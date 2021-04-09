@@ -1,5 +1,15 @@
-#  Technical documentation of scripts in the optimacros application
+#  Scripts 1.0 Optimacros documentation
 
-Техническая документация по функционалу скриптов в приложении Optimacos.
+Документация по скриптам 1.0 Optimacos
 
-[Перейти к документации](index.md)
+1. [Глоссарий](glossary.md)
+2. [Общее описание cкриптов 1.0](generalDescription.md)
+3. [Требования к разработчику скриптов](prerequisities.md)
+4. [Начало работы](gettingStarted.md)
+5. [Курс молодого бойца](cookBook.md)
+6. [Расширенные возможности](advancedFeatues.md)
+7. [API Reference](API_reference.md)
+8. [Приложения](appendix.md)
+
+
+[Старое оглавление](index.md)
