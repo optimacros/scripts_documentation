@@ -1,6 +1,4 @@
-#  Scripts 1.0 Optimacros documentation
-
-Документация по скриптам 1.0 Optimacos
+#  Документация по скриптам 1.0 Optimacos
 
 1. [Глоссарий](glossary.md)
 2. [Общее описание cкриптов 1.0](generalDescription.md)
