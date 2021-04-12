@@ -9,4 +9,4 @@
 Pivot.withoutValues()
 
 
-[Вернуться к оглавлению](README.md)
+[Оглавление](README.md)
