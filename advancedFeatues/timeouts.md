@@ -1,6 +1,6 @@
 # Таймауты
 
 
-[Курс молодого бойца](advancedFeatues.md)
+[Расширенные возможности](advancedFeatues.md)
 
 [Оглавление](../README.md)
