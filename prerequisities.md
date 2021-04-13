@@ -1,6 +1,6 @@
 # Требования к разработчику скриптов
 
-* Прохождение курса обучения моделлера: https://www.youtube.com/playlist?list=PLAQWOaLtueJeH8Ldr-lrFNhWJYmmX7K6s
+* Прохождение [курса](https://www.youtube.com/playlist?list=PLAQWOaLtueJeH8Ldr-lrFNhWJYmmX7K6s) обучения моделлера.
 
 * Владение базовыми навыками JS (обучиться можно, например, здесь: https://learn.javascript.ru/): 
   * Циклы
