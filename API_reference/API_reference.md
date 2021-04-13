@@ -1576,4 +1576,4 @@ interface OM {
 ```
 ***
 
-[Оглавление](README.md)
+[Оглавление](../README.md)
