@@ -41,7 +41,9 @@ interface Filesystem {
 
 Абстрактный интерфейс файловой системы.
 
-`has(path: string): boolean`
+```js
+has(path: string): boolean
+```
 Возвращает признак существования пути `path`.
 
 
@@ -60,8 +62,9 @@ interface BaseAdapter {
 
 Базовый интерфейс адаптеров файловых систем.
 
-`load(): Filesystem`
-
+```js
+load(): Filesystem
+```
 Возвращает объект файловой системы с предварительно установленными настройками.
 
 ### Интерфейс FTPAdapter
@@ -98,78 +101,96 @@ interface FTPAdapter extends BaseAdapter {
 
 Интерфейс для соединения с FTP.
 
-`setHost(host: string): FTPAdapter`
-
+```js
+setHost(host: string): FTPAdapter
+```
 Устанавливает адрес хоста. Возвращает `this`.
 
-`getHost(): string`
-
+```js
+getHost(): string
+```
 Возвращает адрес хоста.
 
-`setPort(port: number): FTPAdapter`
-
+```js
+setPort(port: number): FTPAdapter
+```
 Устанавливает порт. Возвращает `this`.
 
-`getPort(): number`
-
+```js
+getPort(): number
+```
 Возвращает порт.
 
-`setUsername(username: string): FTPAdapter`
-
+```js
+setUsername(username: string): FTPAdapter
+```
 Устанавливает имя пользователя. Возвращает `this`.
 
-`getUsername(): string`
-
+```js
+getUsername(): string
+```
 Возвращает имя пользователя.
 
-`setPassword(password: string): FTPAdapter`
-
+```js
+setPassword(password: string): FTPAdapter
+```
 Устанавливает пароль. Возвращает `this`.
 
-`getPassword(): string`
-
+```js
+getPassword(): string
+```
 Возвращает пароль.
 
 
 ___
-`setRoot(root: string): FTPAdapter`
-
+```js
+setRoot(root: string): FTPAdapter
+```
 Устанавливает порт. Возвращает `this`.
 
-`getRoot(): string`
-
+```js
+getRoot(): string
+```
 Возвращает порт.
 
-`setPassive(passive: boolean): FTPAdapter`
-
+```js
+setPassive(passive: boolean): FTPAdapter
+```
 Устанавливает порт. Возвращает `this`.
 
-`getPassive(): boolean`
-
+```js
+getPassive(): boolean
+```
 Возвращает порт.
 
-`setSsl(ssl: boolean): FTPAdapter`
-
+```js
+setSsl(ssl: boolean): FTPAdapter
+```
 Устанавливает порт. Возвращает `this`.
 
-`getSsl(): boolean`
-
+```js
+getSsl(): boolean
+```
 Возвращает порт.
 
-`setTimeout(timeout: number): FTPAdapter`
-
+```js
+setTimeout(timeout: number): FTPAdapter
+```
 Устанавливает порт. Возвращает `this`.
 
-`getTimeout(): number`
-
+```js
+getTimeout(): number
+```
 Возвращает порт.
 
-`setUseListOptions(useListOptions: boolean): FTPAdapter`
-
+```js
+setUseListOptions(useListOptions: boolean): FTPAdapter
+```
 Устанавливает порт. Возвращает `this`.
 
-`getUseListOptions(): boolean`
-
+```js
+getUseListOptions(): boolean
+```
 Возвращает порт.
 ___
 
