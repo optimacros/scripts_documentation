@@ -4,6 +4,6 @@
 1. MongoDB
 1. HTTP
 
-[API Reference](API_Reference.md)
+[API Reference](API_reference.md)
 
 [Оглавление](../README.md)
