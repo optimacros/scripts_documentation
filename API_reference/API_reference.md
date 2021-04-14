@@ -23,7 +23,31 @@
     1. SMTP
 1. [Изменение статуса текущего запроса](reqStatusChange.md)
 
-## Интерфейс Cell:
+### Интерфейс OM
+```ts
+interface OM {
+    readonly common: Common;
+    readonly environment: Environment;
+    readonly multicubes: Multicubes;
+    readonly times: Times;
+    readonly versions: Versions;
+    readonly lists: Lists;
+    readonly filesystems: Filesystems;
+    readonly optimization: Optimization;
+    readonly connectors: Connectors;
+}
+
+var om: OM;
+```
+
+Скрипты 1.0 предоставляют глобальную переменную `om`, реализующую интерфейс ```OM```.
+
+___
+!!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
+___
+
+
+### Интерфейс Cell
 ```ts
 interface Cell {
     setValue(value: number | string | null);
@@ -49,8 +73,8 @@ interface Cell {
     isEditable(): boolean;
 }
 ```
-***
-## Интерфейс Cells:
+
+### Интерфейс Cells
 ```ts
 interface Cells {
     all(): Cell[];
@@ -66,8 +90,8 @@ interface Cells {
     getByIndexes(indexes: number[]): Cells | null;
 }
 ```
-***
-## Интерфейс Label:
+
+### Интерфейс Label
 ```ts
 interface Label {
     longId(): number;
@@ -83,8 +107,8 @@ interface Label {
     parentLongId(): number;
 }
 ```
-***
-## Интерфейс LabelsGroup:
+
+### Интерфейс LabelsGroup
 ```ts
 interface LabelsGroup {
     all(): Label[];
@@ -94,8 +118,8 @@ interface LabelsGroup {
     cells(): Cells;
 }
 ```
-***
-## Интерфейс Labels:
+
+### Интерфейс Labels
 ```ts
 interface Labels {
     start(): number;
@@ -111,8 +135,8 @@ interface Labels {
     findLabelByLongId(longId: number): Label | null;
 }
 ```
-***
-## Интерфейс GridRangeChunk:
+
+### Интерфейс GridRangeChunk
 ```ts
 interface GridRangeChunk {
     cells(): Cells;
@@ -122,8 +146,8 @@ interface GridRangeChunk {
     columns(): Labels;
 }
 ```
-***
-## Интерфейс GridRange:
+
+### Интерфейс GridRange
 ```ts
 interface GridRange {
     rowStart(): number;
@@ -141,15 +165,15 @@ interface GridRange {
 ```
 
 описывается в разделе: `Grid.range()` т.к. является парент интерфейсом
-***
-## Интерфейс GridDimension:
+
+### Интерфейс GridDimension
 ```ts
 interface GridDimension {
     getDimensionEntity(): EntityInfo;
 }
 ```
-***
-## Интерфейс GridDefinitionInfo:
+
+### Интерфейс GridDefinitionInfo
 ```ts
 interface GridDefinitionInfo {
     getPageSelectors(): GridPageSelector[];
@@ -159,8 +183,8 @@ interface GridDefinitionInfo {
     getColumnDimensions(): GridDimension[];
 }
 ```
-***
-## Интерфейс Grid:
+
+### Интерфейс Grid
 ```ts
 interface Grid {
     range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange;
@@ -195,8 +219,8 @@ range() - нужен при получении данных для указан�
 
 Пример использования range: `grid.range(0, -1, 0, -1)` с нулевой строки - все строки и с нулевой колонки - все колонки, 
 т.е. все ячейки грида.
-***
-## Интерфейс ExportResult:
+
+### Интерфейс ExportResult
 ```ts
 interface ExportResult {
     mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
@@ -208,8 +232,8 @@ interface ExportResult {
     moveToLocal(path: string): this;
 }
 ```
-***
-## Интерфейс Exporter:
+
+### Интерфейс Exporter
 ```ts
 interface Exporter {
     setEncoding(encoding: string): Exporter;
@@ -241,8 +265,8 @@ interface Exporter {
     export(): ExportResult;
 }
 ```
-***
-## Интерфейс Pivot:
+
+### Интерфейс Pivot
 ```ts
 interface Pivot {
     create(): Grid;
@@ -270,8 +294,8 @@ columnsFilter - аналогично с rowsFilter, но только для к�
 
 addDependentContext - передача контекста
 
-***
-## Интерфейс NumericElementsCreator:
+
+### Интерфейс NumericElementsCreator
 ```ts
 interface NumericElementsCreator {
     setCount(count: number): NumericElementsCreator;
@@ -290,16 +314,16 @@ interface NumericElementsCreator {
 }
 ```
 Аналогия интерфейсного функционала Insert на гриде
-***
-## Интерфейс ElementsCreator:
+
+### Интерфейс ElementsCreator
 ```ts
 interface ElementsCreator {
     numeric(): NumericElementsCreator;
 }
 ```
 Аналогия интерфейсного функционала Insert на гриде
-***
-## Интерфейс ElementsDeleter:
+
+### Интерфейс ElementsDeleter
 ```ts
 interface ElementsDeleter {
     appendIdentifier(identifier: number): ElementsDeleter;
@@ -308,8 +332,8 @@ interface ElementsDeleter {
 }
 ```
 Аналогия интерфейсного функционала delete на гриде
-***
-## Интерфейс ElementsReorder:
+
+### Интерфейс ElementsReorder
 ```ts
 interface ElementsReorder {
     append(longId: number, relativeLongId: number, position: string): ElementsReorder;
@@ -322,8 +346,8 @@ interface ElementsReorder {
 }
 ```
 Аналогия интерфейсного функционала Reorder на гриде
-***
-## Интерфейс Tab:
+
+### Интерфейс Tab
 ```ts
 interface Tab {
     pivot(viewName?: string): Pivot;
@@ -341,8 +365,8 @@ interface Tab {
     storageImporter(): StorageImporter;
 }
 ```
-***
-## Интерфейс Environment:
+
+### Интерфейс Environment
 ```ts
 interface Environment {
     load(name: string): Environment;
@@ -354,8 +378,8 @@ interface Environment {
 ```
 
 load() Принимает имя в виде строки
-***
-## Интерфейс CubeCell:
+
+### Интерфейс CubeCell
 ```ts
 interface CubeCell {
     definitions(): number[];
@@ -367,8 +391,8 @@ interface CubeCell {
     getValue(): number | string | null | boolean;
 }
 ```
-***
-## Интерфейс CubeCellSelector:
+
+### Интерфейс CubeCellSelector
 ```ts
 interface CubeCellSelector {
     getCubeInfo(): CubeInfo;
@@ -381,8 +405,8 @@ interface CubeCellSelector {
     generator(): IterableIterator<CubeCell>;
 }
 ```
-***
-## Интерфейс CubeCellSelectorBuilder:
+
+### Интерфейс CubeCellSelectorBuilder
 ```ts
 interface CubeCellSelectorBuilder {
     setFormula(formula: string): this;
@@ -390,15 +414,15 @@ interface CubeCellSelectorBuilder {
     load(): CubeCellSelector;
 }
 ```
-***
-## Интерфейс CubeCellUpdater:
+
+### Интерфейс CubeCellUpdater
 ```ts
 interface CubeCellUpdater{
     getCount(): number;
 }
 ```
-***
-## Интерфейс CubeCellUpdaterBuilder:
+
+### Интерфейс CubeCellUpdaterBuilder
 ```ts
 interface CubeCellUpdaterBuilder {
     setConditionFormula(formula: string): this;
@@ -408,8 +432,8 @@ interface CubeCellUpdaterBuilder {
     load(): CubeCellUpdater;
 }
 ```
-***
-## Интерфейс CubeFormatInfo:
+
+### Интерфейс CubeFormatInfo
 ```ts
 interface CubeFormatInfo {
     getFormatTypeEntity(): EntityInfo;
@@ -417,8 +441,8 @@ interface CubeFormatInfo {
     getDimensionEntity(): EntityInfo | null;
 }
 ```
-***
-## Интерфейс CubeInfo:
+
+### Интерфейс CubeInfo
 ```ts
 interface CubeInfo extends EntityInfo {
     getFormula(): string | null;
@@ -428,8 +452,8 @@ interface CubeInfo extends EntityInfo {
     getDimensions(): EntityInfo[];
 }
 ```
-***
-## Интерфейс MulticubeTab:
+
+### Интерфейс MulticubeTab
 ```ts
 interface MulticubeTab extends Tab {
     cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
@@ -441,8 +465,8 @@ interface MulticubeTab extends Tab {
     getCubeInfo(identifier: string | number): CubeInfo;
 }
 ```
-***
-## Интерфейс MulticubesTab:
+
+### Интерфейс MulticubesTab
 ```ts
 interface MulticubesTab extends Tab {
     open(name: string): MulticubeTab;
@@ -451,8 +475,8 @@ interface MulticubesTab extends Tab {
 обращение типа: `om.multicubes.multicubesTab()` будет равносильна открытию таб Multicubes, где multicubesTab это минитаб 
 Table в интерфейсной, части приложения. А обращение к методу `open()` с переданным строковым значением содержащим имя 
 мультикуба в модели, будет равносильно открытому мультикубу с данным именем (открытый таб без грида).
-***
-## Интерфейс Multicubes:
+
+### Интерфейс Multicubes
 ```ts
 interface Multicubes {
     multicubesTab(): MulticubesTab;
@@ -460,8 +484,8 @@ interface Multicubes {
 ```
 `om.multicubes` Аналогично открытию табы Multicubes в интерфейсной части приложения, но без открытых мини табов.
 
-***
-## Интерфейс Times:
+
+### Интерфейс Times
 ```ts
 interface Times {
     optionsTab(): Tab
@@ -473,8 +497,8 @@ interface Times {
     applyForm(): any;
 }
 ```
-***
-## Интерфейс VersionsTab:
+
+### Интерфейс VersionsTab
 ```ts
 interface VersionsTab {
     copyVersion(from: string, to: string): any;
@@ -485,8 +509,8 @@ interface VersionsTab {
 copyVersion - использование функционала копирования версий, принимает в качестве первого аргумента имя версии, которую
  копируем. В качестве второго аргумента имя версии в которую копируем.
 
-***
-## Интерфейс Versions:
+
+### Интерфейс Versions
 ```ts
 interface Versions {
     versionsTab(): VersionsTab
@@ -494,8 +518,8 @@ interface Versions {
 ```
 `om.versions` Аналогично открытию табы Version в интерфейсной части приложения, но без открытых мини табов.
 `om.versions.versionsTab` Аналогично открытию табы Version - Table в интерфейсной части приложения
-***
-## Интерфейс CSVParams:
+
+### Интерфейс CSVParams
 ```ts
 interface CSVParams {
     setDelimiter(delimiter: string): CSVParams;
@@ -515,8 +539,8 @@ interface CSVParams {
     getLineDelimiter(): string;
 }
 ```
-***
-## Интерфейс Importer:
+
+### Интерфейс Importer
 ```ts
 interface Importer {
     csv(): CSVParams;
@@ -530,8 +554,8 @@ interface Importer {
     import(): Importer;
 }
 ```
-***
-## Интерфейс ListImporter:
+
+### Интерфейс ListImporter
 ```ts
 interface ListImporter extends Importer {
     setFilePath(path: string): ListImporter;
@@ -549,8 +573,8 @@ interface ListImporter extends Importer {
     getUpdatedPropertiesOnParentLevels(): boolean;
 }
 ```
-***
-## Интерфейс ListTab:
+
+### Интерфейс ListTab
 ```ts
 interface ListTab extends Tab {
     listSubsetTab(): ListSubsetsTab;
@@ -558,8 +582,8 @@ interface ListTab extends Tab {
     importer(): ListImporter;
 }
 ```
-***
-## Интерфейс ListSubsetsTab:
+
+### Интерфейс ListSubsetsTab
 ```ts
 interface ListSubsetsTab extends Tab {
     listTab(): ListTab;
@@ -567,8 +591,8 @@ interface ListSubsetsTab extends Tab {
 ```
 `om.lists.ListSubsetsTab.listTab.open()` Аналогично открытию справочника на минитабе Subsets. open() в качестве 
 аргумента принимает строку с именем справочника, который мы хоти открыть.
-***
-## Интерфейс ListsTab:
+
+### Интерфейс ListsTab
 ```ts
 interface ListsTab extends Tab {
     open(name: string): ListTab;
@@ -576,8 +600,8 @@ interface ListsTab extends Tab {
 ```
 `om.lists.listsTab.open()` Аналогично функционалу Open (открытию справочника) выбранного в гриде Lists - Table в 
 интерфейсной части приложения. В качестве аргумента принимает строку с именем справочника, который мы хоти открыть.
-***
-## Интерфейс Lists:
+
+### Интерфейс Lists
 ```ts
 interface Lists {
     listsTab(): ListsTab
@@ -587,8 +611,8 @@ interface Lists {
 табов.
 `om.lists.listsTab` Аналогично открытию табы Lists - Table в интерфейсной части 
 приложения.
-***
-## Интерфейс CellBuffer:
+
+### Интерфейс CellBuffer
 ```ts
 interface CellBuffer {
     set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
@@ -617,8 +641,8 @@ count() - даёт возможность получить количество.
 
 canLoadCellsValues() - обязательный интерфейс, который принимает булевое значение (true, false) нужнен для того, чтобы 
 указать нужно ли перезагружать значение в буфер в случае если они изменятся.
-***
-## Интерфейс RequestManager:
+
+### Интерфейс RequestManager
 ```ts
 interface RequestManager {
     log(message: string, print?: boolean): RequestManager;
@@ -628,8 +652,8 @@ interface RequestManager {
     setStatusMessage(message: string): RequestManager;
 }
 ```
-***
-## Интерфейс UserInfo:
+
+### Интерфейс UserInfo
 ```ts
 interface UserInfo {
     getEntity(): EntityInfo;
@@ -643,8 +667,8 @@ interface UserInfo {
     getRole(): EntityInfo;
 }
 ```
-***
-## Интерфейс ModelInfo:
+
+### Интерфейс ModelInfo
 ```ts
 interface ModelInfo {
     id(): number;
@@ -664,8 +688,8 @@ interface ModelInfo {
     backup(path: string): boolean;
 }
 ```
-***
-## Интерфейс ResultInfo:
+
+### Интерфейс ResultInfo
 ```ts
 interface ResultInfo {
     addFileHash(hash: string): this;
@@ -676,13 +700,13 @@ interface ResultInfo {
 }
 
 ```
-***
-## Интерфейс EntityInfo:
+
+### Интерфейс EntityInfo
 ```ts
 interface EntityInfo = Label
 ```
-***
-## Интерфейс EntitiesInfo:
+
+### Интерфейс EntitiesInfo
 ```ts
 interface EntitiesInfo {
     get(longId: number): EntityInfo | null;
@@ -690,8 +714,8 @@ interface EntitiesInfo {
     getCollection(longId: number[]): EntityInfo[];
 }
 ```
-***
-## Интерфейс CopyData:
+
+### Интерфейс CopyData
 ```ts
 interface CopyData {
     setSourceLongId(longId: number): CopyData;
@@ -709,8 +733,8 @@ interface CopyData {
     copy(): CopyData;
 }
 ```
-***
-## Интерфейс Common:
+
+### Интерфейс Common
 ```ts
 interface Common {
     createCellBuffer(): CellBuffer;
@@ -728,8 +752,8 @@ interface Common {
     copyData(): CopyData;
 }
 ```
-***
-## Интерфейс FileMeta:
+
+### Интерфейс FileMeta
 ```ts
 interface FileMeta {
     type: string;
@@ -743,47 +767,8 @@ interface FileMeta {
     timestamp: number;
 }
 ```
-***
-## Интерфейс Filesystem:
-```ts
-interface Filesystem {
-    has(path: string): boolean;
 
-    read(path: string): string;
-
-    readAndDelete(path: string): string;
-
-    write(path: string, contents: string): boolean;
-
-    delete(path: string): boolean;
-
-    rename(from: string, to: string): boolean;
-
-    copy(from: string, to: string): boolean;
-
-    getTimestamp(path: string): string;
-
-    getSize(path: string): number;
-
-    createDir(path: string): boolean;
-
-    deleteDir(path: string): boolean;
-
-    listContents(path: string, recursive: boolean): Array<FileMeta>;
-
-    getMetadata(path: string): object;
-
-    upload(from: string, to: string): boolean;
-
-    download(from: string, to: string): boolean;
-
-    makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
-
-    getPathObj(path: string): PathObj;
-}
-```
-***
-## Интерфейс PathObj:
+### Интерфейс PathObj
 ```ts
 interface PathObj {
     getSystem(): Filesystem;
@@ -791,56 +776,8 @@ interface PathObj {
     getPath(): string;
 }
 ```
-***
-## Интерфейс BaseAdapter:
-```ts
-interface BaseAdapter {
-    load(): Filesystem;
-}
-```
-***
-## Интерфейс FTPAdapter:
-```ts
-interface FTPAdapter extends BaseAdapter {
-    setHost(host: string): FTPAdapter;
 
-    getHost(): string;
-
-    setPort(port: number): FTPAdapter;
-
-    getPort(): number;
-
-    setUsername(username: string): FTPAdapter;
-
-    getUsername(): string;
-
-    setPassword(password: string): FTPAdapter;
-
-    getPassword(): string;
-
-    setRoot(root: string): FTPAdapter;
-
-    getRoot(): string;
-
-    setPassive(passive: boolean): FTPAdapter;
-
-    getPassive(): boolean;
-
-    setSsl(ssl: boolean): FTPAdapter;
-
-    getSsl(): boolean;
-
-    setTimeout(timeout: number): FTPAdapter;
-
-    getTimeout(): number;
-
-    setUseListOptions(useListOptions: boolean): FTPAdapter;
-
-    getUseListOptions(): boolean;
-}
-```
-***
-## Интерфейс CsvReader:
+### Интерфейс CsvReader
 ```ts
 interface CsvReader {
     params(): CSVParams;
@@ -854,8 +791,8 @@ interface CsvReader {
     generator(): [][];
 }
 ```
-***
-## Интерфейс CsvWriter:
+
+### Интерфейс CsvWriter
 ```ts
 interface CsvWriter {
     params(): CSVParams;
@@ -872,8 +809,8 @@ interface CsvWriter {
     save(name: string, charset?: string): string;
 }
 ```
-***
-## Интерфейс BaseConverter:
+
+### Интерфейс BaseConverter
 ```ts
 interface BaseConverter {
     setSource(path: string): this;
@@ -881,22 +818,22 @@ interface BaseConverter {
     convert(): string;
 }
 ```
-***
-## Интерфейс ExcelToCsvConverter:
+
+### Интерфейс ExcelToCsvConverter
 ```ts
 interface ExcelToCsvConverter extends BaseConverter {
     setSheetIdentifier(identifier: string | number): this;
 }
 ```
-***
-## Интерфейс ConverterManager:
+
+### Интерфейс ConverterManager
 ```ts
 interface ConverterManager {
     excelToCsv(): ExcelToCsvConverter
 }
 ```
-***
-## Интерфейс FilesDataManager:
+
+### Интерфейс FilesDataManager
 ```ts
 interface FilesDataManager {
     csvWriter(): CsvWriter;
@@ -906,21 +843,9 @@ interface FilesDataManager {
     converterManager(): ConverterManager;
 }
 ```
-***
-## Интерфейс Filesystems:
-```ts
-interface Filesystems {
-    ftp(): FTPAdapter;
 
-    local(): Filesystem;
 
-    sharedFolder(id: string): Filesystem;
-
-    filesDataManager(): FilesDataManager;
-}
-```
-***
-## Интерфейс OptimizationRequestTab:
+### Интерфейс OptimizationRequestTab
 ```ts
 interface OptimizationRequestTab extends Tab {
     run(name: string): { success: boolean, error: undefined | string };
@@ -928,8 +853,8 @@ interface OptimizationRequestTab extends Tab {
 ```
 `om.optimization.optimizationRequestsTab.run()` Аналогично функционалу запуска Отпимизационного запроса в интерфейсной 
 части приложения. run в качестве аргумента принимает строку с именем Отпимизационного запроса
-***
-## Интерфейс Optimization:
+
+### Интерфейс Optimization
 ```ts
 interface Optimization {
     optimizationRequestsTab(): OptimizationRequestTab
@@ -940,8 +865,8 @@ interface Optimization {
 `om.optimization.optimizationRequestsTab` Аналогично открытию табы Optimizer Request - Table в интерфейсной части 
 приложения.
 
-***
-## Интерфейс SqlQueryResult:
+
+### Интерфейс SqlQueryResult
 ```ts
 interface SqlQueryResult {
     count(): number;
@@ -961,22 +886,22 @@ interface SqlQueryResult {
     lastId(): number;
 }
 ```
-***
-## Интерфейс SqlQueryBuilder:
+
+### Интерфейс SqlQueryBuilder
 ```ts
 interface SqlQueryBuilder {
     execute(sql: string, bindings?: object): SqlQueryResult;
 }
 ```
-***
-## Интерфейс SqlConnection:
+
+### Интерфейс SqlConnection
 ```ts
 interface SqlConnection {
     qb(): SqlQueryBuilder;
 }
 ```
-***
-## Интерфейс SqlConnectorBuilder:
+
+### Интерфейс SqlConnectorBuilder
 ```ts
 interface SqlConnectorBuilder {
     setHost(value: string): this;
@@ -997,8 +922,8 @@ interface SqlConnectorBuilder {
     load(): SqlConnection;
 }
 ```
-***
-## Интерфейс SqlBulkCopyResult:
+
+### Интерфейс SqlBulkCopyResult
 ```ts
 interface SqlBulkCopyResult {
     hasErrors(): boolean;
@@ -1010,8 +935,8 @@ interface SqlBulkCopyResult {
     getCommand(): string;
 }
 ```
-***
-## Интерфейс SqlBulkCopyBuilder:
+
+### Интерфейс SqlBulkCopyBuilder
 ```ts
 interface SqlBulkCopyBuilder {
     /**
@@ -1205,8 +1130,8 @@ interface SqlBulkCopyBuilder {
     format(path: string, xml: boolean): SqlBulkCopyResult;
 }
 ```
-***
-## Mongodb и его интерфейсы:
+
+### Mongodb и его интерфейсы:
 ```ts
 declare namespace Mongodb {
     interface CollectionCreator {
@@ -1327,8 +1252,8 @@ declare namespace Mongodb {
 }
 
 ```
-***
-## Http и его интерфейсы:
+
+### Http и его интерфейсы:
 ```ts
 declare namespace Http {
     interface Params {
@@ -1573,8 +1498,8 @@ declare namespace Http {
     }
 }
 ```
-***
-## Интерфейс Connectors:
+
+### Интерфейс Connectors
 ```ts
 interface Connectors {
     mysql(): SqlConnectorBuilder;
@@ -1595,22 +1520,8 @@ interface Connectors {
     winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 }
 ```
-***
-## Интерфейс OM:
-```ts
-interface OM {
-    readonly common: Common;
-    readonly environment: Environment;
-    readonly multicubes: Multicubes;
-    readonly times: Times;
-    readonly versions: Versions;
-    readonly lists: Lists;
-    readonly filesystems: Filesystems;
-    readonly optimization: Optimization;
-    readonly connectors: Connectors;
-}
-```
-***
+
+
 
 export type ObjectOfStringArray = {
     [key: string]: string[];
@@ -1782,8 +1693,7 @@ export namespace Notifications {
     }
 }
 
-export var om: OM;
 
-***
+
 
 [Оглавление](../README.md)
