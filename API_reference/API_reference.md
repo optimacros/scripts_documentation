@@ -45,6 +45,8 @@ interface Cell {
     dropDown(): Labels;
 
     getFormatType(): string;
+
+    isEditable(): boolean;
 }
 ```
 ***
@@ -172,6 +174,8 @@ interface Grid {
     getDefinitionInfo(): GridDefinitionInfo;
 
     exporter(): Exporter;
+
+    storageExporter(): StorageExporter;
 }
 ```
 cellCount() - возвращает количество клеток в гриде
@@ -198,6 +202,10 @@ interface ExportResult {
     mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
 
     getHash(): string;
+
+    copyToLocal(path: string): this;
+
+    moveToLocal(path: string): this;
 }
 ```
 ***
@@ -329,6 +337,8 @@ interface Tab {
     elementsReorder(): ElementsReorder;
 
     importer(): Importer;
+
+    storageImporter(): StorageImporter;
 }
 ```
 ***
@@ -456,6 +466,8 @@ interface Multicubes {
 interface Times {
     optionsTab(): Tab
 
+    typePeriod(identifier: string | number): TypePeriod;
+
     resetForm(): any;
 
     applyForm(): any;
@@ -501,15 +513,6 @@ interface CSVParams {
     setLineDelimiter(escape: string): CSVParams;
 
     getLineDelimiter(): string;
-}
-```
-***
-## Интерфейс CubeCellSelectorBuilder:
-```ts
-interface CubeCellSelectorBuilder {
-    setFormula(formula: string): this;
-
-    load(): CubeCellSelector;
 }
 ```
 ***
@@ -657,22 +660,26 @@ interface ModelInfo {
     repair(): boolean;
 
     recalculate(): boolean;
+
+    backup(path: string): boolean;
 }
 ```
 ***
 ## Интерфейс ResultInfo:
 ```ts
 interface ResultInfo {
-    addFileHash(hash: string): ResultInfo
+    addFileHash(hash: string): this;
+
+    actionsInfo(): ResultActionsInfo;
+
+    setProperty(name: string, value: any): this;
 }
 
 ```
 ***
 ## Интерфейс EntityInfo:
 ```ts
-interface EntityInfo extends Label {
-    // уточнить у Николая, должно ли в данном месте быть просто наследование
-}
+interface EntityInfo = Label
 ```
 ***
 ## Интерфейс EntitiesInfo:
@@ -733,6 +740,7 @@ interface FileMeta {
     basename: string;
     extension: string;
     filename: string;
+    timestamp: number;
 }
 ```
 ***
@@ -1580,6 +1588,11 @@ interface Connectors {
     mongodb(): Mongodb.ConnectorBuilder;
 
     http(): Http.HttpManager;
+		
+    /**
+     * @param builtIn Use built-in configuration if exists. Default is 'false'
+     */
+    winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 }
 ```
 ***
@@ -1597,6 +1610,180 @@ interface OM {
     readonly connectors: Connectors;
 }
 ```
+***
+
+export type ObjectOfStringArray = {
+    [key: string]: string[];
+}
+
+
+
+export interface GridPageSelector extends GridDimension
+{
+    getSelectedEntity(): EntityInfo | null;
+}
+
+export interface StorageExporter extends Exporter {
+    setLineDelimiter(lineDelimiter: string): Exporter;
+
+    setFilterFormula(filterFormula: string): this;
+
+    setDecimalSeparator(decimalSeparator: string): this;
+
+    setDateFormat(dateFormat: string): this;
+
+    setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
+}
+
+export interface TypePeriod {
+    tableTab(): Tab;
+}
+
+export interface StorageImporter extends Importer {
+    setMaxFailures(maxFailures: number): this;
+
+    setIsCompressed(isCompressed: boolean): this;
+
+    setEncoding(encoding: string): this;
+
+    setDateFormat(dateFormat: string): this;
+}
+
+export interface ButtonInfoOptions {
+    setLabel(label: string): ButtonInfoOptions;
+
+    /**
+     * PRIMARY|SECONDARY
+     * @param style
+     */
+    setStyle(style: string): ButtonInfoOptions;
+}
+
+export interface ButtonInfo {
+    /**
+     * GENERAL|CLOSE
+     * @param type
+     */
+    setType(type: string): ButtonInfo;
+
+    options(): ButtonInfoOptions;
+}
+
+export interface ResultBaseAction {
+    appendAfter(): this;
+}
+
+export interface EnvironmentInfo {
+    set(key: string, value: any);
+
+    get(key: string);
+}
+
+export interface ResultMacrosAction extends ResultBaseAction {
+    setAutoRunTimeout(seconds: number): this;
+
+    buttonInfo(): ButtonInfo;
+
+    environmentInfo(): EnvironmentInfo;
+}
+
+export interface ResultOpenAction extends ResultBaseAction {
+    buttonInfo(): ButtonInfo;
+}
+
+export interface ResultActionsInfo {
+    makeMacrosAction(identifier: string | number): ResultMacrosAction;
+
+    makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
+
+    makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
+
+    makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
+
+    makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
+}
+
+export interface OracleConnectorBuilder extends SqlConnectorBuilder {
+    setServiceName(value: string): this;
+
+    setSchema(value: string): this;
+
+    setTNS(value: string): this;
+}
+
+export interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
+    /**
+     * @param name DBLIB|ODBC|SQLSRV
+     */
+    setDriver(name: string | null): this;
+
+    /**
+     * https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility
+     */
+    loadBulkCopyBuilder(): SqlBulkCopyBuilder;
+}
+
+export namespace WinAgent {
+
+    export interface BaseActionResult {
+
+    }
+
+    export interface BaseAction {
+        run(): BaseActionResult;
+    }
+
+    export interface RunMacroActionResult extends BaseActionResult {
+        getFilePaths(): string[];
+    }
+
+    export interface RunMacroAction extends BaseAction {
+        setMacroName(macroName: string): this;
+
+        setMacroFilePath(macroFilePath: string): this;
+
+        setDataFilePaths(dataFilePaths: string[]): this;
+
+        run(): RunMacroActionResult;
+    }
+
+    export interface WinAgentBuilder {
+        setCommandUrl(url: string): this;
+
+        setDownloadUrl(url: string): this;
+
+        auth(): Http.HttpAuth;
+
+        makeRunMacrosAction(): RunMacroAction;
+    }
+}
+
+export namespace Notifications {
+    namespace Smtp {
+        export interface Result {
+
+        }
+
+        export interface Builder {
+            setTo(to: string | string[]): this;
+
+            setSubject(subject: string): this;
+
+            setBody(body: string): this;
+
+            attachFiles(paths: string[]): this;
+
+            send(): Result;
+        }
+    }
+
+    export interface Manager {
+        smtp(channel: string): Smtp.Builder;
+    }
+}
+
+export var om: OM;
+
 ***
 
 [Оглавление](../README.md)
