@@ -10,16 +10,11 @@
 ```ts
 interface Filesystems {
     ftp(): FTPAdapter;
-
     local(): Filesystem;
-
     sharedFolder(id: string): Filesystem;
-
     filesDataManager(): FilesDataManager;
 }
 ```
-
-## Локальная файловая система
 
 ### Интерфейс Filesystem
 ```ts
@@ -44,6 +39,16 @@ interface Filesystem {
 }
 ```
 
+Абстрактный интерфейс файловой системы.
+
+`has(path: string): boolean`
+Возвращает признак существования пути `path`.
+
+
+## Локальная файловая система
+
+Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт `не` может выйти за её пределы.
+
 ## FTP
 
 ### Интерфейс BaseAdapter
@@ -54,6 +59,10 @@ interface BaseAdapter {
 ```
 
 Базовый интерфейс адаптеров файловых систем.
+
+`load(): Filesystem`
+
+Возвращает объект файловой системы с предварительно установленными настройками.
 
 ### Интерфейс FTPAdapter
 ```ts
@@ -90,11 +99,79 @@ interface FTPAdapter extends BaseAdapter {
 Интерфейс для соединения с FTP.
 
 `setHost(host: string): FTPAdapter`
-Устанавливает адрес хоста соединения. Возвращает `this`.
+
+Устанавливает адрес хоста. Возвращает `this`.
 
 `getHost(): string`
-Возвращает адрес хоста соединения.
 
+Возвращает адрес хоста.
+
+`setPort(port: number): FTPAdapter`
+
+Устанавливает порт. Возвращает `this`.
+
+`getPort(): number`
+
+Возвращает порт.
+
+`setUsername(username: string): FTPAdapter`
+
+Устанавливает имя пользователя. Возвращает `this`.
+
+`getUsername(): string`
+
+Возвращает имя пользователя.
+
+`setPassword(password: string): FTPAdapter`
+
+Устанавливает пароль. Возвращает `this`.
+
+`getPassword(): string`
+
+Возвращает пароль.
+
+
+___
+`setRoot(root: string): FTPAdapter`
+
+Устанавливает порт. Возвращает `this`.
+
+`getRoot(): string`
+
+Возвращает порт.
+
+`setPassive(passive: boolean): FTPAdapter`
+
+Устанавливает порт. Возвращает `this`.
+
+`getPassive(): boolean`
+
+Возвращает порт.
+
+`setSsl(ssl: boolean): FTPAdapter`
+
+Устанавливает порт. Возвращает `this`.
+
+`getSsl(): boolean`
+
+Возвращает порт.
+
+`setTimeout(timeout: number): FTPAdapter`
+
+Устанавливает порт. Возвращает `this`.
+
+`getTimeout(): number`
+
+Возвращает порт.
+
+`setUseListOptions(useListOptions: boolean): FTPAdapter`
+
+Устанавливает порт. Возвращает `this`.
+
+`getUseListOptions(): boolean`
+
+Возвращает порт.
+___
 
 ## Shared folder
 
