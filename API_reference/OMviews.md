@@ -15,31 +15,31 @@ interface Multicubes {
     multicubesTab(): MulticubesTab;
 }
 ```
-Интерфейс для получения ссылки на `[MulticubesTab](#MulticubesTab)`.
+Интерфейс для получения ссылки на [`MulticubesTab`](#MulticubesTab).
 
 &nbsp;
 
 ```js
 multicubesTab(): MulticubesTab
 ```
-Возвращает ссылку на `MulticubesTab`. В интерфейсе Optimacros аналогично открытию таба "Мультикубы".
+Возвращает ссылку на [`MulticubesTab`](#MulticubesTab). В интерфейсе Optimacros аналогично открытию таба "Мультикубы".
 
 ### Интерфейс MulticubesTab<a name="MulticubesTab"></a>
 ```ts
-interface MulticubesTab extends Tab {
+interface MulticubesTab extends [Tab](#Tab) {
     open(name: string): MulticubeTab;
 }
 ```
-Интерфейс для получения ссылки на `MulticubeTab`.
+Интерфейс для получения ссылки на [`MulticubeTab`](#MulticubeTab).
 
 &nbsp;
 
 ```js
 open(name: string): MulticubeTab
 ```
-Возвращает ссылку на `MulticubeTab` куба `name`. В интерфейсе Optimacros аналогично открытию таба мультикуба `name`.
+Возвращает ссылку на [`MulticubeTab`](#MulticubeTab) куба `name`. В интерфейсе Optimacros аналогично открытию таба мультикуба `name`.
 
-### Интерфейс Tab
+### Интерфейс Tab<a name="Tab"></a>
 ```ts
 interface Tab {
     pivot(viewName?: string): Pivot;
@@ -62,7 +62,7 @@ pivot(viewName?: string): Pivot
 ```
 Возвращает ссылку на объект `Pivot` представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба в скриптах 1.0 [*отсутствует*](../appendix/constraints.md), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
-### Интерфейс MulticubeTab
+### Интерфейс MulticubeTab<a name="MulticubeTab"></a>
 ```ts
 interface MulticubeTab extends Tab {
     cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
