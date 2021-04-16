@@ -66,11 +66,8 @@ pivot(viewName?: string): Pivot
 ```ts
 interface MulticubeTab extends Tab {
     cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
-
     cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
-
     cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
-
     getCubeInfo(identifier: string | number): CubeInfo;
 }
 ```
@@ -233,7 +230,7 @@ interface GridDimension {
 ```js
 getDimensionEntity(): EntityInfo
 ```
-Возвращает ссылку на сущность измерения.
+Возвращает ссылку на сущность [`EntityInfo`](#EntityInfo) измерения мультикуба.
 
 
 ### Интерфейс GridPageSelector<a name="GridPageSelector"></a>
