@@ -64,9 +64,9 @@ interface BaseAdapter {
 }
 ```
 
-&nbsp;
-
 Базовый интерфейс адаптеров файловых систем.
+
+&nbsp;
 
 ```js
 load(): Filesystem
@@ -106,6 +106,8 @@ interface FTPAdapter extends BaseAdapter {
 ```
 
 Интерфейс для соединения с FTP.
+
+&nbsp;
 
 ```js
 setHost(host: string): FTPAdapter
@@ -169,45 +171,63 @@ setRoot(root: string): FTPAdapter
 ```
 Устанавливает порт. Возвращает `this`.
 
+&nbsp;
+
 ```js
 getRoot(): string
 ```
 Возвращает порт.
+
+&nbsp;
 
 ```js
 setPassive(passive: boolean): FTPAdapter
 ```
 Устанавливает активный или пассивный режим соединения. Возвращает `this`.
 
+&nbsp;
+
 ```js
 getPassive(): boolean
 ```
 Возвращает признак пассивности режима соединения.
+
+&nbsp;
 
 ```js
 setSsl(ssl: boolean): FTPAdapter
 ```
 Устанавливает порт. Возвращает `this`.
 
+&nbsp;
+
 ```js
 getSsl(): boolean
 ```
 Возвращает порт.
+
+&nbsp;
 
 ```js
 setTimeout(timeout: number): FTPAdapter
 ```
 Устанавливает порт. Возвращает `this`.
 
+&nbsp;
+
 ```js
 getTimeout(): number
 ```
 Возвращает порт.
 
+&nbsp;
+
 ```js
 setUseListOptions(useListOptions: boolean): FTPAdapter
 ```
 Устанавливает порт. Возвращает `this`.
+
+&nbsp;
 
 ```js
 getUseListOptions(): boolean
