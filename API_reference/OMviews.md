@@ -22,7 +22,7 @@ interface Multicubes {
 ```js
 multicubesTab(): MulticubesTab
 ```
-Возвращает ссылку на [`MulticubesTab`](#MulticubesTab). В интерфейсе Optimacros аналогично открытию таба "Мультикубы".
+Возвращает ссылку на [`MulticubesTab`](#MulticubesTab). В интерфейсе Optimacros аналогично открытию вкладки "Мультикубы".
 
 ### Интерфейс MulticubesTab<a name="MulticubesTab"></a>
 ```ts
@@ -37,7 +37,7 @@ interface MulticubesTab extends Tab {
 ```js
 open(name: string): MulticubeTab
 ```
-Возвращает ссылку на [`MulticubeTab`](#MulticubeTab) куба `name`. В интерфейсе Optimacros аналогично открытию таба мультикуба `name`.
+Возвращает ссылку на [`MulticubeTab`](#MulticubeTab) куба `name`. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
 
 ### Интерфейс Tab<a name="Tab"></a>
 ```ts
