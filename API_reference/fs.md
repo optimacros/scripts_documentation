@@ -16,6 +16,8 @@ interface Filesystems {
 }
 ```
 
+---
+
 ### Интерфейс Filesystem
 ```ts
 interface Filesystem {
@@ -105,6 +107,8 @@ interface FTPAdapter extends BaseAdapter {
 setHost(host: string): FTPAdapter
 ```
 Устанавливает адрес хоста. Возвращает `this`.
+
+&nbsp;
 
 ```js
 getHost(): string
