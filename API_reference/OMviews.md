@@ -26,7 +26,7 @@ multicubesTab(): MulticubesTab
 
 ### Интерфейс MulticubesTab<a name="MulticubesTab"></a>
 ```ts
-interface MulticubesTab extends [Tab](#Tab) {
+interface MulticubesTab extends Tab {
     open(name: string): MulticubeTab;
 }
 ```
@@ -92,7 +92,7 @@ interface Pivot {
 ```js
 create(): Grid
 ```
-Возвращает ссылку на `Grid` настроенного представления мультикуба.
+Возвращает ссылку на [`Grid`](#Grid) настроенного представления мультикуба.
 
 &nbsp;
 
@@ -201,6 +201,62 @@ interface GridDefinitionInfo {
 }
 ```
 Интерфейс, предоставляющий метаданные об интерфейсе [`Grid`](#Grid).
+
+```js
+getPageSelectors(): GridPageSelector[]
+```
+
+&nbsp;
+
+```js
+getRowDimensions(): GridDimension[]
+```
+Возвращает массив объектов с интерфейсом [`GridDimension`](#GridDimension), представляющий метаданные о строках таблицы.
+
+&nbsp;
+
+```js
+getColumnDimensions(): GridDimension[]
+```
+Возвращает массив объектов с интерфейсом [`GridDimension`](#GridDimension), представляющий метаданные о столбцах таблицы.
+
+### Интерфейс GridDimension<a name="GridDimension"></a>
+```ts
+interface GridDimension {
+    getDimensionEntity(): EntityInfo;
+}
+```
+Интерфейс предоставляет данные об измерении мультикуба.
+
+&nbsp;
+
+```js
+getDimensionEntity(): EntityInfo
+```
+Возвращает ссылку на сущность измерения.
+
+
+### Интерфейс GridPageSelector<a name="GridPageSelector"></a>
+```ts
+interface GridPageSelector extends GridDimension {
+    getSelectedEntity(): EntityInfo | null;
+}
+```
+Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`).
+
+### Интерфейс EntityInfo (Label) <a name="EntityInfo"></a> <a name="Label"></a>
+```ts
+interface Label {
+    longId(): number;
+    name(): string;
+    code(): string;
+    alias(): string | null;
+    label(): string | null;
+    parentLongId(): number;
+}
+
+interface EntityInfo = Label;
+```
 
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>

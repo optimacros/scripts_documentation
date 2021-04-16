@@ -91,23 +91,6 @@ interface Cells {
 }
 ```
 
-### Интерфейс Label
-```ts
-interface Label {
-    longId(): number;
-
-    name(): string;
-
-    code(): string;
-
-    alias(): string | null;
-
-    label(): string | null;
-
-    parentLongId(): number;
-}
-```
-
 ### Интерфейс LabelsGroup
 ```ts
 interface LabelsGroup {
@@ -166,12 +149,7 @@ interface GridRange {
 
 описывается в разделе: `Grid.range()` т.к. является парент интерфейсом
 
-### Интерфейс GridDimension
-```ts
-interface GridDimension {
-    getDimensionEntity(): EntityInfo;
-}
-```
+
 
 ### Интерфейс ExportResult
 ```ts
@@ -576,10 +554,7 @@ interface ResultInfo {
 
 ```
 
-### Интерфейс EntityInfo
-```ts
-interface EntityInfo = Label
-```
+
 
 ### Интерфейс EntitiesInfo
 ```ts
@@ -1396,17 +1371,8 @@ interface Connectors {
 }
 ```
 
-
-
 export type ObjectOfStringArray = {
     [key: string]: string[];
-}
-
-
-
-export interface GridPageSelector extends GridDimension
-{
-    getSelectedEntity(): EntityInfo | null;
 }
 
 export interface StorageExporter extends Exporter {
