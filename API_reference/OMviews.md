@@ -36,9 +36,32 @@ interface MulticubesTab extends Tab {
 
 ```js
 open(name: string): MulticubeTab
-}
 ```
 Возвращает ссылку на `MulticubeTab` куба `name`. В интерфейсе Optimacros аналогично открытию таба мультикуба `name`.
+
+### Интерфейс Tab
+```ts
+interface Tab {
+    pivot(viewName?: string): Pivot;
+    open(name: string): Tab;
+		
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
+		
+    importer(): Importer;
+    storageImporter(): StorageImporter;
+}
+```
+Базовый интерфейс для вкладок.
+
+&nbsp;
+
+```js
+pivot(viewName?: string): Pivot
+```
+Возвращает ссылку на объект `Pivot` представления `viewName` текущей модели. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба в скриптах 1.0 *отсутствует*, поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
+
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 ## Импорт в мультикубы и справочники<a name="import"></a>

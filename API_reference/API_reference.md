@@ -347,24 +347,7 @@ interface ElementsReorder {
 ```
 Аналогия интерфейсного функционала Reorder на гриде
 
-### Интерфейс Tab
-```ts
-interface Tab {
-    pivot(viewName?: string): Pivot;
 
-    open(name: string): Tab;
-
-    elementsCreator(): ElementsCreator;
-
-    elementsDeleter(): ElementsDeleter;
-
-    elementsReorder(): ElementsReorder;
-
-    importer(): Importer;
-
-    storageImporter(): StorageImporter;
-}
-```
 
 ### Интерфейс Environment
 ```ts
