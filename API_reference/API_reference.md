@@ -466,25 +466,6 @@ interface MulticubeTab extends Tab {
 }
 ```
 
-### Интерфейс MulticubesTab
-```ts
-interface MulticubesTab extends Tab {
-    open(name: string): MulticubeTab;
-}
-```
-обращение типа: `om.multicubes.multicubesTab()` будет равносильна открытию таб Multicubes, где multicubesTab это минитаб 
-Table в интерфейсной, части приложения. А обращение к методу `open()` с переданным строковым значением содержащим имя 
-мультикуба в модели, будет равносильно открытому мультикубу с данным именем (открытый таб без грида).
-
-### Интерфейс Multicubes
-```ts
-interface Multicubes {
-    multicubesTab(): MulticubesTab;
-}
-```
-`om.multicubes` Аналогично открытию табы Multicubes в интерфейсной части приложения, но без открытых мини табов.
-
-
 ### Интерфейс Times
 ```ts
 interface Times {
