@@ -15,10 +15,14 @@ interface Multicubes {
     multicubesTab(): MulticubesTab;
 }
 ```
-
-Аналогично открытию таба "Мультикубы" в интерфейсной части приложения.
+Интерфейс для получения ссылки на `MulticubesTab`.
 
 &nbsp;
+
+```js
+multicubesTab(): MulticubesTab
+```
+Возвращает ссылку на `MulticubesTab`. В интерфейсе Optimacros аналогично открытию таба "Мультикубы".
 
 ### Интерфейс MulticubesTab
 ```ts
@@ -26,10 +30,15 @@ interface MulticubesTab extends Tab {
     open(name: string): MulticubeTab;
 }
 ```
-обращение типа: `om.multicubes.multicubesTab()` будет равносильна открытию таб Multicubes, где multicubesTab это минитаб 
-Table в интерфейсной, части приложения. А обращение к методу `open()` с переданным строковым значением содержащим имя 
-мультикуба в модели, будет равносильно открытому мультикубу с данным именем (открытый таб без грида).
-в.
+Интерфейс для получения ссылки на `MulticubeTab`.
+
+&nbsp;
+
+```js
+open(name: string): MulticubeTab
+}
+```
+Возвращает ссылку на `MulticubeTab` куба `name`. В интерфейсе Optimacros аналогично открытию таба мультикуба `name`.
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 ## Импорт в мультикубы и справочники<a name="import"></a>
