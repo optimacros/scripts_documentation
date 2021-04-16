@@ -163,6 +163,8 @@ columnCount(): number
 ```
 Возвращает количество колонок в таблице.
 
+&nbsp;
+
 ```js
 cellCount(): number
 ```
@@ -198,6 +200,8 @@ interface GridDefinitionInfo {
 }
 ```
 Интерфейс, предоставляющий метаданные об интерфейсе [`Grid`](#Grid).
+
+&nbsp;
 
 ```js
 getPageSelectors(): GridPageSelector[]
