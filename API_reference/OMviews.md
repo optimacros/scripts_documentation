@@ -202,6 +202,7 @@ interface GridDefinitionInfo {
 ```js
 getPageSelectors(): GridPageSelector[]
 ```
+Возвращает массив объектов с интерфейсом [`GridPageSelector`](#GridPageSelector), представляющий метаданные о фильтрах таблицы.
 
 &nbsp;
 
@@ -254,6 +255,31 @@ interface Label {
 
 interface EntityInfo = Label;
 ```
+Интерфейс сущности.
+
+&nbsp;
+
+```js
+longId(): number
+```
+Возвращает внутренний идентификатор сущности в системе, уникальный в пределах ...
+
+&nbsp;
+
+
+```js
+name(): string
+```
+Возвращает имя сущности.
+
+&nbsp;
+
+```js
+code(): string
+```
+Возвращает код сущности. В Optimacros всего две сущности могут иметь код: элементы справочников и кубы.
+
+&nbsp;
 
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
