@@ -15,7 +15,7 @@ interface Multicubes {
     multicubesTab(): MulticubesTab;
 }
 ```
-Интерфейс для получения ссылки на `MulticubesTab`.
+Интерфейс для получения ссылки на `[MulticubesTab](#MulticubesTab)`.
 
 &nbsp;
 
@@ -24,7 +24,7 @@ multicubesTab(): MulticubesTab
 ```
 Возвращает ссылку на `MulticubesTab`. В интерфейсе Optimacros аналогично открытию таба "Мультикубы".
 
-### Интерфейс MulticubesTab
+### Интерфейс MulticubesTab<a name="MulticubesTab"></a>
 ```ts
 interface MulticubesTab extends Tab {
     open(name: string): MulticubeTab;
@@ -61,6 +61,19 @@ interface Tab {
 pivot(viewName?: string): Pivot
 ```
 Возвращает ссылку на объект `Pivot` представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба в скриптах 1.0 [*отсутствует*](../appendix/constraints.md), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
+
+### Интерфейс MulticubeTab
+```ts
+interface MulticubeTab extends Tab {
+    cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
+
+    cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
+
+    cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
+
+    getCubeInfo(identifier: string | number): CubeInfo;
+}
+```
 
 ### Интерфейс Pivot
 ```ts
@@ -163,7 +176,7 @@ cellCount(): number
 ```js
 getDefinitionInfo(): GridDefinitionInfo
 ```
-Возвращает ссылку на интерфейс `GridDefinitionInfo`.
+Возвращает ссылку на интерфейс [`GridDefinitionInfo`](#GridDefinitionInfo).
 
 &nbsp;
 
@@ -179,7 +192,7 @@ exporter() - нужен для того чтобы автоматически п
 storageExporter(): StorageExporter
 ```
 
-### Интерфейс GridDefinitionInfo
+### Интерфейс GridDefinitionInfo<a name="GridDefinitionInfo"></a>
 ```ts
 interface GridDefinitionInfo {
     getPageSelectors(): GridPageSelector[];

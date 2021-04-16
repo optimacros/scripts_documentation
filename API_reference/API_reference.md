@@ -360,19 +360,6 @@ interface CubeInfo extends EntityInfo {
 }
 ```
 
-### Интерфейс MulticubeTab
-```ts
-interface MulticubeTab extends Tab {
-    cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
-
-    cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
-
-    cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
-
-    getCubeInfo(identifier: string | number): CubeInfo;
-}
-```
-
 ### Интерфейс Times
 ```ts
 interface Times {
