@@ -266,35 +266,6 @@ interface Exporter {
 }
 ```
 
-### Интерфейс Pivot
-```ts
-interface Pivot {
-    create(): Grid;
-
-    rowsFilter(data: string[] | string | number | number[]): Pivot;
-
-    columnsFilter(data: string[] | string | number | number[]): Pivot;
-
-    withoutValues(): Pivot;
-
-    addDependentContext(identifier: number): Pivot
-}
-```
-
-Интерфейс скриптов не позволяет перекручивать пивотку принимает строку с названием вьюхи, которую мы выкручиваем как нам
- необходимо. Если передаётся null, то получим дефолтное отображение мультикуба.
- 
-create - загружает сам грид переданного представления мультикуба
-
-withoutValues - загружает представление мультикуба без данных
-
-rowsFilter - аналог Hide Show, если мы хотим показать на гриде только одну строку или настроенный нами набор строк.
-
-columnsFilter - аналогично с rowsFilter, но только для колонок
-
-addDependentContext - передача контекста
-
-
 ### Интерфейс NumericElementsCreator
 ```ts
 interface NumericElementsCreator {
