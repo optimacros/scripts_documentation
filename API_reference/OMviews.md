@@ -16,7 +16,6 @@ interface Multicubes {
 }
 ```
 Интерфейс для получения ссылки на `MulticubesTab`.
-
 &nbsp;
 
 ```js
@@ -31,7 +30,6 @@ interface MulticubesTab extends Tab {
 }
 ```
 Интерфейс для получения ссылки на `MulticubeTab`.
-
 &nbsp;
 
 ```js
@@ -54,7 +52,6 @@ interface Tab {
 }
 ```
 Базовый интерфейс для вкладок.
-
 &nbsp;
 
 ```js
@@ -67,7 +64,7 @@ pivot(viewName?: string): Pivot
 ## Импорт в мультикубы и справочники<a name="import"></a>
 ## Обновление клеток мультикубов через формулу<a name="update"></a>
 ## Получение клеток куба с помощью формулы<a name="get"></a>
-## Копирование срезов кубов<a name="copy"></a>
+## Копирование срезов кубов<a nam  e="copy"></a>
 
 
 
