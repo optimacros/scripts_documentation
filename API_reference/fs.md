@@ -43,6 +43,8 @@ interface Filesystem {
 
 Абстрактный интерфейс файловой системы.
 
+&nbsp;
+
 ```js
 has(path: string): boolean
 ```
@@ -61,6 +63,8 @@ interface BaseAdapter {
     load(): Filesystem;
 }
 ```
+
+&nbsp;
 
 Базовый интерфейс адаптеров файловых систем.
 
@@ -115,36 +119,49 @@ getHost(): string
 ```
 Возвращает адрес хоста.
 
+&nbsp;
+
 ```js
 setPort(port: number): FTPAdapter
 ```
 Устанавливает порт. Возвращает `this`.
+
+&nbsp;
 
 ```js
 getPort(): number
 ```
 Возвращает порт.
 
+&nbsp;
+
 ```js
 setUsername(username: string): FTPAdapter
 ```
 Устанавливает имя пользователя. Возвращает `this`.
+
+&nbsp;
 
 ```js
 getUsername(): string
 ```
 Возвращает имя пользователя.
 
+&nbsp;
+
 ```js
 setPassword(password: string): FTPAdapter
 ```
 Устанавливает пароль. Возвращает `this`.
+
+&nbsp;
 
 ```js
 getPassword(): string
 ```
 Возвращает пароль.
 
+&nbsp;
 
 ___
 ```js
