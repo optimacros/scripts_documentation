@@ -173,17 +173,6 @@ interface GridDimension {
 }
 ```
 
-### Интерфейс GridDefinitionInfo
-```ts
-interface GridDefinitionInfo {
-    getPageSelectors(): GridPageSelector[];
-
-    getRowDimensions(): GridDimension[];
-
-    getColumnDimensions(): GridDimension[];
-}
-```
-
 ### Интерфейс ExportResult
 ```ts
 interface ExportResult {
