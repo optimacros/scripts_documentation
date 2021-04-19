@@ -123,14 +123,14 @@ getHost(): string
 ```js
 setPort(port: number): FTPAdapter
 ```
-Устанавливает порт. Возвращает `this`.
+Устанавливает номер порта. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getPort(): number
 ```
-Возвращает порт.
+Возвращает номер порта.
 
 &nbsp;
 

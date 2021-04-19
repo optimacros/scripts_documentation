@@ -23,7 +23,7 @@
     1. SMTP
 1. [Изменение статуса текущего запроса](reqStatusChange.md)
 
-### Интерфейс OM
+### Интерфейс OM<a name="OM"></a>
 ```ts
 interface OM {
     readonly common: Common;
@@ -47,156 +47,111 @@ ___
 ___
 
 
-### Интерфейс Cell
+### Интерфейс Cell<a name="Cell"></a>
 ```ts
 interface Cell {
     setValue(value: number | string | null);
-
     getValue(): number | string | null;
-
     getNativeValue(): number | string | null;
-
     getTextValue(): number | string | null;
-
     getContextValue(): string | null;
 
     definitions(): number[];
-
     columns(): LabelsGroup;
-
     rows(): LabelsGroup;
-
     dropDown(): Labels;
-
     getFormatType(): string;
-
     isEditable(): boolean;
 }
 ```
 
-### Интерфейс Cells
+### Интерфейс Cells<a name="Cells"></a>
 ```ts
 interface Cells {
     all(): Cell[];
-
     first(): Cell;
-
     setValue(value: number | string | null);
-
     count(): number;
-
     chunkInstance(): GridRangeChunk;
-
     getByIndexes(indexes: number[]): Cells | null;
 }
 ```
 
-### Интерфейс LabelsGroup
+### Интерфейс LabelsGroup<a name="LabelsGroup"></a>
 ```ts
 interface LabelsGroup {
     all(): Label[];
-
     first(): Label;
-
     cells(): Cells;
 }
 ```
 
-### Интерфейс Labels
+### Интерфейс Labels<a name="Labels"></a>
 ```ts
 interface Labels {
     start(): number;
-
     count(): number;
-
     all(): LabelsGroup[];
-
     get(index: number): LabelsGroup | null;
-
     chunkInstance(): GridRangeChunk;
-
     findLabelByLongId(longId: number): Label | null;
 }
 ```
 
-### Интерфейс GridRangeChunk
+### Интерфейс GridRangeChunk<a name="GridRangeChunk"></a>
 ```ts
 interface GridRangeChunk {
     cells(): Cells;
-
     rows(): Labels;
-
     columns(): Labels;
 }
 ```
 
-### Интерфейс ExportResult
+### Интерфейс ExportResult<a name="ExportResult"></a>
 ```ts
 interface ExportResult {
     mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
-
     getHash(): string;
-
     copyToLocal(path: string): this;
-
     moveToLocal(path: string): this;
 }
 ```
 
-### Интерфейс Exporter
+### Интерфейс Exporter<a name="Exporter"></a>
 ```ts
 interface Exporter {
     setEncoding(encoding: string): Exporter;
-
     setExtension(extension: string): Exporter;
-
     setOmitSummaryRows(omitSummaryRows: boolean): Exporter;
-
     setOmitEmptyRows(omitEmptyRows: boolean): Exporter;
-
     setIncludeCodes(includeCodes: boolean): Exporter;
-
     setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter;
-
     setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter;
-
     setFileName(fileName: string): Exporter;
-
     setDelimiter(delimiter: string): Exporter;
-
     setEnclosure(enclosure: string): Exporter;
-
     setEscape(escape: string): Exporter;
-
     setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter;
-
     setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter;
-
     export(): ExportResult;
 }
 ```
 
-### Интерфейс NumericElementsCreator
+### Интерфейс NumericElementsCreator<a name="NumericElementsCreator"></a>
 ```ts
 interface NumericElementsCreator {
     setCount(count: number): NumericElementsCreator;
-
     setPositionAfter(relativeLongId: number): NumericElementsCreator;
-
     setPositionBefore(relativeLongId: number): NumericElementsCreator;
-
     setPositionStart(): NumericElementsCreator;
-
     setPositionEnd(): NumericElementsCreator;
-
     setPositionChildOf(parentLongId: number): NumericElementsCreator;
-
     create(): number[];
 }
 ```
 Аналогия интерфейсного функционала Insert на гриде
 
-### Интерфейс ElementsCreator
+### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
 ```ts
 interface ElementsCreator {
     numeric(): NumericElementsCreator;
@@ -204,133 +159,109 @@ interface ElementsCreator {
 ```
 Аналогия интерфейсного функционала Insert на гриде
 
-### Интерфейс ElementsDeleter
+### Интерфейс ElementsDeleter<a name="ElementsDeleter"></a>
 ```ts
 interface ElementsDeleter {
     appendIdentifier(identifier: number): ElementsDeleter;
-
     delete(): ElementsDeleter;
 }
 ```
 Аналогия интерфейсного функционала delete на гриде
 
-### Интерфейс ElementsReorder
+### Интерфейс ElementsReorder<a name="ElementsReorder"></a>
 ```ts
 interface ElementsReorder {
     append(longId: number, relativeLongId: number, position: string): ElementsReorder;
-
     reorder(): ElementsReorder;
-
     count(): number;
-
     reverse(): ElementsReorder;
 }
 ```
 Аналогия интерфейсного функционала Reorder на гриде
 
-
-
-### Интерфейс Environment
+### Интерфейс Environment<a name="Environment"></a>
 ```ts
 interface Environment {
     load(name: string): Environment;
-
     get(key: string, def?: any): any;
-
     set(name: string, value: number | string | null): Environment;
 }
 ```
-
 load() Принимает имя в виде строки
 
-### Интерфейс CubeCell
+### Интерфейс CubeCell<a name="CubeCell"></a>
 ```ts
 interface CubeCell {
     definitions(): number[];
-
     getDimensionIds(): number[];
-
     getDimensionItems(): EntityInfo[];
-
     getValue(): number | string | null | boolean;
 }
 ```
 
-### Интерфейс CubeCellSelector
+### Интерфейс CubeCellSelector<a name="CubeCellSelector"></a>
 ```ts
 interface CubeCellSelector {
     getCubeInfo(): CubeInfo;
-
     getCubeIdentifier(): number;
-
     getCubeDimensions(): EntityInfo[];
-
     // @ts-ignore
     generator(): IterableIterator<CubeCell>;
 }
 ```
 
-### Интерфейс CubeCellSelectorBuilder
+### Интерфейс CubeCellSelectorBuilder<a name="CubeCellSelectorBuilder"></a>
 ```ts
 interface CubeCellSelectorBuilder {
     setFormula(formula: string): this;
-
     load(): CubeCellSelector;
 }
 ```
 
-### Интерфейс CubeCellUpdater
+### Интерфейс CubeCellUpdater<a name="CubeCellUpdater"></a>
 ```ts
 interface CubeCellUpdater{
     getCount(): number;
 }
 ```
 
-### Интерфейс CubeCellUpdaterBuilder
+### Интерфейс CubeCellUpdaterBuilder<a name="CubeCellUpdaterBuilder"></a>
 ```ts
 interface CubeCellUpdaterBuilder {
     setConditionFormula(formula: string): this;
-
     setFormula(formula: string): this;
-
     load(): CubeCellUpdater;
 }
 ```
 
-### Интерфейс CubeFormatInfo
+### Интерфейс CubeFormatInfo<a name="CubeFormatInfo"></a>
 ```ts
 interface CubeFormatInfo {
     getFormatTypeEntity(): EntityInfo;
-
     getDimensionEntity(): EntityInfo | null;
 }
 ```
 
-### Интерфейс CubeInfo
+### Интерфейс CubeInfo<a name="CubeInfo"></a>
 ```ts
 interface CubeInfo extends EntityInfo {
     getFormula(): string | null;
-
     getFormatInfo(): CubeFormatInfo;
-
     getDimensions(): EntityInfo[];
 }
 ```
 
-### Интерфейс Times
+### Интерфейс Times<a name="Times"></a>
 ```ts
 interface Times {
     optionsTab(): Tab
-
     typePeriod(identifier: string | number): TypePeriod;
-
     resetForm(): any;
-
     applyForm(): any;
 }
 ```
 
-### Интерфейс VersionsTab
+### Интерфейс VersionsTab<a name="VersionsTab"></a>
 ```ts
 interface VersionsTab {
     copyVersion(from: string, to: string): any;
@@ -342,7 +273,7 @@ copyVersion - использование функционала копирова
  копируем. В качестве второго аргумента имя версии в которую копируем.
 
 
-### Интерфейс Versions
+### Интерфейс Versions<a name="Versions"></a>
 ```ts
 interface Versions {
     versionsTab(): VersionsTab
@@ -351,71 +282,53 @@ interface Versions {
 `om.versions` Аналогично открытию табы Version в интерфейсной части приложения, но без открытых мини табов.
 `om.versions.versionsTab` Аналогично открытию табы Version - Table в интерфейсной части приложения
 
-### Интерфейс CSVParams
+### Интерфейс CSVParams<a name="CSVParams"></a>
 ```ts
 interface CSVParams {
     setDelimiter(delimiter: string): CSVParams;
-
     getDelimiter(): string;
-
     setEnclosure(enclosure: string): CSVParams;
-
     getEnclosure(): string;
-
     setEscape(escape: string): CSVParams;
-
     getEscape(): string;
-
     setLineDelimiter(escape: string): CSVParams;
-
     getLineDelimiter(): string;
 }
 ```
 
-### Интерфейс Importer
+### Интерфейс Importer<a name="Importer"></a>
 ```ts
 interface Importer {
     csv(): CSVParams;
-
     setFilePath(path: string): Importer;
-
     getFilePath(): string;
-
     getReportFilePath(): string
-
     import(): Importer;
 }
 ```
 
-### Интерфейс ListImporter
+### Интерфейс ListImporter<a name="ListImporter"></a>
 ```ts
 interface ListImporter extends Importer {
     setFilePath(path: string): ListImporter;
-
     setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
-
     getObligatoryListCodes(): boolean;
-
     setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
-
     getImportToChildListOnly(): boolean;
-
     setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
-
     getUpdatedPropertiesOnParentLevels(): boolean;
 }
 ```
 
-### Интерфейс ListTab
+### Интерфейс ListTab<a name="ListTab"></a>
 ```ts
 interface ListTab extends Tab {
-    listSubsetTab(): ListSubsetsTab;
-
+    listSubsetTab(): ListSubsetsTab
     importer(): ListImporter;
 }
 ```
 
-### Интерфейс ListSubsetsTab
+### Интерфейс ListSubsetsTab<a name="ListSubsetsTab"></a>
 ```ts
 interface ListSubsetsTab extends Tab {
     listTab(): ListTab;
@@ -424,7 +337,7 @@ interface ListSubsetsTab extends Tab {
 `om.lists.ListSubsetsTab.listTab.open()` Аналогично открытию справочника на минитабе Subsets. open() в качестве 
 аргумента принимает строку с именем справочника, который мы хоти открыть.
 
-### Интерфейс ListsTab
+### Интерфейс ListsTab<a name="ListsTab"></a>
 ```ts
 interface ListsTab extends Tab {
     open(name: string): ListTab;
@@ -433,7 +346,7 @@ interface ListsTab extends Tab {
 `om.lists.listsTab.open()` Аналогично функционалу Open (открытию справочника) выбранного в гриде Lists - Table в 
 интерфейсной части приложения. В качестве аргумента принимает строку с именем справочника, который мы хоти открыть.
 
-### Интерфейс Lists
+### Интерфейс Lists<a name="Lists"></a>
 ```ts
 interface Lists {
     listsTab(): ListsTab
@@ -444,15 +357,12 @@ interface Lists {
 `om.lists.listsTab` Аналогично открытию табы Lists - Table в интерфейсной части 
 приложения.
 
-### Интерфейс CellBuffer
+### Интерфейс CellBuffer<a name="CellBuffer"></a>
 ```ts
 interface CellBuffer {
     set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
-
     apply(): CellBuffer;
-
     count(): number;
-
     canLoadCellsValues(value: boolean): CellBuffer;
 }
 ```
@@ -474,115 +384,85 @@ count() - даёт возможность получить количество.
 canLoadCellsValues() - обязательный интерфейс, который принимает булевое значение (true, false) нужнен для того, чтобы 
 указать нужно ли перезагружать значение в буфер в случае если они изменятся.
 
-### Интерфейс RequestManager
+### Интерфейс RequestManager<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
     log(message: string, print?: boolean): RequestManager;
-
     logStatusMessage(message: string, print?: boolean): RequestManager;
-
     setStatusMessage(message: string): RequestManager;
 }
 ```
 
-### Интерфейс UserInfo
+### Интерфейс UserInfo<a name="UserInfo"></a>
 ```ts
 interface UserInfo {
     getEntity(): EntityInfo;
-
     getEmail(): string;
-
     getFirstName(): string;
-
     getLastName(): string;
-
     getRole(): EntityInfo;
 }
 ```
 
-### Интерфейс ModelInfo
+### Интерфейс ModelInfo<a name="ModelInfo"></a>
 ```ts
 interface ModelInfo {
     id(): number;
-
     name(): string;
-
     lastSyncDate(): number;
-
     autoCalcStatus(): boolean;
-
     setModelCalculationMode(status: boolean): boolean;
-
     repair(): boolean;
-
     recalculate(): boolean;
-
     backup(path: string): boolean;
 }
 ```
 
-### Интерфейс ResultInfo
+### Интерфейс ResultInfo<a name="ResultInfo"></a>
 ```ts
 interface ResultInfo {
     addFileHash(hash: string): this;
-
     actionsInfo(): ResultActionsInfo;
-
     setProperty(name: string, value: any): this;
 }
 
 ```
 
-
-
-### Интерфейс EntitiesInfo
+### Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
 ```ts
 interface EntitiesInfo {
     get(longId: number): EntityInfo | null;
-
     getCollection(longId: number[]): EntityInfo[];
 }
 ```
 
-### Интерфейс CopyData
+### Интерфейс CopyData<a name="CopyData"></a>
 ```ts
 interface CopyData {
     setSourceLongId(longId: number): CopyData;
-
     setDestLongId(longId: number): CopyData;
-
     enableCopyAllCubes(): CopyData;
-
     enableCustomProperties(): CopyData;
-
     setMulticubeLongIds(longIds: number[]): CopyData;
-
     setMulticubeByNames(names: string[]): CopyData;
-
     copy(): CopyData;
 }
 ```
 
-### Интерфейс Common
+### Интерфейс Common<a name="Common"></a>x
 ```ts
 interface Common {
     createCellBuffer(): CellBuffer;
-
     requestInfo(): RequestManager;
-
     modelInfo(): ModelInfo;
-
     userInfo(): UserInfo;
-
     resultInfo(): ResultInfo;
-
     entitiesInfo(): EntitiesInfo;
-
     copyData(): CopyData;
 }
 ```
 
-### Интерфейс FileMeta
+### Интерфейс FileMeta<a name="FileMeta"></a>
 ```ts
 interface FileMeta {
     type: string;
@@ -597,16 +477,15 @@ interface FileMeta {
 }
 ```
 
-### Интерфейс PathObj
+### Интерфейс PathObj<a name="PathObj"></a>
 ```ts
 interface PathObj {
     getSystem(): Filesystem;
-
     getPath(): string;
 }
 ```
 
-### Интерфейс CsvReader
+### Интерфейс CsvReader<a name="CsvReader"></a>
 ```ts
 interface CsvReader {
     params(): CSVParams;
@@ -621,13 +500,11 @@ interface CsvReader {
 }
 ```
 
-### Интерфейс CsvWriter
+### Интерфейс CsvWriter<a name="CsvWriter"></a>
 ```ts
 interface CsvWriter {
     params(): CSVParams;
-
     writeRow(row: string[]): CsvWriter;
-
     writeRows(rows: string[][]): CsvWriter;
 
     /**
@@ -639,42 +516,38 @@ interface CsvWriter {
 }
 ```
 
-### Интерфейс BaseConverter
+### Интерфейс BaseConverter<a name="BaseConverter"></a>
 ```ts
 interface BaseConverter {
     setSource(path: string): this;
-
     convert(): string;
 }
 ```
 
-### Интерфейс ExcelToCsvConverter
+### Интерфейс ExcelToCsvConverter<a name="ExcelToCsvConverter"></a>
 ```ts
 interface ExcelToCsvConverter extends BaseConverter {
     setSheetIdentifier(identifier: string | number): this;
 }
 ```
 
-### Интерфейс ConverterManager
+### Интерфейс ConverterManager<a name="ConverterManager"></a>
 ```ts
 interface ConverterManager {
     excelToCsv(): ExcelToCsvConverter
 }
 ```
 
-### Интерфейс FilesDataManager
+### Интерфейс FilesDataManager<a name="FilesDataManager"></a>
 ```ts
 interface FilesDataManager {
     csvWriter(): CsvWriter;
-
     csvReader(path: PathObj): CsvReader;
-
     converterManager(): ConverterManager;
 }
 ```
 
-
-### Интерфейс OptimizationRequestTab
+### Интерфейс OptimizationRequestTab<a name="OptimizationRequestTab"></a>
 ```ts
 interface OptimizationRequestTab extends Tab {
     run(name: string): { success: boolean, error: undefined | string };
@@ -683,7 +556,7 @@ interface OptimizationRequestTab extends Tab {
 `om.optimization.optimizationRequestsTab.run()` Аналогично функционалу запуска Отпимизационного запроса в интерфейсной 
 части приложения. run в качестве аргумента принимает строку с именем Отпимизационного запроса
 
-### Интерфейс Optimization
+### Интерфейс Optimization<a name="Optimization"></a>
 ```ts
 interface Optimization {
     optimizationRequestsTab(): OptimizationRequestTab
@@ -695,77 +568,61 @@ interface Optimization {
 приложения.
 
 
-### Интерфейс SqlQueryResult
+### Интерфейс SqlQueryResult<a name="SqlQueryResult"></a>
 ```ts
 interface SqlQueryResult {
     count(): number;
-
     generator(likeArray?: boolean): object[];
-
     all(): object[];
-
     first(): object;
-
     column(columnName: string): any[];
-
     cell(columnName: string, rowIndex?: number): number | string | boolean | null;
-
     updated(): number;
-
     lastId(): number;
 }
 ```
 
-### Интерфейс SqlQueryBuilder
+### Интерфейс SqlQueryBuilder<a name="SqlQueryBuilder"></a>
 ```ts
 interface SqlQueryBuilder {
     execute(sql: string, bindings?: object): SqlQueryResult;
 }
 ```
 
-### Интерфейс SqlConnection
+### Интерфейс SqlConnection<a name="SqlConnection"></a>
 ```ts
 interface SqlConnection {
     qb(): SqlQueryBuilder;
 }
 ```
 
-### Интерфейс SqlConnectorBuilder
+### Интерфейс SqlConnectorBuilder<a name="SqlConnectorBuilder"></a>
 ```ts
 interface SqlConnectorBuilder {
     setHost(value: string): this;
-
     setPort(value: number): this;
-
     setUsername(value: string): this;
-
     setPassword(value: string): this;
-
     setDatabase(value: string): this;
-
     /**
      * https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility
      */
     loadBulkCopyBuilder(): SqlBulkCopyBuilder;
-
     load(): SqlConnection;
 }
 ```
 
-### Интерфейс SqlBulkCopyResult
+### Интерфейс SqlBulkCopyResult<a name="SqlBulkCopyResult"></a>
 ```ts
 interface SqlBulkCopyResult {
     hasErrors(): boolean;
-
     getErrorOutput(): string;
-
     getOutput(): string;
-
     getCommand(): string;
 }
 ```
 
-### Интерфейс SqlBulkCopyBuilder
+### Интерфейс SqlBulkCopyBuilder<a name="SqlBulkCopyBuilder"></a>
 ```ts
 interface SqlBulkCopyBuilder {
     /**
@@ -976,47 +833,36 @@ declare namespace Mongodb {
         }): CollectionCreator;
 
         setName(name: string): CollectionCreator;
-
         create(): { ok: number, errmsg?: string };
     }
 
     interface InsertOneResult {
         getInsertedCount(): number;
-
         getInsertedId(): Types.ObjectId;
-
         isAcknowledged(): boolean;
     }
 
     interface InsertManyResult {
         getInsertedCount(): number;
-
         getInsertedIds(): Types.ObjectId[];
-
         isAcknowledged(): boolean;
     }
 
     interface UpdateResult {
         getMatchedCount(): number;
-
         getModifiedCount(): number;
-
         getUpsertedCount(): number;
-
         getUpsertedId(): Types.ObjectId;
-
         isAcknowledged(): boolean;
     }
 
     interface DeleteResult {
         getDeletedCount(): number;
-
         isAcknowledged(): boolean;
     }
 
     interface Cursor {
         all(): object[];
-
         generator(): object[];
     }
 
@@ -1031,21 +877,13 @@ declare namespace Mongodb {
 
     interface Collection {
         count(filter: object): number;
-
         find(filter: object, options?: FilterOptions): Cursor;
-
         findOne(filter: object, options?: FilterOptions): object;
-
         insertOne(document: object): InsertOneResult;
-
         insertMany(documents: object[]): InsertManyResult;
-
         updateOne(filter: object, update: object, options?: FilterOptions): UpdateResult;
-
         updateMany(filter: object, update: object, options?: FilterOptions): UpdateResult;
-
         deleteOne(filter: object, options?: FilterOptions): DeleteResult;
-
         deleteMany(filter: object, options?: FilterOptions): DeleteResult;
     }
 
@@ -1057,25 +895,19 @@ declare namespace Mongodb {
 
     interface Types {
         objectId(id?: string): Types.ObjectId;
-
         regex(pattern: string, flags?: string): object;
-
         date(milliseconds: number): object;
     }
 
     interface Connection {
         collectionCreator(): CollectionCreator;
-
         dropCollection(name: string): { ok: number, errmsg?: string, nIndexesWas?: number, ns?: string };
-
         selectCollection(name: string): Collection;
-
         types(): Types;
     }
 
     interface ConnectorBuilder {
         setDSN(value: string): ConnectorBuilder;
-
         load(): Connection;
     }
 }
@@ -1087,17 +919,11 @@ declare namespace Mongodb {
 declare namespace Http {
     interface Params {
         getAll(): object;
-
         setAll(pairs: object): boolean;
-
         get(name: string): any;
-
         set(name: string, value: any): boolean;
-
         del(name: string): boolean;
-
         has(name: string): boolean;
-
         clear(): boolean;
     }
 
@@ -1127,51 +953,32 @@ declare namespace Http {
          * Content-Type: application/x-www-form-urlencoded
          */
         formBody(): FormRequestBody;
-
         stringBody(): StringRequestBody;
     }
 
     interface Cert {
         setPath(path: string): Cert;
-
         getPath(path: string): string;
-
         setPassphrase(passphrase: string): Cert;
     }
 
     interface Url {
         setUrl(url: string): boolean;
-
         getUrl(): string;
-
         setUrlPath(path: string): boolean;
-
         getUrlPath(): string;
-
         getUrlScheme(): string;
-
         setUrlScheme(scheme: string): boolean;
-
         getHost(): string;
-
         setHost(host: string): boolean;
-
         getPort(): number | null;
-
         setPort(port: number | string): boolean;
-
         setUser(user: string): boolean;
-
         getUser(): string;
-
         setPassword(password: string): boolean;
-
         getPassword(): string | null;
-
         setFragment(fragment: string): boolean;
-
         getFragment(): string | null;
-
         params(): UrlParams;
     }
 
@@ -1182,7 +989,6 @@ declare namespace Http {
          * Default is true
          */
         getStatus(): boolean;
-
         setMax(max: number): boolean;
 
         /**
@@ -1217,45 +1023,34 @@ declare namespace Http {
 
     interface HttpAuth {
         setUser(user: string): HttpAuth;
-
         setPassword(password: string): HttpAuth;
 
         /**
          * @param type basic|digest|ntlm
          */
         setType(type: string): HttpAuth;
-
         setStatus(status: boolean): HttpAuth;
     }
 
     interface Options {
         setConnTimeout(seconds: number): boolean;
-
         getConnTimeout(): number;
-
         setReqTimeout(seconds: number): boolean;
-
         getReqTimeout(): number;
-
         setCanDecodeContent(value: boolean): boolean;
-
         getCanDecodeContent(): boolean;
-
         allowRedirects(): AllowRedirects;
-
         auth(): HttpAuth;
 
         /**
          * This feature not realized
          */
         cert(): Cert;
-
         verify(): Verify;
     }
 
     interface ResponseErrors {
         getCode(): number;
-
         getMessage(): string;
     }
 
@@ -1271,11 +1066,8 @@ declare namespace Http {
          * Limit to parse first 50MB of response data
          */
         getStringDataLikeJson(): object | boolean;
-
         getStatusCode(): number;
-
         isOk(): boolean;
-
         getErrors(): ResponseErrors;
     }
 
@@ -1300,47 +1092,32 @@ declare namespace Http {
          * @param type GET|POST|DELETE|PUT|HEAD|OPTIONS
          */
         setMethod(type: string): boolean;
-
         getMethod(): string;
-
         body(): RequestBody;
-
         options(): Options;
-
         cookies(): Params;
-
         headers(): Params;
-
         send(): Response;
     }
 
     interface HttpManager {
         requestBuilder(): RequestBuilder;
-
         urlEncode(value: string): string | boolean;
-
         urlDecode(value: string): string | boolean;
-
         base64Encode(value: string): string | boolean;
-
         base64Decode(value: string): string | boolean;
     }
 }
 ```
 
-### Интерфейс Connectors
+### Интерфейс Connectors<a name="Connectors"></a>
 ```ts
 interface Connectors {
     mysql(): SqlConnectorBuilder;
-
     postgresql(): SqlConnectorBuilder;
-
     sqlServer(): SqlConnectorBuilder;
-
     oracle(): OracleConnectorBuilder;
-
     mongodb(): Mongodb.ConnectorBuilder;
-
     http(): Http.HttpManager;
 		
     /**
@@ -1356,13 +1133,9 @@ export type ObjectOfStringArray = {
 
 export interface StorageExporter extends Exporter {
     setLineDelimiter(lineDelimiter: string): Exporter;
-
     setFilterFormula(filterFormula: string): this;
-
     setDecimalSeparator(decimalSeparator: string): this;
-
     setDateFormat(dateFormat: string): this;
-
     setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
 }
 
@@ -1372,11 +1145,8 @@ export interface TypePeriod {
 
 export interface StorageImporter extends Importer {
     setMaxFailures(maxFailures: number): this;
-
     setIsCompressed(isCompressed: boolean): this;
-
     setEncoding(encoding: string): this;
-
     setDateFormat(dateFormat: string): this;
 }
 
@@ -1396,7 +1166,6 @@ export interface ButtonInfo {
      * @param type
      */
     setType(type: string): ButtonInfo;
-
     options(): ButtonInfoOptions;
 }
 
@@ -1406,15 +1175,12 @@ export interface ResultBaseAction {
 
 export interface EnvironmentInfo {
     set(key: string, value: any);
-
     get(key: string);
 }
 
 export interface ResultMacrosAction extends ResultBaseAction {
     setAutoRunTimeout(seconds: number): this;
-
     buttonInfo(): ButtonInfo;
-
     environmentInfo(): EnvironmentInfo;
 }
 
@@ -1424,21 +1190,15 @@ export interface ResultOpenAction extends ResultBaseAction {
 
 export interface ResultActionsInfo {
     makeMacrosAction(identifier: string | number): ResultMacrosAction;
-
     makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
-
     makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
-
     makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
-
     makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
 }
 
 export interface OracleConnectorBuilder extends SqlConnectorBuilder {
     setServiceName(value: string): this;
-
     setSchema(value: string): this;
-
     setTNS(value: string): this;
 }
 
@@ -1470,21 +1230,15 @@ export namespace WinAgent {
 
     export interface RunMacroAction extends BaseAction {
         setMacroName(macroName: string): this;
-
         setMacroFilePath(macroFilePath: string): this;
-
         setDataFilePaths(dataFilePaths: string[]): this;
-
         run(): RunMacroActionResult;
     }
 
     export interface WinAgentBuilder {
         setCommandUrl(url: string): this;
-
         setDownloadUrl(url: string): this;
-
         auth(): Http.HttpAuth;
-
         makeRunMacrosAction(): RunMacroAction;
     }
 }
@@ -1497,13 +1251,9 @@ export namespace Notifications {
 
         export interface Builder {
             setTo(to: string | string[]): this;
-
             setSubject(subject: string): this;
-
             setBody(body: string): this;
-
             attachFiles(paths: string[]): this;
-
             send(): Result;
         }
     }
