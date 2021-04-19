@@ -102,9 +102,9 @@ rowsFilter(data: string | string[] | number | number[]): Pivot
 
 `string[]` — массив названий строк
 
-`number` — [`longId`](#longId) строки
+`number` — [`longId`](#EntityInfo) строки
 
-`number[]` — массив [`longId`](#longId) строк.
+`number[]` — массив [`longId`](#EntityInfo) строк.
 
 Функция возвращает `this`.
 
