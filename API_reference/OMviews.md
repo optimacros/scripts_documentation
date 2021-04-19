@@ -86,7 +86,6 @@ interface Pivot {
 
 &nbsp;
 
-<a name="rowsFilter"></a>
 ```js
 create(): Grid
 ```
@@ -94,6 +93,7 @@ create(): Grid
 
 &nbsp;
 
+<a name="rowsFilter"></a>
 ```js
 rowsFilter(data: string | string[] | number | number[]): Pivot
 ```
