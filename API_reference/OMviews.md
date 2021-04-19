@@ -103,9 +103,9 @@ rowsFilter(data: string | string[] | number | number[]): Pivot
 
 `string[]` — массив названий строк;
 
-`number` — [`longId`](#EntityInfo) строки;
+`number` — [`longId`](#longId) строки;
 
-`number[]` — массив [`longId`](#EntityInfo) строк.
+`number[]` — массив [`longId`](#longId) строк.
 
 Функция возвращает `this`.
 
@@ -287,6 +287,7 @@ interface EntityInfo = Label;
 
 &nbsp;
 
+<a name="longId"></a>
 ```js
 longId(): number
 ```
