@@ -97,10 +97,15 @@ create(): Grid
 rowsFilter(data: string | string[] | number | number[]): Pivot
 ```
 Позволяет задать для отображения множество строк и скрыть остальные. Множество можно задать следующими способами:
+
 `string` — название строки
+
 `string[]` — массив названий строк
+
 `number` — [`longId`](#longId) строки
+
 `number[]` — массив [`longId`](#longId) строк.
+
 Функция возвращает `this`.
 
 &nbsp;
