@@ -86,6 +86,7 @@ interface Pivot {
 
 &nbsp;
 
+<a name="rowsFilter"></a>
 ```js
 create(): Grid
 ```
@@ -98,11 +99,11 @@ rowsFilter(data: string | string[] | number | number[]): Pivot
 ```
 Позволяет задать для отображения множество строк и скрыть остальные. Множество можно задать следующими способами:
 
-`string` — название строки
+`string` — название строки;
 
-`string[]` — массив названий строк
+`string[]` — массив названий строк;
 
-`number` — [`longId`](#EntityInfo) строки
+`number` — [`longId`](#EntityInfo) строки;
 
 `number[]` — массив [`longId`](#EntityInfo) строк.
 
