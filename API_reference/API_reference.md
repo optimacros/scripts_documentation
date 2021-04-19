@@ -130,27 +130,6 @@ interface GridRangeChunk {
 }
 ```
 
-### Интерфейс GridRange
-```ts
-interface GridRange {
-    rowStart(): number;
-
-    rowCount(): number;
-
-    columnStart(): number;
-
-    columnCount(): number;
-
-    cellCount(): number;
-
-    generator(size?: number): GridRangeChunk[];
-}
-```
-
-описывается в разделе: `Grid.range()` т.к. является парент интерфейсом
-
-
-
 ### Интерфейс ExportResult
 ```ts
 interface ExportResult {
