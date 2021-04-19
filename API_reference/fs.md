@@ -221,14 +221,14 @@ getTimeout(): number
 ```js
 setUseListOptions(useListOptions: boolean): FTPAdapter
 ```
-Устанавливает порт. Возвращает `this`.
+Устанавливает флаги -aln у FTP-команды `LIST`. FTP может быть настроен по особенному, поэтому иногда требуется передать `false`. По умолчанию: `true`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getUseListOptions(): boolean
 ```
-Возвращает порт.
+Возвращает признак использованися флагов -aln у FTP-команды `LIST`.
 ___
 
 ## Shared folder

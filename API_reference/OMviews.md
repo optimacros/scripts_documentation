@@ -76,8 +76,8 @@ interface MulticubeTab extends Tab {
 ```ts
 interface Pivot {
     create(): Grid;
-    rowsFilter(data: string[] | string | number | number[]): Pivot;
-    columnsFilter(data: string[] | string | number | number[]): Pivot;
+    rowsFilter(data: string | string[] | number | number[]): Pivot;
+    columnsFilter(data: string | string[] | number | number[]): Pivot;
     withoutValues(): Pivot;
     addDependentContext(identifier: number): Pivot;
 }
@@ -94,16 +94,21 @@ create(): Grid
 &nbsp;
 
 ```js
-rowsFilter(data: string[] | string | number | number[]): Pivot
+rowsFilter(data: string | string[] | number | number[]): Pivot
 ```
-rowsFilter - аналог Hide Show, если мы хотим показать на гриде только одну строку или настроенный нами набор строк.
+Позволяет задать для отображения множество строк и скрыть остальные. Множество можно задать следующими способами:
+`string` — название строки
+`string[]` — массив названий строк
+`number` — [`longId`](#longId) строки
+`number[]` — массив [`longId`](#longId) строк.
+Функция возвращает `this`.
 
 &nbsp;
 
 ```js
-columnsFilter(data: string[] | string | number | number[]): Pivot
+columnsFilter(data: string | string[] | number | number[]): Pivot
 ```
-columnsFilter - аналогично с rowsFilter, но только для колонок
+Аналог [`rowsFilter`](#rowsFilter) для столбцов.
 
 &nbsp;
 
@@ -140,8 +145,10 @@ interface Grid {
 ```js
 range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange
 ```
-Возвращает ссылку на объект с интерфейсом [`GridRange`](#GridRange), представляющий прямоугольный диапазон ячеек. Параметры `rowStart` и `columnStart` задают начальные номера строки и столбца соответственно.
-Параметры `rowCount` и `columnCount` задают количество строк и столбцов соответственно. Особое значение этих параметров `-1` означает захват всех строк/столбцов до конца таблицы.
+Возвращает ссылку на объект с интерфейсом [`GridRange`](#GridRange), представляющий прямоугольный диапазон ячеек.
+
+Параметры `rowStart` и `columnStart` задают начальные номера строки и столбца соответственно. Значения по умолчанию: `0`.
+Параметры `rowCount` и `columnCount` задают количество строк и столбцов соответственно. Особое значение этих параметров `-1` означает захват всех строк/столбцов до конца таблицы. Значения по умолчанию: `-1`.
 
 Пример: `grid.range(0, -1, 0, -1)` означает захват всех ячеек таблицы в объект [`GridRange`](#GridRange).
 
@@ -257,7 +264,6 @@ interface GridRange {
 }
 ```
 
-
 ### Интерфейс EntityInfo (Label) <a name="EntityInfo"></a> <a name="Label"></a>
 ```ts
 interface Label {
@@ -278,7 +284,7 @@ interface EntityInfo = Label;
 ```js
 longId(): number
 ```
-Возвращает внутренний идентификатор сущности в системе, уникальный в пределах ...
+Возвращает внутренний идентификатор сущности в системе, уникальный в пределах модели.
 
 &nbsp;
 
