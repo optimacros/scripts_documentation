@@ -6,7 +6,7 @@
 1. Файлы CSV
 
 
-### Интерфейс Filesystems
+### Интерфейс Filesystems<a name="Filesystems"></a>
 ```ts
 interface Filesystems {
     ftp(): FTPAdapter;
@@ -18,7 +18,7 @@ interface Filesystems {
 
 ---
 
-### Интерфейс Filesystem
+### Интерфейс Filesystem<a name="Filesystem"></a>
 ```ts
 interface Filesystem {
     has(path: string): boolean;
@@ -40,7 +40,6 @@ interface Filesystem {
     getPathObj(path: string): PathObj;
 }
 ```
-
 Абстрактный интерфейс файловой системы.
 
 &nbsp;
@@ -50,20 +49,18 @@ has(path: string): boolean
 ```
 Возвращает признак существования пути `path`.
 
-
 ## Локальная файловая система
 
 Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***не*** может выйти за её пределы.
 
 ## FTP
 
-### Интерфейс BaseAdapter
+### Интерфейс BaseAdapter<a name="BaseAdapter"></a>
 ```ts
 interface BaseAdapter {
     load(): Filesystem;
 }
 ```
-
 Базовый интерфейс адаптеров файловых систем.
 
 &nbsp;
@@ -71,9 +68,9 @@ interface BaseAdapter {
 ```js
 load(): Filesystem
 ```
-Возвращает объект файловой системы с предварительно установленными настройками.
+Возвращает объект файловой системы [`Filesystem`](#Filesystem) с предварительно установленными настройками.
 
-### Интерфейс FTPAdapter
+### Интерфейс FTPAdapter<a name="FTPAdapter"></a>
 ```ts
 interface FTPAdapter extends BaseAdapter {
     setHost(host: string): FTPAdapter;
@@ -105,7 +102,7 @@ interface FTPAdapter extends BaseAdapter {
 }
 ```
 
-Интерфейс для соединения с FTP.
+Интерфейс для соединения с сервером [`FTP`](https://ru.wikipedia.org/wiki/FTP).
 
 &nbsp;
 
@@ -165,18 +162,17 @@ getPassword(): string
 
 &nbsp;
 
-___
 ```js
 setRoot(root: string): FTPAdapter
 ```
-Устанавливает порт. Возвращает `this`.
+Устанавливает начальный путь для работы с FTP. По умолчанию: `/`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getRoot(): string
 ```
-Возвращает порт.
+Возвращает начальный путь для работы с FTP.
 
 &nbsp;
 
@@ -197,28 +193,28 @@ getPassive(): boolean
 ```js
 setSsl(ssl: boolean): FTPAdapter
 ```
-Устанавливает порт. Возвращает `this`.
+Устанавливает признак использования протокола [`SSL`](https://ru.wikipedia.org/wiki/SSL) поверх FTP ([`FTPS`](https://ru.wikipedia.org/wiki/FTPS)). По умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getSsl(): boolean
 ```
-Возвращает порт.
+Возвращает признак использования протокола SSL.
 
 &nbsp;
 
 ```js
 setTimeout(timeout: number): FTPAdapter
 ```
-Устанавливает порт. Возвращает `this`.
+Устанавливает таймаут подключения к серверу в секундах. По умолчанию: `30`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getTimeout(): number
 ```
-Возвращает порт.
+Возвращает таймаут подключения к серверу в секундах.
 
 &nbsp;
 
