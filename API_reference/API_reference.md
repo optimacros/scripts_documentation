@@ -46,67 +46,6 @@ ___
 !!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
 ___
 
-
-### Интерфейс Cell<a name="Cell"></a>
-```ts
-interface Cell {
-    setValue(value: number | string | null);
-    getValue(): number | string | null;
-    getNativeValue(): number | string | null;
-    getTextValue(): number | string | null;
-    getContextValue(): string | null;
-
-    definitions(): number[];
-    columns(): LabelsGroup;
-    rows(): LabelsGroup;
-    dropDown(): Labels;
-    getFormatType(): string;
-    isEditable(): boolean;
-}
-```
-
-### Интерфейс Cells<a name="Cells"></a>
-```ts
-interface Cells {
-    all(): Cell[];
-    first(): Cell;
-    setValue(value: number | string | null);
-    count(): number;
-    chunkInstance(): GridRangeChunk;
-    getByIndexes(indexes: number[]): Cells | null;
-}
-```
-
-### Интерфейс LabelsGroup<a name="LabelsGroup"></a>
-```ts
-interface LabelsGroup {
-    all(): Label[];
-    first(): Label;
-    cells(): Cells;
-}
-```
-
-### Интерфейс Labels<a name="Labels"></a>
-```ts
-interface Labels {
-    start(): number;
-    count(): number;
-    all(): LabelsGroup[];
-    get(index: number): LabelsGroup | null;
-    chunkInstance(): GridRangeChunk;
-    findLabelByLongId(longId: number): Label | null;
-}
-```
-
-### Интерфейс GridRangeChunk<a name="GridRangeChunk"></a>
-```ts
-interface GridRangeChunk {
-    cells(): Cells;
-    rows(): Labels;
-    columns(): Labels;
-}
-```
-
 ### Интерфейс ExportResult<a name="ExportResult"></a>
 ```ts
 interface ExportResult {

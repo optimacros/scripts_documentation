@@ -269,6 +269,101 @@ interface GridRange {
     generator(size?: number): GridRangeChunk[];
 }
 ```
+Интерфейс, представляющий прямоугольный диапазон ячеек в таблице [`Grid`](#Grid).
+
+&nbsp;
+
+```js
+rowStart(): number
+```
+Возвращает номер первой строки.
+
+&nbsp;
+
+```js
+rowCount(): number
+```
+Возвращает количество строк.
+
+&nbsp;
+
+```js
+columnStart(): number
+```
+Возвращает номер первого столбца.
+
+&nbsp;
+
+```js
+columnCount(): number
+```
+Возвращает количество столбцов.
+
+&nbsp;
+
+```js
+cellCount(): number
+```
+Возвращает количество ячеек. Эквивалентно `rowCount() * columnCount()`.
+
+&nbsp;
+
+```js
+generator(size?: number): GridRangeChunk[]
+```
+Возвращает генератор, при каждом обращении возвращающий интерфейс [`GridRangeChunk`](#GridRangeChunk) размером *не более* `size` ячеек, позволяющий обрабатывать `GridRange` покусочно.
+
+Каждый возвращаемый [`GridRangeChunk`](#GridRangeChunk) содержит целое количество строк, т. е. все колонки `GridRange`, а количество строк в нём определяется по формуле `size / columnCount()`.
+
+Значение параметра `size` ограничено сверху значением `5000`, поэтому в скриптах 1.0 [`*невозможно*`](../appendix/constraints.md) работать с `GridRange` с б*О*льшим количеством столбцов. Значение по умолчанию: `500`.
+
+Типичный пример использования:
+
+```js
+let rowIndex = 0;
+
+for (const chunk of range.generator(1000)) {
+    chunk.rows().all().forEach(labelGroup => {
+        const rowLabels = [];
+        labelGroup.all().forEach(label => {
+            rowLabels.push(label.label());
+        });
+
+        console.log(`Row index ${rowIndex} (${rowLabels.join(', ')})\n`);
+        rowIndex++;
+    });
+}
+```
+
+### Интерфейс GridRangeChunk<a name="GridRangeChunk"></a>
+```ts
+interface GridRangeChunk {
+    cells(): Cells;
+    rows(): Labels;
+    columns(): Labels;
+}
+```
+Интерфейс для обработки куска [`GridRange`](#GridRange).
+
+&nbsp;
+
+```js
+cells(): Cells
+```
+
+&nbsp;
+
+```js
+rows(): Labels
+```
+Возвращает интерфейс [`Labels`](#Labels), представляющий заголовки строк.
+
+&nbsp;
+
+```js
+columns(): Labels
+```
+
 
 ### Интерфейс EntityInfo (Label) <a name="EntityInfo"></a> <a name="Label"></a>
 ```ts
@@ -309,6 +404,228 @@ code(): string
 Возвращает код сущности. В Optimacros всего две сущности могут иметь код: элементы справочников и кубы.
 
 &nbsp;
+
+
+### Интерфейс LabelsGroup<a name="LabelsGroup"></a>
+```ts
+interface LabelsGroup {
+    all(): Label[];
+    first(): Label;
+    cells(): Cells;
+}
+```
+
+```js
+all(): Label[]
+```
+
+&nbsp;
+
+```js
+first(): Label
+```
+Аналог `all()[0]`.
+
+&nbsp;
+
+```js
+cells(): Cells
+```
+
+
+### Интерфейс Labels<a name="Labels"></a>
+```ts
+interface Labels {
+    start(): number;
+    count(): number;
+    all(): LabelsGroup[];
+    get(index: number): LabelsGroup | null;
+    chunkInstance(): GridRangeChunk;
+    findLabelByLongId(longId: number): Label | null;
+}
+```
+Интерфейс ....
+
+&nbsp;
+
+```js
+start(): number
+```
+...
+
+&nbsp;
+
+```js
+count(): number
+```
+Возвращает количество ....
+
+&nbsp;
+
+```js
+all(): LabelsGroup[]
+```
+
+&nbsp;
+
+
+```js
+get(index: number): LabelsGroup | null
+```
+
+&nbsp;
+
+```js
+chunkInstance(): GridRangeChunk
+```
+
+&nbsp;
+
+```js
+findLabelByLongId(longId: number): Label | null
+```
+Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в данном объекте `Labels`, иначе — `null`.
+
+### Интерфейс Cell<a name="Cell"></a>
+```ts
+interface Cell {
+    setValue(value: number | string | null);
+    getValue(): number | string | null;
+    getNativeValue(): number | string | null;
+    getTextValue(): number | string | null;
+    getContextValue(): string | null;
+
+    definitions(): number[];
+    columns(): LabelsGroup;
+    rows(): LabelsGroup;
+    dropDown(): Labels;
+    getFormatType(): string;
+    isEditable(): boolean;
+}
+```
+Интерфейс, представляющий клетку таблицы.
+
+&nbsp;
+
+```js
+setValue(value: number | string | null)
+```
+Устанавливает значение для клетки. Не рекомендуется к использованию в больших мультикубах.
+
+&nbsp;
+
+```js
+getValue(): number | string | null
+```
+Возвращает значение клетки, которое видит пользователь.
+
+&nbsp;
+
+```js
+getNativeValue(): number | string | null
+```
+Возвращает значение ....
+
+&nbsp;
+
+```js
+getTextValue(): number | string | null
+```
+
+&nbsp;
+
+```js
+getContextValue(): string | null
+```
+
+&nbsp;
+
+```js
+definitions(): number[]
+```
+
+&nbsp;
+
+```js
+columns(): LabelsGroup
+```
+
+&nbsp;
+
+```js
+rows(): LabelsGroup
+```
+
+&nbsp;
+
+```js
+dropDown(): Labels
+```
+
+&nbsp;
+
+```js
+getFormatType(): string
+```
+
+&nbsp;
+
+```js
+isEditable(): boolean
+```
+
+
+### Интерфейс Cells<a name="Cells"></a>
+```ts
+interface Cells {
+    all(): Cell[];
+    first(): Cell;
+    setValue(value: number | string | null);
+    count(): number;
+    chunkInstance(): GridRangeChunk;
+    getByIndexes(indexes: number[]): Cells | null;
+}
+```
+Интерфейс, представляющий группу клеток таблицы....
+
+&nbsp;
+
+```js
+all(): Cell[]
+```
+Возвращает массив всех клеток.
+
+&nbsp;
+
+```js
+first(): Cell
+```
+Возвращает первую клетку.
+
+&nbsp;
+
+```js
+setValue(value: number | string | null)
+```
+Устанавливает одно и то же значение для всех клеток таблицы. ***Лучше не пользоваться*** .....
+
+&nbsp;
+
+```js
+count(): number
+```
+
+&nbsp;
+
+```js
+chunkInstance(): GridRangeChunk
+```
+
+&nbsp;
+
+```js
+getByIndexes(indexes: number[]): Cells | null
+```
 
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
