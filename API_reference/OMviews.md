@@ -200,7 +200,7 @@ exporter() - нужен для того чтобы автоматически п
 storageExporter(): StorageExporter
 ```
 
-### Интерфейс GridDefinitionInfo ...<a name="GridDefinitionInfo"></a>
+### Интерфейс GridDefinitionInfo<a name="GridDefinitionInfo"></a>
 ```ts
 interface GridDefinitionInfo {
     getPageSelectors(): GridPageSelector[];
@@ -208,28 +208,28 @@ interface GridDefinitionInfo {
     getColumnDimensions(): GridDimension[];
 }
 ```
-Интерфейс, предоставляющий метаданные об интерфейсе [`Grid`](#Grid).
+Интерфейс, предоставляющий метаданные о таблице [`Grid`](#Grid).
 
 &nbsp;
 
 ```js
 getPageSelectors(): GridPageSelector[]
 ```
-Возвращает массив объектов с интерфейсом [`GridPageSelector`](#GridPageSelector), представляющий метаданные о фильтрах таблицы.
+Возвращает массив объектов с интерфейсом [`GridPageSelector`](#GridPageSelector), которые представляют метаданные о фильтрах таблицы.
 
 &nbsp;
 
 ```js
 getRowDimensions(): GridDimension[]
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#GridDimension), представляющий метаданные о строках таблицы.
+Возвращает массив объектов с интерфейсом [`GridDimension`](#GridDimension), которые представляют метаданные о строках таблицы.
 
 &nbsp;
 
 ```js
 getColumnDimensions(): GridDimension[]
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#GridDimension), представляющий метаданные о столбцах таблицы.
+Возвращает массив объектов с интерфейсом [`GridDimension`](#GridDimension), которые представляют метаданные о столбцах таблицы.
 
 ### Интерфейс GridDimension ...<a name="GridDimension"></a>
 ```ts
