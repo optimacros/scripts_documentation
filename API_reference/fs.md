@@ -6,7 +6,7 @@
 1. Файлы CSV
 
 
-### Интерфейс Filesystems<a name="Filesystems"></a>
+### Интерфейс Filesystems ...<a name="Filesystems"></a>
 ```ts
 interface Filesystems {
     ftp(): FTPAdapter;
@@ -18,7 +18,7 @@ interface Filesystems {
 
 ---
 
-### Интерфейс Filesystem<a name="Filesystem"></a>
+### Интерфейс Filesystem ...<a name="Filesystem"></a>
 ```ts
 interface Filesystem {
     has(path: string): boolean;
@@ -55,7 +55,7 @@ has(path: string): boolean
 
 ## FTP
 
-### Интерфейс BaseAdapter<a name="BaseAdapter"></a>
+### Интерфейс BaseAdapter ...<a name="BaseAdapter"></a>
 ```ts
 interface BaseAdapter {
     load(): Filesystem;
@@ -70,7 +70,7 @@ load(): Filesystem
 ```
 Возвращает объект файловой системы [`Filesystem`](#Filesystem) с предварительно установленными настройками.
 
-### Интерфейс FTPAdapter<a name="FTPAdapter"></a>
+### Интерфейс FTPAdapter ...<a name="FTPAdapter"></a>
 ```ts
 interface FTPAdapter extends BaseAdapter {
     setHost(host: string): FTPAdapter;

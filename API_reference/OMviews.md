@@ -9,7 +9,7 @@
 
 ## Представления мультикубов, справочников, версий<a name="views"></a>
 
-### Интерфейс Multicubes
+### Интерфейс Multicubes ...
 ```ts
 interface Multicubes {
     multicubesTab(): MulticubesTab;
@@ -24,7 +24,7 @@ multicubesTab(): MulticubesTab
 ```
 Возвращает ссылку на интерфейс [`MulticubesTab`](#MulticubesTab). В интерфейсе Optimacros аналогично открытию вкладки "Мультикубы".
 
-### Интерфейс MulticubesTab<a name="MulticubesTab"></a>
+### Интерфейс MulticubesTab ...<a name="MulticubesTab"></a>
 ```ts
 interface MulticubesTab extends Tab {
     open(name: string): MulticubeTab;
@@ -39,7 +39,7 @@ open(name: string): MulticubeTab
 ```
 Возвращает ссылку на [`MulticubeTab`](#MulticubeTab) куба `name`. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
 
-### Интерфейс Tab<a name="Tab"></a>
+### Интерфейс Tab ...<a name="Tab"></a>
 ```ts
 interface Tab {
     pivot(viewName?: string): Pivot;
@@ -62,7 +62,7 @@ pivot(viewName?: string): Pivot
 ```
 Возвращает ссылку на объект [`Pivot`](#Pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба в скриптах 1.0 [*отсутствует*](../appendix/constraints.md), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
-### Интерфейс MulticubeTab<a name="MulticubeTab"></a>
+### Интерфейс MulticubeTab ...<a name="MulticubeTab"></a>
 ```ts
 interface MulticubeTab extends Tab {
     cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
@@ -72,7 +72,7 @@ interface MulticubeTab extends Tab {
 }
 ```
 
-### Интерфейс Pivot<a name="Pivot"></a>
+### Интерфейс Pivot ...<a name="Pivot"></a>
 ```ts
 interface Pivot {
     create(): Grid;
@@ -130,7 +130,7 @@ addDependentContext(identifier: number): Pivot
 ```
 addDependentContext - передача контекста
 
-### Интерфейс Grid<a name="Grid"></a>
+### Интерфейс Grid ...<a name="Grid"></a>
 ```ts
 interface Grid {
     range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange;
@@ -200,7 +200,7 @@ exporter() - нужен для того чтобы автоматически п
 storageExporter(): StorageExporter
 ```
 
-### Интерфейс GridDefinitionInfo<a name="GridDefinitionInfo"></a>
+### Интерфейс GridDefinitionInfo ...<a name="GridDefinitionInfo"></a>
 ```ts
 interface GridDefinitionInfo {
     getPageSelectors(): GridPageSelector[];
@@ -231,7 +231,7 @@ getColumnDimensions(): GridDimension[]
 ```
 Возвращает массив объектов с интерфейсом [`GridDimension`](#GridDimension), представляющий метаданные о столбцах таблицы.
 
-### Интерфейс GridDimension<a name="GridDimension"></a>
+### Интерфейс GridDimension ...<a name="GridDimension"></a>
 ```ts
 interface GridDimension {
     getDimensionEntity(): EntityInfo;
@@ -247,7 +247,7 @@ getDimensionEntity(): EntityInfo
 Возвращает ссылку на сущность [`EntityInfo`](#EntityInfo) измерения мультикуба.
 
 
-### Интерфейс GridPageSelector<a name="GridPageSelector"></a>
+### Интерфейс GridPageSelector ...<a name="GridPageSelector"></a>
 ```ts
 interface GridPageSelector extends GridDimension {
     getSelectedEntity(): EntityInfo | null;
@@ -255,7 +255,7 @@ interface GridPageSelector extends GridDimension {
 ```
 Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`).
 
-### Интерфейс GridRange<a name="GridRange"></a>
+### Интерфейс GridRange ...<a name="GridRange"></a>
 ```ts
 interface GridRange {
     rowStart(): number;
@@ -335,7 +335,7 @@ for (const chunk of range.generator(1000)) {
 }
 ```
 
-### Интерфейс GridRangeChunk<a name="GridRangeChunk"></a>
+### Интерфейс GridRangeChunk ...<a name="GridRangeChunk"></a>
 ```ts
 interface GridRangeChunk {
     cells(): Cells;
@@ -365,7 +365,7 @@ columns(): Labels
 ```
 
 
-### Интерфейс EntityInfo (Label) <a name="EntityInfo"></a> <a name="Label"></a>
+### Интерфейс EntityInfo ... (Label) <a name="EntityInfo"></a> <a name="Label"></a>
 ```ts
 interface Label {
     longId(): number;
@@ -406,7 +406,7 @@ code(): string
 &nbsp;
 
 
-### Интерфейс LabelsGroup<a name="LabelsGroup"></a>
+### Интерфейс LabelsGroup ...<a name="LabelsGroup"></a>
 ```ts
 interface LabelsGroup {
     all(): Label[];
@@ -433,7 +433,7 @@ cells(): Cells
 ```
 
 
-### Интерфейс Labels<a name="Labels"></a>
+### Интерфейс Labels ...<a name="Labels"></a>
 ```ts
 interface Labels {
     start(): number;
@@ -486,7 +486,7 @@ findLabelByLongId(longId: number): Label | null
 ```
 Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в данном объекте `Labels`, иначе — `null`.
 
-### Интерфейс Cell<a name="Cell"></a>
+### Интерфейс Cell ...<a name="Cell"></a>
 ```ts
 interface Cell {
     setValue(value: number | string | null);
@@ -575,7 +575,7 @@ isEditable(): boolean
 ```
 
 
-### Интерфейс Cells<a name="Cells"></a>
+### Интерфейс Cells ...<a name="Cells"></a>
 ```ts
 interface Cells {
     all(): Cell[];

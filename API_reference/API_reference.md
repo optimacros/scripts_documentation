@@ -23,7 +23,7 @@
     1. SMTP
 1. [Изменение статуса текущего запроса](reqStatusChange.md)
 
-### Интерфейс OM<a name="OM"></a>
+### Интерфейс OM ...<a name="OM"></a>
 ```ts
 interface OM {
     readonly common: Common;
