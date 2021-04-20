@@ -24,7 +24,7 @@ multicubesTab(): MulticubesTab
 ```
 Возвращает ссылку на интерфейс [`MulticubesTab`](#MulticubesTab). В интерфейсе Optimacros аналогично открытию вкладки "Мультикубы".
 
-### Интерфейс MulticubesTab ...<a name="MulticubesTab"></a>
+### Интерфейс MulticubesTab<a name="MulticubesTab"></a>
 ```ts
 interface MulticubesTab extends Tab {
     open(name: string): MulticubeTab;
