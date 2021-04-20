@@ -55,7 +55,7 @@ has(path: string): boolean
 
 ## FTP
 
-### Интерфейс BaseAdapter ...<a name="BaseAdapter"></a>
+### Интерфейс BaseAdapter<a name="BaseAdapter"></a>
 ```ts
 interface BaseAdapter {
     load(): Filesystem;
