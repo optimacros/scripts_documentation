@@ -231,7 +231,7 @@ getColumnDimensions(): GridDimension[]
 ```
 Возвращает массив объектов с интерфейсом [`GridDimension`](#GridDimension), которые представляют метаданные о столбцах таблицы.
 
-### Интерфейс GridDimension ...<a name="GridDimension"></a>
+### Интерфейс GridDimension<a name="GridDimension"></a>
 ```ts
 interface GridDimension {
     getDimensionEntity(): EntityInfo;
@@ -245,7 +245,6 @@ interface GridDimension {
 getDimensionEntity(): EntityInfo
 ```
 Возвращает ссылку на сущность [`EntityInfo`](#EntityInfo) измерения мультикуба.
-
 
 ### Интерфейс GridPageSelector ...<a name="GridPageSelector"></a>
 ```ts
