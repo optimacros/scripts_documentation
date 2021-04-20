@@ -70,7 +70,7 @@ load(): Filesystem
 ```
 Возвращает объект файловой системы [`Filesystem`](#Filesystem) с предварительно установленными настройками.
 
-### Интерфейс FTPAdapter ...<a name="FTPAdapter"></a>
+### Интерфейс FTPAdapter<a name="FTPAdapter"></a>
 ```ts
 interface FTPAdapter extends BaseAdapter {
     setHost(host: string): FTPAdapter;
