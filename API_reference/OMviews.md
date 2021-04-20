@@ -9,7 +9,7 @@
 
 ## Представления мультикубов, справочников, версий<a name="views"></a>
 
-### Интерфейс Multicubes ...
+### Интерфейс Multicubes<a name="Multicubes"></a>
 ```ts
 interface Multicubes {
     multicubesTab(): MulticubesTab;
