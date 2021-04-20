@@ -254,7 +254,7 @@ interface GridPageSelector extends GridDimension {
 ```
 Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`).
 
-### Интерфейс GridRange ...<a name="GridRange"></a>
+### Интерфейс GridRange<a name="GridRange"></a>
 ```ts
 interface GridRange {
     rowStart(): number;
