@@ -104,11 +104,42 @@ readonly connectors: Connectors
 ```
 Ссылка на интерфейс Connectors.
 
+
+### Интерфейс Environment ...<a name="Environment"></a>
+```ts
+interface Environment {
+    load(name: string): Environment;
+    get(key: string, def?: any): any;
+    set(name: string, value: number | string | null): Environment;
+}
+```
+Интерфейс работы с [переменными окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B).
+
+&nbsp;
+
+```js
+load(name: string): Environment
+```
+Загружает значения переменных окружения из нуль-мерного мультикуба `name`. Возвращает `this`.
+
+&nbsp;
+
+```js
+get(key: string, def?: any): any
+```
+Возвращает значение переменной окружения `key`. При отсутствии этой переменной и наличии аргумента `def` возвращает `def`.
+
+&nbsp;
+
+```js
+set(name: string, value: number | string | null): Environment
+```
+Устанавливает значение переменной окружения `key` в значение `value`. Возвращает `this`.
+
 ___
 !!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
-___
 
-### Интерфейс ExportResult<a name="ExportResult"></a>
+### Интерфейс ExportResult ...<a name="ExportResult"></a>
 ```ts
 interface ExportResult {
     mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
@@ -118,7 +149,7 @@ interface ExportResult {
 }
 ```
 
-### Интерфейс Exporter<a name="Exporter"></a>
+### Интерфейс Exporter ...<a name="Exporter"></a>
 ```ts
 interface Exporter {
     setEncoding(encoding: string): Exporter;
@@ -138,7 +169,7 @@ interface Exporter {
 }
 ```
 
-### Интерфейс NumericElementsCreator<a name="NumericElementsCreator"></a>
+### Интерфейс NumericElementsCreator ...<a name="NumericElementsCreator"></a>
 ```ts
 interface NumericElementsCreator {
     setCount(count: number): NumericElementsCreator;
@@ -152,7 +183,7 @@ interface NumericElementsCreator {
 ```
 Аналогия интерфейсного функционала Insert на гриде
 
-### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
+### Интерфейс ElementsCreator ...<a name="ElementsCreator"></a>
 ```ts
 interface ElementsCreator {
     numeric(): NumericElementsCreator;
@@ -160,7 +191,7 @@ interface ElementsCreator {
 ```
 Аналогия интерфейсного функционала Insert на гриде
 
-### Интерфейс ElementsDeleter<a name="ElementsDeleter"></a>
+### Интерфейс ElementsDeleter ...<a name="ElementsDeleter"></a>
 ```ts
 interface ElementsDeleter {
     appendIdentifier(identifier: number): ElementsDeleter;
@@ -169,7 +200,7 @@ interface ElementsDeleter {
 ```
 Аналогия интерфейсного функционала delete на гриде
 
-### Интерфейс ElementsReorder<a name="ElementsReorder"></a>
+### Интерфейс ElementsReorder ...<a name="ElementsReorder"></a>
 ```ts
 interface ElementsReorder {
     append(longId: number, relativeLongId: number, position: string): ElementsReorder;
@@ -180,17 +211,7 @@ interface ElementsReorder {
 ```
 Аналогия интерфейсного функционала Reorder на гриде
 
-### Интерфейс Environment<a name="Environment"></a>
-```ts
-interface Environment {
-    load(name: string): Environment;
-    get(key: string, def?: any): any;
-    set(name: string, value: number | string | null): Environment;
-}
-```
-load() Принимает имя в виде строки
-
-### Интерфейс CubeCell<a name="CubeCell"></a>
+### Интерфейс CubeCell ...<a name="CubeCell"></a>
 ```ts
 interface CubeCell {
     definitions(): number[];
@@ -200,7 +221,7 @@ interface CubeCell {
 }
 ```
 
-### Интерфейс CubeCellSelector<a name="CubeCellSelector"></a>
+### Интерфейс CubeCellSelector ...<a name="CubeCellSelector"></a>
 ```ts
 interface CubeCellSelector {
     getCubeInfo(): CubeInfo;
@@ -211,7 +232,7 @@ interface CubeCellSelector {
 }
 ```
 
-### Интерфейс CubeCellSelectorBuilder<a name="CubeCellSelectorBuilder"></a>
+### Интерфейс CubeCellSelectorBuilder ...<a name="CubeCellSelectorBuilder"></a>
 ```ts
 interface CubeCellSelectorBuilder {
     setFormula(formula: string): this;
@@ -219,14 +240,14 @@ interface CubeCellSelectorBuilder {
 }
 ```
 
-### Интерфейс CubeCellUpdater<a name="CubeCellUpdater"></a>
+### Интерфейс CubeCellUpdater ...<a name="CubeCellUpdater"></a>
 ```ts
 interface CubeCellUpdater{
     getCount(): number;
 }
 ```
 
-### Интерфейс CubeCellUpdaterBuilder<a name="CubeCellUpdaterBuilder"></a>
+### Интерфейс CubeCellUpdaterBuilder ...<a name="CubeCellUpdaterBuilder"></a>
 ```ts
 interface CubeCellUpdaterBuilder {
     setConditionFormula(formula: string): this;
@@ -235,7 +256,7 @@ interface CubeCellUpdaterBuilder {
 }
 ```
 
-### Интерфейс CubeFormatInfo<a name="CubeFormatInfo"></a>
+### Интерфейс CubeFormatInfo ...<a name="CubeFormatInfo"></a>
 ```ts
 interface CubeFormatInfo {
     getFormatTypeEntity(): EntityInfo;
@@ -243,7 +264,7 @@ interface CubeFormatInfo {
 }
 ```
 
-### Интерфейс CubeInfo<a name="CubeInfo"></a>
+### Интерфейс CubeInfo ...<a name="CubeInfo"></a>
 ```ts
 interface CubeInfo extends EntityInfo {
     getFormula(): string | null;
@@ -252,7 +273,7 @@ interface CubeInfo extends EntityInfo {
 }
 ```
 
-### Интерфейс Times<a name="Times"></a>
+### Интерфейс Times ...<a name="Times"></a>
 ```ts
 interface Times {
     optionsTab(): Tab
@@ -262,7 +283,7 @@ interface Times {
 }
 ```
 
-### Интерфейс VersionsTab<a name="VersionsTab"></a>
+### Интерфейс VersionsTab ...<a name="VersionsTab"></a>
 ```ts
 interface VersionsTab {
     copyVersion(from: string, to: string): any;
@@ -274,7 +295,7 @@ copyVersion - использование функционала копирова
  копируем. В качестве второго аргумента имя версии в которую копируем.
 
 
-### Интерфейс Versions<a name="Versions"></a>
+### Интерфейс Versions ...<a name="Versions"></a>
 ```ts
 interface Versions {
     versionsTab(): VersionsTab
@@ -283,7 +304,7 @@ interface Versions {
 `om.versions` Аналогично открытию табы Version в интерфейсной части приложения, но без открытых мини табов.
 `om.versions.versionsTab` Аналогично открытию табы Version - Table в интерфейсной части приложения
 
-### Интерфейс CSVParams<a name="CSVParams"></a>
+### Интерфейс CSVParams ...<a name="CSVParams"></a>
 ```ts
 interface CSVParams {
     setDelimiter(delimiter: string): CSVParams;
@@ -297,7 +318,7 @@ interface CSVParams {
 }
 ```
 
-### Интерфейс Importer<a name="Importer"></a>
+### Интерфейс Importer ...<a name="Importer"></a>
 ```ts
 interface Importer {
     csv(): CSVParams;
@@ -308,7 +329,7 @@ interface Importer {
 }
 ```
 
-### Интерфейс ListImporter<a name="ListImporter"></a>
+### Интерфейс ListImporter ...<a name="ListImporter"></a>
 ```ts
 interface ListImporter extends Importer {
     setFilePath(path: string): ListImporter;
@@ -321,7 +342,7 @@ interface ListImporter extends Importer {
 }
 ```
 
-### Интерфейс ListTab<a name="ListTab"></a>
+### Интерфейс ListTab ...<a name="ListTab"></a>
 ```ts
 interface ListTab extends Tab {
     listSubsetTab(): ListSubsetsTab
@@ -329,7 +350,7 @@ interface ListTab extends Tab {
 }
 ```
 
-### Интерфейс ListSubsetsTab<a name="ListSubsetsTab"></a>
+### Интерфейс ListSubsetsTab ...<a name="ListSubsetsTab"></a>
 ```ts
 interface ListSubsetsTab extends Tab {
     listTab(): ListTab;
@@ -338,7 +359,7 @@ interface ListSubsetsTab extends Tab {
 `om.lists.ListSubsetsTab.listTab.open()` Аналогично открытию справочника на минитабе Subsets. open() в качестве 
 аргумента принимает строку с именем справочника, который мы хоти открыть.
 
-### Интерфейс ListsTab<a name="ListsTab"></a>
+### Интерфейс ListsTab ...<a name="ListsTab"></a>
 ```ts
 interface ListsTab extends Tab {
     open(name: string): ListTab;
@@ -347,7 +368,7 @@ interface ListsTab extends Tab {
 `om.lists.listsTab.open()` Аналогично функционалу Open (открытию справочника) выбранного в гриде Lists - Table в 
 интерфейсной части приложения. В качестве аргумента принимает строку с именем справочника, который мы хоти открыть.
 
-### Интерфейс Lists<a name="Lists"></a>
+### Интерфейс Lists ...<a name="Lists"></a>
 ```ts
 interface Lists {
     listsTab(): ListsTab
@@ -358,7 +379,7 @@ interface Lists {
 `om.lists.listsTab` Аналогично открытию табы Lists - Table в интерфейсной части 
 приложения.
 
-### Интерфейс CellBuffer<a name="CellBuffer"></a>
+### Интерфейс CellBuffer ...<a name="CellBuffer"></a>
 ```ts
 interface CellBuffer {
     set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
@@ -385,7 +406,7 @@ count() - даёт возможность получить количество.
 canLoadCellsValues() - обязательный интерфейс, который принимает булевое значение (true, false) нужнен для того, чтобы 
 указать нужно ли перезагружать значение в буфер в случае если они изменятся.
 
-### Интерфейс RequestManager<a name="RequestManager"></a>
+### Интерфейс RequestManager ...<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
     log(message: string, print?: boolean): RequestManager;
@@ -394,7 +415,7 @@ interface RequestManager {
 }
 ```
 
-### Интерфейс UserInfo<a name="UserInfo"></a>
+### Интерфейс UserInfo ...<a name="UserInfo"></a>
 ```ts
 interface UserInfo {
     getEntity(): EntityInfo;
@@ -405,7 +426,7 @@ interface UserInfo {
 }
 ```
 
-### Интерфейс ModelInfo<a name="ModelInfo"></a>
+### Интерфейс ModelInfo ...<a name="ModelInfo"></a>
 ```ts
 interface ModelInfo {
     id(): number;
@@ -419,7 +440,7 @@ interface ModelInfo {
 }
 ```
 
-### Интерфейс ResultInfo<a name="ResultInfo"></a>
+### Интерфейс ResultInfo ...<a name="ResultInfo"></a>
 ```ts
 interface ResultInfo {
     addFileHash(hash: string): this;
@@ -429,7 +450,7 @@ interface ResultInfo {
 
 ```
 
-### Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
+### Интерфейс EntitiesInfo ...<a name="EntitiesInfo"></a>
 ```ts
 interface EntitiesInfo {
     get(longId: number): EntityInfo | null;
@@ -437,7 +458,7 @@ interface EntitiesInfo {
 }
 ```
 
-### Интерфейс CopyData<a name="CopyData"></a>
+### Интерфейс CopyData ...<a name="CopyData"></a>
 ```ts
 interface CopyData {
     setSourceLongId(longId: number): CopyData;
@@ -450,7 +471,7 @@ interface CopyData {
 }
 ```
 
-### Интерфейс Common<a name="Common"></a>x
+### Интерфейс Common ...<a name="Common"></a>x
 ```ts
 interface Common {
     createCellBuffer(): CellBuffer;
@@ -463,7 +484,7 @@ interface Common {
 }
 ```
 
-### Интерфейс FileMeta<a name="FileMeta"></a>
+### Интерфейс FileMeta ...<a name="FileMeta"></a>
 ```ts
 interface FileMeta {
     type: string;
@@ -478,7 +499,7 @@ interface FileMeta {
 }
 ```
 
-### Интерфейс PathObj<a name="PathObj"></a>
+### Интерфейс PathObj ...<a name="PathObj"></a>
 ```ts
 interface PathObj {
     getSystem(): Filesystem;
@@ -486,7 +507,7 @@ interface PathObj {
 }
 ```
 
-### Интерфейс CsvReader<a name="CsvReader"></a>
+### Интерфейс CsvReader ...<a name="CsvReader"></a>
 ```ts
 interface CsvReader {
     params(): CSVParams;
@@ -501,7 +522,7 @@ interface CsvReader {
 }
 ```
 
-### Интерфейс CsvWriter<a name="CsvWriter"></a>
+### Интерфейс CsvWriter ...<a name="CsvWriter"></a>
 ```ts
 interface CsvWriter {
     params(): CSVParams;
@@ -517,7 +538,7 @@ interface CsvWriter {
 }
 ```
 
-### Интерфейс BaseConverter<a name="BaseConverter"></a>
+### Интерфейс BaseConverter ...<a name="BaseConverter"></a>
 ```ts
 interface BaseConverter {
     setSource(path: string): this;
@@ -525,21 +546,21 @@ interface BaseConverter {
 }
 ```
 
-### Интерфейс ExcelToCsvConverter<a name="ExcelToCsvConverter"></a>
+### Интерфейс ExcelToCsvConverter ...<a name="ExcelToCsvConverter"></a>
 ```ts
 interface ExcelToCsvConverter extends BaseConverter {
     setSheetIdentifier(identifier: string | number): this;
 }
 ```
 
-### Интерфейс ConverterManager<a name="ConverterManager"></a>
+### Интерфейс ConverterManager ...<a name="ConverterManager"></a>
 ```ts
 interface ConverterManager {
     excelToCsv(): ExcelToCsvConverter
 }
 ```
 
-### Интерфейс FilesDataManager<a name="FilesDataManager"></a>
+### Интерфейс FilesDataManager ...<a name="FilesDataManager"></a>
 ```ts
 interface FilesDataManager {
     csvWriter(): CsvWriter;
@@ -548,7 +569,7 @@ interface FilesDataManager {
 }
 ```
 
-### Интерфейс OptimizationRequestTab<a name="OptimizationRequestTab"></a>
+### Интерфейс OptimizationRequestTab ...<a name="OptimizationRequestTab"></a>
 ```ts
 interface OptimizationRequestTab extends Tab {
     run(name: string): { success: boolean, error: undefined | string };
@@ -557,7 +578,7 @@ interface OptimizationRequestTab extends Tab {
 `om.optimization.optimizationRequestsTab.run()` Аналогично функционалу запуска Отпимизационного запроса в интерфейсной 
 части приложения. run в качестве аргумента принимает строку с именем Отпимизационного запроса
 
-### Интерфейс Optimization<a name="Optimization"></a>
+### Интерфейс Optimization ...<a name="Optimization"></a>
 ```ts
 interface Optimization {
     optimizationRequestsTab(): OptimizationRequestTab
@@ -569,7 +590,7 @@ interface Optimization {
 приложения.
 
 
-### Интерфейс SqlQueryResult<a name="SqlQueryResult"></a>
+### Интерфейс SqlQueryResult ...<a name="SqlQueryResult"></a>
 ```ts
 interface SqlQueryResult {
     count(): number;
@@ -583,21 +604,21 @@ interface SqlQueryResult {
 }
 ```
 
-### Интерфейс SqlQueryBuilder<a name="SqlQueryBuilder"></a>
+### Интерфейс SqlQueryBuilder ...<a name="SqlQueryBuilder"></a>
 ```ts
 interface SqlQueryBuilder {
     execute(sql: string, bindings?: object): SqlQueryResult;
 }
 ```
 
-### Интерфейс SqlConnection<a name="SqlConnection"></a>
+### Интерфейс SqlConnection ...<a name="SqlConnection"></a>
 ```ts
 interface SqlConnection {
     qb(): SqlQueryBuilder;
 }
 ```
 
-### Интерфейс SqlConnectorBuilder<a name="SqlConnectorBuilder"></a>
+### Интерфейс SqlConnectorBuilder ...<a name="SqlConnectorBuilder"></a>
 ```ts
 interface SqlConnectorBuilder {
     setHost(value: string): this;
@@ -613,7 +634,7 @@ interface SqlConnectorBuilder {
 }
 ```
 
-### Интерфейс SqlBulkCopyResult<a name="SqlBulkCopyResult"></a>
+### Интерфейс SqlBulkCopyResult ...<a name="SqlBulkCopyResult"></a>
 ```ts
 interface SqlBulkCopyResult {
     hasErrors(): boolean;
@@ -623,7 +644,7 @@ interface SqlBulkCopyResult {
 }
 ```
 
-### Интерфейс SqlBulkCopyBuilder<a name="SqlBulkCopyBuilder"></a>
+### Интерфейс SqlBulkCopyBuilder ...<a name="SqlBulkCopyBuilder"></a>
 ```ts
 interface SqlBulkCopyBuilder {
     /**
@@ -1111,7 +1132,7 @@ declare namespace Http {
 }
 ```
 
-### Интерфейс Connectors<a name="Connectors"></a>
+### Интерфейс Connectors ...<a name="Connectors"></a>
 ```ts
 interface Connectors {
     mysql(): SqlConnectorBuilder;
