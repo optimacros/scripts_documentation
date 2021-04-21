@@ -39,8 +39,70 @@ interface OM {
 
 var om: OM;
 ```
+Интерфейс `OM` являет собой набор интерфейсов, предоставляющих API Скриптов 1.0 через глобальную переменную `om`.
 
-Скрипты 1.0 предоставляют глобальную переменную `om`, реализующую интерфейс ```OM```.
+&nbsp;
+
+```js
+readonly common: Common
+```
+Ссылка на интерфейс Common.
+
+&nbsp;
+
+```js
+readonly environment: Environment
+```
+Ссылка на интерфейс Environment.
+
+&nbsp;
+
+```js
+readonly multicubes: Multicubes
+```
+Ссылка на интерфейс [`Multicubes`](./OMviews.md#Multicubes).
+
+&nbsp;
+
+```js
+readonly times: Times
+```
+Ссылка на интерфейс Times.
+
+&nbsp;
+
+```js
+readonly versions: Versions
+```
+Ссылка на интерфейс Versions.
+
+&nbsp;
+
+```js
+readonly lists: Lists
+```
+Ссылка на интерфейс Lists.
+
+&nbsp;
+
+```js
+readonly filesystems: Filesystems
+```
+Ссылка на интерфейс Filesystems.
+
+&nbsp;
+
+```js
+readonly optimization: Optimization
+```
+Ссылка на интерфейс Optimization.
+
+&nbsp;
+
+```js
+readonly connectors: Connectors
+```
+Ссылка на интерфейс Connectors.
 
 ___
 !!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
