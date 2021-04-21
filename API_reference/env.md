@@ -8,7 +8,7 @@ interface Environment {
     set(name: string, value: number | string | null): Environment;
 }
 ```
-Интерфейс работы с [переменными окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B).
+Интерфейс для доступа к [переменным окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B).
 
 &nbsp;
 
