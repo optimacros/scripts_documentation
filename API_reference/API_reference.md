@@ -88,7 +88,7 @@ readonly lists: Lists
 ```js
 readonly filesystems: Filesystems
 ```
-Ссылка на интерфейс Filesystems.
+Ссылка на интерфейс [`Filesystems`](./fs.md#Filesystems).
 
 &nbsp;
 
