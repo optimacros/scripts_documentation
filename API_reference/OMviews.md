@@ -413,6 +413,9 @@ interface LabelsGroup {
     cells(): Cells;
 }
 ```
+Многоуровневый набор заголовков строк/столбцов.
+
+&nbsp;
 
 ```js
 all(): Label[]
@@ -430,6 +433,7 @@ first(): Label
 ```js
 cells(): Cells
 ```
+Возвращает одну строку или один столбец.
 
 
 ### Интерфейс Labels ...<a name="Labels"></a>
@@ -443,7 +447,7 @@ interface Labels {
     findLabelByLongId(longId: number): Label | null;
 }
 ```
-Интерфейс ....
+Интерфейс, представляющий многоуровневую ось заголовков строк или столбцов.
 
 &nbsp;
 
@@ -499,7 +503,6 @@ interface Cell {
     rows(): LabelsGroup;
     dropDown(): Labels;
     getFormatType(): string;
-    isEditable(): boolean;
 }
 ```
 Интерфейс, представляющий клетку таблицы.
@@ -513,6 +516,7 @@ setValue(value: number | string | null)
 
 &nbsp;
 
+<a name="getValue"></a>
 ```js
 getValue(): number | string | null
 ```
@@ -530,12 +534,14 @@ getNativeValue(): number | string | null
 ```js
 getTextValue(): number | string | null
 ```
+Синоним [`getValue()`](#getValue). Устаревшая функция.
 
 &nbsp;
 
 ```js
 getContextValue(): string | null
 ```
+
 
 &nbsp;
 
@@ -567,11 +573,6 @@ dropDown(): Labels
 getFormatType(): string
 ```
 
-&nbsp;
-
-```js
-isEditable(): boolean
-```
 
 
 ### Интерфейс Cells ...<a name="Cells"></a>

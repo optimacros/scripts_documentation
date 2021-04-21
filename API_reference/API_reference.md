@@ -17,8 +17,7 @@
     1. Shared folder
     1. Файлы CSV
 1. [Цепочки скриптов](scriptChains.md)
-1. [Текущая модель](currentModel.md)
-1. [Текущий пользователь](currentUser.md)
+1. [Окружение, модель, пользователь](env.md)
 1. [Нотификация пользователей](userNotification.md)
     1. SMTP
 1. [Изменение статуса текущего запроса](reqStatusChange.md)
@@ -39,7 +38,7 @@ interface OM {
 
 var om: OM;
 ```
-Интерфейс `OM` являет собой набор интерфейсов, предоставляющих API Скриптов 1.0 через глобальную переменную `om`.
+Интерфейс `OM` являет собой набор интерфейсов, предоставляющих API cкриптов 1.0 через глобальную переменную `om`.
 
 &nbsp;
 
@@ -53,7 +52,7 @@ readonly common: Common
 ```js
 readonly environment: Environment
 ```
-Ссылка на интерфейс Environment.
+Ссылка на интерфейс [`Environment`](./env.md#Environment).
 
 &nbsp;
 
@@ -105,36 +104,7 @@ readonly connectors: Connectors
 Ссылка на интерфейс Connectors.
 
 
-### Интерфейс Environment ...<a name="Environment"></a>
-```ts
-interface Environment {
-    load(name: string): Environment;
-    get(key: string, def?: any): any;
-    set(name: string, value: number | string | null): Environment;
-}
-```
-Интерфейс работы с [переменными окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B).
 
-&nbsp;
-
-```js
-load(name: string): Environment
-```
-Загружает значения переменных окружения из нуль-мерного мультикуба `name`. Возвращает `this`.
-
-&nbsp;
-
-```js
-get(key: string, def?: any): any
-```
-Возвращает значение переменной окружения `key`. При отсутствии этой переменной и наличии аргумента `def` возвращает `def`.
-
-&nbsp;
-
-```js
-set(name: string, value: number | string | null): Environment
-```
-Устанавливает значение переменной окружения `key` в значение `value`. Возвращает `this`.
 
 ___
 !!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
