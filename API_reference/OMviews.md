@@ -435,7 +435,7 @@ count(): number
 
 Если `Labels` относится к строкам, то это значение, которое было посчитано в функции [`GridRange`](#GridRange).[`generator(size)`](#generator) на основе аргумента `size`.
 
-Если `Labels` относится к столбцам, то это в точности значение аргумента `columnCount` функции [`Grid`](#Grid).[`range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number)`](#range).
+Если `Labels` относится к столбцам, то это в точности значение аргумента `columnCount` функции [`Grid`](#Grid).[`range(rowStart, rowCount, columnStart, columnCount)`](#range).
 
 &nbsp;
 
