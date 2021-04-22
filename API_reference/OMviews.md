@@ -379,7 +379,7 @@ interface Label {
 
 interface EntityInfo = Label;
 ```
-Интерфейс сущности.
+Интерфейс сущности. Как правило, представляет собой один из заголовков строки или столбца.
 
 &nbsp;
 
@@ -466,7 +466,7 @@ findLabelByLongId(longId: number): Label | null
 ```
 Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в `this`, иначе — `null`.
 
-### Интерфейс LabelsGroup ...<a name="LabelsGroup"></a>
+### Интерфейс LabelsGroup<a name="LabelsGroup"></a>
 ```ts
 interface LabelsGroup {
     all(): Label[];
@@ -474,13 +474,14 @@ interface LabelsGroup {
     cells(): Cells;
 }
 ```
-Интерфейс, представляющий многоуровневый набор заголовков строки или столбца.
+Интерфейс, представляющий многоуровневый набор заголовков конкретной строки или столбца.
 
 &nbsp;
 
 ```js
 all(): Label[]
 ```
+Возвращает массив конкретных заголовков [`Label`](#Label).
 
 &nbsp;
 
@@ -494,7 +495,7 @@ first(): Label
 ```js
 cells(): Cells
 ```
-Возвращает одну строку или один столбец.
+Возвращает интерфейс [`Cells`](#Cells), предоставляющий доступ к ячейкам одной строки или одного столбца.
 
 ### Интерфейс Cell ...<a name="Cell"></a>
 ```ts
