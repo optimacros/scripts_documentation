@@ -148,6 +148,7 @@ interface Grid {
 
 &nbsp;
 
+<a name="range"></a>
 ```js
 range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange
 ```
@@ -307,6 +308,7 @@ cellCount(): number
 
 &nbsp;
 
+<a name="generator"></a>
 ```js
 generator(size?: number): GridRangeChunk[]
 ```
@@ -314,7 +316,7 @@ generator(size?: number): GridRangeChunk[]
 
 Каждый возвращаемый [`GridRangeChunk`](#GridRangeChunk) содержит целое количество строк, т. е. все колонки `GridRange`, а количество строк в нём определяется по формуле `size / columnCount()`.
 
-Значение аргумента `size` ограничено сверху значением `5000`, поэтому в скриптах 1.0 [`невозможно`](../appendix/constraints.md) работать с `GridRange` с б*О*льшим количеством столбцов. Значение по умолчанию: `500`.
+Значение аргумента `size` ограничено снизу значением `500` и сверху значением `5000`, поэтому в скриптах 1.0 [`невозможно`](../appendix/constraints.md) работать с `GridRange` с б*О*льшим количеством столбцов. Значение по умолчанию: `500`.
 
 Типичный пример использования:
 
@@ -404,38 +406,6 @@ code(): string
 
 &nbsp;
 
-
-### Интерфейс LabelsGroup ...<a name="LabelsGroup"></a>
-```ts
-interface LabelsGroup {
-    all(): Label[];
-    first(): Label;
-    cells(): Cells;
-}
-```
-Многоуровневый набор заголовков строк/столбцов.
-
-&nbsp;
-
-```js
-all(): Label[]
-```
-
-&nbsp;
-
-```js
-first(): Label
-```
-Аналог `all()[0]`.
-
-&nbsp;
-
-```js
-cells(): Cells
-```
-Возвращает одну строку или один столбец.
-
-
 ### Интерфейс Labels ...<a name="Labels"></a>
 ```ts
 interface Labels {
@@ -447,21 +417,25 @@ interface Labels {
     findLabelByLongId(longId: number): Label | null;
 }
 ```
-Интерфейс, представляющий многоуровневую ось заголовков строк или столбцов.
+Интерфейс, представляющий набор объектов [`LabelsGroup`](#LabelsGroup), то есть набор строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#GridRangeChunk).
 
 &nbsp;
 
 ```js
 start(): number
 ```
-...
+Возвращает номер первой строки/столбца текущего [`GridRangeChunk`](#GridRangeChunk) в таблице [`Grid`](#Grid).
 
 &nbsp;
 
 ```js
 count(): number
 ```
-Возвращает количество ....
+Возвращает количество строк/столбцов в наборе.
+
+Если `Labels` относится к строкам, то это значение, которое было посчитано в функции [`GridRange`](#GridRange).[`generator(size)`](#generator) на основе аргумента `size`.
+
+Если `Labels` относится к столбцам, то это в точности значение аргумента `columnCount` функции [`Grid`](#Grid).[`range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number)`](#range).
 
 &nbsp;
 
@@ -488,6 +462,36 @@ chunkInstance(): GridRangeChunk
 findLabelByLongId(longId: number): Label | null
 ```
 Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в данном объекте `Labels`, иначе — `null`.
+
+### Интерфейс LabelsGroup ...<a name="LabelsGroup"></a>
+```ts
+interface LabelsGroup {
+    all(): Label[];
+    first(): Label;
+    cells(): Cells;
+}
+```
+Интерфейс, представляющий многоуровневый набор заголовков строки или столбца.
+
+&nbsp;
+
+```js
+all(): Label[]
+```
+
+&nbsp;
+
+```js
+first(): Label
+```
+Аналог `all()[0]`.
+
+&nbsp;
+
+```js
+cells(): Cells
+```
+Возвращает одну строку или один столбец.
 
 ### Интерфейс Cell ...<a name="Cell"></a>
 ```ts
