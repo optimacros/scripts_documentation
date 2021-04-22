@@ -406,7 +406,7 @@ code(): string
 
 &nbsp;
 
-### Интерфейс Labels ...<a name="Labels"></a>
+### Интерфейс Labels<a name="Labels"></a>
 ```ts
 interface Labels {
     start(): number;
@@ -417,7 +417,7 @@ interface Labels {
     findLabelByLongId(longId: number): Label | null;
 }
 ```
-Интерфейс, представляющий набор объектов [`LabelsGroup`](#LabelsGroup), то есть набор строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#GridRangeChunk).
+Интерфейс, представляющий набор объектов [`LabelsGroup`](#LabelsGroup), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#GridRangeChunk).
 
 &nbsp;
 
@@ -433,9 +433,9 @@ count(): number
 ```
 Возвращает количество строк/столбцов в наборе.
 
-Если `Labels` относится к строкам, то это значение, которое было посчитано в функции [`GridRange`](#GridRange).[`generator(size)`](#generator) на основе аргумента `size`.
+Если `this` относится к строкам, то это значение, которое было посчитано в функции [`GridRange`](#GridRange).[`generator(size)`](#generator) на основе аргумента `size`.
 
-Если `Labels` относится к столбцам, то это в точности значение аргумента `columnCount` функции [`Grid`](#Grid).[`range(rowStart, rowCount, columnStart, columnCount)`](#range).
+Если `this` относится к столбцам, то это в точности значение аргумента `columnCount` функции [`Grid`](#Grid).[`range(rowStart, rowCount, columnStart, columnCount)`](#range).
 
 &nbsp;
 
@@ -464,7 +464,7 @@ chunkInstance(): GridRangeChunk
 ```js
 findLabelByLongId(longId: number): Label | null
 ```
-Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в данном объекте `Labels`, иначе — `null`.
+Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в `this`, иначе — `null`.
 
 ### Интерфейс LabelsGroup ...<a name="LabelsGroup"></a>
 ```ts
