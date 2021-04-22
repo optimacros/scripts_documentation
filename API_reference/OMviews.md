@@ -442,6 +442,7 @@ count(): number
 ```js
 all(): LabelsGroup[]
 ```
+Возвращает набор объектов заголовков каждой строки/столбца[`LabelsGroup`](#LabelsGroup) в виде массива.
 
 &nbsp;
 
@@ -449,12 +450,14 @@ all(): LabelsGroup[]
 ```js
 get(index: number): LabelsGroup | null
 ```
+Аналог `all()[index]`.
 
 &nbsp;
 
 ```js
 chunkInstance(): GridRangeChunk
 ```
+Возвращает обратную ссылку на [`GridRangeChunk`](#GridRangeChunk), из которого был получен `this`.
 
 &nbsp;
 
