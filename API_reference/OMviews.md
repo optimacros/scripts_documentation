@@ -42,8 +42,8 @@ open(name: string): MulticubeTab
 ### Интерфейс Tab ...<a name="Tab"></a>
 ```ts
 interface Tab {
-    pivot(viewName?: string): Pivot;
     open(name: string): Tab;
+    pivot(viewName?: string): Pivot;
 		
     elementsCreator(): ElementsCreator;
     elementsDeleter(): ElementsDeleter;
@@ -54,6 +54,13 @@ interface Tab {
 }
 ```
 Базовый интерфейс для вкладок.
+
+&nbsp;
+
+```js
+open(name: string): Tab
+```
+Открывает ...
 
 &nbsp;
 
@@ -699,6 +706,14 @@ interface Lists {
 listsTab(): ListsTab
 ```
 Возвращает ссылку на интерфейс [`ListsTab`](#ListsTab). В интерфейсе Optimacros аналогично открытию вкладки "Справочники".
+
+### Интерфейс ListsTab<a name="ListsTab"></a>
+```ts
+interface ListsTab extends Tab {
+    open(name: string): ListTab;
+}
+```
+Возвращает ссылку на [`ListTab`](#ListTab) справочника `name`. В интерфейсе Optimacros аналогично открытию вкладки справочника `name`.
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 ## Импорт в мультикубы и справочники<a name="import"></a>
