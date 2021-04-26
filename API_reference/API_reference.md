@@ -390,17 +390,6 @@ interface ListsTab extends Tab {
 `om.lists.listsTab.open()` Аналогично функционалу Open (открытию справочника) выбранного в гриде Lists - Table в 
 интерфейсной части приложения. В качестве аргумента принимает строку с именем справочника, который мы хоти открыть.
 
-### Интерфейс Lists ...<a name="Lists"></a>
-```ts
-interface Lists {
-    listsTab(): ListsTab
-}
-```
-`om.lists` Аналогично открытию табы Lists в интерфейсной части приложения, но без открытых мини 
-табов.
-`om.lists.listsTab` Аналогично открытию табы Lists - Table в интерфейсной части 
-приложения.
-
 ### Интерфейс RequestManager ...<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
