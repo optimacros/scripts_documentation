@@ -104,7 +104,59 @@ readonly connectors: Connectors
 Ссылка на интерфейс Connectors.
 
 
+### Интерфейс Common ...<a name="Common"></a>
+```ts
+interface Common {
+    createCellBuffer(): CellBuffer;
+    requestInfo(): RequestManager;
+    modelInfo(): ModelInfo;
+    userInfo(): UserInfo;
+    resultInfo(): ResultInfo;
+    entitiesInfo(): EntitiesInfo;
+    copyData(): CopyData;
+}
+```
 
+```js
+createCellBuffer(): CellBuffer
+```
+
+&nbsp;
+
+```js
+requestInfo(): RequestManager
+```
+
+&nbsp;
+
+
+```js
+modelInfo(): ModelInfo
+```
+
+&nbsp;
+
+```js
+userInfo(): UserInfo
+```
+
+&nbsp;
+
+```js
+resultInfo(): ResultInfo
+```
+
+&nbsp;
+
+```js
+entitiesInfo(): EntitiesInfo
+```
+
+&nbsp;
+
+```js
+copyData(): CopyData
+```
 
 ___
 !!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
@@ -349,33 +401,6 @@ interface Lists {
 `om.lists.listsTab` Аналогично открытию табы Lists - Table в интерфейсной части 
 приложения.
 
-### Интерфейс CellBuffer ...<a name="CellBuffer"></a>
-```ts
-interface CellBuffer {
-    set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
-    apply(): CellBuffer;
-    count(): number;
-    canLoadCellsValues(value: boolean): CellBuffer;
-}
-```
-### CellBuffer общее понятие:
-CellBuffer - это абстрактный буфер обмена, куда можно было бы временно поместить например значения ячеек, чтобы затем 
-что-то в них изменить, перед тем как отправить на сервер. На данный момент скрипт 1D иерархии является апофеозом 
-использования cellBuffer без, которого в нём не обойтись. Пример использования такой: CellBuffer используется чтобы 
-редактировать клетки, а редактировать клетки можно только лишь тогда, когда у нас есть объект нужной клетки в памяти. 
-Иными словами, на практике: Чтобы работать с CellBuffer нам нужно работать с гридом, это неотъемлемая часть его 
-использования. Читая грид слева направо, сверху вниз, мы выбираем клетки, которые нам нужно редактировать и помещаем их 
-в CellBuffer. CellBuffer является накопителем клеток грида.
-
-set() - даёт возможность установить значение в клетку. Первый аргумент это клетка, второй аргумент это значение.
-
-apply() - применяет значения из буфера и одновременно его очищает.
-
-count() - даёт возможность получить количество.
-
-canLoadCellsValues() - обязательный интерфейс, который принимает булевое значение (true, false) нужнен для того, чтобы 
-указать нужно ли перезагружать значение в буфер в случае если они изменятся.
-
 ### Интерфейс RequestManager ...<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
@@ -438,19 +463,6 @@ interface CopyData {
     setMulticubeLongIds(longIds: number[]): CopyData;
     setMulticubeByNames(names: string[]): CopyData;
     copy(): CopyData;
-}
-```
-
-### Интерфейс Common ...<a name="Common"></a>x
-```ts
-interface Common {
-    createCellBuffer(): CellBuffer;
-    requestInfo(): RequestManager;
-    modelInfo(): ModelInfo;
-    userInfo(): UserInfo;
-    resultInfo(): ResultInfo;
-    entitiesInfo(): EntitiesInfo;
-    copyData(): CopyData;
 }
 ```
 
