@@ -336,7 +336,7 @@ for (const chunk of range.generator(1000)) {
 }
 ```
 
-### Интерфейс GridRangeChunk ...<a name="GridRangeChunk"></a>
+### Интерфейс GridRangeChunk<a name="GridRangeChunk"></a>
 ```ts
 interface GridRangeChunk {
     cells(): Cells;
@@ -351,6 +351,7 @@ interface GridRangeChunk {
 ```js
 cells(): Cells
 ```
+Возвращает ссылку на набор ячеек [`Cells`](#Cells) текущего куска.
 
 &nbsp;
 
@@ -496,7 +497,7 @@ first(): Label
 ```js
 cells(): Cells
 ```
-Возвращает интерфейс [`Cells`](#Cells), предоставляющий доступ к ячейкам одной строки или одного столбца.
+Возвращает интерфейс [`Cells`](#Cells), предоставляющий доступ к ячейкам данной строки или столбца.
 
 ### Интерфейс Cell ...<a name="Cell"></a>
 ```ts
@@ -597,7 +598,7 @@ interface Cells {
     getByIndexes(indexes: number[]): Cells | null;
 }
 ```
-Интерфейс, представляющий набор клеток таблицы....
+Интерфейс, представляющий набор клеток таблицы.
 
 &nbsp;
 
@@ -632,6 +633,7 @@ count(): number
 ```js
 chunkInstance(): GridRangeChunk
 ```
+Возвращает обратную ссылку на [`GridRangeChunk`](#GridRangeChunk), из которого был получен `this`.
 
 &nbsp;
 
