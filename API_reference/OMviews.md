@@ -89,7 +89,7 @@ elementsDeleter(): ElementsDeleter
 elementsReorder(): ElementsReorder
 ```
 
-### Интерфейс ElementsCreator ...<a name="ElementsCreator"></a>
+### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
 ```ts
 interface ElementsCreator {
     numeric(): NumericElementsCreator;
@@ -104,7 +104,7 @@ numeric(): NumericElementsCreator
 ```
 Возращает ссылку на [`NumericElementsCreator`](#NumericElementsCreator).
 
-### Интерфейс NumericElementsCreator ...<a name="NumericElementsCreator"></a>
+### Интерфейс NumericElementsCreator<a name="NumericElementsCreator"></a>
 ```ts
 interface NumericElementsCreator {
     setCount(count: number): NumericElementsCreator;
@@ -167,7 +167,7 @@ create(): number[]
 ```
 Добавляет элементы и возвращает массив их [`longId`](#longId).
 
-### Интерфейс ElementsDeleter ...<a name="ElementsDeleter"></a>
+### Интерфейс ElementsDeleter<a name="ElementsDeleter"></a>
 ```ts
 interface ElementsDeleter {
     appendIdentifier(identifier: number): ElementsDeleter;
@@ -181,7 +181,7 @@ interface ElementsDeleter {
 ```js
 appendIdentifier(identifier: number): ElementsDeleter
 ```
-Добавляет элемент, чей [`longId`](#longId) равен `identifier`, в список для удаления.
+Добавляет в буфер элемент, чей [`longId`](#longId) равен `identifier`. Возращает `this`.
 
 &nbsp;
 
