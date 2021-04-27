@@ -69,6 +69,128 @@ pivot(viewName?: string): Pivot
 ```
 Возвращает ссылку на объект [`Pivot`](#Pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба в скриптах 1.0 [*отсутствует*](../appendix/constraints.md), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](#ElementsCreator) для добавления элементов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](#ElementsDeleter) для удаления элементов.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+
+### Интерфейс ElementsCreator ...<a name="ElementsCreator"></a>
+```ts
+interface ElementsCreator {
+    numeric(): NumericElementsCreator;
+}
+```
+Абстрактный интерфейс, предоставляющий конкретные интерфейсы с различными возможностями добавления элементов.
+
+&nbsp;
+
+```js
+numeric(): NumericElementsCreator
+```
+Возращает ссылку на [`NumericElementsCreator`](#NumericElementsCreator).
+
+### Интерфейс NumericElementsCreator ...<a name="NumericElementsCreator"></a>
+```ts
+interface NumericElementsCreator {
+    setCount(count: number): NumericElementsCreator;
+    setPositionAfter(relativeLongId: number): NumericElementsCreator;
+    setPositionBefore(relativeLongId: number): NumericElementsCreator;
+    setPositionStart(): NumericElementsCreator;
+    setPositionEnd(): NumericElementsCreator;
+    setPositionChildOf(parentLongId: number): NumericElementsCreator;
+    create(): number[];
+}
+```
+Интерфейс позволяет добавить заданное количество элементов в заданную позицию таблицы. Аналог кнопки "Добавить элементы" в интерфейсе Optimacros.
+
+&nbsp;
+
+```js
+setCount(count: number): NumericElementsCreator
+```
+Устанавливает количество добавляемых элементов. Возвращает `this`.
+
+&nbsp;
+
+```js
+setPositionAfter(relativeLongId: number): NumericElementsCreator
+```
+Устанавливает позицию добавления после [`relativeLongId`](#longId). Возвращает `this`.
+
+&nbsp; 
+
+```js
+setPositionBefore(relativeLongId: number): NumericElementsCreator
+```
+Устанавливает позицию добавления до [`relativeLongId`](#longId). Возвращает `this`.
+
+&nbsp;
+
+```js
+setPositionStart(): NumericElementsCreator
+```
+Устанавливает позицию добавления в начало. Возвращает `this`.
+
+&nbsp;
+
+```js
+setPositionEnd(): NumericElementsCreator
+```
+Устанавливает позицию добавления в конец. Возвращает `this`.
+
+&nbsp;
+
+```js
+setPositionChildOf(parentLongId: number): NumericElementsCreator
+```
+Устанавливает позицию добавления дочерней для [`parentLongId`](#longId). Возвращает `this`.
+
+&nbsp;
+
+```js
+create(): number[]
+```
+Добавляет элементы и возвращает массив их [`longId`](#longId).
+
+### Интерфейс ElementsDeleter ...<a name="ElementsDeleter"></a>
+```ts
+interface ElementsDeleter {
+    appendIdentifier(identifier: number): ElementsDeleter;
+    delete(): ElementsDeleter;
+}
+```
+Интерфейс позволяет удалить элементы таблицы. Аналог кнопки "Удалить" в интерфейсе Optimacros.
+
+&nbsp;
+
+```js
+appendIdentifier(identifier: number): ElementsDeleter
+```
+Добавляет элемент, чей [`longId`](#longId) равен `identifier`, в список для удаления.
+
+&nbsp;
+
+```js
+delete(): ElementsDeleter
+```
+Фактически удаляет все элементы в буфере из таблицы. Возвращает `this`.
+
+
 ### Интерфейс MulticubeTab ...<a name="MulticubeTab"></a>
 ```ts
 interface MulticubeTab extends Tab {
@@ -714,6 +836,14 @@ interface ListsTab extends Tab {
 }
 ```
 Возвращает ссылку на [`ListTab`](#ListTab) справочника `name`. В интерфейсе Optimacros аналогично открытию вкладки справочника `name`.
+
+### Интерфейс ListTab ...<a name="ListTab"></a>
+```ts
+interface ListTab extends Tab {
+    listSubsetTab(): ListSubsetsTab
+    importer(): ListImporter;
+}
+```
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 ## Импорт в мультикубы и справочники<a name="import"></a>

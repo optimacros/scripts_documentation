@@ -80,7 +80,7 @@ readonly versions: Versions
 ```js
 readonly lists: Lists
 ```
-Ссылка на интерфейс Lists.
+Ссылка на интерфейс [`Lists`](./OMviews.md#Lists).
 
 &nbsp;
 
@@ -190,37 +190,6 @@ interface Exporter {
     export(): ExportResult;
 }
 ```
-
-### Интерфейс NumericElementsCreator ...<a name="NumericElementsCreator"></a>
-```ts
-interface NumericElementsCreator {
-    setCount(count: number): NumericElementsCreator;
-    setPositionAfter(relativeLongId: number): NumericElementsCreator;
-    setPositionBefore(relativeLongId: number): NumericElementsCreator;
-    setPositionStart(): NumericElementsCreator;
-    setPositionEnd(): NumericElementsCreator;
-    setPositionChildOf(parentLongId: number): NumericElementsCreator;
-    create(): number[];
-}
-```
-Аналогия интерфейсного функционала Insert на гриде
-
-### Интерфейс ElementsCreator ...<a name="ElementsCreator"></a>
-```ts
-interface ElementsCreator {
-    numeric(): NumericElementsCreator;
-}
-```
-Аналогия интерфейсного функционала Insert на гриде
-
-### Интерфейс ElementsDeleter ...<a name="ElementsDeleter"></a>
-```ts
-interface ElementsDeleter {
-    appendIdentifier(identifier: number): ElementsDeleter;
-    delete(): ElementsDeleter;
-}
-```
-Аналогия интерфейсного функционала delete на гриде
 
 ### Интерфейс ElementsReorder ...<a name="ElementsReorder"></a>
 ```ts
@@ -364,14 +333,6 @@ interface ListImporter extends Importer {
 }
 ```
 
-### Интерфейс ListTab ...<a name="ListTab"></a>
-```ts
-interface ListTab extends Tab {
-    listSubsetTab(): ListSubsetsTab
-    importer(): ListImporter;
-}
-```
-
 ### Интерфейс ListSubsetsTab ...<a name="ListSubsetsTab"></a>
 ```ts
 interface ListSubsetsTab extends Tab {
@@ -380,16 +341,7 @@ interface ListSubsetsTab extends Tab {
 ```
 `om.lists.ListSubsetsTab.listTab.open()` Аналогично открытию справочника на минитабе Subsets. open() в качестве 
 аргумента принимает строку с именем справочника, который мы хоти открыть.
-
-### Интерфейс ListsTab ...<a name="ListsTab"></a>
-```ts
-interface ListsTab extends Tab {
-    open(name: string): ListTab;
-}
-```
-`om.lists.listsTab.open()` Аналогично функционалу Open (открытию справочника) выбранного в гриде Lists - Table в 
-интерфейсной части приложения. В качестве аргумента принимает строку с именем справочника, который мы хоти открыть.
-
+а
 ### Интерфейс RequestManager ...<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
