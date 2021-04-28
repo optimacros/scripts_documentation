@@ -88,6 +88,7 @@ elementsDeleter(): ElementsDeleter
 ```js
 elementsReorder(): ElementsReorder
 ```
+Возвращает ссылку на [`ElementsReorder`](#ElementsReorder) для тасования элементов.
 
 ### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
 ```ts
@@ -189,6 +190,52 @@ appendIdentifier(identifier: number): ElementsDeleter
 delete(): ElementsDeleter
 ```
 Фактически удаляет все элементы в буфере из таблицы. Возвращает `this`.
+
+### Интерфейс ElementsReorder ...<a name="ElementsReorder"></a>
+```ts
+interface ElementsReorder {
+    append(longId: number, relativeLongId: number, position: string): ElementsReorder;
+    reorder(): ElementsReorder;
+    count(): number;
+    reverse(): ElementsReorder;
+}
+```
+Интерфейс позволяет перетасовать элементы и доступен только для элементов справочников. Аналог кнопки "Переместить" в интерфейсе Optimacros. Но в отличие от интерфейса пользователя, в скриптах 1.0 изменение позиции элемента возможно только в пределах элементов с тем же родительским элементом. Поэтому для постановки элемента в конкретную позицию среди элементов с другим родительским, нужно сначала сменить родителя. Именно так и организован интерфейс пользователя: в таком случае он отправляет на сервер две команды.
+
+&nbsp;
+
+```js
+append(longId: number, relativeLongId: number, position: string): ElementsReorder
+```
+Добавляет во внутреннюю очередь данные о [`longId`](#longId) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId`. Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
+
+`Before` — непосредственно перед `relativeLongId`;
+
+`After` — сразу за `relativeLongId`;
+
+`Start` — в начало (значение `relativeLongId` нерелевантно);
+
+`End` — в конец (значение `relativeLongId` нерелевантно).
+
+&nbsp;
+
+```js
+reorder(): ElementsReorder
+```
+Передаёт на сервер данные для фактического перемещения их в модели и очищает буфер. Возвращает `this`.
+
+&nbsp;
+
+```js
+count(): number
+```
+Возвращает количество перемещаемых элементов во внутренней очереди.
+
+&nbsp;
+
+```js
+reverse(): ElementsReorder
+```
 
 
 ### Интерфейс MulticubeTab ...<a name="MulticubeTab"></a>
@@ -789,14 +836,14 @@ interface CellBuffer {
 ```js
 set(cell: Cell | CubeCell, value: number | string | null): CellBuffer
 ```
-Устанавливает значение `value` в клетку `cell`. Возвращает `this`.
+Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
 
 &nbsp;
 
 ```js
 apply(): CellBuffer
 ```
-Передаёт на сервер значения всех клеток для присваивания в базе данных и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение. Возвращает `this`.
+Передаёт на сервер значения всех клеток для присваивания в модели и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение. Возвращает `this`.
 
 &nbsp;
 

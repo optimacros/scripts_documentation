@@ -191,17 +191,6 @@ interface Exporter {
 }
 ```
 
-### Интерфейс ElementsReorder ...<a name="ElementsReorder"></a>
-```ts
-interface ElementsReorder {
-    append(longId: number, relativeLongId: number, position: string): ElementsReorder;
-    reorder(): ElementsReorder;
-    count(): number;
-    reverse(): ElementsReorder;
-}
-```
-Аналогия интерфейсного функционала Reorder на гриде
-
 ### Интерфейс CubeCell ...<a name="CubeCell"></a>
 ```ts
 interface CubeCell {
