@@ -423,13 +423,20 @@ getDimensionEntity(): EntityInfo
 ```
 Возвращает ссылку на сущность [`EntityInfo`](#EntityInfo) измерения мультикуба.
 
-### Интерфейс GridPageSelector ...<a name="GridPageSelector"></a>
+### Интерфейс GridPageSelector<a name="GridPageSelector"></a>
 ```ts
 interface GridPageSelector extends GridDimension {
     getSelectedEntity(): EntityInfo | null;
 }
 ```
 Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`).
+
+&nbsp;
+
+```js
+getSelectedEntity(): EntityInfo | null
+```
+Возвращает ссылку на [`EntityInfo`](#EntityInfo) выбранного элемента фильтра или `null`.
 
 ### Интерфейс GridRange<a name="GridRange"></a>
 ```ts
