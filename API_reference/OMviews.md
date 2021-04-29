@@ -713,7 +713,7 @@ getValue(): number | string | null
 ```js
 getNativeValue(): number | string | null
 ```
-Возвращает значение ....
+Возвращает самородное значение клетки, зависящее от формата куба.
 
 &nbsp;
 
