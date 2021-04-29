@@ -551,12 +551,12 @@ columns(): Labels
 Возвращает интерфейс [`Labels`](#Labels), представляющий заголовки столбцов.
 
 
-### Интерфейс EntityInfo ... (Label) <a name="EntityInfo"></a> <a name="Label"></a>
+### Интерфейс EntityInfo (Label)...<a name="EntityInfo"></a> <a name="Label"></a>
 ```ts
 interface Label {
     longId(): number;
     name(): string;
-    code(): string;
+    code(): string | null;
     alias(): string | null;
     label(): string | null;
     parentLongId(): number;
@@ -576,7 +576,7 @@ longId(): number
 
 &nbsp;
 
-
+<a name="Label.name"></a>
 ```js
 name(): string
 ```
@@ -590,6 +590,32 @@ code(): string
 Возвращает код сущности. В Optimacros всего две сущности могут иметь код: элементы справочников и кубы.
 
 &nbsp;
+
+<a name="alias"></a>
+```js
+alias(): string | null
+```
+Возвращает отображаемое имя.
+
+Если `this` является сущностью элемента справочника, в настройках которого задано некоторое свойство в качестве отображаемого имени (опция `Отображение`), и для этой сущности задано значение этого свойства, то возвращает значение этого свойства.
+
+Иначе возвращает [`name()`](#Label.name).
+
+&nbsp;
+
+```js
+label(): string | null
+```
+То же, что и [`alias()`](#alias).
+
+&nbsp;
+
+```js
+parentLongId(): number
+```
+Если сущность является элементом справочника, у которого есть родительский справочник, то возвращает [`longId`](#longId) сущности родителя.
+
+Если родительской сущности нет, возвращает `-1`.
 
 ### Интерфейс Labels<a name="Labels"></a>
 ```ts
