@@ -681,7 +681,6 @@ interface Cell {
     setValue(value: number | string | null);
     getValue(): number | string | null;
     getNativeValue(): number | string | null;
-    getTextValue(): number | string | null;
     getContextValue(): string | null;
 
     definitions(): number[];
@@ -713,21 +712,20 @@ getValue(): number | string | null
 ```js
 getNativeValue(): number | string | null
 ```
-Возвращает самородное значение клетки, зависящее от формата куба.
+Возвращает самородное значение клетки, зависящее от формата. Если клетка имеет формат справочника, то возвращается [`longId`](#longId). 
 
-&nbsp;
+В противном случае возвращается то же, что вернёт `getValue()`.
 
-```js
-getTextValue(): number | string | null
-```
-Синоним [`getValue()`](#getValue). Устаревшая функция.
+Если `number`, `string`, `boolean`, то возвращается соответственно `number`, `string`, `string` (`true` или `false`).
 
 &nbsp;
 
 ```js
 getContextValue(): string | null
 ```
+Если ячейка имеет формат справочника, в настройках которого задано некоторое свойство `prop` в качестве отображаемого имени (`Отображение`), и для этой ячейки задано значение этого свойства, то возвращает строку, состоящую из имени, двойной вертикальной черты и значения свойства `prop`, например, `#5||Берлин`.
 
+В противном случае возвращает `null`.
 
 &nbsp;
 
