@@ -283,7 +283,7 @@ rowsFilter(data: string | string[] | number | number[]): Pivot
 
 `number[]` — массив [`longId`](#longId) строк.
 
-Функция возвращает `this`.
+Возвращает `this`.
 
 &nbsp;
 
@@ -304,7 +304,7 @@ withoutValues - загружает представление мультикуб
 ```js
 addDependentContext(identifier: number): Pivot
 ```
-Включает в фильтр по строкам весь зависимый контекст переданного [`longId`](#longId) `identifier`: материнские и дочерние элементы всех уровней.
+Включает в фильтр по строкам весь зависимый контекст переданного [`longId`](#longId) `identifier`: материнские и дочерние элементы всех уровней. Возвращает `this`.
 
 ### Интерфейс Grid ...<a name="Grid"></a>
 ```ts
