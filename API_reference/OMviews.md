@@ -290,7 +290,7 @@ rowsFilter(data: string | string[] | number | number[]): Pivot
 ```js
 columnsFilter(data: string | string[] | number | number[]): Pivot
 ```
-Аналог [`rowsFilter`](#rowsFilter) для столбцов.
+Аналог [`rowsFilter()`](#rowsFilter) для столбцов.
 
 &nbsp;
 
