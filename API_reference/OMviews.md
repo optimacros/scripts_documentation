@@ -297,7 +297,7 @@ columnsFilter(data: string | string[] | number | number[]): Pivot
 ```js
 withoutValues(): Pivot
 ```
-withoutValues - загружает представление мультикуба без данных
+Устанавливает признак загрузки с куба данных о мультикубе без значений ячеек. В этом случае функции интерфейса [`Cell`](#Cell) [`getValue()`](#getValue), [`getNativeValue()`](#getNativeValue) и [`getContextValue()`](#getContextValue) будут возвращать `null`, а функции [`Cell`](#Cell).[`setValue`](#Cell.setValue), [`Cells`](#Cells).[`setValue`](#Cells.setValue) и [`CellBuffer`](#CellBuffer).[`apply()`](#apply) не выполнять действий и не выдавать ошибок.
 
 &nbsp;
 
@@ -727,6 +727,7 @@ interface Cell {
 
 &nbsp;
 
+<a name="Cell.setValue"></a>
 ```js
 setValue(value: number | string | null)
 ```
@@ -742,6 +743,7 @@ getValue(): number | string | null
 
 &nbsp;
 
+<a name="getNativeValue"></a>
 ```js
 getNativeValue(): number | string | null
 ```
@@ -753,6 +755,7 @@ getNativeValue(): number | string | null
 
 &nbsp;
 
+<a name="getContextValue"></a>
 ```js
 getContextValue(): string | null
 ```
@@ -822,6 +825,7 @@ first(): Cell
 
 &nbsp;
 
+<a name="Cells.setValue"></a>
 ```js
 setValue(value: number | string | null)
 ```
@@ -870,6 +874,7 @@ set(cell: Cell | CubeCell, value: number | string | null): CellBuffer
 
 &nbsp;
 
+<a name="apply"></a>
 ```js
 apply(): CellBuffer
 ```
