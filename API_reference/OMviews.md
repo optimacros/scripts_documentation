@@ -551,7 +551,7 @@ columns(): Labels
 Возвращает интерфейс [`Labels`](#Labels), представляющий заголовки столбцов.
 
 
-### Интерфейс EntityInfo (Label)...<a name="EntityInfo"></a> <a name="Label"></a>
+### Интерфейс EntityInfo (Label)<a name="EntityInfo"></a> <a name="Label"></a>
 ```ts
 interface Label {
     longId(): number;
