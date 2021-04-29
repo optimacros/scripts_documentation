@@ -304,7 +304,7 @@ withoutValues - загружает представление мультикуб
 ```js
 addDependentContext(identifier: number): Pivot
 ```
-addDependentContext - передача контекста
+Включает в фильтр по строкам весь зависимый контекст переданного [`longId`](#longId) `identifier`: материнские и дочерние элементы всех уровней.
 
 ### Интерфейс Grid ...<a name="Grid"></a>
 ```ts
