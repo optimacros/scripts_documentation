@@ -798,7 +798,7 @@ dropDown(): Labels
 getFormatType(): string
 ```
 
-### Интерфейс Cells ...<a name="Cells"></a>
+### Интерфейс Cells<a name="Cells"></a>
 ```ts
 interface Cells {
     all(): Cell[];
