@@ -1,8 +1,9 @@
 # Курс молодого бойца
 
 1. [Hello, world!](hw.md)
-2. [Плоский архив](flatArchive.md)
-3. [Сложное дерево [пример ОВК]](complexTree.md)
-4. [Скрипты процесса согласования/Workflow](workflow.md)
+1. [Доступ к справочникам](listAccess.md)
+1. [Плоский архив](flatArchive.md)
+1. [Сложное дерево [пример ОВК]](complexTree.md)
+1. [Скрипты процесса согласования/Workflow](workflow.md)
 
 [Оглавление](../README.md)
