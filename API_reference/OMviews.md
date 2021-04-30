@@ -842,6 +842,7 @@ count(): number
 
 &nbsp;
 
+<a name="chunkInstance"></a>
 ```js
 chunkInstance(): GridRangeChunk
 ```
@@ -852,7 +853,7 @@ chunkInstance(): GridRangeChunk
 ```js
 getByIndexes(indexes: number[]): Cells | null
 ```
-Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#Cells). Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#Cells).
+Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#Cells). В этом случае функция [`chunkInstance()`](#chunkInstance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#GridRangeChunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#Cells).
 
 ### Интерфейс CellBuffer ...<a name="CellBuffer"></a>
 ```ts
