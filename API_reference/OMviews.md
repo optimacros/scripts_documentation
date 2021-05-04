@@ -300,7 +300,9 @@ columnsFilter(data: string | string[] | number | number[]): Pivot
 ```js
 withoutValues(): Pivot
 ```
-Устанавливает признак загрузки с сервера данных о мультикубе без значений ячеек. В этом случае функции интерфейса [`Cell`](#Cell) [`getValue()`](#getValue), [`getNativeValue()`](#getNativeValue) и [`getContextValue()`](#getContextValue) будут возвращать `null`, а функции [`Cell`](#Cell).[`setValue()`](#Cell.setValue), [`Cells`](#Cells).[`setValue()`](#Cells.setValue) и [`CellBuffer`](#CellBuffer).[`apply()`](#apply) не выполнять действий и не выдавать ошибок. Возвращает `this`.
+Устанавливает признак загрузки с сервера данных о мультикубе без значений ячеек. В этом случае функции интерфейса [`Cell`](#Cell) [`getValue()`](#getValue), [`getNativeValue()`](#getNativeValue) и [`getContextValue()`](#getContextValue) будут возвращать `null`, однако функции [`Cell`](#Cell).[`setValue()`](#Cell.setValue), [`Cells`](#Cells).[`setValue()`](#Cells.setValue) и [`CellBuffer`](#CellBuffer).[`apply()`](#apply) не теряют свою магическую силу. Возвращает `this`.
+
+Эта функция существенно ускоряет работу с мультикубами в тех случаях, когда нужно записать данные, но не читать их.
 
 &nbsp;
 
@@ -859,7 +861,7 @@ getByIndexes(indexes: number[]): Cells | null
 ```
 Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#Cells). В этом случае функция [`chunkInstance()`](#chunkInstance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#GridRangeChunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#Cells).
 
-### Интерфейс CellBuffer ...<a name="CellBuffer"></a>
+### Интерфейс CellBuffer<a name="CellBuffer"></a>
 ```ts
 interface CellBuffer {
     set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
