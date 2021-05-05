@@ -73,7 +73,7 @@ readonly times: Times
 ```js
 readonly versions: Versions
 ```
-Ссылка на интерфейс Versions.
+Ссылка на интерфейс [`Versions`](./OMviews.md#Versions).
 
 &nbsp;
 
@@ -262,27 +262,6 @@ interface Times {
     applyForm(): any;
 }
 ```
-
-### Интерфейс VersionsTab ...<a name="VersionsTab"></a>
-```ts
-interface VersionsTab {
-    copyVersion(from: string, to: string): any;
-}
-```
-`om.versions.versionsTab` Аналогично открытию табы Version - Table в интерфейсной части приложения.
-
-copyVersion - использование функционала копирования версий, принимает в качестве первого аргумента имя версии, которую
- копируем. В качестве второго аргумента имя версии в которую копируем.
-
-
-### Интерфейс Versions ...<a name="Versions"></a>
-```ts
-interface Versions {
-    versionsTab(): VersionsTab
-}
-```
-`om.versions` Аналогично открытию табы Version в интерфейсной части приложения, но без открытых мини табов.
-`om.versions.versionsTab` Аналогично открытию табы Version - Table в интерфейсной части приложения
 
 ### Интерфейс CSVParams ...<a name="CSVParams"></a>
 ```ts
