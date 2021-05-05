@@ -32,7 +32,6 @@ set(name: string, value: number | string | null): Environment
 Устанавливает значение переменной окружения `key` в значение `value`. Возвращает `this`.
 
 
-
 [API Reference](API_reference.md)
 
 [Оглавление](../README.md)

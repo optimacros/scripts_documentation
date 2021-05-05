@@ -322,15 +322,6 @@ interface ListImporter extends Importer {
 }
 ```
 
-### Интерфейс ListSubsetsTab ...<a name="ListSubsetsTab"></a>
-```ts
-interface ListSubsetsTab extends Tab {
-    listTab(): ListTab;
-}
-```
-`om.lists.ListSubsetsTab.listTab.open()` Аналогично открытию справочника на минитабе Subsets. open() в качестве 
-аргумента принимает строку с именем справочника, который мы хоти открыть.
-а
 ### Интерфейс RequestManager ...<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
