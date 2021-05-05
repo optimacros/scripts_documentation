@@ -10,5 +10,3 @@
 8. [API Reference](./API_reference/API_reference.md)
 9. [Приложения](./appendix/appendix.md)
 
-
-[Старое оглавление](index.md)
