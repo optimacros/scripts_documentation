@@ -967,6 +967,10 @@ copyVersion(from: string, to: string): any
 использование функционала копирования версий, принимает в качестве первого аргумента имя версии, которую
  копируем. В качестве второго аргумента имя версии в которую копируем.
 
+const versionsTab = om.versions.versionsTab();
+
+console.log(JSON.stringify(versionsTab.copyVersion('Version #3', 'Non-actual')))
+Не работает.
 
 
 
