@@ -54,10 +54,6 @@ console.log('Hello, world!')
 
 ![Вывод в админке Hello, world!](./pic/helloWorldAdminOutput.png)
 
-Раздел Sheduler позволяет устанавливать запуск скриптов по расписанию в **Cron-формате**. Подробнее почитать о Cron-формате можно [здесь](http://www.nncron.ru/nncronlt/help/RU/working/cron-format.htm). 
- 
-Строка Last отображает время последнего запуска скрипта и результат исполнения.
-
 [Курс молодого бойца](cookBook.md)
 
 [Оглавление](../README.md)
