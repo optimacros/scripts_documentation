@@ -936,26 +936,39 @@ interface ListTab extends Tab {
 }
 ```
 
+### Интерфейс Versions<a name="Versions"></a>
+```ts
+interface Versions {
+    versionsTab(): VersionsTab
+}
+```
+Интерфейс для получения ссылки на [`VersionsTab`](#VersionsTab).
+
+&nbsp;
+
+```js
+versionsTab(): VersionsTab
+```
+Возвращает ссылку на интерфейс [`VersionsTab`](#VersionsTab). В интерфейсе Optimacros аналогично открытию вкладки "Версии".
+
 ### Интерфейс VersionsTab ...<a name="VersionsTab"></a>
 ```ts
 interface VersionsTab {
     copyVersion(from: string, to: string): any;
 }
 ```
-`om.versions.versionsTab` Аналогично открытию табы Version - Table в интерфейсной части приложения.
+Вкладка "Версии". Для работы не требует открытия.
 
-copyVersion - использование функционала копирования версий, принимает в качестве первого аргумента имя версии, которую
+&nbsp;
+
+```js
+copyVersion(from: string, to: string): any
+```
+использование функционала копирования версий, принимает в качестве первого аргумента имя версии, которую
  копируем. В качестве второго аргумента имя версии в которую копируем.
 
 
-### Интерфейс Versions ...<a name="Versions"></a>
-```ts
-interface Versions {
-    versionsTab(): VersionsTab
-}
-```
-`om.versions` Аналогично открытию табы Version в интерфейсной части приложения, но без открытых мини табов.
-`om.versions.versionsTab` Аналогично открытию табы Version - Table в интерфейсной части приложения
+
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 

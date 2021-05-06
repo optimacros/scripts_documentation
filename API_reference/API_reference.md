@@ -288,6 +288,11 @@ interface Importer {
 }
 ```
 
+
+export interface ListSubsetsTab extends Tab {
+    listTab(): ListTab;
+}
+
 ### Интерфейс ListImporter ...<a name="ListImporter"></a>
 ```ts
 interface ListImporter extends Importer {
