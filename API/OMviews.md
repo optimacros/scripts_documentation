@@ -953,7 +953,7 @@ versionsTab(): VersionsTab
 ```
 Возвращает ссылку на [`VersionsTab`](#VersionsTab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
 
-### Интерфейс VersionsTab ...<a name="VersionsTab"></a>
+### Интерфейс VersionsTab<a name="VersionsTab"></a>
 ```ts
 interface VersionsTab {
     copyVersion(from: string, to: string): Object;
@@ -979,9 +979,9 @@ interface Times {
 &nbsp;
 
 ```js
-optionsTab(): Tab
+optionsTab(): TimeOptionsTab
 ```
-Возвращает ссылку на [`Tab`](#Tab) настроек времени, который не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
+Возвращает ссылку на [`TimeOptionsTab`](#TimeOptionsTab) настроек времени, который не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
 
 ### Интерфейс TimeOptionsTab ...<a name="TimeOptionsTab"></a>
 ```ts
