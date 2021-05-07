@@ -951,7 +951,7 @@ interface Versions {
 ```js
 versionsTab(): VersionsTab
 ```
-Возвращает ссылку на [`VersionsTab`](#VersionsTab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
+Возвращает ссылку на вкладку [`VersionsTab`](#VersionsTab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
 
 ### Интерфейс VersionsTab<a name="VersionsTab"></a>
 ```ts
@@ -959,16 +959,16 @@ interface VersionsTab {
     copyVersion(from: string, to: string): Object;
 }
 ```
-Вкладка `Версии`. Для работы не требует открытия.
+Вкладка `Версии`. Для работы не требует открытия. 
 
 &nbsp;
 
 ```js
 copyVersion(from: string, to: string): Object
 ```
-Копирует срез по версии `from` в срез по версии `to` во всех мультикубах модели, которые имеют измерение версий, включающее обе эти версии.
+Копирует срез по версии `from` в срез по версии `to` во всех мультикубах модели, которые имеют измерение версий, включающее обе эти версии. Возвращает объект вида `{"success":true}`.
 
-### Интерфейс Times ...<a name="Times"></a>
+### Интерфейс Times<a name="Times"></a>
 ```ts
 interface Times {
     optionsTab(): TimeOptionsTab;
@@ -981,7 +981,7 @@ interface Times {
 ```js
 optionsTab(): TimeOptionsTab
 ```
-Возвращает ссылку на [`TimeOptionsTab`](#TimeOptionsTab) настроек времени, который не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
+Возвращает ссылку на вкладку [`TimeOptionsTab`](#TimeOptionsTab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
 
 ### Интерфейс TimeOptionsTab ...<a name="TimeOptionsTab"></a>
 ```ts
@@ -990,17 +990,21 @@ interface TimeOptionsTab {
     applyForm(): Object;
 }
 ```
-Вкладка `Время`. Для работы не требует открытия.
+Вкладка `Время`. Для работы не требует открытия. Является [`плоской таблицей`](../appendix/constraints.md#flatTable). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
+
+&nbsp;
 
 ```js
 resetForm(): Object
 ```
+Сбрасывает все изменения данных во вкладке. Возвращает объект вида `{"success":true}`.
 
 &nbsp;
 
 ```js
 applyForm(): Object
 ```
+Применяет все изменения данных. Возвращает объект вида `{"success":true}`.
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 
