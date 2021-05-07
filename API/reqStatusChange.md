@@ -15,7 +15,7 @@ interface RequestManager {
 ```js
 log(message: string, print?: boolean): RequestManager
 ```
-Выводит сообщение `message` в лог, доступ к которому можно получить в админке. Если `print == true` (по умолчанию: `false`), дублирует его в консоль и дополнительно переносит курсор на новую строку. Возвращает `this`. **Устаревшая функция.**
+Выводит сообщение `message` в лог, доступ к которому можно получить в админке. Если `print == true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. Возвращает `this`. *Устаревшая функция.*
 
 ![Лог в админке](./pic/requestInfo.png)
 
@@ -24,14 +24,16 @@ log(message: string, print?: boolean): RequestManager
 ```js
 logStatusMessage(message: string, print?: boolean): RequestManager
 ```
- Возвращает `this`.
+Делает то же, что и `setStatusMessage()`. Если `print == true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. Возвращает `this`. *Устаревшая функция.*
 
 &nbsp;
 
 ```js
 setStatusMessage(message: string): RequestManager
 ```
- Возвращает `this`.
+Устанавливает статусное сообщение `message`. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ. Возвращает `this`.
+
+![Статусное сообщение](./pic/statusMessage.png)
 
 [API Reference](API.md)
 
