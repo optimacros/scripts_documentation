@@ -116,16 +116,21 @@ interface Common {
     copyData(): CopyData;
 }
 ```
+Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
+
+&nbsp;
 
 ```js
 createCellBuffer(): CellBuffer
 ```
+Возвращает ссылку на интерфейс [`CellBuffer`](./OMviews.md#CellBuffer).
 
 &nbsp;
 
 ```js
 requestInfo(): RequestManager
 ```
+Возвращает ссылку на интерфейс [`RequestManager`](./reqStatusChange.md#RequestManager).
 
 &nbsp;
 
@@ -320,15 +325,6 @@ interface ListImporter extends Importer {
     getImportToChildListOnly(): boolean;
     setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
     getUpdatedPropertiesOnParentLevels(): boolean;
-}
-```
-
-### Интерфейс RequestManager ...<a name="RequestManager"></a>
-```ts
-interface RequestManager {
-    log(message: string, print?: boolean): RequestManager;
-    logStatusMessage(message: string, print?: boolean): RequestManager;
-    setStatusMessage(message: string): RequestManager;
 }
 ```
 
