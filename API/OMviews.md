@@ -251,7 +251,7 @@ interface MulticubeTab extends Tab {
 }
 ```
 
-### Интерфейс Pivot ...<a name="Pivot"></a>
+### Интерфейс Pivot<a name="Pivot"></a>
 ```ts
 interface Pivot {
     create(): Grid;
