@@ -974,7 +974,7 @@ interface Times {
     optionsTab(): TimeOptionsTab;
 }
 ```
-Интерфейс для работы с измерениями времени.
+Интерфейс для получения ссылки на [`TimeOptionsTab`](#TimeOptionsTab).
 
 &nbsp;
 
@@ -983,7 +983,7 @@ optionsTab(): TimeOptionsTab
 ```
 Возвращает ссылку на вкладку [`TimeOptionsTab`](#TimeOptionsTab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
 
-### Интерфейс TimeOptionsTab ...<a name="TimeOptionsTab"></a>
+### Интерфейс TimeOptionsTab<a name="TimeOptionsTab"></a>
 ```ts
 interface TimeOptionsTab {
     resetForm(): Object;
