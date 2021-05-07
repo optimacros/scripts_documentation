@@ -158,6 +158,32 @@ entitiesInfo(): EntitiesInfo
 copyData(): CopyData
 ```
 
+
+### Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
+```ts
+interface EntitiesInfo {
+    get(longId: number): EntityInfo | null;
+    getCollection(longId: number[]): EntityInfo[];
+}
+```
+Интерфейс для получения сущности по [`longId`](./OMviews.md#longId).
+
+&nbsp;
+
+
+```js
+get(longId: number): EntityInfo | null
+```
+Возвращает сущность [`EntityInfo`](./OMviews.md#EntityInfo) по её [`longId`](./OMviews.md#longId).
+
+&nbsp;
+
+```js
+getCollection(longId: number[]): EntityInfo[]
+```
+Возвращает массив сущностей [`EntityInfo`](./OMviews.md#EntityInfo) по массиву их[`longId`](./OMviews.md#longId).
+
+
 ___
 !!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
 
@@ -338,14 +364,6 @@ interface ResultInfo {
     setProperty(name: string, value: any): this;
 }
 
-```
-
-### Интерфейс EntitiesInfo ...<a name="EntitiesInfo"></a>
-```ts
-interface EntitiesInfo {
-    get(longId: number): EntityInfo | null;
-    getCollection(longId: number[]): EntityInfo[];
-}
 ```
 
 ### Интерфейс CopyData ...<a name="CopyData"></a>
