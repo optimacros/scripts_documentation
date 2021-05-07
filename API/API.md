@@ -66,7 +66,7 @@ readonly multicubes: Multicubes
 ```js
 readonly times: Times
 ```
-Ссылка на интерфейс Times.
+Ссылка на интерфейс [`Times`](./OMviews.md#Times).
 
 &nbsp;
 
@@ -250,16 +250,6 @@ interface CubeInfo extends EntityInfo {
     getFormula(): string | null;
     getFormatInfo(): CubeFormatInfo;
     getDimensions(): EntityInfo[];
-}
-```
-
-### Интерфейс Times ...<a name="Times"></a>
-```ts
-interface Times {
-    optionsTab(): Tab
-    typePeriod(identifier: string | number): TypePeriod;
-    resetForm(): any;
-    applyForm(): any;
 }
 ```
 

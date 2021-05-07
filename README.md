@@ -6,6 +6,6 @@
 5. [Курс молодого бойца](./cookBook/cookBook.md)
 6. [Расширенные возможности](./advancedFeatues/advancedFeatues.md)
 7. [Библиотека скриптов импорта-экспорта](./importExportLib/importExportLib.md)
-8. [API Reference](./API_reference/API_reference.md)
+8. [API Reference](./API/API.md)
 9. [Приложения](./appendix/appendix.md)
 

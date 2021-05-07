@@ -718,6 +718,8 @@ cells(): Cells
 ```
 Возвращает интерфейс [`Cells`](#Cells), предоставляющий доступ к ячейкам данной строки или столбца.
 
+В случае плоской таблицы [`возвращает`](../appendix/constraints.md#flatTable) `null`.
+
 ### Интерфейс Cell ...<a name="Cell"></a>
 ```ts
 interface Cell {
@@ -949,30 +951,56 @@ interface Versions {
 ```js
 versionsTab(): VersionsTab
 ```
-Возвращает ссылку на интерфейс [`VersionsTab`](#VersionsTab). В интерфейсе Optimacros аналогично открытию вкладки "Версии".
+Возвращает ссылку на [`VersionsTab`](#VersionsTab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
 
 ### Интерфейс VersionsTab ...<a name="VersionsTab"></a>
 ```ts
 interface VersionsTab {
-    copyVersion(from: string, to: string): any;
+    copyVersion(from: string, to: string): Object;
 }
 ```
-Вкладка "Версии". Для работы не требует открытия.
+Вкладка `Версии`. Для работы не требует открытия.
 
 &nbsp;
 
 ```js
-copyVersion(from: string, to: string): any
+copyVersion(from: string, to: string): Object
 ```
-использование функционала копирования версий, принимает в качестве первого аргумента имя версии, которую
- копируем. В качестве второго аргумента имя версии в которую копируем.
+Копирует срез по версии `from` в срез по версии `to` во всех мультикубах модели, которые имеют измерение версий, включающее обе эти версии.
 
-const versionsTab = om.versions.versionsTab();
+### Интерфейс Times ...<a name="Times"></a>
+```ts
+interface Times {
+    optionsTab(): TimeOptionsTab;
+}
+```
+Интерфейс для работы с измерениями времени.
 
-console.log(JSON.stringify(versionsTab.copyVersion('Version #3', 'Non-actual')))
-Не работает.
+&nbsp;
 
+```js
+optionsTab(): Tab
+```
+Возвращает ссылку на [`Tab`](#Tab) настроек времени, который не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
 
+### Интерфейс TimeOptionsTab ...<a name="TimeOptionsTab"></a>
+```ts
+interface TimeOptionsTab {
+    resetForm(): Object;
+    applyForm(): Object;
+}
+```
+Вкладка `Время`. Для работы не требует открытия.
+
+```js
+resetForm(): Object
+```
+
+&nbsp;
+
+```js
+applyForm(): Object
+```
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 
@@ -987,6 +1015,6 @@ console.log(JSON.stringify(versionsTab.copyVersion('Version #3', 'Non-actual')))
 
 
 
-[API Reference](API_reference.md)
+[API Reference](API.md)
 
 [Оглавление](../README.md)
