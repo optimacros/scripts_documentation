@@ -151,6 +151,7 @@ resultInfo(): ResultInfo
 ```js
 entitiesInfo(): EntitiesInfo
 ```
+Возвращает ссылку на интерфейс [`EntitiesInfo`](#EntitiesInfo).
 
 &nbsp;
 
