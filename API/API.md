@@ -203,26 +203,6 @@ interface ExportResult {
 }
 ```
 
-### Интерфейс Exporter ...<a name="Exporter"></a>
-```ts
-interface Exporter {
-    setEncoding(encoding: string): Exporter;
-    setExtension(extension: string): Exporter;
-    setOmitSummaryRows(omitSummaryRows: boolean): Exporter;
-    setOmitEmptyRows(omitEmptyRows: boolean): Exporter;
-    setIncludeCodes(includeCodes: boolean): Exporter;
-    setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter;
-    setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter;
-    setFileName(fileName: string): Exporter;
-    setDelimiter(delimiter: string): Exporter;
-    setEnclosure(enclosure: string): Exporter;
-    setEscape(escape: string): Exporter;
-    setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter;
-    setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter;
-    export(): ExportResult;
-}
-```
-
 ### Интерфейс CubeCell ...<a name="CubeCell"></a>
 ```ts
 interface CubeCell {

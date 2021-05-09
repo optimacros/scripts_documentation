@@ -377,8 +377,7 @@ getDefinitionInfo(): GridDefinitionInfo
 ```js
 exporter(): Exporter
 ```
-exporter() - нужен для того чтобы автоматически проитерироваться по этому гриду и проитерированные данные будут 
-сохранены в файл
+Возвращает ссылку на интерфейс [`Exporter`](#Exporter) для экспорта таблицы.
 
 &nbsp;
 
@@ -1007,6 +1006,50 @@ applyForm(): Object
 Применяет все изменения данных. Возвращает объект вида `{"success":true}`.
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
+
+### Интерфейс Exporter ...<a name="Exporter"></a>
+```ts
+interface Exporter {
+    setEncoding(encoding: string): Exporter;
+    setExtension(extension: string): Exporter;
+    setOmitSummaryRows(omitSummaryRows: boolean): Exporter;
+    setOmitEmptyRows(omitEmptyRows: boolean): Exporter;
+    setIncludeCodes(includeCodes: boolean): Exporter;
+    setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter;
+    setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter;
+    setFileName(fileName: string): Exporter;
+    setDelimiter(delimiter: string): Exporter;
+    setEnclosure(enclosure: string): Exporter;
+    setEscape(escape: string): Exporter;
+    setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter;
+    setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter;
+    export(): ExportResult;
+}
+```
+Интерфейс, реализующий шаблон [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на экспорт таблицы [`Grid`](#Grid). Все функции, кроме `export()`, возвращают `this`.
+
+&nbsp;
+
+```js
+setEncoding(encoding: string): Exporter
+```
+Задаёт кодировку для экспорта. Доступно два варианта: `'Windows-1251'` и `'UTF-8'`. По умолчанию: `'Windows-1251'`.
+
+&nbsp;
+
+setExtension(extension: string): Exporter
+setOmitSummaryRows(omitSummaryRows: boolean): Exporter
+setOmitEmptyRows(omitEmptyRows: boolean): Exporter
+setIncludeCodes(includeCodes: boolean): Exporter
+setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter
+setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter
+setFileName(fileName: string): Exporter
+setDelimiter(delimiter: string): Exporter
+setEnclosure(enclosure: string): Exporter
+setEscape(escape: string): Exporter
+setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter
+setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
+export(): ExportResult
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
 
