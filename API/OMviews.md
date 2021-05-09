@@ -1026,14 +1026,14 @@ interface Exporter {
     export(): ExportResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на экспорт таблицы [`Grid`](#Grid). Все функции, кроме [`export()`](#export), возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на экспорт таблицы [`Grid`](#Grid). Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
 
 &nbsp;
 
 ```js
 setEncoding(encoding: string): Exporter
 ```
-Задаёт кодировку для экспорта. Допустимые значения: 
+Устанавливает кодировку экспортируемого файла. Допустимые значения: 
 `["win" ,"WIN", "windows-1251", "WINDOWS-1251", "utf", "UFT", "utf-8", "UTF-8"]`. По умолчанию: `"UTF-8"`.
 
 &nbsp;
@@ -1041,26 +1041,82 @@ setEncoding(encoding: string): Exporter
 ```js
 setFormat(format: string): Exporter
 ```
-Задаёт формат экспортируемого файла. ДОпустимые значения: `["csv", "xls", "xlsx", "txt"]`. По умолчанию: `"xlsx"`.
+Устанавливает формат экспортируемого файла. Допустимые значения: `["csv", "xls", "xlsx", "txt"]`. По умолчанию: `"xlsx"`.
 
 &nbsp;
 
-
+```js
 setOmitSummaryRows(omitSummaryRows: boolean): Exporter
-setOmitEmptyRows(omitEmptyRows: boolean): Exporter
-setIncludeCodes(includeCodes: boolean): Exporter
-setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter
-setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter
-setFileName(fileName: string): Exporter
-setDelimiter(delimiter: string): Exporter
-setEnclosure(enclosure: string): Exporter
-setEscape(escape: string): Exporter
-setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter
-setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
+```
+Устанавливает флаг пропуска итоговых строк. По умолчанию: `false`.
 
 &nbsp;
 
-<a name="export"></a>
+```js
+setOmitEmptyRows(omitEmptyRows: boolean): Exporter
+```
+Устанавливает флаг пропуска пустых строк. По умолчанию: `false`.
+
+&nbsp;
+
+```js
+setIncludeCodes(includeCodes: boolean): Exporter
+```
+Устанавливает флаг включения кодов для каждого измерения на строках. По умолчанию: `false`.
+
+&nbsp;
+
+```js
+setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter
+```
+Устанавливает мэппинг для настраиваемого импорта. По умолчанию: `false`.
+
+&nbsp;
+
+```js
+setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter
+```
+Устанавливает мэппинг для расширенного импорта. По умолчанию: `false`.
+
+&nbsp;
+
+```js
+setFileName(fileName: string): Exporter
+```
+Устанавливает начальную часть имени экспортируемого файла. По умолчанию: `'view'`. Итоговое имя файла будет иметь вид `'{fileName}--YYYY.MM.DD--HH.mm.{format}'`.
+
+&nbsp;
+
+```js
+setDelimiter(delimiter: string): Exporter
+```
+
+&nbsp;
+
+```js
+setEnclosure(enclosure: string): Exporter
+```
+
+&nbsp;
+
+```js
+setEscape(escape: string): Exporter
+```
+&nbsp;
+
+```js
+setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter
+```
+
+&nbsp;
+
+```js
+setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
+```
+
+&nbsp;
+
+<a name="Exporter.export"></a>
 ```js
 export(): ExportResult
 ```
