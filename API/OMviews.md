@@ -1034,14 +1034,14 @@ interface Exporter {
 setEncoding(encoding: string): Exporter
 ```
 Устанавливает кодировку экспортируемого файла. Допустимые значения: 
-`['win' ,'WIN', 'windows-1251', 'WINDOWS-1251', 'utf', 'UFT', 'utf-8', 'UTF-8']`. По умолчанию: `'UTF-8'`.
+`'win' ,'WIN', 'windows-1251', 'WINDOWS-1251', 'utf', 'UFT', 'utf-8', 'UTF-8'`. По умолчанию: `'UTF-8'`.
 
 &nbsp;
 
 ```js
 setEnclosure(format: string): Exporter
 ```
-Устанавливает формат экспортируемого файла. Допустимые значения: `['csv', 'xls', 'xlsx', 'txt']`. По умолчанию: `'xlsx'`.
+Устанавливает формат экспортируемого файла. Допустимые значения: `'csv', 'xls', 'xlsx', 'txt'`. По умолчанию: `'xlsx'`.
 
 &nbsp;
 
@@ -1090,7 +1090,7 @@ setFileName(fileName: string): Exporter
 ```js
 setDelimiter(delimiter: string): Exporter
 ```
-Устанавливает разделитель полей. Допустимые значения: `[',', ';', '\t']`.  По умолчанию: `';'`.
+Устанавливает разделитель полей. Допустимые значения: `',', ';', '\t'`.  По умолчанию: `';'`.
 
 &nbsp;
 
