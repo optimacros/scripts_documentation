@@ -8,6 +8,7 @@ interface RequestManager {
     setStatusMessage(message: string): RequestManager;
 }
 ```
+Интерфейс для записи в лог (устаревший функционал) и работы со статусными сообщениями.
 
 &nbsp;
 
