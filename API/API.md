@@ -193,16 +193,6 @@ getCollection(longId: number[]): EntityInfo[]
 ___
 !!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
 
-### Интерфейс ExportResult ...<a name="ExportResult"></a>
-```ts
-interface ExportResult {
-    mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
-    getHash(): string;
-    copyToLocal(path: string): this;
-    moveToLocal(path: string): this;
-}
-```
-
 ### Интерфейс CubeCell ...<a name="CubeCell"></a>
 ```ts
 interface CubeCell {

@@ -1039,7 +1039,7 @@ setEncoding(encoding: string): Exporter
 &nbsp;
 
 ```js
-setFormat(format: string): Exporter
+setEnclosure(format: string): Exporter
 ```
 Устанавливает формат экспортируемого файла. Допустимые значения: `['csv', 'xls', 'xlsx', 'txt']`. По умолчанию: `'xlsx'`.
 
@@ -1097,25 +1097,28 @@ setDelimiter(delimiter: string): Exporter
 ```js
 setEnclosure(enclosure: string): Exporter
 ```
-Устанавливает строку, которой будет обрамляться текстовое поле, если в нём содержится разделитель полей. Допустимые значения: `'` и `"`. По умолчанию: `"`.
-
+Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей. Допустимые значения: `'` и `"`. По умолчанию: `"`.
 
 &nbsp;
 
 ```js
 setEscape(escape: string): Exporter
 ```
+Устанавливает символ для экранирования обрамляющего символа, если встретится в строке ещё и он, и символа переноса строки. Допустимые значения: `\` и `"`. По умолчанию равен обрамляющему символу.
+
 &nbsp;
 
 ```js
 setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter
 ```
+Устанавливает флаг показа псевдонимов без имён. Применимо только для значений справочников. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
 setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 ```
+Устанавливает флаг показа кода вместо имён для тех элементов, у которых есть код. По умолчанию: `false`.
 
 &nbsp;
 
@@ -1123,6 +1126,18 @@ setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 ```js
 export(): ExportResult
 ```
+
+### Интерфейс ExportResult ...<a name="ExportResult"></a>
+```ts
+interface ExportResult {
+    mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
+    getHash(): string;
+    copyToLocal(path: string): this;
+    moveToLocal(path: string): this;
+}
+```
+
+
 
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
