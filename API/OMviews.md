@@ -1011,7 +1011,7 @@ applyForm(): Object
 ```ts
 interface Exporter {
     setEncoding(encoding: string): Exporter;
-    setExtension(extension: string): Exporter;
+    setFormat(format: string): Exporter;
     setOmitSummaryRows(omitSummaryRows: boolean): Exporter;
     setOmitEmptyRows(omitEmptyRows: boolean): Exporter;
     setIncludeCodes(includeCodes: boolean): Exporter;
@@ -1026,18 +1026,26 @@ interface Exporter {
     export(): ExportResult;
 }
 ```
-Интерфейс, реализующий шаблон [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на экспорт таблицы [`Grid`](#Grid). Все функции, кроме `export()`, возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на экспорт таблицы [`Grid`](#Grid). Все функции, кроме [`export()`](#export), возвращают `this`.
 
 &nbsp;
 
 ```js
 setEncoding(encoding: string): Exporter
 ```
-Задаёт кодировку для экспорта. Доступно два варианта: `'Windows-1251'` и `'UTF-8'`. По умолчанию: `'Windows-1251'`.
+Задаёт кодировку для экспорта. Допустимые значения: 
+`["win" ,"WIN", "windows-1251", "WINDOWS-1251", "utf", "UFT", "utf-8", "UTF-8"]`. По умолчанию: `"UTF-8"`.
 
 &nbsp;
 
-setExtension(extension: string): Exporter
+```js
+setFormat(format: string): Exporter
+```
+Задаёт формат экспортируемого файла. ДОпустимые значения: `["csv", "xls", "xlsx", "txt"]`. По умолчанию: `"xlsx"`.
+
+&nbsp;
+
+
 setOmitSummaryRows(omitSummaryRows: boolean): Exporter
 setOmitEmptyRows(omitEmptyRows: boolean): Exporter
 setIncludeCodes(includeCodes: boolean): Exporter
@@ -1049,7 +1057,14 @@ setEnclosure(enclosure: string): Exporter
 setEscape(escape: string): Exporter
 setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter
 setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
+
+&nbsp;
+
+<a name="export"></a>
+```js
 export(): ExportResult
+```
+
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
 
