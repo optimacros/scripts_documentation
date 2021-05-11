@@ -1047,7 +1047,7 @@ setFileName(fileName: string): Exporter
 ```js
 setDelimiter(delimiter: string): Exporter
 ```
-Устанавливает разделитель полей. Допустимые значения: `','`, `';'`, `'\t'`.  По умолчанию: `';'`.
+Устанавливает разделитель полей. Допустимые значения: `,`, `;`, `\t`.  По умолчанию: `;`.
 
 &nbsp;
 
@@ -1117,7 +1117,7 @@ setFilterFormula(filterFormula: string): StorageExporter
 ```js
 setDecimalSeparator(decimalSeparator: string): StorageExporter
 ```
-Устанавливает десятичный разделитель. Допустимые значения: `','`, `'.'`.  По умолчанию: `'.'`.
+Устанавливает десятичный разделитель. Допустимые значения: `,`, `.`.  По умолчанию: `.`.
 
 &nbsp;
 
