@@ -1089,7 +1089,7 @@ export(): ExportResult
 ```ts
 interface ExportResult {
     mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult;
-    getHash(): string;
+    getHash(): string | null;
     copyToLocal(path: string): ExportResult;
     moveToLocal(path: string): ExportResult;
 }
@@ -1106,7 +1106,7 @@ mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): 
 &nbsp;
 
 ```js
-getHash(): string
+getHash(): string | null
 ```
 Возвращает идентификатор файла в [`глобальном реестре`](../glossary.md#globalFileRegistry), или `null`, если файл там отсутствует. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
 
