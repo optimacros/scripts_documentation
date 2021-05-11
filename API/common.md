@@ -156,6 +156,7 @@ interface ResultInfo {
 
 &nbsp;
 
+<a name="ResultInfo.addFileHash"></a>
 ```js
 addFileHash(hash: string): ResultInfo
 ```

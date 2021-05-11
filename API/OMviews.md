@@ -1107,6 +1107,7 @@ mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): 
 ```js
 getHash(): string
 ```
+Возвращает идентификатор файла в [`глобальном реестре файлов`](../glossary.md#globalFileRegistry). Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
 
 &nbsp;
 
