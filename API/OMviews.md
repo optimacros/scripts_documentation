@@ -1193,7 +1193,7 @@ moveToLocal(path: string): ExportResult
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
 
-### Интерфейс CSVParams ...<a name="CSVParams"></a>
+### Интерфейс CSVParams<a name="CSVParams"></a>
 ```ts
 interface CSVParams {
     setDelimiter(delimiter: string): CSVParams;
@@ -1229,6 +1229,8 @@ setEnclosure(enclosure: string): CSVParams
 ```
 Устанавливает обрамляющий символ. Аналогично `Exporter`.[`setEnclosure()`](#setEnclosure). Возвращает `this`.
 
+&nbsp;
+
 ```js
 getEnclosure(): string
 ```
@@ -1240,6 +1242,8 @@ getEnclosure(): string
 setEscape(escape: string): CSVParams
 ```
 Устанавливает символ для экранирования обрамляющего символа. Аналогично `Exporter`.[`setEscape()`](#setEscape). Возвращает `this`.
+
+&nbsp;
 
 ```js
 getEscape(): string
@@ -1253,11 +1257,12 @@ setLineDelimiter(escape: string): CSVParams
 ```
 Устанавливает разделитель строк. Аналогично `StorageExporter`.[`setLineDelimiter()`](#setLineDelimiter). Возвращает `this`.
 
+&nbsp;
+
 ```js
 getLineDelimiter(): string
 ```
 Возвращает разделитель строк.
-
 
 ### Интерфейс Importer ...<a name="Importer"></a>
 ```ts
