@@ -90,6 +90,21 @@ elementsReorder(): ElementsReorder
 ```
 Возвращает ссылку на [`ElementsReorder`](#ElementsReorder) для тасования элементов.
 
+&nbsp;
+
+```js
+importer(): Importer
+```
+Возвращает ссылку на базовый интерфейс импорта [`Importer`](#Importer).
+
+&nbsp;
+
+```js
+storageImporter(): StorageImporter
+```
+Возвращает ссылку на быстрый интерфейс импорта [`StorageImporter`](#StorageImporter).
+
+
 ### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
 ```ts
 interface ElementsCreator {
@@ -377,14 +392,14 @@ getDefinitionInfo(): GridDefinitionInfo
 ```js
 exporter(): Exporter
 ```
-Возвращает ссылку на интерфейс [`Exporter`](#Exporter) для базового экспорта таблицы.
+Возвращает ссылку на интерфейс [`Exporter`](#Exporter) базового экспорта таблицы.
 
 &nbsp;
 
 ```js
 storageExporter(): StorageExporter
 ```
-Возвращает ссылку на интерфейс [`StorageExporter`](#StorageExporter) для быстрого экспорта таблицы.
+Возвращает ссылку на интерфейс [`StorageExporter`](#StorageExporter) быстрого экспорта таблицы.
 
 ### Интерфейс GridDefinitionInfo<a name="GridDefinitionInfo"></a>
 ```ts
@@ -983,7 +998,7 @@ interface Exporter {
     export(): ExportResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на экспорт таблицы [`Grid`](#Grid). Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы [`Grid`](#Grid). Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
 
 &nbsp;
 
@@ -996,7 +1011,7 @@ setEncoding(encoding: string): Exporter
 &nbsp;
 
 ```js
-setEnclosure(format: string): Exporter
+setFormat(format: string): Exporter
 ```
 Устанавливает формат экспортируемого файла. Допустимые значения: `'csv', 'xls', 'xlsx', 'txt'`. По умолчанию: `'xlsx'`.
 
@@ -1044,6 +1059,7 @@ setFileName(fileName: string): Exporter
 
 &nbsp;
 
+<a name="setDelimiter"></a>
 ```js
 setDelimiter(delimiter: string): Exporter
 ```
@@ -1051,6 +1067,7 @@ setDelimiter(delimiter: string): Exporter
 
 &nbsp;
 
+<a name="setEnclosure"></a>
 ```js
 setEnclosure(enclosure: string): Exporter
 ```
@@ -1058,6 +1075,7 @@ setEnclosure(enclosure: string): Exporter
 
 &nbsp;
 
+<a name="setEscape"></a>
 ```js
 setEscape(escape: string): Exporter
 ```
@@ -1096,14 +1114,15 @@ interface StorageExporter extends Exporter {
     setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
 }
 ```
-Интерфейс быстрого экспорта. 
+Интерфейс быстрого экспорта. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
 
 &nbsp;
 
+<a name="setLineDelimiter"></a>
 ```js
 setLineDelimiter(lineDelimiter: string): StorageExporter
 ```
-Устанавливает разделитель строк.
+Устанавливает разделитель строк. По умолчанию: `\n`.
 
 &nbsp;
 
@@ -1124,6 +1143,7 @@ setDecimalSeparator(decimalSeparator: string): StorageExporter
 ```js
 setDateFormat(dateFormat: string): StorageExporter
 ```
+Устанавливает формат даты.
 
 &nbsp;
 
@@ -1172,6 +1192,95 @@ moveToLocal(path: string): ExportResult
 Перемещает экспортированный файл в путь `path` в рабочей папке скрипта и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry). Возвращает `this`.
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
+
+### Интерфейс CSVParams ...<a name="CSVParams"></a>
+```ts
+interface CSVParams {
+    setDelimiter(delimiter: string): CSVParams;
+    getDelimiter(): string;
+    setEnclosure(enclosure: string): CSVParams;
+    getEnclosure(): string;
+    setEscape(escape: string): CSVParams;
+    getEscape(): string;
+    setLineDelimiter(escape: string): CSVParams;
+    getLineDelimiter(): string;
+}
+```
+Интерфейс настроек импорта из файла CSV.
+
+&nbsp;
+
+```js
+setDelimiter(delimiter: string): CSVParams
+```
+Устанавливает разделитель полей. Аналогично `Exporter`.[`setDelimiter()`](#setDelimiter). Возвращает `this`.
+
+&nbsp;
+
+```js
+getDelimiter(): string
+```
+Возвращает разделитель полей.
+
+&nbsp;
+
+```js
+setEnclosure(enclosure: string): CSVParams
+```
+Устанавливает обрамляющий символ. Аналогично `Exporter`.[`setEnclosure()`](#setEnclosure). Возвращает `this`.
+
+```js
+getEnclosure(): string
+```
+Возвращает обрамляющий символ.
+
+&nbsp;
+
+```js
+setEscape(escape: string): CSVParams
+```
+Устанавливает символ для экранирования обрамляющего символа. Аналогично `Exporter`.[`setEscape()`](#setEscape). Возвращает `this`.
+
+```js
+getEscape(): string
+```
+Возвращает символ для экранирования обрамляющего символа.
+
+&nbsp;
+
+```js
+setLineDelimiter(escape: string): CSVParams
+```
+Устанавливает разделитель строк. Аналогично `StorageExporter`.[`setLineDelimiter()`](#setLineDelimiter). Возвращает `this`.
+
+```js
+getLineDelimiter(): string
+```
+Возвращает разделитель строк.
+
+
+### Интерфейс Importer ...<a name="Importer"></a>
+```ts
+interface Importer {
+    csv(): CSVParams;
+    setFilePath(path: string): Importer;
+    getFilePath(): string;
+    getReportFilePath(): string
+    import(): Importer;
+}
+```
+
+
+### Интерфейс Importer ...<a name="Importer"></a>
+```ts
+interface StorageImporter extends Importer {
+    setMaxFailures(maxFailures: number): StorageImporter;
+    setIsCompressed(isCompressed: boolean): StorageImporter;
+    setEncoding(encoding: string): StorageImporter;
+    setDateFormat(dateFormat: string): StorageImporter;
+}
+```
+
 
 ## Обновление клеток мультикубов через формулу<a name="update"></a>
 

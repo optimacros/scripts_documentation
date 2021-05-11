@@ -169,31 +169,6 @@ interface CubeInfo extends EntityInfo {
 }
 ```
 
-### Интерфейс CSVParams ...<a name="CSVParams"></a>
-```ts
-interface CSVParams {
-    setDelimiter(delimiter: string): CSVParams;
-    getDelimiter(): string;
-    setEnclosure(enclosure: string): CSVParams;
-    getEnclosure(): string;
-    setEscape(escape: string): CSVParams;
-    getEscape(): string;
-    setLineDelimiter(escape: string): CSVParams;
-    getLineDelimiter(): string;
-}
-```
-
-### Интерфейс Importer ...<a name="Importer"></a>
-```ts
-interface Importer {
-    csv(): CSVParams;
-    setFilePath(path: string): Importer;
-    getFilePath(): string;
-    getReportFilePath(): string
-    import(): Importer;
-}
-```
-
 
 export interface ListSubsetsTab extends Tab {
     listTab(): ListTab;
@@ -919,16 +894,8 @@ export type ObjectOfStringArray = {
     [key: string]: string[];
 }
 
-
 export interface TypePeriod {
     tableTab(): Tab;
-}
-
-export interface StorageImporter extends Importer {
-    setMaxFailures(maxFailures: number): this;
-    setIsCompressed(isCompressed: boolean): this;
-    setEncoding(encoding: string): this;
-    setDateFormat(dateFormat: string): this;
 }
 
 export interface ButtonInfoOptions {
