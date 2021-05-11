@@ -35,18 +35,21 @@ requestInfo(): RequestManager
 ```js
 modelInfo(): ModelInfo
 ```
+Возвращает ссылку на интерфейс [`ModelInfo`](#ModelInfo).
 
 &nbsp;
 
 ```js
 userInfo(): UserInfo
 ```
+Возвращает ссылку на интерфейс [`UserInfo`](#UserInfo).
 
 &nbsp;
 
 ```js
 resultInfo(): ResultInfo
 ```
+Возвращает ссылку на интерфейс [`ResultInfo`](#ResultInfo).
 
 &nbsp;
 
@@ -60,6 +63,7 @@ entitiesInfo(): EntitiesInfo
 ```js
 copyData(): CopyData
 ```
+Возвращает ссылку на интерфейс [`CopyData`](#CopyData).
 
 ### Интерфейс RequestManager ...<a name="RequestManager"></a>
 ```ts
