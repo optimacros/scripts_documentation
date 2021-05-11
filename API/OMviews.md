@@ -1085,15 +1085,16 @@ export(): ExportResult
 Производит экспорт представления в соответствии с опциями, регистрирует файл в [`глобальном реестре файлов`](../glossary.md#globalFileRegistry) и возвращает интерфейс [`ExportResult`](#ExportResult).
 
 
-### Интерфейс ExportResult ...<a name="ExportResult"></a>
+### Интерфейс ExportResult<a name="ExportResult"></a>
 ```ts
 interface ExportResult {
     mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult;
     getHash(): string;
-    copyToLocal(path: string): this;
-    moveToLocal(path: string): this;
+    copyToLocal(path: string): ExportResult;
+    moveToLocal(path: string): ExportResult;
 }
 ```
+Интерфейс для работы с результатом экспорта.
 
 &nbsp;
 
@@ -1107,21 +1108,22 @@ mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): 
 ```js
 getHash(): string
 ```
-Возвращает идентификатор файла в [`глобальном реестре файлов`](../glossary.md#globalFileRegistry). Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
+Возвращает идентификатор файла в [`глобальном реестре`](../glossary.md#globalFileRegistry). Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
 
 &nbsp;
 
 
 ```js
-copyToLocal(path: string): this
+copyToLocal(path: string): ExportResult
 ```
+Копирует экспортированный файл в рабочую папку скрипта. Возвращает `this`.
 
 &nbsp;
 
 ```js
-moveToLocal(path: string): this
+moveToLocal(path: string): ExportResult
 ```
-
+Перемещает экспортированный файл в рабочую папку скрипта. Возвращает `this`. Убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry).
 
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
