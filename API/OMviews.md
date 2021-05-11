@@ -1101,7 +1101,7 @@ interface ExportResult {
 ```js
 mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
 ```
-Если экспорт был в формате `'xls'` или `'xlsx'`, создаёт в файле Excel `toFile` новый лист `toSheet` и помещает в него результат экспорта.  данные берутся с листа `fromSheet`, по умолчанию – с первого листа. Возращает `this`.
+Если экспорт был в формате `'xls'` или `'xlsx'`, создаёт в файле Excel `toFile` новый лист `toSheet` и помещает в него результат экспорта.  Данные берутся с листа `fromSheet`, по умолчанию – с первого листа. Возращает `this`.
 
 &nbsp;
 
@@ -1123,8 +1123,8 @@ copyToLocal(path: string): ExportResult
 ```js
 moveToLocal(path: string): ExportResult
 ```
-Перемещает экспортированный файл в рабочую папку скрипта. Возвращает `this`. Убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry).
-
+Перемещает экспортированный файл в рабочую папку скрипта и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry).
+. Возвращает `this`.
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
 
