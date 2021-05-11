@@ -27,7 +27,7 @@ createCellBuffer(): CellBuffer
 ```js
 requestInfo(): RequestManager
 ```
-Возвращает ссылку на интерфейс [`RequestManager`](./reqStatusChange.md#RequestManager).
+Возвращает ссылку на интерфейс [`RequestManager`](#RequestManager).
 
 &nbsp;
 
