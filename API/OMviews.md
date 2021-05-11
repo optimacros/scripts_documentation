@@ -300,7 +300,7 @@ columnsFilter(data: string | string[] | number | number[]): Pivot
 ```js
 withoutValues(): Pivot
 ```
-Устанавливает признак загрузки с сервера данных о мультикубе без значений ячеек. В этом случае функции интерфейса [`Cell`](#Cell) [`getValue()`](#getValue), [`getNativeValue()`](#getNativeValue) и [`getContextValue()`](#getContextValue) будут возвращать `null`, однако функции [`Cell`](#Cell).[`setValue()`](#Cell.setValue), [`Cells`](#Cells).[`setValue()`](#Cells.setValue) и [`CellBuffer`](#CellBuffer).[`apply()`](#apply) не теряют свою магическую силу. Возвращает `this`.
+Устанавливает признак загрузки с сервера данных о мультикубе без значений ячеек. В этом случае функции интерфейса [`Cell`](#Cell) [`getValue()`](#getValue), [`getNativeValue()`](#getNativeValue) и [`getContextValue()`](#getContextValue) будут возвращать `null`, однако функции [`Cell`](#Cell).[`setValue()`](#Cell.setValue), [`Cells`](#Cells).[`setValue()`](#Cells.setValue) и [`CellBuffer`](./common.md#CellBuffer).[`apply()`](#apply) не теряют свою магическую силу. Возвращает `this`.
 
 Эта функция существенно ускоряет работу с мультикубами в тех случаях, когда нужно записать данные, но не читать их.
 
@@ -861,50 +861,6 @@ chunkInstance(): GridRangeChunk
 getByIndexes(indexes: number[]): Cells | null
 ```
 Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#Cells). В этом случае функция [`chunkInstance()`](#chunkInstance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#GridRangeChunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#Cells).
-
-### Интерфейс CellBuffer<a name="CellBuffer"></a>
-```ts
-interface CellBuffer {
-    set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
-    apply(): CellBuffer;
-    count(): number;
-    canLoadCellsValues(value: boolean): CellBuffer;
-}
-```
-Буфер, куда можно временно поместить значения набора ячеек, не обязательно смежных, чтобы изменить их перед отправкой на сервер.
-
-При модификации большого количества клеток (от нескольких сотен тысяч), рекомендуется пользоваться импортом CSV.
-
-&nbsp;
-
-```js
-set(cell: Cell | CubeCell, value: number | string | null): CellBuffer
-```
-Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
-
-&nbsp;
-
-<a name="apply"></a>
-```js
-apply(): CellBuffer
-```
-Передаёт на сервер значения всех клеток для присваивания в модели и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение, например, после установки в ячейку формата даты строки `'2019-03-01'` впоследствии из неё будет считана строка `'1 Mar 19'`. Возвращает `this`.
-
-&nbsp;
-
-```js
-count()
-```
-Возвращает количество ячеек в буфере.
-
-&nbsp;
-
-```js
-canLoadCellsValues(value: boolean): CellBuffer
-```
-Устанавливает значение `value`, указывающее, нужно ли перезагружать значения клеток в буфере, если они изменятся. Возвращает `this`.
-
-По умолчанию: `true`. Однако такое поведение сохранено лишь для обратной совместимости, оно приводит к деградации производительности. Поэтому рекомендуется сразу после инициализации объекта вызывать эту функцию и передавать `false`.
 
 ### Интерфейс Lists<a name="Lists"></a>
 ```ts
