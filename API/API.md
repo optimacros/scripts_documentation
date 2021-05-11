@@ -919,13 +919,6 @@ export type ObjectOfStringArray = {
     [key: string]: string[];
 }
 
-export interface StorageExporter extends Exporter {
-    setLineDelimiter(lineDelimiter: string): Exporter;
-    setFilterFormula(filterFormula: string): this;
-    setDecimalSeparator(decimalSeparator: string): this;
-    setDateFormat(dateFormat: string): this;
-    setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
-}
 
 export interface TypePeriod {
     tableTab(): Tab;

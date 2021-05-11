@@ -1,7 +1,7 @@
 # Интерфейс Common
 
 
-### Интерфейс Common ...<a name="Common"></a>
+### Интерфейс Common<a name="Common"></a>
 ```ts
 interface Common {
     createCellBuffer(): CellBuffer;
@@ -65,7 +65,7 @@ copyData(): CopyData
 ```
 Возвращает ссылку на интерфейс [`CopyData`](#CopyData).
 
-### Интерфейс RequestManager ...<a name="RequestManager"></a>
+### Интерфейс RequestManager<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
     log(message: string, print?: boolean): RequestManager;

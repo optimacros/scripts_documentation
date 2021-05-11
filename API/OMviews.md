@@ -315,7 +315,7 @@ addDependentContext(identifier: number): Pivot
 
 Возвращает `this`.
 
-### Интерфейс Grid ...<a name="Grid"></a>
+### Интерфейс Grid<a name="Grid"></a>
 ```ts
 interface Grid {
     range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange;
@@ -342,7 +342,7 @@ range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: 
 Аргументы `rowStart` и `columnStart` задают начальные номера строки и столбца соответственно. Значения по умолчанию: `0`.
 Аргументы `rowCount` и `columnCount` задают количество строк и столбцов соответственно. Особое значение этих аргументов `-1` означает захват всех строк/столбцов до конца таблицы. Значения по умолчанию: `-1`.
 
-Пример: `grid.range(0, -1, 0, -1)` означает захват всех ячеек таблицы в объект [`GridRange`](#GridRange).
+Пример: `grid.range(0, -1, 0, -1)` означает захват всех ячеек таблицы.
 
 &nbsp;
 
@@ -377,13 +377,14 @@ getDefinitionInfo(): GridDefinitionInfo
 ```js
 exporter(): Exporter
 ```
-Возвращает ссылку на интерфейс [`Exporter`](#Exporter) для экспорта таблицы.
+Возвращает ссылку на интерфейс [`Exporter`](#Exporter) для базового экспорта таблицы.
 
 &nbsp;
 
 ```js
 storageExporter(): StorageExporter
 ```
+Возвращает ссылку на интерфейс [`StorageExporter`](#StorageExporter) для быстрого экспорта таблицы.
 
 ### Интерфейс GridDefinitionInfo<a name="GridDefinitionInfo"></a>
 ```ts
@@ -963,7 +964,7 @@ applyForm(): Object
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 
-### Интерфейс Exporter ...<a name="Exporter"></a>
+### Интерфейс Exporter<a name="Exporter"></a>
 ```ts
 interface Exporter {
     setEncoding(encoding: string): Exporter;
@@ -990,7 +991,7 @@ interface Exporter {
 setEncoding(encoding: string): Exporter
 ```
 Устанавливает кодировку экспортируемого файла. Допустимые значения: 
-`'win' ,'WIN', 'windows-1251', 'WINDOWS-1251', 'utf', 'UFT', 'utf-8', 'UTF-8'`. По умолчанию: `'UTF-8'`.
+`'win' ,'WIN', 'windows-1251', 'WINDOWS-1251', 'utf', 'UTF', 'utf-8', 'UTF-8'`. По умолчанию: `'UTF-8'`.
 
 &nbsp;
 
@@ -1084,6 +1085,47 @@ export(): ExportResult
 ```
 Производит экспорт представления в соответствии с опциями, регистрирует файл в [`глобальном реестре файлов`](../glossary.md#globalFileRegistry) и возвращает интерфейс [`ExportResult`](#ExportResult).
 
+### Интерфейс StorageExporter<a name="StorageExporter"></a>
+
+```ts
+interface StorageExporter extends Exporter {
+    setLineDelimiter(lineDelimiter: string): Exporter;
+    setFilterFormula(filterFormula: string): StorageExporter;
+    setDecimalSeparator(decimalSeparator: string): StorageExporter;
+    setDateFormat(dateFormat: string): StorageExporter;
+    setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
+}
+```
+
+&nbsp;
+
+```js
+setLineDelimiter(lineDelimiter: string): Exporter
+```
+
+&nbsp;
+
+```js
+setFilterFormula(filterFormula: string): StorageExporter
+```
+
+&nbsp;
+
+```js
+setDecimalSeparator(decimalSeparator: string): StorageExporter
+```
+
+&nbsp;
+
+```js
+setDateFormat(dateFormat: string): StorageExporter
+```
+
+&nbsp;
+
+```js
+setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter
+```
 
 ### Интерфейс ExportResult<a name="ExportResult"></a>
 ```ts
