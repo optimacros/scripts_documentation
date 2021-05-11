@@ -1108,7 +1108,7 @@ mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): 
 ```js
 getHash(): string
 ```
-Возвращает идентификатор файла в [`глобальном реестре`](../glossary.md#globalFileRegistry). Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
+Возвращает идентификатор файла в [`глобальном реестре`](../glossary.md#globalFileRegistry), или `null`, если файл там отсутствует. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
 
 &nbsp;
 
@@ -1116,14 +1116,14 @@ getHash(): string
 ```js
 copyToLocal(path: string): ExportResult
 ```
-Копирует экспортированный файл в рабочую папку скрипта. Возвращает `this`.
+Копирует экспортированный файл в путь `path` в рабочей папке скрипта. Возвращает `this`.
 
 &nbsp;
 
 ```js
 moveToLocal(path: string): ExportResult
 ```
-Перемещает экспортированный файл в рабочую папку скрипта и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry). Возвращает `this`.
+Перемещает экспортированный файл в путь `path` в рабочей папке скрипта и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry). Возвращает `this`.
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
 
