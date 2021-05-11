@@ -1126,17 +1126,44 @@ setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 ```js
 export(): ExportResult
 ```
+Производит экспорт представления в соответствии с опциями, регистрирует файл в [`глобальном реестре файлов`](../glossary.md#globalFileRegistry) и возвращает интерфейс [`ExportResult`](#ExportResult).
+
 
 ### Интерфейс ExportResult ...<a name="ExportResult"></a>
 ```ts
 interface ExportResult {
-    mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
+    mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult;
     getHash(): string;
     copyToLocal(path: string): this;
     moveToLocal(path: string): this;
 }
 ```
 
+&nbsp;
+
+```js
+mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
+```
+Если экспорт был в формате `'xls'` или `'xlsx'`, создаёт в файле Excel `toFile` новый лист `toSheet` и помещает в него результат экспорта.  данные берутся с листа `fromSheet`, по умолчанию – с первого листа. Возращает `this`.
+
+&nbsp;
+
+```js
+getHash(): string
+```
+
+&nbsp;
+
+
+```js
+copyToLocal(path: string): this
+```
+
+&nbsp;
+
+```js
+moveToLocal(path: string): this
+```
 
 
 

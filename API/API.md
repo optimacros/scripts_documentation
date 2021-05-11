@@ -7,6 +7,7 @@
     1. Обновление клеток мультикубов через формулу
     1. Получение клеток куба с помощью формулы
     1. Копирование срезов кубов
+1. [Интерфейс Common](common.md)
 1. [Коннекторы](connectors.md)
     1. Реляционные СУБД
     1. MongoDB
@@ -102,92 +103,6 @@ readonly optimization: Optimization
 readonly connectors: Connectors
 ```
 Ссылка на интерфейс Connectors.
-
-
-### Интерфейс Common ...<a name="Common"></a>
-```ts
-interface Common {
-    createCellBuffer(): CellBuffer;
-    requestInfo(): RequestManager;
-    modelInfo(): ModelInfo;
-    userInfo(): UserInfo;
-    resultInfo(): ResultInfo;
-    entitiesInfo(): EntitiesInfo;
-    copyData(): CopyData;
-}
-```
-Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
-
-&nbsp;
-
-```js
-createCellBuffer(): CellBuffer
-```
-Возвращает ссылку на интерфейс [`CellBuffer`](./OMviews.md#CellBuffer).
-
-&nbsp;
-
-```js
-requestInfo(): RequestManager
-```
-Возвращает ссылку на интерфейс [`RequestManager`](./reqStatusChange.md#RequestManager).
-
-&nbsp;
-
-
-```js
-modelInfo(): ModelInfo
-```
-
-&nbsp;
-
-```js
-userInfo(): UserInfo
-```
-
-&nbsp;
-
-```js
-resultInfo(): ResultInfo
-```
-
-&nbsp;
-
-```js
-entitiesInfo(): EntitiesInfo
-```
-Возвращает ссылку на интерфейс [`EntitiesInfo`](#EntitiesInfo).
-
-&nbsp;
-
-```js
-copyData(): CopyData
-```
-
-
-### Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
-```ts
-interface EntitiesInfo {
-    get(longId: number): EntityInfo | null;
-    getCollection(longId: number[]): EntityInfo[];
-}
-```
-Интерфейс для получения сущности по [`longId`](./OMviews.md#longId).
-
-&nbsp;
-
-
-```js
-get(longId: number): EntityInfo | null
-```
-Возвращает сущность [`EntityInfo`](./OMviews.md#EntityInfo) по её [`longId`](./OMviews.md#longId).
-
-&nbsp;
-
-```js
-getCollection(longId: number[]): EntityInfo[]
-```
-Возвращает массив сущностей [`EntityInfo`](./OMviews.md#EntityInfo) по массиву их[`longId`](./OMviews.md#longId).
 
 
 ___
@@ -321,16 +236,6 @@ interface ModelInfo {
     recalculate(): boolean;
     backup(path: string): boolean;
 }
-```
-
-### Интерфейс ResultInfo ...<a name="ResultInfo"></a>
-```ts
-interface ResultInfo {
-    addFileHash(hash: string): this;
-    actionsInfo(): ResultActionsInfo;
-    setProperty(name: string, value: any): this;
-}
-
 ```
 
 ### Интерфейс CopyData ...<a name="CopyData"></a>
