@@ -1123,8 +1123,7 @@ copyToLocal(path: string): ExportResult
 ```js
 moveToLocal(path: string): ExportResult
 ```
-Перемещает экспортированный файл в рабочую папку скрипта и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry).
-. Возвращает `this`.
+Перемещает экспортированный файл в рабочую папку скрипта и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry). Возвращает `this`.
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
 
