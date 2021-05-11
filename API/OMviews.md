@@ -1083,37 +1083,41 @@ setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 ```js
 export(): ExportResult
 ```
-Производит экспорт представления в соответствии с опциями, регистрирует файл в [`глобальном реестре файлов`](../glossary.md#globalFileRegistry) и возвращает интерфейс [`ExportResult`](#ExportResult).
+Производит экспорт представления в соответствии с опциями, регистрирует файл в [`глобальном реестре`](../glossary.md#globalFileRegistry) и возвращает ссылку на [`ExportResult`](#ExportResult).
 
 ### Интерфейс StorageExporter<a name="StorageExporter"></a>
 
 ```ts
 interface StorageExporter extends Exporter {
-    setLineDelimiter(lineDelimiter: string): Exporter;
+    setLineDelimiter(lineDelimiter: string): StorageExporter;
     setFilterFormula(filterFormula: string): StorageExporter;
     setDecimalSeparator(decimalSeparator: string): StorageExporter;
     setDateFormat(dateFormat: string): StorageExporter;
     setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
 }
 ```
+Интерфейс быстрого экспорта. 
 
 &nbsp;
 
 ```js
-setLineDelimiter(lineDelimiter: string): Exporter
+setLineDelimiter(lineDelimiter: string): StorageExporter
 ```
+Устанавливает разделитель строк.
 
 &nbsp;
 
 ```js
 setFilterFormula(filterFormula: string): StorageExporter
 ```
+Устанавливает формулу, которая будет применяться к каждой ...
 
 &nbsp;
 
 ```js
 setDecimalSeparator(decimalSeparator: string): StorageExporter
 ```
+Устанавливает десятичный разделитель. Допустимые значения: `','`, `'.'`.  По умолчанию: `'.'`.
 
 &nbsp;
 
