@@ -998,7 +998,7 @@ interface Exporter {
     export(): ExportResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы [`Grid`](#Grid). Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы [`Grid`](#Grid). Доступен для всех [`Grid`](#Grid). Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
 
 &nbsp;
 
@@ -1114,7 +1114,7 @@ interface StorageExporter extends Exporter {
     setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
 }
 ```
-Интерфейс быстрого экспорта. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
+Интерфейс быстрого экспорта. Есть только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов эуспортируются только их имена. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
 
 &nbsp;
 
@@ -1140,6 +1140,7 @@ setDecimalSeparator(decimalSeparator: string): StorageExporter
 
 &nbsp;
 
+<a name="StorageExporter.setDateFormat"></a>
 ```js
 setDateFormat(dateFormat: string): StorageExporter
 ```
@@ -1270,13 +1271,49 @@ interface Importer {
     csv(): CSVParams;
     setFilePath(path: string): Importer;
     getFilePath(): string;
-    getReportFilePath(): string
+    getReportFilePath(): string | null;
     import(): Importer;
 }
 ```
+Есть в мультикубах и в справочниках.
+Результатом импорта является файл отчёта.
 
+&nbsp;
 
-### Интерфейс Importer ...<a name="Importer"></a>
+```js
+csv(): CSVParams
+```
+Возвращает ссылку на объект [`CSVParams`](#CSVParams), предоставляющий доступ к настройкам CSV. В случае импорта из Excel не имеет смысла.
+
+&nbsp;
+
+```js
+setFilePath(path: string): Importer
+```
+Устанавливает имя импортируемого файла. Возвращает `this`.
+
+&nbsp;
+
+```js
+getFilePath(): string
+```
+Возвращает имя импортируемого файла.
+
+&nbsp;
+
+```js
+getReportFilePath(): string | null
+```
+Возвращает путь к файлу отчёта.
+
+&nbsp;
+
+```js
+import(): Importer
+```
+ Возвращает `this`.
+
+### Интерфейс StorageImporter ...<a name="StorageImporter"></a>
 ```ts
 interface StorageImporter extends Importer {
     setMaxFailures(maxFailures: number): StorageImporter;
@@ -1285,7 +1322,35 @@ interface StorageImporter extends Importer {
     setDateFormat(dateFormat: string): StorageImporter;
 }
 ```
+..... Есть только в мультикубах. Все функции возвращают `this`.
 
+&nbsp;
+
+```js
+setMaxFailures(maxFailures: number): StorageImporter
+```
+Устанавливает количество ошибок, после которых попытка импорта прекращается. Уже импортированные значения при этом сохранятся. Значение по умолчанию: `0` (т. е. бесконечность).
+
+&nbsp;
+
+```js
+setIsCompressed(isCompressed: boolean): StorageImporter
+```
+Устанавливает флаг `isCompressed`. Если он равен `true`, во время импорта будет происходить поточная деархивация упакованного в ZIP файла. Значение по умолчанию: `false`.
+
+&nbsp;
+
+```js
+setEncoding(encoding: string): StorageImporter
+```
+Устанавливает кодировку. По умолчанию: `'UTF-8'`.
+
+&nbsp;
+
+```js
+setDateFormat(dateFormat: string): StorageImporter
+```
+Устанавливает формат дат. Аналогично функции [`StorageExporter.setDateFormat()`](#StorageExporter.setDateFormat).
 
 ## Обновление клеток мультикубов через формулу<a name="update"></a>
 
