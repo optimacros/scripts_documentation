@@ -65,7 +65,9 @@ type: string
 
 &nbsp;
 
-`path: string`
+```js
+path: string
+```
 Путь к объекту в [`рабочей директории скрипта`](../glossary.md#scriptDir).
 
 &nbsp;
