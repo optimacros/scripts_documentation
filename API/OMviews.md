@@ -1101,7 +1101,7 @@ setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 ```js
 export(): ExportResult
 ```
-Производит экспорт представления в соответствии с опциями, регистрирует файл в [`глобальном реестре`](../glossary.md#globalFileRegistry) и возвращает ссылку на [`ExportResult`](#ExportResult).
+Производит экспорт представления в соответствии с настройками, регистрирует файл в [`глобальном реестре`](../glossary.md#globalFileRegistry) и возвращает ссылку на [`ExportResult`](#ExportResult).
 
 ### Интерфейс StorageExporter<a name="StorageExporter"></a>
 
@@ -1115,7 +1115,7 @@ interface StorageExporter extends Exporter {
     setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
 }
 ```
-Интерфейс быстрого экспорта. Есть только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов эуспортируются только их имена. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
+Интерфейс быстрого экспорта. Доступен только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов эуспортируются только их имена. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
 
 &nbsp;
 
@@ -1276,7 +1276,7 @@ getLineDelimiter(): string
 ```
 Возвращает разделитель строк.
 
-### Интерфейс Importer ...<a name="Importer"></a>
+### Интерфейс Importer<a name="Importer"></a>
 ```ts
 interface Importer {
     csv(): CSVParams;
@@ -1286,8 +1286,7 @@ interface Importer {
     import(): Importer;
 }
 ```
-Есть в мультикубах и в справочниках.
-Результатом импорта является файл отчёта.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](#Grid). Доступен в мультикубах и в справочниках. Результатом импорта является файл отчёта.
 
 &nbsp;
 
@@ -1322,9 +1321,9 @@ getReportFilePath(): string | null
 ```js
 import(): Importer
 ```
- Возвращает `this`.
+Производит импорт в [`Grid`](#Grid) в соответствии с настройками. Возвращает `this`.
 
-### Интерфейс StorageImporter ...<a name="StorageImporter"></a>
+### Интерфейс StorageImporter<a name="StorageImporter"></a>
 ```ts
 interface StorageImporter extends Importer {
     setMaxFailures(maxFailures: number): StorageImporter;
@@ -1333,7 +1332,7 @@ interface StorageImporter extends Importer {
     setDateFormat(dateFormat: string): StorageImporter;
 }
 ```
-..... Есть только в мультикубах. Все функции возвращают `this`.
+Интерфейс быстрого импорта. Доступен только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов эуспортируются только их имена. Все функции возвращают `this`.
 
 &nbsp;
 
