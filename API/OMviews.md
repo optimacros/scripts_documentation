@@ -39,7 +39,7 @@ open(name: string): MulticubeTab
 ```
 Возвращает ссылку на [`MulticubeTab`](#MulticubeTab) куба `name`. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
 
-### Интерфейс Tab ...<a name="Tab"></a>
+### Интерфейс Tab<a name="Tab"></a>
 ```ts
 interface Tab {
     open(name: string): Tab;
