@@ -225,14 +225,6 @@ interface CopyData {
 }
 ```
 
-### Интерфейс PathObj ...<a name="PathObj"></a>
-```ts
-interface PathObj {
-    getSystem(): Filesystem;
-    getPath(): string;
-}
-```
-
 ### Интерфейс CsvReader ...<a name="CsvReader"></a>
 ```ts
 interface CsvReader {

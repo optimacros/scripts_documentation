@@ -25,6 +25,7 @@ ftp(): FTPAdapter
 
 &nbsp;
 
+<a name="local"></a>
 ```js
 local(): Filesystem
 ```
@@ -119,7 +120,30 @@ timestamp: number
 ```
 Время последнего изменения в формате [`Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
-### Интерфейс Filesystem ...<a name="Filesystem"></a>
+### Интерфейс PathObj<a name="PathObj"></a>
+```ts
+interface PathObj {
+    getSystem(): Filesystem;
+    getPath(): string;
+}
+```
+Интерфейс, хранящий в себе путь к файлу и ссылку на файловую систему.
+
+&nbsp;
+
+```js
+getSystem(): Filesystem
+```
+Возвращает ссылку на файловую систему.
+
+&nbsp;
+
+```js
+getPath(): string
+```
+Возвращает путь к файлу.
+
+### Интерфейс Filesystem<a name="Filesystem"></a>
 ```ts
 interface Filesystem {
     has(path: string): boolean;
@@ -130,10 +154,10 @@ interface Filesystem {
     rename(from: string, to: string): boolean;
     copy(from: string, to: string): boolean;
     getTimestamp(path: string): string;
-    getSize(path: string): number;
+    getSize(path: string): number | boolean;
     createDir(path: string): boolean;
     deleteDir(path: string): boolean;
-    listContents(path: string, recursive: boolean): Array<FileMeta>;
+    listContents(path: string, recursive: boolean): FileMeta[];
     getMetadata(path: string): object;
     upload(from: string, to: string): boolean;
     download(from: string, to: string): boolean;
@@ -155,48 +179,56 @@ has(path: string): boolean
 ```js
 read(path: string): string
 ```
+Читает целиком файл `path` и возвращает его содержимое.
 
 &nbsp;
 
 ```js
 readAndDelete(path: string): string
 ```
+Читает целиком файл `path`, удаляет его и возвращает его содержимое.
 
 &nbsp;
 
 ```js
 write(path: string, contents: string): boolean
 ```
+Если файла `path` не существует, создаёт его; при необходимости создаёт промежуточные папки. Затем записывает текст `contents` в файл `path` и возвращает признак успешного выполнения. 
 
 &nbsp;
 
 ```js
 delete(path: string): boolean
 ```
+Удаляет файл `path`. Возвращает признак успешного выполнения. Если файл не существует, выбрасывает исключение.
 
 &nbsp;
 
 ```js
 rename(from: string, to: string): boolean
 ```
+Переименовывает объект `from` в `to`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
 copy(from: string, to: string): boolean
 ```
+Копирует файл `from` в путь `to`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
 getTimestamp(path: string): string
 ```
+Возвращает время последнего изменения в формате [`Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
 &nbsp;
 
 ```js
-getSize(path: string): number
+getSize(path: string): number | boolean
 ```
+Возвращает размер файла в байтах. Если `path` является папкой, возвращает `false`.
 
 &nbsp;
 
@@ -210,40 +242,47 @@ createDir(path: string): boolean
 ```js
 deleteDir(path: string): boolean
 ```
+Удаляет папку `path`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-listContents(path: string, recursive: boolean): Array<FileMeta>
+listContents(path: string, recursive: boolean): FileMeta[]
 ```
+Возвращает массив объектов [`FileMeta`](#FileMeta), содержащих информацию об объектах внутри папки `path`. Если включен флаг `recursive`, возвращается также информация и о вложенных объектах.
 
 &nbsp;
 
 ```js
 getMetadata(path: string): object
 ```
+Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#FileMeta), однако часть полей может отсутствовать.
 
 ```js
 upload(from: string, to: string): boolean
 ```
+Копирует файл `from` с [`локальной`](#local) файловой системы в путь `to` файловой системы `this`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
 download(from: string, to: string): boolean
 ```
+Копирует файл `from` с файловой системы `this` в путь `to` [`локальной`](#local) файловой системы. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
 makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string
 ```
+Функция доступа *только* для [`локальной`](#local) файловой системы. Регистрирует уже существующий файл `path` в [`глобальном реестре`](../glossary.md#globalFileRegistry) под именем `name`.`extension`. Аргумент `copy` определяет, копировать или перемещать файл `path` в глобальный реестр; по умолчанию: `true`. Возвращает хэш файла.
 
 &nbsp;
 
 ```js
 getPathObj(path: string): PathObj
 ```
+Возвращает интерфейс [`PathObj`](#PathObj).
 
 
 ## Локальная файловая система
