@@ -40,7 +40,7 @@ sharedFolder(id: string): Filesystem
 filesDataManager(): FilesDataManager
 ```
 
-### Интерфейс FileMeta ...<a name="FileMeta"></a>
+### Интерфейс FileMeta<a name="FileMeta"></a>
 ```ts
 interface FileMeta {
     type: string;
@@ -66,13 +66,14 @@ type: string
 &nbsp;
 
 `path: string`
-Путь к объекту в рабочей п.   ...................
+Путь к объекту в [`рабочей директории скрипта`](../glossary.md#scriptDir).
 
 &nbsp;
 
 ```js
 visibility: string
 ```
+Доступность объекта: `private` или `public`.
 
 &nbsp;
 
@@ -86,7 +87,7 @@ size: number
 ```js
 dirname: string
 ```
-Папка, в которой находится объект. Для объектов в ...... это пустая строка.
+Папка, в которой находится объект. Для объектов в [`рабочей директории скрипта`](../glossary.md#scriptDir) это пустая строка.
 
 &nbsp;
 
@@ -114,7 +115,7 @@ filename: string
 ```js
 timestamp: number
 ```
-Время 
+Время последнего изменения в формате [`Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
 ### Интерфейс Filesystem ...<a name="Filesystem"></a>
 ```ts
