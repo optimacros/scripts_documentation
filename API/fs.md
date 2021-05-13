@@ -16,7 +16,105 @@ interface Filesystems {
 }
 ```
 
----
+&nbsp;
+
+```js
+ftp(): FTPAdapter
+```
+Возвращает ссылку на интерфейс [`FTPAdapter`](#FTPAdapter) доступа к FTP.
+
+&nbsp;
+
+```js
+local(): Filesystem
+```
+Возвращает ссылку на интерфейс [`Filesystem`](#Filesystem) доступа к локальной файловой системе.
+
+&nbsp;
+
+```js
+sharedFolder(id: string): Filesystem
+```
+
+```js
+filesDataManager(): FilesDataManager
+```
+
+### Интерфейс FileMeta ...<a name="FileMeta"></a>
+```ts
+interface FileMeta {
+    type: string;
+    path: string;
+    visibility: string;
+    size: number;
+    dirname: string;
+    basename: string;
+    extension: string;
+    filename: string;
+    timestamp: number;
+}
+```
+Интерфейс содержит набор свойств файла или папки.
+
+&nbsp;
+
+```js
+type: string
+```
+Тип объекта: `file` или `dir`.
+
+&nbsp;
+
+`path: string`
+Путь к объекту в рабочей п.   ...................
+
+&nbsp;
+
+```js
+visibility: string
+```
+
+&nbsp;
+
+```js
+size: number
+```
+У файла: размер в байтах. У папок поле отсутствует.
+
+&nbsp;
+
+```js
+dirname: string
+```
+Папка, в которой находится объект. Для объектов в ...... это пустая строка.
+
+&nbsp;
+
+```js
+basename: string
+```
+Имя объекта.
+
+&nbsp;
+
+```js
+extension: string
+```
+Расширение имени без точки. Если расширения нет, поле отсутствует.
+
+&nbsp;
+
+```js
+filename: string
+```
+Имя объекта (файла или папки) без последней точки и расширения.
+
+&nbsp;
+
+```js
+timestamp: number
+```
+Время 
 
 ### Интерфейс Filesystem ...<a name="Filesystem"></a>
 ```ts
@@ -47,11 +145,107 @@ interface Filesystem {
 ```js
 has(path: string): boolean
 ```
-Возвращает признак существования пути `path`.
+Возвращает признак существования файла/папки по адресу `path`.
+
+&nbsp;
+
+```js
+read(path: string): string
+```
+
+&nbsp;
+
+```js
+readAndDelete(path: string): string
+```
+
+&nbsp;
+
+```js
+write(path: string, contents: string): boolean
+```
+
+&nbsp;
+
+```js
+delete(path: string): boolean
+```
+
+&nbsp;
+
+```js
+rename(from: string, to: string): boolean
+```
+
+&nbsp;
+
+```js
+copy(from: string, to: string): boolean
+```
+
+&nbsp;
+
+```js
+getTimestamp(path: string): string
+```
+
+&nbsp;
+
+```js
+getSize(path: string): number
+```
+
+&nbsp;
+
+```js
+createDir(path: string): boolean
+```
+Создаёт папку `path`; при необходимости создаёт промежуточные папки. Возвращает признак успешного выполнения.
+
+&nbsp;
+
+```js
+deleteDir(path: string): boolean
+```
+
+&nbsp;
+
+```js
+listContents(path: string, recursive: boolean): Array<FileMeta>
+```
+
+&nbsp;
+
+```js
+getMetadata(path: string): object
+```
+
+```js
+upload(from: string, to: string): boolean
+```
+
+&nbsp;
+
+```js
+download(from: string, to: string): boolean
+```
+
+&nbsp;
+
+```js
+makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string
+```
+
+&nbsp;
+
+```js
+getPathObj(path: string): PathObj
+```
+
 
 ## Локальная файловая система
 
-Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***не*** может выйти за её пределы.
+Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***НЕ*** может выйти за её пределы.
 
 ## FTP
 
@@ -102,7 +296,7 @@ interface FTPAdapter extends BaseAdapter {
 }
 ```
 
-Интерфейс для соединения с сервером [`FTP`](https://ru.wikipedia.org/wiki/FTP).
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для соединения с сервером [`FTP`](https://ru.wikipedia.org/wiki/FTP).
 
 &nbsp;
 

@@ -1107,6 +1107,7 @@ export(): ExportResult
 
 ```ts
 interface StorageExporter extends Exporter {
+    setFormat(format: string): StorageExporter;
     setLineDelimiter(lineDelimiter: string): StorageExporter;
     setFilterFormula(filterFormula: string): StorageExporter;
     setDecimalSeparator(decimalSeparator: string): StorageExporter;
@@ -1117,6 +1118,11 @@ interface StorageExporter extends Exporter {
 Интерфейс быстрого экспорта. Есть только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов эуспортируются только их имена. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
 
 &nbsp;
+
+```js
+setFormat(format: string): StorageExporter
+```
+Устанавливает формат экспортируемого файла. Допустимые значения: `'csv', 'txt', 'gz', 'zip'`. По умолчанию: `'csv'`.
 
 <a name="setLineDelimiter"></a>
 ```js
@@ -1129,7 +1135,7 @@ setLineDelimiter(lineDelimiter: string): StorageExporter
 ```js
 setFilterFormula(filterFormula: string): StorageExporter
 ```
-Устанавливает формулу, которая будет применяться к каждой ...
+Устанавливает булеву формулу, которая будет применяться в качестве аналога [`setBooleanCubeIdentifier()`](#setBooleanCubeIdentifier), но без создания булева куба.
 
 &nbsp;
 
@@ -1144,13 +1150,16 @@ setDecimalSeparator(decimalSeparator: string): StorageExporter
 ```js
 setDateFormat(dateFormat: string): StorageExporter
 ```
-Устанавливает формат даты.
+Устанавливает формат даты. Синтаксис формата такой же, как и в функции C++ [`std::put_time()`](https://en.cppreference.com/w/cpp/io/manip/put_time). Значение по умолчанию: `'%d.%m.%Y'`.
 
 &nbsp;
 
+<a name="setBooleanCubeIdentifier"></a>
 ```js
 setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter
 ```
+Устанавливает идентификатор булева куба, который будет использоваться в качестве логического фильтра.
+
 
 ### Интерфейс ExportResult<a name="ExportResult"></a>
 ```ts

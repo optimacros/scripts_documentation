@@ -225,21 +225,6 @@ interface CopyData {
 }
 ```
 
-### Интерфейс FileMeta ...<a name="FileMeta"></a>
-```ts
-interface FileMeta {
-    type: string;
-    path: string;
-    visibility: string;
-    size: number;
-    dirname: string;
-    basename: string;
-    extension: string;
-    filename: string;
-    timestamp: number;
-}
-```
-
 ### Интерфейс PathObj ...<a name="PathObj"></a>
 ```ts
 interface PathObj {
