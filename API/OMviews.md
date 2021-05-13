@@ -1124,6 +1124,8 @@ setFormat(format: string): StorageExporter
 ```
 Устанавливает формат экспортируемого файла. Допустимые значения: `'csv', 'txt', 'gz', 'zip'`. По умолчанию: `'csv'`.
 
+&nbsp;
+
 <a name="setLineDelimiter"></a>
 ```js
 setLineDelimiter(lineDelimiter: string): StorageExporter
