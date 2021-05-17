@@ -537,22 +537,18 @@ save(name: string, charset?: string): string
 ```ts
 interface CsvReader {
     params(): CSVParams;
-
-    /**
-     * UTF-8, WINDOWS-1251
-     * @param charset
-     */
     changeFileCharset(charset: string): CsvReader;
-
-    generator(): [][];
+    generator(): string[][];
 }
 ```
+Интерфейс для чтения файлов формата CSV.
 
 &nbsp;
 
 ```js
 params(): CSVParams
 ```
+Возвращает ссылку на интерфейс [`CSVParams`](./OMviews.md#CSVParams), предоставляющий доступ к настройкам CSV.
 
 &nbsp;
 
@@ -563,8 +559,9 @@ changeFileCharset(charset: string): CsvReader
 &nbsp;
 
 ```js
-generator(): [][]
+generator(): string[][]
 ```
+Возвращает генератор, при каждом обращении читающий одну строку файла CSV и возвращающий её в виде `string[]`.
 
 &nbsp;
 
@@ -641,6 +638,7 @@ csvWriter(): CsvWriter
 ```js
 csvReader(path: PathObj): CsvReader
 ```
+Возвращает ссылку на [`CsvReader`](#CsvReader) для чтения файла `path` в формате [`PathObj`](#PathObj).
 
 &nbsp;
 
