@@ -1,6 +1,5 @@
 # Интерфейс Common
 
-
 ### Интерфейс Common<a name="Common"></a>
 ```ts
 interface Common {
@@ -65,6 +64,8 @@ copyData(): CopyData
 ```
 Возвращает ссылку на интерфейс [`CopyData`](#CopyData).
 
+&nbsp;
+
 ### Интерфейс RequestManager<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
@@ -100,6 +101,8 @@ setStatusMessage(message: string): RequestManager
 Устанавливает статусное сообщение `message`. Имеет смысл во время длительной работы скриптов сообщать пользователю об этапах или процентах выполненных работ.
 
 ![Статусное сообщение](./pic/statusMessage.png)
+
+&nbsp;
 
 ### Интерфейс CellBuffer<a name="CellBuffer"></a>
 ```ts
@@ -145,6 +148,8 @@ canLoadCellsValues(value: boolean): CellBuffer
 
 По умолчанию: `true`. Однако такое поведение сохранено лишь для обратной совместимости, оно приводит к деградации производительности. Поэтому рекомендуется сразу после инициализации объекта вызывать эту функцию и передавать `false`.
 
+&nbsp;
+
 ### Интерфейс ResultInfo ...<a name="ResultInfo"></a>
 ```ts
 interface ResultInfo {
@@ -162,6 +167,7 @@ addFileHash(hash: string): ResultInfo
 ```
 Добавляет к HTML-ответу скрипта хэш `hash` файла, ранее зарегистрированного в [`глобальном реестре`](../glossary.md#globalFileRegistry), тем самым предотвращая его удаление из реестра по завершении скрипта. Для пользователя это приведёт к тому, что файл будет скачан в браузере. Возвращает `this`.
 
+&nbsp;
 
 ### Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
 ```ts

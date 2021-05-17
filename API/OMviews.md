@@ -24,6 +24,8 @@ multicubesTab(): MulticubesTab
 ```
 Возвращает ссылку на интерфейс [`MulticubesTab`](#MulticubesTab). В интерфейсе Optimacros аналогично открытию вкладки "Мультикубы".
 
+&nbsp;
+
 ### Интерфейс MulticubesTab<a name="MulticubesTab"></a>
 ```ts
 interface MulticubesTab extends Tab {
@@ -38,6 +40,8 @@ interface MulticubesTab extends Tab {
 open(name: string): MulticubeTab
 ```
 Возвращает ссылку на [`MulticubeTab`](#MulticubeTab) куба `name`. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
+
+&nbsp;
 
 ### Интерфейс Tab<a name="Tab"></a>
 ```ts
@@ -104,6 +108,7 @@ storageImporter(): StorageImporter
 ```
 Возвращает ссылку на быстрый интерфейс импорта [`StorageImporter`](#StorageImporter).
 
+&nbsp;
 
 ### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
 ```ts
@@ -119,6 +124,8 @@ interface ElementsCreator {
 numeric(): NumericElementsCreator
 ```
 Возращает ссылку на [`NumericElementsCreator`](#NumericElementsCreator).
+
+&nbsp;
 
 ### Интерфейс NumericElementsCreator<a name="NumericElementsCreator"></a>
 ```ts
@@ -183,6 +190,8 @@ create(): number[]
 ```
 Добавляет элементы и возвращает массив их [`longId`](#longId).
 
+&nbsp;
+
 ### Интерфейс ElementsDeleter<a name="ElementsDeleter"></a>
 ```ts
 interface ElementsDeleter {
@@ -205,6 +214,8 @@ appendIdentifier(identifier: number): ElementsDeleter
 delete(): ElementsDeleter
 ```
 Фактически удаляет все элементы в буфере из таблицы. Возвращает `this`.
+
+&nbsp;
 
 ### Интерфейс ElementsReorder<a name="ElementsReorder"></a>
 ```ts
@@ -256,6 +267,8 @@ reverse(): ElementsReorder
 ```
 Переворачивает очередь. Возвращает `this`.
 
+&nbsp;
+
 ### Интерфейс MulticubeTab ...<a name="MulticubeTab"></a>
 ```ts
 interface MulticubeTab extends Tab {
@@ -265,6 +278,8 @@ interface MulticubeTab extends Tab {
     getCubeInfo(identifier: string | number): CubeInfo;
 }
 ```
+
+&nbsp;
 
 ### Интерфейс Pivot<a name="Pivot"></a>
 ```ts
@@ -329,6 +344,8 @@ addDependentContext(identifier: number): Pivot
 Если эта функция многократно вызывается с аргументами, один из которых является потомком остальных (порядок вызовов не имеет значения), то это считается уточнением запроса, и результат будет равносилен однократному вызову с этим аргументом.
 
 Возвращает `this`.
+
+&nbsp;
 
 ### Интерфейс Grid<a name="Grid"></a>
 ```ts
@@ -401,6 +418,8 @@ storageExporter(): StorageExporter
 ```
 Возвращает ссылку на интерфейс [`StorageExporter`](#StorageExporter) быстрого экспорта таблицы.
 
+&nbsp;
+
 ### Интерфейс GridDefinitionInfo<a name="GridDefinitionInfo"></a>
 ```ts
 interface GridDefinitionInfo {
@@ -432,6 +451,8 @@ getColumnDimensions(): GridDimension[]
 ```
 Возвращает массив объектов с интерфейсом [`GridDimension`](#GridDimension), которые представляют метаданные о столбцах таблицы.
 
+&nbsp;
+
 ### Интерфейс GridDimension<a name="GridDimension"></a>
 ```ts
 interface GridDimension {
@@ -447,6 +468,8 @@ getDimensionEntity(): EntityInfo
 ```
 Возвращает ссылку на сущность [`EntityInfo`](#EntityInfo) измерения мультикуба.
 
+&nbsp;
+
 ### Интерфейс GridPageSelector<a name="GridPageSelector"></a>
 ```ts
 interface GridPageSelector extends GridDimension {
@@ -461,6 +484,8 @@ interface GridPageSelector extends GridDimension {
 getSelectedEntity(): EntityInfo | null
 ```
 Возвращает ссылку на [`EntityInfo`](#EntityInfo) выбранного элемента фильтра или `null`.
+
+&nbsp;
 
 ### Интерфейс GridRange<a name="GridRange"></a>
 ```ts
@@ -544,6 +569,8 @@ for (const chunk of range.generator(1000)) {
 }
 ```
 
+&nbsp;
+
 ### Интерфейс GridRangeChunk<a name="GridRangeChunk"></a>
 ```ts
 interface GridRangeChunk {
@@ -575,6 +602,7 @@ columns(): Labels
 ```
 Возвращает интерфейс [`Labels`](#Labels), представляющий заголовки столбцов.
 
+&nbsp;
 
 ### Интерфейс EntityInfo (Label)<a name="EntityInfo"></a> <a name="Label"></a>
 ```ts
@@ -642,6 +670,8 @@ parentLongId(): number
 
 Если родительской сущности нет, возвращает `-1`.
 
+&nbsp;
+
 ### Интерфейс Labels<a name="Labels"></a>
 ```ts
 interface Labels {
@@ -702,6 +732,8 @@ findLabelByLongId(longId: number): Label | null
 ```
 Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в `this`, иначе — `null`.
 
+&nbsp;
+
 ### Интерфейс LabelsGroup<a name="LabelsGroup"></a>
 ```ts
 interface LabelsGroup {
@@ -734,6 +766,8 @@ cells(): Cells
 Возвращает интерфейс [`Cells`](#Cells), предоставляющий доступ к ячейкам данной строки или столбца.
 
 В случае плоской таблицы [`возвращает`](../appendix/constraints.md#flatTable) `null`.
+
+&nbsp;
 
 ### Интерфейс Cell ...<a name="Cell"></a>
 ```ts
@@ -821,6 +855,8 @@ dropDown(): Labels
 getFormatType(): string
 ```
 
+&nbsp;
+
 ### Интерфейс Cells<a name="Cells"></a>
 ```ts
 interface Cells {
@@ -878,6 +914,8 @@ getByIndexes(indexes: number[]): Cells | null
 ```
 Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#Cells). В этом случае функция [`chunkInstance()`](#chunkInstance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#GridRangeChunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#Cells).
 
+&nbsp;
+
 ### Интерфейс Lists<a name="Lists"></a>
 ```ts
 interface Lists {
@@ -893,6 +931,8 @@ listsTab(): ListsTab
 ```
 Возвращает ссылку на интерфейс [`ListsTab`](#ListsTab). В интерфейсе Optimacros аналогично открытию вкладки "Справочники".
 
+&nbsp;
+
 ### Интерфейс ListsTab<a name="ListsTab"></a>
 ```ts
 interface ListsTab extends Tab {
@@ -901,6 +941,8 @@ interface ListsTab extends Tab {
 ```
 Возвращает ссылку на [`ListTab`](#ListTab) справочника `name`. В интерфейсе Optimacros аналогично открытию вкладки справочника `name`.
 
+&nbsp;
+
 ### Интерфейс ListTab ...<a name="ListTab"></a>
 ```ts
 interface ListTab extends Tab {
@@ -908,6 +950,8 @@ interface ListTab extends Tab {
     importer(): ListImporter;
 }
 ```
+
+&nbsp;
 
 ### Интерфейс Versions<a name="Versions"></a>
 ```ts
@@ -924,6 +968,8 @@ versionsTab(): VersionsTab
 ```
 Возвращает ссылку на вкладку [`VersionsTab`](#VersionsTab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
 
+&nbsp;
+
 ### Интерфейс VersionsTab<a name="VersionsTab"></a>
 ```ts
 interface VersionsTab {
@@ -939,6 +985,8 @@ copyVersion(from: string, to: string): Object
 ```
 Копирует срез по версии `from` в срез по версии `to` во всех мультикубах модели, которые имеют измерение версий, включающее обе эти версии. Возвращает объект вида `{"success":true}`.
 
+&nbsp;
+
 ### Интерфейс Times<a name="Times"></a>
 ```ts
 interface Times {
@@ -953,6 +1001,8 @@ interface Times {
 optionsTab(): TimeOptionsTab
 ```
 Возвращает ссылку на вкладку [`TimeOptionsTab`](#TimeOptionsTab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
+
+&nbsp;
 
 ### Интерфейс TimeOptionsTab<a name="TimeOptionsTab"></a>
 ```ts
@@ -976,6 +1026,8 @@ resetForm(): Object
 applyForm(): Object
 ```
 Применяет все изменения данных. Возвращает объект вида `{"success":true}`.
+
+&nbsp;
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 
@@ -1103,6 +1155,8 @@ export(): ExportResult
 ```
 Производит экспорт представления в соответствии с настройками, регистрирует файл в [`глобальном реестре`](../glossary.md#globalFileRegistry) и возвращает ссылку на [`ExportResult`](#ExportResult).
 
+&nbsp;
+
 ### Интерфейс StorageExporter<a name="StorageExporter"></a>
 
 ```ts
@@ -1162,6 +1216,7 @@ setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter
 ```
 Устанавливает идентификатор булева куба, который будет использоваться в качестве логического фильтра.
 
+&nbsp;
 
 ### Интерфейс ExportResult<a name="ExportResult"></a>
 ```ts
@@ -1202,6 +1257,8 @@ copyToLocal(path: string): ExportResult
 moveToLocal(path: string): ExportResult
 ```
 Перемещает экспортированный файл в путь `path` в рабочей папке скрипта и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry). Возвращает `this`.
+
+&nbsp;
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
 
@@ -1276,6 +1333,8 @@ getLineDelimiter(): string
 ```
 Возвращает разделитель строк.
 
+&nbsp;
+
 ### Интерфейс Importer<a name="Importer"></a>
 ```ts
 interface Importer {
@@ -1323,6 +1382,8 @@ import(): Importer
 ```
 Производит импорт в [`Grid`](#Grid) в соответствии с настройками. Возвращает `this`.
 
+&nbsp;
+
 ### Интерфейс StorageImporter<a name="StorageImporter"></a>
 ```ts
 interface StorageImporter extends Importer {
@@ -1362,9 +1423,15 @@ setDateFormat(dateFormat: string): StorageImporter
 ```
 Устанавливает формат дат. Аналогично функции [`StorageExporter.setDateFormat()`](#StorageExporter.setDateFormat).
 
+&nbsp;
+
 ## Обновление клеток мультикубов через формулу<a name="update"></a>
 
+&nbsp;
+
 ## Получение клеток куба с помощью формулы<a name="get"></a>
+
+&nbsp;
 
 ## Копирование срезов кубов<a name="copy"></a>
 

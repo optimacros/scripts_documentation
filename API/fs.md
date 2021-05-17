@@ -42,6 +42,8 @@ sharedFolder – папка на сервере, которая была доб�
 filesDataManager(): FilesDataManager
 ```
 
+&nbsp;
+
 ### Интерфейс FileMeta<a name="FileMeta"></a>
 ```ts
 interface FileMeta {
@@ -121,6 +123,8 @@ timestamp: number
 ```
 Время последнего изменения в [`формате Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
+&nbsp;
+
 ### Интерфейс PathObj<a name="PathObj"></a>
 ```ts
 interface PathObj {
@@ -143,6 +147,8 @@ getSystem(): Filesystem
 getPath(): string
 ```
 Возвращает путь к файлу.
+
+&nbsp;
 
 ### Интерфейс Filesystem<a name="Filesystem"></a>
 ```ts
@@ -287,10 +293,13 @@ getPathObj(path: string): PathObj
 ```
 Возвращает интерфейс [`PathObj`](#PathObj).
 
+&nbsp;
 
 ## Локальная файловая система
 
 Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***НЕ*** может выйти за её пределы.
+
+&nbsp;
 
 ## FTP
 
@@ -308,6 +317,8 @@ interface BaseAdapter {
 load(): Filesystem
 ```
 Возвращает объект файловой системы [`Filesystem`](#Filesystem) с предварительно установленными настройками.
+
+&nbsp;
 
 ### Интерфейс FTPAdapter<a name="FTPAdapter"></a>
 ```ts
@@ -469,10 +480,16 @@ getUseListOptions(): boolean
 ```
 Возвращает признак использованися флагов `-aln` у FTP-команды `LIST`.
 
+&nbsp;
+
 ## Shared folder
 
 
+&nbsp;
+
 ## Файлы CSV
+
+&nbsp;
 
 ### Интерфейс CsvWriter ...<a name="CsvWriter"></a>
 ```ts
@@ -514,6 +531,7 @@ writeRows(rows: string[][]): CsvWriter
 save(name: string, charset?: string): string
 ```
 
+&nbsp;
 
 ### Интерфейс CsvReader ...<a name="CsvReader"></a>
 ```ts
@@ -548,6 +566,7 @@ changeFileCharset(charset: string): CsvReader
 generator(): [][]
 ```
 
+&nbsp;
 
 ### Интерфейс BaseConverter ...<a name="BaseConverter"></a>
 ```ts
@@ -569,6 +588,7 @@ setSource(path: string): BaseConverter
 convert(): string
 ```
 
+&nbsp;
 
 ### Интерфейс ExcelToCsvConverter ...<a name="ExcelToCsvConverter"></a>
 ```ts
@@ -583,6 +603,7 @@ interface ExcelToCsvConverter extends BaseConverter {
 setSheetIdentifier(identifier: string | number): ExcelToCsvConverter
 ```
 
+&nbsp;
 
 ### Интерфейс ConverterManager ...<a name="ConverterManager"></a>
 ```ts
@@ -597,6 +618,7 @@ interface ConverterManager {
 excelToCsv(): ExcelToCsvConverter
 ```
 
+&nbsp;
 
 ### Интерфейс FilesDataManager ...<a name="FilesDataManager"></a>
 ```ts
