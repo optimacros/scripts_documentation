@@ -223,68 +223,6 @@ interface CopyData {
 }
 ```
 
-### Интерфейс CsvReader ...<a name="CsvReader"></a>
-```ts
-interface CsvReader {
-    params(): CSVParams;
-
-    /**
-     * UTF-8, WINDOWS-1251
-     * @param charset
-     */
-    changeFileCharset(charset: string): CsvReader;
-
-    generator(): [][];
-}
-```
-
-### Интерфейс CsvWriter ...<a name="CsvWriter"></a>
-```ts
-interface CsvWriter {
-    params(): CSVParams;
-    writeRow(row: string[]): CsvWriter;
-    writeRows(rows: string[][]): CsvWriter;
-
-    /**
-     *
-     * @param name
-     * @param charset UTF-8, WINDOWS-1251
-     */
-    save(name: string, charset?: string): string;
-}
-```
-
-### Интерфейс BaseConverter ...<a name="BaseConverter"></a>
-```ts
-interface BaseConverter {
-    setSource(path: string): this;
-    convert(): string;
-}
-```
-
-### Интерфейс ExcelToCsvConverter ...<a name="ExcelToCsvConverter"></a>
-```ts
-interface ExcelToCsvConverter extends BaseConverter {
-    setSheetIdentifier(identifier: string | number): this;
-}
-```
-
-### Интерфейс ConverterManager ...<a name="ConverterManager"></a>
-```ts
-interface ConverterManager {
-    excelToCsv(): ExcelToCsvConverter
-}
-```
-
-### Интерфейс FilesDataManager ...<a name="FilesDataManager"></a>
-```ts
-interface FilesDataManager {
-    csvWriter(): CsvWriter;
-    csvReader(path: PathObj): CsvReader;
-    converterManager(): ConverterManager;
-}
-```
-
 ### Интерфейс OptimizationRequestTab ...<a name="OptimizationRequestTab"></a>
 ```ts
 interface OptimizationRequestTab extends Tab {

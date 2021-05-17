@@ -36,6 +36,7 @@ local(): Filesystem
 ```js
 sharedFolder(id: string): Filesystem
 ```
+sharedFolder – папка на сервере, которая была добавлена администратором при установке Workspace через manifest внутрь контейнера workspace. Папка на хостовой ОС. 
 
 ```js
 filesDataManager(): FilesDataManager
@@ -118,7 +119,7 @@ filename: string
 ```js
 timestamp: number
 ```
-Время последнего изменения в формате [`Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
+Время последнего изменения в [`формате Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
 ### Интерфейс PathObj<a name="PathObj"></a>
 ```ts
@@ -257,6 +258,8 @@ listContents(path: string, recursive: boolean): FileMeta[]
 getMetadata(path: string): object
 ```
 Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#FileMeta), однако часть полей может отсутствовать.
+
+&nbsp;
 
 ```js
 upload(from: string, to: string): boolean
@@ -470,6 +473,158 @@ getUseListOptions(): boolean
 
 
 ## Файлы CSV
+
+### Интерфейс CsvWriter ...<a name="CsvWriter"></a>
+```ts
+interface CsvWriter {
+    params(): CSVParams;
+    writeRow(row: string[]): CsvWriter;
+    writeRows(rows: string[][]): CsvWriter;
+
+    /**
+     *
+     * @param name
+     * @param charset UTF-8, WINDOWS-1251
+     */
+    save(name: string, charset?: string): string;
+}
+```
+
+&nbsp;
+
+```js
+params(): CSVParams
+```
+
+&nbsp;
+
+```js
+writeRow(row: string[]): CsvWriter
+```
+
+&nbsp;
+
+```js
+writeRows(rows: string[][]): CsvWriter
+```
+
+&nbsp;
+
+```js
+save(name: string, charset?: string): string
+```
+
+
+### Интерфейс CsvReader ...<a name="CsvReader"></a>
+```ts
+interface CsvReader {
+    params(): CSVParams;
+
+    /**
+     * UTF-8, WINDOWS-1251
+     * @param charset
+     */
+    changeFileCharset(charset: string): CsvReader;
+
+    generator(): [][];
+}
+```
+
+&nbsp;
+
+```js
+params(): CSVParams
+```
+
+&nbsp;
+
+```js
+changeFileCharset(charset: string): CsvReader
+```
+
+&nbsp;
+
+```js
+generator(): [][]
+```
+
+
+### Интерфейс BaseConverter ...<a name="BaseConverter"></a>
+```ts
+interface BaseConverter {
+    setSource(path: string): BaseConverter;
+    convert(): string;
+}
+```
+
+&nbsp;
+
+```js
+setSource(path: string): BaseConverter
+```
+
+&nbsp;
+
+```js
+convert(): string
+```
+
+
+### Интерфейс ExcelToCsvConverter ...<a name="ExcelToCsvConverter"></a>
+```ts
+interface ExcelToCsvConverter extends BaseConverter {
+    setSheetIdentifier(identifier: string | number): ExcelToCsvConverter;
+}
+```
+
+&nbsp;
+
+```js
+setSheetIdentifier(identifier: string | number): ExcelToCsvConverter
+```
+
+
+### Интерфейс ConverterManager ...<a name="ConverterManager"></a>
+```ts
+interface ConverterManager {
+    excelToCsv(): ExcelToCsvConverter;
+}
+```
+
+&nbsp;
+
+```js
+excelToCsv(): ExcelToCsvConverter
+```
+
+
+### Интерфейс FilesDataManager ...<a name="FilesDataManager"></a>
+```ts
+interface FilesDataManager {
+    csvWriter(): CsvWriter;
+    csvReader(path: PathObj): CsvReader;
+    converterManager(): ConverterManager;
+}
+```
+
+&nbsp;
+
+
+```js
+csvWriter(): CsvWriter
+```
+
+&nbsp;
+
+```js
+csvReader(path: PathObj): CsvReader
+```
+
+&nbsp;
+
+```js
+converterManager(): ConverterManager
+```
 
 
 
