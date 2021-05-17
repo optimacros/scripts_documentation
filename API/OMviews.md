@@ -1275,7 +1275,7 @@ interface CSVParams {
     getLineDelimiter(): string;
 }
 ```
-Интерфейс настроек импорта из файла CSV.
+Интерфейс настроек импорта из файла [`CSV`](https://ru.wikipedia.org/wiki/CSV).
 
 &nbsp;
 

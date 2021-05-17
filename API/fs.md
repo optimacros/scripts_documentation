@@ -489,47 +489,45 @@ getUseListOptions(): boolean
 
 ## Файлы CSV
 
-&nbsp;
-
-### Интерфейс CsvWriter ...<a name="CsvWriter"></a>
+### Интерфейс CsvWriter<a name="CsvWriter"></a>
 ```ts
 interface CsvWriter {
     params(): CSVParams;
     writeRow(row: string[]): CsvWriter;
     writeRows(rows: string[][]): CsvWriter;
-
-    /**
-     *
-     * @param name
-     * @param charset UTF-8, WINDOWS-1251
-     */
     save(name: string, charset?: string): string;
 }
 ```
+Интерфейс для записи в новый файл формата [`CSV`](https://ru.wikipedia.org/wiki/CSV). Запись ведётся во временный буфер, и лишь функция [`save()`](#CsvWriter.save) сохраняет файл в памяти. Редактировать существующий файл невозможно, вместо этого нужно читать из одного файла и писать в другой.
 
 &nbsp;
 
 ```js
 params(): CSVParams
 ```
+Возвращает ссылку на интерфейс [`CSVParams`](./OMviews.md#CSVParams), предоставляющий доступ к настройкам CSV.
 
 &nbsp;
 
 ```js
 writeRow(row: string[]): CsvWriter
 ```
+Записывает массив полей `row` в очередную строку файла.
 
 &nbsp;
 
 ```js
 writeRows(rows: string[][]): CsvWriter
 ```
+Записывает двойной массив полей `rows` в очередные несколько строк файла.
 
 &nbsp;
 
+<a name="CsvWriter.save"></a>
 ```js
 save(name: string, charset?: string): string
 ```
+Сохраняет файл в [`рабочей директории скрипта`](../glossary.md#scriptDir) под именем `{name}.csv` в кодировке `charset` (допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`). Возвращает имя файла с расширением: `{name}.csv`.
 
 &nbsp;
 
@@ -541,7 +539,7 @@ interface CsvReader {
     generator(): string[][];
 }
 ```
-Интерфейс для чтения файлов формата CSV.
+Интерфейс для чтения файла формата [`CSV`](https://ru.wikipedia.org/wiki/CSV).
 
 &nbsp;
 
@@ -632,6 +630,7 @@ interface FilesDataManager {
 ```js
 csvWriter(): CsvWriter
 ```
+Возвращает ссылку на [`CsvWriter`](#CsvWriter).
 
 &nbsp;
 
