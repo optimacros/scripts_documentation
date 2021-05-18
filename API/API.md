@@ -99,7 +99,7 @@ readonly optimization: Optimization
 ```js
 readonly connectors: Connectors
 ```
-Ссылка на интерфейс Connectors.
+Ссылка на интерфейс [`Connectors`](./connectors.md#Connectors).
 
 
 ___
@@ -242,51 +242,6 @@ interface Optimization {
 табов.
 `om.optimization.optimizationRequestsTab` Аналогично открытию табы Optimizer Request - Table в интерфейсной части 
 приложения.
-
-
-### Интерфейс SqlQueryResult ...<a name="SqlQueryResult"></a>
-```ts
-interface SqlQueryResult {
-    count(): number;
-    generator(likeArray?: boolean): object[];
-    all(): object[];
-    first(): object;
-    column(columnName: string): any[];
-    cell(columnName: string, rowIndex?: number): number | string | boolean | null;
-    updated(): number;
-    lastId(): number;
-}
-```
-
-### Интерфейс SqlQueryBuilder ...<a name="SqlQueryBuilder"></a>
-```ts
-interface SqlQueryBuilder {
-    execute(sql: string, bindings?: object): SqlQueryResult;
-}
-```
-
-### Интерфейс SqlConnection ...<a name="SqlConnection"></a>
-```ts
-interface SqlConnection {
-    qb(): SqlQueryBuilder;
-}
-```
-
-### Интерфейс SqlConnectorBuilder ...<a name="SqlConnectorBuilder"></a>
-```ts
-interface SqlConnectorBuilder {
-    setHost(value: string): this;
-    setPort(value: number): this;
-    setUsername(value: string): this;
-    setPassword(value: string): this;
-    setDatabase(value: string): this;
-    /**
-     * https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility
-     */
-    loadBulkCopyBuilder(): SqlBulkCopyBuilder;
-    load(): SqlConnection;
-}
-```
 
 ### Интерфейс SqlBulkCopyResult ...<a name="SqlBulkCopyResult"></a>
 ```ts
@@ -783,23 +738,6 @@ declare namespace Http {
         base64Encode(value: string): string | boolean;
         base64Decode(value: string): string | boolean;
     }
-}
-```
-
-### Интерфейс Connectors ...<a name="Connectors"></a>
-```ts
-interface Connectors {
-    mysql(): SqlConnectorBuilder;
-    postgresql(): SqlConnectorBuilder;
-    sqlServer(): SqlConnectorBuilder;
-    oracle(): OracleConnectorBuilder;
-    mongodb(): Mongodb.ConnectorBuilder;
-    http(): Http.HttpManager;
-		
-    /**
-     * @param builtIn Use built-in configuration if exists. Default is 'false'
-     */
-    winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 }
 ```
 
