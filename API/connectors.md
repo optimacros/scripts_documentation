@@ -4,7 +4,7 @@
 1. MongoDB
 1. HTTP
 
-##Реляционные СУБД
+## Реляционные СУБД
 
 ### Интерфейс SqlQueryResult ...<a name="SqlQueryResult"></a>
 ```ts
@@ -37,6 +37,14 @@ interface SqlConnection {
     qb(): SqlQueryBuilder;
 }
 ```
+Интерфейс соединения с реляционной базой данных.
+
+&nbsp;
+
+```js
+qb(): SqlQueryBuilder
+```
+
 
 &nbsp;
 
@@ -55,8 +63,47 @@ interface SqlConnectorBuilder {
     load(): SqlConnection;
 }
 ```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для подключения к реляционной базе данных.
 
 &nbsp;
+
+```js
+setHost(value: string): SqlConnectorBuilder
+```
+Устанавливает адрес подключения. Возвращает `this`.
+
+&nbsp;
+
+```js
+setPort(value: number): SqlConnectorBuilder
+```
+Устанавливает номер порта для подключения. Возвращает `this`.
+
+```js
+setUsername(value: string): SqlConnectorBuilder
+```
+Устанавливает имя пользователя. Возвращает `this`.
+
+```js
+setPassword(value: string): SqlConnectorBuilder
+```
+Устанавливает пароль. Возвращает `this`.
+
+```js
+setDatabase(value: string): SqlConnectorBuilder
+```
+Устанавливает имя базы данных. Возвращает `this`.
+
+```js
+loadBulkCopyBuilder(): SqlBulkCopyBuilder
+```
+...........
+
+```js
+load(): SqlConnection
+```
+Соединяется с БД и возвращает интерфейс соединения [`SqlConnection`](#SqlConnection).
+
 
 ### Интерфейс MysqlConnectorBuilder ...<a name="MysqlConnectorBuilder"></a>
 ```ts
@@ -160,11 +207,11 @@ winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
 
 &nbsp;
 
-##MongoDB
+## MongoDB
 
 &nbsp;
 
-##HTTP
+## HTTP
 
 
 [API Reference](API.md)
