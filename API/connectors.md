@@ -111,6 +111,14 @@ interface MysqlConnectorBuilder extends SqlConnectorBuilder {
     loadImportBuilder(): MysqlImportBuilder;
 }
 ```
+[`Коннектор`](./glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
+
+&nbsp;
+
+```js
+loadImportBuilder(): MysqlImportBuilder
+```
+......
 
 &nbsp;
 
