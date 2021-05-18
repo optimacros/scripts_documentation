@@ -121,7 +121,7 @@ filename: string
 ```js
 timestamp: number
 ```
-Время последнего изменения в [`формате Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
+Время последнего изменения в [`формате ++ Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
 &nbsp;
 
