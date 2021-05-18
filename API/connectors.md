@@ -79,31 +79,42 @@ setPort(value: number): SqlConnectorBuilder
 ```
 Устанавливает номер порта для подключения. Возвращает `this`.
 
+&nbsp;
+
 ```js
 setUsername(value: string): SqlConnectorBuilder
 ```
 Устанавливает имя пользователя. Возвращает `this`.
+
+&nbsp;
 
 ```js
 setPassword(value: string): SqlConnectorBuilder
 ```
 Устанавливает пароль. Возвращает `this`.
 
+&nbsp;
+
 ```js
 setDatabase(value: string): SqlConnectorBuilder
 ```
 Устанавливает имя базы данных. Возвращает `this`.
+
+&nbsp;
 
 ```js
 loadBulkCopyBuilder(): SqlBulkCopyBuilder
 ```
 ...........
 
+&nbsp;
+
 ```js
 load(): SqlConnection
 ```
 Соединяется с БД и возвращает интерфейс соединения [`SqlConnection`](#SqlConnection).
 
+&nbsp;
 
 ### Интерфейс MysqlConnectorBuilder ...<a name="MysqlConnectorBuilder"></a>
 ```ts
