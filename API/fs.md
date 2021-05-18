@@ -531,7 +531,7 @@ save(name: string, charset?: string): string
 
 &nbsp;
 
-### Интерфейс CsvReader ...<a name="CsvReader"></a>
+### Интерфейс CsvReader<a name="CsvReader"></a>
 ```ts
 interface CsvReader {
     params(): CSVParams;
@@ -553,6 +553,7 @@ params(): CSVParams
 ```js
 changeFileCharset(charset: string): CsvReader
 ```
+Устанавливает кодировку файла. Допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`. Возвращает `this`.
 
 &nbsp;
 
