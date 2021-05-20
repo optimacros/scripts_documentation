@@ -77,7 +77,7 @@ winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
 ```ts
 interface SqlQueryResult {
     count(): number;
-    generator(likeArray?: boolean): object[];
+    generator(likeArray?: boolean): object[] | string[][];
     all(): object[];
     first(): object;
     column(columnName: string): any[];
@@ -86,15 +86,79 @@ interface SqlQueryResult {
     lastId(): number;
 }
 ```
+Интерфейс доступа к результатам запроса.
+
+&nbsp;
+
+```js
+count(): number
+```
+Возвращает количество обработанных строк. Реализация зависит от СУБД и от драйвера.
+
+&nbsp;
+
+```js
+generator(likeArray?: boolean): object[] | string[][]
+```
+Возвращает генератор для работы со строками запроса. Если `likeArray == true`, на каждой итерации генератор возвращает очередную строку запроса в виде массива полей `string[]`, иначе в виде `object`, где ключами выступают названия столбцов, значениями – данные; по умолчанию `likeArray == false`.
+
+&nbsp;
+
+```js
+all(): object[]
+```
+Аналог вызову `generator(false)` с тем отличием, что возвращает все оставшиеся данные в виде массива.
+
+&nbsp;
+
+
+```js
+first(): object
+```
+Возвращает ***следующую*** строку запроса, **несмотря на название**.
+
+&nbsp;
+
+```js
+column(columnName: string): any[]
+```
+
+&nbsp;
+
+```js
+cell(columnName: string, rowIndex?: number): number | string | boolean | null
+```
+
+&nbsp;
+
+```js
+updated(): number
+```
+
+&nbsp;
+
+```js
+lastId(): number
+```
 
 &nbsp;
 
 ### Интерфейс SqlQueryBuilder ...<a name="SqlQueryBuilder"></a>
 ```ts
 interface SqlQueryBuilder {
-    execute(sql: string, bindings?: object): SqlQueryResult;
+    execute(sql: string, bindings?: object | (string | number | boolean | null)[]): SqlQueryResult;
 }
 ```
+Интерфейс построения запроса к базе данных.
+
+&nbsp;
+
+```js
+execute(sql: string, bindings?: object | (string | number | boolean | null)[]): SqlQueryResult
+```
+Конструирует SQL-запрос из строки `sql`, используя параметры привязки `bindings`, передаёт его на исполнение в СУБД и возвращает интерфейс [`SqlQueryResult`](#SqlQueryResult) доступа к результатам запроса.
+
+.....................
 
 &nbsp;
 
