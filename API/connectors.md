@@ -98,20 +98,20 @@ interface SqlQueryBuilder {
 
 &nbsp;
 
-### Интерфейс SqlConnection ...<a name="SqlConnection"></a>
+### Интерфейс SqlConnection<a name="SqlConnection"></a>
 ```ts
 interface SqlConnection {
     qb(): SqlQueryBuilder;
 }
 ```
-Интерфейс соединения с реляционной базой данных.
+Объект соединения с реляционной базой данных.
 
 &nbsp;
 
 ```js
 qb(): SqlQueryBuilder
 ```
-
+Возвращает интерфейс [`SqlQueryBuilder`](#SqlQueryBuilder) построения запроса к базе данных.
 
 &nbsp;
 
@@ -179,7 +179,7 @@ loadBulkCopyBuilder(): SqlBulkCopyBuilder
 ```js
 load(): SqlConnection
 ```
-Соединяется с БД и возвращает интерфейс соединения [`SqlConnection`](#SqlConnection).
+Соединяется с БД и возвращает объект соединения [`SqlConnection`](#SqlConnection).
 
 &nbsp;
 
