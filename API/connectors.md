@@ -4,6 +4,73 @@
 1. MongoDB
 1. HTTP
 
+### Интерфейс Connectors ...<a name="Connectors"></a>
+```ts
+interface Connectors {
+    mysql(): MysqlConnectorBuilder;
+    postgresql(): SqlConnectorBuilder;
+    sqlServer(): MicrosoftSqlConnectorBuilder;
+    oracle(): OracleConnectorBuilder;
+    mongodb(): Mongodb.ConnectorBuilder;
+    http(): Http.HttpManager;
+		
+    /**
+     * @param builtIn Use built-in configuration if exists. Default is 'false'
+     */
+    winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
+}
+```
+Интерфейс, группирующий [`коннекторы`](../glossary.md#connector) к различным внешним системам.
+
+&nbsp;
+
+```js
+mysql(): MysqlConnectorBuilder
+```
+Возвращает коннектор для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
+
+&nbsp;
+
+```js
+postgresql(): SqlConnectorBuilder
+```
+Возвращает коннектор для подключения к базе данных [`PostgreSQL`](https://ru.wikipedia.org/wiki/PostgreSQL).
+
+&nbsp;
+
+```js
+sqlServer(): MicrosoftSqlConnectorBuilder
+```
+Возвращает коннектор для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
+
+&nbsp;
+
+```js
+oracle(): OracleConnectorBuilder
+```
+Возвращает коннектор для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database).
+
+&nbsp;
+
+```js
+mongodb(): Mongodb.ConnectorBuilder
+```
+Возвращает коннектор для подключения к базе данных [`MongoDB`](https://ru.wikipedia.org/wiki/MongoDB).
+
+&nbsp;
+
+```js
+http(): Http.HttpManager
+```
+
+&nbsp;
+
+```js
+winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
+```
+
+&nbsp;
+
 ## Реляционные СУБД
 
 ### Интерфейс SqlQueryResult ...<a name="SqlQueryResult"></a>
@@ -163,68 +230,7 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
 ```
 
 
-&nbsp;
 
-### Интерфейс Connectors ...<a name="Connectors"></a>
-```ts
-interface Connectors {
-    mysql(): MysqlConnectorBuilder;
-    postgresql(): SqlConnectorBuilder;
-    sqlServer(): MicrosoftSqlConnectorBuilder;
-    oracle(): OracleConnectorBuilder;
-    mongodb(): Mongodb.ConnectorBuilder;
-    http(): Http.HttpManager;
-		
-    /**
-     * @param builtIn Use built-in configuration if exists. Default is 'false'
-     */
-    winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
-}
-```
-
-&nbsp;
-
-```js
-mysql(): MysqlConnectorBuilder
-```
-
-&nbsp;
-
-```js
-postgresql(): SqlConnectorBuilder
-```
-
-&nbsp;
-
-```js
-sqlServer(): MicrosoftSqlConnectorBuilder
-```
-
-&nbsp;
-
-```js
-oracle(): OracleConnectorBuilder
-```
-
-&nbsp;
-
-```js
-mongodb(): Mongodb.ConnectorBuilder
-```
-
-&nbsp;
-
-```js
-http(): Http.HttpManager
-```
-
-&nbsp;
-
-```js
-winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
-```
-
-&nbsp;
 
 ## MongoDB
 

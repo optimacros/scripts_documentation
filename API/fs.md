@@ -624,6 +624,7 @@ interface FilesDataManager {
     converterManager(): ConverterManager;
 }
 ```
+Интерфейс, который группирует интерфейсы для работы с данными файлов в [`рабочей директории скрипта`](../glossary.md#scriptDir).
 
 &nbsp;
 

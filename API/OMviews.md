@@ -1249,14 +1249,14 @@ getHash(): string | null
 ```js
 copyToLocal(path: string): ExportResult
 ```
-Копирует экспортированный файл в путь `path` в рабочей папке скрипта. Возвращает `this`.
+Копирует экспортированный файл в путь `path` в [`рабочей директории скрипта`](../glossary.md#scriptDir). Возвращает `this`.
 
 &nbsp;
 
 ```js
 moveToLocal(path: string): ExportResult
 ```
-Перемещает экспортированный файл в путь `path` в рабочей папке скрипта и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry). Возвращает `this`.
+Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../glossary.md#scriptDir) и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry). Возвращает `this`.
 
 &nbsp;
 
