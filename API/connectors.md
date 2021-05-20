@@ -73,20 +73,20 @@ winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
 
 ## Реляционные СУБД
 
-### Интерфейс SqlQueryResult ...<a name="SqlQueryResult"></a>
+### Интерфейс SqlQueryResult<a name="SqlQueryResult"></a>
 ```ts
 interface SqlQueryResult {
     count(): number;
     generator(likeArray?: boolean): object[] | string[][];
     all(): object[];
-    first(): object;
-    column(columnName: string): any[];
+    first(): object | null;
+    column(columnName: string): string[];
     cell(columnName: string, rowIndex?: number): number | string | boolean | null;
     updated(): number;
     lastId(): number;
 }
 ```
-Интерфейс доступа к результатам запроса.
+Интерфейс доступа к результатам запроса. Функции `generator()`, `all()`, `first()`, `column()` и `cell()` работают с одним и тем же внутренним итератором по строкам ответа на SQL-запрос, поэтому каждая из них начинает чтение с первой ещё не прочитанной строки ответа.
 
 &nbsp;
 
@@ -111,35 +111,38 @@ all(): object[]
 
 &nbsp;
 
-
 ```js
-first(): object
+first(): object | null
 ```
-Возвращает ***следующую*** строку запроса, **несмотря на название**.
+Возвращает ***следующую*** строку запроса, ***несмотря на название***.
 
 &nbsp;
 
 ```js
-column(columnName: string): any[]
+column(columnName: string): string[]
 ```
+Выбирает и возвращает в виде массива значения столбца `columnName` у всех оставшихся строк ответа.
 
 &nbsp;
 
 ```js
 cell(columnName: string, rowIndex?: number): number | string | boolean | null
 ```
+Пропускает в итераторе ответа `rowIndex` (по умолчанию: `0`) строк и возвращает значение столбца `columnName` из очередной строки. Внутренний итератор переходит на следующую строку.
 
 &nbsp;
 
 ```js
 updated(): number
 ```
+Возвращает количество изменённых строк. Если SQL-запрос был не на изменение, возвращаемое значение зависит от реализации.
 
 &nbsp;
 
 ```js
 lastId(): number
 ```
+Функция работает только с запросом `INSERT`. Возвращает `id` последней вставленной строки.
 
 &nbsp;
 
