@@ -264,7 +264,7 @@ load(): SqlConnection
 
 &nbsp;
 
-### Интерфейс MysqlConnectorBuilder ...<a name="MysqlConnectorBuilder"></a>
+### Интерфейс MysqlConnectorBuilder<a name="MysqlConnectorBuilder"></a>
 ```ts
 interface MysqlConnectorBuilder extends SqlConnectorBuilder {
     loadImportBuilder(): MysqlImportBuilder;
@@ -277,7 +277,7 @@ interface MysqlConnectorBuilder extends SqlConnectorBuilder {
 ```js
 loadImportBuilder(): MysqlImportBuilder
 ```
-Возвращает ссылку на интерфейс [`MysqlImportBuilder`](#MysqlImportBuilder).
+Возвращает ссылку на интерфейс [`MysqlImportBuilder`](#MysqlImportBuilder) импорта из файла CSV.
 
 &nbsp;
 
