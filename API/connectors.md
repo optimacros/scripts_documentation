@@ -314,6 +314,7 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
 
 ### Интерфейс MysqlImportBuilder ...<a name="MysqlImportBuilder"></a>
 
+```js
 interface MysqlImportBuilder {
     setTable(name: string): MysqlImportBuilder;
     setDelimiter(delimiter: string): MysqlImportBuilder;
@@ -333,7 +334,9 @@ interface MysqlImportBuilder {
     setFilePath(path: string): MysqlImportBuilder;
     import(): MysqlImportResult;
 }
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MySQL из файла CSV с помощью [`mysqlimport`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html). Все функции, кроме `import()`, возвращают `this`.
+```
+
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MySQL из файла CSV с помощью [*mysqlimport*](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html). Все функции, кроме `import()`, возвращают `this`.
 
 &nbsp;
 
@@ -375,70 +378,70 @@ setEscape(escape: string): MysqlImportBuilder;
 ```js
 setThreads(threads: number): MysqlImportBuilder;
 ```
-Устанавливает количество [`потоков`](https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%82%D0%BE%D0%BA_%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F) импорта; опция `mysqlimport`: `--use-threads`. Задать можно не более `8` потоков. По умолчанию: `1`. 
+Устанавливает количество [`потоков`](https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%82%D0%BE%D0%BA_%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F) импорта; опция *mysqlimport*: `--use-threads`. Задать можно не более `8` потоков. По умолчанию: `1`. 
 
 &nbsp;
 
 ```js
 setVerbose(verbose: boolean): MysqlImportBuilder;
 ```
-Устанавливает флаг расширенного вывода; опция `mysqlimport`: ``. По умолчанию: `false`.
+Устанавливает флаг расширенного вывода; опция *mysqlimport*: *--verbose*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
 setFirstIgnoreLines(count: number): MysqlImportBuilder;
 ```
-Устанавливает количество первых строк, которые будут проигнорированы; опция `mysqlimport`: *--ignore-lines*. По умолчанию: `0`.
+Устанавливает количество первых строк, которые будут проигнорированы; опция *mysqlimport*: *--ignore-lines*. По умолчанию: `0`.
 
 &nbsp;
 
 ```js
 setLockTable(status: boolean): MysqlImportBuilder;
 ```
-Устанавливает флаг блокировки таблицы во время импорта; опция `mysqlimport`: **--lock-tables**. По умолчанию: `false`.
+Устанавливает флаг блокировки таблицы во время импорта; опция *mysqlimport*: *--lock-tables*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
 setForce(status: boolean): MysqlImportBuilder;
 ```
-Устанавливает флаг игнорирования критических ошибок; опция `mysqlimport`: ***--force***. По умолчанию: `false`.
+Устанавливает флаг игнорирования критических ошибок; опция *mysqlimport*: *--force*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
 setDeleteAllRows(status: boolean): MysqlImportBuilder;
 ```
-Устанавливает флаг предварительного выполнения команды [`TRUNCATE`](https://ru.wikipedia.org/wiki/Truncate_(SQL)), что требует прав на эту команду; опция `mysqlimport`: `--delete`. По умолчанию: `false`.
+Устанавливает флаг предварительного выполнения команды [`TRUNCATE`](https://ru.wikipedia.org/wiki/Truncate_(SQL)), что требует прав на эту команду; опция *mysqlimport*: *--delete*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
 setCompress(status: boolean): MysqlImportBuilder;
 ```
-Устанавливает флаг компрессии; опция `mysqlimport`: `--compress`. По умолчанию: `false`.
+Устанавливает флаг компрессии; опция *mysqlimport*: *--compress*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
 setIgnoreDuplicates(status: boolean): MysqlImportBuilder;
 ```
-Устанавливает флаг игнорирования строк с одинаковым уникальным ключом; опция `mysqlimport`: `--ignore`. По умолчанию: `false`.
+Устанавливает флаг игнорирования строк с одинаковым уникальным ключом; опция *mysqlimport*: *--ignore*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
 setReplace(status: boolean): MysqlImportBuilder;
 ```
-Устанавливает флаг замены строк с одинаковым уникальным ключом; опция `mysqlimport`: `--replaece`. По умолчанию: `false`.
+Устанавливает флаг замены строк с одинаковым уникальным ключом; опция *mysqlimport*: *--replace*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
 setColumns(names: string[]): MysqlImportBuilder;
 ```
-Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла CSV; опция `mysqlimport`: `--columns`. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
+Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла CSV; опция *mysqlimport*: *--columns*. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
 
 &nbsp;
 
@@ -453,7 +456,7 @@ setFilePath(path: string): MysqlImportBuilder;
 ```js
 import(): MysqlImportResult;
 ```
-Формирует из флагов команду на вызов `mysqlimport`, дожидается завершения импорта и возвращает ссылку на [`MysqlImportResult`](#MysqlImportResult).
+Формирует из флагов команду на вызов *mysqlimport*, дожидается завершения импорта и возвращает ссылку на [`MysqlImportResult`](#MysqlImportResult).
 
 &nbsp;
 
@@ -483,21 +486,21 @@ hasErrors(): boolean
 ```js
 getErrorOutput(): string
 ```
-Возвращает вывод команды `mysqlimport` в `stderr`.
+Возвращает вывод команды *mysqlimport* в `stderr`.
 
 &nbsp;
 
 ```js
 getOutput(): string
 ```
-Возвращает вывод команды `mysqlimport` в `stdout`.
+Возвращает вывод команды *mysqlimport* в `stdout`.
 
 &nbsp;
 
 ```js
 getCommand(): string
 ```
-Возвращает сформированную команду на вызов `mysqlimport`, которая была выполнена в момент вызова [`MysqlImportBuilder.import()`](#MysqlImportBuilder.import). Параметры будут сохранены в конфигурационном файле, доступ к которому можно получить функцией `getConfig()`.
+Возвращает сформированную команду на вызов *mysqlimport*, которая была выполнена в момент вызова [`MysqlImportBuilder.import()`](#MysqlImportBuilder.import). Параметры будут сохранены в конфигурационном файле, доступ к которому можно получить функцией `getConfig()`.
 
 &nbsp;
 
