@@ -312,7 +312,7 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
 
 &nbsp;
 
-### Интерфейс MysqlImportBuilder ...<a name="MysqlImportBuilder"></a>
+### Интерфейс MysqlImportBuilder<a name="MysqlImportBuilder"></a>
 
 ```js
 interface MysqlImportBuilder {
@@ -378,7 +378,7 @@ setEscape(escape: string): MysqlImportBuilder;
 ```js
 setThreads(threads: number): MysqlImportBuilder;
 ```
-Устанавливает количество [`потоков`](https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%82%D0%BE%D0%BA_%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F) импорта; опция *mysqlimport*: `--use-threads`. Задать можно не более `8` потоков. По умолчанию: `1`. 
+Устанавливает количество [`потоков`](https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%82%D0%BE%D0%BA_%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F) импорта; опция *mysqlimport*: *--use-threads*. Задать можно не более `8` потоков. По умолчанию: `1`. 
 
 &nbsp;
 
@@ -460,7 +460,7 @@ import(): MysqlImportResult;
 
 &nbsp;
 
-### Интерфейс MysqlImportResult ...<a name="MysqlImportResult"></a>
+### Интерфейс MysqlImportResult<a name="MysqlImportResult"></a>
 
 ```js
 interface MysqlImportResult {
