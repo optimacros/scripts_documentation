@@ -166,8 +166,6 @@ execute(sql: string, bindings?: (string | number | boolean | null)[] | object): 
 ```js
 const sqlQuery = "INSERT INTO `city` (`name`, `country_id`, `population`) VALUES (?, ?, ?)";
 
-const data = ['Хабаровск', 7, 610305];
-
 const queryResult = mySqlConn.qb().execute(sqlQuery, ['Хабаровск', 7, 610305]);
 ```
 
