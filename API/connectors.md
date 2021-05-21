@@ -146,10 +146,10 @@ lastId(): number
 
 &nbsp;
 
-### Интерфейс SqlQueryBuilder ...<a name="SqlQueryBuilder"></a>
+### Интерфейс SqlQueryBuilder<a name="SqlQueryBuilder"></a>
 ```ts
 interface SqlQueryBuilder {
-    execute(sql: string, bindings?: object | (string | number | boolean | null)[]): SqlQueryResult;
+    execute(sql: string, bindings?: (string | number | boolean | null)[] | object): SqlQueryResult;
 }
 ```
 Интерфейс построения запроса к базе данных.
@@ -157,11 +157,27 @@ interface SqlQueryBuilder {
 &nbsp;
 
 ```js
-execute(sql: string, bindings?: object | (string | number | boolean | null)[]): SqlQueryResult
+execute(sql: string, bindings?: (string | number | boolean | null)[] | object): SqlQueryResult
 ```
 Конструирует SQL-запрос из строки `sql`, используя параметры привязки `bindings`, передаёт его на исполнение в СУБД и возвращает интерфейс [`SqlQueryResult`](#SqlQueryResult) доступа к результатам запроса.
 
-.....................
+Для конструирования запроса в параметре `sql` заполнители `?` последовательно заменяются элементами массива `bindings`. Пример:
+
+```js
+const sqlQuery = "INSERT INTO `city` (`name`, `country_id`, `population`) VALUES (?, ?, ?)";
+
+const data = ['Хабаровск', 7, 610305];
+
+const queryResult = mySqlConn.qb().execute(sqlQuery, ['Хабаровск', 7, 610305]);
+```
+
+Если запрос делается к СУБД MySQL, допускается ещё один вариант: заполнители состоят из двоеточия и имени, `bindings` является объектом, в процессе конструирования запроса подстановка происходит по ключу имени. Пример:
+
+```js
+const sqlQuery = "SELECT SUM(`price`) as summary FROM `sells` WHERE price > :price";
+
+const queryResult = mySqlConn.qb().execute(sqlQuery, { price: 100 });
+```
 
 &nbsp;
 
