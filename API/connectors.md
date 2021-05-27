@@ -27,35 +27,35 @@ interface Connectors {
 ```js
 mysql(): MysqlConnectorBuilder
 ```
-Возвращает коннектор для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
+Возвращает коннектор [`MysqlConnectorBuilder`](#MysqlConnectorBuilder) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
 
 &nbsp;
 
 ```js
 postgresql(): SqlConnectorBuilder
 ```
-Возвращает коннектор для подключения к базе данных [`PostgreSQL`](https://ru.wikipedia.org/wiki/PostgreSQL).
+Возвращает коннектор [`SqlConnectorBuilder`](#SqlConnectorBuilder) для подключения к базе данных [`PostgreSQL`](https://ru.wikipedia.org/wiki/PostgreSQL).
 
 &nbsp;
 
 ```js
 sqlServer(): MicrosoftSqlConnectorBuilder
 ```
-Возвращает коннектор для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
+Возвращает коннектор [`MicrosoftSqlConnectorBuilder`](#MicrosoftSqlConnectorBuilder) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
 
 &nbsp;
 
 ```js
 oracle(): OracleConnectorBuilder
 ```
-Возвращает коннектор для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database).
+Возвращает коннектор [`OracleConnectorBuilder`](#OracleConnectorBuilder) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database).
 
 &nbsp;
 
 ```js
 mongodb(): Mongodb.ConnectorBuilder
 ```
-Возвращает коннектор для подключения к базе данных [`MongoDB`](https://ru.wikipedia.org/wiki/MongoDB).
+Возвращает коннектор [`Mongodb.ConnectorBuilder`](#Mongodb.ConnectorBuilder) ...................... для подключения к базе данных [`MongoDB`](https://ru.wikipedia.org/wiki/MongoDB).
 
 &nbsp;
 
@@ -284,18 +284,30 @@ loadImportBuilder(): MysqlImportBuilder
 ### Интерфейс MicrosoftSqlConnectorBuilder ...<a name="MicrosoftSqlConnectorBuilder"></a>
 ```ts
 interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
-    /**
-     * @param name DBLIB|ODBC|SQLSRV
-     */
-    setDriver(name: string | null): this;
-
-    /**
-     * https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility
-     */
+    setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
     loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
 
+&nbsp;
+
+```js
+setDriver(name: string | null): MicrosoftSqlConnectorBuilder
+```
+Устанавливает драйвер взаимодействия с MS SQL Server. Допустимые значения: `DBLIB`, `ODBC`, `SQLSRV`. Значение по умолчанию: `DBLIB`. Возвращает `this`.
+
+Для подключения к серверу с помощью `DBLIB` в случае аутентификации по протоколу [NTLMv2](https://ru.wikipedia.org/wiki/NTLMv2) необходимо настроить SQL-соединение в манифесте администратора воркспейса. Если это невозможно, рекомендуется использовать драйвер `SQLSRV`.
+
+Драйвер `ODBC` считается устаревшим.
+
+Для работы драйвера `SQLSRV` используется библиотека [`MS SQL для Linux`](https://docs.microsoft.com/ru-ru/sql/linux/sql-server-linux-overview). Её особенностью является подстановка параметров на стороне сервера, в связи с чем в его настройках установлено ограничение на максимальное их количество, по умолчанию: `1000`.
+
+&nbsp;
+
+```js
+loadBulkCopyBuilder(): SqlBulkCopyBuilder
+```
+Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#SqlBulkCopyBuilder) импорта из файла CSV.................
 
 &nbsp;
 
@@ -335,7 +347,6 @@ interface MysqlImportBuilder {
     import(): MysqlImportResult;
 }
 ```
-
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MySQL из файла CSV с помощью [*mysqlimport*](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html). Все функции, кроме `import()`, возвращают `this`.
 
 &nbsp;
@@ -517,6 +528,255 @@ getStats(): object
 Если импорт завершён без ошибок, возвращает объект вида `{"records": 3, "deleted": 0, "skipped": 0, "warnings": 0}`.
 
 &nbsp;
+
+### Интерфейс SqlBulkCopyBuilder ...<a name="SqlBulkCopyBuilder"></a>
+```ts
+interface SqlBulkCopyBuilder {
+    setServerName(value: string): SqlBulkCopyBuilder;
+    setPort(value: number): SqlBulkCopyBuilder;
+    setUsername(value: string): SqlBulkCopyBuilder;
+    setPassword(value: string): SqlBulkCopyBuilder;
+    setDatabase(value: string): SqlBulkCopyBuilder;
+    setQuery(value: string): SqlBulkCopyBuilder;
+    setPacketSize(size: number): SqlBulkCopyBuilder;
+    setBatchSize(size: number): SqlBulkCopyBuilder;
+    setCharacterTypesMode(status: boolean): SqlBulkCopyBuilder;
+    setCodePage(code: string): SqlBulkCopyBuilder;
+    setDsnMode(status: boolean): SqlBulkCopyBuilder;
+    setErrorFile(path: string): SqlBulkCopyBuilder;
+    setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder;
+    setFormatFile(path: string): SqlBulkCopyBuilder;
+    setFirstRow(index: number): SqlBulkCopyBuilder;
+    setHint(hint: string): SqlBulkCopyBuilder;
+    setStandardInputFile(path: string): SqlBulkCopyBuilder;
+    setKeepNullValuesMode(status: boolean): SqlBulkCopyBuilder;
+    setLoginTimeout(timeout: number): SqlBulkCopyBuilder;
+    setLastRow(index: number): SqlBulkCopyBuilder;
+    setMaxErrors(size: number): SqlBulkCopyBuilder;
+    setNativeTypesMode(status: boolean): SqlBulkCopyBuilder;
+    setKeepNonTextNativeValuesMode(status: boolean): SqlBulkCopyBuilder;
+    setOutputFile(path: string): SqlBulkCopyBuilder;
+    setQuotedIdentifiersMode(status: boolean): SqlBulkCopyBuilder;
+    setRowTerm(term: string): SqlBulkCopyBuilder;
+    setRegionalMode(status: boolean): SqlBulkCopyBuilder;
+    setFieldTerm(term: string): SqlBulkCopyBuilder;
+    setTrustedConnectionMode(status: boolean): SqlBulkCopyBuilder;
+    setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder;
+
+    import(path: string): SqlBulkCopyResult;
+
+    export(path: string): SqlBulkCopyResult;
+
+    /**
+     * @param path
+     * @param xml Default is true
+     */
+    format(path: string, xml: boolean): SqlBulkCopyResult;
+}
+```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MS SQL из файла CSV с помощью [*bcp*](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility). Все функции, начинающиеся с `set...()`, возвращают `this`.
+
+&nbsp;
+
+```js
+setServerName(value: string): SqlBulkCopyBuilder
+```
+Устанавливает экземпляр SQL Server, к которому устанавливается подключение; опция *bcp*: *-S*.
+
+&nbsp;
+
+```js
+setPort(value: number): SqlBulkCopyBuilder
+```
+Устанавливает номер порта соединения. По умолчанию: `1433`.
+
+/**
+* -U
+* @param value
+*/
+setUsername(value: string): SqlBulkCopyBuilder
+
+/**
+* -P
+* @param value
+*/
+setPassword(value: string): SqlBulkCopyBuilder
+
+/**
+* -d
+* @param value
+*/
+setDatabase(value: string): SqlBulkCopyBuilder
+
+/**
+* Query for export or table query string for import
+* @param value
+*/
+setQuery(value: string): SqlBulkCopyBuilder
+
+/**
+* -a
+* @param size
+*/
+setPacketSize(size: number): SqlBulkCopyBuilder
+
+/**
+* -b
+* @param size
+*/
+setBatchSize(size: number): SqlBulkCopyBuilder
+
+/**
+* -c
+* @param status
+*/
+setCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
+
+/**
+* -C
+* @param code
+*/
+setCodePage(code: string): SqlBulkCopyBuilder
+
+/**
+* -D
+* @param status
+*/
+setDsnMode(status: boolean): SqlBulkCopyBuilder
+
+/**
+* -e
+* @param path
+*/
+setErrorFile(path: string): SqlBulkCopyBuilder
+
+/**
+* -E
+* @param status
+*/
+setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder
+
+/**
+* -f
+* @param path
+*/
+setFormatFile(path: string): SqlBulkCopyBuilder
+
+/**
+* -F
+* @param index
+*/
+setFirstRow(index: number): SqlBulkCopyBuilder
+
+/**
+* -h
+* @param hint
+*/
+setHint(hint: string): SqlBulkCopyBuilder
+
+/**
+* -i
+* @param path
+*/
+setStandardInputFile(path: string): SqlBulkCopyBuilder
+
+/**
+* -k
+* @param status
+*/
+setKeepNullValuesMode(status: boolean): SqlBulkCopyBuilder
+
+/**
+* -l
+* @param timeout
+*/
+setLoginTimeout(timeout: number): SqlBulkCopyBuilder
+
+/**
+* -L
+* @param index
+*/
+setLastRow(index: number): SqlBulkCopyBuilder
+
+/**
+* -m
+* @param size
+*/
+setMaxErrors(size: number): SqlBulkCopyBuilder
+
+/**
+* -n
+* @param status
+*/
+setNativeTypesMode(status: boolean): SqlBulkCopyBuilder
+
+/**
+* -N
+* @param status
+*/
+setKeepNonTextNativeValuesMode(status: boolean): SqlBulkCopyBuilder
+
+/**
+* -o
+* @param path
+*/
+setOutputFile(path: string): SqlBulkCopyBuilder
+
+/**
+* -q
+* @param status
+*/
+setQuotedIdentifiersMode(status: boolean): SqlBulkCopyBuilder
+
+/**
+* -r
+* @param term
+*/
+setRowTerm(term: string): SqlBulkCopyBuilder
+
+/**
+* -R
+* @param status
+*/
+setRegionalMode(status: boolean): SqlBulkCopyBuilder
+
+/**
+* -t
+* @param term
+*/
+setFieldTerm(term: string): SqlBulkCopyBuilder
+
+/**
+* -T
+* @param status
+*/
+setTrustedConnectionMode(status: boolean): SqlBulkCopyBuilder
+
+/**
+* -w
+* @param status
+*/
+setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
+
+import(path: string): SqlBulkCopyResult
+
+export(path: string): SqlBulkCopyResult
+
+/**
+* @param path
+* @param xml Default is true
+*/
+format(path: string, xml: boolean): SqlBulkCopyResult
+
+### Интерфейс SqlBulkCopyResult ...<a name="SqlBulkCopyResult"></a>
+```ts
+interface SqlBulkCopyResult {
+    hasErrors(): boolean;
+    getErrorOutput(): string;
+    getOutput(): string;
+    getCommand(): string;
+}
+```
 
 ## MongoDB
 
