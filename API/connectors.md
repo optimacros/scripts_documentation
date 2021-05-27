@@ -347,7 +347,7 @@ interface MysqlImportBuilder {
     import(): MysqlImportResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MySQL из файла CSV с помощью [*mysqlimport*](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html). Все функции, кроме `import()`, возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MySQL из файла CSV с помощью утилиты [*mysqlimport*](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html). Все функции, кроме `import()`, возвращают `this`.
 
 &nbsp;
 
@@ -574,7 +574,7 @@ interface SqlBulkCopyBuilder {
     format(path: string, xml: boolean): SqlBulkCopyResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MS SQL из файла CSV с помощью [*bcp*](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility). Все функции, начинающиеся с `set...()`, возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MS SQL из файла CSV с помощью утилиты [*bcp*](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility). Все функции, начинающиеся с `set...()`, возвращают `this`.
 
 &nbsp;
 
@@ -590,29 +590,34 @@ setPort(value: number): SqlBulkCopyBuilder
 ```
 Устанавливает номер порта соединения. По умолчанию: `1433`.
 
-/**
-* -U
-* @param value
-*/
+&nbsp;
+
+```js
 setUsername(value: string): SqlBulkCopyBuilder
+```
+Устанавливает имя пользователя; опция *bcp*: *-U*.
 
-/**
-* -P
-* @param value
-*/
+&nbsp;
+```js
 setPassword(value: string): SqlBulkCopyBuilder
+```
+Устанавливает имя пользователя; опция *bcp*: *-U*.
 
-/**
-* -d
-* @param value
-*/
+&nbsp;
+
+```js
 setDatabase(value: string): SqlBulkCopyBuilder
+```
+Устанавливает имя БД, к которой произойдёт подключение; опция *bcp*: *-d*.
 
-/**
-* Query for export or table query string for import
-* @param value
-*/
+&nbsp;
+
+```js
 setQuery(value: string): SqlBulkCopyBuilder
+```
+Устанавливает ***имя таблицы***, в которую будет произведён импорт, ***несмотря на название***.
+
+&nbsp;
 
 /**
 * -a
