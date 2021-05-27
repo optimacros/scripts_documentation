@@ -601,7 +601,7 @@ setUsername(value: string): SqlBulkCopyBuilder
 ```js
 setPassword(value: string): SqlBulkCopyBuilder
 ```
-Устанавливает имя пользователя; опция *bcp*: *-U*.
+Устанавливает имя пользователя; опция *bcp*: *-P*.
 
 &nbsp;
 
