@@ -658,12 +658,10 @@ setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder
 
 &nbsp;
 
-/**
-* -f
-* @param path
-*/
+```js
 setFormatFile(path: string): SqlBulkCopyBuilder
-.............................баг
+```
+Устанавливает путь к файлу формата; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#f) *bcp*: *-f*. ***Этот функционал содержит баг в утилите bcp и не рекомендуется к использованию!***
 
 &nbsp;
 
@@ -782,19 +780,26 @@ setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
 ```js
 import(path: string): SqlBulkCopyResult
 ```
+Формирует из флагов команду на вызов *bcp*, дожидается завершения импорта из файла `path` и возвращает ссылку на [`SqlBulkCopyResult`](#SqlBulkCopyResult).
 
 &nbsp;
 
 ```js
 export(path: string): SqlBulkCopyResult
 ```
+Формирует из флагов команду на вызов *bcp*, дожидается завершения экспорта в файл `path` и возвращает ссылку на [`SqlBulkCopyResult`](#SqlBulkCopyResult).
 
+&nbsp;
 
 /**
 * @param path
 * @param xml Default is true
 */
+```js
 format(path: string, xml: boolean): SqlBulkCopyResult
+```
+Устанавливает формат импорта `path`. Если указан флаг `xml`, 
+***Этот функционал содержит баг в утилите bcp и не рекомендуется к использованию!***
 
 &nbsp;
 
@@ -807,6 +812,32 @@ interface SqlBulkCopyResult {
     getCommand(): string;
 }
 ```
+
+&nbsp;
+
+```js
+hasErrors(): boolean
+```
+
+&nbsp;
+
+```js
+getErrorOutput(): string
+```
+
+&nbsp;
+
+```js
+getOutput(): string
+```
+
+&nbsp;
+
+```js
+getCommand(): string
+```
+
+&nbsp;
 
 ## MongoDB
 

@@ -598,18 +598,6 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
     setTNS(value: string): this;
 }
 
-export interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
-    /**
-     * @param name DBLIB|ODBC|SQLSRV
-     */
-    setDriver(name: string | null): this;
-
-    /**
-     * https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility
-     */
-    loadBulkCopyBuilder(): SqlBulkCopyBuilder;
-}
-
 export namespace WinAgent {
 
     export interface BaseActionResult {
