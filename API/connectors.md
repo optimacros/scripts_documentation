@@ -196,7 +196,7 @@ qb(): SqlQueryBuilder
 
 &nbsp;
 
-### Интерфейс SqlConnectorBuilder ...<a name="SqlConnectorBuilder"></a>
+### Интерфейс SqlConnectorBuilder<a name="SqlConnectorBuilder"></a>
 ```ts
 interface SqlConnectorBuilder {
     setHost(value: string): SqlConnectorBuilder;
@@ -204,10 +204,6 @@ interface SqlConnectorBuilder {
     setUsername(value: string): SqlConnectorBuilder;
     setPassword(value: string): SqlConnectorBuilder;
     setDatabase(value: string): SqlConnectorBuilder;
-    /**
-     * https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility
-     */
-    loadBulkCopyBuilder(): SqlBulkCopyBuilder;
     load(): SqlConnection;
 }
 ```
@@ -247,13 +243,6 @@ setPassword(value: string): SqlConnectorBuilder
 setDatabase(value: string): SqlConnectorBuilder
 ```
 Устанавливает имя базы данных. Возвращает `this`.
-
-&nbsp;
-
-```js
-loadBulkCopyBuilder(): SqlBulkCopyBuilder
-```
-...........
 
 &nbsp;
 
