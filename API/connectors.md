@@ -567,6 +567,7 @@ interface SqlBulkCopyBuilder {
 
 &nbsp;
 
+<a name="setServerName"></a>
 ```js
 setServerName(value: string): SqlBulkCopyBuilder
 ```
@@ -639,8 +640,7 @@ setCodePage(code: string): SqlBulkCopyBuilder
 ```js
 setDsnMode(status: boolean): SqlBulkCopyBuilder
 ```
-Устанавливает значение, передаваемое в параметр `bcp -S`, которое интерпретируется как имя источника данных (DSN); [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#D) *bcp*: *-D*.
-....................................
+Устанавливает режим, в котором значение, передаваемое в функцию [`setServerName()`](#setServerName) интерпретируется как имя источника данных (DSN); [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#D) *bcp*: *-D*.
 
 &nbsp;
 
@@ -663,7 +663,7 @@ setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder
 * @param path
 */
 setFormatFile(path: string): SqlBulkCopyBuilder
-....баг
+.............................баг
 
 &nbsp;
 
@@ -695,87 +695,108 @@ setKeepNullValuesMode(status: boolean): SqlBulkCopyBuilder
 
 &nbsp;
 
-/**
-* -l
-* @param timeout
-*/
+```js
 setLoginTimeout(timeout: number): SqlBulkCopyBuilder
+```
+Устанавливает время ожидания входа в секундах; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#l) *bcp*: *-l*. Значение по умолчанию: `15`.
 
-/**
-* -L
-* @param index
-*/
+&nbsp;
+
+```js
 setLastRow(index: number): SqlBulkCopyBuilder
+```
+Устанавливает номер последней строки для импорта из файла данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#L) *bcp*: *-L*.
 
-/**
-* -m
-* @param size
-*/
+&nbsp;
+
+```js
 setMaxErrors(size: number): SqlBulkCopyBuilder
+```
+Устанавливает максимальное количество ошибок, которые могут произойти до отмены импорта; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#m) *bcp*: *-m*. Значение по умолчанию: ``....................................
 
-/**
-* -n
-* @param status
-*/
+&nbsp;
+
+```js
 setNativeTypesMode(status: boolean): SqlBulkCopyBuilder
+```
+Устанавливает признак использования собственных типов данных (базы данных). Этот параметр не запрашивает тип данных для каждого поля, он использует собственные значения; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#n) *bcp*: *-n*.
 
-/**
-* -N
-* @param status
-*/
+&nbsp;
+
+```js
 setKeepNonTextNativeValuesMode(status: boolean): SqlBulkCopyBuilder
+```
+Устанавливает признак использования собственных типов данных (базы данных) для несимвольных данных и символы Юникода для символьных данных. Этот параметр не запрашивает тип данных для каждого поля, он использует собственные значения; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#N) *bcp*: *-N*.
 
-/**
-* -o
-* @param path
-*/
+&nbsp;
+
+```js
 setOutputFile(path: string): SqlBulkCopyBuilder
+```
+Устанавливает имя файла, который принимает перенаправленные из командной строки выходные данные; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#o) *bcp*: *-o*.
 
-/**
-* -q
-* @param status
-*/
+&nbsp;
+
+```js
 setQuotedIdentifiersMode(status: boolean): SqlBulkCopyBuilder
+```
+Выполняет инструкцию `SET QUOTED_IDENTIFIERS ON` в соединении между служебной программой `bcp` и экземпляром `SQL Server`; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#q) *bcp*: *-q*.
 
-/**
-* -r
-* @param term
-*/
+&nbsp;
+
+```js
 setRowTerm(term: string): SqlBulkCopyBuilder
+```
+Устанавливает признак конца строки; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#r) *bcp*: *-r*.
 
-/**
-* -R
-* @param status
-*/
+&nbsp;
+
 setRegionalMode(status: boolean): SqlBulkCopyBuilder
+Устанавливает признак импорта данных в денежном формате, в формате даты и времени с помощью регионального формата, определённого настройками локали клиентского компьютера; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#R) *bcp*: *-R*. Значение по умолчанию: `false`.
 
-/**
-* -t
-* @param term
-*/
+&nbsp;
+
+```js
 setFieldTerm(term: string): SqlBulkCopyBuilder
+```
+Устанавливает признак конца поля; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#t) *bcp*: *-t*. Значение по умолчанию: `\t`.
 
-/**
-* -T
-* @param status
-*/
+&nbsp;
+ 
+```js
 setTrustedConnectionMode(status: boolean): SqlBulkCopyBuilder
+```
+Указывает, что программа `bcp` устанавливает доверительное соединение с `SQL Server` с использованием встроенной безопасности; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#T) *bcp*: *-T*. Не требуются учётные данные безопасности для сетевого пользователя.
+
+&nbsp;
 
 /**
 * -w
 * @param status
 */
 setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
+Устанавливает признак использования символов Юникода. При использовании этого параметра не запрашивается тип данных каждого поля, для хранения данных используется тип `nchar`, отсутствуют префиксы, в качестве разделителя полей используется символ табуляции `\t`, а в качестве признака конца строки — символ новой строки `\n`.
 
+&nbsp;
+
+```js
 import(path: string): SqlBulkCopyResult
+```
 
+&nbsp;
+
+```js
 export(path: string): SqlBulkCopyResult
+```
+
 
 /**
 * @param path
 * @param xml Default is true
 */
 format(path: string, xml: boolean): SqlBulkCopyResult
+
+&nbsp;
 
 ### Интерфейс SqlBulkCopyResult ...<a name="SqlBulkCopyResult"></a>
 ```ts
