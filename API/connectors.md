@@ -581,7 +581,7 @@ interface SqlBulkCopyBuilder {
 ```js
 setServerName(value: string): SqlBulkCopyBuilder
 ```
-Устанавливает экземпляр SQL Server, к которому устанавливается подключение; опция *bcp*: *-S*.
+Устанавливает экземпляр SQL Server, к которому устанавливается подключение; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#S) *bcp*: *-S*.
 
 &nbsp;
 
@@ -595,20 +595,20 @@ setPort(value: number): SqlBulkCopyBuilder
 ```js
 setUsername(value: string): SqlBulkCopyBuilder
 ```
-Устанавливает имя пользователя; опция *bcp*: *-U*.
+Устанавливает имя пользователя; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#U) *bcp*: *-U*.
 
 &nbsp;
 ```js
 setPassword(value: string): SqlBulkCopyBuilder
 ```
-Устанавливает имя пользователя; опция *bcp*: *-P*.
+Устанавливает имя пользователя; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#P) *bcp*: *-P*.
 
 &nbsp;
 
 ```js
 setDatabase(value: string): SqlBulkCopyBuilder
 ```
-Устанавливает имя БД, к которой произойдёт подключение; опция *bcp*: *-d*.
+Устанавливает имя БД, к которой произойдёт подключение; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#d) *bcp*: *-d*.
 
 &nbsp;
 
@@ -619,23 +619,24 @@ setQuery(value: string): SqlBulkCopyBuilder
 
 &nbsp;
 
-/**
-* -a
-* @param size
-*/
+```js
 setPacketSize(size: number): SqlBulkCopyBuilder
+```
+Устанавливает число байтов в каждом сетевом пакете; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#a) *bcp*: *-a*. Значение может находиться в пределах от `4096` до `65535` байт, значение по умолчанию: `4096`.
 
-/**
-* -b
-* @param size
-*/
+&nbsp;
+
+```js
 setBatchSize(size: number): SqlBulkCopyBuilder
+```
+Устанавливает количество строк в каждом пакете импортированных данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#b) *bcp*: *-b*. Каждый пакет импортируется и регистрируется как отдельная транзакция, которая фиксируется после выполнения импорта всего пакета. По умолчанию импорт всех строк в файле данных выполняется в одном пакете. 
 
-/**
-* -c
-* @param status
-*/
+&nbsp;
+
+```js
 setCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
+```
+Устанавливает символьный тип данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#c) *bcp*: *-c*. Подробное описание [`здесь`](https://docs.microsoft.com/ru-ru/sql/relational-databases/import-export/use-character-format-to-import-or-export-data-sql-server?view=sql-server-ver15).
 
 /**
 * -C
