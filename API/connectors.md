@@ -699,11 +699,12 @@ setStandardInputFile(path: string): SqlBulkCopyBuilder
 
 &nbsp;
 
-/**
-* -k
-* @param status
-*/
+```js
 setKeepNullValuesMode(status: boolean): SqlBulkCopyBuilder
+```
+Указывает, что пустые столбцы во время данной операции должны сохранить значение NULL вместо любых вставляемых значений столбцов по умолчанию; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#k) *bcp*: *-k*.
+
+&nbsp;
 
 /**
 * -l
