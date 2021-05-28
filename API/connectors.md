@@ -638,53 +638,66 @@ setCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
 ```
 Устанавливает символьный тип данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#c) *bcp*: *-c*. Подробное описание [`здесь`](https://docs.microsoft.com/ru-ru/sql/relational-databases/import-export/use-character-format-to-import-or-export-data-sql-server?view=sql-server-ver15).
 
-/**
-* -C
-* @param code
-*/
+&nbsp;
+
+```js
 setCodePage(code: string): SqlBulkCopyBuilder
+```
+Устанавливает кодовую страницу данных в файле данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#C) *bcp*: *-C*. Значение по умолчанию: `OEM`.
 
-/**
-* -D
-* @param status
-*/
+&nbsp;
+
+```js
 setDsnMode(status: boolean): SqlBulkCopyBuilder
+```
+Устанавливает значение, передаваемое в параметр `bcp -S`, которое интерпретируется как имя источника данных (DSN); [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#D) *bcp*: *-D*.
+....................................
 
-/**
-* -e
-* @param path
-*/
+&nbsp;
+
+```js
 setErrorFile(path: string): SqlBulkCopyBuilder
+```
+Устанавливает полный путь к файлу ошибок, используемому для хранения строк, которые `bcp` не может передать из файла в базу данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#e) *bcp*: *-e*.
 
-/**
-* -E
-* @param status
-*/
+&nbsp;
+
+```js
 setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder
+```
+Указывает, что значение или значения идентификаторов в файле импортированных данных будут использоваться для столбца идентификаторов; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#E) *bcp*: *-E*.
+
+&nbsp;
 
 /**
 * -f
 * @param path
 */
 setFormatFile(path: string): SqlBulkCopyBuilder
+....баг
 
-/**
-* -F
-* @param index
-*/
+&nbsp;
+
+```js
 setFirstRow(index: number): SqlBulkCopyBuilder
+```
+Устанавливает номер первой строки для импорта из файла данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#F) *bcp*: *-F*.
 
-/**
-* -h
-* @param hint
-*/
+&nbsp;
+
+```js
 setHint(hint: string): SqlBulkCopyBuilder
+```
+Устанавливает одно или несколько указаний для использования во время массового импорта; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#h) *bcp*: *-h*.
 
-/**
-* -i
-* @param path
-*/
+&nbsp;
+
+```js
 setStandardInputFile(path: string): SqlBulkCopyBuilder
+```
+Устанавливает имя файла ответов, содержащего ответы на вопросы командной строки для каждого поля данных при выполнении массового копирования в интерактивном режиме; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#i) *bcp*: *-i*.
+
+&nbsp;
 
 /**
 * -k
