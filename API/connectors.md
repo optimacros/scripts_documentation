@@ -309,7 +309,7 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
     setTNS(value: string): OracleConnectorBuilder;
 }
 ```
-[`Коннектор`](../glossary.md#connector) [`OracleConnectorBuilder`](#OracleConnectorBuilder) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`.
+[`Коннектор`](../glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`.
 
 &nbsp;
 
