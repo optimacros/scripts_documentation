@@ -277,6 +277,7 @@ interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
     loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
+[`Коннектор`](../glossary.md#connector) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
 
 &nbsp;
 
@@ -303,13 +304,31 @@ loadBulkCopyBuilder(): SqlBulkCopyBuilder
 ### Интерфейс OracleConnectorBuilder ...<a name="OracleConnectorBuilder"></a>
 ```ts
 export interface OracleConnectorBuilder extends SqlConnectorBuilder {
-    setServiceName(value: string): this;
-
-    setSchema(value: string): this;
-
-    setTNS(value: string): this;
+    setServiceName(value: string): OracleConnectorBuilder;
+    setSchema(value: string): OracleConnectorBuilder;
+    setTNS(value: string): OracleConnectorBuilder;
 }
 ```
+[`Коннектор`](../glossary.md#connector) [`OracleConnectorBuilder`](#OracleConnectorBuilder) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database).
+
+&nbsp;
+
+```js
+setServiceName(value: string): OracleConnectorBuilder
+```
+
+&nbsp;
+
+```js
+setSchema(value: string): OracleConnectorBuilder
+```
+
+&nbsp;
+
+```js
+setTNS(value: string): OracleConnectorBuilder
+```
+
 
 &nbsp;
 
@@ -565,6 +584,8 @@ interface SqlBulkCopyBuilder {
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MS SQL из файла CSV с помощью утилиты [*bcp*](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility). Все функции, начинающиеся с `set...()`, возвращают `this`.
 
+Порядок полей в файле CSV и таблице должен строго совпадать, даже при импорте в таблицу с полем [`IDENTITY`](https://docs.microsoft.com/ru-ru/sql/t-sql/statements/create-table-transact-sql-identity-property), так как в утилите *bcp* имеется баг, из-за которого работоспособность функций [`setFormatFile()`](#SqlBulkCopyBuilder.setFormatFile) и [`format()`](#SqlBulkCopyBuilder.format) не гарантирована.
+
 &nbsp;
 
 <a name="setServerName"></a>
@@ -658,6 +679,7 @@ setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder
 
 &nbsp;
 
+<a name="SqlBulkCopyBuilder.setFormatFile"></a>
 ```js
 setFormatFile(path: string): SqlBulkCopyBuilder
 ```
@@ -793,6 +815,7 @@ export(path: string): SqlBulkCopyResult
 * @param path
 * @param xml Default is true
 */
+<a name="SqlBulkCopyBuilder.format"></a>
 ```js
 format(path: string, xml: boolean): SqlBulkCopyResult
 ```
@@ -810,6 +833,7 @@ interface SqlBulkCopyResult {
     getCommand(): string;
 }
 ```
+Интерфейс просмотра результатов импорта/экспорта, осуществлённого с помощью [`SqlBulkCopyBuilder`](#SqlBulkCopyBuilder).
 
 &nbsp;
 
