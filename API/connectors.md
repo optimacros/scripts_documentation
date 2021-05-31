@@ -301,7 +301,7 @@ loadBulkCopyBuilder(): SqlBulkCopyBuilder
 
 &nbsp;
 
-### Интерфейс OracleConnectorBuilder ...<a name="OracleConnectorBuilder"></a>
+### Интерфейс OracleConnectorBuilder<a name="OracleConnectorBuilder"></a>
 ```ts
 export interface OracleConnectorBuilder extends SqlConnectorBuilder {
     setServiceName(value: string): OracleConnectorBuilder;
@@ -309,26 +309,28 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
     setTNS(value: string): OracleConnectorBuilder;
 }
 ```
-[`Коннектор`](../glossary.md#connector) [`OracleConnectorBuilder`](#OracleConnectorBuilder) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database).
+[`Коннектор`](../glossary.md#connector) [`OracleConnectorBuilder`](#OracleConnectorBuilder) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`.
 
 &nbsp;
 
 ```js
 setServiceName(value: string): OracleConnectorBuilder
 ```
+Устанавливает имя службы (SERVICE_NAME). SERVICE_NAME определяет одно или ряд имен для подключения к одному экземпляру базы данных. Возможные значения SERVICE_NAME указываются в сетевых установках Oracle и регистрируются в качестве службы БД процессом listener.
 
 &nbsp;
 
 ```js
 setSchema(value: string): OracleConnectorBuilder
 ```
+Устанавливает [`схему`](https://docs.oracle.com/cd/E11882_01/server.112/e10897/schema.htm).
 
 &nbsp;
 
 ```js
 setTNS(value: string): OracleConnectorBuilder
 ```
-
+Устанавливает имя службы TNS. Протокол TNS (Transparent Network Substrate) — уровень связи, используемый базами данных Oracle. Имя службы TNS — это имя, с которым экземпляр базы данных Oracle представлен в сети. Имя службы TNS назначается при настройке подключений к базе данных Oracle. 
 
 &nbsp;
 
