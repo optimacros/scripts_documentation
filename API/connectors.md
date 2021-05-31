@@ -270,7 +270,7 @@ loadImportBuilder(): MysqlImportBuilder
 
 &nbsp;
 
-### Интерфейс MicrosoftSqlConnectorBuilder ...<a name="MicrosoftSqlConnectorBuilder"></a>
+### Интерфейс MicrosoftSqlConnectorBuilder<a name="MicrosoftSqlConnectorBuilder"></a>
 ```ts
 interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
     setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
@@ -297,7 +297,7 @@ setDriver(name: string | null): MicrosoftSqlConnectorBuilder
 ```js
 loadBulkCopyBuilder(): SqlBulkCopyBuilder
 ```
-Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#SqlBulkCopyBuilder) импорта из файла CSV.................
+Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#SqlBulkCopyBuilder) импорта/экспорта через файл CSV.
 
 &nbsp;
 
