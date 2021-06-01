@@ -592,12 +592,6 @@ export interface ResultActionsInfo {
     makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
 }
 
-export interface OracleConnectorBuilder extends SqlConnectorBuilder {
-    setServiceName(value: string): this;
-    setSchema(value: string): this;
-    setTNS(value: string): this;
-}
-
 export namespace WinAgent {
 
     export interface BaseActionResult {
