@@ -539,7 +539,7 @@ getStats(): object
 
 &nbsp;
 
-### Интерфейс SqlBulkCopyBuilder ...<a name="SqlBulkCopyBuilder"></a>
+### Интерфейс SqlBulkCopyBuilder<a name="SqlBulkCopyBuilder"></a>
 ```ts
 interface SqlBulkCopyBuilder {
     setServerName(value: string): SqlBulkCopyBuilder;
@@ -574,13 +574,7 @@ interface SqlBulkCopyBuilder {
     setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder;
 
     import(path: string): SqlBulkCopyResult;
-
     export(path: string): SqlBulkCopyResult;
-
-    /**
-     * @param path
-     * @param xml Default is true
-     */
     format(path: string, xml: boolean): SqlBulkCopyResult;
 }
 ```
@@ -734,7 +728,7 @@ setLastRow(index: number): SqlBulkCopyBuilder
 ```js
 setMaxErrors(size: number): SqlBulkCopyBuilder
 ```
-Устанавливает максимальное количество ошибок, которые могут произойти до отмены импорта; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#m) *bcp*: *-m*. Значение по умолчанию: ``....................................
+Устанавливает максимальное количество ошибок, которые могут произойти до отмены импорта; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#m) *bcp*: *-m*. Значение по умолчанию: `10`.
 
 &nbsp;
 
@@ -813,16 +807,13 @@ export(path: string): SqlBulkCopyResult
 
 &nbsp;
 
-/**
-* @param path
-* @param xml Default is true
-*/
 <a name="SqlBulkCopyBuilder.format"></a>
 ```js
 format(path: string, xml: boolean): SqlBulkCopyResult
 ```
-Устанавливает формат импорта `path`. Если указан флаг `xml`, 
-***Этот функционал содержит баг в утилите bcp и не рекомендуется к использованию!***
+Формирует из флагов команду на вызов *bcp [`format`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#format)*, которая создаёт файл форматирования `path`, основанный на указанных параметрах, дожидается завершения и возвращает ссылку на [`SqlBulkCopyResult`](#SqlBulkCopyResult). Если указан флаг `xml` ([`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#x) *bcp*: *-x*), файл форматирования будет создан на основе [`XML`](https://ru.wikipedia.org/wiki/XML); по умолчанию: `true`.
+
+Файл форматирования можно использовать для последующего экспорта/импорта при вызове функции [`setFormatFile()`](#SqlBulkCopyBuilder.setFormatFile).
 
 &nbsp;
 
