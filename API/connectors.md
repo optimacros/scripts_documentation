@@ -795,6 +795,7 @@ setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
 
 &nbsp;
 
+<a name="SqlBulkCopyBuilder.import"></a>
 ```js
 import(path: string): SqlBulkCopyResult
 ```
@@ -802,6 +803,7 @@ import(path: string): SqlBulkCopyResult
 
 &nbsp;
 
+<a name="SqlBulkCopyBuilder.export"></a>
 ```js
 export(path: string): SqlBulkCopyResult
 ```
@@ -819,7 +821,7 @@ format(path: string, xml: boolean): SqlBulkCopyResult
 
 &nbsp;
 
-### Интерфейс SqlBulkCopyResult ...<a name="SqlBulkCopyResult"></a>
+### Интерфейс SqlBulkCopyResult<a name="SqlBulkCopyResult"></a>
 ```ts
 interface SqlBulkCopyResult {
     hasErrors(): boolean;
@@ -835,24 +837,28 @@ interface SqlBulkCopyResult {
 ```js
 hasErrors(): boolean
 ```
+Возвращает `getErrorOutput() != ''`.
 
 &nbsp;
 
 ```js
 getErrorOutput(): string
 ```
+Возвращает вывод команды *bcp* в `stderr`.
 
 &nbsp;
 
 ```js
 getOutput(): string
 ```
+Возвращает вывод команды *bcp* в `stdout`.
 
 &nbsp;
 
 ```js
 getCommand(): string
 ```
+Возвращает сформированную команду на вызов *bcp*, которая была выполнена в момент вызова одной из функций [`SqlBulkCopyBuilder.import()`](#SqlBulkCopyBuilder.import), [`SqlBulkCopyBuilder.export()`](#SqlBulkCopyBuilder.export), [`SqlBulkCopyBuilder.format()`](#SqlBulkCopyBuilder.format).
 
 &nbsp;
 
