@@ -784,7 +784,7 @@ setFieldTerm(term: string): SqlBulkCopyBuilder
 ```js
 setTrustedConnectionMode(status: boolean): SqlBulkCopyBuilder
 ```
-Указывает, что программа `bcp` устанавливает доверительное соединение с `SQL Server` с использованием встроенной безопасности; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#T) *bcp*: *-T*. Не требуются учётные данные безопасности для сетевого пользователя.
+Указывает, что программа `bcp` устанавливает доверительное соединение с `MS SQL Server` с использованием встроенной безопасности; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#T) *bcp*: *-T*. Не требуются учётные данные безопасности для сетевого пользователя.
 
 &nbsp;
 
