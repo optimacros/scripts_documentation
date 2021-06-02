@@ -767,7 +767,9 @@ setRowTerm(term: string): SqlBulkCopyBuilder
 
 &nbsp;
 
+```js
 setRegionalMode(status: boolean): SqlBulkCopyBuilder
+```
 Устанавливает признак импорта данных в денежном формате, в формате даты и времени с помощью регионального формата, определённого настройками локали клиентского компьютера; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#R) *bcp*: *-R*. Значение по умолчанию: `false`.
 
 &nbsp;
