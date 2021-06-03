@@ -185,31 +185,6 @@ interface ListImporter extends Importer {
 }
 ```
 
-### Интерфейс UserInfo ...<a name="UserInfo"></a>
-```ts
-interface UserInfo {
-    getEntity(): EntityInfo;
-    getEmail(): string;
-    getFirstName(): string;
-    getLastName(): string;
-    getRole(): EntityInfo;
-}
-```
-
-### Интерфейс ModelInfo ...<a name="ModelInfo"></a>
-```ts
-interface ModelInfo {
-    id(): number;
-    name(): string;
-    lastSyncDate(): number;
-    autoCalcStatus(): boolean;
-    setModelCalculationMode(status: boolean): boolean;
-    repair(): boolean;
-    recalculate(): boolean;
-    backup(path: string): boolean;
-}
-```
-
 ### Интерфейс CopyData ...<a name="CopyData"></a>
 ```ts
 interface CopyData {

@@ -151,6 +151,75 @@ canLoadCellsValues(value: boolean): CellBuffer
 &nbsp;
 
 ### Интерфейс ModelInfo ...<a name="ModelInfo"></a>
+```ts
+interface ModelInfo {
+    id(): string;
+    name(): string;
+    lastSyncDate(): number;
+    autoCalcStatus(): boolean;
+    setModelCalculationMode(status: boolean): boolean;
+    repair(): boolean;
+    recalculate(): boolean;
+    backup(path: string): boolean;
+}
+```
+Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
+
+&nbsp;
+
+```js
+id(): string
+```
+Возвращает `id` модели.
+
+&nbsp;
+
+```js
+name(): string
+```
+Возвращает имя модели.
+
+&nbsp;
+
+```js
+lastSyncDate(): number
+```
+Возвращает дату и время в формате [`UNIX`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F) последнего пересчёта модели в ручном режиме.
+
+&nbsp;
+
+```js
+autoCalcStatus(): boolean
+```
+Возвращает признак режима автоматического пересчёта модели.
+
+&nbsp;
+
+```js
+setModelCalculationMode(status: boolean): boolean
+```
+Устанавливает признак режима автоматического пересчёта модели. Аналог в интерфейсе Optimacros: меню пользователя -> `Параметры` -> `Расширенные` -> `Режим ручного пересчёта модели`. Возвращает `true`.
+
+&nbsp;
+
+```js
+repair(): boolean
+```
+Делает резервную копию модели, останавливает все процессы модели, запускает их заново и восстанавливает модель из копии. Аналог в интерфейсе Optimacros: меню пользователя -> `Перезапустить модель`. Возвращает `true`.
+
+&nbsp;
+
+```js
+recalculate(): boolean
+```
+Не останавливает процессы модели. Аналог в интерфейсе Optimacros: меню пользователя -> `Пересчитать модель`. Возвращает `true`.
+
+&nbsp;
+
+```js
+backup(path: string): boolean
+```
+Сохраняет резервную копию в [`рабочую директорию`](../glossary.md#scriptDir) скрипта по пути `path`. Возвращает `true`.
 
 &nbsp;
 
