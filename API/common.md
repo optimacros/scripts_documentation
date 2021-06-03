@@ -150,6 +150,59 @@ canLoadCellsValues(value: boolean): CellBuffer
 
 &nbsp;
 
+### Интерфейс ModelInfo ...<a name="ModelInfo"></a>
+
+&nbsp;
+
+### Интерфейс UserInfo ...<a name="UserInfo"></a>
+```ts
+interface UserInfo {
+    getEntity(): EntityInfo;
+    getEmail(): string;
+    getFirstName(): string;
+    getLastName(): string;
+    getRole(): EntityInfo;
+}
+```
+Интерфейс получения информации о пользователе.
+
+&nbsp;
+
+```js
+getEntity(): EntityInfo
+```
+Возвращает сущность пользователя в виде [`EntityInfo`](./OMviews.md#EntityInfo).
+
+&nbsp;
+
+```js
+getEmail(): string
+```
+Возвращает email пользователя.
+
+&nbsp;
+
+```js
+getFirstName(): string
+```
+Возвращает имя пользователя.
+
+&nbsp;
+
+```js
+getLastName(): string
+```
+Возвращает фамилию пользователя.
+
+&nbsp;
+
+```js
+getRole(): EntityInfo
+```
+Возвращает сущность роли пользователя в виде [`EntityInfo`](./OMviews.md#EntityInfo).
+
+&nbsp;
+
 ### Интерфейс ResultInfo ...<a name="ResultInfo"></a>
 ```ts
 interface ResultInfo {
