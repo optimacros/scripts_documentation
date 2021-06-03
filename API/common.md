@@ -154,7 +154,7 @@ canLoadCellsValues(value: boolean): CellBuffer
 
 &nbsp;
 
-### Интерфейс UserInfo ...<a name="UserInfo"></a>
+### Интерфейс UserInfo<a name="UserInfo"></a>
 ```ts
 interface UserInfo {
     getEntity(): EntityInfo;
