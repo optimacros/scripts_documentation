@@ -973,7 +973,7 @@ versionsTab(): VersionsTab
 
 ### Интерфейс VersionsTab<a name="VersionsTab"></a>
 ```ts
-interface VersionsTab {
+interface VersionsTab extends Tab {
     copyVersion(from: string, to: string): Object;
 }
 ```
