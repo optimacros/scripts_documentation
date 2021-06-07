@@ -72,11 +72,15 @@ for (const chunk of generator) {
 
 Для получения удобочитаемого вывода рекомендуется добавлять этот символ самостоятельно:
 
-```console.log(message + '\n')```
+```js
+console.log(message + '\n')
+```
 
 или
 
-```console.log(`${message}\n`)```.
+```js
+console.log(`${message}\n`)
+```
 
 
 [Приложения](appendix.md)
