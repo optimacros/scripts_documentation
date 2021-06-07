@@ -70,7 +70,13 @@ for (const chunk of generator) {
 <a name="noLineBreak"></a>
 ## `console.log()` не добавляет символ переноса строки
 
-Для получения удобочитаемого вывода рекомендуется добавлять этот символ самостоятельно: ```console.log(message + '\n')``` или ```console.log(`${message}\n`)```.
+Для получения удобочитаемого вывода рекомендуется добавлять этот символ самостоятельно:
+
+```console.log(message + '\n')```
+
+или
+
+```console.log(`${message}\n`)```.
 
 
 [Приложения](appendix.md)
