@@ -72,7 +72,7 @@ type: string
 ```js
 path: string
 ```
-Путь к объекту в [`рабочей директории скрипта`](../glossary.md#scriptDir).
+Путь к объекту в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
 
 &nbsp;
 
@@ -93,7 +93,7 @@ size: number
 ```js
 dirname: string
 ```
-Папка, в которой находится объект. Для объектов в [`рабочей директории скрипта`](../glossary.md#scriptDir) это пустая строка.
+Папка, в которой находится объект. Для объектов в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) это пустая строка.
 
 &nbsp;
 
@@ -284,7 +284,7 @@ download(from: string, to: string): boolean
 ```js
 makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string
 ```
-Функция доступа *только* для [`локальной`](#local) файловой системы. Регистрирует уже существующий файл `path` в [`глобальном реестре`](../glossary.md#globalFileRegistry) под именем `{name}.{extension}`. Аргумент `copy` определяет, копировать или перемещать файл `path` в глобальный реестр; по умолчанию: `true`. Возвращает хэш файла. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
+Функция доступа *только* для [`локальной`](#local) файловой системы. Регистрирует уже существующий файл `path` в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry) под именем `{name}.{extension}`. Аргумент `copy` определяет, копировать или перемещать файл `path` в глобальный реестр; по умолчанию: `true`. Возвращает хэш файла. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
 
 &nbsp;
 
@@ -527,7 +527,7 @@ writeRows(rows: string[][]): CsvWriter
 ```js
 save(name: string, charset?: string): string
 ```
-Сохраняет файл в [`рабочей директории скрипта`](../glossary.md#scriptDir) под именем `{name}.csv` в кодировке `charset` (допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`). Возвращает имя файла с расширением: `{name}.csv`.
+Сохраняет файл в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) под именем `{name}.csv` в кодировке `charset` (допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`). Возвращает имя файла с расширением: `{name}.csv`.
 
 &nbsp;
 
@@ -624,7 +624,7 @@ interface FilesDataManager {
     converterManager(): ConverterManager;
 }
 ```
-Интерфейс, который группирует интерфейсы для работы с данными файлов в [`рабочей директории скрипта`](../glossary.md#scriptDir).
+Интерфейс, который группирует интерфейсы для работы с данными файлов в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
 
 &nbsp;
 

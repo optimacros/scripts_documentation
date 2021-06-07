@@ -219,7 +219,7 @@ recalculate(): boolean
 ```js
 backup(path: string): boolean
 ```
-Сохраняет резервную копию в [`рабочую директорию`](../glossary.md#scriptDir) скрипта по пути `path`. Возвращает `true`.
+Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#scriptDir) скрипта по пути `path`. Возвращает `true`.
 
 &nbsp;
 
@@ -287,7 +287,7 @@ interface ResultInfo {
 ```js
 addFileHash(hash: string): ResultInfo
 ```
-Добавляет к ответу на запрос скрипта хэш `hash` файла, ранее зарегистрированного в [`глобальном реестре`](../glossary.md#globalFileRegistry). Для пользователя это приведёт к тому, что файл будет скачан в браузере. Возвращает `this`.
+Добавляет к ответу на запрос скрипта хэш `hash` файла, ранее зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Для пользователя это приведёт к тому, что файл будет скачан в браузере. Возвращает `this`.
 
 &nbsp;
 

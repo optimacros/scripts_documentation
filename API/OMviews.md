@@ -1154,7 +1154,7 @@ setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 ```js
 export(): ExportResult
 ```
-Производит экспорт представления в соответствии с настройками, регистрирует файл в [`глобальном реестре`](../glossary.md#globalFileRegistry) и возвращает ссылку на [`ExportResult`](#ExportResult).
+Производит экспорт представления в соответствии с настройками, регистрирует файл в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry) и возвращает ссылку на [`ExportResult`](#ExportResult).
 
 &nbsp;
 
@@ -1242,7 +1242,7 @@ mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): 
 ```js
 getHash(): string | null
 ```
-Возвращает идентификатор файла в [`глобальном реестре`](../glossary.md#globalFileRegistry), или `null`, если файл там отсутствует. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
+Возвращает идентификатор файла в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry), или `null`, если файл там отсутствует. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
 
 &nbsp;
 
@@ -1250,14 +1250,14 @@ getHash(): string | null
 ```js
 copyToLocal(path: string): ExportResult
 ```
-Копирует экспортированный файл в путь `path` в [`рабочей директории скрипта`](../glossary.md#scriptDir). Возвращает `this`.
+Копирует экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir). Возвращает `this`.
 
 &nbsp;
 
 ```js
 moveToLocal(path: string): ExportResult
 ```
-Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../glossary.md#scriptDir) и убирает его из [`глобального реестра`](../glossary.md#globalFileRegistry). Возвращает `this`.
+Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) и убирает его из [`глобального реестра`](../appendix/glossary.md#globalFileRegistry). Возвращает `this`.
 
 &nbsp;
 

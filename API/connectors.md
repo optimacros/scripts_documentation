@@ -20,7 +20,7 @@ interface Connectors {
     winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 }
 ```
-Интерфейс, группирующий [`коннекторы`](../glossary.md#connector) к различным внешним системам.
+Интерфейс, группирующий [`коннекторы`](../appendix/glossary.md#connector) к различным внешним системам.
 
 &nbsp;
 
@@ -207,7 +207,7 @@ interface SqlConnectorBuilder {
     load(): SqlConnection;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), базовый интерфейс [`коннекторов`](../glossary.md#connector) для подключения к реляционной базе данных.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), базовый интерфейс [`коннекторов`](../appendix/glossary.md#connector) для подключения к реляционной базе данных.
 
 &nbsp;
 
@@ -259,7 +259,7 @@ interface MysqlConnectorBuilder extends SqlConnectorBuilder {
     loadImportBuilder(): MysqlImportBuilder;
 }
 ```
-[`Коннектор`](../glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
 
 &nbsp;
 
@@ -277,7 +277,7 @@ interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
     loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
-[`Коннектор`](../glossary.md#connector) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
 
 &nbsp;
 
@@ -309,7 +309,7 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
     setTNS(value: string): OracleConnectorBuilder;
 }
 ```
-[`Коннектор`](../glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`.
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`.
 
 &nbsp;
 
@@ -469,7 +469,7 @@ setColumns(names: string[]): MysqlImportBuilder
 ```js
 setFilePath(path: string): MysqlImportBuilder
 ```
-Устанавливает путь к файлу в [`рабочей директории скрипта`](../glossary.md#scriptDir).
+Устанавливает путь к файлу в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
 
 &nbsp;
 
