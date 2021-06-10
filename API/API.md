@@ -18,7 +18,7 @@
     1. Shared folder
     1. Файлы CSV
 1. [Цепочки скриптов](scriptChains.md)
-1. [Окружение, модель, пользователь](env.md)
+1. [Окружение](env.md)
 
 ### Интерфейс OM ...<a name="OM"></a>
 ```ts
@@ -487,29 +487,8 @@ declare namespace Http {
         setPath(path: string): boolean;
     }
 
-    interface RequestBuilder {
-        url(): Url;
 
-        /**
-         *
-         * @param type GET|POST|DELETE|PUT|HEAD|OPTIONS
-         */
-        setMethod(type: string): boolean;
-        getMethod(): string;
-        body(): RequestBody;
-        options(): Options;
-        cookies(): Params;
-        headers(): Params;
-        send(): Response;
-    }
 
-    interface HttpManager {
-        requestBuilder(): RequestBuilder;
-        urlEncode(value: string): string | boolean;
-        urlDecode(value: string): string | boolean;
-        base64Encode(value: string): string | boolean;
-        base64Decode(value: string): string | boolean;
-    }
 }
 ```
 

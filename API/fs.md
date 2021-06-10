@@ -1,10 +1,12 @@
 # Файловые системы
 
-1. Локальная файловая система
-1. FTP
-1. Shared folder
-1. Файлы CSV
+1. [Общие интерфейсы файловых систем](#generalFS)
+1. [Локальная файловая система](#localFS)
+1. [FTP](#ftp)
+1. [Shared folder](#sharedFolder)
+1. [Файлы CSV](#csv)
 
+## Общие интерфейсы файловых систем<a name="generalFS"></a>
 
 ### Интерфейс Filesystems ...<a name="Filesystems"></a>
 ```ts
@@ -295,13 +297,13 @@ getPathObj(path: string): PathObj
 
 &nbsp;
 
-## Локальная файловая система
+## Локальная файловая система<a name="localFS"></a>
 
 Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***НЕ*** может выйти за её пределы.
 
 &nbsp;
 
-## FTP
+## FTP<a name="ftp"></a>
 
 ### Интерфейс BaseAdapter<a name="BaseAdapter"></a>
 ```ts
@@ -482,12 +484,11 @@ getUseListOptions(): boolean
 
 &nbsp;
 
-## Shared folder
-
+## Shared folder<a name="sharedFolder"></a>
 
 &nbsp;
 
-## Файлы CSV
+## Файлы CSV<a name="csv"></a>
 
 ### Интерфейс CsvWriter<a name="CsvWriter"></a>
 ```ts

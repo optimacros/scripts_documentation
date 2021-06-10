@@ -1,8 +1,10 @@
 # Коннекторы
 
-1. Реляционные СУБД
-1. MongoDB
-1. HTTP
+1. [Реляционные СУБД](#relationalDB)
+1. [MongoDB](#mongoDB)
+1. [HTTP](#http)
+
+## Реляционные СУБД]<a name="relationalDB"></a>
 
 ### Интерфейс Connectors ...<a name="Connectors"></a>
 ```ts
@@ -862,11 +864,95 @@ getCommand(): string
 
 &nbsp;
 
-## MongoDB
+## MongoDB<a name="mongoDB"></a>
 
 &nbsp;
 
-## HTTP
+## HTTP<a name="http"></a>
+
+### Интерфейс HttpManager<a name="HttpManager"></a>
+
+```ts
+interface HttpManager {
+		requestBuilder(): RequestBuilder;
+		urlEncode(value: string): string | boolean;
+		urlDecode(value: string): string | boolean;
+		base64Encode(value: string): string | boolean;
+		base64Decode(value: string): string | boolean;
+}
+
+```
+Коннектор для подключения ...............
+
+&nbsp;
+
+
+```js
+requestBuilder(): RequestBuilder
+```
+
+&nbsp;
+
+```js
+urlEncode(value: string): string | boolean
+```
+
+&nbsp;
+
+```js
+urlDecode(value: string): string | boolean
+```
+
+&nbsp;
+
+```js
+base64Encode(value: string): string | boolean
+```
+
+&nbsp;
+
+```js
+base64Decode(value: string): string | boolean
+```
+
+&nbsp;
+
+### Интерфейс RequestBuilder<a name="RequestBuilder"></a>
+
+```ts
+interface RequestBuilder {
+		url(): Url;
+
+		/**
+		 *
+		 * @param type GET|POST|DELETE|PUT|HEAD|OPTIONS
+		 */
+		setMethod(type: string): boolean;
+		getMethod(): string;
+		body(): RequestBody;
+		options(): Options;
+		cookies(): Params;
+		headers(): Params;
+		send(): Response;
+}
+```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки и отправки запроса по протоколу HTTP.
+
+&nbsp;
+
+```js
+url(): Url
+```
+
+&nbsp;
+
+setMethod(type: string): boolean
+getMethod(): string
+body(): RequestBody
+options(): Options
+cookies(): Params
+headers(): Params
+send(): Response
 
 
 [API Reference](API.md)
