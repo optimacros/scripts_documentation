@@ -320,44 +320,6 @@ declare namespace Mongodb {
 ### Http и его интерфейсы:
 ```ts
 declare namespace Http {
-    interface Params {
-        getAll(): object;
-        setAll(pairs: object): boolean;
-        get(name: string): any;
-        set(name: string, value: any): boolean;
-        del(name: string): boolean;
-        has(name: string): boolean;
-        clear(): boolean;
-    }
-
-    interface UrlParams extends Params {
-        stringify(): string;
-    }
-
-    interface JsonRequestBody {
-        setJson(value: string | object): boolean;
-    }
-
-    interface StringRequestBody {
-        setBody(value: string): boolean;
-    }
-
-    interface FormRequestBody {
-        params(): Params;
-    }
-
-    interface RequestBody {
-        /**
-         * Content-Type: application/json
-         */
-        jsonBody(): JsonRequestBody;
-
-        /**
-         * Content-Type: application/x-www-form-urlencoded
-         */
-        formBody(): FormRequestBody;
-        stringBody(): StringRequestBody;
-    }
 
     interface Cert {
         setPath(path: string): Cert;

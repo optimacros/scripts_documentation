@@ -870,40 +870,122 @@ getCommand(): string
 
 ## HTTP<a name="http"></a>
 
-    interface Params {
-        getAll(): object;
-        setAll(pairs: object): boolean;
-        get(name: string): any;
-        set(name: string, value: any): boolean;
-        del(name: string): boolean;
-        has(name: string): boolean;
-        clear(): boolean;
-    }
+interface Params {
+	getAll(): object;
+	setAll(pairs: object): boolean;
+	get(name: string): any;
+	set(name: string, value: any): boolean;
+	del(name: string): boolean;
+	has(name: string): boolean;
+	clear(): boolean;
+}
 
-    interface UrlParams extends Params {
-        stringify(): string;
-    }
+interface UrlParams extends Params {
+	stringify(): string;
+}
+
+### Интерфейс JsonRequestBody...<a name="JsonRequestBody"></a>
+
+```ts
+interface JsonRequestBody {
+	setJson(value: string | object): boolean;
+}
+```
+
+&nbsp;
+
+```js
+setJson(value: string | object): boolean
+```
+
+&nbsp;
+
+### Интерфейс StringRequestBody...<a name="StringRequestBody"></a>
+
+```ts
+interface StringRequestBody {
+	setBody(value: string): boolean;
+}
+```
+
+&nbsp;
+
+```js
+	setBody(value: string): boolean
+```
+
+&nbsp;
+
+### Интерфейс FormRequestBody...<a name="FormRequestBody"></a>
+
+```ts
+interface FormRequestBody {
+	params(): Params;
+}
+```
+
+&nbsp;
+
+```js
+	params(): Params
+```
+
+&nbsp;
+
+### Интерфейс RequestBody<a name="RequestBody"></a>
+
+```js
+interface RequestBody {
+	jsonBody(): JsonRequestBody;
+	stringBody(): StringRequestBody;
+	formBody(): FormRequestBody;
+}
+```
+Интерфейс генерации тела запроса [`POST`](https://ru.wikipedia.org/wiki/POST_(HTTP)). Все функции перезаписывают тело запроса до отправки, поэтому следует выбрать одну из них.
+
+&nbsp;
+
+```js
+jsonBody(): JsonRequestBody
+```
+Устанавливает значение [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type: application/json`, возвращает интерфейс [`JsonRequestBody`](#JsonRequestBody) для отправки [`JSON`](https://ru.wikipedia.org/wiki/JSON) в теле запроса.
+
+&nbsp;
+
+```js
+stringBody(): StringRequestBody
+```
+*Не* устанавливает [`заголовок HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type`, возвращает интерфейс [`StringRequestBody`](#StringRequestBody) для отправки строки в теле запроса.
+
+&nbsp;
+
+```js
+formBody(): FormRequestBody
+```
+Устанавливает значение [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type: application/x-www-form-urlencoded`, возвращает интерфейс [`FormRequestBody`](#FormRequestBody) для отправки формы в теле запроса.
+
+&nbsp;
 
 ### Интерфейс Url...<a name="Url"></a>
 ```js
 interface Url {
-		setUrl(url: string): boolean;
-		getUrl(): string;
-		setUrlPath(path: string): boolean;
-		getUrlPath(): string;
-		setUrlScheme(scheme: string): boolean;
-		getUrlScheme(): string;
-		setHost(host: string): boolean;
-		getHost(): string;
-		setPort(port: number | string): boolean;
-		getPort(): number | null;
-		setUser(user: string): boolean;
-		getUser(): string;
-		setPassword(password: string): boolean;
-		getPassword(): string | null;
-		setFragment(fragment: string): boolean;
-		getFragment(): string | null;
-		params(): UrlParams;
+	setUrl(url: string): boolean;
+	getUrl(): string;
+	setUrlPath(path: string): boolean;
+	getUrlPath(): string;
+	setUrlScheme(scheme: string): boolean;
+	getUrlScheme(): string;
+	setHost(host: string): boolean;
+	getHost(): string;
+	setPort(port: number | string): boolean;
+	getPort(): number | null;
+	setUser(user: string): boolean;
+	getUser(): string;
+	setPassword(password: string): boolean;
+	getPassword(): string | null;
+	setFragment(fragment: string): boolean;
+	getFragment(): string | null;
+	params(): UrlParams;
 }
 ```
 Интерфейс построения [`URL`](https://ru.wikipedia.org/wiki/URL).
@@ -976,7 +1058,7 @@ setPort(port: number | string): boolean
 ```js
 getPort(): number | null
 ```
-Возвращает нрмаре порта.
+Возвращает номер порта.
 
 &nbsp;
 
@@ -1028,23 +1110,18 @@ params(): UrlParams
 
 &nbsp;
 
-### Интерфейс RequestBuilder<a name="RequestBuilder"></a>
+### Интерфейс RequestBuilder...<a name="RequestBuilder"></a>
 
 ```ts
 interface RequestBuilder {
-		url(): Url;
-
-		/**
-		 *
-		 * @param type GET|POST|DELETE|PUT|HEAD|OPTIONS
-		 */
-		setMethod(type: string): boolean;
-		getMethod(): string;
-		body(): RequestBody;
-		options(): Options;
-		cookies(): Params;
-		headers(): Params;
-		send(): Response;
+	url(): Url;
+	setMethod(type: string): boolean;
+	getMethod(): string;
+	body(): RequestBody;
+	options(): Options;
+	cookies(): Params;
+	headers(): Params;
+	send(): Response;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки и отправки запроса по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP).
@@ -1054,18 +1131,21 @@ interface RequestBuilder {
 ```js
 url(): Url
 ```
+Возвращает объект [`Url`](#Url) построения URL.
 
 &nbsp;
 
 ```js
 setMethod(type: string): boolean
 ```
+Устанавливает [`метод HTTP `](https://ru.wikipedia.org/wiki/HTTP#%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B). Доступные значения: `GET`, `POST`, `DELETE`, `PUT`, `HEAD`, `OPTIONS`. Значение по умолчанию: `GET`. Возвращает `true`.
 
 &nbsp;
 
 ```js
 getMethod(): string
 ```
+Возвращает [`метод HTTP `](https://ru.wikipedia.org/wiki/HTTP#%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B). 
 
 &nbsp;
 
@@ -1100,15 +1180,15 @@ send(): Response
 
 &nbsp;
 
-### Интерфейс HttpManager<a name="HttpManager"></a>
+### Интерфейс HttpManager...<a name="HttpManager"></a>
 
 ```ts
 interface HttpManager {
-		requestBuilder(): RequestBuilder;
-		urlEncode(value: string): string;
-		urlDecode(value: string): string;
-		base64Encode(value: string): string | boolean;
-		base64Decode(value: string): string | boolean;
+	requestBuilder(): RequestBuilder;
+	urlEncode(value: string): string;
+	urlDecode(value: string): string;
+	base64Encode(value: string): string | boolean;
+	base64Decode(value: string): string | boolean;
 }
 
 ```
@@ -1120,6 +1200,7 @@ interface HttpManager {
 ```js
 requestBuilder(): RequestBuilder
 ```
+Возвращает объект [`RequestBuilder`](#RequestBuilder) построения запроса.
 
 &nbsp;
 
