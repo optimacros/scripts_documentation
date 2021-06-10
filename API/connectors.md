@@ -900,19 +900,21 @@ setJson(value: string | object): boolean
 
 &nbsp;
 
-### Интерфейс StringRequestBody...<a name="StringRequestBody"></a>
+### Интерфейс StringRequestBody<a name="StringRequestBody"></a>
 
 ```ts
 interface StringRequestBody {
 	setBody(value: string): boolean;
 }
 ```
+Интерфейс генерации тела запроса для отправки в нём строки.
 
 &nbsp;
 
 ```js
 	setBody(value: string): boolean
 ```
+Устанавливает переданную строку в тело запроса.
 
 &nbsp;
 
