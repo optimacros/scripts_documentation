@@ -365,25 +365,6 @@ declare namespace Http {
         setPassphrase(passphrase: string): Cert;
     }
 
-    interface Url {
-        setUrl(url: string): boolean;
-        getUrl(): string;
-        setUrlPath(path: string): boolean;
-        getUrlPath(): string;
-        getUrlScheme(): string;
-        setUrlScheme(scheme: string): boolean;
-        getHost(): string;
-        setHost(host: string): boolean;
-        getPort(): number | null;
-        setPort(port: number | string): boolean;
-        setUser(user: string): boolean;
-        getUser(): string;
-        setPassword(password: string): boolean;
-        getPassword(): string | null;
-        setFragment(fragment: string): boolean;
-        getFragment(): string | null;
-        params(): UrlParams;
-    }
 
     interface AllowRedirects {
         setStatus(status: boolean): boolean;

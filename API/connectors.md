@@ -870,49 +870,160 @@ getCommand(): string
 
 ## HTTP<a name="http"></a>
 
-### Интерфейс HttpManager<a name="HttpManager"></a>
+    interface Params {
+        getAll(): object;
+        setAll(pairs: object): boolean;
+        get(name: string): any;
+        set(name: string, value: any): boolean;
+        del(name: string): boolean;
+        has(name: string): boolean;
+        clear(): boolean;
+    }
 
-```ts
-interface HttpManager {
-		requestBuilder(): RequestBuilder;
-		urlEncode(value: string): string | boolean;
-		urlDecode(value: string): string | boolean;
-		base64Encode(value: string): string | boolean;
-		base64Decode(value: string): string | boolean;
+    interface UrlParams extends Params {
+        stringify(): string;
+    }
+
+### Интерфейс Url...<a name="Url"></a>
+```js
+interface Url {
+		setUrl(url: string): boolean;
+		getUrl(): string;
+		setUrlPath(path: string): boolean;
+		getUrlPath(): string;
+		setUrlScheme(scheme: string): boolean;
+		getUrlScheme(): string;
+		setHost(host: string): boolean;
+		getHost(): string;
+		setPort(port: number | string): boolean;
+		getPort(): number | null;
+		setUser(user: string): boolean;
+		getUser(): string;
+		setPassword(password: string): boolean;
+		getPassword(): string | null;
+		setFragment(fragment: string): boolean;
+		getFragment(): string | null;
+		params(): UrlParams;
 }
-
 ```
-Коннектор для подключения ...............
-
-&nbsp;
-
-
-```js
-requestBuilder(): RequestBuilder
-```
+Интерфейс построения [`URL`](https://ru.wikipedia.org/wiki/URL).
 
 &nbsp;
 
 ```js
-urlEncode(value: string): string | boolean
+setUrl(url: string): boolean
 ```
+Устанавливает URL целиком. Возвращает `true`.
 
 &nbsp;
 
 ```js
-urlDecode(value: string): string | boolean
+getUrl(): string
 ```
+Возвращает URL.
 
 &nbsp;
 
 ```js
-base64Encode(value: string): string | boolean
+setUrlPath(path: string): boolean
 ```
+Устанавливает путь на сервере. Возвращает `true`.
 
 &nbsp;
 
 ```js
-base64Decode(value: string): string | boolean
+getUrlPath(): string
+```
+Возвращает путь на сервере.
+
+&nbsp;
+
+```js
+setUrlScheme(scheme: string): boolean
+```
+Устанавливает схему URL (протокол). Возвращает `true`.
+
+&nbsp;
+
+```js
+getUrlScheme(): string
+```
+Возвращает схему URL (протокол).
+
+&nbsp;
+
+```js
+setHost(host: string): boolean
+```
+Устанавливает имя или адрес хоста. Возвращает `true`.
+
+&nbsp;
+
+```js
+getHost(): string
+```
+Возвращает имя или адрес хоста, установленное в URL.
+
+&nbsp;
+
+```js
+setPort(port: number | string): boolean
+```
+Устанавливает номер порта. Возвращает `true`.
+
+&nbsp;
+
+```js
+getPort(): number | null
+```
+Возвращает нрмаре порта.
+
+&nbsp;
+
+```js
+setUser(user: string): boolean
+```
+Устанавливает имя пользователя. Возвращает `true`.
+
+&nbsp;
+
+```js
+getUser(): string
+```
+Возвращает имя пользователя.
+
+&nbsp;
+
+```js
+setPassword(password: string): boolean
+```
+Устанавливает пароль. Возвращает `true`.
+
+&nbsp;
+
+```js
+getPassword(): string | null
+```
+Возвращает пароль.
+
+&nbsp;
+
+```js
+setFragment(fragment: string): boolean
+```
+Устанавливает идентификатор якоря.  Возвращает `true`.
+
+&nbsp;
+
+```js
+getFragment(): string | null
+```
+Возвращает идентификатор якоря.
+
+&nbsp;
+
+```js
+params(): UrlParams
 ```
 
 &nbsp;
@@ -936,7 +1047,7 @@ interface RequestBuilder {
 		send(): Response;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки и отправки запроса по протоколу HTTP.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки и отправки запроса по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP).
 
 &nbsp;
 
@@ -946,13 +1057,100 @@ url(): Url
 
 &nbsp;
 
+```js
 setMethod(type: string): boolean
+```
+
+&nbsp;
+
+```js
 getMethod(): string
+```
+
+&nbsp;
+
+```js
 body(): RequestBody
+```
+
+&nbsp;
+
+```js
 options(): Options
+```
+
+&nbsp;
+
+```js
 cookies(): Params
+```
+
+&nbsp;
+
+```js
 headers(): Params
+```
+
+&nbsp;
+
+```js
 send(): Response
+```
+
+
+&nbsp;
+
+### Интерфейс HttpManager<a name="HttpManager"></a>
+
+```ts
+interface HttpManager {
+		requestBuilder(): RequestBuilder;
+		urlEncode(value: string): string;
+		urlDecode(value: string): string;
+		base64Encode(value: string): string | boolean;
+		base64Decode(value: string): string | boolean;
+}
+
+```
+Коннектор для подключения ...............
+
+&nbsp;
+
+
+```js
+requestBuilder(): RequestBuilder
+```
+
+&nbsp;
+
+```js
+urlEncode(value: string): string
+```
+Возвращает строку `value`, закодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
+
+&nbsp;
+
+```js
+urlDecode(value: string): string
+```
+Возвращает строку `value`, раскодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
+
+&nbsp;
+
+```js
+base64Encode(value: string): string | boolean
+```
+Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64).
+
+
+&nbsp;
+
+```js
+base64Decode(value: string): string | boolean
+```
+Возвращает строку `value`, раскодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64).
+
+&nbsp;
 
 
 [API Reference](API.md)
