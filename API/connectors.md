@@ -884,19 +884,21 @@ interface UrlParams extends Params {
 	stringify(): string;
 }
 
-### Интерфейс JsonRequestBody...<a name="JsonRequestBody"></a>
+### Интерфейс JsonRequestBody<a name="JsonRequestBody"></a>
 
 ```ts
 interface JsonRequestBody {
 	setJson(value: string | object): boolean;
 }
 ```
+Интерфейс генерации тела запроса для отправки в нём [`JSON`](https://ru.wikipedia.org/wiki/JSON).
 
 &nbsp;
 
 ```js
 setJson(value: string | object): boolean
 ```
+Устанавливает переданный JSON в тело запроса.
 
 &nbsp;
 
