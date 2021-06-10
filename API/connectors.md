@@ -4,7 +4,7 @@
 1. [MongoDB](#mongoDB)
 1. [HTTP](#http)
 
-## Реляционные СУБД]<a name="relationalDB"></a>
+## Реляционные СУБД<a name="relationalDB"></a>
 
 ### Интерфейс Connectors ...<a name="Connectors"></a>
 ```ts
