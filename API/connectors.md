@@ -890,13 +890,14 @@ interface Params {
 ```js
 getAll(): Object
 ```
-Возвращает все параметры в виде 
+Возвращает все параметры в виде [`Object`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object).
 
 &nbsp;
 
 ```js
 setAll(pairs: Object): boolean
 ```
+Не работает.
 
 &nbsp;
 
@@ -1255,7 +1256,7 @@ interface HttpManager {
 	requestBuilder(): RequestBuilder;
 	urlEncode(value: string): string;
 	urlDecode(value: string): string;
-	base64Encode(value: string): string | boolean;
+	base64Encode(value: string): string;
 	base64Decode(value: string): string | boolean;
 }
 
@@ -1287,7 +1288,7 @@ urlDecode(value: string): string
 &nbsp;
 
 ```js
-base64Encode(value: string): string | boolean
+base64Encode(value: string): string
 ```
 Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64).
 
@@ -1297,7 +1298,7 @@ base64Encode(value: string): string | boolean
 ```js
 base64Decode(value: string): string | boolean
 ```
-Возвращает строку `value`, раскодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64).
+Возвращает строку `value`, раскодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` в случае ошибки.
 
 &nbsp;
 

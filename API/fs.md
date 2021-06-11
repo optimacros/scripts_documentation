@@ -11,10 +11,10 @@
 ### Интерфейс Filesystems ...<a name="Filesystems"></a>
 ```ts
 interface Filesystems {
-    ftp(): FTPAdapter;
-    local(): Filesystem;
-    sharedFolder(id: string): Filesystem;
-    filesDataManager(): FilesDataManager;
+	ftp(): FTPAdapter;
+	local(): Filesystem;
+	sharedFolder(id: string): Filesystem;
+	filesDataManager(): FilesDataManager;
 }
 ```
 
@@ -49,15 +49,15 @@ filesDataManager(): FilesDataManager
 ### Интерфейс FileMeta<a name="FileMeta"></a>
 ```ts
 interface FileMeta {
-    type: string;
-    path: string;
-    visibility: string;
-    size: number;
-    dirname: string;
-    basename: string;
-    extension: string;
-    filename: string;
-    timestamp: number;
+	type: string;
+	path: string;
+	visibility: string;
+	size: number;
+	dirname: string;
+	basename: string;
+	extension: string;
+	filename: string;
+	timestamp: number;
 }
 ```
 Интерфейс содержит набор свойств файла или папки.
@@ -130,8 +130,8 @@ timestamp: number
 ### Интерфейс PathObj<a name="PathObj"></a>
 ```ts
 interface PathObj {
-    getSystem(): Filesystem;
-    getPath(): string;
+	getSystem(): Filesystem;
+	getPath(): string;
 }
 ```
 Интерфейс, хранящий в себе путь к файлу и ссылку на файловую систему.
@@ -155,23 +155,23 @@ getPath(): string
 ### Интерфейс Filesystem<a name="Filesystem"></a>
 ```ts
 interface Filesystem {
-    has(path: string): boolean;
-    read(path: string): string;
-    readAndDelete(path: string): string;
-    write(path: string, contents: string): boolean;
-    delete(path: string): boolean;
-    rename(from: string, to: string): boolean;
-    copy(from: string, to: string): boolean;
-    getTimestamp(path: string): string;
-    getSize(path: string): number | boolean;
-    createDir(path: string): boolean;
-    deleteDir(path: string): boolean;
-    listContents(path: string, recursive: boolean): FileMeta[];
-    getMetadata(path: string): Object;
-    upload(from: string, to: string): boolean;
-    download(from: string, to: string): boolean;
-    makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
-    getPathObj(path: string): PathObj;
+	has(path: string): boolean;
+	read(path: string): string;
+	readAndDelete(path: string): string;
+	write(path: string, contents: string): boolean;
+	delete(path: string): boolean;
+	rename(from: string, to: string): boolean;
+	copy(from: string, to: string): boolean;
+	getTimestamp(path: string): string;
+	getSize(path: string): number | boolean;
+	createDir(path: string): boolean;
+	deleteDir(path: string): boolean;
+	listContents(path: string, recursive: boolean): FileMeta[];
+	getMetadata(path: string): Object;
+	upload(from: string, to: string): boolean;
+	download(from: string, to: string): boolean;
+	makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
+	getPathObj(path: string): PathObj;
 }
 ```
 Абстрактный интерфейс файловой системы.
@@ -308,7 +308,7 @@ getPathObj(path: string): PathObj
 ### Интерфейс BaseAdapter<a name="BaseAdapter"></a>
 ```ts
 interface BaseAdapter {
-    load(): Filesystem;
+	load(): Filesystem;
 }
 ```
 Базовый интерфейс адаптеров файловых систем.
@@ -325,32 +325,35 @@ load(): Filesystem
 ### Интерфейс FTPAdapter<a name="FTPAdapter"></a>
 ```ts
 interface FTPAdapter extends BaseAdapter {
-    setHost(host: string): FTPAdapter;
-    getHost(): string;
+	setHost(host: string): FTPAdapter;
+	getHost(): string;
 
-    setPort(port: number): FTPAdapter;
-    getPort(): number;
+	setPort(port: number): FTPAdapter;
+	getPort(): number;
 
-    setUsername(username: string): FTPAdapter;
-    getUsername(): string;
+	setUsername(username: string): FTPAdapter;
+	getUsername(): string;
 
-    setPassword(password: string): FTPAdapter;
-    getPassword(): string;
+	setPassword(password: string): FTPAdapter;
+	getPassword(): string;
 
-    setRoot(root: string): FTPAdapter;
-    getRoot(): string;
+	setRoot(root: string): FTPAdapter;
+	getRoot(): string;
 
-    setPassive(passive: boolean): FTPAdapter;
-    getPassive(): boolean;
+	setPassive(passive: boolean): FTPAdapter;
+	getPassive(): boolean;
+		
+	setIgnorePassiveAddress(ignore: boolean): FTPAdapter; 
+	getIgnorePassiveAddress(): boolean; 
 
-    setSsl(ssl: boolean): FTPAdapter;
-    getSsl(): boolean;
+	setSsl(ssl: boolean): FTPAdapter;
+	getSsl(): boolean;
 
-    setTimeout(timeout: number): FTPAdapter;
-    getTimeout(): number;
+	setTimeout(timeout: number): FTPAdapter;
+	getTimeout(): number;
 
-    setUseListOptions(useListOptions: boolean): FTPAdapter;
-    getUseListOptions(): boolean;
+	setUseListOptions(useListOptions: boolean): FTPAdapter;
+	getUseListOptions(): boolean;
 }
 ```
 
@@ -443,6 +446,21 @@ getPassive(): boolean
 &nbsp;
 
 ```js
+setIgnorePassiveAddress(ignore: boolean) : FTPAdapter
+```
+Устанавливает режим игнорирования IP-адреса, полученного от FTP-сервера в пассивном режиме. По умолчанию: `false`. Возвращает `this`.
+
+&nbsp;
+
+
+```js
+getIgnorePassiveAddress(ignore: boolean) : boolean
+```
+Возвращает признак игнорирования IP-адреса, полученного от FTP-сервера в пассивном режиме.
+
+&nbsp;
+
+```js
 setSsl(ssl: boolean): FTPAdapter
 ```
 Устанавливает признак использования протокола [`SSL`](https://ru.wikipedia.org/wiki/SSL) поверх FTP ([`FTPS`](https://ru.wikipedia.org/wiki/FTPS)). По умолчанию: `false`. Возвращает `this`.
@@ -493,10 +511,10 @@ getUseListOptions(): boolean
 ### Интерфейс CsvWriter<a name="CsvWriter"></a>
 ```ts
 interface CsvWriter {
-    params(): CSVParams;
-    writeRow(row: string[]): CsvWriter;
-    writeRows(rows: string[][]): CsvWriter;
-    save(name: string, charset?: string): string;
+	params(): CSVParams;
+	writeRow(row: string[]): CsvWriter;
+	writeRows(rows: string[][]): CsvWriter;
+	save(name: string, charset?: string): string;
 }
 ```
 Интерфейс для записи в новый файл формата [`CSV`](https://ru.wikipedia.org/wiki/CSV). Запись ведётся во временный буфер, и лишь функция [`save()`](#CsvWriter.save) сохраняет файл в памяти. Редактировать существующий файл невозможно, вместо этого нужно читать из одного файла и писать в другой.
@@ -535,9 +553,9 @@ save(name: string, charset?: string): string
 ### Интерфейс CsvReader<a name="CsvReader"></a>
 ```ts
 interface CsvReader {
-    params(): CSVParams;
-    changeFileCharset(charset: string): CsvReader;
-    generator(): string[][];
+	params(): CSVParams;
+	changeFileCharset(charset: string): CsvReader;
+	generator(): string[][];
 }
 ```
 Интерфейс для чтения файла формата [`CSV`](https://ru.wikipedia.org/wiki/CSV).
@@ -568,8 +586,8 @@ generator(): string[][]
 ### Интерфейс BaseConverter ...<a name="BaseConverter"></a>
 ```ts
 interface BaseConverter {
-    setSource(path: string): BaseConverter;
-    convert(): string;
+	setSource(path: string): BaseConverter;
+	convert(): string;
 }
 ```
 
@@ -590,7 +608,7 @@ convert(): string
 ### Интерфейс ExcelToCsvConverter ...<a name="ExcelToCsvConverter"></a>
 ```ts
 interface ExcelToCsvConverter extends BaseConverter {
-    setSheetIdentifier(identifier: string | number): ExcelToCsvConverter;
+	setSheetIdentifier(identifier: string | number): ExcelToCsvConverter;
 }
 ```
 
@@ -605,7 +623,7 @@ setSheetIdentifier(identifier: string | number): ExcelToCsvConverter
 ### Интерфейс ConverterManager ...<a name="ConverterManager"></a>
 ```ts
 interface ConverterManager {
-    excelToCsv(): ExcelToCsvConverter;
+	excelToCsv(): ExcelToCsvConverter;
 }
 ```
 
@@ -620,9 +638,9 @@ excelToCsv(): ExcelToCsvConverter
 ### Интерфейс FilesDataManager ...<a name="FilesDataManager"></a>
 ```ts
 interface FilesDataManager {
-    csvWriter(): CsvWriter;
-    csvReader(path: PathObj): CsvReader;
-    converterManager(): ConverterManager;
+	csvWriter(): CsvWriter;
+	csvReader(path: PathObj): CsvReader;
+	converterManager(): ConverterManager;
 }
 ```
 Интерфейс, который группирует интерфейсы для работы с данными файлов в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
