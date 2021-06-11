@@ -870,6 +870,9 @@ getCommand(): string
 
 ## HTTP<a name="http"></a>
 
+### Интерфейс Params...<a name="Params"></a>
+
+```ts
 interface Params {
 	getAll(): object;
 	setAll(pairs: object): boolean;
@@ -879,10 +882,67 @@ interface Params {
 	has(name: string): boolean;
 	clear(): boolean;
 }
+```
 
+&nbsp;
+
+```js
+getAll(): object
+```
+
+&nbsp;
+
+```js
+setAll(pairs: object): boolean
+```
+
+&nbsp;
+
+```js
+get(name: string): any
+```
+
+&nbsp;
+
+```js
+set(name: string, value: any): boolean
+```
+
+&nbsp;
+
+```js
+del(name: string): boolean
+```
+
+&nbsp;
+
+```js
+has(name: string): boolean
+```
+
+&nbsp;
+
+```js
+clear(): boolean
+```
+
+&nbsp;
+
+### Интерфейс UrlParams...<a name="UrlParams"></a>
+
+```ts
 interface UrlParams extends Params {
 	stringify(): string;
 }
+```
+
+&nbsp;
+
+```js
+stringify(): string
+```
+
+&nbsp;
 
 ### Интерфейс JsonRequestBody<a name="JsonRequestBody"></a>
 
@@ -898,7 +958,7 @@ interface JsonRequestBody {
 ```js
 setJson(value: string | object): boolean
 ```
-Устанавливает переданный JSON в тело запроса.
+Устанавливает переданный JSON в тело запроса. Возвращает `true`.
 
 &nbsp;
 
@@ -916,23 +976,25 @@ interface StringRequestBody {
 ```js
 	setBody(value: string): boolean
 ```
-Устанавливает переданную строку в тело запроса.
+Устанавливает переданную строку в тело запроса. Возвращает `true`.
 
 &nbsp;
 
-### Интерфейс FormRequestBody...<a name="FormRequestBody"></a>
+### Интерфейс FormRequestBody<a name="FormRequestBody"></a>
 
 ```ts
 interface FormRequestBody {
 	params(): Params;
 }
 ```
+Интерфейс генерации тела запроса для отправки в нём параметров формы .
 
 &nbsp;
 
 ```js
 	params(): Params
 ```
+Возвращает объект [`Params`](#Params) для установки значений параметров.
 
 &nbsp;
 
