@@ -79,9 +79,9 @@ winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
 ```ts
 interface SqlQueryResult {
     count(): number;
-    generator(likeArray?: boolean): object[] | string[][];
-    all(): object[];
-    first(): object | null;
+    generator(likeArray?: boolean): Object[] | string[][];
+    all(): Object[];
+    first(): Object | null;
     column(columnName: string): string[];
     cell(columnName: string, rowIndex?: number): number | string | boolean | null;
     updated(): number;
@@ -100,21 +100,21 @@ count(): number
 &nbsp;
 
 ```js
-generator(likeArray?: boolean): object[] | string[][]
+generator(likeArray?: boolean): Object[] | string[][]
 ```
-Возвращает генератор для работы со строками запроса. Если `likeArray == true`, на каждой итерации генератор возвращает очередную строку запроса в виде массива полей `string[]`, иначе в виде `object`, где ключами выступают названия столбцов, значениями – данные; по умолчанию `likeArray == false`.
+Возвращает генератор для работы со строками запроса. Если `likeArray == true`, на каждой итерации генератор возвращает очередную строку запроса в виде массива полей `string[]`, иначе в виде `Object`, где ключами выступают названия столбцов, значениями – данные; по умолчанию `likeArray == false`.
 
 &nbsp;
 
 ```js
-all(): object[]
+all(): Object[]
 ```
 Аналог вызову `generator(false)` с тем отличием, что возвращает все оставшиеся данные в виде массива.
 
 &nbsp;
 
 ```js
-first(): object | null
+first(): Object | null
 ```
 Возвращает ***следующую*** строку запроса, ***несмотря на название***.
 
@@ -151,7 +151,7 @@ lastId(): number
 ### Интерфейс SqlQueryBuilder<a name="SqlQueryBuilder"></a>
 ```ts
 interface SqlQueryBuilder {
-    execute(sql: string, bindings?: (string | number | boolean | null)[] | object): SqlQueryResult;
+    execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): SqlQueryResult;
 }
 ```
 Интерфейс построения запроса к базе данных.
@@ -159,7 +159,7 @@ interface SqlQueryBuilder {
 &nbsp;
 
 ```js
-execute(sql: string, bindings?: (string | number | boolean | null)[] | object): SqlQueryResult
+execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): SqlQueryResult
 ```
 Конструирует SQL-запрос из строки `sql`, используя параметры привязки `bindings`, передаёт его на исполнение в СУБД и возвращает интерфейс [`SqlQueryResult`](#SqlQueryResult) доступа к результатам запроса.
 
@@ -492,7 +492,7 @@ interface MysqlImportResult {
     getOutput(): string;
     getCommand(): string;
     getConfig(): string;
-    getStats(): object;
+    getStats(): Object;
 }
 ```
 Интерфейс просмотра результатов импорта, осуществлённого с помощью [`MysqlImportBuilder`](#MysqlImportBuilder).
@@ -535,7 +535,7 @@ getConfig(): string
 &nbsp;
 
 ```js
-getStats(): object
+getStats(): Object
 ```
 Если импорт завершён без ошибок, возвращает объект вида `{"records": 3, "deleted": 0, "skipped": 0, "warnings": 0}`.
 
@@ -874,8 +874,8 @@ getCommand(): string
 
 ```ts
 interface Params {
-	getAll(): object;
-	setAll(pairs: object): boolean;
+	getAll(): Object;
+	setAll(pairs: Object): boolean;
 	get(name: string): any;
 	set(name: string, value: any): boolean;
 	del(name: string): boolean;
@@ -883,17 +883,19 @@ interface Params {
 	clear(): boolean;
 }
 ```
+Интерфейс, представляющий набор параметров и их значений.
 
 &nbsp;
 
 ```js
-getAll(): object
+getAll(): Object
 ```
+Возвращает все параметры в виде 
 
 &nbsp;
 
 ```js
-setAll(pairs: object): boolean
+setAll(pairs: Object): boolean
 ```
 
 &nbsp;
@@ -948,7 +950,7 @@ stringify(): string
 
 ```ts
 interface JsonRequestBody {
-	setJson(value: string | object): boolean;
+	setJson(value: string | Object): boolean;
 }
 ```
 Интерфейс генерации тела запроса для отправки в нём [`JSON`](https://ru.wikipedia.org/wiki/JSON).
@@ -956,7 +958,7 @@ interface JsonRequestBody {
 &nbsp;
 
 ```js
-setJson(value: string | object): boolean
+setJson(value: string | Object): boolean
 ```
 Устанавливает переданный JSON в тело запроса. Возвращает `true`.
 

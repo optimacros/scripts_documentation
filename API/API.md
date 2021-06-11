@@ -265,29 +265,29 @@ declare namespace Mongodb {
     }
 
     interface Cursor {
-        all(): object[];
-        generator(): object[];
+        all(): Object[];
+        generator(): Object[];
     }
 
     interface FilterOptions extends Object {
-        sort: object,
+        sort: Object,
         skip: number,
         limit: number,
         showRecordId: boolean,
-        min: object,
-        max: object
+        min: Object,
+        max: Object
     }
 
     interface Collection {
-        count(filter: object): number;
-        find(filter: object, options?: FilterOptions): Cursor;
-        findOne(filter: object, options?: FilterOptions): object;
-        insertOne(document: object): InsertOneResult;
-        insertMany(documents: object[]): InsertManyResult;
-        updateOne(filter: object, update: object, options?: FilterOptions): UpdateResult;
-        updateMany(filter: object, update: object, options?: FilterOptions): UpdateResult;
-        deleteOne(filter: object, options?: FilterOptions): DeleteResult;
-        deleteMany(filter: object, options?: FilterOptions): DeleteResult;
+        count(filter: Object): number;
+        find(filter: Object, options?: FilterOptions): Cursor;
+        findOne(filter: Object, options?: FilterOptions): Object;
+        insertOne(document: Object): InsertOneResult;
+        insertMany(documents: Object[]): InsertManyResult;
+        updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult;
+        updateMany(filter: Object, update: Object, options?: FilterOptions): UpdateResult;
+        deleteOne(filter: Object, options?: FilterOptions): DeleteResult;
+        deleteMany(filter: Object, options?: FilterOptions): DeleteResult;
     }
 
     namespace Types {
@@ -297,9 +297,9 @@ declare namespace Mongodb {
     }
 
     interface Types {
-        objectId(id?: string): Types.ObjectId;
-        regex(pattern: string, flags?: string): object;
-        date(milliseconds: number): object;
+        ObjectId(id?: string): Types.ObjectId;
+        regex(pattern: string, flags?: string): Object;
+        date(milliseconds: number): Object;
     }
 
     interface Connection {
@@ -411,7 +411,7 @@ declare namespace Http {
         /**
          * Limit to parse first 50MB of response data
          */
-        getStringDataLikeJson(): object | boolean;
+        getStringDataLikeJson(): Object | boolean;
         getStatusCode(): number;
         isOk(): boolean;
         getErrors(): ResponseErrors;

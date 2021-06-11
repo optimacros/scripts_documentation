@@ -167,7 +167,7 @@ interface Filesystem {
     createDir(path: string): boolean;
     deleteDir(path: string): boolean;
     listContents(path: string, recursive: boolean): FileMeta[];
-    getMetadata(path: string): object;
+    getMetadata(path: string): Object;
     upload(from: string, to: string): boolean;
     download(from: string, to: string): boolean;
     makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
@@ -263,7 +263,7 @@ listContents(path: string, recursive: boolean): FileMeta[]
 &nbsp;
 
 ```js
-getMetadata(path: string): object
+getMetadata(path: string): Object
 ```
 Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#FileMeta), однако часть полей может отсутствовать.
 
