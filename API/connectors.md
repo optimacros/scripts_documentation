@@ -936,11 +936,15 @@ clear(): boolean
 
 &nbsp;
 
-### Интерфейс UrlParams<a name="UrlParams"></a>
+### Интерфейс UrlParams...<a name="UrlParams"></a>
 
 ```ts
 interface UrlParams extends Params {
 	stringify(): string;
+	// NONE|RFC1738|RFC3986
+	setEncodingType(type: string): UrlParams;
+
+	getEncodingType(): string;
 }
 ```
 Интерфейс, представляющий набор параметров и их значений для передачи их в [`Url`](#Url).
@@ -1042,7 +1046,7 @@ formBody(): FormRequestBody
 
 &nbsp;
 
-### Интерфейс Url...<a name="Url"></a>
+### Интерфейс Url<a name="Url"></a>
 ```js
 interface Url {
 	setUrl(url: string): boolean;
@@ -1183,6 +1187,7 @@ getFragment(): string | null
 ```js
 params(): UrlParams
 ```
+Возвращает интерфейс доступа [`UrlParams`](#UrlParams) к параметрам URL.
 
 &nbsp;
 
