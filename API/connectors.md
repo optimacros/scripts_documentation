@@ -936,19 +936,21 @@ clear(): boolean
 
 &nbsp;
 
-### Интерфейс UrlParams...<a name="UrlParams"></a>
+### Интерфейс UrlParams<a name="UrlParams"></a>
 
 ```ts
 interface UrlParams extends Params {
 	stringify(): string;
 }
 ```
+Интерфейс, представляющий набор параметров и их значений для передачи их в [`Url`](#Url).
 
 &nbsp;
 
 ```js
 stringify(): string
 ```
+Возвращает строковое представление значений параметров вида `paramOne=5&paramTwo=hello&paramThree=world`.
 
 &nbsp;
 
@@ -995,7 +997,7 @@ interface FormRequestBody {
 	params(): Params;
 }
 ```
-Интерфейс генерации тела запроса для отправки в нём параметров формы .
+Интерфейс генерации тела запроса для отправки в нём параметров [`формы`](https://ru.wikipedia.org/wiki/%D0%A4%D0%BE%D1%80%D0%BC%D0%B0_(HTML)).
 
 &nbsp;
 
