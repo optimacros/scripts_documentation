@@ -870,7 +870,7 @@ getCommand(): string
 
 ## HTTP<a name="http"></a>
 
-### Интерфейс Params...<a name="Params"></a>
+### Интерфейс Params<a name="Params"></a>
 
 ```ts
 interface Params {
@@ -904,30 +904,35 @@ setAll(pairs: Object): boolean
 ```js
 get(name: string): any
 ```
+Возвращает значение параметра `name`.
 
 &nbsp;
 
 ```js
 set(name: string, value: any): boolean
 ```
+Устанавливает значение параметра `name`. Возвращает `true`.
 
 &nbsp;
 
 ```js
 del(name: string): boolean
 ```
+Удаляет параметр `name`. Возвращает `true`.
 
 &nbsp;
 
 ```js
 has(name: string): boolean
 ```
+Возвращает признак наличия параметра `name`.
 
 &nbsp;
 
 ```js
 clear(): boolean
 ```
+Удаляет все параметры. Возвращает `true`.
 
 &nbsp;
 
