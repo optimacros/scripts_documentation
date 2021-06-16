@@ -1637,15 +1637,37 @@ type ObjectOfStringArray = {
 
 &nbsp;
 
+### Интерфейс ResponseErrors<a name="ResponseErrors"></a>
+
+```ts
+interface ResponseErrors {
+	getCode(): number;
+	getMessage(): string;
+}
+```
+Интерфейс доступа в ошибкам транспортного уровня HTTP.
+
+&nbsp;
+
+```js
+getCode(): number
+```
+Возвращает код ошибки.
+
+&nbsp;
+
+```js
+getMessage(): string
+```
+Возвращает текст ошибки.
+
+&nbsp;
+
 ### Интерфейс Response...<a name="Response"></a>
 
 ```ts
 interface Response {
 	headers(): ObjectOfStringArray;
-
-	/**
-	 * Limit to first 50MB of response data
-	 */
 	getStringData(): string;
 
 	/**
@@ -1663,30 +1685,35 @@ interface Response {
 ```js
 headers(): ObjectOfStringArray
 ```
+Возвращает заголовки ответа в виде [`ObjectOfStringArray`](#ObjectOfStringArray).
 
 &nbsp;
 
 ```js
 getStringData(): string
 ```
+Возвращает первые `50 Мбайт` тела ответа.
 
 &nbsp;
 
 ```js
 getStringDataLikeJson(): Object | boolean
 ```
+Получает первые `50 Мбайт` тела ответа, прогоняет их через функцию [`JSON.parse()`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) и возвращает её результат или `false` в случае ошибки.
 
 &nbsp;
 
 ```js
 getStatusCode(): number
 ```
+Возвращает [`код состояния HTTP`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP).
 
 &nbsp;
 
 ```js
 isOk(): boolean
 ```
+Возвращает признак того, что код состояния HTTP [`успешный`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP#%D0%A3%D1%81%D0%BF%D0%B5%D1%85), то есть `200 <= getStatusCode() < 300`.
 
 &nbsp;
 

@@ -320,18 +320,10 @@ declare namespace Mongodb {
 ### Http и его интерфейсы:
 ```ts
 declare namespace Http {
-    interface ResponseErrors {
-        getCode(): number;
-        getMessage(): string;
-    }
 
 
 }
 ```
-
-export type ObjectOfStringArray = {
-    [key: string]: string[];
-}
 
 export interface TypePeriod {
     tableTab(): Tab;
