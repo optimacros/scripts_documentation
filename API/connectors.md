@@ -1311,7 +1311,6 @@ interface HttpAuth {
 
 &nbsp;
 
-
 ```js
 setUser(user: string): HttpAuth
 ```
@@ -1337,6 +1336,40 @@ setType(type: string): HttpAuth
 setStatus(status: boolean): HttpAuth
 ```
 Устанавливает флаг аутентификации HTTP. Значение по умолчанию: `false`.
+
+&nbsp;
+
+### Интерфейс Cert<a name="Cert"></a>
+
+```ts
+interface Cert {
+	setPath(path: string): Cert;
+	getPath(path: string): string;
+	setPassphrase(passphrase: string): Cert;
+}
+```
+Интерфейс настройки сертификата аутентификации HTTP. ***Не реализован.***
+
+&nbsp;
+
+```js
+setPath(path: string): Cert
+```
+Устанавливает путь к файлу сертификата. Возвращает `this`.
+
+&nbsp;
+
+```js
+getPath(path: string): string
+```
+Возвращает путь к файлу сертификата.
+
+&nbsp;
+
+```js
+setPassphrase(passphrase: string): Cert
+```
+Устанавливает парольную фразу. Возвращает `this`.
 
 &nbsp;
 
@@ -1409,12 +1442,14 @@ getCanDecodeContent(): boolean
 ```js
 allowRedirects(): AllowRedirects
 ```
+Возвращает интерфейс [`AllowRedirects`](#AllowRedirects) доступа к настройкам перенаправлений HTTP.
 
 &nbsp;
 
 ```js
 auth(): HttpAuth
 ```
+Возвращает интерфейс [`HttpAuth`](#HttpAuth) доступа к настройкам аутентификации HTTP.
 
 &nbsp;
 

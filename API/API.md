@@ -320,15 +320,6 @@ declare namespace Mongodb {
 ### Http и его интерфейсы:
 ```ts
 declare namespace Http {
-
-    interface Cert {
-        setPath(path: string): Cert;
-        getPath(path: string): string;
-        setPassphrase(passphrase: string): Cert;
-    }
-
-
-
     interface ResponseErrors {
         getCode(): number;
         getMessage(): string;
@@ -363,9 +354,6 @@ declare namespace Http {
          */
         setPath(path: string): boolean;
     }
-
-
-
 }
 ```
 
