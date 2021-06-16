@@ -984,7 +984,7 @@ interface JsonRequestBody {
 ```js
 setJson(value: string | Object): boolean
 ```
-Устанавливает переданный JSON в тело запроса. Возвращает `true`.
+Устанавливает в тело запроса переданный JSON. Если передаётся строка, она предварительно конвертируется в JSON с помощью [`JSON.parse()`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse). Возвращает `true`. ***Передача в функцию `value` типа `Object` работает некорректно.***
 
 &nbsp;
 
@@ -1499,7 +1499,7 @@ verify(): Verify
 
 &nbsp;
 
-### Интерфейс RequestBuilder...<a name="RequestBuilder"></a>
+### Интерфейс RequestBuilder<a name="RequestBuilder"></a>
 
 ```ts
 interface RequestBuilder {
@@ -1548,6 +1548,7 @@ body(): RequestBody
 ```js
 options(): Options
 ```
+Возвращает интерфейс [`Options`](#Options) настройки опций соединения.
 
 &nbsp;
 
@@ -1555,7 +1556,6 @@ options(): Options
 cookies(): Params
 ```
 Возвращает интерфейс [`Params`](#Params) для доступа к [`cookies`](https://ru.wikipedia.org/wiki/Cookie).
-
 
 &nbsp;
 
@@ -1645,7 +1645,7 @@ interface ResponseErrors {
 	getMessage(): string;
 }
 ```
-Интерфейс доступа в ошибкам транспортного уровня HTTP.
+Интерфейс доступа к [`ошибкам`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP) транспортного уровня HTTP.
 
 &nbsp;
 
@@ -1669,10 +1669,6 @@ getMessage(): string
 interface Response {
 	headers(): ObjectOfStringArray;
 	getStringData(): string;
-
-	/**
-	 * Limit to parse first 50MB of response data
-	 */
 	getStringDataLikeJson(): Object | boolean;
 	getStatusCode(): number;
 	isOk(): boolean;
@@ -1720,9 +1716,9 @@ isOk(): boolean
 ```js
 getErrors(): ResponseErrors
 ```
+Возвращает интерфейс [`ResponseErrors`](#ResponseErrors) доступа к ошибкам HTTP.
 
 &nbsp;
-
 
 [API Reference](API.md)
 
