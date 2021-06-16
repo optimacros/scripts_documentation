@@ -1297,6 +1297,49 @@ getProtocols(): string[]
 
 &nbsp;
 
+### Интерфейс HttpAuth<a name="HttpAuth"></a>
+
+```ts
+interface HttpAuth {
+	setUser(user: string): HttpAuth;
+	setPassword(password: string): HttpAuth;
+	setType(type: string): HttpAuth;
+	setStatus(status: boolean): HttpAuth;
+}
+```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настроек аутентификации HTTP. Все функции возвращают `this`.
+
+&nbsp;
+
+
+```js
+setUser(user: string): HttpAuth
+```
+Устанавливает имя пользователя.
+
+&nbsp;
+
+```js
+setPassword(password: string): HttpAuth
+```
+Устанавливает пароль.
+
+&nbsp;
+
+```js
+setType(type: string): HttpAuth
+```
+Устанавливает тип аутентификации. Допустимые значения: [`basic`](https://ru.wikipedia.org/wiki/%D0%90%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F_%D0%B2_%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82%D0%B5#%D0%91%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D1%8F_%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F), [`digest`](https://ru.wikipedia.org/wiki/%D0%94%D0%B0%D0%B9%D0%B4%D0%B6%D0%B5%D1%81%D1%82-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F), [`ntlm`](https://ru.wikipedia.org/wiki/NTLM).
+
+&nbsp;
+
+```js
+setStatus(status: boolean): HttpAuth
+```
+Устанавливает флаг аутентификации HTTP. Значение по умолчанию: `false`.
+
+&nbsp;
+
 ### Интерфейс Options...<a name="Options"></a>
 
 ```ts

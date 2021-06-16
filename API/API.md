@@ -328,57 +328,6 @@ declare namespace Http {
     }
 
 
-    interface AllowRedirects {
-        setStatus(status: boolean): boolean;
-
-        /**
-         * Default is true
-         */
-        getStatus(): boolean;
-        setMax(max: number): boolean;
-
-        /**
-         * Default is 5
-         */
-        getMax(): number;
-
-        /**
-         * This feature not realized
-         */
-        setStrict(strict: boolean): boolean;
-
-        /**
-         * Default is false
-         */
-        getStrict(): boolean;
-
-        setWithReferer(withReferer: boolean): boolean;
-
-        /**
-         * Default is false
-         */
-        getWithReferer(): boolean;
-
-        setProtocols(protocols: string[]): boolean;
-
-        /**
-         * Default is ["http", "https"]
-         */
-        getProtocols(): string[];
-    }
-
-    interface HttpAuth {
-        setUser(user: string): HttpAuth;
-        setPassword(password: string): HttpAuth;
-
-        /**
-         * @param type basic|digest|ntlm
-         */
-        setType(type: string): HttpAuth;
-        setStatus(status: boolean): HttpAuth;
-    }
-
-
 
     interface ResponseErrors {
         getCode(): number;
