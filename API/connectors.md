@@ -1373,6 +1373,38 @@ setPassphrase(passphrase: string): Cert
 
 &nbsp;
 
+### Интерфейс Verify...<a name="Verify"></a>
+
+```ts
+interface Verify {
+/**
+ * Default is TRUE
+ * @param value
+ */
+	setStatus(value: boolean): boolean;
+
+	/**
+	* This feature not realized
+	*/
+	setPath(path: string): boolean;
+}
+```
+
+
+```js
+setStatus(value: boolean): boolean
+```
+Устанавливает признак проверки сертификата. Значение по умолчанию: `true`. Возвращает `true`.
+
+&nbsp;
+
+```js
+setPath(path: string): boolean
+```
+Не реализовано.
+
+&nbsp;
+
 ### Интерфейс Options...<a name="Options"></a>
 
 ```ts
@@ -1456,6 +1488,7 @@ auth(): HttpAuth
 ```js
 cert(): Cert
 ```
+Возвращает интерфейс [`Cert`](#Cert) для настройки аутентификации по сертификату. ***Не реализовано.***
 
 &nbsp;
 

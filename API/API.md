@@ -341,19 +341,6 @@ declare namespace Http {
         isOk(): boolean;
         getErrors(): ResponseErrors;
     }
-
-    interface Verify {
-        /**
-         * Default is TRUE
-         * @param value
-         */
-        setStatus(value: boolean): boolean;
-
-        /**
-         * This feature not realized
-         */
-        setPath(path: string): boolean;
-    }
 }
 ```
 
