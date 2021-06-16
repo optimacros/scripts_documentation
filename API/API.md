@@ -325,22 +325,7 @@ declare namespace Http {
         getMessage(): string;
     }
 
-    interface Response {
-        headers(): ObjectOfStringArray;
 
-        /**
-         * Limit to first 50MB of response data
-         */
-        getStringData(): string;
-
-        /**
-         * Limit to parse first 50MB of response data
-         */
-        getStringDataLikeJson(): Object | boolean;
-        getStatusCode(): number;
-        isOk(): boolean;
-        getErrors(): ResponseErrors;
-    }
 }
 ```
 

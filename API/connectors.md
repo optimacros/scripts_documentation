@@ -1569,7 +1569,7 @@ headers(): Params
 ```js
 send(): Response
 ```
-
+Отправляет HTTP-запрос, дожидается ответа и возвращает интерфейс [`Response`](#Response) доступа к данным ответа сервера.
 
 &nbsp;
 
@@ -1623,6 +1623,76 @@ base64Encode(value: string): string
 base64Decode(value: string): string | boolean
 ```
 Возвращает строку `value`, раскодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` в случае ошибки.
+
+&nbsp;
+
+### Тип ObjectOfStringArray<a name="ObjectOfStringArray"></a>
+
+```ts
+type ObjectOfStringArray = {
+    [key: string]: string[];
+}
+```
+Специализированный тип объекта, в котором значения могут быть только списками строк.
+
+&nbsp;
+
+### Интерфейс Response...<a name="Response"></a>
+
+```ts
+interface Response {
+	headers(): ObjectOfStringArray;
+
+	/**
+	 * Limit to first 50MB of response data
+	 */
+	getStringData(): string;
+
+	/**
+	 * Limit to parse first 50MB of response data
+	 */
+	getStringDataLikeJson(): Object | boolean;
+	getStatusCode(): number;
+	isOk(): boolean;
+	getErrors(): ResponseErrors;
+}
+```
+
+&nbsp;
+
+```js
+headers(): ObjectOfStringArray
+```
+
+&nbsp;
+
+```js
+getStringData(): string
+```
+
+&nbsp;
+
+```js
+getStringDataLikeJson(): Object | boolean
+```
+
+&nbsp;
+
+```js
+getStatusCode(): number
+```
+
+&nbsp;
+
+```js
+isOk(): boolean
+```
+
+&nbsp;
+
+```js
+getErrors(): ResponseErrors
+```
 
 &nbsp;
 
