@@ -782,7 +782,7 @@ setFieldTerm(term: string): SqlBulkCopyBuilder
 Устанавливает признак конца поля; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#t) *bcp*: *-t*. Значение по умолчанию: `\t`.
 
 &nbsp;
- 
+
 ```js
 setTrustedConnectionMode(status: boolean): SqlBulkCopyBuilder
 ```
@@ -955,6 +955,18 @@ interface UrlParams extends Params {
 stringify(): string
 ```
 Возвращает строковое представление значений параметров вида `paramOne=5&paramTwo=hello&paramThree=world`.
+
+&nbsp;
+
+```js
+setEncodingType(type: string): UrlParams
+```
+
+&nbsp;
+
+```js
+getEncodingType(): string
+```
 
 &nbsp;
 
@@ -1191,6 +1203,191 @@ params(): UrlParams
 
 &nbsp;
 
+### Интерфейс AllowRedirects<a name="AllowRedirects"></a>
+
+```ts
+interface AllowRedirects {
+	setStatus(status: boolean): boolean;
+	getStatus(): boolean;
+
+	setMax(max: number): boolean;
+	getMax(): number;
+
+	setStrict(strict: boolean): boolean;
+	getStrict(): boolean;
+
+	setWithReferer(withReferer: boolean): boolean;
+	getWithReferer(): boolean;
+
+	setProtocols(protocols: string[]): boolean;
+	getProtocols(): string[];
+}
+```
+Интерфейс настроек разрешения [`перенаправления HTTP-запросов`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP#%D0%9F%D0%B5%D1%80%D0%B5%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5).
+
+&nbsp;
+
+```js
+setStatus(status: boolean): boolean
+```
+Устанавливает флаг разрешения перенаправлений HTTP-запросов. Значение по умолчанию: `true`. Возвращает `true`.
+
+&nbsp;
+
+```js
+getStatus(): boolean
+```
+Возвращает флаг разрешения перенаправлений HTTP-запросов.
+
+&nbsp;
+
+```js
+setMax(max: number): boolean
+```
+Устанавливает максимальное количество перенаправлений. Значение по умолчанию: `5`. Возвращает `true`.
+
+&nbsp;
+
+```js
+getMax(): number
+```
+Возвращает максимальное количество перенаправлений.
+
+&nbsp;
+
+```js
+setStrict(strict: boolean): boolean
+```
+Не реализовано.
+
+&nbsp;
+
+```js
+getStrict(): boolean
+```
+Не реализовано.
+
+&nbsp;
+
+```js
+setWithReferer(withReferer: boolean): boolean
+```
+Устанавливает флаг передачи [`HTTP referer`](https://ru.wikipedia.org/wiki/HTTP_referer) в заголовке запроса. Значение по умолчанию: `false`. Возвращает `true`.
+
+&nbsp;
+
+```js
+getWithReferer(): boolean
+```
+Возвращает флаг передачи [`HTTP referer`](https://ru.wikipedia.org/wiki/HTTP_referer) в заголовке запроса.
+
+&nbsp;
+
+```js
+setProtocols(protocols: string[]): boolean
+```
+Устанавливает список протоколов, для которых разрешены перенаправления. Значение по умолчанию: `['http', 'https']`. Возвращает `true`.
+
+&nbsp;
+
+```js
+getProtocols(): string[]
+```
+Возвращает список протоколов, для которых разрешены перенаправления.
+
+&nbsp;
+
+### Интерфейс Options...<a name="Options"></a>
+
+```ts
+interface Options {
+	setConnTimeout(seconds: number): boolean;
+	getConnTimeout(): number;
+	setReqTimeout(seconds: number): boolean;
+	getReqTimeout(): number;
+	setCanDecodeContent(value: boolean): boolean;
+	getCanDecodeContent(): boolean;
+	allowRedirects(): AllowRedirects;
+	auth(): HttpAuth;
+
+	/**
+	 * This feature not realized
+	 */
+	cert(): Cert;
+	verify(): Verify;
+}
+```
+
+Интерфейс настройки опций соединения.
+
+&nbsp;
+
+```js
+setConnTimeout(seconds: number): boolean
+```
+Устанавливает тайм-аут соединения в секундах. Значение по умолчанию: `10`, максимальное значение: `60`. Возвращает `true`.
+
+&nbsp;
+
+```js
+getConnTimeout(): number
+```
+Возвращает тайм-аут соединения.
+
+&nbsp;
+
+```js
+setReqTimeout(seconds: number): boolean
+```
+Устанавливает тайм-аут ожидания ответа в секундах. Значение по умолчанию: `30`, максимальное значение: `300`. Возвращает `true`.
+
+&nbsp;
+
+```js
+getReqTimeout(): number
+```
+Возвращает тайм-аут ожидания ответа.
+
+&nbsp;
+
+```js
+setCanDecodeContent(value: boolean): boolean
+```
+Устанавливает признак 
+
+&nbsp;
+
+```js
+getCanDecodeContent(): boolean
+```
+
+&nbsp;
+
+```js
+allowRedirects(): AllowRedirects
+```
+
+&nbsp;
+
+```js
+auth(): HttpAuth
+```
+
+&nbsp;
+
+```js
+cert(): Cert
+```
+
+&nbsp;
+
+```js
+verify(): Verify
+```
+
+
+&nbsp;
+
 ### Интерфейс RequestBuilder...<a name="RequestBuilder"></a>
 
 ```ts
@@ -1233,6 +1430,7 @@ getMethod(): string
 ```js
 body(): RequestBody
 ```
+Возвращает интерфейс [`RequestBody`](#RequestBody) формирования тела запроса.
 
 &nbsp;
 
@@ -1245,12 +1443,15 @@ options(): Options
 ```js
 cookies(): Params
 ```
+Возвращает интерфейс [`Params`](#Params) для доступа к [`cookies`](https://ru.wikipedia.org/wiki/Cookie).
+
 
 &nbsp;
 
 ```js
 headers(): Params
 ```
+Возвращает интерфейс [`Params`](#Params) для формирования [`HTTP-заголовков`](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_HTTP) запроса.
 
 &nbsp;
 

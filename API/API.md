@@ -378,22 +378,7 @@ declare namespace Http {
         setStatus(status: boolean): HttpAuth;
     }
 
-    interface Options {
-        setConnTimeout(seconds: number): boolean;
-        getConnTimeout(): number;
-        setReqTimeout(seconds: number): boolean;
-        getReqTimeout(): number;
-        setCanDecodeContent(value: boolean): boolean;
-        getCanDecodeContent(): boolean;
-        allowRedirects(): AllowRedirects;
-        auth(): HttpAuth;
 
-        /**
-         * This feature not realized
-         */
-        cert(): Cert;
-        verify(): Verify;
-    }
 
     interface ResponseErrors {
         getCode(): number;
