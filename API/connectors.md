@@ -64,6 +64,7 @@ mongodb(): Mongodb.ConnectorBuilder
 ```js
 http(): Http.HttpManager
 ```
+Возвращает коннектор [`Http.HttpManager`](#HttpManager) соединения по протоколу HTTP.
 
 &nbsp;
 
@@ -870,6 +871,8 @@ getCommand(): string
 
 ## HTTP<a name="http"></a>
 
+Все интерфейсы этого раздела находятся в пространстве имён `Http`.
+
 ### Интерфейс Params<a name="Params"></a>
 
 ```ts
@@ -1381,7 +1384,7 @@ interface Verify {
 	setPath(path: string): boolean;
 }
 ```
-Интерфейс верификации сертификатов (SSL)[https://ru.wikipedia.org/wiki/SSL].
+Интерфейс верификации сертификатов [`SSL`](https://ru.wikipedia.org/wiki/SSL).
 
 ```js
 setStatus(value: boolean): boolean
@@ -1397,7 +1400,7 @@ setPath(path: string): boolean
 
 &nbsp;
 
-### Интерфейс Options...<a name="Options"></a>
+### Интерфейс Options<a name="Options"></a>
 
 ```ts
 interface Options {
@@ -1409,10 +1412,6 @@ interface Options {
 	getCanDecodeContent(): boolean;
 	allowRedirects(): AllowRedirects;
 	auth(): HttpAuth;
-
-	/**
-	 * This feature not realized
-	 */
 	cert(): Cert;
 	verify(): Verify;
 }
@@ -1453,14 +1452,14 @@ getReqTimeout(): number
 ```js
 setCanDecodeContent(value: boolean): boolean
 ```
-Устанавливает признак деархивации тела ответа сервера. Значение по умолчанию: `true`. Возвращает `true`.
+Устанавливает признак распаковки тела ответа сервера. В случае `true` архивированное тело ответа будет деархивироваться, в случае `false` – нет. Значение по умолчанию: `true`. Возвращает `true`.
 
 &nbsp;
 
 ```js
 getCanDecodeContent(): boolean
 ```
-Возвращает признак деархивации тела ответа сервера.
+Возвращает признак распаковки тела ответа сервера.
 
 &nbsp;
 
