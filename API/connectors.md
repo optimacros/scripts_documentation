@@ -1565,7 +1565,7 @@ send(): Response
 
 &nbsp;
 
-### Интерфейс HttpManager...<a name="HttpManager"></a>
+### Интерфейс HttpManager<a name="HttpManager"></a>
 
 ```ts
 interface HttpManager {
@@ -1577,7 +1577,7 @@ interface HttpManager {
 }
 
 ```
-Коннектор для подключения ...............
+Коннектор для подключения к серверу по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP).
 
 &nbsp;
 
