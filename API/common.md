@@ -150,6 +150,48 @@ canLoadCellsValues(value: boolean): CellBuffer
 
 &nbsp;
 
+### Интерфейс ExportObfuscationState<a name="ExportObfuscationState"></a>
+
+```ts
+interface ExportObfuscationState {
+    setPath(path: string): ExportObfuscationState;
+    setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState;
+    setDataArchiveType(type: string): ExportObfuscationState;
+    export(): boolean;
+}
+```
+Интерфейс для экспорта модели в [`обфусцированном`](https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D1%8F_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%BD%D0%BE%D0%B5_%D0%BE%D0%B1%D0%B5%D1%81%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%B8%D0%B5)) состоянии. Используется для передачи моделей, содержащих конфиденциальную информацию, третьим лицам.
+
+&nbsp;
+
+```js
+setPath(path: string): ExportObfuscationState
+```
+Устанавливает путь к файлу модели. Возвращает `this`.
+
+&nbsp;
+
+```js
+setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState
+```
+Устанавливает список email пользователей модели, которые *не* будут обфусцированы. Возвращает `this`.
+
+&nbsp;
+
+```js
+setDataArchiveType(type: string): ExportObfuscationState
+```
+Устанавливает тип формата выгруженных данных модели. Допустимые значения: `TXT`, `BIN`. Значение по умолчанию: `BIN`. Возвращает `this`.
+
+&nbsp;
+
+```js
+export(): boolean
+```
+Экспортирует модель и возвращает `true`.
+
+&nbsp;
+
 ### Интерфейс ModelInfo<a name="ModelInfo"></a>
 ```ts
 interface ModelInfo {
@@ -161,6 +203,7 @@ interface ModelInfo {
     repair(): boolean;
     recalculate(): boolean;
     backup(path: string): boolean;
+    exportObfuscationState(): ExportObfuscationState;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -220,6 +263,13 @@ recalculate(): boolean
 backup(path: string): boolean
 ```
 Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#scriptDir) скрипта по пути `path`. Возвращает `true`.
+
+&nbsp;
+
+```js
+exportObfuscationState(): ExportObfuscationState
+```
+Возвращает интерфейс [`ExportObfuscationState`](#ExportObfuscationState) экспорта модели в обфусцированном состоянии.
 
 &nbsp;
 
