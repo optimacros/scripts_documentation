@@ -463,6 +463,20 @@ export interface UserInfo {
     getRole(): EntityInfo;
 }
 
+interface ExportObfuscationState {
+    setPath(path: string): ExportObfuscationState;
+
+    setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState;
+
+    /**
+     * Default: BIN
+     * @param type TXT|BIN
+     */
+    setDataArchiveType(type: string): ExportObfuscationState;
+
+    export(): boolean;
+}
+
 export interface ModelInfo {
     id(): string;
 
@@ -479,6 +493,8 @@ export interface ModelInfo {
     recalculate(): boolean;
 
     backup(path: string): boolean;
+    
+    exportObfuscationState(): ExportObfuscationState;
 }
 
 export interface ButtonInfoOptions {
