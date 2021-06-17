@@ -936,14 +936,12 @@ clear(): boolean
 
 &nbsp;
 
-### Интерфейс UrlParams...<a name="UrlParams"></a>
+### Интерфейс UrlParams<a name="UrlParams"></a>
 
 ```ts
 interface UrlParams extends Params {
 	stringify(): string;
-	// NONE|RFC1738|RFC3986
 	setEncodingType(type: string): UrlParams;
-
 	getEncodingType(): string;
 }
 ```
@@ -961,12 +959,14 @@ stringify(): string
 ```js
 setEncodingType(type: string): UrlParams
 ```
+Устанавливает стандарт кодировки параметров URL. Допустимые значения: `NONE`, `RFC1738`, `RFC3986`. Значение по умолчанию: `RFC1738`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getEncodingType(): string
 ```
+Возвращает стандарт кодировки параметров URL.
 
 &nbsp;
 
@@ -1373,28 +1373,20 @@ setPassphrase(passphrase: string): Cert
 
 &nbsp;
 
-### Интерфейс Verify...<a name="Verify"></a>
+### Интерфейс Verify<a name="Verify"></a>
 
 ```ts
 interface Verify {
-/**
- * Default is TRUE
- * @param value
- */
 	setStatus(value: boolean): boolean;
-
-	/**
-	* This feature not realized
-	*/
 	setPath(path: string): boolean;
 }
 ```
-
+Интерфейс верификации сертификатов (SSL)[https://ru.wikipedia.org/wiki/SSL].
 
 ```js
 setStatus(value: boolean): boolean
 ```
-Устанавливает признак проверки сертификата. Значение по умолчанию: `true`. Возвращает `true`.
+Устанавливает признак верификации сертификата SSL. Значение по умолчанию: `true`. Возвращает `true`.
 
 &nbsp;
 
@@ -1461,13 +1453,14 @@ getReqTimeout(): number
 ```js
 setCanDecodeContent(value: boolean): boolean
 ```
-Устанавливает признак 
+Устанавливает признак деархивации тела ответа сервера. Значение по умолчанию: `true`. Возвращает `true`.
 
 &nbsp;
 
 ```js
 getCanDecodeContent(): boolean
 ```
+Возвращает признак деархивации тела ответа сервера.
 
 &nbsp;
 
@@ -1495,7 +1488,7 @@ cert(): Cert
 ```js
 verify(): Verify
 ```
-
+Возвращает интерфейс [`Verify`](#Verify) проверки сертификатов SSL.
 
 &nbsp;
 
@@ -1645,7 +1638,7 @@ interface ResponseErrors {
 	getMessage(): string;
 }
 ```
-Интерфейс доступа к [`ошибкам`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP) транспортного уровня HTTP.
+Интерфейс доступа к [`ошибке`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP) транспортного уровня HTTP.
 
 &nbsp;
 
@@ -1709,7 +1702,7 @@ getStatusCode(): number
 ```js
 isOk(): boolean
 ```
-Возвращает признак того, что код состояния HTTP [`успешный`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP#%D0%A3%D1%81%D0%BF%D0%B5%D1%85), то есть `200 <= getStatusCode() < 300`.
+Возвращает признак того, что код состояния HTTP [`успешный`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP#%D0%A3%D1%81%D0%BF%D0%B5%D1%85), то есть `getStatusCode() == 200`.
 
 &nbsp;
 
