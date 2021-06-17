@@ -1655,7 +1655,7 @@ getMessage(): string
 
 &nbsp;
 
-### Интерфейс Response...<a name="Response"></a>
+### Интерфейс Response<a name="Response"></a>
 
 ```ts
 interface Response {
@@ -1667,6 +1667,7 @@ interface Response {
 	getErrors(): ResponseErrors;
 }
 ```
+Интерфейс ответа HTTP-сервера.
 
 &nbsp;
 
