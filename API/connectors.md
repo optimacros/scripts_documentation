@@ -871,7 +871,7 @@ getCommand(): string
 
 ## HTTP<a name="http"></a>
 
-Все интерфейсы этого раздела находятся в пространстве имён `Http`.
+Все интерфейсы этого раздела, кроме `ObjectOfStringArray`, находятся в пространстве имён `Http`.
 
 ### Интерфейс Params<a name="Params"></a>
 
