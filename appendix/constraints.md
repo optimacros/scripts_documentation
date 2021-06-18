@@ -82,6 +82,8 @@ console.log(message + '\n')
 console.log(`${message}\n`)
 ```
 
+Это неудобство [`отсутствует`](https://github.com/optimacros/applications_documentation/blob/master/API/diff.md#lineBreak) в Application Manager.
+
 
 [Приложения](appendix.md)
 
