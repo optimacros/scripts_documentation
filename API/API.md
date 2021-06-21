@@ -168,24 +168,6 @@ interface CubeInfo extends EntityInfo {
 }
 ```
 
-
-export interface ListSubsetsTab extends Tab {
-    listTab(): ListTab;
-}
-
-### Интерфейс ListImporter ...<a name="ListImporter"></a>
-```ts
-interface ListImporter extends Importer {
-    setFilePath(path: string): ListImporter;
-    setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
-    getObligatoryListCodes(): boolean;
-    setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
-    getImportToChildListOnly(): boolean;
-    setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
-    getUpdatedPropertiesOnParentLevels(): boolean;
-}
-```
-
 ### Интерфейс CopyData ...<a name="CopyData"></a>
 ```ts
 interface CopyData {

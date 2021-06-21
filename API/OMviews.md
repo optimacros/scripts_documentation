@@ -32,7 +32,7 @@ interface MulticubesTab extends Tab {
     open(name: string): MulticubeTab;
 }
 ```
-Интерфейс для получения ссылки на [`MulticubeTab`](#MulticubeTab).
+Интерфейс для получения ссылки на [`MulticubeTab`](#MulticubeTab). Интерфейс наследуется от [`Tab`](#Tab).
 
 &nbsp;
 
@@ -279,6 +279,7 @@ interface MulticubeTab extends Tab {
     getCubeInfo(identifier: string | number): CubeInfo;
 }
 ```
+Вкладка мультикуба. Интерфейс наследуется от [`Tab`](#Tab).
 
 &nbsp;
 
@@ -477,7 +478,7 @@ interface GridPageSelector extends GridDimension {
     getSelectedEntity(): EntityInfo | null;
 }
 ```
-Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`).
+Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`). Интерфейс наследуется от [`GridDimension`](#GridDimension).
 
 &nbsp;
 
@@ -937,10 +938,10 @@ listsTab(): ListsTab
 ### Интерфейс ListsTab<a name="ListsTab"></a>
 ```ts
 interface ListsTab extends Tab {
-    open(name: string): ListTab;
+	open(name: string): ListTab;
 }
 ```
-Интерфейс для получения ссылки на [`ListTab`](#ListTab).
+Интерфейс для получения ссылки на [`ListTab`](#ListTab). Интерфейс наследуется от [`Tab`](#Tab).
 
 &nbsp;
 
@@ -951,12 +952,102 @@ open(name: string): ListTab
 
 &nbsp;
 
-### Интерфейс ListTab ...<a name="ListTab"></a>
+### Интерфейс ListTab<a name="ListTab"></a>
 ```ts
 interface ListTab extends Tab {
-    listSubsetTab(): ListSubsetsTab
-    importer(): ListImporter;
+	listSubsetTab(): ListSubsetsTab;
+	importer(): ListImporter;
 }
+```
+Вкладка справочника. Интерфейс наследуется от [`Tab`](#Tab).
+
+&nbsp;
+
+```js
+listSubsetTab(): ListSubsetsTab
+```
+Возвращает ссылку на интерфейс [`ListSubsetsTab`](#ListSubsetsTab). В интерфейсе Optimacros аналогично открытию вкладки `Выборки` справочника `name`.
+
+&nbsp;
+
+```js
+importer(): ListImporter
+```
+Возвращает интерфейс [`ListImporter`](#ListImporter) для импорта данных в справочник.
+
+&nbsp;
+
+### Интерфейс ListSubsetsTab...<a name="ListSubsetsTab"></a>
+
+```ts
+interface ListSubsetsTab extends Tab {
+	listTab(): ListTab;
+}
+```
+Вкладка `Выборки` справочника. Интерфейс наследуется от [`Tab`](#Tab). В отличие от аналогичной вкладки в интерфейсе Optimacros, её [`Grid`](#Grid) не имеет ни измерений на столбцах, ни ячеек; доступ можно получить только к заголовкам строк, являющихся названиями выборок справочника.
+
+&nbsp;
+
+```js
+listTab(): ListTab
+```
+
+&nbsp;
+
+### Интерфейс ListImporter ...<a name="ListImporter"></a>
+```ts
+interface ListImporter extends Importer {
+	setFilePath(path: string): ListImporter;
+	setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter;
+	getObligatoryListCodes(): boolean;
+	setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
+	getImportToChildListOnly(): boolean;
+	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
+	getUpdatedPropertiesOnParentLevels(): boolean;
+}
+```
+Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](#Importer).
+
+&nbsp;
+
+```js
+setFilePath(path: string): ListImporter
+```
+
+&nbsp;
+
+```js
+setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
+```
+
+&nbsp;
+
+```js
+getObligatoryListCodes(): boolean
+```
+
+&nbsp;
+
+```js
+setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
+```
+
+&nbsp;
+
+```js
+getImportToChildListOnly(): boolean
+```
+
+&nbsp;
+
+```js
+setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
+```
+
+&nbsp;
+
+```js
+getUpdatedPropertiesOnParentLevels(): boolean
 ```
 
 &nbsp;
@@ -984,7 +1075,8 @@ interface VersionsTab extends Tab {
     copyVersion(from: string, to: string): Object;
 }
 ```
-Вкладка `Версии`. Для работы не требует открытия. 
+Вкладка `Версии`. Интерфейс наследуется от [`Tab`](#Tab). Для работы не требует открытия.
+
 
 &nbsp;
 
@@ -1177,7 +1269,7 @@ interface StorageExporter extends Exporter {
     setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
 }
 ```
-Интерфейс быстрого экспорта. Доступен только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
+Интерфейс быстрого экспорта. Доступен только в мультикубах. Интерфейс наследуется от [`Exporter`](#Exporter). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
 
 &nbsp;
 
@@ -1401,7 +1493,7 @@ interface StorageImporter extends Importer {
     setDateFormat(dateFormat: string): StorageImporter;
 }
 ```
-Интерфейс быстрого импорта. Доступен только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции возвращают `this`.
+Интерфейс быстрого импорта. Доступен только в мультикубах. Интерфейс наследуется от [`StorageImporter`](#StorageImporter). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции возвращают `this`.
 
 &nbsp;
 
