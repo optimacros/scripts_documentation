@@ -64,9 +64,9 @@ let rowDimensionNames = [];
 
 ![Строчные измерения вьюхи Условия и расчёты 3](./pic/rcf_RowMeasuresMK.png)
 
-Для перебора массива воспользуемся [forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) с параметром `gridDimension`, в котором присвоим переменной `entity` результат работы функции.
+Для перебора массива воспользуемся [forEach()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) с параметром `gridDimension`, в котором присвоим переменной `entity` результат работы функции.
 
-Для того, чтобы в `entity` получить сущность [EntityInfo](../API/OMviews.md#EntityInfo) измерения, вызовем функцию `getDimensionEntity()` интерфейса [GridDimension](../API/OMviews.md#GridDimension). После чего добавим все названия измерений с помощью [push()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) в созданный нами ранее массив `rowDimensionNames`. Осталось лишь написать вывод информации о количестве измерений:
+Для того, чтобы в `entity` получить сущность [EntityInfo](../API/OMviews.md#EntityInfo) измерения, вызовем функцию `getDimensionEntity()` интерфейса [GridDimension](../API/OMviews.md#GridDimension). После чего добавим все названия измерений с помощью [push()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/push) в созданный нами ранее массив `rowDimensionNames`. Осталось лишь написать вывод информации о количестве измерений:
 
 ```js
 const multicubesTab = om.multicubes.multicubesTab();
