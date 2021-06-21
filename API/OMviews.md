@@ -940,6 +940,13 @@ interface ListsTab extends Tab {
     open(name: string): ListTab;
 }
 ```
+Интерфейс для получения ссылки на [`ListTab`](#ListTab).
+
+&nbsp;
+
+```js
+open(name: string): ListTab
+```
 Возвращает ссылку на [`ListTab`](#ListTab) справочника `name`. В интерфейсе Optimacros аналогично открытию вкладки справочника `name`.
 
 &nbsp;
