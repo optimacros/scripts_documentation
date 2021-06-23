@@ -135,7 +135,7 @@ apply(): CellBuffer
 &nbsp;
 
 ```js
-count()
+count(): number
 ```
 Возвращает количество ячеек в буфере.
 
