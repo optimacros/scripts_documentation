@@ -977,7 +977,7 @@ importer(): ListImporter
 
 &nbsp;
 
-### Интерфейс ListSubsetsTab...<a name="ListSubsetsTab"></a>
+### Интерфейс ListSubsetsTab<a name="ListSubsetsTab"></a>
 
 ```ts
 interface ListSubsetsTab extends Tab {
@@ -991,6 +991,7 @@ interface ListSubsetsTab extends Tab {
 ```js
 listTab(): ListTab
 ```
+Возвращает интерфейс [`ListTab`](#ListTab) вкладки того справочника, чьи выборки представляет собой `this`.
 
 &nbsp;
 
@@ -1013,24 +1014,28 @@ interface ListImporter extends Importer {
 ```js
 setFilePath(path: string): ListImporter
 ```
+Устанавливает имя импортируемого файла. Возвращает `this`.
 
 &nbsp;
 
 ```js
 setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
 ```
+Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, элемент не будет импортироваться. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getObligatoryListCodes(): boolean
 ```
+Возвращает признак режима обязательных кодов.
 
 &nbsp;
 
 ```js
 setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
 ```
+Отключает обновление свойств `Parent` и `Code` для элементов родительских справочников. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
@@ -1043,12 +1048,14 @@ getImportToChildListOnly(): boolean
 ```js
 setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
 ```
+Устанавливает режим обновления кастомых свойств и сабсетов для элементов родительских справочников. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getUpdatedPropertiesOnParentLevels(): boolean
 ```
+Возвращает признак режима обновления кастомых свойств и сабсетов для элементов родительских справочников.
 
 &nbsp;
 
