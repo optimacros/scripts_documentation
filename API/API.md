@@ -304,52 +304,6 @@ export interface TypePeriod {
     tableTab(): Tab;
 }
 
-export interface ButtonInfoOptions {
-    setLabel(label: string): ButtonInfoOptions;
-
-    /**
-     * PRIMARY|SECONDARY
-     * @param style
-     */
-    setStyle(style: string): ButtonInfoOptions;
-}
-
-export interface ButtonInfo {
-    /**
-     * GENERAL|CLOSE
-     * @param type
-     */
-    setType(type: string): ButtonInfo;
-    options(): ButtonInfoOptions;
-}
-
-export interface ResultBaseAction {
-    appendAfter(): this;
-}
-
-export interface EnvironmentInfo {
-    set(key: string, value: any);
-    get(key: string);
-}
-
-export interface ResultMacrosAction extends ResultBaseAction {
-    setAutoRunTimeout(seconds: number): this;
-    buttonInfo(): ButtonInfo;
-    environmentInfo(): EnvironmentInfo;
-}
-
-export interface ResultOpenAction extends ResultBaseAction {
-    buttonInfo(): ButtonInfo;
-}
-
-export interface ResultActionsInfo {
-    makeMacrosAction(identifier: string | number): ResultMacrosAction;
-    makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
-    makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
-    makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
-    makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
-}
-
 export namespace WinAgent {
 
     export interface BaseActionResult {
