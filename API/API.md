@@ -300,14 +300,6 @@ declare namespace Mongodb {
 
 ```
 
-### Http и его интерфейсы:
-```ts
-declare namespace Http {
-
-
-}
-```
-
 export interface TypePeriod {
     tableTab(): Tab;
 }
