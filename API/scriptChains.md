@@ -83,7 +83,7 @@ get(key: string): any
 
 &nbsp;
 
-### Интерфейс ResultBaseAction ...<a name="ResultBaseAction"></a>
+### Интерфейс ResultBaseAction<a name="ResultBaseAction"></a>
 
 ```ts
 interface ResultBaseAction {
@@ -97,7 +97,13 @@ interface ResultBaseAction {
 ```js
 appendAfter(): this
 ```
-Добавляет действие в реестр последующего запуска. Оно будет выполнено после исполнения текущего скрипта.
+Добавляет действие в реестр последующего запуска. Оно будет выполнено после исполнения текущего скрипта. При этом если действием является запуск очередного скрипта [`ResultMacrosAction`](#ResultMacrosAction), который в свою очередь тоже может добавить в реестр действие запуска некоторого количества скриптов, то функционирование реестра запуска осуществляется в соответствии с алгоритмом обхода дерева запусков [`в глубину`](https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%B8%D1%81%D0%BA_%D0%B2_%D0%B3%D0%BB%D1%83%D0%B1%D0%B8%D0%BD%D1%83).
+
+Рассмотрим пример. Скрипт `3` последовательно добавляет действия запусков скриптов `4` и `2`. Скрипт `4` последовательно добавляет действия запусков скриптов `5` и `1`:
+
+![Дерево вызовов](./pic/DFS.png)
+
+В такой ситуации скрипты исполнятся в следующем порядке: `3 -> 4 -> 5 -> 1 -> 2`.
 
 &nbsp;
 
@@ -110,7 +116,7 @@ interface ResultMacrosAction extends ResultBaseAction {
 	environmentInfo(): EnvironmentInfo;
 }
 ```
-Интерфейс действия запуска скрипта.
+Интерфейс действия запуска скрипта. Интерфейс наследуется от [`ResultBaseAction`](#ResultBaseAction).
 
 &nbsp;
 
@@ -151,13 +157,45 @@ export interface ResultOpenAction extends ResultBaseAction {
 
 ```ts
 interface ResultActionsInfo {
-    makeMacrosAction(identifier: string | number): ResultMacrosAction;
-    makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
-    makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
-    makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
-    makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
+	makeMacrosAction(identifier: string | number): ResultMacrosAction;
+	makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
+	makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
+	makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
+	makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
 }
 ```
+
+&nbsp;
+
+```js
+makeMacrosAction(identifier: string | number): ResultMacrosAction
+```
+
+&nbsp;
+
+```js
+makeDashboardOpenAction(identifier: string | number): ResultOpenAction
+```
+
+&nbsp;
+
+```js
+makeContextTableOpenAction(identifier: string | number): ResultOpenAction
+```
+
+&nbsp;
+
+```js
+makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction
+```
+
+&nbsp;
+
+```js
+makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction
+```
+
+&nbsp;
 
 [API Reference](API.md)
 
