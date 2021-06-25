@@ -161,7 +161,7 @@ buttonInfo(): ButtonInfo
 
 &nbsp;
 
-### Интерфейс ResultActionsInfo ...<a name="ResultActionsInfo"></a>
+### Интерфейс ResultActionsInfo<a name="ResultActionsInfo"></a>
 
 ```ts
 interface ResultActionsInfo {
@@ -178,30 +178,35 @@ interface ResultActionsInfo {
 ```js
 makeMacrosAction(identifier: string | number): ResultMacrosAction
 ```
+Создаёт и возвращает действие [`ResultMacrosAction`](#ResultMacrosAction) запуска существущего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./OMviews.md#longId) скрипта.
 
 &nbsp;
 
 ```js
 makeDashboardOpenAction(identifier: string | number): ResultOpenAction
 ```
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./OMviews.md#longId) дашборда. ***Не работает.***
 
 &nbsp;
 
 ```js
 makeContextTableOpenAction(identifier: string | number): ResultOpenAction
 ```
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./OMviews.md#longId) контекстной таблицы. ***Не работает.***
 
 &nbsp;
 
 ```js
 makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction
 ```
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./OMviews.md#longId) мультикуба, `view` означает имя или [`longId`](./OMviews.md#longId) представления. ***Не работает.***
 
 &nbsp;
 
 ```js
 makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction
 ```
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./OMviews.md#longId) справочника, `view` означает имя или [`longId`](./OMviews.md#longId) представления. ***Не работает.***
 
 &nbsp;
 
