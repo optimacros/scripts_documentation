@@ -995,7 +995,7 @@ listTab(): ListTab
 
 &nbsp;
 
-### Интерфейс ListImporter ...<a name="ListImporter"></a>
+### Интерфейс ListImporter<a name="ListImporter"></a>
 ```ts
 interface ListImporter extends Importer {
 	setFilePath(path: string): ListImporter;
@@ -1021,7 +1021,7 @@ setFilePath(path: string): ListImporter
 ```js
 setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
 ```
-Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, элемент не будет импортироваться. Значение по умолчанию: `false`. Возвращает `this`.
+Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществуещие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
@@ -1035,27 +1035,28 @@ getObligatoryListCodes(): boolean
 ```js
 setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
 ```
-Отключает обновление свойств `Parent` и `Code` для элементов родительских справочников. Значение по умолчанию: `false`. Возвращает `this`.
+Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getImportToChildListOnly(): boolean
 ```
+Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
 
 &nbsp;
 
 ```js
 setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
 ```
-Устанавливает режим обновления кастомых свойств и сабсетов для элементов родительских справочников. Значение по умолчанию: `false`. Возвращает `this`.
+Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getUpdatedPropertiesOnParentLevels(): boolean
 ```
-Возвращает признак режима обновления кастомых свойств и сабсетов для элементов родительских справочников.
+Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
 
 &nbsp;
 

@@ -61,8 +61,8 @@ options(): ButtonInfoOptions
 
 ```ts
 interface EnvironmentInfo {
-    set(key: string, value: any): EnvironmentInfo;
-    get(key: string): any;
+	set(key: string, value: any): EnvironmentInfo;
+	get(key: string): any;
 }
 ```
 Интерфейс [`переменных окружения`](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B). Значениями могут быть только [`сериализуемые`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) в JSON данные.
