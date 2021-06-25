@@ -1,16 +1,11 @@
 # Цепочки скриптов
 
-### Интерфейс ButtonInfoOptions ...<a name="ButtonInfoOptions"></a>
+### Интерфейс ButtonInfoOptions<a name="ButtonInfoOptions"></a>
 
 ```ts
 interface ButtonInfoOptions {
-    setLabel(label: string): ButtonInfoOptions;
-
-    /**
-     * PRIMARY|SECONDARY
-     * @param style
-     */
-    setStyle(style: string): ButtonInfoOptions;
+	setLabel(label: string): ButtonInfoOptions;
+	setStyle(style: string): ButtonInfoOptions;
 }
 ```
 Интерфейс настроек кнопки. Все функции возвращают `this`.
@@ -27,7 +22,7 @@ setLabel(label: string): ButtonInfoOptions
 ```js
 setStyle(style: string): ButtonInfoOptions
 ```
-Устанавливает стиль кнопки. Возможные значения: `'PRIMARY'` – подтверждение действия, `'SECONDARY'` – отмена действия (в этом случае после завершения скрипта обе кнопки в интерфейсе Optimacros будут кнопками отмены). Значение по умолчанию: `'PRIMARY'`.
+Устанавливает стиль кнопки. Возможные значения: `'PRIMARY'` – кнопка цвета темы Optimacros, `'SECONDARY'` – скучная, неинтересная кнопка. Значение по умолчанию: `'PRIMARY'`.
 
 &nbsp;
 
