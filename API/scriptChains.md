@@ -128,10 +128,11 @@ setAutoRunTimeout(seconds: number): this
 
 &nbsp;
 
+<a name="ResultMacrosAction.buttonInfo"></a>
 ```js
 buttonInfo(): ButtonInfo
 ```
-В случае вызова этой функции после завершения работы скрипта в интерфейсе Optimacros появятся 2 кнопки: `Отмена`, которая отменяет запуск скрипта, и кнопка, чьи вид и поведение определяются интерфейсом [`ButtonInfo`](#ButtonInfo), который и возвращает функция.
+В случае вызова этой функции после завершения работы скрипта в интерфейсе Optimacros появятся 2 кнопки: `Отмена`, которая отменяет запуск действия, и кнопка, чьи вид и поведение определяются интерфейсом [`ButtonInfo`](#ButtonInfo), который и возвращает функция.
 
 &nbsp;
 
@@ -142,11 +143,23 @@ environmentInfo(): EnvironmentInfo
 
 &nbsp;
 
-### Интерфейс ResultOpenAction ...<a name="ResultOpenAction"></a>
+### Интерфейс ResultOpenAction<a name="ResultOpenAction"></a>
 
-export interface ResultOpenAction extends ResultBaseAction {
-    buttonInfo(): ButtonInfo;
+```ts
+interface ResultOpenAction extends ResultBaseAction {
+	buttonInfo(): ButtonInfo;
 }
+```
+Интерфейс действия открытия некоторого объекта Optimacros. Интерфейс наследуется от [`ResultBaseAction`](#ResultBaseAction).
+
+&nbsp;
+
+```js
+buttonInfo(): ButtonInfo
+```
+Работает так же, как и [`ResultMacrosAction`](#ResultMacrosAction).[`buttonInfo()`](#ResultMacrosAction.buttonInfo).
+
+&nbsp;
 
 ### Интерфейс ResultActionsInfo ...<a name="ResultActionsInfo"></a>
 
