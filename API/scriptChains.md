@@ -172,6 +172,7 @@ interface ResultActionsInfo {
 	makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
 }
 ```
+Интерфейс создания действий, которые можно автомагически осуществить после исполнения текущего скрипта.
 
 &nbsp;
 

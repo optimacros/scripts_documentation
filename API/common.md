@@ -325,9 +325,9 @@ getRole(): EntityInfo
 ### Интерфейс ResultInfo ...<a name="ResultInfo"></a>
 ```ts
 interface ResultInfo {
-    addFileHash(hash: string): ResultInfo;
-    actionsInfo(): ResultActionsInfo;
-    setProperty(name: string, value: any): ResultInfo;
+	addFileHash(hash: string): ResultInfo;
+	actionsInfo(): ResultActionsInfo;
+	setProperty(name: string, value: any): ResultInfo;
 }
 ```
 
@@ -338,6 +338,19 @@ interface ResultInfo {
 addFileHash(hash: string): ResultInfo
 ```
 Добавляет к ответу на запрос скрипта хэш `hash` файла, ранее зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Для пользователя это приведёт к тому, что файл будет скачан в браузере. Возвращает `this`.
+
+&nbsp;
+
+```js
+actionsInfo(): ResultActionsInfo
+```
+Возвращает интерфейс [`ResultActionsInfo`](./scriptChains.md#ResultActionsInfo) создания действий, которые можно автомагически осуществить после исполнения текущего скрипта.
+
+&nbsp;
+
+```js
+setProperty(name: string, value: any): ResultInfo
+```
 
 &nbsp;
 
