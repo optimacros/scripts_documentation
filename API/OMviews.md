@@ -3,7 +3,7 @@
 1. [Представления мультикубов, справочников, версий](#views)
 1. [Экспорт из мультикубов и справочников](#export)
 1. [Импорт в мультикубы и справочники](#import)
-1. [Обновление клеток мультикубов через формулу](#update)
+1. [Обновление клеток куба по формуле](#update)
 1. [Получение клеток куба с помощью формулы](#get)
 1. [Копирование срезов кубов](#copy)
 
@@ -273,13 +273,38 @@ reverse(): ElementsReorder
 ### Интерфейс MulticubeTab ...<a name="MulticubeTab"></a>
 ```ts
 interface MulticubeTab extends Tab {
-    cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
-    cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
-    cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
-    getCubeInfo(identifier: string | number): CubeInfo;
+	cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
+	cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
+	cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
+	getCubeInfo(identifier: string | number): CubeInfo;
 }
 ```
 Вкладка мультикуба. Интерфейс наследуется от [`Tab`](#Tab).
+
+&nbsp;
+
+```js
+cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
+```
+
+&nbsp;
+
+```js
+cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder
+```
+
+&nbsp;
+
+```js
+cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder
+```
+Возвращает интерфейс [`CubeCellUpdaterBuilder`](#CubeCellUpdaterBuilder) обновления клеток куба с именем или идентификатором `identifier` по формуле.
+
+&nbsp;
+
+```js
+getCubeInfo(identifier: string | number): CubeInfo
+```
 
 &nbsp;
 
@@ -1532,7 +1557,56 @@ setDateFormat(dateFormat: string): StorageImporter
 
 &nbsp;
 
-## Обновление клеток мультикубов через формулу<a name="update"></a>
+## Обновление клеток куба по формуле<a name="update"></a>
+
+### Интерфейс CubeCellUpdaterBuilder<a name="CubeCellUpdaterBuilder"></a>
+```ts
+interface CubeCellUpdaterBuilder {
+	setConditionFormula(formula: string): this;
+	setFormula(formula: string): this;
+	load(): CubeCellUpdater;
+}
+```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для обновления клеток куба по формуле Optimacros.
+
+&nbsp;
+
+```js
+setConditionFormula(formula: string): this
+```
+Устанавливает условную формулу, которая будет применяться к каждой клетке куба, и возвращать значение типа `Boolean`. Значение по умолчанию: `'TRUE'`. Возвращает `this`.
+
+&nbsp;
+
+```js
+setFormula(formula: string): this
+```
+Устанавливает формулу в формате Optimacros, которая будет применяться к тем клеткам куба, на которых условная формула вернула значение `'TRUE'`, и возвращать для них значение, тип которого должен соответствовать формату куба. Значение по умолчанию отсутствует. Возвращает `this`.
+
+&nbsp;
+
+```js
+load(): CubeCellUpdater
+```
+Устанавливает значения в клетках куба в соответствии с формулой и условной формулой, возвращает интерфейс [`CubeCellUpdater`](#CubeCellUpdater).
+
+&nbsp;
+
+### Интерфейс CubeCellUpdater<a name="CubeCellUpdater"></a>
+
+```ts
+interface CubeCellUpdater {
+	getCount(): number;
+}
+```
+Интерфейс получения результатов об обновлении клеток куба по формуле.
+
+&nbsp;
+
+```js
+getCount(): number
+```
+Должна возвращать количество ячеек, модифицированных применением формулы. ***Не реализовано; возвращает `-1`.***
 
 &nbsp;
 

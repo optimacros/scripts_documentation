@@ -5,7 +5,7 @@
     1. Представления мультикубов, справочников, версий
     1. Экспорт из мультикубов и справочников
     1. Импорт в мультикубы и справочники
-    1. Обновление клеток мультикубов через формулу
+    1. Обновление клеток куба по формуле
     1. Получение клеток куба с помощью формулы
     1. Копирование срезов кубов
 1. [Интерфейс Common](common.md)
@@ -132,22 +132,6 @@ interface CubeCellSelector {
 interface CubeCellSelectorBuilder {
     setFormula(formula: string): this;
     load(): CubeCellSelector;
-}
-```
-
-### Интерфейс CubeCellUpdater ...<a name="CubeCellUpdater"></a>
-```ts
-interface CubeCellUpdater{
-    getCount(): number;
-}
-```
-
-### Интерфейс CubeCellUpdaterBuilder ...<a name="CubeCellUpdaterBuilder"></a>
-```ts
-interface CubeCellUpdaterBuilder {
-    setConditionFormula(formula: string): this;
-    setFormula(formula: string): this;
-    load(): CubeCellUpdater;
 }
 ```
 
