@@ -240,6 +240,8 @@ export interface Tab {
 
 export interface Environment {
     load(name: string): Environment;
+    
+    loadFromMulticube(name: string, view?: string | null): Environment;
 
     get(key: string, def?: any): any;
 
