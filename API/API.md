@@ -152,19 +152,6 @@ interface CubeInfo extends EntityInfo {
 }
 ```
 
-### Интерфейс CopyData ...<a name="CopyData"></a>
-```ts
-interface CopyData {
-    setSourceLongId(longId: number): CopyData;
-    setDestLongId(longId: number): CopyData;
-    enableCopyAllCubes(): CopyData;
-    enableCustomProperties(): CopyData;
-    setMulticubeLongIds(longIds: number[]): CopyData;
-    setMulticubeByNames(names: string[]): CopyData;
-    copy(): CopyData;
-}
-```
-
 ### Интерфейс OptimizationRequestTab ...<a name="OptimizationRequestTab"></a>
 ```ts
 interface OptimizationRequestTab extends Tab {

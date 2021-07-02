@@ -355,6 +355,7 @@ setProperty(name: string, value: any): ResultInfo
 &nbsp;
 
 ### Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
+
 ```ts
 interface EntitiesInfo {
     get(longId: number): EntityInfo | null;
@@ -377,6 +378,73 @@ get(longId: number): EntityInfo | null
 getCollection(longId: number[]): EntityInfo[]
 ```
 Возвращает массив сущностей [`EntityInfo`](./OMviews.md#EntityInfo) по массиву их[`longId`](./OMviews.md#longId).
+
+&nbsp;
+
+### Интерфейс CopyData<a name="CopyData"></a>
+
+```ts
+interface CopyData {
+	setSourceLongId(longId: number): CopyData;
+	setDestLongId(longId: number): CopyData;
+	enableCustomProperties(): CopyData;
+	enableCopyAllCubes(): CopyData;
+	setMulticubeLongIds(longIds: number[]): CopyData;
+	setMulticubeByNames(names: string[]): CopyData;
+	copy(): CopyData;
+}
+```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет скопировать срез куба в другой куб внутри одного мультикуба. Для указания кубов, которые необходимо копировать, необходимо вызвать одну из трёх функций: `enableCopyAllCubes()`, `setMulticubeLongIds()`, `setMulticubeByNames()`. Все методы возвращают `this`.
+
+&nbsp;
+
+```js
+setSourceLongId(longId: number): CopyData
+```
+Устанавливает [`longId`](./OMviews.md#longId) измерения источника.
+
+&nbsp;
+
+```js
+setDestLongId(longId: number): CopyData
+```
+Устанавливает [`longId`](./OMviews.md#longId) измерения приёмника.
+
+&nbsp;
+
+```js
+enableCustomProperties(): CopyData
+```
+Предписывает пройти по всем справочникам, которые имеют связь с источником и приёмником, и произведёт копирование пользовательских свойств.
+&nbsp;
+
+```js
+enableCopyAllCubes(): CopyData
+```
+Предписывает произвести копирование во всех кубах.
+
+&nbsp;
+
+```js
+setMulticubeLongIds(longIds: number[]): CopyData
+```
+Устанавливает [`longId`](./OMviews.md#longId) мультикубов.
+
+&nbsp;
+
+```js
+setMulticubeByNames(names: string[]): CopyData
+```
+Устанавливает имена мультикубов.
+
+&nbsp;
+
+```js
+copy(): CopyData
+```
+Выполняет копирование.
+
+&nbsp;
 
 [API Reference](API.md)
 
