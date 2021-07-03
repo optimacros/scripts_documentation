@@ -466,6 +466,7 @@ getPageSelectors(): GridPageSelector[]
 
 &nbsp;
 
+<a name="GridDefinitionInfo.getRowDimensions"></a>
 ```js
 getRowDimensions(): GridDimension[]
 ```
@@ -473,6 +474,7 @@ getRowDimensions(): GridDimension[]
 
 &nbsp;
 
+<a name="GridDefinitionInfo.getColumnDimensions"></a>
 ```js
 getColumnDimensions(): GridDimension[]
 ```
