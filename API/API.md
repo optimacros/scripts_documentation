@@ -20,20 +20,23 @@
     1. Файлы CSV
 1. [Цепочки скриптов](scriptChains.md)
 1. [Окружение](env.md)
+1. [Уведомление пользователя](notifications.md)
 
 ### Интерфейс OM ...<a name="OM"></a>
 ```ts
 interface OM {
-    readonly common: Common;
-    readonly environment: Environment;
-    readonly multicubes: Multicubes;
-    readonly times: Times;
-    readonly versions: Versions;
-    readonly lists: Lists;
-    readonly filesystems: Filesystems;
-    readonly optimization: Optimization;
-    readonly connectors: Connectors;
+	readonly common: Common;
+	readonly environment: Environment;
+	readonly multicubes: Multicubes;
+	readonly times: Times;
+	readonly versions: Versions;
+	readonly lists: Lists;
+	readonly filesystems: Filesystems;
+	readonly optimization: Optimization;
+	readonly connectors: Connectors;
+	readonly notifications: Notifications.Manager;
 }
+
 
 var om: OM;
 ```
@@ -101,6 +104,15 @@ readonly optimization: Optimization
 readonly connectors: Connectors
 ```
 Ссылка на интерфейс [`Connectors`](./connectors.md#Connectors).
+
+&nbsp;
+
+```js
+readonly notifications: Notifications.Manager
+```
+Ссылка на интерфейс [`Notifications.Manager`](./notifications.md#Manager).
+
+&nbsp;
 
 
 ___
@@ -303,28 +315,6 @@ export namespace WinAgent {
         makeRunMacrosAction(): RunMacroAction;
     }
 }
-
-export namespace Notifications {
-    namespace Smtp {
-        export interface Result {
-
-        }
-
-        export interface Builder {
-            setTo(to: string | string[]): this;
-            setSubject(subject: string): this;
-            setBody(body: string): this;
-            attachFiles(paths: string[]): this;
-            send(): Result;
-        }
-    }
-
-    export interface Manager {
-        smtp(channel: string): Smtp.Builder;
-    }
-}
-
-
 
 
 [Оглавление](../README.md)
