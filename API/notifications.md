@@ -2,13 +2,21 @@
 
 Все интерфейсы этого раздела находятся в пространстве имён `Notifications`.
 
-### Интерфейс Smtp.Result<a name="Smtp.Result"></a>
+### Интерфейс Manager<a name="Manager"></a>
 
 ```ts
-interface Smtp.Result {
+interface Manager {
+	smtp(channel: string): Smtp.Builder;
 }
 ```
-Интерфейс доступа к результатам отправки письма. Он пустой.
+Интерфейс, объединяющий каналы уведомлений пользователя.
+
+&nbsp;
+
+```js
+smtp(channel: string): Smtp.Builder
+```
+Возвращает интерфейс [`Smtp.Builder`](#Smtp.Builder) канала с именем `channel` уведомления пользователя по протоколу [`SMTP`](https://ru.wikipedia.org/wiki/SMTP).
 
 &nbsp;
 
@@ -62,21 +70,13 @@ send(): Smtp.Result
 
 &nbsp;
 
-### Интерфейс Manager<a name="Manager"></a>
+### Интерфейс Smtp.Result<a name="Smtp.Result"></a>
 
 ```ts
-interface Manager {
-	smtp(channel: string): Smtp.Builder;
+interface Smtp.Result {
 }
 ```
-Интерфейс, объединяющий каналы уведомлений пользователя.
-
-&nbsp;
-
-```js
-smtp(channel: string): Smtp.Builder
-```
-Возвращает интерфейс [`Smtp.Builder`](#Smtp.Builder) канала с именем `channel` уведомления пользователя по протоколу [`SMTP`](https://ru.wikipedia.org/wiki/SMTP).
+Интерфейс доступа к результатам отправки письма. Он пустой.
 
 &nbsp;
 
