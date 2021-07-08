@@ -295,7 +295,7 @@ load(): CubeCellSelector
 
 &nbsp;
 
-### Интерфейс CubeCellSelector ...<a name="CubeCellSelector"></a>
+### Интерфейс CubeCellSelector<a name="CubeCellSelector"></a>
 ```ts
 interface CubeCellSelector {
 	getCubeInfo(): CubeInfo;
@@ -311,7 +311,7 @@ interface CubeCellSelector {
 ```js
 getCubeInfo(): CubeInfo
 ```
-
+Возвращает интерфейс [`CubeInfo`](#CubeInfo) для получения информации о кубе.
 
 &nbsp;
 
@@ -336,7 +336,7 @@ generator(): IterableIterator<CubeCell>
 
 &nbsp;
 
-### Интерфейс CubeCell ...<a name="CubeCell"></a>
+### Интерфейс CubeCell<a name="CubeCell"></a>
 ```ts
 interface CubeCell {
 	definitions(): number[];
@@ -352,7 +352,7 @@ interface CubeCell {
 ```js
 definitions(): number[]
 ```
-Идентификаторы, которыми определена клетка.
+Возвращает такой же массив идентификаторов, что и [`getDimensionIds()`](#getDimensionIds). Однако дополнительно первым элементом является идентификатор самого куба.
 
 &nbsp;
 
@@ -373,7 +373,7 @@ getDimensionItems(): EntityInfo[]
 ```js
 getValue(): number | string | null | boolean
 ```
-Возвращает значение клетки.
+Возвращает значение клетки. Если формат клетки – справочник или дата, возвращает идентификатор элемента.
 
 &nbsp;
 
@@ -384,6 +384,23 @@ interface CubeFormatInfo {
 	getDimensionEntity(): EntityInfo | null;
 }
 ```
+Интерфейс для получения информации о формате куба.
+
+&nbsp;
+
+```js
+getFormatTypeEntity(): EntityInfo
+```
+Возвращает сущность [`EntityInfo`](#EntityInfo) формата куба.
+
+&nbsp;
+
+```js
+getDimensionEntity(): EntityInfo | null
+```
+***Не работает.***
+
+&nbsp;
 
 ### Интерфейс CubeInfo ...<a name="CubeInfo"></a>
 ```ts
@@ -400,7 +417,7 @@ interface CubeInfo extends EntityInfo {
 ```js
 getFormula(): string | null
 ```
-Возвращает формулу Optimacros,
+Возвращает формулу Optimacros, заданную для куба, или `null`, если её нет.
 
 &nbsp;
 
