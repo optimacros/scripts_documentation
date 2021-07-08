@@ -472,6 +472,7 @@ cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder
 ```js
 getCubeInfo(identifier: string | number): CubeInfo
 ```
+Возвращает интерфейс [`CubeInfo`](#CubeInfo) для получения информации о кубе `identifier`.
 
 &nbsp;
 
