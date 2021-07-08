@@ -9,17 +9,17 @@
 ### Интерфейс Connectors ...<a name="Connectors"></a>
 ```ts
 interface Connectors {
-    mysql(): MysqlConnectorBuilder;
-    postgresql(): SqlConnectorBuilder;
-    sqlServer(): MicrosoftSqlConnectorBuilder;
-    oracle(): OracleConnectorBuilder;
-    mongodb(): Mongodb.ConnectorBuilder;
-    http(): Http.HttpManager;
-		
-    /**
-     * @param builtIn Use built-in configuration if exists. Default is 'false'
-     */
-    winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
+	mysql(): MysqlConnectorBuilder;
+	postgresql(): SqlConnectorBuilder;
+	sqlServer(): MicrosoftSqlConnectorBuilder;
+	oracle(): OracleConnectorBuilder;
+	mongodb(): Mongodb.ConnectorBuilder;
+	http(): Http.HttpManager;
+
+	/**
+	 * @param builtIn Use built-in configuration if exists. Default is 'false'
+	 */
+	winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 }
 ```
 Интерфейс, группирующий [`коннекторы`](../appendix/glossary.md#connector) к различным внешним системам.
@@ -79,14 +79,14 @@ winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
 ### Интерфейс SqlQueryResult<a name="SqlQueryResult"></a>
 ```ts
 interface SqlQueryResult {
-    count(): number;
-    generator(likeArray?: boolean): Object[] | string[][];
-    all(): Object[];
-    first(): Object | null;
-    column(columnName: string): string[];
-    cell(columnName: string, rowIndex?: number): number | string | boolean | null;
-    updated(): number;
-    lastId(): number;
+	count(): number;
+	generator(likeArray?: boolean): Object[] | string[][];
+	all(): Object[];
+	first(): Object | null;
+	column(columnName: string): string[];
+	cell(columnName: string, rowIndex?: number): number | string | boolean | null;
+	updated(): number;
+	lastId(): number;
 }
 ```
 Интерфейс доступа к результатам запроса. Функции `generator()`, `all()`, `first()`, `column()` и `cell()` работают с одним и тем же внутренним итератором по строкам ответа на SQL-запрос, поэтому каждая из них начинает чтение с первой ещё не прочитанной строки ответа.
@@ -152,7 +152,7 @@ lastId(): number
 ### Интерфейс SqlQueryBuilder<a name="SqlQueryBuilder"></a>
 ```ts
 interface SqlQueryBuilder {
-    execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): SqlQueryResult;
+	execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): SqlQueryResult;
 }
 ```
 Интерфейс построения запроса к базе данных.
@@ -185,7 +185,7 @@ const queryResult = mySqlConn.qb().execute(sqlQuery, { price: 100 });
 ### Интерфейс SqlConnection<a name="SqlConnection"></a>
 ```ts
 interface SqlConnection {
-    qb(): SqlQueryBuilder;
+	qb(): SqlQueryBuilder;
 }
 ```
 Объект соединения с реляционной базой данных.
@@ -202,12 +202,12 @@ qb(): SqlQueryBuilder
 ### Интерфейс SqlConnectorBuilder<a name="SqlConnectorBuilder"></a>
 ```ts
 interface SqlConnectorBuilder {
-    setHost(value: string): SqlConnectorBuilder;
-    setPort(value: number): SqlConnectorBuilder;
-    setUsername(value: string): SqlConnectorBuilder;
-    setPassword(value: string): SqlConnectorBuilder;
-    setDatabase(value: string): SqlConnectorBuilder;
-    load(): SqlConnection;
+	setHost(value: string): SqlConnectorBuilder;
+	setPort(value: number): SqlConnectorBuilder;
+	setUsername(value: string): SqlConnectorBuilder;
+	setPassword(value: string): SqlConnectorBuilder;
+	setDatabase(value: string): SqlConnectorBuilder;
+	load(): SqlConnection;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), базовый интерфейс [`коннекторов`](../appendix/glossary.md#connector) для подключения к реляционной базе данных.
@@ -259,7 +259,7 @@ load(): SqlConnection
 ### Интерфейс MysqlConnectorBuilder<a name="MysqlConnectorBuilder"></a>
 ```ts
 interface MysqlConnectorBuilder extends SqlConnectorBuilder {
-    loadImportBuilder(): MysqlImportBuilder;
+	loadImportBuilder(): MysqlImportBuilder;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
@@ -276,8 +276,8 @@ loadImportBuilder(): MysqlImportBuilder
 ### Интерфейс MicrosoftSqlConnectorBuilder<a name="MicrosoftSqlConnectorBuilder"></a>
 ```ts
 interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
-    setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
-    loadBulkCopyBuilder(): SqlBulkCopyBuilder;
+	setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
+	loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
@@ -307,9 +307,9 @@ loadBulkCopyBuilder(): SqlBulkCopyBuilder
 ### Интерфейс OracleConnectorBuilder<a name="OracleConnectorBuilder"></a>
 ```ts
 export interface OracleConnectorBuilder extends SqlConnectorBuilder {
-    setServiceName(value: string): OracleConnectorBuilder;
-    setSchema(value: string): OracleConnectorBuilder;
-    setTNS(value: string): OracleConnectorBuilder;
+	setServiceName(value: string): OracleConnectorBuilder;
+	setSchema(value: string): OracleConnectorBuilder;
+	setTNS(value: string): OracleConnectorBuilder;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`.
@@ -338,26 +338,25 @@ setTNS(value: string): OracleConnectorBuilder
 &nbsp;
 
 ### Интерфейс MysqlImportBuilder<a name="MysqlImportBuilder"></a>
-
 ```js
 interface MysqlImportBuilder {
-    setTable(name: string): MysqlImportBuilder;
-    setDelimiter(delimiter: string): MysqlImportBuilder;
-    setLineDelimiter(delimiter: string): MysqlImportBuilder;
-    setEnclosure(enclosure: string): MysqlImportBuilder;
-    setEscape(escape: string): MysqlImportBuilder;
-    setThreads(threads: number): MysqlImportBuilder;
-    setVerbose(verbose: boolean): MysqlImportBuilder;
-    setFirstIgnoreLines(count: number): MysqlImportBuilder;
-    setLockTable(status: boolean): MysqlImportBuilder;
-    setForce(status: boolean): MysqlImportBuilder;
-    setDeleteAllRows(status: boolean): MysqlImportBuilder;
-    setCompress(status: boolean): MysqlImportBuilder;
-    setIgnoreDuplicates(status: boolean): MysqlImportBuilder;
-    setReplace(status: boolean): MysqlImportBuilder;
-    setColumns(names: string[]): MysqlImportBuilder;
-    setFilePath(path: string): MysqlImportBuilder;
-    import(): MysqlImportResult;
+	setTable(name: string): MysqlImportBuilder;
+	setDelimiter(delimiter: string): MysqlImportBuilder;
+	setLineDelimiter(delimiter: string): MysqlImportBuilder;
+	setEnclosure(enclosure: string): MysqlImportBuilder;
+	setEscape(escape: string): MysqlImportBuilder;
+	setThreads(threads: number): MysqlImportBuilder;
+	setVerbose(verbose: boolean): MysqlImportBuilder;
+	setFirstIgnoreLines(count: number): MysqlImportBuilder;
+	setLockTable(status: boolean): MysqlImportBuilder;
+	setForce(status: boolean): MysqlImportBuilder;
+	setDeleteAllRows(status: boolean): MysqlImportBuilder;
+	setCompress(status: boolean): MysqlImportBuilder;
+	setIgnoreDuplicates(status: boolean): MysqlImportBuilder;
+	setReplace(status: boolean): MysqlImportBuilder;
+	setColumns(names: string[]): MysqlImportBuilder;
+	setFilePath(path: string): MysqlImportBuilder;
+	import(): MysqlImportResult;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MySQL из файла CSV с помощью утилиты [*mysqlimport*](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html). Все функции, кроме `import()`, возвращают `this`.
@@ -485,15 +484,14 @@ import(): MysqlImportResult
 &nbsp;
 
 ### Интерфейс MysqlImportResult<a name="MysqlImportResult"></a>
-
 ```js
 interface MysqlImportResult {
-    hasErrors(): boolean;
-    getErrorOutput(): string;
-    getOutput(): string;
-    getCommand(): string;
-    getConfig(): string;
-    getStats(): Object;
+	hasErrors(): boolean;
+	getErrorOutput(): string;
+	getOutput(): string;
+	getCommand(): string;
+	getConfig(): string;
+	getStats(): Object;
 }
 ```
 Интерфейс просмотра результатов импорта, осуществлённого с помощью [`MysqlImportBuilder`](#MysqlImportBuilder).
@@ -545,40 +543,40 @@ getStats(): Object
 ### Интерфейс SqlBulkCopyBuilder<a name="SqlBulkCopyBuilder"></a>
 ```ts
 interface SqlBulkCopyBuilder {
-    setServerName(value: string): SqlBulkCopyBuilder;
-    setPort(value: number): SqlBulkCopyBuilder;
-    setUsername(value: string): SqlBulkCopyBuilder;
-    setPassword(value: string): SqlBulkCopyBuilder;
-    setDatabase(value: string): SqlBulkCopyBuilder;
-    setQuery(value: string): SqlBulkCopyBuilder;
-    setPacketSize(size: number): SqlBulkCopyBuilder;
-    setBatchSize(size: number): SqlBulkCopyBuilder;
-    setCharacterTypesMode(status: boolean): SqlBulkCopyBuilder;
-    setCodePage(code: string): SqlBulkCopyBuilder;
-    setDsnMode(status: boolean): SqlBulkCopyBuilder;
-    setErrorFile(path: string): SqlBulkCopyBuilder;
-    setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder;
-    setFormatFile(path: string): SqlBulkCopyBuilder;
-    setFirstRow(index: number): SqlBulkCopyBuilder;
-    setHint(hint: string): SqlBulkCopyBuilder;
-    setStandardInputFile(path: string): SqlBulkCopyBuilder;
-    setKeepNullValuesMode(status: boolean): SqlBulkCopyBuilder;
-    setLoginTimeout(timeout: number): SqlBulkCopyBuilder;
-    setLastRow(index: number): SqlBulkCopyBuilder;
-    setMaxErrors(size: number): SqlBulkCopyBuilder;
-    setNativeTypesMode(status: boolean): SqlBulkCopyBuilder;
-    setKeepNonTextNativeValuesMode(status: boolean): SqlBulkCopyBuilder;
-    setOutputFile(path: string): SqlBulkCopyBuilder;
-    setQuotedIdentifiersMode(status: boolean): SqlBulkCopyBuilder;
-    setRowTerm(term: string): SqlBulkCopyBuilder;
-    setRegionalMode(status: boolean): SqlBulkCopyBuilder;
-    setFieldTerm(term: string): SqlBulkCopyBuilder;
-    setTrustedConnectionMode(status: boolean): SqlBulkCopyBuilder;
-    setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder;
+	setServerName(value: string): SqlBulkCopyBuilder;
+	setPort(value: number): SqlBulkCopyBuilder;
+	setUsername(value: string): SqlBulkCopyBuilder;
+	setPassword(value: string): SqlBulkCopyBuilder;
+	setDatabase(value: string): SqlBulkCopyBuilder;
+	setQuery(value: string): SqlBulkCopyBuilder;
+	setPacketSize(size: number): SqlBulkCopyBuilder;
+	setBatchSize(size: number): SqlBulkCopyBuilder;
+	setCharacterTypesMode(status: boolean): SqlBulkCopyBuilder;
+	setCodePage(code: string): SqlBulkCopyBuilder;
+	setDsnMode(status: boolean): SqlBulkCopyBuilder;
+	setErrorFile(path: string): SqlBulkCopyBuilder;
+	setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder;
+	setFormatFile(path: string): SqlBulkCopyBuilder;
+	setFirstRow(index: number): SqlBulkCopyBuilder;
+	setHint(hint: string): SqlBulkCopyBuilder;
+	setStandardInputFile(path: string): SqlBulkCopyBuilder;
+	setKeepNullValuesMode(status: boolean): SqlBulkCopyBuilder;
+	setLoginTimeout(timeout: number): SqlBulkCopyBuilder;
+	setLastRow(index: number): SqlBulkCopyBuilder;
+	setMaxErrors(size: number): SqlBulkCopyBuilder;
+	setNativeTypesMode(status: boolean): SqlBulkCopyBuilder;
+	setKeepNonTextNativeValuesMode(status: boolean): SqlBulkCopyBuilder;
+	setOutputFile(path: string): SqlBulkCopyBuilder;
+	setQuotedIdentifiersMode(status: boolean): SqlBulkCopyBuilder;
+	setRowTerm(term: string): SqlBulkCopyBuilder;
+	setRegionalMode(status: boolean): SqlBulkCopyBuilder;
+	setFieldTerm(term: string): SqlBulkCopyBuilder;
+	setTrustedConnectionMode(status: boolean): SqlBulkCopyBuilder;
+	setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder;
 
-    import(path: string): SqlBulkCopyResult;
-    export(path: string): SqlBulkCopyResult;
-    format(path: string, xml: boolean): SqlBulkCopyResult;
+	import(path: string): SqlBulkCopyResult;
+	export(path: string): SqlBulkCopyResult;
+	format(path: string, xml: boolean): SqlBulkCopyResult;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MS SQL из файла CSV с помощью утилиты [*bcp*](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility). Все функции, начинающиеся с `set...()`, возвращают `this`.
@@ -827,10 +825,10 @@ format(path: string, xml: boolean): SqlBulkCopyResult
 ### Интерфейс SqlBulkCopyResult<a name="SqlBulkCopyResult"></a>
 ```ts
 interface SqlBulkCopyResult {
-    hasErrors(): boolean;
-    getErrorOutput(): string;
-    getOutput(): string;
-    getCommand(): string;
+	hasErrors(): boolean;
+	getErrorOutput(): string;
+	getOutput(): string;
+	getCommand(): string;
 }
 ```
 Интерфейс просмотра результатов импорта/экспорта, осуществлённого с помощью [`SqlBulkCopyBuilder`](#SqlBulkCopyBuilder).
@@ -874,7 +872,6 @@ getCommand(): string
 Все интерфейсы этого раздела, кроме `ObjectOfStringArray`, находятся в пространстве имён `Http`.
 
 ### Интерфейс Params<a name="Params"></a>
-
 ```ts
 interface Params {
 	getAll(): Object;
@@ -940,7 +937,6 @@ clear(): boolean
 &nbsp;
 
 ### Интерфейс UrlParams<a name="UrlParams"></a>
-
 ```ts
 interface UrlParams extends Params {
 	stringify(): string;
@@ -974,7 +970,6 @@ getEncodingType(): string
 &nbsp;
 
 ### Интерфейс JsonRequestBody<a name="JsonRequestBody"></a>
-
 ```ts
 interface JsonRequestBody {
 	setJson(value: string | Object): boolean;
@@ -992,7 +987,6 @@ setJson(value: string | Object): boolean
 &nbsp;
 
 ### Интерфейс StringRequestBody<a name="StringRequestBody"></a>
-
 ```ts
 interface StringRequestBody {
 	setBody(value: string): boolean;
@@ -1010,7 +1004,6 @@ interface StringRequestBody {
 &nbsp;
 
 ### Интерфейс FormRequestBody<a name="FormRequestBody"></a>
-
 ```ts
 interface FormRequestBody {
 	params(): Params;
@@ -1028,8 +1021,7 @@ interface FormRequestBody {
 &nbsp;
 
 ### Интерфейс RequestBody<a name="RequestBody"></a>
-
-```js
+```ts
 interface RequestBody {
 	jsonBody(): JsonRequestBody;
 	stringBody(): StringRequestBody;
@@ -1062,7 +1054,7 @@ formBody(): FormRequestBody
 &nbsp;
 
 ### Интерфейс Url<a name="Url"></a>
-```js
+```ts
 interface Url {
 	setUrl(url: string): boolean;
 	getUrl(): string;
@@ -1207,7 +1199,6 @@ params(): UrlParams
 &nbsp;
 
 ### Интерфейс AllowRedirects<a name="AllowRedirects"></a>
-
 ```ts
 interface AllowRedirects {
 	setStatus(status: boolean): boolean;
@@ -1301,7 +1292,6 @@ getProtocols(): string[]
 &nbsp;
 
 ### Интерфейс HttpAuth<a name="HttpAuth"></a>
-
 ```ts
 interface HttpAuth {
 	setUser(user: string): HttpAuth;
@@ -1343,7 +1333,6 @@ setStatus(status: boolean): HttpAuth
 &nbsp;
 
 ### Интерфейс Cert<a name="Cert"></a>
-
 ```ts
 interface Cert {
 	setPath(path: string): Cert;
@@ -1377,7 +1366,6 @@ setPassphrase(passphrase: string): Cert
 &nbsp;
 
 ### Интерфейс Verify<a name="Verify"></a>
-
 ```ts
 interface Verify {
 	setStatus(value: boolean): boolean;
@@ -1401,7 +1389,6 @@ setPath(path: string): boolean
 &nbsp;
 
 ### Интерфейс Options<a name="Options"></a>
-
 ```ts
 interface Options {
 	setConnTimeout(seconds: number): boolean;
@@ -1492,7 +1479,6 @@ verify(): Verify
 &nbsp;
 
 ### Интерфейс RequestBuilder<a name="RequestBuilder"></a>
-
 ```ts
 interface RequestBuilder {
 	url(): Url;
@@ -1566,7 +1552,6 @@ send(): Response
 &nbsp;
 
 ### Интерфейс HttpManager<a name="HttpManager"></a>
-
 ```ts
 interface HttpManager {
 	requestBuilder(): RequestBuilder;
@@ -1575,12 +1560,10 @@ interface HttpManager {
 	base64Encode(value: string): string;
 	base64Decode(value: string): string | boolean;
 }
-
 ```
 Коннектор для подключения к серверу по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP).
 
 &nbsp;
-
 
 ```js
 requestBuilder(): RequestBuilder
@@ -1619,10 +1602,9 @@ base64Decode(value: string): string | boolean
 &nbsp;
 
 ### Тип ObjectOfStringArray<a name="ObjectOfStringArray"></a>
-
 ```ts
 type ObjectOfStringArray = {
-    [key: string]: string[];
+	[key: string]: string[];
 }
 ```
 Специализированный тип объекта, в котором значения могут быть только списками строк.
@@ -1630,7 +1612,6 @@ type ObjectOfStringArray = {
 &nbsp;
 
 ### Интерфейс ResponseErrors<a name="ResponseErrors"></a>
-
 ```ts
 interface ResponseErrors {
 	getCode(): number;
@@ -1656,7 +1637,6 @@ getMessage(): string
 &nbsp;
 
 ### Интерфейс Response<a name="Response"></a>
-
 ```ts
 interface Response {
 	headers(): ObjectOfStringArray;

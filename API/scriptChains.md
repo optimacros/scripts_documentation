@@ -1,7 +1,6 @@
 # Цепочки скриптов
 
 ### Интерфейс ButtonInfoOptions<a name="ButtonInfoOptions"></a>
-
 ```ts
 interface ButtonInfoOptions {
 	setLabel(label: string): ButtonInfoOptions;
@@ -27,7 +26,6 @@ setStyle(style: string): ButtonInfoOptions
 &nbsp;
 
 ### Интерфейс ButtonInfo<a name="ButtonInfo"></a>
-
 ```ts
 interface ButtonInfo {
 	setType(type: string): ButtonInfo;
@@ -53,7 +51,6 @@ options(): ButtonInfoOptions
 &nbsp;
 
 ### Интерфейс EnvironmentInfo<a name="EnvironmentInfo"></a>
-
 ```ts
 interface EnvironmentInfo {
 	set(key: string, value: any): EnvironmentInfo;
@@ -79,7 +76,6 @@ get(key: string): any
 &nbsp;
 
 ### Интерфейс ResultBaseAction<a name="ResultBaseAction"></a>
-
 ```ts
 interface ResultBaseAction {
 	appendAfter(): this;
@@ -103,7 +99,6 @@ appendAfter(): this
 &nbsp;
 
 ### Интерфейс ResultMacrosAction<a name="ResultMacrosAction"></a>
-
 ```ts
 interface ResultMacrosAction extends ResultBaseAction {
 	setAutoRunTimeout(seconds: number): this;
@@ -144,7 +139,6 @@ environmentInfo(): EnvironmentInfo
 &nbsp;
 
 ### Интерфейс ResultOpenAction<a name="ResultOpenAction"></a>
-
 ```ts
 interface ResultOpenAction extends ResultBaseAction {
 	buttonInfo(): ButtonInfo;
@@ -162,7 +156,6 @@ buttonInfo(): ButtonInfo
 &nbsp;
 
 ### Интерфейс ResultActionsInfo<a name="ResultActionsInfo"></a>
-
 ```ts
 interface ResultActionsInfo {
 	makeMacrosAction(identifier: string | number): ResultMacrosAction;

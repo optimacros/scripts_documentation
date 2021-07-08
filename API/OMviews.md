@@ -12,7 +12,7 @@
 ### Интерфейс Multicubes<a name="Multicubes"></a>
 ```ts
 interface Multicubes {
-    multicubesTab(): MulticubesTab;
+	multicubesTab(): MulticubesTab;
 }
 ```
 Интерфейс для получения ссылки на [`MulticubesTab`](#MulticubesTab).
@@ -29,7 +29,7 @@ multicubesTab(): MulticubesTab
 ### Интерфейс MulticubesTab<a name="MulticubesTab"></a>
 ```ts
 interface MulticubesTab extends Tab {
-    open(name: string): MulticubeTab;
+	open(name: string): MulticubeTab;
 }
 ```
 Интерфейс для получения ссылки на [`MulticubeTab`](#MulticubeTab). Интерфейс наследуется от [`Tab`](#Tab).
@@ -46,15 +46,15 @@ open(name: string): MulticubeTab
 ### Интерфейс Tab<a name="Tab"></a>
 ```ts
 interface Tab {
-    open(name: string): Tab;
-    pivot(viewName?: string): Pivot;
-		
-    elementsCreator(): ElementsCreator;
-    elementsDeleter(): ElementsDeleter;
-    elementsReorder(): ElementsReorder;
-		
-    importer(): Importer;
-    storageImporter(): StorageImporter;
+	open(name: string): Tab;
+	pivot(viewName?: string): Pivot;
+
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
+
+	importer(): Importer;
+	storageImporter(): StorageImporter;
 }
 ```
 Базовый интерфейс для вкладок.
@@ -114,7 +114,7 @@ storageImporter(): StorageImporter
 ### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
 ```ts
 interface ElementsCreator {
-    numeric(): NumericElementsCreator;
+	numeric(): NumericElementsCreator;
 }
 ```
 Абстрактный интерфейс, предоставляющий конкретные интерфейсы с различными возможностями добавления элементов.
@@ -131,13 +131,13 @@ numeric(): NumericElementsCreator
 ### Интерфейс NumericElementsCreator<a name="NumericElementsCreator"></a>
 ```ts
 interface NumericElementsCreator {
-    setCount(count: number): NumericElementsCreator;
-    setPositionAfter(relativeLongId: number): NumericElementsCreator;
-    setPositionBefore(relativeLongId: number): NumericElementsCreator;
-    setPositionStart(): NumericElementsCreator;
-    setPositionEnd(): NumericElementsCreator;
-    setPositionChildOf(parentLongId: number): NumericElementsCreator;
-    create(): number[];
+	setCount(count: number): NumericElementsCreator;
+	setPositionAfter(relativeLongId: number): NumericElementsCreator;
+	setPositionBefore(relativeLongId: number): NumericElementsCreator;
+	setPositionStart(): NumericElementsCreator;
+	setPositionEnd(): NumericElementsCreator;
+	setPositionChildOf(parentLongId: number): NumericElementsCreator;
+	create(): number[];
 }
 ```
 Интерфейс позволяет добавить заданное количество элементов в заданную позицию таблицы. Аналог кнопки "Добавить элементы" в интерфейсе Optimacros. Перед созданием элементов необходимо указать их количество (нет значения по умолчанию) и позицию добавления (по умолчанию: в конец).
@@ -196,8 +196,8 @@ create(): number[]
 ### Интерфейс ElementsDeleter<a name="ElementsDeleter"></a>
 ```ts
 interface ElementsDeleter {
-    appendIdentifier(identifier: number): ElementsDeleter;
-    delete(): ElementsDeleter;
+	appendIdentifier(identifier: number): ElementsDeleter;
+	delete(): ElementsDeleter;
 }
 ```
 Интерфейс позволяет удалить элементы таблицы. Аналог кнопки "Удалить" в интерфейсе Optimacros.
@@ -221,10 +221,10 @@ delete(): ElementsDeleter
 ### Интерфейс ElementsReorder<a name="ElementsReorder"></a>
 ```ts
 interface ElementsReorder {
-    append(longId: number, relativeLongId: number, position: string): ElementsReorder;
-    reorder(): ElementsReorder;
-    count(): number;
-    reverse(): ElementsReorder;
+	append(longId: number, relativeLongId: number, position: string): ElementsReorder;
+	reorder(): ElementsReorder;
+	count(): number;
+	reverse(): ElementsReorder;
 }
 ```
 Интерфейс позволяет перетасовать элементы и доступен только для элементов справочников. Во время работы хранит очередь элементов, которые функцией [`reorder()`](#reorder) будут переданы на сервер для перепозиционирования в порядке этой очереди.
@@ -271,7 +271,6 @@ reverse(): ElementsReorder
 &nbsp;
 
 ### Интерфейс CubeCellSelector ...<a name="CubeCellSelector"></a>
-
 ```ts
 interface CubeCellSelector {
 	getCubeInfo(): CubeInfo;
@@ -336,17 +335,17 @@ load(): CubeCellSelector
 ### Интерфейс CubeFormatInfo ...<a name="CubeFormatInfo"></a>
 ```ts
 interface CubeFormatInfo {
-    getFormatTypeEntity(): EntityInfo;
-    getDimensionEntity(): EntityInfo | null;
+	getFormatTypeEntity(): EntityInfo;
+	getDimensionEntity(): EntityInfo | null;
 }
 ```
 
 ### Интерфейс CubeInfo ...<a name="CubeInfo"></a>
 ```ts
 interface CubeInfo extends EntityInfo {
-    getFormula(): string | null;
-    getFormatInfo(): CubeFormatInfo;
-    getDimensions(): EntityInfo[];
+	getFormula(): string | null;
+	getFormatInfo(): CubeFormatInfo;
+	getDimensions(): EntityInfo[];
 }
 ```
 
@@ -373,7 +372,7 @@ cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```js
 cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder
 ```
-Возвращает интерфейс [`CubeCellSelectorBuilder`](#CubeCellSelectorBuilder) для куба `identifier`.
+Возвращает интерфейс [`CubeCellSelectorBuilder`](#CubeCellSelectorBuilder) выборки клеток для куба `identifier`.
 
 &nbsp;
 
@@ -393,11 +392,11 @@ getCubeInfo(identifier: string | number): CubeInfo
 ### Интерфейс Pivot<a name="Pivot"></a>
 ```ts
 interface Pivot {
-    create(): Grid;
-    rowsFilter(data: string | string[] | number | number[]): Pivot;
-    columnsFilter(data: string | string[] | number | number[]): Pivot;
-    withoutValues(): Pivot;
-    addDependentContext(identifier: number): Pivot;
+	create(): Grid;
+	rowsFilter(data: string | string[] | number | number[]): Pivot;
+	columnsFilter(data: string | string[] | number | number[]): Pivot;
+	withoutValues(): Pivot;
+	addDependentContext(identifier: number): Pivot;
 }
 ```
 Интерфейс представления (сводной таблицы) мутилькуба. Функции интерфейса настраивают будущее отображение таблицы и ***не*** запрашивают данные мультикуба.
@@ -459,15 +458,15 @@ addDependentContext(identifier: number): Pivot
 ### Интерфейс Grid<a name="Grid"></a>
 ```ts
 interface Grid {
-    range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange;
+	range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange;
 
-    rowCount(): number;
-    columnCount(): number;
-    cellCount(): number;
+	rowCount(): number;
+	columnCount(): number;
+	cellCount(): number;
 
-    getDefinitionInfo(): GridDefinitionInfo;
-    exporter(): Exporter;
-    storageExporter(): StorageExporter;
+	getDefinitionInfo(): GridDefinitionInfo;
+	exporter(): Exporter;
+	storageExporter(): StorageExporter;
 }
 ```
 Интерфейс таблицы.
@@ -532,9 +531,9 @@ storageExporter(): StorageExporter
 ### Интерфейс GridDefinitionInfo<a name="GridDefinitionInfo"></a>
 ```ts
 interface GridDefinitionInfo {
-    getPageSelectors(): GridPageSelector[];
-    getRowDimensions(): GridDimension[];
-    getColumnDimensions(): GridDimension[];
+	getPageSelectors(): GridPageSelector[];
+	getRowDimensions(): GridDimension[];
+	getColumnDimensions(): GridDimension[];
 }
 ```
 Интерфейс, предоставляющий метаданные о таблице [`Grid`](#Grid).
@@ -567,7 +566,7 @@ getColumnDimensions(): GridDimension[]
 ### Интерфейс GridDimension<a name="GridDimension"></a>
 ```ts
 interface GridDimension {
-    getDimensionEntity(): EntityInfo;
+	getDimensionEntity(): EntityInfo;
 }
 ```
 Интерфейс предоставляет данные об измерении мультикуба.
@@ -584,7 +583,7 @@ getDimensionEntity(): EntityInfo
 ### Интерфейс GridPageSelector<a name="GridPageSelector"></a>
 ```ts
 interface GridPageSelector extends GridDimension {
-    getSelectedEntity(): EntityInfo | null;
+	getSelectedEntity(): EntityInfo | null;
 }
 ```
 Интерфейс предоставляет данные о фильтре мультикуба. (Ранее фильтры назывались `Page`). Интерфейс наследуется от [`GridDimension`](#GridDimension).
@@ -601,15 +600,15 @@ getSelectedEntity(): EntityInfo | null
 ### Интерфейс GridRange<a name="GridRange"></a>
 ```ts
 interface GridRange {
-    rowStart(): number;
-    rowCount(): number;
+	rowStart(): number;
+	rowCount(): number;
 
-    columnStart(): number;
-    columnCount(): number;
+	columnStart(): number;
+	columnCount(): number;
 
-    cellCount(): number;
+	cellCount(): number;
 
-    generator(size?: number): GridRangeChunk[];
+	generator(size?: number): GridRangeChunk[];
 }
 ```
 Интерфейс, представляющий прямоугольный диапазон ячеек в таблице [`Grid`](#Grid).
@@ -685,9 +684,9 @@ for (const chunk of range.generator(1000)) {
 ### Интерфейс GridRangeChunk<a name="GridRangeChunk"></a>
 ```ts
 interface GridRangeChunk {
-    cells(): Cells;
-    rows(): Labels;
-    columns(): Labels;
+	cells(): Cells;
+	rows(): Labels;
+	columns(): Labels;
 }
 ```
 Интерфейс для обработки куска [`GridRange`](#GridRange).
@@ -718,12 +717,12 @@ columns(): Labels
 ### Интерфейс EntityInfo (Label)<a name="EntityInfo"></a> <a name="Label"></a>
 ```ts
 interface Label {
-    longId(): number;
-    name(): string;
-    code(): string | null;
-    alias(): string | null;
-    label(): string | null;
-    parentLongId(): number;
+	longId(): number;
+	name(): string;
+	code(): string | null;
+	alias(): string | null;
+	label(): string | null;
+	parentLongId(): number;
 }
 
 interface EntityInfo = Label;
@@ -786,12 +785,12 @@ parentLongId(): number
 ### Интерфейс Labels<a name="Labels"></a>
 ```ts
 interface Labels {
-    start(): number;
-    count(): number;
-    all(): LabelsGroup[];
-    get(index: number): LabelsGroup | null;
-    chunkInstance(): GridRangeChunk;
-    findLabelByLongId(longId: number): Label | null;
+	start(): number;
+	count(): number;
+	all(): LabelsGroup[];
+	get(index: number): LabelsGroup | null;
+	chunkInstance(): GridRangeChunk;
+	findLabelByLongId(longId: number): Label | null;
 }
 ```
 Интерфейс, представляющий набор объектов [`LabelsGroup`](#LabelsGroup), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#GridRangeChunk).
@@ -823,7 +822,6 @@ all(): LabelsGroup[]
 
 &nbsp;
 
-
 ```js
 get(index: number): LabelsGroup | null
 ```
@@ -848,9 +846,9 @@ findLabelByLongId(longId: number): Label | null
 ### Интерфейс LabelsGroup<a name="LabelsGroup"></a>
 ```ts
 interface LabelsGroup {
-    all(): Label[];
-    first(): Label;
-    cells(): Cells;
+	all(): Label[];
+	first(): Label;
+	cells(): Cells;
 }
 ```
 Интерфейс, представляющий многоуровневый набор заголовков конкретной строки или столбца.
@@ -883,16 +881,16 @@ cells(): Cells
 ### Интерфейс Cell ...<a name="Cell"></a>
 ```ts
 interface Cell {
-    setValue(value: number | string | null);
-    getValue(): number | string | null;
-    getNativeValue(): number | string | null;
-    getContextValue(): string | null;
+	setValue(value: number | string | null);
+	getValue(): number | string | null;
+	getNativeValue(): number | string | null;
+	getContextValue(): string | null;
 
-    definitions(): number[];
-    columns(): LabelsGroup;
-    rows(): LabelsGroup;
-    dropDown(): Labels;
-    getFormatType(): string;
+	definitions(): number[];
+	columns(): LabelsGroup;
+	rows(): LabelsGroup;
+	dropDown(): Labels;
+	getFormatType(): string;
 }
 ```
 Интерфейс, представляющий клетку таблицы.
@@ -971,12 +969,12 @@ getFormatType(): string
 ### Интерфейс Cells<a name="Cells"></a>
 ```ts
 interface Cells {
-    all(): Cell[];
-    first(): Cell;
-    setValue(value: number | string | null);
-    count(): number;
-    chunkInstance(): GridRangeChunk;
-    getByIndexes(indexes: number[]): Cells | null;
+	all(): Cell[];
+	first(): Cell;
+	setValue(value: number | string | null);
+	count(): number;
+	chunkInstance(): GridRangeChunk;
+	getByIndexes(indexes: number[]): Cells | null;
 }
 ```
 Интерфейс, представляющий (как правило, прямоугольный) набор клеток таблицы.
@@ -1030,7 +1028,7 @@ getByIndexes(indexes: number[]): Cells | null
 ### Интерфейс Lists<a name="Lists"></a>
 ```ts
 interface Lists {
-    listsTab(): ListsTab
+	listsTab(): ListsTab
 }
 ```
 Интерфейс для получения ссылки на [`ListsTab`](#ListsTab).
@@ -1087,7 +1085,6 @@ importer(): ListImporter
 &nbsp;
 
 ### Интерфейс ListSubsetsTab<a name="ListSubsetsTab"></a>
-
 ```ts
 interface ListSubsetsTab extends Tab {
 	listTab(): ListTab;
@@ -1172,7 +1169,7 @@ getUpdatedPropertiesOnParentLevels(): boolean
 ### Интерфейс Versions<a name="Versions"></a>
 ```ts
 interface Versions {
-    versionsTab(): VersionsTab
+	versionsTab(): VersionsTab
 }
 ```
 Интерфейс для получения ссылки на [`VersionsTab`](#VersionsTab).
@@ -1189,7 +1186,7 @@ versionsTab(): VersionsTab
 ### Интерфейс VersionsTab<a name="VersionsTab"></a>
 ```ts
 interface VersionsTab extends Tab {
-    copyVersion(from: string, to: string): Object;
+	copyVersion(from: string, to: string): Object;
 }
 ```
 Вкладка `Версии`. Интерфейс наследуется от [`Tab`](#Tab). Для работы не требует открытия.
@@ -1206,7 +1203,7 @@ copyVersion(from: string, to: string): Object
 ### Интерфейс Times<a name="Times"></a>
 ```ts
 interface Times {
-    optionsTab(): TimeOptionsTab;
+	optionsTab(): TimeOptionsTab;
 }
 ```
 Интерфейс для получения ссылки на [`TimeOptionsTab`](#TimeOptionsTab).
@@ -1223,8 +1220,8 @@ optionsTab(): TimeOptionsTab
 ### Интерфейс TimeOptionsTab<a name="TimeOptionsTab"></a>
 ```ts
 interface TimeOptionsTab {
-    resetForm(): Object;
-    applyForm(): Object;
+	resetForm(): Object;
+	applyForm(): Object;
 }
 ```
 Вкладка `Время`. Для работы не требует открытия. Является [`плоской таблицей`](../appendix/constraints.md#flatTable). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
@@ -1250,20 +1247,20 @@ applyForm(): Object
 ### Интерфейс Exporter<a name="Exporter"></a>
 ```ts
 interface Exporter {
-    setEncoding(encoding: string): Exporter;
-    setFormat(format: string): Exporter;
-    setOmitSummaryRows(omitSummaryRows: boolean): Exporter;
-    setOmitEmptyRows(omitEmptyRows: boolean): Exporter;
-    setIncludeCodes(includeCodes: boolean): Exporter;
-    setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter;
-    setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter;
-    setFileName(fileName: string): Exporter;
-    setDelimiter(delimiter: string): Exporter;
-    setEnclosure(enclosure: string): Exporter;
-    setEscape(escape: string): Exporter;
-    setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter;
-    setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter;
-    export(): ExportResult;
+	setEncoding(encoding: string): Exporter;
+	setFormat(format: string): Exporter;
+	setOmitSummaryRows(omitSummaryRows: boolean): Exporter;
+	setOmitEmptyRows(omitEmptyRows: boolean): Exporter;
+	setIncludeCodes(includeCodes: boolean): Exporter;
+	setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter;
+	setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter;
+	setFileName(fileName: string): Exporter;
+	setDelimiter(delimiter: string): Exporter;
+	setEnclosure(enclosure: string): Exporter;
+	setEscape(escape: string): Exporter;
+	setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter;
+	setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter;
+	export(): ExportResult;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы. Доступен для всех [`Grid`](#Grid). Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
@@ -1374,15 +1371,14 @@ export(): ExportResult
 &nbsp;
 
 ### Интерфейс StorageExporter<a name="StorageExporter"></a>
-
 ```ts
 interface StorageExporter extends Exporter {
-    setFormat(format: string): StorageExporter;
-    setLineDelimiter(lineDelimiter: string): StorageExporter;
-    setFilterFormula(filterFormula: string): StorageExporter;
-    setDecimalSeparator(decimalSeparator: string): StorageExporter;
-    setDateFormat(dateFormat: string): StorageExporter;
-    setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
+	setFormat(format: string): StorageExporter;
+	setLineDelimiter(lineDelimiter: string): StorageExporter;
+	setFilterFormula(filterFormula: string): StorageExporter;
+	setDecimalSeparator(decimalSeparator: string): StorageExporter;
+	setDateFormat(dateFormat: string): StorageExporter;
+	setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
 }
 ```
 Интерфейс быстрого экспорта. Доступен только в мультикубах. Интерфейс наследуется от [`Exporter`](#Exporter). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
@@ -1437,10 +1433,10 @@ setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter
 ### Интерфейс ExportResult<a name="ExportResult"></a>
 ```ts
 interface ExportResult {
-    mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult;
-    getHash(): string | null;
-    copyToLocal(path: string): ExportResult;
-    moveToLocal(path: string): ExportResult;
+	mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult;
+	getHash(): string | null;
+	copyToLocal(path: string): ExportResult;
+	moveToLocal(path: string): ExportResult;
 }
 ```
 Интерфейс для работы с результатом экспорта.
@@ -1461,7 +1457,6 @@ getHash(): string | null
 
 &nbsp;
 
-
 ```js
 copyToLocal(path: string): ExportResult
 ```
@@ -1481,14 +1476,14 @@ moveToLocal(path: string): ExportResult
 ### Интерфейс CSVParams<a name="CSVParams"></a>
 ```ts
 interface CSVParams {
-    setDelimiter(delimiter: string): CSVParams;
-    getDelimiter(): string;
-    setEnclosure(enclosure: string): CSVParams;
-    getEnclosure(): string;
-    setEscape(escape: string): CSVParams;
-    getEscape(): string;
-    setLineDelimiter(escape: string): CSVParams;
-    getLineDelimiter(): string;
+	setDelimiter(delimiter: string): CSVParams;
+	getDelimiter(): string;
+	setEnclosure(enclosure: string): CSVParams;
+	getEnclosure(): string;
+	setEscape(escape: string): CSVParams;
+	getEscape(): string;
+	setLineDelimiter(escape: string): CSVParams;
+	getLineDelimiter(): string;
 }
 ```
 Интерфейс настроек импорта из файла [`CSV`](https://ru.wikipedia.org/wiki/CSV).
@@ -1554,11 +1549,11 @@ getLineDelimiter(): string
 ### Интерфейс Importer<a name="Importer"></a>
 ```ts
 interface Importer {
-    csv(): CSVParams;
-    setFilePath(path: string): Importer;
-    getFilePath(): string;
-    getReportFilePath(): string | null;
-    import(): Importer;
+	csv(): CSVParams;
+	setFilePath(path: string): Importer;
+	getFilePath(): string;
+	getReportFilePath(): string | null;
+	import(): Importer;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](#Grid). Доступен в мультикубах и в справочниках. Результатом импорта является файл отчёта.
@@ -1603,10 +1598,10 @@ import(): Importer
 ### Интерфейс StorageImporter<a name="StorageImporter"></a>
 ```ts
 interface StorageImporter extends Importer {
-    setMaxFailures(maxFailures: number): StorageImporter;
-    setIsCompressed(isCompressed: boolean): StorageImporter;
-    setEncoding(encoding: string): StorageImporter;
-    setDateFormat(dateFormat: string): StorageImporter;
+	setMaxFailures(maxFailures: number): StorageImporter;
+	setIsCompressed(isCompressed: boolean): StorageImporter;
+	setEncoding(encoding: string): StorageImporter;
+	setDateFormat(dateFormat: string): StorageImporter;
 }
 ```
 Интерфейс быстрого импорта. Доступен только в мультикубах. Интерфейс наследуется от [`StorageImporter`](#StorageImporter). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции возвращают `this`.
@@ -1677,7 +1672,6 @@ load(): CubeCellUpdater
 &nbsp;
 
 ### Интерфейс CubeCellUpdater<a name="CubeCellUpdater"></a>
-
 ```ts
 interface CubeCellUpdater {
 	getCount(): number;

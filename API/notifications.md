@@ -3,7 +3,6 @@
 Все интерфейсы этого раздела находятся в пространстве имён `Notifications`.
 
 ### Интерфейс Manager<a name="Manager"></a>
-
 ```ts
 interface Manager {
 	smtp(channel: string): Smtp.Builder;
@@ -21,7 +20,6 @@ smtp(channel: string): Smtp.Builder
 &nbsp;
 
 ### Интерфейс Smtp.Builder<a name="Smtp.Builder"></a>
-
 ```ts
 interface Smtp.Builder {
 	setTo(to: string | string[]): this;
@@ -71,7 +69,6 @@ send(): Smtp.Result
 &nbsp;
 
 ### Интерфейс Smtp.Result<a name="Smtp.Result"></a>
-
 ```ts
 interface Smtp.Result {
 }

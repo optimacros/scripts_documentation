@@ -342,7 +342,7 @@ interface FTPAdapter extends BaseAdapter {
 
 	setPassive(passive: boolean): FTPAdapter;
 	getPassive(): boolean;
-		
+	
 	setIgnorePassiveAddress(ignore: boolean): FTPAdapter; 
 	getIgnorePassiveAddress(): boolean; 
 

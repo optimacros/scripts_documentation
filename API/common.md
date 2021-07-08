@@ -3,13 +3,13 @@
 ### Интерфейс Common<a name="Common"></a>
 ```ts
 interface Common {
-    createCellBuffer(): CellBuffer;
-    requestInfo(): RequestManager;
-    modelInfo(): ModelInfo;
-    userInfo(): UserInfo;
-    resultInfo(): ResultInfo;
-    entitiesInfo(): EntitiesInfo;
-    copyData(): CopyData;
+	createCellBuffer(): CellBuffer;
+	requestInfo(): RequestManager;
+	modelInfo(): ModelInfo;
+	userInfo(): UserInfo;
+	resultInfo(): ResultInfo;
+	entitiesInfo(): EntitiesInfo;
+	copyData(): CopyData;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -69,15 +69,14 @@ copyData(): CopyData
 ### Интерфейс RequestManager<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
-    log(message: string, print?: boolean): RequestManager;
-    logStatusMessage(message: string, print?: boolean): RequestManager;
-    setStatusMessage(message: string): RequestManager;
+	log(message: string, print?: boolean): RequestManager;
+	logStatusMessage(message: string, print?: boolean): RequestManager;
+	setStatusMessage(message: string): RequestManager;
 }
 ```
 Интерфейс для записи в лог (устаревший функционал) и работы со статусными сообщениями. Все функции возвращают `this`.
 
 &nbsp;
-
 
 ```js
 log(message: string, print?: boolean): RequestManager
@@ -107,10 +106,10 @@ setStatusMessage(message: string): RequestManager
 ### Интерфейс CellBuffer<a name="CellBuffer"></a>
 ```ts
 interface CellBuffer {
-    set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
-    apply(): CellBuffer;
-    count(): number;
-    canLoadCellsValues(value: boolean): CellBuffer;
+	set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
+	apply(): CellBuffer;
+	count(): number;
+	canLoadCellsValues(value: boolean): CellBuffer;
 }
 ```
 Буфер, куда можно временно поместить значения набора ячеек, не обязательно смежных, чтобы изменить их перед отправкой на сервер.
@@ -151,13 +150,12 @@ canLoadCellsValues(value: boolean): CellBuffer
 &nbsp;
 
 ### Интерфейс ExportObfuscationState<a name="ExportObfuscationState"></a>
-
 ```ts
 interface ExportObfuscationState {
-    setPath(path: string): ExportObfuscationState;
-    setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState;
-    setDataArchiveType(type: string): ExportObfuscationState;
-    export(): boolean;
+	setPath(path: string): ExportObfuscationState;
+	setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState;
+	setDataArchiveType(type: string): ExportObfuscationState;
+	export(): boolean;
 }
 ```
 Интерфейс для экспорта модели в [`обфусцированном`](https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%84%D1%83%D1%81%D0%BA%D0%B0%D1%86%D0%B8%D1%8F_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%BD%D0%BE%D0%B5_%D0%BE%D0%B1%D0%B5%D1%81%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%B8%D0%B5)) состоянии. Используется для передачи моделей, содержащих конфиденциальную информацию, третьим лицам.
@@ -195,15 +193,15 @@ export(): boolean
 ### Интерфейс ModelInfo<a name="ModelInfo"></a>
 ```ts
 interface ModelInfo {
-    id(): string;
-    name(): string;
-    lastSyncDate(): number;
-    autoCalcStatus(): boolean;
-    setModelCalculationMode(status: boolean): boolean;
-    repair(): boolean;
-    recalculate(): boolean;
-    backup(path: string): boolean;
-    exportObfuscationState(): ExportObfuscationState;
+	id(): string;
+	name(): string;
+	lastSyncDate(): number;
+	autoCalcStatus(): boolean;
+	setModelCalculationMode(status: boolean): boolean;
+	repair(): boolean;
+	recalculate(): boolean;
+	backup(path: string): boolean;
+	exportObfuscationState(): ExportObfuscationState;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -276,11 +274,11 @@ exportObfuscationState(): ExportObfuscationState
 ### Интерфейс UserInfo<a name="UserInfo"></a>
 ```ts
 interface UserInfo {
-    getEntity(): EntityInfo;
-    getEmail(): string;
-    getFirstName(): string;
-    getLastName(): string;
-    getRole(): EntityInfo;
+	getEntity(): EntityInfo;
+	getEmail(): string;
+	getFirstName(): string;
+	getLastName(): string;
+	getRole(): EntityInfo;
 }
 ```
 Интерфейс получения информации о пользователе.
@@ -355,17 +353,15 @@ setProperty(name: string, value: any): ResultInfo
 &nbsp;
 
 ### Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
-
 ```ts
 interface EntitiesInfo {
-    get(longId: number): EntityInfo | null;
-    getCollection(longId: number[]): EntityInfo[];
+	get(longId: number): EntityInfo | null;
+	getCollection(longId: number[]): EntityInfo[];
 }
 ```
 Интерфейс для получения сущности по [`longId`](./OMviews.md#longId).
 
 &nbsp;
-
 
 ```js
 get(longId: number): EntityInfo | null
@@ -377,12 +373,11 @@ get(longId: number): EntityInfo | null
 ```js
 getCollection(longId: number[]): EntityInfo[]
 ```
-Возвращает массив сущностей [`EntityInfo`](./OMviews.md#EntityInfo) по массиву их[`longId`](./OMviews.md#longId).
+Возвращает массив сущностей [`EntityInfo`](./OMviews.md#EntityInfo) по массиву их [`longId`](./OMviews.md#longId).
 
 &nbsp;
 
 ### Интерфейс CopyData<a name="CopyData"></a>
-
 ```ts
 interface CopyData {
 	setSourceLongId(longId: number): CopyData;
