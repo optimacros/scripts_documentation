@@ -128,42 +128,6 @@ interface CubeCell {
 }
 ```
 
-### Интерфейс CubeCellSelector ...<a name="CubeCellSelector"></a>
-```ts
-interface CubeCellSelector {
-    getCubeInfo(): CubeInfo;
-    getCubeIdentifier(): number;
-    getCubeDimensions(): EntityInfo[];
-    // @ts-ignore
-    generator(): IterableIterator<CubeCell>;
-}
-```
-
-### Интерфейс CubeCellSelectorBuilder ...<a name="CubeCellSelectorBuilder"></a>
-```ts
-interface CubeCellSelectorBuilder {
-    setFormula(formula: string): this;
-    load(): CubeCellSelector;
-}
-```
-
-### Интерфейс CubeFormatInfo ...<a name="CubeFormatInfo"></a>
-```ts
-interface CubeFormatInfo {
-    getFormatTypeEntity(): EntityInfo;
-    getDimensionEntity(): EntityInfo | null;
-}
-```
-
-### Интерфейс CubeInfo ...<a name="CubeInfo"></a>
-```ts
-interface CubeInfo extends EntityInfo {
-    getFormula(): string | null;
-    getFormatInfo(): CubeFormatInfo;
-    getDimensions(): EntityInfo[];
-}
-```
-
 ### Интерфейс OptimizationRequestTab ...<a name="OptimizationRequestTab"></a>
 ```ts
 interface OptimizationRequestTab extends Tab {

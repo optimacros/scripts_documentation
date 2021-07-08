@@ -270,6 +270,87 @@ reverse(): ElementsReorder
 
 &nbsp;
 
+### Интерфейс CubeCellSelector ...<a name="CubeCellSelector"></a>
+
+```ts
+interface CubeCellSelector {
+	getCubeInfo(): CubeInfo;
+	getCubeIdentifier(): number;
+	getCubeDimensions(): EntityInfo[];
+	// @ts-ignore
+	generator(): IterableIterator<CubeCell>;
+}
+```
+
+&nbsp;
+
+```js
+getCubeInfo(): CubeInfo
+```
+
+&nbsp;
+
+```js
+getCubeIdentifier(): number
+```
+
+&nbsp;
+
+```js
+getCubeDimensions(): EntityInfo[]
+```
+
+&nbsp;
+
+```js
+generator(): IterableIterator<CubeCell>
+```
+
+&nbsp;
+
+### Интерфейс CubeCellSelectorBuilder<a name="CubeCellSelectorBuilder"></a>
+```ts
+interface CubeCellSelectorBuilder {
+	setFormula(formula: string): this;
+	load(): CubeCellSelector;
+}
+```
+Простой интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для выборки клеток куба по формуле.
+
+&nbsp;
+
+```js
+setFormula(formula: string): this
+```
+Устанавливает формулу выбора.
+
+&nbsp;
+
+```js
+load(): CubeCellSelector
+```
+Производит выбор клеток и возвращает интерфейс [`CubeCellSelector`](#CubeCellSelector).
+
+&nbsp;
+
+### Интерфейс CubeFormatInfo ...<a name="CubeFormatInfo"></a>
+```ts
+interface CubeFormatInfo {
+    getFormatTypeEntity(): EntityInfo;
+    getDimensionEntity(): EntityInfo | null;
+}
+```
+
+### Интерфейс CubeInfo ...<a name="CubeInfo"></a>
+```ts
+interface CubeInfo extends EntityInfo {
+    getFormula(): string | null;
+    getFormatInfo(): CubeFormatInfo;
+    getDimensions(): EntityInfo[];
+}
+```
+
+
 ### Интерфейс MulticubeTab ...<a name="MulticubeTab"></a>
 ```ts
 interface MulticubeTab extends Tab {
@@ -292,6 +373,7 @@ cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```js
 cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder
 ```
+Возвращает интерфейс [`CubeCellSelectorBuilder`](#CubeCellSelectorBuilder) для куба `identifier`.
 
 &nbsp;
 
