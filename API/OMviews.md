@@ -270,43 +270,6 @@ reverse(): ElementsReorder
 
 &nbsp;
 
-### Интерфейс CubeCellSelector ...<a name="CubeCellSelector"></a>
-```ts
-interface CubeCellSelector {
-	getCubeInfo(): CubeInfo;
-	getCubeIdentifier(): number;
-	getCubeDimensions(): EntityInfo[];
-	// @ts-ignore
-	generator(): IterableIterator<CubeCell>;
-}
-```
-
-&nbsp;
-
-```js
-getCubeInfo(): CubeInfo
-```
-
-&nbsp;
-
-```js
-getCubeIdentifier(): number
-```
-
-&nbsp;
-
-```js
-getCubeDimensions(): EntityInfo[]
-```
-
-&nbsp;
-
-```js
-generator(): IterableIterator<CubeCell>
-```
-
-&nbsp;
-
 ### Интерфейс CubeCellSelectorBuilder<a name="CubeCellSelectorBuilder"></a>
 ```ts
 interface CubeCellSelectorBuilder {
@@ -332,6 +295,88 @@ load(): CubeCellSelector
 
 &nbsp;
 
+### Интерфейс CubeCellSelector ...<a name="CubeCellSelector"></a>
+```ts
+interface CubeCellSelector {
+	getCubeInfo(): CubeInfo;
+	getCubeIdentifier(): number;
+	getCubeDimensions(): EntityInfo[];
+	generator(): IterableIterator<CubeCell>;
+}
+```
+Интерфейс прямого взаимодействия с хранилищем данных.
+
+&nbsp;
+
+```js
+getCubeInfo(): CubeInfo
+```
+
+
+&nbsp;
+
+```js
+getCubeIdentifier(): number
+```
+Возвращает идентификатор куба.
+
+&nbsp;
+
+```js
+getCubeDimensions(): EntityInfo[]
+```
+То же, что и [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
+
+&nbsp;
+
+```js
+generator(): IterableIterator<CubeCell>
+```
+Возвращает генератор, при каждом обращении возвращающий интерфейс [`CubeCell`](#CubeCell) очередной полученной в выборке клетки куба.
+
+&nbsp;
+
+### Интерфейс CubeCell ...<a name="CubeCell"></a>
+```ts
+interface CubeCell {
+	definitions(): number[];
+	getDimensionIds(): number[];
+	getDimensionItems(): EntityInfo[];
+	getValue(): number | string | null | boolean;
+}
+```
+Низкоуровневый интерфейс доступа к данным клетки куба.
+
+&nbsp;
+
+```js
+definitions(): number[]
+```
+Идентификаторы, которыми определена клетка.
+
+&nbsp;
+
+```js
+getDimensionIds(): number[]
+```
+Возвращает массив идентификаторов измерений, которыми определена клетка.
+
+&nbsp;
+
+```js
+getDimensionItems(): EntityInfo[]
+```
+Возвращает массив [`EntityInfo`](#EntityInfo) измерений, которыми определена клетка.
+
+&nbsp;
+
+```js
+getValue(): number | string | null | boolean
+```
+Возвращает значение клетки.
+
+&nbsp;
+
 ### Интерфейс CubeFormatInfo ...<a name="CubeFormatInfo"></a>
 ```ts
 interface CubeFormatInfo {
@@ -348,7 +393,30 @@ interface CubeInfo extends EntityInfo {
 	getDimensions(): EntityInfo[];
 }
 ```
+Интерфейс информации о кубе. Интерфейс наследуется от [`EntityInfo`](#EntityInfo).
 
+&nbsp;
+
+```js
+getFormula(): string | null
+```
+Возвращает формулу Optimacros,
+
+&nbsp;
+
+```js
+getFormatInfo(): CubeFormatInfo
+```
+
+&nbsp;
+
+<a name="CubeInfo.getDimensions"></a>
+```js
+getDimensions(): EntityInfo[]
+```
+Возвращает массив [`EntityInfo`](#EntityInfo) измерений куба.
+
+&nbsp;
 
 ### Интерфейс MulticubeTab ...<a name="MulticubeTab"></a>
 ```ts

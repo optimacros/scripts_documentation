@@ -118,16 +118,6 @@ readonly notifications: Notifications.Manager
 ___
 !!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
 
-### Интерфейс CubeCell ...<a name="CubeCell"></a>
-```ts
-interface CubeCell {
-    definitions(): number[];
-    getDimensionIds(): number[];
-    getDimensionItems(): EntityInfo[];
-    getValue(): number | string | null | boolean;
-}
-```
-
 ### Интерфейс OptimizationRequestTab ...<a name="OptimizationRequestTab"></a>
 ```ts
 interface OptimizationRequestTab extends Tab {
