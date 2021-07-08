@@ -384,7 +384,7 @@ interface CubeFormatInfo {
 	getDimensionEntity(): EntityInfo | null;
 }
 ```
-Интерфейс для получения информации о формате куба.
+Интерфейс информации о формате куба.
 
 &nbsp;
 
@@ -402,7 +402,7 @@ getDimensionEntity(): EntityInfo | null
 
 &nbsp;
 
-### Интерфейс CubeInfo ...<a name="CubeInfo"></a>
+### Интерфейс CubeInfo<a name="CubeInfo"></a>
 ```ts
 interface CubeInfo extends EntityInfo {
 	getFormula(): string | null;
@@ -424,6 +424,7 @@ getFormula(): string | null
 ```js
 getFormatInfo(): CubeFormatInfo
 ```
+Возвращает интерфейс [`CubeFormatInfo`](#CubeFormatInfo) для получения информации о формате куба.
 
 &nbsp;
 
