@@ -377,31 +377,6 @@ getValue(): number | string | null | boolean
 
 &nbsp;
 
-### Интерфейс CubeFormatInfo<a name="CubeFormatInfo"></a>
-```ts
-interface CubeFormatInfo {
-	getFormatTypeEntity(): EntityInfo;
-	getDimensionEntity(): EntityInfo | null;
-}
-```
-Интерфейс информации о формате куба.
-
-&nbsp;
-
-```js
-getFormatTypeEntity(): EntityInfo
-```
-Возвращает сущность [`EntityInfo`](#EntityInfo) формата куба.
-
-&nbsp;
-
-```js
-getDimensionEntity(): EntityInfo | null
-```
-***Не работает.***
-
-&nbsp;
-
 ### Интерфейс CubeInfo<a name="CubeInfo"></a>
 ```ts
 interface CubeInfo extends EntityInfo {
@@ -433,6 +408,31 @@ getFormatInfo(): CubeFormatInfo
 getDimensions(): EntityInfo[]
 ```
 Возвращает массив [`EntityInfo`](#EntityInfo) измерений куба.
+
+&nbsp;
+
+### Интерфейс CubeFormatInfo<a name="CubeFormatInfo"></a>
+```ts
+interface CubeFormatInfo {
+	getFormatTypeEntity(): EntityInfo;
+	getDimensionEntity(): EntityInfo | null;
+}
+```
+Интерфейс информации о формате куба.
+
+&nbsp;
+
+```js
+getFormatTypeEntity(): EntityInfo
+```
+Возвращает сущность [`EntityInfo`](#EntityInfo) формата куба.
+
+&nbsp;
+
+```js
+getDimensionEntity(): EntityInfo | null
+```
+***Не работает.***
 
 &nbsp;
 
