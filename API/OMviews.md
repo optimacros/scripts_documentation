@@ -377,7 +377,7 @@ getValue(): number | string | null | boolean
 
 &nbsp;
 
-### Интерфейс CubeFormatInfo ...<a name="CubeFormatInfo"></a>
+### Интерфейс CubeFormatInfo<a name="CubeFormatInfo"></a>
 ```ts
 interface CubeFormatInfo {
 	getFormatTypeEntity(): EntityInfo;
