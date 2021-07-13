@@ -620,19 +620,20 @@ setSheetIdentifier(identifier: string | number): ExcelToCsvConverter
 
 &nbsp;
 
-### Интерфейс ConverterManager ...<a name="ConverterManager"></a>
+### Интерфейс ConverterManager<a name="ConverterManager"></a>
 ```ts
 interface ConverterManager {
 	excelToCsv(): ExcelToCsvConverter;
 }
 ```
-
+Менеджер конвертеров.
 
 &nbsp;
 
 ```js
 excelToCsv(): ExcelToCsvConverter
 ```
+Возвращает ссылку на интерфейс [`ExcelToCsvConverter`](#ExcelToCsvConverter) преобразования файлов Excel в CSV.
 
 &nbsp;
 
@@ -667,8 +668,6 @@ csvReader(path: PathObj): CsvReader
 converterManager(): ConverterManager
 ```
 Возвращает ссылку на [`ConverterManager`](#ConverterManager).
-
-
 
 [API Reference](API.md)
 
