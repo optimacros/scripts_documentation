@@ -432,6 +432,7 @@ getFormatTypeEntity(): EntityInfo
 ```js
 getDimensionEntity(): EntityInfo | null
 ```
+Возвращает идентификатор измерения, выбранного в качестве формата, если формат – один из `List`, `Time`, `Version`, `CubeSubset`, и `null` в противном случае.
 ***Не работает.***
 
 &nbsp;

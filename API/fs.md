@@ -627,6 +627,7 @@ interface ConverterManager {
 }
 ```
 
+
 &nbsp;
 
 ```js
@@ -635,7 +636,7 @@ excelToCsv(): ExcelToCsvConverter
 
 &nbsp;
 
-### Интерфейс FilesDataManager ...<a name="FilesDataManager"></a>
+### Интерфейс FilesDataManager<a name="FilesDataManager"></a>
 ```ts
 interface FilesDataManager {
 	csvWriter(): CsvWriter;
@@ -665,6 +666,7 @@ csvReader(path: PathObj): CsvReader
 ```js
 converterManager(): ConverterManager
 ```
+Возвращает ссылку на [`ConverterManager`](#ConverterManager).
 
 
 
