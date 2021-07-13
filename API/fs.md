@@ -590,6 +590,7 @@ interface BaseConverter {
 	convert(): string;
 }
 ```
+Базо
 
 &nbsp;
 
@@ -605,18 +606,20 @@ convert(): string
 
 &nbsp;
 
-### Интерфейс ExcelToCsvConverter ...<a name="ExcelToCsvConverter"></a>
+### Интерфейс ExcelToCsvConverter<a name="ExcelToCsvConverter"></a>
 ```ts
 interface ExcelToCsvConverter extends BaseConverter {
 	setSheetIdentifier(identifier: string | number): ExcelToCsvConverter;
 }
 ```
+Интерфейс преобразования файлов Excel в CSV. Наследуется от [`BaseConverter`](#BaseConverter).
 
 &nbsp;
 
 ```js
 setSheetIdentifier(identifier: string | number): ExcelToCsvConverter
 ```
+Устанавливает идентификатор или имя листа. Возвращает `this`.
 
 &nbsp;
 
