@@ -44,6 +44,7 @@ sharedFolder – папка на сервере, которая была доб�
 filesDataManager(): FilesDataManager
 ```
 
+
 &nbsp;
 
 ### Интерфейс FileMeta<a name="FileMeta"></a>
@@ -583,26 +584,28 @@ generator(): string[][]
 
 &nbsp;
 
-### Интерфейс BaseConverter ...<a name="BaseConverter"></a>
+### Интерфейс BaseConverter<a name="BaseConverter"></a>
 ```ts
 interface BaseConverter {
-	setSource(path: string): BaseConverter;
+	setSource(path: string): this;
 	convert(): string;
 }
 ```
-Базо
+Базовый интерфейс преобразования файлов.
 
 &nbsp;
 
 ```js
-setSource(path: string): BaseConverter
+setSource(path: string): this
 ```
+Устанавливает имя исходного файла. Возвращает `this`.
 
 &nbsp;
 
 ```js
 convert(): string
 ```
+Конвертирует файл. Возвращает имя преобразованного файла.
 
 &nbsp;
 
