@@ -57,7 +57,7 @@ oracle(): OracleConnectorBuilder
 ```js
 mongodb(): Mongodb.ConnectorBuilder
 ```
-Возвращает коннектор [`Mongodb.ConnectorBuilder`](#Mongodb.ConnectorBuilder) ...................... для подключения к базе данных [`MongoDB`](https://ru.wikipedia.org/wiki/MongoDB).
+Возвращает коннектор [`Mongodb.ConnectorBuilder`](#ConnectorBuilder) для подключения к базе данных [`MongoDB`](https://ru.wikipedia.org/wiki/MongoDB).
 
 &nbsp;
 
@@ -864,6 +864,391 @@ getCommand(): string
 &nbsp;
 
 ## MongoDB<a name="mongoDB"></a>
+
+Все интерфейсы этого раздела находятся в пространстве имён `Mongodb`.
+
+&nbsp;
+
+### Интерфейс ConnectorBuilder<a name="ConnectorBuilder"></a>
+```ts
+interface ConnectorBuilder {
+	setDSN(value: string): ConnectorBuilder;
+	load(): Connection;
+}
+```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки подключения к [`MongoDB`](https://ru.wikipedia.org/wiki/MongoDB).
+
+&nbsp;
+
+```js
+setDSN(value: string): ConnectorBuilder
+```
+Устанавливает [`DSN`](https://docs.mongodb.com/bi-connector/master/tutorial/create-system-dsn/) для подключения.
+
+&nbsp;
+
+```js
+load(): Connection
+```
+Создаёт соединение с БД и возвращает его интерфейс [`Connection`](#Connection).
+
+&nbsp;
+
+### Интерфейс Connection...<a name="Connection"></a>
+```ts
+interface Connection {
+	collectionCreator(): CollectionCreator;
+	dropCollection(name: string): { ok: number, errmsg?: string, nIndexesWas?: number, ns?: string };
+	selectCollection(name: string): Collection;
+	types(): Types;
+}
+```
+
+&nbsp;
+
+```js
+collectionCreator(): CollectionCreator
+```
+
+&nbsp;
+
+```js
+dropCollection(name: string): { ok: number, errmsg?: string, nIndexesWas?: number, ns?: string }
+```
+
+&nbsp;
+
+```js
+selectCollection(name: string): Collection
+```
+
+&nbsp;
+
+```js
+types(): Types
+```
+
+&nbsp;
+
+### Интерфейс CollectionCreator...<a name="CollectionCreator"></a>
+```ts
+interface CollectionCreator {
+	/**
+	* https://docs.mongodb.com/manual/reference/method/db.createCollection
+	* @param options
+	*/
+	setOptions(options: {
+		capped: boolean,
+		autoIndexId: boolean,
+		size: number,
+		max: number
+	}): CollectionCreator;
+
+	setName(name: string): CollectionCreator;
+	create(): { ok: number, errmsg?: string };
+}
+```
+
+&nbsp;
+
+	/**
+	* https://docs.mongodb.com/manual/reference/method/db.createCollection
+	* @param options
+	*/
+```js
+setOptions(options: { 
+	capped: boolean,
+	autoIndexId: boolean,
+	size: number,
+	max: number
+}): CollectionCreator
+```
+
+&nbsp;
+
+```js
+setName(name: string): CollectionCreator
+```
+
+&nbsp;
+
+```js
+create(): { ok: number, errmsg?: string }
+```
+
+&nbsp;
+
+### Интерфейс Collection...<a name="Collection"></a>
+```ts
+interface Collection {
+	count(filter: Object): number;
+	find(filter: Object, options?: FilterOptions): Cursor;
+	findOne(filter: Object, options?: FilterOptions): Object;
+	insertOne(document: Object): InsertOneResult;
+	insertMany(documents: Object[]): InsertManyResult;
+	updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult;
+	updateMany(filter: Object, update: Object, options?: FilterOptions): UpdateResult;
+	deleteOne(filter: Object, options?: FilterOptions): DeleteResult;
+	deleteMany(filter: Object, options?: FilterOptions): DeleteResult;
+}
+```
+
+&nbsp;
+
+```js
+count(filter: Object): number
+```
+
+&nbsp;
+
+```js
+find(filter: Object, options?: FilterOptions): Cursor
+```
+
+&nbsp;
+
+```js
+findOne(filter: Object, options?: FilterOptions): Object
+```
+
+&nbsp;
+
+```js
+insertOne(document: Object): InsertOneResult
+```
+
+&nbsp;
+
+```js
+insertMany(documents: Object[]): InsertManyResult
+```
+
+&nbsp;
+
+```js
+updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult
+```
+
+&nbsp;
+
+```js
+updateMany(filter: Object, update: Object, options?: FilterOptions): UpdateResult
+```
+
+&nbsp;
+
+```js
+deleteOne(filter: Object, options?: FilterOptions): DeleteResult
+```
+
+&nbsp;
+
+```js
+deleteMany(filter: Object, options?: FilterOptions): DeleteResult
+```
+
+&nbsp;
+
+### Интерфейс InsertOneResult...<a name="InsertOneResult"></a>
+```ts
+interface InsertOneResult {
+	getInsertedCount(): number;
+	getInsertedId(): Types.ObjectId;
+	isAcknowledged(): boolean;
+}
+```
+
+&nbsp;
+
+```js
+getInsertedCount(): number
+```
+
+&nbsp;
+
+```js
+getInsertedId(): Types.ObjectId
+```
+
+&nbsp;
+
+```js
+isAcknowledged(): boolean
+```
+
+&nbsp;
+
+### Интерфейс InsertManyResult...<a name="InsertManyResult"></a>
+```ts
+interface InsertManyResult {
+	getInsertedCount(): number;
+	getInsertedIds(): Types.ObjectId[];
+	isAcknowledged(): boolean;
+}
+```
+
+&nbsp;
+
+```js
+getInsertedCount(): number
+```
+
+&nbsp;
+
+```js
+getInsertedIds(): Types.ObjectId[]
+```
+
+&nbsp;
+
+```js
+isAcknowledged(): boolean
+```
+
+&nbsp;
+
+### Интерфейс UpdateResult...<a name="UpdateResult"></a>
+```ts
+interface UpdateResult {
+	getMatchedCount(): number;
+	getModifiedCount(): number;
+	getUpsertedCount(): number;
+	getUpsertedId(): Types.ObjectId;
+	isAcknowledged(): boolean;
+}
+```
+
+&nbsp;
+
+```js
+getMatchedCount(): number
+```
+
+&nbsp;
+
+```js
+getModifiedCount(): number
+```
+
+&nbsp;
+
+```js
+getUpsertedCount(): number
+```
+
+&nbsp;
+
+```js
+getUpsertedId(): Types.ObjectId
+```
+
+&nbsp;
+
+```js
+isAcknowledged(): boolean
+```
+
+&nbsp;
+
+### Интерфейс DeleteResult...<a name="DeleteResult"></a>
+```ts
+interface DeleteResult {
+	getDeletedCount(): number;
+	isAcknowledged(): boolean;
+}
+```
+
+&nbsp;
+
+```js
+getDeletedCount(): number
+```
+
+&nbsp;
+
+```js
+isAcknowledged(): boolean
+```
+
+&nbsp;
+
+### Интерфейс Cursor...<a name="Cursor"></a>
+```ts
+interface Cursor {
+	all(): Object[];
+	generator(): Object[];
+}
+```
+
+&nbsp;
+
+```js
+all(): Object[]
+```
+
+&nbsp;
+
+```js
+generator(): Object[]
+```
+
+&nbsp;
+
+### Интерфейс FilterOptions...<a name="FilterOptions"></a>
+```ts
+interface FilterOptions extends Object {
+	sort: Object,
+	skip: number,
+	limit: number,
+	showRecordId: boolean,
+	min: Object,
+	max: Object
+}
+```
+### Интерфейс Types...<a name="Types"></a>
+```ts
+interface Types {
+	ObjectId(id?: string): Types.ObjectId;
+	regex(pattern: string, flags?: string): Object;
+	date(milliseconds: number): Object;
+}
+```
+
+&nbsp;
+
+
+```js
+ObjectId(id?: string): Types.ObjectId
+```
+
+&nbsp;
+
+```js
+regex(pattern: string, flags?: string): Object
+```
+
+&nbsp;
+
+```js
+date(milliseconds: number): Object
+```
+
+&nbsp;
+
+### Интерфейс Types.ObjectId...<a name="Types.ObjectId"></a>
+```ts
+namespace Types {
+	interface ObjectId {
+		toString(): string;
+	}
+}
+```
+
+&nbsp;
+
+```js
+toString(): string
+```
 
 &nbsp;
 
