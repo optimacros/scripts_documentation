@@ -1082,6 +1082,7 @@ getInsertedId(): Types.ObjectId
 
 &nbsp;
 
+<a name="InsertOneResult.isAcknowledged"></a>
 ```js
 isAcknowledged(): boolean
 ```
@@ -1089,7 +1090,7 @@ isAcknowledged(): boolean
 
 &nbsp;
 
-### Интерфейс InsertManyResult...<a name="InsertManyResult"></a>
+### Интерфейс InsertManyResult<a name="InsertManyResult"></a>
 ```ts
 interface InsertManyResult {
 	getInsertedCount(): number;
@@ -1097,24 +1098,28 @@ interface InsertManyResult {
 	isAcknowledged(): boolean;
 }
 ```
+Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функцией[`insertMany()`](#insertMany).
 
 &nbsp;
 
 ```js
 getInsertedCount(): number
 ```
+Возвращает количество вставленных объектов.
 
 &nbsp;
 
 ```js
 getInsertedIds(): Types.ObjectId[]
 ```
+Возвращает массив [`Types.ObjectId`](#Types.ObjectId) вставленных документоы.
 
 &nbsp;
 
 ```js
 isAcknowledged(): boolean
 ```
+То же, что и [`InsertOneResult.isAcknowledged()`](#InsertOneResult.isAcknowledged).
 
 &nbsp;
 
