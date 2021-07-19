@@ -898,7 +898,7 @@ load(): Connection
 ```ts
 interface Connection {
 	collectionCreator(): CollectionCreator;
-	dropCollection(name: string): { ok: number, errmsg?: string, nIndexesWas?: number, ns?: string };
+	dropCollection(name: string): Object;
 	selectCollection(name: string): Collection;
 	types(): Types;
 }
@@ -914,8 +914,9 @@ collectionCreator(): CollectionCreator
 &nbsp;
 
 ```js
-dropCollection(name: string): { ok: number, errmsg?: string, nIndexesWas?: number, ns?: string }
+dropCollection(name: string): Object
 ```
+Передаёт в MongoDB запрос на [`удаление коллекции`](https://docs.mongodb.com/manual/reference/method/db.collection.drop/) `name`, дожидается завершения обработки и возвращает объект результата.
 
 &nbsp;
 
@@ -962,7 +963,7 @@ setName(name: string): CollectionCreator
 ```js
 create(): { ok: number, errmsg?: string }
 ```
-Передаёт запрос на создание коллекции в MongoDB, дожидается результата и возвращает объект результата от MongoDB.
+Передаёт в MongoDB запрос на создание коллекции, дожидается завершения обработки и возвращает объект результата.
 
 &nbsp;
 
@@ -980,42 +981,55 @@ interface Collection {
 	deleteMany(filter: Object, options?: FilterOptions): DeleteResult;
 }
 ```
+Интерфейс работы с коллекцией MongoDB.
+
+Большинство функций принимают параметры `filter` и `options`, имеющие в них одно и то же значение.
+
+`filter` – фильтр (или запрос) данных коллекции. Подробнее о принципах его построения см. в [`документации`](https://docs.mongodb.com/manual/reference/method/db.collection.find/) (параметр `query`).
+
+`options` – опции запроса [`FilterOptions`](#FilterOptions).
 
 &nbsp;
 
 ```js
 count(filter: Object): number
 ```
+Возвращает количество документов коллекции, соответствующих запросу `filter`.
 
 &nbsp;
 
 ```js
 find(filter: Object, options?: FilterOptions): Cursor
 ```
+Передаёт в MongoDB запрос [`find()`](https://docs.mongodb.com/manual/reference/method/db.collection.find/) поиска документов и возвращает [`Cursor`](#Cursor).
 
 &nbsp;
 
 ```js
 findOne(filter: Object, options?: FilterOptions): Object
 ```
+Передаёт в MongoDB запрос [`findOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.findOne/) поиска одного документа и возвращает его.
 
 &nbsp;
 
 ```js
 insertOne(document: Object): InsertOneResult
 ```
+Передаёт в MongoDB запрос [`insertOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/) добавления одного документа `document` в коллекцию и возвращает интерфейс [`InsertOneResult`](#InsertOneResult) доступа к результатам этого запроса.
 
 &nbsp;
 
 ```js
 insertMany(documents: Object[]): InsertManyResult
 ```
+Передаёт в MongoDB запрос [`insertMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.insertMany/) добавления массива документов `documents` в коллекцию и возвращает интерфейс [`InsertManyResult`](#InsertManyResult) доступа к результатам этого запроса.
 
 &nbsp;
 
 ```js
 updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult
 ```
+
 
 &nbsp;
 
@@ -1051,12 +1065,14 @@ interface InsertOneResult {
 ```js
 getInsertedCount(): number
 ```
+Возвращает количество вставленных объектов. Как правило, это `0` или `1`.
 
 &nbsp;
 
 ```js
 getInsertedId(): Types.ObjectId
 ```
+Возвращает ObjectId вставленного документа.
 
 &nbsp;
 
@@ -1167,18 +1183,21 @@ interface Cursor {
 	generator(): Object[];
 }
 ```
+Курсор запроса к MongoDB.
 
 &nbsp;
 
 ```js
 all(): Object[]
 ```
+Возвращает все документы ответа в виде массива.
 
 &nbsp;
 
 ```js
 generator(): Object[]
 ```
+Возвращает генератор, перебирающий все документы ответа.
 
 &nbsp;
 
@@ -1193,6 +1212,50 @@ interface FilterOptions extends Object {
 	max: Object
 }
 ```
+Интерфейс опций запроса к MongoDB. Наследуется от [`Object`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object).
+
+&nbsp;
+
+```js
+sort: Object
+```
+Задаёт сортировку возвращаемых данных. Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/cursor.sort).
+
+&nbsp;
+
+```js
+skip: number
+```
+Предписывает пропустить первые `skip` документов ответа. Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/cursor.skip).
+
+&nbsp;
+
+```js
+limit: number
+```
+Ограничивает количество возвращаемых документов. Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/cursor.limit).
+
+&nbsp;
+
+```js
+showRecordId: boolean
+```
+Добавляет `$recordId` в результаты запроса. Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/cursor.showRecordId).
+
+&nbsp;
+
+```js
+min: Object
+```
+
+&nbsp;
+
+```js
+max: Object
+```
+
+&nbsp;
+
 ### Интерфейс Types...<a name="Types"></a>
 ```ts
 interface Types {
@@ -1208,6 +1271,7 @@ interface Types {
 ```js
 ObjectId(id?: string): Types.ObjectId
 ```
+Без аргументов генерирует и возвращает новый [`Types.ObjectId`](#Types.ObjectId). В случае с переданным `id` преобразует его в тип [`Types.ObjectId`](#Types.ObjectId) и возвращает. 
 
 &nbsp;
 
@@ -1224,7 +1288,7 @@ date(milliseconds: number): Object
 
 &nbsp;
 
-### Интерфейс Types.ObjectId...<a name="Types.ObjectId"></a>
+### Интерфейс Types.ObjectId<a name="Types.ObjectId"></a>
 ```ts
 namespace Types {
 	interface ObjectId {
@@ -1232,12 +1296,14 @@ namespace Types {
 	}
 }
 ```
+Интерфейс-аналог внутреннего для MongoDB типа [`ObjectId`](https://docs.mongodb.com/manual/reference/method/ObjectId/).
 
 &nbsp;
 
 ```js
 toString(): string
 ```
+Возвращает строковое представление `ObjectId`.
 
 &nbsp;
 
