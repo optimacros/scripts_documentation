@@ -967,7 +967,7 @@ create(): { ok: number, errmsg?: string }
 
 &nbsp;
 
-### Интерфейс Collection...<a name="Collection"></a>
+### Интерфейс Collection<a name="Collection"></a>
 ```ts
 interface Collection {
 	count(filter: Object): number;
@@ -983,7 +983,7 @@ interface Collection {
 ```
 Интерфейс работы с коллекцией MongoDB.
 
-Большинство функций принимают параметры `filter` и `options`, имеющие в них одно и то же значение.
+Большинство функций принимают параметры `filter` и `options`, имеющие везде одно и то же значение.
 
 `filter` – фильтр (или запрос) данных коллекции. Подробнее о принципах его построения см. в [`документации`](https://docs.mongodb.com/manual/reference/method/db.collection.find/) (параметр `query`).
 
@@ -1008,7 +1008,7 @@ find(filter: Object, options?: FilterOptions): Cursor
 ```js
 findOne(filter: Object, options?: FilterOptions): Object
 ```
-Передаёт в MongoDB запрос [`findOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.findOne/) поиска одного документа и возвращает его.
+Передаёт в MongoDB запрос [`findOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.findOne/) поиска одного документа и возвращает найденный документ.
 
 &nbsp;
 
@@ -1032,6 +1032,7 @@ insertMany(documents: Object[]): InsertManyResult
 ```js
 updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult
 ```
+Передаёт в MongoDB запрос [`updateOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.updateOne/) изменения объектом `update` одного документа, определяемого запросом `filter`, и возвращает интерфейс [`UpdateResult`](#UpdateResult) доступа к результатам этого запроса.
 
 &nbsp;
 
@@ -1039,6 +1040,7 @@ updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult
 ```js
 updateMany(filter: Object, update: Object, options?: FilterOptions): UpdateResult
 ```
+Передаёт в MongoDB запрос [`updateMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.updateMany/) изменения объектом `update` нескольких документов, определяемых запросом `filter`, и возвращает интерфейс [`UpdateResult`](#UpdateResult) доступа к результатам этого запроса.
 
 &nbsp;
 
@@ -1046,6 +1048,7 @@ updateMany(filter: Object, update: Object, options?: FilterOptions): UpdateResul
 ```js
 deleteOne(filter: Object, options?: FilterOptions): DeleteResult
 ```
+Передаёт в MongoDB запрос [`deleteOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne/) удаления одного документа, определяемого запросом `filter`, и возвращает интерфейс [`DeleteResult`](#DeleteResult) доступа к результатам этого запроса.
 
 &nbsp;
 
@@ -1053,6 +1056,7 @@ deleteOne(filter: Object, options?: FilterOptions): DeleteResult
 ```js
 deleteMany(filter: Object, options?: FilterOptions): DeleteResult
 ```
+Передаёт в MongoDB запрос [`deleteMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/) удаления нескольких документов, определяемых запросом `filter`, и возвращает интерфейс [`DeleteResult`](#DeleteResult) доступа к результатам этого запроса.
 
 &nbsp;
 
