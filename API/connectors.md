@@ -1273,12 +1273,14 @@ showRecordId: boolean
 ```js
 min: Object
 ```
+Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/cursor.min).
 
 &nbsp;
 
 ```js
 max: Object
 ```
+Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/cursor.max).
 
 &nbsp;
 

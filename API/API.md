@@ -96,7 +96,7 @@ readonly filesystems: Filesystems
 ```js
 readonly optimization: Optimization
 ```
-Ссылка на интерфейс Optimization.
+Ссылка на интерфейс [`Optimization`](./optimization.md#Optimization).
 
 &nbsp;
 
@@ -117,29 +117,6 @@ readonly notifications: Notifications.Manager
 
 ___
 !!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
-
-### Интерфейс OptimizationRequestTab ...<a name="OptimizationRequestTab"></a>
-```ts
-interface OptimizationRequestTab extends Tab {
-    run(name: string): { success: boolean, error: undefined | string };
-}
-```
-`om.optimization.optimizationRequestsTab.run()` Аналогично функционалу запуска Отпимизационного запроса в интерфейсной 
-части приложения. run в качестве аргумента принимает строку с именем Отпимизационного запроса
-
-### Интерфейс Optimization ...<a name="Optimization"></a>
-```ts
-interface Optimization {
-    optimizationRequestsTab(): OptimizationRequestTab
-}
-```
-`om.optimization` Аналогично открытию табы Optimizer Request в интерфейсной части приложения, но без открытых мини 
-табов.
-`om.optimization.optimizationRequestsTab` Аналогично открытию табы Optimizer Request - Table в интерфейсной части 
-приложения.
-
-
-
 
 export interface TypePeriod {
     tableTab(): Tab;
