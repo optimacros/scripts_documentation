@@ -1012,6 +1012,7 @@ findOne(filter: Object, options?: FilterOptions): Object
 
 &nbsp;
 
+<a name="insertOne"></a>
 ```js
 insertOne(document: Object): InsertOneResult
 ```
@@ -1019,6 +1020,7 @@ insertOne(document: Object): InsertOneResult
 
 &nbsp;
 
+<a name="insertMany"></a>
 ```js
 insertMany(documents: Object[]): InsertManyResult
 ```
@@ -1026,32 +1028,35 @@ insertMany(documents: Object[]): InsertManyResult
 
 &nbsp;
 
+<a name="updateOne"></a>
 ```js
 updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult
 ```
 
-
 &nbsp;
 
+<a name="updateMany"></a>
 ```js
 updateMany(filter: Object, update: Object, options?: FilterOptions): UpdateResult
 ```
 
 &nbsp;
 
+<a name="deleteOne"></a>
 ```js
 deleteOne(filter: Object, options?: FilterOptions): DeleteResult
 ```
 
 &nbsp;
 
+<a name="deleteMany"></a>
 ```js
 deleteMany(filter: Object, options?: FilterOptions): DeleteResult
 ```
 
 &nbsp;
 
-### Интерфейс InsertOneResult...<a name="InsertOneResult"></a>
+### Интерфейс InsertOneResult<a name="InsertOneResult"></a>
 ```ts
 interface InsertOneResult {
 	getInsertedCount(): number;
@@ -1059,6 +1064,7 @@ interface InsertOneResult {
 	isAcknowledged(): boolean;
 }
 ```
+Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функцией[`insertOne()`](#insertOne).
 
 &nbsp;
 
@@ -1072,13 +1078,14 @@ getInsertedCount(): number
 ```js
 getInsertedId(): Types.ObjectId
 ```
-Возвращает ObjectId вставленного документа.
+Возвращает [`Types.ObjectId`](#Types.ObjectId) вставленного документа.
 
 &nbsp;
 
 ```js
 isAcknowledged(): boolean
 ```
+Возвращает признак запуска операции с [`write concern`](https://docs.mongodb.com/manual/reference/glossary/#std-term-write-concern).
 
 &nbsp;
 
