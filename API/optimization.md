@@ -17,17 +17,15 @@ optimizationRequestsTab(): OptimizationRequestTab
 
 &nbsp;
 
-### Интерфейс OptimizationRequestTab ...<a name="OptimizationRequestTab"></a>
+### Интерфейс OptimizationRequestTab<a name="OptimizationRequestTab"></a>
 ```ts
 interface OptimizationRequestTab extends Tab {
 	run(name: string): { success: boolean, error: undefined | string };
 }
 ```
-`om.optimization.optimizationRequestsTab.run()` Аналогично функционалу запуска Отпимизационного запроса в интерфейсной 
-части приложения. run в качестве аргумента принимает строку с именем Отпимизационного запроса
+Запускает оптимизационный запрос `name`. Возвращает объект с данными об исполнении.
 
-
-
+&nbsp;
 
 [API Reference](API.md)
 
