@@ -894,7 +894,7 @@ load(): Connection
 
 &nbsp;
 
-### Интерфейс Connection...<a name="Connection"></a>
+### Интерфейс Connection<a name="Connection"></a>
 ```ts
 interface Connection {
 	collectionCreator(): CollectionCreator;
@@ -903,6 +903,7 @@ interface Connection {
 	types(): Types;
 }
 ```
+Интерфейс соединения с MongoDB.
 
 &nbsp;
 
@@ -930,6 +931,7 @@ selectCollection(name: string): Collection
 ```js
 types(): Types
 ```
+Возвращает вспомогательный интерфейс [`Types`](#Types).
 
 &nbsp;
 
@@ -1137,18 +1139,21 @@ interface UpdateResult {
 	isAcknowledged(): boolean;
 }
 ```
+Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функциями[`updateOne()`](#updateOne) и [`updateMany()`](#updateMany).
 
 &nbsp;
 
 ```js
 getMatchedCount(): number
 ```
+Возвращает количество найденных по фильтру `filter` документов.
 
 &nbsp;
 
 ```js
 getModifiedCount(): number
 ```
+Возвращает количество модифицированных документов.
 
 &nbsp;
 
@@ -1161,34 +1166,39 @@ getUpsertedCount(): number
 ```js
 getUpsertedId(): Types.ObjectId
 ```
+Возвращает [`Types.ObjectId`](#Types.ObjectId) вставленного документа. Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/db.collection.update/#std-label-upsert-behavior).
 
 &nbsp;
 
 ```js
 isAcknowledged(): boolean
 ```
+То же, что и [`InsertOneResult.isAcknowledged()`](#InsertOneResult.isAcknowledged).
 
 &nbsp;
 
-### Интерфейс DeleteResult...<a name="DeleteResult"></a>
+### Интерфейс DeleteResult<a name="DeleteResult"></a>
 ```ts
 interface DeleteResult {
 	getDeletedCount(): number;
 	isAcknowledged(): boolean;
 }
 ```
+Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функциями[`deleteOne()`](#deleteOne) и [`deleteMany()`](#deleteMany).
 
 &nbsp;
 
 ```js
 getDeletedCount(): number
 ```
+Возвращает количество удалённых документов.
 
 &nbsp;
 
 ```js
 isAcknowledged(): boolean
 ```
+То же, что и [`InsertOneResult.isAcknowledged()`](#InsertOneResult.isAcknowledged).
 
 &nbsp;
 
