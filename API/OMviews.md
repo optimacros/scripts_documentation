@@ -22,7 +22,7 @@ interface Multicubes {
 ```js
 multicubesTab(): MulticubesTab
 ```
-Возвращает ссылку на интерфейс [`MulticubesTab`](#MulticubesTab). В интерфейсе Optimacros аналогично открытию вкладки "Мультикубы".
+Возвращает ссылку на интерфейс [`MulticubesTab`](#MulticubesTab). В интерфейсе Optimacros аналогично открытию вкладки `Данные` -> `Мультикубы`.
 
 &nbsp;
 
@@ -1126,7 +1126,7 @@ interface Lists {
 ```js
 listsTab(): ListsTab
 ```
-Возвращает ссылку на интерфейс [`ListsTab`](#ListsTab). В интерфейсе Optimacros аналогично открытию вкладки "Справочники".
+Возвращает ссылку на интерфейс [`ListsTab`](#ListsTab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Справочники`.
 
 &nbsp;
 
