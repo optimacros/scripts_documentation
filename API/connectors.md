@@ -1192,14 +1192,14 @@ isAcknowledged(): boolean
 
 &nbsp;
 
-### Интерфейс Cursor...<a name="Cursor"></a>
+### Интерфейс Cursor<a name="Cursor"></a>
 ```ts
 interface Cursor {
 	all(): Object[];
 	generator(): Object[];
 }
 ```
-Курсор запроса к MongoDB.
+Курсор ответных данных на запрос к MongoDB.
 
 &nbsp;
 
