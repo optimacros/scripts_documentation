@@ -909,6 +909,7 @@ interface Connection {
 ```js
 collectionCreator(): CollectionCreator
 ```
+Возвращает интерфейс создания коллекции [`CollectionCreator`](#CollectionCreator).
 
 &nbsp;
 
@@ -921,6 +922,7 @@ dropCollection(name: string): { ok: number, errmsg?: string, nIndexesWas?: numbe
 ```js
 selectCollection(name: string): Collection
 ```
+Возвращает интерфейс [`Collection`](#Collection) работы с коллекцией `name`.
 
 &nbsp;
 
@@ -930,51 +932,37 @@ types(): Types
 
 &nbsp;
 
-### Интерфейс CollectionCreator...<a name="CollectionCreator"></a>
+### Интерфейс CollectionCreator<a name="CollectionCreator"></a>
 ```ts
 interface CollectionCreator {
-	/**
-	* https://docs.mongodb.com/manual/reference/method/db.createCollection
-	* @param options
-	*/
-	setOptions(options: {
-		capped: boolean,
-		autoIndexId: boolean,
-		size: number,
-		max: number
-	}): CollectionCreator;
+	setOptions(options: Object): CollectionCreator;
 
 	setName(name: string): CollectionCreator;
 	create(): { ok: number, errmsg?: string };
 }
 ```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для создания коллекции MongoDB. Все функции, кроме `create()`, возвращают `this`.
 
 &nbsp;
 
-	/**
-	* https://docs.mongodb.com/manual/reference/method/db.createCollection
-	* @param options
-	*/
 ```js
-setOptions(options: { 
-	capped: boolean,
-	autoIndexId: boolean,
-	size: number,
-	max: number
-}): CollectionCreator
+setOptions(options: Object): CollectionCreator
 ```
+Устанавливает опции коллекции. Их полный набор и описание см. в [`документации`](https://docs.mongodb.com/manual/reference/method/db.createCollection) к MongoDB.
 
 &nbsp;
 
 ```js
 setName(name: string): CollectionCreator
 ```
+Устанавливает имя коллекции.
 
 &nbsp;
 
 ```js
 create(): { ok: number, errmsg?: string }
 ```
+Передаёт запрос на создание коллекции в MongoDB, дожидается результата и возвращает объект результата от MongoDB.
 
 &nbsp;
 
@@ -1213,9 +1201,9 @@ interface Types {
 	date(milliseconds: number): Object;
 }
 ```
+Вспомогательный интерфейс для конверсии типов.
 
 &nbsp;
-
 
 ```js
 ObjectId(id?: string): Types.ObjectId
@@ -1226,6 +1214,7 @@ ObjectId(id?: string): Types.ObjectId
 ```js
 regex(pattern: string, flags?: string): Object
 ```
+Принимает [`регулярное выражение`](https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%B3%D1%83%D0%BB%D1%8F%D1%80%D0%BD%D1%8B%D0%B5_%D0%B2%D1%8B%D1%80%D0%B0%D0%B6%D0%B5%D0%BD%D0%B8%D1%8F) `pattern` и набор флагов `flags` и возвращает объект регулярного выражения для работы в MongoDB.
 
 &nbsp;
 
