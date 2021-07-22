@@ -3,10 +3,11 @@
 1. [Реляционные СУБД](#relationalDB)
 1. [MongoDB](#mongoDB)
 1. [HTTP](#http)
+1. [WinAgent](#WinAgent)
 
 ## Реляционные СУБД<a name="relationalDB"></a>
 
-### Интерфейс Connectors ...<a name="Connectors"></a>
+### Интерфейс Connectors<a name="Connectors"></a>
 ```ts
 interface Connectors {
 	mysql(): MysqlConnectorBuilder;
@@ -15,10 +16,6 @@ interface Connectors {
 	oracle(): OracleConnectorBuilder;
 	mongodb(): Mongodb.ConnectorBuilder;
 	http(): Http.HttpManager;
-
-	/**
-	 * @param builtIn Use built-in configuration if exists. Default is 'false'
-	 */
 	winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 }
 ```
@@ -71,6 +68,7 @@ http(): Http.HttpManager
 ```js
 winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
 ```
+Возвращает коннектор [`WinAgent.WinAgentBuilder`](#WinAgentBuilder) для взаимодействия с [`WinAgent`](#WinAgent). Параметр `builtIn` указывает использовать встроенную конфигурацию воркспейса. Значение по умолчанию: `false`.
 
 &nbsp;
 
@@ -2160,6 +2158,123 @@ getErrors(): ResponseErrors
 Возвращает интерфейс [`ResponseErrors`](#ResponseErrors) доступа к ошибкам HTTP.
 
 &nbsp;
+
+## WinAgent<a name="WinAgent"></a>
+
+Все интерфейсы этого раздела, находятся в пространстве имён `WinAgent`.
+
+### Интерфейс WinAgentBuilder...<a name="WinAgentBuilder"></a>
+```js
+interface WinAgentBuilder {
+	setCommandUrl(url: string): this;
+	setDownloadUrl(url: string): this;
+	auth(): Http.HttpAuth;
+	makeRunMacrosAction(): RunMacroAction;
+}
+```
+
+&nbsp;
+
+```js
+setCommandUrl(url: string): this
+```
+
+&nbsp;
+
+```js
+setDownloadUrl(url: string): this
+```
+
+&nbsp;
+
+```js
+auth(): Http.HttpAuth
+```
+
+&nbsp;
+
+```js
+makeRunMacrosAction(): RunMacroAction
+```
+
+&nbsp;
+
+### Интерфейс BaseAction...<a name="BaseAction"></a>
+```ts
+interface BaseAction {
+	run(): BaseActionResult;
+}
+
+```
+
+&nbsp;
+
+```js
+run(): BaseActionResult
+```
+
+&nbsp;
+
+### Интерфейс RunMacroAction...<a name="RunMacroAction"></a>
+```еs
+interface RunMacroAction extends BaseAction {
+	setMacroName(macroName: string): this;
+	setMacroFilePath(macroFilePath: string): this;
+	setDataFilePaths(dataFilePaths: string[]): this;
+	run(): RunMacroActionResult;
+}
+```
+
+&nbsp;
+
+```js
+setMacroName(macroName: string): this
+```
+
+&nbsp;
+
+```js
+setMacroFilePath(macroFilePath: string): this
+```
+
+&nbsp;
+
+```js
+setDataFilePaths(dataFilePaths: string[]): this
+```
+
+&nbsp;
+
+```js
+run(): RunMacroActionResult
+```
+
+&nbsp;
+
+### Интерфейс BaseActionResult...<a name="BaseActionResult"></a>
+```ts
+interface BaseActionResult {
+
+}
+```
+
+&nbsp;
+
+### Интерфейс RunMacroActionResult...<a name="RunMacroActionResult"></a>
+```ts
+interface RunMacroActionResult extends BaseActionResult {
+	getFilePaths(): string[];
+}
+```
+
+&nbsp;
+
+```js
+getFilePaths(): string[]
+```
+
+&nbsp;
+
 
 [API Reference](API.md)
 

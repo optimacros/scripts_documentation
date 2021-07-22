@@ -123,34 +123,5 @@ export interface TypePeriod {
     tableTab(): Tab;
 }
 
-export namespace WinAgent {
-
-    export interface BaseActionResult {
-
-    }
-
-    export interface BaseAction {
-        run(): BaseActionResult;
-    }
-
-    export interface RunMacroActionResult extends BaseActionResult {
-        getFilePaths(): string[];
-    }
-
-    export interface RunMacroAction extends BaseAction {
-        setMacroName(macroName: string): this;
-        setMacroFilePath(macroFilePath: string): this;
-        setDataFilePaths(dataFilePaths: string[]): this;
-        run(): RunMacroActionResult;
-    }
-
-    export interface WinAgentBuilder {
-        setCommandUrl(url: string): this;
-        setDownloadUrl(url: string): this;
-        auth(): Http.HttpAuth;
-        makeRunMacrosAction(): RunMacroAction;
-    }
-}
-
 
 [Оглавление](../README.md)
