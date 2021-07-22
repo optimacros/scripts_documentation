@@ -2178,18 +2178,21 @@ interface WinAgentBuilder {
 ```js
 setCommandUrl(url: string): this
 ```
+Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL) агента, на которую будут подаваться команды из скрипта. Возвращает `this`.
 
 &nbsp;
 
 ```js
 setDownloadUrl(url: string): this
 ```
+Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL), по которой мы будем скачивать результирующие документы. Возвращает `this`.
 
 &nbsp;
 
 ```js
 auth(): Http.HttpAuth
 ```
+Возвращает интерфейс [`Http.HttpAuth`](#HttpAuth) доступа к настройкам аутентификации.
 
 &nbsp;
 
@@ -2230,12 +2233,14 @@ interface RunMacroAction extends BaseAction {
 ```js
 setMacroName(macroName: string): this
 ```
+Устанавливает имя макроса. Возвращает `this`.
 
 &nbsp;
 
 ```js
 setMacroFilePath(macroFilePath: string): this
 ```
+Устанавливает имя файла с макросом. Возвращает `this`.
 
 &nbsp;
 
@@ -2251,12 +2256,13 @@ run(): RunMacroActionResult
 
 &nbsp;
 
-### Интерфейс BaseActionResult...<a name="BaseActionResult"></a>
+### Интерфейс BaseActionResult<a name="BaseActionResult"></a>
 ```ts
 interface BaseActionResult {
 
 }
 ```
+Базовый интерфейс результата действия.
 
 &nbsp;
 
@@ -2266,6 +2272,7 @@ interface RunMacroActionResult extends BaseActionResult {
 	getFilePaths(): string[];
 }
 ```
+Интерфейс доступа к данным результата выполнения макроса. Наследуется от [`BaseActionResult`](#BaseActionResult).
 
 &nbsp;
 
