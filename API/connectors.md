@@ -2206,18 +2206,20 @@ makeRunMacrosAction(): RunMacroAction
 
 &nbsp;
 
-### Интерфейс BaseAction...<a name="BaseAction"></a>
+### Интерфейс BaseAction<a name="BaseAction"></a>
 ```ts
 interface BaseAction {
 	run(): BaseActionResult;
 }
 ```
+Базовый интерфейс действия.
 
 &nbsp;
 
 ```js
 run(): BaseActionResult
 ```
+Выполняет действие и возвращает базовый интерфейс [`BaseActionResult`](#BaseActionResult) доступа к данным его результата.
 
 &nbsp;
 
