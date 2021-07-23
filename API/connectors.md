@@ -2161,9 +2161,11 @@ getErrors(): ResponseErrors
 
 ## WinAgent<a name="WinAgent"></a>
 
+WinAgent – сервис создания отчётов MS Word и Excel, работающий по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP). Для его работы на выделенной машине под управлением Windows должен быть установлен сам сервис и MS Office, включающий пакеты Word и Excel. WinAgent принимает на вход отчёты из Optimacros и файл MS Word или MS Excel с макросом (расширение `docm` или `xlsm`) и запускает макрос. Макрос должен заранее знать, где будут располагаться входящие файлы. Он будет автомагически располагать в шаблоне данные этих файлов в зависимости от задачи.
+
 Все интерфейсы этого раздела, находятся в пространстве имён `WinAgent`.
 
-### Интерфейс WinAgentBuilder...<a name="WinAgentBuilder"></a>
+### Интерфейс WinAgentBuilder<a name="WinAgentBuilder"></a>
 ```js
 interface WinAgentBuilder {
 	setCommandUrl(url: string): this;
@@ -2172,33 +2174,35 @@ interface WinAgentBuilder {
 	makeRunMacrosAction(): RunMacroAction;
 }
 ```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки доступа к WinAgent.
 
 &nbsp;
 
 ```js
 setCommandUrl(url: string): this
 ```
-Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL) агента, на которую будут подаваться команды из скрипта. Возвращает `this`.
+Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL) агента, на который будут подаваться команды из скрипта. Возвращает `this`.
 
 &nbsp;
 
 ```js
 setDownloadUrl(url: string): this
 ```
-Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL), по которой мы будем скачивать результирующие документы. Возвращает `this`.
+Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL), по которому можно будет скачивать результирующие документы. Возвращает `this`.
 
 &nbsp;
 
 ```js
 auth(): Http.HttpAuth
 ```
-Возвращает интерфейс [`Http.HttpAuth`](#HttpAuth) доступа к настройкам аутентификации.
+Возвращает интерфейс [`Http.HttpAuth`](#HttpAuth) доступа к настройкам аутентификации WinAgent.
 
 &nbsp;
 
 ```js
 makeRunMacrosAction(): RunMacroAction
 ```
+Возвращает интерфейс [`RunMacroAction`](#RunMacroAction) настройки и запуска макроса.
 
 &nbsp;
 
@@ -2207,7 +2211,6 @@ makeRunMacrosAction(): RunMacroAction
 interface BaseAction {
 	run(): BaseActionResult;
 }
-
 ```
 
 &nbsp;
@@ -2227,6 +2230,7 @@ interface RunMacroAction extends BaseAction {
 	run(): RunMacroActionResult;
 }
 ```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки запуска макроса. Наследуется от [`BaseAction`](#BaseAction).
 
 &nbsp;
 
@@ -2247,6 +2251,7 @@ setMacroFilePath(macroFilePath: string): this
 ```js
 setDataFilePaths(dataFilePaths: string[]): this
 ```
+Задаёт массив входных файлов с данными для макроса. Возвращает `this`.
 
 &nbsp;
 
@@ -2262,7 +2267,7 @@ interface BaseActionResult {
 
 }
 ```
-Базовый интерфейс результата действия.
+Базовый интерфейс результата действия. Он пустой.
 
 &nbsp;
 
