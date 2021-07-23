@@ -2223,7 +2223,7 @@ run(): BaseActionResult
 
 &nbsp;
 
-### Интерфейс RunMacroAction...<a name="RunMacroAction"></a>
+### Интерфейс RunMacroAction<a name="RunMacroAction"></a>
 ```еs
 interface RunMacroAction extends BaseAction {
 	setMacroName(macroName: string): this;
@@ -2239,7 +2239,7 @@ interface RunMacroAction extends BaseAction {
 ```js
 setMacroName(macroName: string): this
 ```
-Устанавливает имя макроса. Возвращает `this`.
+Устанавливает имя макроса. Значение по умолчанию: `'process'`. Возвращает `this`.
 
 &nbsp;
 
@@ -2260,6 +2260,7 @@ setDataFilePaths(dataFilePaths: string[]): this
 ```js
 run(): RunMacroActionResult
 ```
+Запускает макрос и возвращает интерфейс [`RunMacroActionResult`](#RunMacroActionResult) доступа к данным его результата.
 
 &nbsp;
 
@@ -2273,7 +2274,7 @@ interface BaseActionResult {
 
 &nbsp;
 
-### Интерфейс RunMacroActionResult...<a name="RunMacroActionResult"></a>
+### Интерфейс RunMacroActionResult<a name="RunMacroActionResult"></a>
 ```ts
 interface RunMacroActionResult extends BaseActionResult {
 	getFilePaths(): string[];
@@ -2286,6 +2287,7 @@ interface RunMacroActionResult extends BaseActionResult {
 ```js
 getFilePaths(): string[]
 ```
+Возвращает список имён результирующих файлов.
 
 &nbsp;
 
