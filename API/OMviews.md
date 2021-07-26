@@ -349,6 +349,7 @@ interface CubeCell {
 
 &nbsp;
 
+<a name="CubeCell.definitions"></a>
 ```js
 definitions(): number[]
 ```
@@ -968,14 +969,13 @@ cells(): Cells
 
 &nbsp;
 
-### Интерфейс Cell ...<a name="Cell"></a>
+### Интерфейс Cell<a name="Cell"></a>
 ```ts
 interface Cell {
 	setValue(value: number | string | null);
 	getValue(): number | string | null;
 	getNativeValue(): number | string | null;
 	getContextValue(): string | null;
-
 	definitions(): number[];
 	columns(): LabelsGroup;
 	rows(): LabelsGroup;
@@ -1026,8 +1026,7 @@ getContextValue(): string | null
 ```js
 definitions(): number[]
 ```
-
-Идентификаторы Возвращает такой же массив идентификаторов, что и `getDimensionIds()`. Однако дополнительно первым элементом является идентификатор самого куба.
+То же, что и [`CubeCell.definitions`](#CubeCell.definitions).
 
 &nbsp;
 
@@ -1055,6 +1054,8 @@ dropDown(): Labels
 ```js
 getFormatType(): string
 ```
+Возвращает строку с форматом клетки. Возможные значения: `'NUMBER'`, `'BOOLEAN'`, 
+`'ENTITY'`, `'TIME_ENTITY'`, `'LINE_ITEM_SUBSET'`, `'VERSION'`, `'TEXT'`, `'DATE'`, `'NONE'`.
 
 &nbsp;
 
