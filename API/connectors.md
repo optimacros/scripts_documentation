@@ -1158,7 +1158,7 @@ getModifiedCount(): number
 ```js
 getUpsertedCount(): number
 ```
-Возвращает количество документов, вставленного по опции [`upsert`](https://docs.mongodb.com/manual/reference/method/db.collection.update/#std-label-upsert-behavior).
+Возвращает количество документов, вставленных по опции [`upsert`](https://docs.mongodb.com/manual/reference/method/db.collection.update/#std-label-upsert-behavior).
 
 &nbsp;
 
