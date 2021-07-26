@@ -2291,7 +2291,6 @@ getFilePaths(): string[]
 
 &nbsp;
 
-
 [API Reference](API.md)
 
 [Оглавление](../README.md)

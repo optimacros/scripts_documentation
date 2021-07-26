@@ -437,7 +437,7 @@ getDimensionEntity(): EntityInfo | null
 
 &nbsp;
 
-### Интерфейс MulticubeTab ...<a name="MulticubeTab"></a>
+### Интерфейс MulticubeTab<a name="MulticubeTab"></a>
 ```ts
 interface MulticubeTab extends Tab {
 	cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
@@ -453,6 +453,8 @@ interface MulticubeTab extends Tab {
 ```js
 cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```
+
+Очищает всё содержимое кубов `cubesIdentifiers` или весь мультикуб при вызове без параметров. Возвращает `this`.
 
 &nbsp;
 
@@ -1024,6 +1026,8 @@ getContextValue(): string | null
 ```js
 definitions(): number[]
 ```
+
+Идентификаторы Возвращает такой же массив идентификаторов, что и `getDimensionIds()`. Однако дополнительно первым элементом является идентификатор самого куба.
 
 &nbsp;
 
@@ -1781,9 +1785,6 @@ getCount(): number
 &nbsp;
 
 ## Копирование срезов кубов<a name="copy"></a>
-
-
-
 
 [API Reference](API.md)
 

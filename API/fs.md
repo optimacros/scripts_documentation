@@ -39,7 +39,9 @@ local(): Filesystem
 ```js
 sharedFolder(id: string): Filesystem
 ```
-sharedFolder – папка на сервере, которая была добавлена администратором при установке Workspace через manifest внутрь контейнера workspace. Папка на хостовой ОС. 
+Возвращает интерфейс [`Filesystem`](#Filesystem) доступа к shared folder – папке на сервере, которая была добавлена администратором при установке Workspace через manifest внутрь контейнера workspace.
+
+&nbsp; 
 
 ```js
 filesDataManager(): FilesDataManager

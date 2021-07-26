@@ -115,13 +115,4 @@ readonly notifications: Notifications.Manager
 
 &nbsp;
 
-
-___
-!!! РАЗОБРАТЬ ВСЁ, ЧТО НИЖЕ !!!
-
-export interface TypePeriod {
-    tableTab(): Tab;
-}
-
-
 [Оглавление](../README.md)

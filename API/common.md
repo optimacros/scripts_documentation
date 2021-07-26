@@ -329,6 +329,8 @@ interface ResultInfo {
 }
 ```
 
+Интерфейс управления ответом на запрос о запуске скрипта.
+
 &nbsp;
 
 <a name="ResultInfo.addFileHash"></a>
@@ -349,6 +351,8 @@ actionsInfo(): ResultActionsInfo
 ```js
 setProperty(name: string, value: any): ResultInfo
 ```
+
+Устанавливает свойству `name` значение `value` в HTTP-ответе на запрос о запуске скрипта приложением-клиентов (например, web-интерфейсом Optimacros). Возвращает `this`.
 
 &nbsp;
 
