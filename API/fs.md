@@ -528,7 +528,7 @@ interface CsvWriter {
 ```js
 params(): CSVParams
 ```
-Возвращает ссылку на интерфейс [`CSVParams`](./OMviews.md#CSVParams), предоставляющий доступ к настройкам CSV.
+Возвращает ссылку на интерфейс [`CSVParams`](./exportImport.md#CSVParams), предоставляющий доступ к настройкам CSV.
 
 &nbsp;
 
@@ -569,7 +569,7 @@ interface CsvReader {
 ```js
 params(): CSVParams
 ```
-Возвращает ссылку на интерфейс [`CSVParams`](./OMviews.md#CSVParams), предоставляющий доступ к настройкам CSV.
+Возвращает ссылку на интерфейс [`CSVParams`](./exportImport.md#CSVParams), предоставляющий доступ к настройкам CSV.
 
 &nbsp;
 
