@@ -1226,7 +1226,7 @@ generator(): Object[]
 
 &nbsp;
 
-### Интерфейс FilterOptions...<a name="FilterOptions"></a>
+### Интерфейс FilterOptions<a name="FilterOptions"></a>
 ```ts
 interface FilterOptions extends Object {
 	sort: Object,
@@ -1272,6 +1272,7 @@ showRecordId: boolean
 ```js
 min: Object
 ```
+Устанавливает нижнюю грань для указанных полей, по которым построен числовой индекс. 
 Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/cursor.min).
 
 &nbsp;
@@ -1279,6 +1280,7 @@ min: Object
 ```js
 max: Object
 ```
+Устанавливает верхнюю грань для указанных полей, по которым построен числовой индекс. 
 Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/cursor.max).
 
 &nbsp;
