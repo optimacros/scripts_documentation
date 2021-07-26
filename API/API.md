@@ -4,6 +4,7 @@
 1. [Низкоуровневый доступ к клеткам и кубам](cubeCell.md)
 1. [Экспорт и импорт](exportImport.md)
 1. [Манипуляция элементами](elementsManipulator.md)
+1. [Измерения](dimensions.md)
 1. [Представления Optimacros](OMviews.md)
     1. Представления мультикубов, справочников, версий
     1. Экспорт из мультикубов и справочников
@@ -71,21 +72,21 @@ readonly multicubes: Multicubes
 ```js
 readonly times: Times
 ```
-Ссылка на интерфейс [`Times`](./OMviews.md#Times).
+Ссылка на интерфейс [`Times`](./dimensions.md#Times).
 
 &nbsp;
 
 ```js
 readonly versions: Versions
 ```
-Ссылка на интерфейс [`Versions`](./OMviews.md#Versions).
+Ссылка на интерфейс [`Versions`](./dimensions.md#Versions).
 
 &nbsp;
 
 ```js
 readonly lists: Lists
 ```
-Ссылка на интерфейс [`Lists`](./OMviews.md#Lists).
+Ссылка на интерфейс [`Lists`](./dimensions.md#Lists).
 
 &nbsp;
 

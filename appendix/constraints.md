@@ -26,7 +26,7 @@ definitionInfo.getColumnDimensions()[0]getDimensionEntity().name()
 
 вернёт специальное значение `'Empty 1 0'`.
 
-Характерный пример плоской таблицы – [`вкладка`](../API/OMviews.md#TimeOptionsTab) настроек времени.
+Характерный пример плоской таблицы – [`вкладка`](../API/dimensions.md#TimeOptionsTab) настроек времени.
 
 Для решения этой проблемы следует использовать функцию [`GridRangeChunk`](../API/OMviews.md#GridRangeChunk).`cells()`, которая возвращает линейный массив, параллельный массиву [`GridRangeChunk`](../API/OMviews.md#GridRangeChunk).`rows()`. Пример кода, который в настройках времени устанавливает нужное значение в ячейку `Current Month`, используя такой подход:
 
