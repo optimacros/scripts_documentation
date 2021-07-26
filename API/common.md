@@ -320,7 +320,7 @@ getRole(): EntityInfo
 
 &nbsp;
 
-### Интерфейс ResultInfo ...<a name="ResultInfo"></a>
+### Интерфейс ResultInfo<a name="ResultInfo"></a>
 ```ts
 interface ResultInfo {
 	addFileHash(hash: string): ResultInfo;
@@ -328,7 +328,6 @@ interface ResultInfo {
 	setProperty(name: string, value: any): ResultInfo;
 }
 ```
-
 Интерфейс управления ответом на запрос о запуске скрипта.
 
 &nbsp;
@@ -351,8 +350,7 @@ actionsInfo(): ResultActionsInfo
 ```js
 setProperty(name: string, value: any): ResultInfo
 ```
-
-Устанавливает свойству `name` значение `value` в HTTP-ответе на запрос о запуске скрипта приложением-клиентов (например, web-интерфейсом Optimacros). Возвращает `this`.
+Устанавливает свойству `name` значение `value` в HTTP-ответе на запрос о запуске скрипта приложением-клиентом (например, web-интерфейсом Optimacros). Возвращает `this`.
 
 &nbsp;
 
