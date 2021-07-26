@@ -1075,7 +1075,7 @@ interface InsertOneResult {
 ```js
 getInsertedCount(): number
 ```
-Возвращает количество вставленных объектов. Как правило, это `0` или `1`.
+Возвращает количество вставленных документов. Как правило, это `0` или `1`.
 
 &nbsp;
 
@@ -1109,14 +1109,14 @@ interface InsertManyResult {
 ```js
 getInsertedCount(): number
 ```
-Возвращает количество вставленных объектов.
+Возвращает количество вставленных документов.
 
 &nbsp;
 
 ```js
 getInsertedIds(): Types.ObjectId[]
 ```
-Возвращает массив [`Types.ObjectId`](#Types.ObjectId) вставленных документоы.
+Возвращает массив [`Types.ObjectId`](#Types.ObjectId) вставленных документов.
 
 &nbsp;
 
@@ -1127,7 +1127,7 @@ isAcknowledged(): boolean
 
 &nbsp;
 
-### Интерфейс UpdateResult...<a name="UpdateResult"></a>
+### Интерфейс UpdateResult<a name="UpdateResult"></a>
 ```ts
 interface UpdateResult {
 	getMatchedCount(): number;
@@ -1158,13 +1158,14 @@ getModifiedCount(): number
 ```js
 getUpsertedCount(): number
 ```
+Возвращает количество документов, вставленного по опции [`upsert`](https://docs.mongodb.com/manual/reference/method/db.collection.update/#std-label-upsert-behavior).
 
 &nbsp;
 
 ```js
 getUpsertedId(): Types.ObjectId
 ```
-Возвращает [`Types.ObjectId`](#Types.ObjectId) вставленного документа. Подробнее см. в [`документации`](https://docs.mongodb.com/manual/reference/method/db.collection.update/#std-label-upsert-behavior).
+Возвращает [`Types.ObjectId`](#Types.ObjectId) документа, вставленного по опции [`upsert`](https://docs.mongodb.com/manual/reference/method/db.collection.update/#std-label-upsert-behavior).
 
 &nbsp;
 
