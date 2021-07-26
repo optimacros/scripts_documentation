@@ -1282,7 +1282,7 @@ max: Object
 
 &nbsp;
 
-### Интерфейс Types...<a name="Types"></a>
+### Интерфейс Types<a name="Types"></a>
 ```ts
 interface Types {
 	ObjectId(id?: string): Types.ObjectId;
@@ -1311,6 +1311,7 @@ regex(pattern: string, flags?: string): Object
 ```js
 date(milliseconds: number): Object
 ```
+Принимает количество ***миллисекунд***, прошедших с начала эпохи (в отличие от времени [`UNIX`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F), которое использует количество ***секунд***) и возвращает объект даты для использования в MongoDB.
 
 &nbsp;
 
