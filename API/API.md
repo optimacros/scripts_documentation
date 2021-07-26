@@ -1,6 +1,7 @@
 # API Reference
 
 1. [Интерфейс скриптов 1.0 (на языке TypeScript)](scripts.om.d.ts)
+1. [Низкоуровневый доступ к клеткам и кубам](cubeCell.md)
 1. [Представления Optimacros](OMviews.md)
     1. Представления мультикубов, справочников, версий
     1. Экспорт из мультикубов и справочников
@@ -37,7 +38,6 @@ interface OM {
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
 }
-
 
 var om: OM;
 ```
