@@ -1,10 +1,5 @@
 # Представления Optimacros
 
-1. [Представления мультикубов, справочников, версий](#views)
-
-
-## Представления мультикубов, справочников, версий<a name="views"></a>
-
 ### Интерфейс Multicubes<a name="Multicubes"></a>
 ```ts
 interface Multicubes {
