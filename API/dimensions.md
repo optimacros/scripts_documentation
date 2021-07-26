@@ -55,7 +55,7 @@ listSubsetTab(): ListSubsetsTab
 ```js
 importer(): ListImporter
 ```
-Возвращает интерфейс [`ListImporter`](./exportImport.md#ListImporter) для импорта данных в справочник.
+Возвращает интерфейс [`ListImporter`](#ListImporter) для импорта данных в справочник.
 
 &nbsp;
 
