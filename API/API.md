@@ -17,7 +17,6 @@
 	1. [HTTP](http.md)
 	1. [WinAgent](winAgent.md)
 1. [Уведомление пользователя](notifications.md)
-
 1. [Цепочки скриптов](scriptChains.md)
 
 ### Интерфейс OM<a name="OM"></a>
