@@ -1,4 +1,4 @@
-# Представления Optimacros
+# Представления
 
 ### Интерфейс Multicubes<a name="Multicubes"></a>
 ```ts
