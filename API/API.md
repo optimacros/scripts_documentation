@@ -11,6 +11,7 @@
 1. [Реляционные БД](relationalDB.md)
 1. [MongoDB](mongoDB.md)
 1. [HTTP](http.md)
+1. [WinAgent](winAgent.md)
 1. [Файловые системы](fs.md)
     1. Локальная
     1. FTP
