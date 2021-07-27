@@ -1,14 +1,6 @@
 # Файловые системы
 
-1. [Общие интерфейсы файловых систем](#generalFS)
-1. [Локальная файловая система](#localFS)
-1. [FTP](#ftp)
-1. [Shared folder](#sharedFolder)
-1. [Файлы CSV](#csv)
-
-## Общие интерфейсы файловых систем<a name="generalFS"></a>
-
-### Интерфейс Filesystems ...<a name="Filesystems"></a>
+### Интерфейс Filesystems<a name="Filesystems"></a>
 ```ts
 interface Filesystems {
 	ftp(): FTPAdapter;
@@ -32,7 +24,7 @@ ftp(): FTPAdapter
 ```js
 local(): Filesystem
 ```
-Возвращает ссылку на интерфейс [`Filesystem`](#Filesystem) доступа к локальной файловой системе.
+Возвращает ссылку на интерфейс [`Filesystem`](#Filesystem) доступа к локальной файловой системе. Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***НЕ*** может выйти за её пределы.
 
 &nbsp;
 
@@ -46,113 +38,7 @@ sharedFolder(id: string): Filesystem
 ```js
 filesDataManager(): FilesDataManager
 ```
-Возвращает интерфейс [`FilesDataManager`](#FilesDataManager) работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
-
-&nbsp;
-
-### Интерфейс FileMeta<a name="FileMeta"></a>
-```ts
-interface FileMeta {
-	type: string;
-	path: string;
-	visibility: string;
-	size: number;
-	dirname: string;
-	basename: string;
-	extension: string;
-	filename: string;
-	timestamp: number;
-}
-```
-Интерфейс содержит набор свойств файла или папки.
-
-&nbsp;
-
-```js
-type: string
-```
-Тип объекта: `file` или `dir`.
-
-&nbsp;
-
-```js
-path: string
-```
-Путь к объекту в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
-
-&nbsp;
-
-```js
-visibility: string
-```
-Доступность объекта: `private` или `public`.
-
-&nbsp;
-
-```js
-size: number
-```
-У файла: размер в байтах. У папок поле отсутствует.
-
-&nbsp;
-
-```js
-dirname: string
-```
-Папка, в которой находится объект. Для объектов в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) это пустая строка.
-
-&nbsp;
-
-```js
-basename: string
-```
-Имя объекта *с расширением*.
-
-&nbsp;
-
-```js
-extension: string
-```
-Расширение имени без точки. Если расширения нет, поле отсутствует.
-
-&nbsp;
-
-```js
-filename: string
-```
-Имя объекта (файла или папки) *без последней точки и расширения*.
-
-&nbsp;
-
-```js
-timestamp: number
-```
-Время последнего изменения в [`формате Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
-
-&nbsp;
-
-### Интерфейс PathObj<a name="PathObj"></a>
-```ts
-interface PathObj {
-	getSystem(): Filesystem;
-	getPath(): string;
-}
-```
-Интерфейс, хранящий в себе путь к файлу и ссылку на файловую систему.
-
-&nbsp;
-
-```js
-getSystem(): Filesystem
-```
-Возвращает ссылку на файловую систему.
-
-&nbsp;
-
-```js
-getPath(): string
-```
-Возвращает путь к файлу.
+Возвращает интерфейс [`FilesDataManager`](./csv.md#FilesDataManager) работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
 
 &nbsp;
 
@@ -301,13 +187,111 @@ getPathObj(path: string): PathObj
 
 &nbsp;
 
-## Локальная файловая система<a name="localFS"></a>
-
-Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***НЕ*** может выйти за её пределы.
+### Интерфейс FileMeta<a name="FileMeta"></a>
+```ts
+interface FileMeta {
+	type: string;
+	path: string;
+	visibility: string;
+	size: number;
+	dirname: string;
+	basename: string;
+	extension: string;
+	filename: string;
+	timestamp: number;
+}
+```
+Интерфейс содержит набор свойств файла или папки.
 
 &nbsp;
 
-## FTP<a name="ftp"></a>
+```js
+type: string
+```
+Тип объекта: `file` или `dir`.
+
+&nbsp;
+
+```js
+path: string
+```
+Путь к объекту в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
+
+&nbsp;
+
+```js
+visibility: string
+```
+Доступность объекта: `private` или `public`.
+
+&nbsp;
+
+```js
+size: number
+```
+У файла: размер в байтах. У папок поле отсутствует.
+
+&nbsp;
+
+```js
+dirname: string
+```
+Папка, в которой находится объект. Для объектов в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) это пустая строка.
+
+&nbsp;
+
+```js
+basename: string
+```
+Имя объекта *с расширением*.
+
+&nbsp;
+
+```js
+extension: string
+```
+Расширение имени без точки. Если расширения нет, поле отсутствует.
+
+&nbsp;
+
+```js
+filename: string
+```
+Имя объекта (файла или папки) *без последней точки и расширения*.
+
+&nbsp;
+
+```js
+timestamp: number
+```
+Время последнего изменения в [`формате Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
+
+&nbsp;
+
+### Интерфейс PathObj<a name="PathObj"></a>
+```ts
+interface PathObj {
+	getSystem(): Filesystem;
+	getPath(): string;
+}
+```
+Интерфейс, хранящий в себе путь к файлу и ссылку на файловую систему.
+
+&nbsp;
+
+```js
+getSystem(): Filesystem
+```
+Возвращает ссылку на файловую систему.
+
+&nbsp;
+
+```js
+getPath(): string
+```
+Возвращает путь к файлу.
+
+&nbsp;
 
 ### Интерфейс BaseAdapter<a name="BaseAdapter"></a>
 ```ts
@@ -505,178 +489,6 @@ getUseListOptions(): boolean
 Возвращает признак использованися флагов `-aln` у FTP-команды `LIST`.
 
 &nbsp;
-
-## Shared folder<a name="sharedFolder"></a>
-
-&nbsp;
-
-## Файлы CSV<a name="csv"></a>
-
-### Интерфейс CsvWriter<a name="CsvWriter"></a>
-```ts
-interface CsvWriter {
-	params(): CSVParams;
-	writeRow(row: string[]): CsvWriter;
-	writeRows(rows: string[][]): CsvWriter;
-	save(name: string, charset?: string): string;
-}
-```
-Интерфейс для записи в новый файл формата [`CSV`](https://ru.wikipedia.org/wiki/CSV). Запись ведётся во временный буфер, и лишь функция [`save()`](#CsvWriter.save) сохраняет файл в памяти. Редактировать существующий файл невозможно, вместо этого нужно читать из одного файла и писать в другой.
-
-&nbsp;
-
-```js
-params(): CSVParams
-```
-Возвращает ссылку на интерфейс [`CSVParams`](./exportImport.md#CSVParams), предоставляющий доступ к настройкам CSV.
-
-&nbsp;
-
-```js
-writeRow(row: string[]): CsvWriter
-```
-Записывает массив полей `row` в очередную строку файла. Возвращает `this`.
-
-&nbsp;
-
-```js
-writeRows(rows: string[][]): CsvWriter
-```
-Записывает двойной массив полей `rows` в очередные несколько строк файла. Возвращает `this`.
-
-&nbsp;
-
-<a name="CsvWriter.save"></a>
-```js
-save(name: string, charset?: string): string
-```
-Сохраняет файл в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) под именем `{name}.csv` в кодировке `charset` (допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`). Возвращает имя файла с расширением: `{name}.csv`.
-
-&nbsp;
-
-### Интерфейс CsvReader<a name="CsvReader"></a>
-```ts
-interface CsvReader {
-	params(): CSVParams;
-	changeFileCharset(charset: string): CsvReader;
-	generator(): string[][];
-}
-```
-Интерфейс для чтения файла формата [`CSV`](https://ru.wikipedia.org/wiki/CSV).
-
-&nbsp;
-
-```js
-params(): CSVParams
-```
-Возвращает ссылку на интерфейс [`CSVParams`](./exportImport.md#CSVParams), предоставляющий доступ к настройкам CSV.
-
-&nbsp;
-
-```js
-changeFileCharset(charset: string): CsvReader
-```
-Устанавливает кодировку файла. Допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`. Возвращает `this`.
-
-&nbsp;
-
-```js
-generator(): string[][]
-```
-Возвращает генератор, при каждом обращении читающий одну строку файла CSV и возвращающий её в виде `string[]`.
-
-&nbsp;
-
-### Интерфейс BaseConverter<a name="BaseConverter"></a>
-```ts
-interface BaseConverter {
-	setSource(path: string): this;
-	convert(): string;
-}
-```
-Базовый интерфейс преобразования файлов.
-
-&nbsp;
-
-```js
-setSource(path: string): this
-```
-Устанавливает имя исходного файла. Возвращает `this`.
-
-&nbsp;
-
-```js
-convert(): string
-```
-Конвертирует файл. Возвращает имя преобразованного файла.
-
-&nbsp;
-
-### Интерфейс ExcelToCsvConverter<a name="ExcelToCsvConverter"></a>
-```ts
-interface ExcelToCsvConverter extends BaseConverter {
-	setSheetIdentifier(identifier: string | number): ExcelToCsvConverter;
-}
-```
-Интерфейс преобразования файлов Excel в CSV. Наследуется от [`BaseConverter`](#BaseConverter).
-
-&nbsp;
-
-```js
-setSheetIdentifier(identifier: string | number): ExcelToCsvConverter
-```
-Устанавливает идентификатор или имя листа. Возвращает `this`.
-
-&nbsp;
-
-### Интерфейс ConverterManager<a name="ConverterManager"></a>
-```ts
-interface ConverterManager {
-	excelToCsv(): ExcelToCsvConverter;
-}
-```
-Менеджер конвертеров.
-
-&nbsp;
-
-```js
-excelToCsv(): ExcelToCsvConverter
-```
-Возвращает ссылку на интерфейс [`ExcelToCsvConverter`](#ExcelToCsvConverter) преобразования файлов Excel в CSV.
-
-&nbsp;
-
-### Интерфейс FilesDataManager<a name="FilesDataManager"></a>
-```ts
-interface FilesDataManager {
-	csvWriter(): CsvWriter;
-	csvReader(path: PathObj): CsvReader;
-	converterManager(): ConverterManager;
-}
-```
-Интерфейс, который группирует интерфейсы для работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
-
-&nbsp;
-
-
-```js
-csvWriter(): CsvWriter
-```
-Возвращает ссылку на [`CsvWriter`](#CsvWriter).
-
-&nbsp;
-
-```js
-csvReader(path: PathObj): CsvReader
-```
-Возвращает ссылку на [`CsvReader`](#CsvReader) для чтения файла `path` в формате [`PathObj`](#PathObj).
-
-&nbsp;
-
-```js
-converterManager(): ConverterManager
-```
-Возвращает ссылку на [`ConverterManager`](#ConverterManager).
 
 [API Reference](API.md)
 
