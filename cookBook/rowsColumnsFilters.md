@@ -149,7 +149,7 @@ definitionInfo.getPageSelectors().forEach(pageSelector => {
     const dimensionEntity = pageSelector.getDimensionEntity();
 });
 ```
-А теперь отличие от двух предыдущих пунктов. Помимо наименований измерений в фиильтрах, необходимо также получить информацию о выбранном элементе в фильтре. Для этого используется функция `getSelectedEntity()` (интерфейс [GridPageSelector](../API/OMviews.md#GridPageSelector)):
+А теперь отличие от двух предыдущих пунктов. Помимо наименований измерений в фильтрах, необходимо также получить информацию о выбранном элементе в фильтре. Для этого используется функция `getSelectedEntity()` (интерфейс [GridPageSelector](../API/OMviews.md#GridPageSelector)):
 
 ```js
 let pageSelectedNames = [];
