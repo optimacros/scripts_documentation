@@ -413,6 +413,7 @@ setDestLongId(longId: number): CopyData
 enableCustomProperties(): CopyData
 ```
 Предписывает пройти по всем справочникам, которые имеют связь с источником и приёмником, и произведёт копирование пользовательских свойств.
+
 &nbsp;
 
 ```js
