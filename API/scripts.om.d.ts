@@ -313,6 +313,63 @@ export interface StorageExporter extends Exporter {
     setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
 }
 
+interface SyncResult {
+    getReportPath(): string;
+}
+
+interface SyncBuilder {
+    /**
+     * @param modelId Source model string identifier or name
+     */
+    setSrcModelId(modelId: string): SyncBuilder;
+
+    /**
+     * @param modelId Destination model string identifier or name
+     */
+    setDestModelId(modelId: string): SyncBuilder;
+
+    /**
+     * @param entityId Source entity identifier
+     */
+    setSrcEntityId(entityId: number): SyncBuilder;
+
+    /**
+     * @param entityId Destination entity identifier
+     */
+    setDestEntityId(entityId: number): SyncBuilder;
+
+    setFilters(filters: Record<string, string[]>): SyncBuilder;
+
+    sync(): SyncResult;
+}
+
+interface SyncMulticubeBuilder extends SyncBuilder {
+    setOmitEmptyRows(status: boolean): SyncMulticubeBuilder;
+
+    setOmitSummaryRows(status: boolean): SyncMulticubeBuilder;
+
+    setUseCodeInsteadLabel(status: boolean): SyncMulticubeBuilder;
+}
+
+interface SyncListBuilder extends SyncBuilder {
+    setViewId(viewId: number): SyncListBuilder;
+
+    setSrcToDesListMap(map: {
+        srcId: number,
+        destId: number,
+    }[]): SyncListBuilder;
+
+    setProxySrcColumnDataMap(map: {
+        fromName: string;
+        toName: string;
+    }[]): SyncListBuilder;
+
+    /**
+     * @param format Values: XLSX|CSV, Default: XLSX
+     */
+    setReportFileFormat(format: string): SyncListBuilder;
+}
+
 export interface MulticubeTab extends Tab {
     cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
 
@@ -329,6 +386,8 @@ export interface MulticubesTab extends Tab {
 
 export interface Multicubes {
     multicubesTab(): MulticubesTab;
+    
+    syncMulticube(): SyncMulticubeBuilder;
 }
 
 export interface TypePeriod {
@@ -426,7 +485,9 @@ export interface ListsTab extends Tab {
 }
 
 export interface Lists {
-    listsTab(): ListsTab
+    listsTab(): ListsTab;
+    
+    syncList(): SyncListBuilder;
 }
 
 export interface CellBuffer {
@@ -515,6 +576,11 @@ export interface ButtonInfo {
 
 export interface ResultBaseAction {
     appendAfter(): this;
+    
+    /**
+     * @param modelId Model string identifier or name
+     */
+    setModelId(modelId: string): this;
 }
 
 export interface EnvironmentInfo {
