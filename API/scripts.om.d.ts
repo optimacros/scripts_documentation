@@ -365,7 +365,7 @@ interface SyncListBuilder extends SyncBuilder {
     }[]): SyncListBuilder;
 
     /**
-     * @param format Values: XLSX|CSV, Default: XLSX
+     * @param format Values: XLSX|CSV, Default: CSV
      */
     setReportFileFormat(format: string): SyncListBuilder;
 }
