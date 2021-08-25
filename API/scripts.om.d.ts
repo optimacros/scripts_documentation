@@ -1417,6 +1417,21 @@ export namespace WinAgent {
         setDownloadUrl(url: string): this;
 
         auth(): Http.HttpAuth;
+        
+        /**
+         * @param sec Default value is 10 sec
+         */
+        setConnectTimeout(sec: number): this;
+
+        /**
+         * @param sec Default value is 600 sec
+         */
+        setRequestTimeout(sec: number): this;
+
+        /**
+         * @param sec Default value is 150 sec
+         */
+        setOperationTimeout(sec: number): this;
 
         makeRunMacrosAction(): RunMacroAction;
     }
