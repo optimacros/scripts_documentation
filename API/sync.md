@@ -110,10 +110,22 @@ interface SyncListBuilder extends SyncBuilder {
     setReportFileFormat(format: string): SyncListBuilder;
 }
 
+### Интерфейс SyncResult<a name="SyncResult"></a>
+```ts
 interface SyncResult {
-    getReportPath(): string;
+	getReportPath(): string;
 }
+```
+Интерфейс доступа к результатам синхронизации. Механизм синхронизации в процессе работы формирует файл отчёта.
 
+&nbsp;
+
+```js
+getReportPath(): string
+```
+Возвращает имя файла отчёта.
+
+&nbsp;
 
 [API Reference](API.md)
 
