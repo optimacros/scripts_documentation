@@ -1,7 +1,7 @@
 # История изменений
 
-## xx/xx/20xx
-* Здесь будет описание следующей версии.
+## 25/08/2021
+* В интерфейс [`WinAgentBuilder`](../API/winAgent.md#WinAgentBuilder) добавлены функции: `setConnectTimeout`, `setRequestTimeout`, `setOperationTimeout`.
 
 ## 27/07/2021
 

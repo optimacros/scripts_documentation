@@ -10,6 +10,9 @@ interface WinAgentBuilder {
 	setCommandUrl(url: string): this;
 	setDownloadUrl(url: string): this;
 	auth(): Http.HttpAuth;
+	setConnectTimeout(sec: number): this;
+	setRequestTimeout(sec: number): this;
+	setOperationTimeout(sec: number): this;
 	makeRunMacrosAction(): RunMacroAction;
 }
 ```
@@ -35,6 +38,28 @@ setDownloadUrl(url: string): this
 auth(): Http.HttpAuth
 ```
 Возвращает интерфейс [`Http.HttpAuth`](./http.md#HttpAuth) доступа к настройкам аутентификации WinAgent.
+
+&nbsp;
+
+```js
+setConnectTimeout(sec: number): this
+```
+Устанавливает таймаут ожидания соединения по HTTP в секундах. Значение по умолчанию: `10`. Возвращает `this`.
+
+&nbsp;
+
+```js
+setRequestTimeout(sec: number): this
+```
+Устанавливает таймаут ожидания ответа от внешнего ресурса в секундах. Значение по умолчанию: `600`. Возвращает `this`.
+
+&nbsp;
+
+```js
+setOperationTimeout(sec: number): this
+```
+Устанавливает таймаут ожидания WinAgent'ом исполнения макроса VBA в секундах. Значение по умолчанию: `150`. Возвращает `this`.
+
 
 &nbsp;
 
