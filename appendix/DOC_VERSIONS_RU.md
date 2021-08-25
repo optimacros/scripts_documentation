@@ -2,7 +2,7 @@
 
 ## 25/08/2021
 * В интерфейс [`WinAgentBuilder`](../API/winAgent.md#WinAgentBuilder) добавлены функции: `setConnectTimeout()`, `setRequestTimeout()`, `setOperationTimeout()`.
-* Добавлен функционал синхронизации мультикубов и справочников: функция `syncMulticube()` интерфейса [`Multicubes`](../API/OMviews.md#Multicubes), интерфейсы [`SyncBuilder`](../API/sync.md#SyncBuilder), [`SyncMulticubeBuilder`](../API/sync.md#SyncMulticubeBuilder), [`SyncResult`](../API/sync.md#SyncResult).
+* Добавлен функционал синхронизации мультикубов и справочников: функции `syncMulticube()` интерфейса [`Multicubes`](../API/OMviews.md#Multicubes) и `syncList()` интерфейса [`Lists`](../API/dimensions.md#Lists), интерфейсы [`SyncBuilder`](../API/sync.md#SyncBuilder), [`SyncMulticubeBuilder`](../API/sync.md#SyncMulticubeBuilder), [`SyncListBuilder`](../API/sync.md#SyncListBuilder), [`SyncResult`](../API/sync.md#SyncResult).
 
 ## 27/07/2021
 

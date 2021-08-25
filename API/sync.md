@@ -90,25 +90,61 @@ setUseCodeInsteadLabel(status: boolean): SyncMulticubeBuilder
  
 &nbsp;
 
-
+### Интерфейс SyncListBuilder<a name="SyncListBuilder"></a>
+```ts
 interface SyncListBuilder extends SyncBuilder {
-    setViewId(viewId: number): SyncListBuilder;
+	setViewId(viewId: number): SyncListBuilder;
 
-    setSrcToDesListMap(map: {
-        srcId: number,
-        destId: number,
-    }[]): SyncListBuilder;
+	setSrcToDesListMap(map: {
+		srcId: number,
+		destId: number,
+	}[]): SyncListBuilder;
 
-    setProxySrcColumnDataMap(map: {
-        fromName: string;
-        toName: string;
-    }[]): SyncListBuilder;
+	setProxySrcColumnDataMap(map: {
+		fromName: string;
+		toName: string;
+	}[]): SyncListBuilder;
 
-    /**
-     * @param format Values: XLSX|CSV, Default: CSV
-     */
-    setReportFileFormat(format: string): SyncListBuilder;
+	setReportFileFormat(format: string): SyncListBuilder;
 }
+```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), синхронизации справочников. Наследуется от [`SyncBuilder`](#SyncBuilder). Все функции возвращают `this`.
+
+&nbsp;
+
+```js
+setViewId(viewId: number): SyncListBuilder
+```
+Устанавливает `id` представления справочника.
+
+&nbsp;
+
+```js
+setSrcToDesListMap(map: { 
+	srcId: number,
+	destId: number,
+}[]): SyncListBuilder
+```
+Задаёт карту соответствия элементов источника элементам приёмника.
+
+&nbsp;
+
+```js
+setProxySrcColumnDataMap(map: {
+	fromName: string;
+	toName: string;
+}[]): SyncListBuilder
+```
+Задаёт карту копирования столбцов источника в столбцы приёмника.
+
+&nbsp;
+
+```js
+setReportFileFormat(format: string): SyncListBuilder
+```
+Устанавливает формат файла отчёта. Возможные значения: `'XLSX'`, `'CSV'`. Значение по умолчанию: `'CSV'`.
+
+&nbsp;
 
 ### Интерфейс SyncResult<a name="SyncResult"></a>
 ```ts

@@ -3,10 +3,11 @@
 ### Интерфейс Lists<a name="Lists"></a>
 ```ts
 interface Lists {
-	listsTab(): ListsTab
+	listsTab(): ListsTab;
+	syncList(): SyncListBuilder;
 }
 ```
-Интерфейс для получения ссылки на [`ListsTab`](#ListsTab).
+Интерфейс работы со справочниками.
 
 &nbsp;
 
@@ -14,6 +15,13 @@ interface Lists {
 listsTab(): ListsTab
 ```
 Возвращает ссылку на интерфейс [`ListsTab`](#ListsTab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Справочники`.
+
+&nbsp;
+
+```js
+syncList(): SyncListBuilder
+```
+Возвращает интерфейс [`SyncListBuilder`](./sync.md#SyncListBuilder) синхронизации справочников.
 
 &nbsp;
 
