@@ -79,6 +79,7 @@ get(key: string): any
 ```ts
 interface ResultBaseAction {
 	appendAfter(): this;
+	setModelId(modelId: string): this;
 }
 ```
 Базовый интерфейс действия.
@@ -95,6 +96,13 @@ appendAfter(): this
 ![Дерево вызовов](./pic/DFS.png)
 
 В такой ситуации скрипты исполнятся в следующем порядке: `3 -> 4 -> 5 -> 1 -> 2`.
+
+&nbsp;
+
+```js
+setModelId(modelId: string): this
+```
+Устанавливает имя или `id` модели, к которой будет относиться выполнение децствия. Этот механизм позволяет запустить скрипт из другой модели.
 
 &nbsp;
 
