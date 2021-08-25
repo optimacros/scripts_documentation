@@ -21,7 +21,7 @@ multicubesTab(): MulticubesTab
 ```js
 syncMulticube(): SyncMulticubeBuilder
 ```
-
+Возвращает интерфейс [`SyncMulticubeBuilder`](./sync.md#SyncMulticubeBuilder) синхронизации мультикубов.
 
 &nbsp;
 
