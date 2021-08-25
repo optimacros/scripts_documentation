@@ -4,9 +4,10 @@
 ```ts
 interface Multicubes {
 	multicubesTab(): MulticubesTab;
+	syncMulticube(): SyncMulticubeBuilder;
 }
 ```
-Интерфейс для получения ссылки на [`MulticubesTab`](#MulticubesTab).
+Интерфейс работы с мультикубами.
 
 &nbsp;
 
@@ -14,6 +15,13 @@ interface Multicubes {
 multicubesTab(): MulticubesTab
 ```
 Возвращает ссылку на интерфейс [`MulticubesTab`](#MulticubesTab). В интерфейсе Optimacros аналогично открытию вкладки `Данные` -> `Мультикубы`.
+
+&nbsp;
+
+```js
+syncMulticube(): SyncMulticubeBuilder
+```
+
 
 &nbsp;
 
