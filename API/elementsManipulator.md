@@ -110,7 +110,7 @@ delete(): ElementsDeleter
 ### Интерфейс ElementsReorder<a name="ElementsReorder"></a>
 ```ts
 interface ElementsReorder {
-	append(longId: number, relativeLongId: number, position: string): ElementsReorder;
+	append(longId: number, relativeLongId?: number, position?: string): ElementsReorder;
 	reorder(): ElementsReorder;
 	count(): number;
 	reverse(): ElementsReorder;
@@ -123,17 +123,17 @@ interface ElementsReorder {
 &nbsp;
 
 ```js
-append(longId: number, relativeLongId: number, position: string): ElementsReorder
+append(longId: number, relativeLongId?: number, position?: string): ElementsReorder
 ```
-Добавляет в очередь данные о [`longId`](./OMviews.md#longId) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId`. Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
+Добавляет в очередь данные о [`longId`](./OMviews.md#longId) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId` (значение по умолчанию: `-1`). Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
 
 `'Before'` — непосредственно перед `relativeLongId`;
 
 `'After'` — сразу за `relativeLongId`;
 
-`'Start'` — в начало (значение `relativeLongId` нерелевантно);
+`'Start'` — в начало (необходимо указать `relativeLongId == -1`);
 
-`'End'` — в конец (значение `relativeLongId` нерелевантно).
+`'End'` — в конец (необходимо указать `relativeLongId == -1`), это значение по умолчанию.
 
 &nbsp;
 
