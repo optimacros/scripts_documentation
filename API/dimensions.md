@@ -31,7 +31,7 @@ interface ListsTab extends Tab {
 	open(name: string): ListTab;
 }
 ```
-Интерфейс для получения ссылки на [`ListTab`](#ListTab). Интерфейс наследуется от [`Tab`](./OMviews.md#Tab).
+Интерфейс для получения ссылки на [`ListTab`](#ListTab). Интерфейс наследуется от [`Tab`](./OMviews.md#Tab). Несмотря на это, функция `open()` **не реализована**.
 
 &nbsp;
 
