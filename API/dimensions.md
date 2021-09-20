@@ -46,6 +46,7 @@ open(name: string): ListTab
 ```ts
 interface ListTab extends Tab {
 	listSubsetTab(): ListSubsetsTab;
+	customPropertiesTab(): CustomPropertiesTab;
 	importer(): ListImporter;
 }
 ```
@@ -57,6 +58,12 @@ interface ListTab extends Tab {
 listSubsetTab(): ListSubsetsTab
 ```
 Возвращает ссылку на интерфейс [`ListSubsetsTab`](#ListSubsetsTab). В интерфейсе Optimacros аналогично открытию вкладки `Выборки` справочника `name`.
+
+&nbsp;
+```js
+customPropertiesTab(): CustomPropertiesTab
+```
+Возвращает интерфейс [`CustomPropertiesTab`](#CustomPropertiesTab) доступа к свойствам справочников.
 
 &nbsp;
 
@@ -81,6 +88,14 @@ interface ListSubsetsTab extends Tab {
 listTab(): ListTab
 ```
 Возвращает интерфейс [`ListTab`](#ListTab) вкладки того справочника, чьи выборки представляет собой `this`.
+
+&nbsp;
+### Интерфейс CustomPropertiesTab<a name="CustomPropertiesTab"></a>
+```ts
+interface CustomPropertiesTab extends Tab {
+}
+```
+Интерфейс доступа к свойствам справочника. В интерфейсе Optimacros аналогично открытию вкладки `Свойства` справочника. Наследуется от интерфейса [`Tab`](./views.md#Tab). Реализован только метод [`pivot()`](./views.md#Tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек, но не на добавление/удаление/перемещение свойств.
 
 &nbsp;
 

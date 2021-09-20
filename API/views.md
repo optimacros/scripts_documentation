@@ -117,6 +117,7 @@ interface MulticubeTab extends Tab {
 	cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 	cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 	getCubeInfo(identifier: string | number): CubeInfo;
+	cubesTab(): CubesTab;
 }
 ```
 Вкладка мультикуба. Интерфейс наследуется от [`Tab`](#Tab).
@@ -149,6 +150,21 @@ cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder
 getCubeInfo(identifier: string | number): CubeInfo
 ```
 Возвращает интерфейс [`CubeInfo`](./cubeCell.md#CubeInfo) для получения информации о кубе `identifier`.
+
+&nbsp;
+```js
+cubesTab(): CubesTab
+```
+Возвращает интерфейс [`CubesTab`](#CubesTab) доступа к режиму редактирования мультикуба.
+
+&nbsp;
+
+### Интерфейс CubesTab<a name="CubesTab"></a>
+```ts
+interface CubesTab extends Tab {
+}
+```
+Интерфейс доступа к кубам мультикуба. В интерфейсе Optimacros аналогично открытию вкладки `Режим редактирования` мультикуба. Наследуется от интерфейса [`Tab`](#Tab). Реализован только метод [`pivot()`](#Tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек, но не на добавление/удаление/перемещение кубов.
 
 &nbsp;
 
