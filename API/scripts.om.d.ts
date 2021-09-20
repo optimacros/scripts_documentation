@@ -370,6 +370,10 @@ interface SyncListBuilder extends SyncBuilder {
     setReportFileFormat(format: string): SyncListBuilder;
 }
 
+interface CubesTab extends Tab {
+
+}
+
 export interface MulticubeTab extends Tab {
     cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
 
@@ -378,6 +382,8 @@ export interface MulticubeTab extends Tab {
     cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 
     getCubeInfo(identifier: string | number): CubeInfo;
+    
+    cubesTab(): CubesTab;
 }
 
 export interface MulticubesTab extends Tab {
@@ -470,8 +476,14 @@ export interface ListImporter extends Importer {
     getUpdatedPropertiesOnParentLevels(): boolean;
 }
 
+interface CustomPropertiesTab extends Tab {
+
+}
+
 export interface ListTab extends Tab {
     listSubsetTab(): ListSubsetsTab;
+    
+    customPropertiesTab(): CustomPropertiesTab;
 
     importer(): ListImporter;
 }
