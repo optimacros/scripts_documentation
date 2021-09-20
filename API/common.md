@@ -305,7 +305,7 @@ interface UserInfo {
 ```js
 getEntity(): EntityInfo
 ```
-Возвращает сущность пользователя в виде [`EntityInfo`](./OMviews.md#EntityInfo).
+Возвращает сущность пользователя в виде [`EntityInfo`](./views.md#EntityInfo).
 
 &nbsp;
 
@@ -333,7 +333,7 @@ getLastName(): string
 ```js
 getRole(): EntityInfo
 ```
-Возвращает сущность роли пользователя в виде [`EntityInfo`](./OMviews.md#EntityInfo).
+Возвращает сущность роли пользователя в виде [`EntityInfo`](./views.md#EntityInfo).
 
 &nbsp;
 
@@ -378,21 +378,21 @@ interface EntitiesInfo {
 	getCollection(longId: number[]): EntityInfo[];
 }
 ```
-Интерфейс для получения сущности по [`longId`](./OMviews.md#longId).
+Интерфейс для получения сущности по [`longId`](./views.md#longId).
 
 &nbsp;
 
 ```js
 get(longId: number): EntityInfo | null
 ```
-Возвращает сущность [`EntityInfo`](./OMviews.md#EntityInfo) по её [`longId`](./OMviews.md#longId).
+Возвращает сущность [`EntityInfo`](./views.md#EntityInfo) по её [`longId`](./views.md#longId).
 
 &nbsp;
 
 ```js
 getCollection(longId: number[]): EntityInfo[]
 ```
-Возвращает массив сущностей [`EntityInfo`](./OMviews.md#EntityInfo) по массиву их [`longId`](./OMviews.md#longId).
+Возвращает массив сущностей [`EntityInfo`](./views.md#EntityInfo) по массиву их [`longId`](./views.md#longId).
 
 &nbsp;
 
@@ -415,14 +415,14 @@ interface CopyData {
 ```js
 setSourceLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./OMviews.md#longId) измерения источника.
+Устанавливает [`longId`](./views.md#longId) измерения источника.
 
 &nbsp;
 
 ```js
 setDestLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./OMviews.md#longId) измерения приёмника.
+Устанавливает [`longId`](./views.md#longId) измерения приёмника.
 
 &nbsp;
 
@@ -443,7 +443,7 @@ enableCopyAllCubes(): CopyData
 ```js
 setMulticubeLongIds(longIds: number[]): CopyData
 ```
-Устанавливает [`longId`](./OMviews.md#longId) мультикубов.
+Устанавливает [`longId`](./views.md#longId) мультикубов.
 
 &nbsp;
 

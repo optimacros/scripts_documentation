@@ -3,7 +3,7 @@
 1. [Интерфейс скриптов 1.0 (на языке TypeScript)](scripts.om.d.ts)
 1. [Интерфейс Common](common.md)
 1. [Окружение](env.md)
-1. [Представления](OMviews.md)
+1. [Представления](views.md)
 	1. [Измерения](dimensions.md)
 	1. [Манипуляция элементами](elementsManipulator.md)
 	1. [Низкоуровневый доступ к клеткам и кубам](cubeCell.md)
@@ -58,7 +58,7 @@ readonly environment: Environment
 ```js
 readonly multicubes: Multicubes
 ```
-Ссылка на интерфейс [`Multicubes`](./OMviews.md#Multicubes).
+Ссылка на интерфейс [`Multicubes`](./views.md#Multicubes).
 
 &nbsp;
 

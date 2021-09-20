@@ -43,14 +43,14 @@ setCount(count: number): NumericElementsCreator
 ```js
 setPositionAfter(relativeLongId: number): NumericElementsCreator
 ```
-Устанавливает позицию добавления после [`relativeLongId`](./OMviews.md#longId). Возвращает `this`.
+Устанавливает позицию добавления после [`relativeLongId`](./views.md#longId). Возвращает `this`.
 
 &nbsp; 
 
 ```js
 setPositionBefore(relativeLongId: number): NumericElementsCreator
 ```
-Устанавливает позицию добавления до [`relativeLongId`](./OMviews.md#longId). Возвращает `this`.
+Устанавливает позицию добавления до [`relativeLongId`](./views.md#longId). Возвращает `this`.
 
 &nbsp;
 
@@ -71,14 +71,14 @@ setPositionEnd(): NumericElementsCreator
 ```js
 setPositionChildOf(parentLongId: number): NumericElementsCreator
 ```
-Устанавливает позицию добавления дочерней для [`parentLongId`](./OMviews.md#longId). Возвращает `this`.
+Устанавливает позицию добавления дочерней для [`parentLongId`](./views.md#longId). Возвращает `this`.
 
 &nbsp;
 
 ```js
 create(): number[]
 ```
-Добавляет элементы и возвращает массив их [`longId`](./OMviews.md#longId).
+Добавляет элементы и возвращает массив их [`longId`](./views.md#longId).
 
 &nbsp;
 
@@ -96,7 +96,7 @@ interface ElementsDeleter {
 ```js
 appendIdentifier(identifier: number): ElementsDeleter
 ```
-Добавляет в буфер элемент, чей [`longId`](./OMviews.md#longId) равен `identifier`. Возращает `this`.
+Добавляет в буфер элемент, чей [`longId`](./views.md#longId) равен `identifier`. Возращает `this`.
 
 &nbsp;
 
@@ -125,7 +125,7 @@ interface ElementsReorder {
 ```js
 append(longId: number, relativeLongId?: number, position?: string): ElementsReorder
 ```
-Добавляет в очередь данные о [`longId`](./OMviews.md#longId) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId` (значение по умолчанию: `-1`). Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
+Добавляет в очередь данные о [`longId`](./views.md#longId) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId` (значение по умолчанию: `-1`). Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
 
 `'Before'` — непосредственно перед `relativeLongId`;
 

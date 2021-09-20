@@ -37,7 +37,7 @@ getDimensionIds(): number[]
 ```js
 getDimensionItems(): EntityInfo[]
 ```
-Возвращает массив [`EntityInfo`](./OMviews.md#EntityInfo) измерений, которыми определена клетка.
+Возвращает массив [`EntityInfo`](./views.md#EntityInfo) измерений, которыми определена клетка.
 
 &nbsp;
 
@@ -56,7 +56,7 @@ interface CubeInfo extends EntityInfo {
 	getDimensions(): EntityInfo[];
 }
 ```
-Интерфейс информации о кубе. Интерфейс наследуется от [`EntityInfo`](./OMviews.md#EntityInfo).
+Интерфейс информации о кубе. Интерфейс наследуется от [`EntityInfo`](./views.md#EntityInfo).
 
 &nbsp;
 
@@ -78,7 +78,7 @@ getFormatInfo(): CubeFormatInfo
 ```js
 getDimensions(): EntityInfo[]
 ```
-Возвращает массив [`EntityInfo`](./OMviews.md#EntityInfo) измерений куба.
+Возвращает массив [`EntityInfo`](./views.md#EntityInfo) измерений куба.
 
 &nbsp;
 
@@ -96,7 +96,7 @@ interface CubeFormatInfo {
 ```js
 getFormatTypeEntity(): EntityInfo
 ```
-Возвращает сущность [`EntityInfo`](./OMviews.md#EntityInfo) формата куба.
+Возвращает сущность [`EntityInfo`](./views.md#EntityInfo) формата куба.
 
 &nbsp;
 

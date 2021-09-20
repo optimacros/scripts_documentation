@@ -8,13 +8,13 @@
 
 ## Доступ к измерениям в строках
 
-Сначала скрипту необходимо открыть мультикуб. Скрипт начинает свой путь с переменной [om](../API/API.md#OM), обращаясь к свойствам для углубления в модель. Для того, чтобы с помощью скрипта найти раздел `Данные` -> `Мультикубы`, мы используем интерфейс [Multicubes](../API/OMviews.md#Multicubes). Для перехода в этот раздел необходимо вызвать функцию `multicubesTab()`. Сохраним результат в константу `multicubesTab`:
+Сначала скрипту необходимо открыть мультикуб. Скрипт начинает свой путь с переменной [om](../API/API.md#OM), обращаясь к свойствам для углубления в модель. Для того, чтобы с помощью скрипта найти раздел `Данные` -> `Мультикубы`, мы используем интерфейс [Multicubes](../API/views.md#Multicubes). Для перехода в этот раздел необходимо вызвать функцию `multicubesTab()`. Сохраним результат в константу `multicubesTab`:
 
 ```js
 const multicubesTab = om.multicubes.multicubesTab();
 ```
 
-Таким образом, с помощью скрипта мы добрались до списка мультикубов модели. Теперь для того, чтобы выбрать интересующий нас мультикуб, необходимо вызвать функцию `open()` из интерфейса [MulticubesTab](../API/OMviews.md#MulticubesTab) и в качестве аргумента указать имя мультикуба, с которым мы хотим работать. Сохраним открытый мультикуб в константу `multicubeTab`. Теперь код выглядит так:
+Таким образом, с помощью скрипта мы добрались до списка мультикубов модели. Теперь для того, чтобы выбрать интересующий нас мультикуб, необходимо вызвать функцию `open()` из интерфейса [MulticubesTab](../API/views.md#MulticubesTab) и в качестве аргумента указать имя мультикуба, с которым мы хотим работать. Сохраним открытый мультикуб в константу `multicubeTab`. Теперь код выглядит так:
 
 ```js
 const multicubesTab = om.multicubes.multicubesTab();
@@ -23,19 +23,19 @@ const multicubeTab = multicubesTab.open('Условия и расчёты');
 
 После того, как макрос открыл мультикуб, ему нужно понять, как именно расположить измерения, либо выбрать представление, в котором уже сохранено расположение измерений. Однако в скриптах 1.0 есть только [один способ](../appendix/constraints.md#pivot) получить доступ к представлению мультикуба.
 
-Вызовем функцию `pivot()` из интерфейса [Tab](../API/OMviews.md#Tab). Мы будем просматривать представление `Условия и расчёты 3`. Сохраним открытое представление в константу `pivot`:
+Вызовем функцию `pivot()` из интерфейса [Tab](../API/views.md#Tab). Мы будем просматривать представление `Условия и расчёты 3`. Сохраним открытое представление в константу `pivot`:
 
 ```js
 const pivot = multicubeTab.pivot('Условия и расчёты 3');
 ```
-После того, как мы выбрали представление, следует обратиться к таблице с данными. Для этого используем функцию `create()` интерфейса [Pivot](../API/OMviews.md#Pivot). Ссылку на таблицу сохраним в константу `grid`:
+После того, как мы выбрали представление, следует обратиться к таблице с данными. Для этого используем функцию `create()` интерфейса [Pivot](../API/views.md#Pivot). Ссылку на таблицу сохраним в константу `grid`:
 
 ```js
 const pivot = multicubeTab.pivot('Условия и расчёты 3');
 const grid =  pivot.create();
 ```
 
-Проверим работоспособность скрипта. Для этого выведем количество строк с помощью функции `rowCount()` интерфейса [Grid](../API/OMviews.md#Grid):
+Проверим работоспособность скрипта. Для этого выведем количество строк с помощью функции `rowCount()` интерфейса [Grid](../API/views.md#Grid):
 
 ```js
 const multicubesTab = om.multicubes.multicubesTab();
@@ -60,13 +60,13 @@ const definitionInfo =  grid.getDefinitionInfo();
 let rowDimensionNames = [];
 ```
 
-Для того, чтобы просмотреть измерения, используемые в строках таблицы, нам нужно вызвать функцию `getRowDimensions()` интерфейса [GridDefinitionInfo](../API/OMviews.md#GridDefinitionInfo). Эта функция обратится к измерениям на строках и вернёт их в виде массива (для нашей тестовой таблицы массив будет содержать два элемента: `Кубы`, `s.Тип парковки`):
+Для того, чтобы просмотреть измерения, используемые в строках таблицы, нам нужно вызвать функцию `getRowDimensions()` интерфейса [GridDefinitionInfo](../API/views.md#GridDefinitionInfo). Эта функция обратится к измерениям на строках и вернёт их в виде массива (для нашей тестовой таблицы массив будет содержать два элемента: `Кубы`, `s.Тип парковки`):
 
 ![Строчные измерения вьюхи Условия и расчёты 3](./pic/rcf_RowMeasuresMK.png)
 
 Для перебора массива воспользуемся [forEach()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) с параметром `gridDimension`, в котором присвоим переменной `entity` результат работы функции.
 
-Для того, чтобы в `entity` получить сущность [EntityInfo](../API/OMviews.md#EntityInfo) измерения, вызовем функцию `getDimensionEntity()` интерфейса [GridDimension](../API/OMviews.md#GridDimension). После чего добавим все названия измерений с помощью [push()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/push) в созданный нами ранее массив `rowDimensionNames`. Осталось лишь написать вывод информации о количестве измерений:
+Для того, чтобы в `entity` получить сущность [EntityInfo](../API/views.md#EntityInfo) измерения, вызовем функцию `getDimensionEntity()` интерфейса [GridDimension](../API/views.md#GridDimension). После чего добавим все названия измерений с помощью [push()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/push) в созданный нами ранее массив `rowDimensionNames`. Осталось лишь написать вывод информации о количестве измерений:
 
 ```js
 const multicubesTab = om.multicubes.multicubesTab();
@@ -95,7 +95,7 @@ console.log(`Row dimensions: ${rowDimensionNames.join(', ')} \n`);
 
 Для того, чтобы получить названия измерений в столбцах, используется аналогичная механика. Оставим уже написаный выше скрипт и допишем пару строк.
 
-Чтобы получить измерения в столбцах, воспользуемся функцией `getColumnDimensions()` интерфейса [GridDefinitionInfo](../API/OMviews.md#GridDefinitionInfo):
+Чтобы получить измерения в столбцах, воспользуемся функцией `getColumnDimensions()` интерфейса [GridDefinitionInfo](../API/views.md#GridDefinitionInfo):
 
 ```js
 let columnDimensionNames = [];
@@ -141,7 +141,7 @@ console.log(`Column dimensions: ${columnDimensionNames.join(', ')} \n`);
 
 ## Доступ к измерениям в фильтрах
 
-Чтобы получить доступ к измерениям в фильтрах, необходимо использовать немного усложнённую механику. Создаём массив `pageSelectedNames`. Для получения интерфейса с данными об измерениях в фильтрах представления вызываем функцию `getPageSelectors()` интерфейса [GridDefinitionInfo](../API/OMviews.md#GridDefinitionInfo):
+Чтобы получить доступ к измерениям в фильтрах, необходимо использовать немного усложнённую механику. Создаём массив `pageSelectedNames`. Для получения интерфейса с данными об измерениях в фильтрах представления вызываем функцию `getPageSelectors()` интерфейса [GridDefinitionInfo](../API/views.md#GridDefinitionInfo):
 
 ```js
 let pageSelectedNames = [];
@@ -149,7 +149,7 @@ definitionInfo.getPageSelectors().forEach(pageSelector => {
     const dimensionEntity = pageSelector.getDimensionEntity();
 });
 ```
-А теперь отличие от двух предыдущих пунктов. Помимо наименований измерений в фильтрах, необходимо также получить информацию о выбранном элементе в фильтре. Для этого используется функция `getSelectedEntity()` (интерфейс [GridPageSelector](../API/OMviews.md#GridPageSelector)):
+А теперь отличие от двух предыдущих пунктов. Помимо наименований измерений в фильтрах, необходимо также получить информацию о выбранном элементе в фильтре. Для этого используется функция `getSelectedEntity()` (интерфейс [GridPageSelector](../API/views.md#GridPageSelector)):
 
 ```js
 let pageSelectedNames = [];
