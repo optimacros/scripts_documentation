@@ -1,5 +1,9 @@
 # История изменений
 
+## 20/09/2021
+* Добавлены интерфейсы [`CubesTab`](../API/views.md#CubesTab), [`CustomPropertiesTab`](../API/dimensions.md#CustomPropertiesTab) и функции доступа к ним [`MulticubeTab`](../API/views.md#MulticubeTab).`cubesTab()`, [`ListTab`](../API/dimensions.md#ListTab).`customPropertiesTab()`.
+* Исправлены в лучшую сторону описания функций [`GridRange`](../API/views.md#GridRange).`generator()`, [`SyncBuilder`](../API/sync.md#SyncBuilder).`setFilters()`, [`ElementsReorder`](../API/elementsManipulator.md#ElementsReorder).`append()`, [`Tab`](../API/views.md#Tab).`open()`, [`ListsTab`](../API/dimensions.md#ListsTab).`open()` и интерфейсов [`Http.UrlParams`](../API/http.md#UrlParams), [`CellBuffer`](../API/common.md#CellBuffer).
+
 ## 25/08/2021
 * В интерфейс [`WinAgentBuilder`](../API/winAgent.md#WinAgentBuilder) добавлены функции: `setConnectTimeout()`, `setRequestTimeout()`, `setOperationTimeout()`.
 * Добавлен функционал синхронизации мультикубов и справочников: функции `syncMulticube()` интерфейса [`Multicubes`](../API/views.md#Multicubes) и `syncList()` интерфейса [`Lists`](../API/dimensions.md#Lists), интерфейсы [`SyncBuilder`](../API/sync.md#SyncBuilder), [`SyncMulticubeBuilder`](../API/sync.md#SyncMulticubeBuilder), [`SyncListBuilder`](../API/sync.md#SyncListBuilder), [`SyncResult`](../API/sync.md#SyncResult).
