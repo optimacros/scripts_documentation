@@ -1,5 +1,10 @@
 # История изменений
 
+## 27/09/2021
+* Добавлен [третий урок](../cookBook/cellsAccess.md) в Курс молодого бойца.
+* Сформировано содержание [Курса молодого бойца](../cookBook/cookBook.md).
+* Исправлено в лучшую сторону описание функции [`NumericElementsCreator`](../API/elementsManipulator.md#NumericElementsCreator).`setPositionEnd()`.
+
 ## 20/09/2021
 * Добавлены интерфейсы [`CubesTab`](../API/views.md#CubesTab), [`CustomPropertiesTab`](../API/dimensions.md#CustomPropertiesTab) и функции доступа к ним [`MulticubeTab`](../API/views.md#MulticubeTab).`cubesTab()`, [`ListTab`](../API/dimensions.md#ListTab).`customPropertiesTab()`.
 * Исправлены в лучшую сторону описания функций [`GridRange`](../API/views.md#GridRange).`generator()`, [`SyncBuilder`](../API/sync.md#SyncBuilder).`setFilters()`, [`ElementsReorder`](../API/elementsManipulator.md#ElementsReorder).`append()`, [`Tab`](../API/views.md#Tab).`open()`, [`ListsTab`](../API/dimensions.md#ListsTab).`open()` и интерфейсов [`Http.UrlParams`](../API/http.md#UrlParams), [`CellBuffer`](../API/common.md#CellBuffer).
