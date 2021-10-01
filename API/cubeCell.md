@@ -30,14 +30,14 @@ definitions(): number[]
 ```js
 getDimensionIds(): number[]
 ```
-Возвращает массив идентификаторов измерений, которыми определена клетка.
+Возвращает массив идентификаторов измерений куба, которыми определена клетка.  Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
 
 &nbsp;
 
 ```js
 getDimensionItems(): EntityInfo[]
 ```
-Возвращает массив [`EntityInfo`](./views.md#EntityInfo) измерений, которыми определена клетка.
+Возвращает массив [`EntityInfo`](./views.md#EntityInfo) измерений куба, которыми определена клетка. Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
 
 &nbsp;
 
