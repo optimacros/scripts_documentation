@@ -81,7 +81,7 @@ interface RequestManager {
 ```js
 log(message: string, print?: boolean): RequestManager
 ```
-Выводит сообщение `message` в лог, доступ к которому можно получить в админке. Если `print == true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
+Выводит сообщение `message` в лог, доступ к которому можно получить в админке. Если `print === true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
 
 ![Лог в админке](./pic/requestInfo.png)
 
@@ -90,7 +90,7 @@ log(message: string, print?: boolean): RequestManager
 ```js
 logStatusMessage(message: string, print?: boolean): RequestManager
 ```
-Делает то же, что и `setStatusMessage()`. Если `print == true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
+Делает то же, что и `setStatusMessage()`. Если `print === true` (по умолчанию: `false`), дублирует `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
 
 &nbsp;
 

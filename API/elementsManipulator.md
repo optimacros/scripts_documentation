@@ -131,9 +131,9 @@ append(longId: number, relativeLongId?: number, position?: string): ElementsReor
 
 `'After'` — сразу за `relativeLongId`;
 
-`'Start'` — в начало (необходимо указать `relativeLongId == -1`);
+`'Start'` — в начало (необходимо указать `relativeLongId === -1`);
 
-`'End'` — в конец (необходимо указать `relativeLongId == -1`), это значение по умолчанию.
+`'End'` — в конец (необходимо указать `relativeLongId === -1`), это значение по умолчанию.
 
 &nbsp;
 
