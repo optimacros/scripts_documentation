@@ -23,9 +23,12 @@
 1. [Разбор скрипта интеграции FTP](integrationFTP.md)
 1. [Разбор скрипта интеграции OData](integrationOData.md)
 1. [Разбор скрипта ОВК](OVK.md)
-1. [Разбор скрипта 1D (версия 1.8)](1D.md)
+1. [Разбор скрипта 1D (версия 1.8.2)](1D.md)
 1. [Разбор скрипта Workflow](workflow.md)
 1. [Разбор скрипта Обфускация](obfuscation.md)
 1. [Разбор скрипта Межмодельная интеграция](intermodel.md)
+1. [Разбор скриптов по передаче контекста](passContext.md)
+1. [Разбор скрипта VBA Template Export](vbaTemplateExport.md)
+1. [Разбор скрипта View Cleaner](viewCleaner.md)
 
 [Оглавление](../README.md)
