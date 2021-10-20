@@ -61,6 +61,7 @@ setPositionStart(): NumericElementsCreator
 
 &nbsp;
 
+<a name="NumericElementsCreator.setPositionEnd"></a>
 ```js
 setPositionEnd(): NumericElementsCreator
 ```
@@ -68,6 +69,7 @@ setPositionEnd(): NumericElementsCreator
 
 &nbsp;
 
+<a name="NumericElementsCreator.setPositionChildOf"></a>
 ```js
 setPositionChildOf(parentLongId: number): NumericElementsCreator
 ```

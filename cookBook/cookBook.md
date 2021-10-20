@@ -19,6 +19,7 @@
 1. [Оптимизационные запросы](optimization.md)
 1. [Разбор скрипта Плоский архив](flatArchive.md)
 1. [Цепочки скриптов и деревья выбора](scriptChains.md)
+1. [Разбор скрипта Частичное копирование справочников](partialListCopy.md) <== ГОТОВ ==>
 1. [Разбор скрипта интеграции MS SQL](integrationMSSQL.md)
 1. [Разбор скрипта интеграции FTP](integrationFTP.md)
 1. [Разбор скрипта интеграции OData](integrationOData.md)
