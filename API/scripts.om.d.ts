@@ -1402,19 +1402,31 @@ export namespace Http {
 
         /**
          * Limit to first 50MB of response data
+         * @param length Default 100MB
+         * @param catchEof Default true
          */
-        getStringData(): string;
+        getStringData(length?: number, catchEof?: boolean): string;
 
         /**
          * Limit to parse first 50MB of response data
          */
         getStringDataLikeJson(): object | boolean;
 
+        /**
+         * @param length Default 1MB
+         */
+        getStringDataGenerator(length?: number): null | string;
+
+        /**
+         * @param length Default 1MB
+         */
+        getBinaryDataGenerator(length?: number): null | string;
+
         getStatusCode(): number;
 
         isOk(): boolean;
 
-        getErrors(): ResponseErrors | null;
+        getErrors(): ResponseErrors;
     }
 
     export interface Verify {
