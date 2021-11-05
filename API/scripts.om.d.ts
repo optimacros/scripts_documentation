@@ -1415,12 +1415,12 @@ export namespace Http {
         /**
          * @param length Default 1MB
          */
-        getStringDataGenerator(length?: number): null | string;
+        getStringDataGenerator(length?: number): string[];
 
         /**
          * @param length Default 1MB
          */
-        getBinaryDataGenerator(length?: number): null | string;
+        getBinaryDataGenerator(length?: number): string[];
 
         getStatusCode(): number;
 
