@@ -1426,7 +1426,7 @@ export namespace Http {
 
         isOk(): boolean;
 
-        getErrors(): ResponseErrors;
+        getErrors(): ResponseErrors | null;
     }
 
     export interface Verify {
