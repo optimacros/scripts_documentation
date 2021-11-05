@@ -1401,7 +1401,7 @@ export namespace Http {
         headers(): ObjectOfStringArray;
 
         /**
-         * Limit to first 50MB of response data
+         * Limit to first 100MB of response data
          * @param length Default 100MB
          * @param catchEof Default true
          */
