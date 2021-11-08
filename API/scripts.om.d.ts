@@ -1401,14 +1401,26 @@ export namespace Http {
         headers(): ObjectOfStringArray;
 
         /**
-         * Limit to first 50MB of response data
+         * Limit to first 100MB of response data
+         * @param length Default 100MB
+         * @param catchEof Default true
          */
-        getStringData(): string;
+        getStringData(length?: number, catchEof?: boolean): string;
 
         /**
          * Limit to parse first 50MB of response data
          */
         getStringDataLikeJson(): object | boolean;
+
+        /**
+         * @param length Default 1MB
+         */
+        getStringDataGenerator(length?: number): string[];
+
+        /**
+         * @param length Default 1MB
+         */
+        getBinaryDataGenerator(length?: number): string[];
 
         getStatusCode(): number;
 
