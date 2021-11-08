@@ -771,14 +771,16 @@ getMessage(): string
 ```ts
 interface Response {
 	headers(): ObjectOfStringArray;
-	getStringData(): string;
+	getStringData(length?: number, catchEof?: boolean): string;
 	getStringDataLikeJson(): Object | boolean;
+	getStringDataGenerator(length?: number): string[];
+	getBinaryDataGenerator(length?: number): string[];
 	getStatusCode(): number;
 	isOk(): boolean;
 	getErrors(): ResponseErrors;
 }
 ```
-Интерфейс ответа HTTP-сервера.
+Интерфейс ответа HTTP-сервера. Является [ленивым](https://ru.wikipedia.org/wiki/Ленивые_вычисления). Предоставленные функции чтения данных ответа: `getStringData()`, `getStringDataLikeJson()`, `getStringDataGenerator()`, `getBinaryDataGenerator()` — фактически берут данные из одного источника, и не рекомендуется их комбинировать.
 
 &nbsp;
 
@@ -790,9 +792,9 @@ headers(): ObjectOfStringArray
 &nbsp;
 
 ```js
-getStringData(): string
+getStringData(length?: number, catchEof?: boolean): string
 ```
-Возвращает первые `50 Мбайт` тела ответа.
+Возвращает данные ответа. Размер данных ограничен лимитом в `length` байт. Параметр `length` может принимать значения от `1 байта` до `100 Мбайт = 100 * 2`<sup>20</sup>` байт`; значение по умолчанию: `100 Мбайт`. Если размер данных превышает лимит и `catchEof === true`, выбрасывается исключение. Значение `catchEof` по умолчанию: `true`.
 
 &nbsp;
 
@@ -800,6 +802,20 @@ getStringData(): string
 getStringDataLikeJson(): Object | boolean
 ```
 Получает первые `50 Мбайт` тела ответа, прогоняет их через функцию [`JSON.parse()`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) и возвращает её результат или `false` в случае ошибки.
+
+&nbsp;
+
+```js
+getStringDataGenerator(length?: number): string[];
+```
+Возвращает генератор, при каждом обращении возвращающий данные от сервера в виде строки размером *около* `length` байт. Параметр `length` может принимать значения от `1 байта` до `1 Мбайта = 2`<sup>20</sup>` байт`; значение по умолчанию: `1 Мбайт`. Несмотря на то, что размер данных задаётся в байтах, строки хранятся в кодировке `UTF-8`, и если последний многобайтовый символ возвращаемого куска данных не полностью помещается в заданный лимит, строка не будет обрезана на середине символа. Вместо этого генератор обрежет строку точно между символами `UTF-8` и вернёт результат размером чуть менее `length` байт. При следующем обращении к генератору указанный символ будет первым символом возвращаемой строки, чья длина теперь может быть чуть больше `length` байт.
+
+&nbsp;
+
+```js
+getBinaryDataGenerator(length?: number): string[];
+```
+Возвращает генератор, при каждом обращении возвращающий данные от сервера в виде строки размером *ровно* `length` байт. Параметр `length` может принимать значения от `1 байта` до `1 Мбайта = 2`<sup>20</sup>` байт`; значение по умолчанию: `1 Мбайт`.
 
 &nbsp;
 
