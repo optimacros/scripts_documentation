@@ -801,7 +801,7 @@ getStringData(length?: number, catchEof?: boolean): string
 ```js
 getStringDataLikeJson(): Object | boolean
 ```
-Получает первые `50 Мбайт` тела ответа, прогоняет их через функцию [`JSON.parse()`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) и возвращает её результат или `false` в случае ошибки.
+Получает первые `length` байт тела ответа, прогоняет их через функцию [`JSON.parse()`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) и возвращает её результат или `false` в случае ошибки. Величина `length` – значение по умолчанию аналогичного параметра функции `getStringData()`.
 
 &nbsp;
 
