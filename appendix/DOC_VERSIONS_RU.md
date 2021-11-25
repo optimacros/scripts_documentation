@@ -1,7 +1,7 @@
 # История изменений
 
 ## 24/11/2021
-* В интерфейс [`Http.Response`](../API/http.md#Response) добавлены функции `getStringDataGenerator()` и `getBinaryDataGenerator()`, изменено поведение функций `getStringData()`, изменено описание функции `getStringDataLikeJson()`.
+* В интерфейс [`Http.Response`](../API/http.md#Response) добавлены функции `getStringDataGenerator()` и `getBinaryDataGenerator()`, изменено поведение функции `getStringData()`, изменено описание функции `getStringDataLikeJson()`.
 * В разделе [`Расширенные возможности`](../advancedFeatues/advancedFeatues.md) написаны пункты [`Лимиты времени и памяти`](../advancedFeatues/limits.md) и [`Блокировка модели`](../advancedFeatues/modelLock.md).
 * В [`Курс молодого бойца`](../cookBook/cookBook.md) добавлены уроки по разбору скриптов [`частичного копирования справочников`](../cookBook/partialListCopy.md) и [`свёртки справочников`](../cookBook/listReduce.md).
 * В план [`Курса молодого бойца`](../cookBook/cookBook.md) добавлены ещё три урока по разборам скриптов: Передача контекста, VBA Template Export, View Cleaner.
