@@ -217,7 +217,7 @@ columnsFilter(data: string | string[] | number | number[]): Pivot
 ```js
 withoutValues(): Pivot
 ```
-Устанавливает признак загрузки с сервера данных о мультикубе без значений ячеек. В этом случае функции интерфейса [`Cell`](#Cell) [`getValue()`](#getValue), [`getNativeValue()`](#getNativeValue) и [`getContextValue()`](#getContextValue) будут возвращать `null`, однако функции [`Cell`](#Cell).[`setValue()`](#Cell.setValue), [`Cells`](#Cells).[`setValue()`](#Cells.setValue) и [`CellBuffer`](./common.md#CellBuffer).[`apply()`](#apply) не теряют свою магическую силу. Возвращает `this`.
+Устанавливает признак загрузки с сервера данных о мультикубе без значений ячеек. В этом случае функции интерфейса [`Cell`](#Cell) [`getValue()`](#Cell.getValue), [`getNativeValue()`](#Cell.getNativeValue) и [`getContextValue()`](#getContextValue) будут возвращать `null`, однако функции [`Cell`](#Cell).[`setValue()`](#Cell.setValue), [`Cells`](#Cells).[`setValue()`](#Cells.setValue) и [`CellBuffer`](./common.md#CellBuffer).[`apply()`](#apply) не теряют свою магическую силу. Возвращает `this`.
 
 Эта функция существенно ускоряет работу с мультикубами в тех случаях, когда нужно записать данные, но не читать их.
 
@@ -683,7 +683,7 @@ setValue(value: number | string | null)
 
 &nbsp;
 
-<a name="getValue"></a>
+<a name="Cell.getValue"></a>
 ```js
 getValue(): number | string | null
 ```
@@ -691,13 +691,13 @@ getValue(): number | string | null
 
 &nbsp;
 
-<a name="getNativeValue"></a>
+<a name="Cell.getNativeValue"></a>
 ```js
 getNativeValue(): number | string | null
 ```
 Возвращает самородное значение клетки, зависящее от формата. Если клетка имеет формат справочника, то возвращается [`longId`](#longId). 
 
-В противном случае возвращает то же, что и [`getValue()`](#getValue).
+В противном случае возвращает то же, что и [`getValue()`](#Cell.getValue).
 
 &nbsp;
 
@@ -714,7 +714,7 @@ getContextValue(): string | null
 ```js
 definitions(): number[]
 ```
-То же, что и [`CubeCell.definitions`](./cubeCell.md#CubeCell.definitions).
+То же, что и [`CubeCell.definitions()`](./cubeCell.md#CubeCell.definitions).
 
 &nbsp;
 
