@@ -127,7 +127,6 @@ interface MulticubeTab extends Tab {
 ```js
 cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```
-
 Очищает всё содержимое кубов `cubesIdentifiers` или весь мультикуб при вызове без параметров. Возвращает `this`.
 
 &nbsp;
