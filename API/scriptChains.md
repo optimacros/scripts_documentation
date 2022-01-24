@@ -187,28 +187,28 @@ makeMacrosAction(identifier: string | number): ResultMacrosAction
 ```js
 makeDashboardOpenAction(identifier: string | number): ResultOpenAction
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) дашборда. ***Не работает.***
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) дашборда.
 
 &nbsp;
 
 ```js
 makeContextTableOpenAction(identifier: string | number): ResultOpenAction
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) контекстной таблицы. ***Не работает.***
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) контекстной таблицы.
 
 &nbsp;
 
 ```js
 makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) мультикуба, `view` означает имя или [`longId`](./views.md#longId) представления. ***Не работает.***
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) мультикуба, `view` означает имя или [`longId`](./views.md#longId) представления.
 
 &nbsp;
 
 ```js
 makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) справочника, `view` означает имя или [`longId`](./views.md#longId) представления. ***Не работает.***
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) справочника, `view` означает имя или [`longId`](./views.md#longId) представления.
 
 &nbsp;
 
