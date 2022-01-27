@@ -190,7 +190,7 @@ interface MysqlConnectorBuilder extends SqlConnectorBuilder {
 	loadImportBuilder(): MysqlImportBuilder;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL). Интерфейс наследуется от [`SqlConnectorBuilder`](#SqlConnectorBuilder).
 
 &nbsp;
 
@@ -208,7 +208,7 @@ interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 	loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server). Интерфейс наследуется от [`SqlConnectorBuilder`](#SqlConnectorBuilder).
 
 &nbsp;
 
@@ -240,7 +240,7 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
 	setTNS(value: string): OracleConnectorBuilder;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`.
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#SqlConnectorBuilder).
 
 &nbsp;
 

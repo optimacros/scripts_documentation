@@ -23,7 +23,7 @@ interface OptimizationRequestTab extends Tab {
 	run(name: string): { success: boolean, error: undefined | string };
 }
 ```
-Запускает оптимизационный запрос `name`. Возвращает объект с данными об исполнении.
+Запускает оптимизационный запрос `name`. Возвращает объект с данными об исполнении. Интерфейс наследуется от [`Tab`](./views.md#Tab).
 
 &nbsp;
 
