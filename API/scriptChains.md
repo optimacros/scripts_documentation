@@ -114,7 +114,7 @@ interface ResultMacrosAction extends ResultBaseAction {
 	environmentInfo(): EnvironmentInfo;
 }
 ```
-Интерфейс действия запуска скрипта.Наследуется от [`ResultBaseAction`](#ResultBaseAction).
+Интерфейс действия запуска скрипта. Наследуется от [`ResultBaseAction`](#ResultBaseAction).
 
 &nbsp;
 
