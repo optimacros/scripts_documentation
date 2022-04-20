@@ -744,6 +744,9 @@ export interface Filesystem {
     upload(from: string, to: string): boolean;
 
     download(from: string, to: string): boolean;
+    
+    //2.0 only
+    makeLocalFile(hash: string, path: string): string;
 
     makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 
