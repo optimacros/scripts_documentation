@@ -144,6 +144,35 @@ export interface ExportResult {
     moveToLocal(path: string): this;
 }
 
+export const enum ExporterEncoding {
+    UTF = 'utf',
+    WINDOWS1251 = 'win'
+}
+
+export const enum ExporterFileExtension {
+    CSV = 'csv',
+    XLS = 'xls',
+    XLSX = 'xlsx',
+    TXT = 'txt',
+    ZIP = 'zip'
+}
+
+export const enum ExporterCsvDelimiter {
+    COMMA = ',',
+    SEMICOLON = ';',
+    TAB = '\t'
+}
+
+export const enum ExporterCsvEnclosure {
+    DOUBLE_QUOTE = '"',
+    SINGLE_QUOTE = "'"
+}
+
+export const enum ExporterCsvEscape {
+    BACKSLASH = '\',
+    DOUBLE_QUOTE = '"'
+}
+
 export interface Exporter {
     setEncoding(encoding: ExporterEncoding): this;
 
