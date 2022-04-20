@@ -1581,6 +1581,27 @@ interface MysqlConnectorBuilder extends SqlConnectorBuilder {
     loadImportBuilder(): MysqlImportBuilder;
 }
 
+interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
+    setAccount(account: string): SnowflakeConnectorBuilder;
+
+    setRegion(region: string): SnowflakeConnectorBuilder;
+
+    /**
+     * Configuring OCSP Checking
+     * Default is false
+     * @param insecure
+     */
+    setInsecure(insecure: boolean): SnowflakeConnectorBuilder;
+
+    setWarehouse(warehouse: string): SnowflakeConnectorBuilder;
+
+    setSchema(schema: string): SnowflakeConnectorBuilder;
+
+    setRole(role: string): SnowflakeConnectorBuilder;
+
+    setProtocol(protocol: string): SnowflakeConnectorBuilder;
+}
+
 export interface Connectors {
     mysql(): MysqlConnectorBuilder;
 
@@ -1589,6 +1610,8 @@ export interface Connectors {
     sqlServer(): MicrosoftSqlConnectorBuilder;
 
     oracle(): OracleConnectorBuilder;
+    
+    snowflake(): SnowflakeConnectorBuilder;
 
     mongodb(): Mongodb.ConnectorBuilder;
 
