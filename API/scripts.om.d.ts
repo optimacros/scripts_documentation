@@ -169,7 +169,7 @@ export const enum ExporterCsvEnclosure {
 }
 
 export const enum ExporterCsvEscape {
-    BACKSLASH = '\',
+    BACKSLASH = '\\',
     DOUBLE_QUOTE = '"'
 }
 
