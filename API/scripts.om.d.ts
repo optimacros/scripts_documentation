@@ -349,11 +349,11 @@ export interface StorageExporter extends Exporter {
     setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
 }
 
-interface SyncResult {
+export interface SyncResult {
     getReportPath(): string;
 }
 
-interface SyncBuilder {
+export interface SyncBuilder {
     /**
      * @param modelId Source model string identifier or name
      */
@@ -379,7 +379,7 @@ interface SyncBuilder {
     sync(): SyncResult;
 }
 
-interface SyncMulticubeBuilder extends SyncBuilder {
+export interface SyncMulticubeBuilder extends SyncBuilder {
     setOmitEmptyRows(status: boolean): SyncMulticubeBuilder;
 
     setOmitSummaryRows(status: boolean): SyncMulticubeBuilder;
@@ -387,7 +387,7 @@ interface SyncMulticubeBuilder extends SyncBuilder {
     setUseCodeInsteadLabel(status: boolean): SyncMulticubeBuilder;
 }
 
-interface SyncListBuilder extends SyncBuilder {
+export interface SyncListBuilder extends SyncBuilder {
     setViewId(viewId: number): SyncListBuilder;
 
     setSrcToDesListMap(map: {
@@ -406,7 +406,7 @@ interface SyncListBuilder extends SyncBuilder {
     setReportFileFormat(format: string): SyncListBuilder;
 }
 
-interface CubesTab extends Tab {
+export interface CubesTab extends Tab {
 
 }
 
@@ -530,7 +530,7 @@ export interface ListImporter extends Importer {
     getUpdatedPropertiesOnParentLevels(): boolean;
 }
 
-interface CustomPropertiesTab extends Tab {
+export interface CustomPropertiesTab extends Tab {
 
 }
 
@@ -599,7 +599,7 @@ export interface UserInfo {
     getRole(): EntityInfo;
 }
 
-interface ExportObfuscationState {
+export interface ExportObfuscationState {
     setPath(path: string): ExportObfuscationState;
 
     setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState;
@@ -1597,7 +1597,7 @@ export namespace WinAgent {
     }
 }
 
-interface MysqlImportResult {
+export interface MysqlImportResult {
     hasErrors(): boolean;
 
     getErrorOutput(): string;
@@ -1611,65 +1611,65 @@ interface MysqlImportResult {
     getStats(): object;
 }
 
-interface MysqlImportBuilder {
-    setTable(name: string): MysqlImportBuilder;
+export interface MysqlImportBuilder {
+    setTable(name: string): this;
 
-    setDelimiter(delimiter: string): MysqlImportBuilder;
+    setDelimiter(delimiter: string): this;
 
-    setLineDelimiter(delimiter: string): MysqlImportBuilder;
+    setLineDelimiter(delimiter: string): this;
 
-    setEnclosure(enclosure: string): MysqlImportBuilder;
+    setEnclosure(enclosure: string): this;
 
-    setEscape(escape: string): MysqlImportBuilder;
+    setEscape(escape: string): this;
 
-    setThreads(threads: number): MysqlImportBuilder;
+    setThreads(threads: number): this;
 
-    setVerbose(verbose: boolean): MysqlImportBuilder;
+    setVerbose(verbose: boolean): this;
 
-    setFirstIgnoreLines(count: number): MysqlImportBuilder;
+    setFirstIgnoreLines(count: number): this;
 
-    setLockTable(status: boolean): MysqlImportBuilder;
+    setLockTable(status: boolean): this;
 
-    setForce(status: boolean): MysqlImportBuilder;
+    setForce(status: boolean): this;
 
-    setDeleteAllRows(status: boolean): MysqlImportBuilder;
+    setDeleteAllRows(status: boolean): this;
 
-    setCompress(status: boolean): MysqlImportBuilder;
+    setCompress(status: boolean): this;
 
-    setIgnoreDuplicates(status: boolean): MysqlImportBuilder;
+    setIgnoreDuplicates(status: boolean): this;
 
-    setReplace(status: boolean): MysqlImportBuilder;
+    setReplace(status: boolean): this;
 
-    setColumns(names: string[]): MysqlImportBuilder;
+    setColumns(names: string[]): this;
 
-    setFilePath(path: string): MysqlImportBuilder;
+    setFilePath(path: string): this;
 
     import(): MysqlImportResult;
 }
 
-interface MysqlConnectorBuilder extends SqlConnectorBuilder {
-    loadImportBuilder(): MysqlImportBuilder;
+export interface MysqlConnectorBuilder extends SqlConnectorBuilder {
+    loadImportBuilder(): this;
 }
 
-interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
-    setAccount(account: string): SnowflakeConnectorBuilder;
+export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
+    setAccount(account: string): this;
 
-    setRegion(region: string): SnowflakeConnectorBuilder;
+    setRegion(region: string): this;
 
     /**
      * Configuring OCSP Checking
      * Default is false
      * @param insecure
      */
-    setInsecure(insecure: boolean): SnowflakeConnectorBuilder;
+    setInsecure(insecure: boolean): this;
 
-    setWarehouse(warehouse: string): SnowflakeConnectorBuilder;
+    setWarehouse(warehouse: string): this;
 
-    setSchema(schema: string): SnowflakeConnectorBuilder;
+    setSchema(schema: string): this;
 
-    setRole(role: string): SnowflakeConnectorBuilder;
+    setRole(role: string): this;
 
-    setProtocol(protocol: string): SnowflakeConnectorBuilder;
+    setProtocol(protocol: string): this;
 }
 
 export interface Connectors {
