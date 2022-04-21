@@ -18,9 +18,9 @@ export interface Cell {
 
     definitions(): number[];
 
-    columns(): LabelsGroup;
+    columns(): LabelsGroup | undefined;
 
-    rows(): LabelsGroup;
+    rows(): LabelsGroup | undefined;
 
     dropDown(): Labels;
 
@@ -33,7 +33,7 @@ export interface Cell {
 export interface Cells {
     all(): Cell[];
 
-    first(): Cell;
+    first(): Cell | undefined;
 
     setValue(value: number | string | null);
 
@@ -47,9 +47,9 @@ export interface Cells {
 export interface Label {
     longId(): number;
 
-    name(): string;
+    name(): string | null;
 
-    code(): string;
+    code(): string | null;
 
     alias(): string | null;
 
@@ -71,13 +71,13 @@ export interface Labels {
 
     count(): number;
 
-    all(): LabelsGroup[];
+    all(): (LabelsGroup | undefined)[];
 
-    get(index: number): LabelsGroup | null;
+    get(index: number): LabelsGroup | undefined;
 
     chunkInstance(): GridRangeChunk;
 
-    findLabelByLongId(longId: number): Label | null;
+    findLabelByLongId(longId: number): Label | undefined;
 }
 
 export interface GridRangeChunk {
@@ -103,7 +103,7 @@ export interface GridRange {
 }
 
 export interface GridDimension {
-    getDimensionEntity(): EntityInfo;
+    getDimensionEntity(): EntityInfo | undefined;
 }
 
 export interface GridPageSelector extends GridDimension {
@@ -137,7 +137,7 @@ export interface Grid {
 export interface ExportResult {
     mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): this;
 
-    getHash(): string | null;
+    getHash(): string;
 
     copyToLocal(path: string): this;
 
@@ -206,33 +206,40 @@ export interface Exporter {
 export interface Pivot {
     create(): Grid;
 
-    rowsFilter(data: string[] | string | number | number[]): Pivot;
-
-    columnsFilter(data: string[] | string | number | number[]): Pivot;
+    rowsFilter(...data: string[] | number[]): Pivot;
+    
+    columnsFilter(...data: string[] | number[]): Pivot;
 
     withoutValues(): Pivot;
 
     addDependentContext(identifier: number): Pivot
 }
 
-export interface NumericElementsCreator {
-    setCount(count: number): NumericElementsCreator;
+export interface BaseElementsCreator {
+    setPositionAfter(relativeLongId: number): this;
 
-    setPositionAfter(relativeLongId: number): NumericElementsCreator;
+    setPositionBefore(relativeLongId: number): this;
 
-    setPositionBefore(relativeLongId: number): NumericElementsCreator;
+    setPositionStart(): this;
 
-    setPositionStart(): NumericElementsCreator;
+    setPositionEnd(): this;
 
-    setPositionEnd(): NumericElementsCreator;
-
-    setPositionChildOf(parentLongId: number): NumericElementsCreator;
+    setPositionChildOf(parentLongId: number): this;
 
     create(): number[];
 }
 
+export interface NumericElementsCreator implements BaseElementsCreator {
+    setCount(count: number): this;
+}
+
+export interface NamedElementsCreator implements BaseElementsCreator {
+    setElementNames(names: string[]): this;
+}
+
 export interface ElementsCreator {
     numeric(): NumericElementsCreator;
+    named(): NamedElementsCreator;
 }
 
 export interface ElementsDeleter {
@@ -254,7 +261,7 @@ export interface ElementsReorder {
 export interface Tab {
     pivot(viewName?: string): Pivot;
 
-    open(name: string): Tab;
+    open(name: string): Tab | undefined;
 
     elementsCreator(): ElementsCreator;
 
@@ -317,9 +324,9 @@ export interface CubeCellUpdaterBuilder {
 }
 
 export interface CubeFormatInfo {
-    getFormatTypeEntity(): EntityInfo;
+    getFormatTypeEntity(): EntityInfo | undefined;
 
-    getDimensionEntity(): EntityInfo | null;
+    getDimensionEntity(): EntityInfo | undefined;
 }
 
 export interface CubeInfo extends EntityInfo {
@@ -416,7 +423,7 @@ export interface MulticubeTab extends Tab {
 }
 
 export interface MulticubesTab extends Tab {
-    open(name: string): MulticubeTab;
+    open(name: string): MulticubeTab | undefined;
 }
 
 export interface Multicubes {
@@ -425,6 +432,15 @@ export interface Multicubes {
     syncMulticube(): SyncMulticubeBuilder;
 }
 
+export interface TimePeriodSubsetTab extends Tab {
+
+}
+
+export interface TimePeriodTab extends Tab {
+    subsetsTab(): TimePeriodSubsetTab;
+}
+
+
 export interface TypePeriod {
     tableTab(): Tab;
 }
@@ -432,7 +448,11 @@ export interface TypePeriod {
 export interface Times {
     optionsTab(): TimeOptionsTab;
 
+    //v1.0 only
     typePeriod(identifier: string | number): TypePeriod;
+    
+    //v2.0 only
+    timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 
 export interface TimeOptionsTab extends Tab {
@@ -445,8 +465,13 @@ export interface VersionsTab extends Tab {
     copyVersion(from: string, to: string): any;
 }
 
+export interface VersionSubsetsTab extends Tab {
+
+}
+
 export interface Versions {
-    versionsTab(): VersionsTab
+    versionsTab(): VersionsTab;
+    versionSubsetsTab(): VersionSubsetsTab;
 }
 
 export interface CSVParams {
@@ -472,9 +497,9 @@ export interface Importer {
 
     setFilePath(path: string): this;
 
-    getFilePath(): string;
+    getFilePath(): string | undefined;
 
-    getReportFilePath(): string | null;
+    getReportFilePath(): string | undefined;
 
     import(): this;
 }
@@ -510,19 +535,32 @@ interface CustomPropertiesTab extends Tab {
 }
 
 export interface ListTab extends Tab {
-    listSubsetTab(): ListSubsetsTab;
+    listSubsetTab(): ListSubsetsTab; //OBSOLETE in favor of subsetTab()
+    
+    subsetTab(): ListSubsetsTab;
+    
+    propertiesTab(): ListPropertiesTab;
+    
+    accessModelTab(): ListAccessModelTab;
     
     customPropertiesTab(): CustomPropertiesTab;
 
     importer(): ListImporter;
 }
 
-export interface ListSubsetsTab extends Tab {
+export interface ListChildTab extends Tab {
     listTab(): ListTab;
 }
 
+export type ListSubsetsTab = ListChildTab;
+export type ListPropertiesTab = ListChildTab;
+
+export interface ListAccessModelTab extends ListChildTab {
+    isEnabled(): boolean;
+}
+
 export interface ListsTab extends Tab {
-    open(name: string): ListTab;
+    open(name: string): ListTab | undefined;
 }
 
 export interface Lists {
@@ -625,9 +663,9 @@ export interface ResultBaseAction {
 }
 
 export interface EnvironmentInfo {
-    set(key: string, value: any): EnvironmentInfo;
+    set(key: string, value: unknown): this;
 
-    get(key: string): any;
+    get(key: string): unknown;
 }
 
 export interface ResultMacrosAction extends ResultBaseAction {
@@ -731,7 +769,7 @@ export interface Filesystem {
 
     getTimestamp(path: string): number;
 
-    getSize(path: string): number | false;
+    getSize(path: string): number;
 
     createDir(path: string): boolean;
 
@@ -766,19 +804,19 @@ export interface BaseAdapter {
 export interface FTPAdapter extends BaseAdapter {
     setHost(host: string): FTPAdapter;
 
-    getHost(): string;
+    getHost(): string | undefined;
 
     setPort(port: number): FTPAdapter;
 
-    getPort(): number;
+    getPort(): number | undefined;
 
     setUsername(username: string): FTPAdapter;
 
-    getUsername(): string;
+    getUsername(): string | undefined;
 
     setPassword(password: string): FTPAdapter;
 
-    getPassword(): string;
+    getPassword(): string | undefined;
 
     setRoot(root: string): FTPAdapter;
 
@@ -786,7 +824,7 @@ export interface FTPAdapter extends BaseAdapter {
 
     setPassive(passive: boolean): FTPAdapter;
 
-    getPassive(): boolean;
+    getPassive(): boolean | undefined;
 
     setSsl(ssl: boolean): FTPAdapter;
 
@@ -810,7 +848,7 @@ export interface CsvReader {
      */
     changeFileCharset(charset: string): CsvReader;
 
-    generator(): string[][];
+    generator(): [][];
 }
 
 export interface CsvWriter {
@@ -870,24 +908,24 @@ export interface Optimization {
 
 export interface SqlQueryResult {
     count(): number;
-
-    generator(likeArray?: boolean): object[] | string[][];
-
+    
+    generator(likeArray?: boolean): object | object[];
+    
     all(): object[];
-
-    first(): object | null;
-
-    column(columnName: string): string[];
-
-    cell(columnName: string, rowIndex?: number): string | null;
-
-    updated(): number;
-
-    lastId(): number | string;
+    
+    first(): object | undefined;
+    
+    column(columnName: string): unknown[];
+    
+    cell(columnName: string, rowIndex?: number): unknown;
+    
+    updated(): number | undefined;
+    
+    lastId(): number | string | undefined;
 }
 
 export interface SqlQueryBuilder {
-    execute(sql: string, bindings?: object | (string | number | boolean | null)[]): SqlQueryResult;
+    execute(sql: string, bindings?: object): SqlQueryResult;
 }
 
 export interface SqlConnection {
@@ -1138,10 +1176,10 @@ export namespace Mongodb {
          * @param options
          */
         setOptions(options: {
-            capped: boolean,
-            autoIndexId: boolean,
-            size: number,
-            max: number
+            capped?: boolean,
+            autoIndexId?: boolean,
+            size?: number,
+            max?: number
         }): CollectionCreator;
 
         setName(name: string): CollectionCreator;
@@ -1203,7 +1241,7 @@ export namespace Mongodb {
 
         find(filter: object, options?: FilterOptions): Cursor;
 
-        findOne(filter: object, options?: FilterOptions): object;
+        findOne(filter: object, options?: FilterOptions): object | undefined;
 
         insertOne(document: object): InsertOneResult;
 
@@ -1326,7 +1364,7 @@ export namespace Http {
 
         setHost(host: string): boolean;
 
-        getPort(): number | null;
+        getPort(): number | undefined;
 
         setPort(port: number | string): boolean;
 
@@ -1336,11 +1374,11 @@ export namespace Http {
 
         setPassword(password: string): boolean;
 
-        getPassword(): string | null;
+        getPassword(): string | undefined;
 
         setFragment(fragment: string): boolean;
 
-        getFragment(): string | null;
+        getFragment(): string | undefined;
 
         params(): UrlParams;
     }
@@ -1401,15 +1439,15 @@ export namespace Http {
     export interface Options {
         setConnTimeout(seconds: number): boolean;
 
-        getConnTimeout(): number;
+        getConnTimeout(): number | undefined;
 
         setReqTimeout(seconds: number): boolean;
 
-        getReqTimeout(): number;
+        getReqTimeout(): number | undefined;
 
         setCanDecodeContent(value: boolean): boolean;
 
-        getCanDecodeContent(): boolean;
+        getCanDecodeContent(): boolean | undefined;
 
         allowRedirects(): AllowRedirects;
 
@@ -1458,7 +1496,7 @@ export namespace Http {
 
         isOk(): boolean;
 
-        getErrors(): ResponseErrors | null;
+        getErrors(): ResponseErrors | undefined;
     }
 
     export interface Verify {
