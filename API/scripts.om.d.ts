@@ -784,7 +784,7 @@ export interface Filesystem {
     download(from: string, to: string): boolean;
     
     //2.0 only
-    makeLocalFile(hash: string, path: string): string;
+    makeLocalFile(hash: string, path?: string): string;
 
     makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 
