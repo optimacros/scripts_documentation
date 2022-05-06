@@ -512,6 +512,8 @@ export interface StorageImporter extends Importer {
     setEncoding(encoding: string): this;
 
     setDateFormat(dateFormat: string): this;
+    
+    setMappings(mappings: object): this;
 }
 
 export interface ListImporter extends Importer {
