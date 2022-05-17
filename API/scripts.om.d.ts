@@ -581,6 +581,84 @@ export interface CellBuffer {
     canLoadCellsValues(value: boolean): CellBuffer;
 }
 
+export namespace ApiService {
+    export interface RequestFileInfo {
+        getName(): string;
+
+        getFileName(): string;
+
+        getFileSize(): number;
+
+        copyToLocal(path: string): this;
+    }
+
+    export interface RequestFileInfos {
+        get(key: string): RequestFileInfo | null;
+
+        getAll(): RequestFileInfo[];
+    }
+
+    export interface ParamInfo {
+        getName(): string;
+
+        getValue(): string | null;
+    }
+
+    export interface ParamInfos {
+        get(key: string): ParamInfo | null;
+
+        getAll(): ParamInfo[];
+    }
+
+    export interface ResponseCookieInfos {
+        append(name: string, value: string, ttl: number): this;
+    }
+
+    export interface ResponseHeaderInfos {
+        append(name: string, value: string): this;
+    }
+
+    export interface ResponseFileInfos {
+        append(fileId: string): this;
+    }
+
+    export interface ResponseBodyParamInfos {
+        append(name: string, value: unknown): this;
+    }
+
+    export interface ResponseInfo {
+        getCookieInfos(): ResponseCookieInfos;
+
+        getFileInfos(): ResponseFileInfos;
+
+        getBodyParamInfos(): ResponseBodyParamInfos;
+    }
+
+    export interface ClientInfo {
+        getAgent(): string;
+
+        getIp(): string;
+    }
+
+    export interface RequestInfo {
+        getMethod(): string;
+
+        getClientInfo(): ClientInfo;
+
+        getCookieInfos(): ParamInfos;
+
+        getHeaderInfos(): ParamInfos;
+
+        getUrlParamInfos(): ParamInfos;
+
+        getFileInfos(): RequestFileInfos;
+
+        getBodyParamInfos(): ParamInfos;
+
+        getResponseInfo(): ResponseInfo;
+    }
+}
+
 export interface RequestManager {
     log(message: string, print?: boolean): RequestManager;
 
@@ -740,6 +818,8 @@ export interface Common {
     entitiesInfo(): EntitiesInfo;
 
     copyData(): CopyData;
+    
+    apiServiceRequestInfo(): ApiService.RequestInfo | null;
 }
 
 export interface FileMeta {
