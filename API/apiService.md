@@ -31,7 +31,7 @@ getMethod(): string
 ```js
 getClientInfo(): ClientInfo
 ```
-Возвращает ссылку на интерфейс [`ClientInfo`](#ClientInfo) для получения информации о клиенте.
+Возвращает ссылку на интерфейс [`ClientInfo`](#ClientInfo).
 
 &nbsp;
 
@@ -59,7 +59,7 @@ getUrlParamInfos(): ParamInfos
 ```js
 getFileInfos(): RequestFileInfos
 ```
-Возвращает ссылку на интерфейс [`RequestFileInfos`](#RequestFileInfos) для получения информации о загруженных клиентом файлах при регистрации API запросов.
+Возвращает ссылку на интерфейс [`RequestFileInfos`](#RequestFileInfos).
 
 &nbsp;
 
@@ -116,7 +116,7 @@ interface ParamInfos {
 ```js
 get(key: string): ParamInfo | null
 ```
-Возвращает ссылку на интерфейс [`ParamInfo`](#ParamInfo) для параметра по ключу `key`.
+Возвращает ссылку на интерфейс [`ParamInfo`](#ParamInfo) по ключу `key`.
 
 &nbsp;
 
@@ -159,14 +159,14 @@ interface RequestFileInfos {
     getAll(): RequestFileInfo[];
 }
 ```
-Интерфейс, представляющий набор загруженных клиентом файлов.
+Интерфейс для получения информации о загруженных клиентом файлах при регистрации API запросов.
 
 &nbsp;
 
 ```js
 get(key: string): RequestFileInfo | null
 ```
-Возвращает ссылку на интерфейс [`RequestFileInfo`](#RequestFileInfo) для файла по ключу `key`, переданного в теле запроса.
+Возвращает ссылку на интерфейс [`RequestFileInfo`](#RequestFileInfo) по ключу `key`, переданного в теле запроса.
 
 &nbsp;
 
@@ -186,21 +186,21 @@ interface RequestFileInfo {
     copyToLocal(path: string): this;
 }
 ```
-Интерфейс для получения информации о загруженном файле.
+Интерфейс для получения информации о загруженном клиентом файле.
 
 &nbsp;
 
 ```js
 getName(): string
 ```
-Возвращает имя.
+Возвращает имя файла.
 
 &nbsp;
 
 ```js
 getFileName(): string
 ```
-Возвращает имя файла.
+Возвращает имя файла с расширением.
 
 &nbsp;
 
