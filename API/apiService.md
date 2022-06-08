@@ -7,7 +7,7 @@
 ### Интерфейс RequestInfo<a name="RequestInfo"></a>
 ```ts
 interface RequestInfo {
-	getMethod(): string;
+    getMethod(): string;
     getClientInfo(): ClientInfo;
     getCookieInfos(): ParamInfos;
     getHeaderInfos(): ParamInfos;
@@ -80,7 +80,7 @@ getResponseInfo(): ResponseInfo
 ### Интерфейс ClientInfo<a name="ClientInfo"></a>
 ```ts
 interface ClientInfo {
-	getAgent(): string;
+    getAgent(): string;
     getIp(): string;
 }
 ```
@@ -105,7 +105,7 @@ getIp(): string
 ### Интерфейс ParamInfos<a name="ParamInfos"></a>
 ```ts
 interface ParamInfos {
-	get(key: string): ParamInfo | null;
+    get(key: string): ParamInfo | null;
     getAll(): ParamInfo[];
 }
 ```
@@ -116,7 +116,7 @@ interface ParamInfos {
 ```js
 get(key: string): ParamInfo | null
 ```
-Возвращает ссылку на интерфейс [`ParamInfo`](#ParamInfo) по ключу `key`.
+Возвращает ссылку на интерфейс [`ParamInfo`](#ParamInfo) по имени поля `key`.
 
 &nbsp;
 
@@ -130,7 +130,7 @@ getAll(): ParamInfo[]
 ### Интерфейс ParamInfo<a name="ParamInfo"></a>
 ```ts
 interface ParamInfo {
-	getName(): string;
+    getName(): string;
     getValue(): string | null;
 }
 ```
@@ -155,18 +155,18 @@ getValue(): string | null
 ### Интерфейс RequestFileInfos<a name="RequestFileInfos"></a>
 ```ts
 interface RequestFileInfos {
-	get(key: string): RequestFileInfo | null;
+    get(key: string): RequestFileInfo | null;
     getAll(): RequestFileInfo[];
 }
 ```
-Интерфейс для получения информации о загруженных клиентом файлах при регистрации API запросов.
+Интерфейс для получения информации о загруженных клиентом файлах.
 
 &nbsp;
 
 ```js
 get(key: string): RequestFileInfo | null
 ```
-Возвращает ссылку на интерфейс [`RequestFileInfo`](#RequestFileInfo) по ключу `key`, переданного в теле запроса.
+Возвращает ссылку на интерфейс [`RequestFileInfo`](#RequestFileInfo) по имени поля `key`, переданного в теле запроса.
 
 &nbsp;
 
@@ -180,7 +180,7 @@ getAll(): RequestFileInfo[]
 ### Интерфейс RequestFileInfo<a name="RequestFileInfo"></a>
 ```ts
 interface RequestFileInfo {
-	getName(): string;
+    getName(): string;
     getFileName(): string;
     getFileSize(): number;
     copyToLocal(path: string): this;
@@ -214,14 +214,14 @@ getFileSize(): number
 ```js
 copyToLocal(path: string): this
 ```
-Выполняет копирование файла из области мета данных зарегистрированного API запроса в [`локальную`](#local) директорию скрипта.
+Выполняет копирование файла из области мета данных зарегистрированного API запроса в локальную файловую систему. Локальная файловая система — временная папка на сервере, которая является [`рабочей директорией скрипта`](../appendix/glossary.md#scriptDir).
 
 &nbsp;
 
 ### Интерфейс ResponseInfo<a name="ResponseInfo"></a>
 ```ts
 interface ResponseInfo {
-	getCookieInfos(): ResponseCookieInfos;
+    getCookieInfos(): ResponseCookieInfos;
     getFileInfos(): ResponseFileInfos;
     getBodyParamInfos(): ResponseBodyParamInfos;
 }
@@ -254,7 +254,7 @@ getBodyParamInfos(): ResponseBodyParamInfos
 ### Интерфейс ResponseCookieInfos<a name="ResponseCookieInfos"></a>
 ```ts
 interface ResponseCookieInfos {
-	append(name: string, value: string, ttl: number): this;
+    append(name: string, value: string, ttl: number): this;
 }
 ```
 Интерфейс для формирования параметров в HTTP заголовке [`Cookies`](https://ru.wikipedia.org/wiki/Cookie).
@@ -271,7 +271,7 @@ append(name: string, value: string, ttl: number): this
 ### Интерфейс ResponseFileInfos<a name="ResponseFileInfos"></a>
 ```ts
 interface ResponseFileInfos {
-	append(fileId: string): this;
+    append(fileId: string): this;
 }
 ```
 Интерфейс для отправки файлов в ответе.
@@ -288,7 +288,7 @@ append(fileId: string): this
 ### Интерфейс ResponseBodyParamInfos<a name="ResponseBodyParamInfos"></a>
 ```ts
 interface ResponseBodyParamInfos {
-	append(name: string, value: unknown): this;
+    append(name: string, value: unknown): this;
 }
 ```
 Интерфейс для формирования параметров в ответе.
