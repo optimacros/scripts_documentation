@@ -623,7 +623,7 @@ export namespace ApiService {
     }
 
     export interface ResponseBodyParamInfos {
-        append(name: string, value: unknown): this;
+        append(name: string, value: number | string | boolean | object): this;
     }
 
     export interface ResponseInfo {

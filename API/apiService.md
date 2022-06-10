@@ -281,14 +281,14 @@ interface ResponseFileInfos {
 ```js
 append(fileId: string): this
 ```
-Позволяет передать файл. В функцию передается индентификатор файла `fileId`, зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry).
+Позволяет передать файл. В функцию передается индентификатор файла `fileId`, зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Идентификатор файла (хэш файла) можно получить с помощью функции `makeGlobalFile()`, которая находиться в интерфейсе [`Filesystem`](./fs.md#Filesystem).
 
 &nbsp;
 
 ### Интерфейс ResponseBodyParamInfos<a name="ResponseBodyParamInfos"></a>
 ```ts
 interface ResponseBodyParamInfos {
-    append(name: string, value: unknown): this;
+    append(name: string, value: number | string | boolean | object): this;
 }
 ```
 Интерфейс для формирования параметров в ответе.
