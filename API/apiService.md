@@ -296,7 +296,7 @@ interface ResponseBodyParamInfos {
 &nbsp;
 
 ```js
-append(name: string, value: unknown): this
+append(name: string, value: number | string | boolean | object): this
 ```
 Позволяет передать свойство `name` с значением `value`. Принимает значения с типами number, string, bool, object, array.
 
