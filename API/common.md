@@ -10,6 +10,7 @@ interface Common {
 	resultInfo(): ResultInfo;
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
+	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -63,6 +64,13 @@ entitiesInfo(): EntitiesInfo
 copyData(): CopyData
 ```
 Возвращает ссылку на интерфейс [`CopyData`](#CopyData).
+
+&nbsp;
+
+```js
+apiServiceRequestInfo(): ApiService.RequestInfo | null;
+```
+Возвращает ссылку на интерфейс [`ApiService.RequestInfo`](./apiService.md#RequestInfo).
 
 &nbsp;
 

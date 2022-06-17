@@ -308,6 +308,10 @@ export interface CubeCellSelector {
 export interface CubeCellSelectorBuilder {
     setFormula(formula: string): this;
 
+    setStartCell(longIds: number[]): this;
+
+    setMaxCount(count: number): this;
+
     load(): CubeCellSelector;
 }
 
@@ -623,7 +627,7 @@ export namespace ApiService {
     }
 
     export interface ResponseBodyParamInfos {
-        append(name: string, value: unknown): this;
+        append(name: string, value: number | string | boolean | object): this;
     }
 
     export interface ResponseInfo {
