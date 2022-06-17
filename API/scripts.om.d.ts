@@ -308,6 +308,10 @@ export interface CubeCellSelector {
 export interface CubeCellSelectorBuilder {
     setFormula(formula: string): this;
 
+    setStartCell(longIds: number[]): this;
+
+    setMaxCount(count: number): this;
+
     load(): CubeCellSelector;
 }
 

@@ -114,6 +114,8 @@ getDimensionEntity(): EntityInfo | null
 ```ts
 interface CubeCellSelectorBuilder {
 	setFormula(formula: string): this;
+	setStartCell(longIds: number[]): this;
+	setMaxCount(count: number): this;
 	load(): CubeCellSelector;
 }
 ```
@@ -125,6 +127,20 @@ interface CubeCellSelectorBuilder {
 setFormula(formula: string): this
 ```
 Устанавливает формулу выбора.
+
+&nbsp;
+
+```js
+setStartCell(longIds: number[]): this
+```
+Устанавливает клетку, начиная с которой будет выполняться выбор. В качестве аргумента передается массив идентификаторов тех элементов измерений куба, которыми определена клетка. Массив идентификаторов можно получить с помощью метода `getDimensionIds()` интерфейса [`CubeCell`](#CubeCell).
+
+&nbsp;
+
+```js
+setMaxCount(count: number): this
+```
+Устанавливает максимальное количесво выбранных клеток.
 
 &nbsp;
 
