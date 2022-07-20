@@ -668,6 +668,7 @@ interface Cell {
 	rows(): LabelsGroup;
 	dropDown(): Labels;
 	getFormatType(): string;
+	isEditable(): boolean;
 }
 ```
 Интерфейс, представляющий клетку таблицы.
@@ -743,6 +744,13 @@ getFormatType(): string
 ```
 Возвращает строку с форматом клетки. Возможные значения: `'NUMBER'`, `'BOOLEAN'`, 
 `'ENTITY'`, `'TIME_ENTITY'`, `'LINE_ITEM_SUBSET'`, `'VERSION'`, `'TEXT'`, `'DATE'`, `'NONE'`.
+
+&nbsp;
+
+```js
+isEditable(): boolean
+```
+Возвращает признак возможности редактирования ячейки пользователем.
 
 &nbsp;
 

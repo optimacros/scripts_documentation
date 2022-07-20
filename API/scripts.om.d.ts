@@ -26,7 +26,6 @@ export interface Cell {
 
     getFormatType(): string;
 
-    //2.0 only
     isEditable(): boolean;
 }
 
