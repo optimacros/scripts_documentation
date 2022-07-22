@@ -64,7 +64,7 @@ if (!ENV) {
 Далее мы сохраняем ссылку на вкладку справочника-приёмника для будущего использования и устанавливаем свойство `NAME_PROPERTY` задавая в настройках таблицы [фильтрацию](../API/views.md#Pivot) и по строкам, и по столбцам, после чего в ней остаётся одна ячейка, поэтому можно не пользоваться [`CellBuffer`](../API/common.md#CellBuffer):
 
 ```js
-const dstListTab = om.lists.listsTab().open(ENV.DST_LIST)
+const dstListTab = om.lists.listsTab().open(ENV.DST_LIST);
 
 // Set formula for NAME_PROPERTY
 if (ENV.NAME_PROPERTY) {
@@ -114,7 +114,7 @@ for (const chunk of pivot.create().range().generator()) {
 		if (elem.List === ENV.SRC_LIST) {
 			srcListData.push(elem);
 		}
-	})
+	});
 }
 ```
 
@@ -263,7 +263,7 @@ for (const chunk of dstListTab.pivot().columnsFilter(ENV.PROPERTIES).rowsFilter(
 		}
 
 		ind++;
-	})
+	});
 }
 cb.apply();
 ```

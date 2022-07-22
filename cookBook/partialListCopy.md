@@ -45,7 +45,7 @@ if (!ENV) {
 }
 
 if (ENV.SRC_PROPS.length !== ENV.DST_PROPS.length) {
-	throw new Error('Списки свойств приёмника и источника разной длины!')
+	throw new Error('Списки свойств приёмника и источника разной длины!');
 }
 ```
 
@@ -57,17 +57,17 @@ if (ENV.SRC_PROPS.length !== ENV.DST_PROPS.length) {
 function readGrid(pivot, gridData, idCol, exc) {
 	for (const chunk of pivot.create().range().generator()) {
 		chunk.rows().all().forEach(rowLabels => {
-			const elem = {}
+			const elem = {};
 
 			for (const cell of rowLabels.cells().all()) {
 				const col = cell.columns().first().name();
-				elem[col] = cell.getValue()
+				elem[col] = cell.getValue();
 			}
 			
 			if (exc.findIndex(ex => elem[idCol] === ex) === -1) {
-				gridData.push(elem)
+				gridData.push(elem);
 			}
-		})
+		});
 	}
 }
 ```
@@ -79,7 +79,7 @@ function readGrid(pivot, gridData, idCol, exc) {
 const srcListTab = om.lists.listsTab().open(ENV.SRC_LIST);
 let srcData = [];
 om.common.requestInfo().logStatusMessage(`Reading source list`, true);
-readGrid(srcListTab.pivot().columnsFilter(ENV.SRC_PROPS), srcData, ENV.SRC_PROPS[0], ENV.SRC_EXC)
+readGrid(srcListTab.pivot().columnsFilter(ENV.SRC_PROPS), srcData, ENV.SRC_PROPS[0], ENV.SRC_EXC);
 ```
 
 Здесь заметим, что используется функция [`logStatusMessage()`](../API/common.md#RequestManager.logStatusMessage), которая информирует пользователя о происходящем этапе работы и одновременно отправляет сообщение в вывод скрипта. И что таблица справочника считывается не целиком, а фильтруется по именам свойств, заданных в настройках `ENV`. В нашем примере справочник-источник выглядит так:
@@ -110,7 +110,7 @@ om.common.requestInfo().logStatusMessage(`Reading destination list and changing 
 for (const chunk of dstListTab.pivot().columnsFilter(ENV.DST_PROPS.concat(['Item Name'])).create().range().generator()) {
 	chunk.rows().all().forEach(rowLabels => {
 		// ...
-	})
+	});
 }
 ```
 
@@ -373,7 +373,7 @@ for (const chunk of dstListTab.pivot().columnsFilter(ENV.DST_PROPS).rowsFilter(n
 			cb.set(cell, srcData[ind][ENV.SRC_PROPS[colInd]]);
 		}
 		++ind;
-	})
+	});
 }
 cb.apply();
 ```

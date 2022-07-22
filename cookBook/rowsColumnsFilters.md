@@ -166,7 +166,7 @@ const pageSelectedNames = [];
 definitionInfo.getPageSelectors().forEach(pageSelector => {
     const dimensionEntity = pageSelector.getDimensionEntity();
     const selectedEntity = pageSelector.getSelectedEntity();
-    pageSelectedNames.push(`${dimensionEntity.name()} (${selectedEntity.name()})`)
+    pageSelectedNames.push(`${dimensionEntity.name()} (${selectedEntity.name()})`);
 });
 ```
 
@@ -177,7 +177,7 @@ const multicubesTab = om.multicubes.multicubesTab();
 const multicubeTab = multicubesTab.open('Условия и расчёты');
 
 const pivot = multicubeTab.pivot('Условия и расчёты 3');
-const grid =  pivot.create();
+const grid = pivot.create();
 
 console.log(`Rows: ${grid.rowCount()} \n`);
 console.log(`Columns: ${grid.columnCount()} \n`);
@@ -203,7 +203,7 @@ const pageSelectedNames = [];
 definitionInfo.getPageSelectors().forEach(pageSelector => {
     const dimensionEntity = pageSelector.getDimensionEntity();
     const selectedEntity = pageSelector.getSelectedEntity();
-    pageSelectedNames.push(`${dimensionEntity.name()} (${selectedEntity.name()})`)
+    pageSelectedNames.push(`${dimensionEntity.name()} (${selectedEntity.name()})`);
 });
 
 console.log(`Filter dimensions: ${pageSelectedNames.join(', ')} \n`);

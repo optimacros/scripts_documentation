@@ -7,14 +7,14 @@
 По аналогии с предыдущим уроком для получения доступа к ячейкам представления мультикуба необходимо открыть раздел мультикубов, выбрать один из доступных, указать необходимое представление и обратиться к таблице с данными:
 
 ```js
-const multicubesTab = om.multicubes.multicubesTab()
-const multicubeTab = multicubesTab.open('Условия и расчёты')
+const multicubesTab = om.multicubes.multicubesTab();
+const multicubeTab = multicubesTab.open('Условия и расчёты');
 
-const pivot = multicubeTab.pivot('Условия и расчёты 3')
-const grid = pivot.create()
+const pivot = multicubeTab.pivot('Условия и расчёты 3');
+const grid = pivot.create();
 
-const range = grid.range()
-const generator = range.generator()
+const range = grid.range();
+const generator = range.generator();
 ```
 
 Для получения данных из таблицы представления мультикуба используется функция `range()` интерфейса [Grid](../API/views.md#Grid). Она выбирает прямоугольник представления мультикуба, и если не передавать в неё аргументы, то будет захватывать всю таблицу.
@@ -40,8 +40,8 @@ const generator = range.generator()
 ```js
 for (const chunk of generator) {
     chunk.rows().all().forEach(labelsGroup => {
-        console.log(labelsGroup.first().label())
-    })
+        console.log(labelsGroup.first().label());
+    });
 }
 ```
 
@@ -54,27 +54,27 @@ for (const chunk of generator) {
 ```js
 for (const chunk of generator) {
     chunk.rows().all().forEach(labelsGroup => {
-        console.log(`Row label: ${labelsGroup.first().label()} \n`)
-    })
+        console.log(`Row label: ${labelsGroup.first().label()} \n`);
+    });
 }
 ```
 
 Итоговый код:
 
 ```js
-const multicubesTab = om.multicubes.multicubesTab()
-const multicubeTab = multicubesTab.open('Условия и расчёты')
+const multicubesTab = om.multicubes.multicubesTab();
+const multicubeTab = multicubesTab.open('Условия и расчёты');
 
-const pivot = multicubeTab.pivot('Условия и расчёты 3')
-const grid =  pivot.create()
+const pivot = multicubeTab.pivot('Условия и расчёты 3');
+const grid =  pivot.create();
 
-const range = grid.range()
-const generator = range.generator()
+const range = grid.range();
+const generator = range.generator();
 
 for (const chunk of generator) {
     chunk.rows().all().forEach(labelsGroup => {
-        console.log(`Row label: ${labelsGroup.first().label()} \n`)
-    })
+        console.log(`Row label: ${labelsGroup.first().label()} \n`);
+    });
 }
 ```
 
@@ -99,37 +99,37 @@ for (const chunk of generator) {
 ```js
 for (const chunk of generator) {
     chunk.rows().all().forEach(labelsGroup => {
-        const rowLabels = []
+        const rowLabels = [];
         labelsGroup.all().forEach(label => {
-            rowLabels.push(label.label())
-        })
-				
-        console.log(`Row label: ${rowLabels.join(', ')} \n`)
-    })
+            rowLabels.push(label.label());
+        });
+		
+        console.log(`Row label: ${rowLabels.join(', ')} \n`);
+    });
 }
 ```
 
 Итоговый код:
 
 ```js
-const multicubesTab = om.multicubes.multicubesTab()
-const multicubeTab = multicubesTab.open('Условия и расчёты')
+const multicubesTab = om.multicubes.multicubesTab();
+const multicubeTab = multicubesTab.open('Условия и расчёты');
 
-const pivot = multicubeTab.pivot('Условия и расчёты 3')
-const grid =  pivot.create()
+const pivot = multicubeTab.pivot('Условия и расчёты 3');
+const grid =  pivot.create();
 
-const range = grid.range()
-const generator = range.generator()
+const range = grid.range();
+const generator = range.generator();
 
 for (const chunk of generator) {
     chunk.rows().all().forEach(labelsGroup => {
-        const rowLabels = []
+        const rowLabels = [];
         labelsGroup.all().forEach(labels => {
-            rowLabels.push(labels.label())
-        })
+            rowLabels.push(labels.label());
+        });
 				
-        console.log(`Row label: ${rowLabels.join(', ')} \n`)
-    })
+        console.log(`Row label: ${rowLabels.join(', ')} \n`);
+    });
 }
 ```
 
@@ -146,29 +146,29 @@ for (const chunk of generator) {
 Для получения доступа к значениям клеток используется интерфейс [Cell](../API/views.md#Cell). Функции интерфейса позволяют считывать и изменять значения клеток. Для получения значений хранящихся в ячейках вызывается функция `getValue()`. В массив `cellValues` будем сохранять полученные функцией `getValue()` значения. Итоговый код:
 
 ```js
-const multicubesTab = om.multicubes.multicubesTab()
-const multicubeTab = multicubesTab.open('Условия и расчёты')
+const multicubesTab = om.multicubes.multicubesTab();
+const multicubeTab = multicubesTab.open('Условия и расчёты');
 
-const pivot = multicubeTab.pivot('Условия и расчёты 3')
-const grid =  pivot.create()
+const pivot = multicubeTab.pivot('Условия и расчёты 3');
+const grid =  pivot.create();
 
-const range = grid.range()
-const generator = range.generator()
+const range = grid.range();
+const generator = range.generator();
 
 for (const chunk of generator) {
     chunk.rows().all().forEach(labelsGroup => {
-        const rowLabels = []
+        const rowLabels = [];
         labelsGroup.all().forEach(labels => {
-            rowLabels.push(labels.label())
-        })
-        console.log(`Row label: ${rowLabels.join(', ')} \n`)
+            rowLabels.push(labels.label());
+        });
+        console.log(`Row label: ${rowLabels.join(', ')} \n`);
 				
-        const cellValues = []
+        const cellValues = [];
         labelsGroup.cells().all().forEach(cell => {
-            cellValues.push(cell.getValue())
-        })
-        console.log(`Cells value: ${cellValues.join(', ')} \n \n`)
-    })
+            cellValues.push(cell.getValue());
+        });
+        console.log(`Cells value: ${cellValues.join(', ')} \n \n`);
+    });
 }
 ```
 
@@ -179,14 +179,14 @@ for (const chunk of generator) {
 Если нас интересуют значения только в одном столбце и не планируется считывать данные из других, то одним из вариантов написания кода будет вызов функции `columnsFilter()` интерфейса [Pivot](../API/views.md#Pivot). Создадим переменную `monthFilter`, зададим ей значение из необходимого столбца, например, `'Jan 21'`, и передадим её в функцию:
 
 ```js
-const pivot = multicubeTab.pivot('Условия и расчёты 3')
-const monthFilter = 'Jan 21'
-const grid =  pivot.columnsFilter(monthFilter).create()
+const pivot = multicubeTab.pivot('Условия и расчёты 3');
+const monthFilter = 'Jan 21';
+const grid =  pivot.columnsFilter(monthFilter).create();
 
-const range = grid.range()
-const generator = range.generator()
+const range = grid.range();
+const generator = range.generator();
 
-console.log(`Filter on columns: ${monthFilter} \n`)
+console.log(`Filter on columns: ${monthFilter} \n`);
 ```
 
 Т. к. в результате работы скрипта будут получены значения только одного столбца, массив `cellValues` можно не использовать.
@@ -194,30 +194,30 @@ console.log(`Filter on columns: ${monthFilter} \n`)
 Итоговый код:
 
 ```js
-const multicubesTab = om.multicubes.multicubesTab()
-const multicubeTab = multicubesTab.open('Условия и расчёты')
+const multicubesTab = om.multicubes.multicubesTab();
+const multicubeTab = multicubesTab.open('Условия и расчёты');
 
-const pivot = multicubeTab.pivot('Условия и расчёты 3')
-const monthFilter = 'Jan 21'
-const grid =  pivot.columnsFilter(monthFilter).create()
+const pivot = multicubeTab.pivot('Условия и расчёты 3');
+const monthFilter = 'Jan 21';
+const grid =  pivot.columnsFilter(monthFilter).create();
 
-const range = grid.range()
-const generator = range.generator()
+const range = grid.range();
+const generator = range.generator();
 
-console.log(`Filter on columns: ${monthFilter} \n`)
+console.log(`Filter on columns: ${monthFilter} \n`);
 
 for (const chunk of generator) {
     chunk.rows().all().forEach(labelsGroup => {
-        const rowLabels = []
+        const rowLabels = [];
         labelsGroup.all().forEach(labels => {
-            rowLabels.push(labels.label())
-        })
+            rowLabels.push(labels.label());
+        });
 				
-        console.log(`Row label: ${rowLabels.join(', ')} \n`)
+        console.log(`Row label: ${rowLabels.join(', ')} \n`);
         labelsGroup.cells().all().forEach(cell => {
-            console.log(`Cells value: ${cell.getValue()} \n`)
-        })
-    })
+            console.log(`Cells value: ${cell.getValue()} \n`);
+        });
+    });
 }
 ```
 
