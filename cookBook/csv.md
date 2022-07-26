@@ -2,10 +2,9 @@
 # Экспорт и импорт из мультикуба в csv
 Обычный метод модификации данных мультикуба использует функцию ```generator()``` интерфейса `GridRange`. Получаем интерфейс `GridRangeChunk`, который построчно читается. Модифицируем необходимые строки, записываем изменения в буфер и передаем значения на сервер. Основной недостаток этого метода - очень медленная работа при большом размере мультикуба. Как показала практика, гораздо быстрее с этой задачей справляется метод, использующий модифицирование данных через csv файлы. Именно об этом методе пойдет речь далее. Алгоритм метода включает в себя 4 пункта: выгрузку данных в файл, чтение и модификацию, запись в новый файл, импорт в мультикуб новых данных.
 
-**При экспорте-импорте CSV файла, мультикуб экспорта должен быть плоским, т.е. не включать в себя фильтры!** Это происходит потому, что функция csvReader.generator()` не читает фильтры. Если это необходимо создайте нужное представление мультикуба.
+Система выгружает в csv данные только по текущему выбранному фильтру во вью. Если нужны все данные МК, то нужен плоский вид, если будут фильтры — то выгрузится всё только по выбранным фильтрам.
 
 В качестве примера возможной задачи возьмем мультикуб нескольких игроков. В зависимости от уровня игрока зависит ценность получаемой награды. Наша задача - раздать игрокам их награды. Мультикуб называется "Уровни игроков". Внутри него 2 куба: "Приз" и "Уровень игрока". Также я добавил 2 справочника: "Months" и "Имена игроков". Если уровень игрока меньше или равен пятому, он получает "Меч третьего уровня", если больше пятого, уровень игрока становится равен случайному числу от 5 до 15 и получает "Меч Иссинхдора".
-Мультикуб "Уровни игроков" незаполненный:
 
 ![Скрин мультикуб незаполненный](./pic/csv_MKView.jpg)
 
@@ -25,11 +24,11 @@ const multicubeTab = multicubesTab.open("Уровни игроков");
 const pivot = multicubeTab.pivot();
 const grid = pivot.create();
 ```
-Теперь нам нужен интерфейс экспорта таблицы. Существует интерфейс [Exporter](../API/exportImport.md#Exporter) базового экспорта таблицы и интерфейс [StorageExporter](../API/exportImport.md#StorageExporter) быстрого экспорта таблицы. Рассмотрим их различия. Интерфейс `StorageExporter` наследуется от `Exporter`. Доступен только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена.
+Теперь нам нужен интерфейс экспорта таблицы. Существует интерфейс [Exporter](../API/exportImport.md#Exporter) базового экспорта таблицы и интерфейс [StorageExporter](../API/exportImport.md#StorageExporter) быстрого экспорта таблицы. Рассмотрим их различия. Интерфейс `StorageExporter` наследуется от `Exporter`. Доступен только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов (отображаемых имен) экспортируются только их имена. По умолчанию обычный экспорт, если есть псевдонимы, выводит псевдоним или имя как в справочнике.
 
 На практике рассмотрим отличия в csv файлах. Для этого сначала сохраним экспортированные файлы по локальным путям и скачаем их.  
 
-Получим доступ к интерфейсу быстрого экспорта таблицы `StorageExporter` с помощью функции `storageExporter()`. Устанавливаем формат экспортируемого файла csv, используя функцию `setFormat`. Для чтения файла в нужной кодировке используем функцию `setEncoding`. Будьте очень осторожны с изменением кодировки файла!!! Функция `generator()` перестает работать при изменениях кодировки. Строки становятся не читаемыми. **После скачивания файла функцию `setEncoding()` из кода необходимо удалить!**
+Получим доступ к интерфейсу быстрого экспорта таблицы `StorageExporter` с помощью функции `storageExporter()`. Устанавливаем формат экспортируемого файла csv, используя функцию `setFormat`. Для чтения файла в нужной кодировке используем функцию `setEncoding`. Будьте осторожны с изменением кодировки файла. Так как кодировка файла поменялась, необходимо будет указать новую кодировку при чтении csv.
 
 Производим экспорт файла в соответствии с настройками с помощью функции `export()` и получаем ссылку на интерфейс [ExportResult](../API/exportImport.md#ExportResult). Сохраним экспортированный файл по пути `storageExporter` с помощью функции `copyToLocal()` для последующего доступа по сохраненному пути.
 ```js
@@ -52,7 +51,7 @@ const resultInfo = om.common.resultInfo();
 resultInfo.addFileHash(hashStorageExport);
 resultInfo.addFileHash(hashExport);
 ```
-Скрипт может скачивать только последний файл. Скачиваем оба файла по очереди, удаляя соответствующие строки кода.
+Для скачивания нескольких файлов нужно в браузере разрешить скачивание нескольких файлов. Или скачиваем файлы по очереди.
 Итоговый код:
 ```js
 const multicubesTab = om.multicubes.multicubesTab();
@@ -81,8 +80,9 @@ resultInfo.addFileHash(hashExport);
 
 ![Скрин быстрого экспорта](./pic/csv_StorageExporter.jpg)
 
-Файлы отличаются различной группировкой параметров. В случае базового экспорта в каждой строке идут измерения справочников месяцев и имен игроков. Затем идет название одного куба и его значение. На следующей строчке считывается следующий куб и его значение.
-В случае быстрого экспорта файл реализован немного по-другому. В нем нет измерения Cubes, вместо этого написаны все значения имен кубов. Далее в каждой строчке даны сразу все значения кубов, а не по отдельности как в первом случае. 
+Обычный формат экспорта выдаёт первой строкой — выбранные фильтры, далее — сначала перечисление измерений в строках, потом перечисление измерений в колонках.
+Потом идут строки с заголовками столбцов (по числу измерений), при этом ячейки, соответствующие заголовкам строк пустые. Потом идут строки как во вью.
+Общее правило такое: обычная выгрузка выдаёт вью, как оно есть в модели, быстрая выгрузка выводит все в виде столбцов.
 Я выбрал интерфейс StorageExporter из-за его сильного удобства. За одну строку мы сразу считаем значения всех кубов мультикуба. Это позволяет просто запомнить индексы соответствующих кубов и обращаться к ним в массиве. Во втором случае при большом количестве кубов проблематично однозначно идентифицировать имя куба с его значением. К тому же, если потребуется получить несколько значений кубов одновременно, придется вручную запоминать каждое из них в переменную, что не очень удобно. Случай работы с интерфейсом `Exporter` в этом уроке описан не будет.
 
 Итоговый код:
@@ -101,12 +101,13 @@ const exportResult = storageExporter.export().copyToLocal("export");
 Теперь можно построчно читать данные входного мультикуба. 
 Получаем доступ к интерфейсу локальной файловой системы [Filesystem](../API/fs.md#Filesystem) с помощью функции `getPathObj()`, в качестве параметра передается путь файла `export`. Этот интерфейс хранит в себе путь к файлу и ссылку на файловую систему. Он понадобится для чтения файла по выбранному пути.
 
-Получим интерфейс [FilesDataManager](../API/csv.md#FilesDataManager) для чтения файла с помощью функции `csvReader()`, в качестве параметра укажем интерфейс PathObj. Чтобы прочитать файл построчно вызовем  функцию-генератор – `generator()` – интерфейса `CsvReader` возвращающую массив строк вида `string[][]`.
+Получим интерфейс [FilesDataManager](../API/csv.md#FilesDataManager) для чтения файла с помощью функции `csvReader()`, в качестве параметра укажем интерфейс PathObj. Не забываем, что кодировка сохраненного файла изменилась на "WINDOWS-1251", поэтому изменяем настройки интерфейса `CsvReader`. Для этого вызываем функцию `changeFileCharset` с параметром "WINDOWS-1251". Чтобы прочитать файл построчно вызовем  функцию-генератор – `generator()` – интерфейса `CsvReader` возвращающую массив строк вида `string[][]`.
 ```js
 const localFileSystem = om.filesystems.local();
 const filePath = localFileSystem.getPathObj("export");
 const fileManager = om.filesystems.filesDataManager();
-const csvReader = fileManager.csvReader(filePath);
+const csvReader = fileManager.csvReader(filePath)
+                             .changeFileCharset("WINDOWS-1251");
 const generator = csvReader.generator();
 ```
 Итоговый код:
@@ -123,35 +124,20 @@ const exportResult = storageExporter.export().copyToLocal("export");
 const localFileSystem = om.filesystems.local();
 const filePath = localFileSystem.getPathObj("export");
 const fileManager = om.filesystems.filesDataManager();
-const csvReader = fileManager.csvReader(filePath);
+const csvReader = fileManager.csvReader(filePath)
+                             .changeFileCharset("WINDOWS-1251");
 const generator = csvReader.generator();
 ```
 Посмотрим на структуру файла импорта, скачанного в предыдущий раз. Сначала идут заголовки измерений, внизу прописаны их значения.
 В первой строке файла слева направо читаем заголовки строк и столбцов. Дальше в строке прописаны названия всех кубов мультикуба. Мультикуб может содержать внутри себя очень много кубов. Модифицировать нам необходимо только несколько кубов, еще некоторое количество кубов нам необходимо прочитать.  Нам необходимо сохранить заголовки строк, столбов и их значения без изменений. Оставим названия тех кубов, которые нам нужны и поменяем их значения на необходимые.
-
-Для того, чтобы прочитать столбцы и строки измерений в каждой строчке файла, определим их общую длину. При построчном чтении эта часть останется без изменений.
-
-Используем функцию `getDefinitionInfo()` интерфейса `Grid` для доступа к интерфейсу [GridDefinitionInfo](../API/views.md#GridDefinitionInfo). Последовательно получим доступ к массивам объектов строк и столбцов с интерфейсом [GridDimension](..API/views.md#GridDimension), используя функции `getRowDimensions()`, `getColumnDimensions()`. Далее вычислим длины массивов, сложим их и вычтем единицу (измерение "Cubes"). Получается "Имена игроков" + "Months" - "Cubes" = 2. Два первых столбца меняться не будут.
-
-```js
-const definitionInfo = grid.getDefinitionInfo();
-const columnDimensions = definitionInfo.getColumnDimensions();
-const columnLength = columnDimensions.length;
-const rowDimensions = definitionInfo.getRowDimensions();
-const rowLength = rowDimensions.length;
-const dimensionsLength = rowLength + columnLength - 1;
-```
-Также необходим объект, содержащий названия кубов, которые необходимо перезаписать("valueCubes") и которые необходимо прочитать из строки("indexCubes") файла. По условию меняется два куба и читается куб "Уровень игрока".
+Для того, чтобы прочитать столбцы и строки измерений в каждой строчке файла, определим количество используемых справочников и выборок. В задаче используются только 2 справочника "Months" и "Имена игроков". Эта часть перезаписываться не будет.
+Также необходим объект, содержащий названия кубов, значения которых необходимо прочитать. По условию нам нужны оба значения кубов "Уровень игрока" и "Приз".
 ```js
 const CUBES_MK = {
-    valueCubes: {
         cubePrize: "Приз",
         cubePoints: "Уровень игрока"
-    },
-    indexCubes: {
-        cubePoints: "Уровень игрока"
-    }
-};
+}
+const dimensionsLength = 2;
 ```
 Т. к. среда Оptimacros рассчитана на работу с объектами, содержащими большие объёмы данных, запрос на получение этих данных реализован покусочно. Функция-генератор возвращает строковый массив, с которым можно работать в цикле.
 ```js
@@ -159,9 +145,10 @@ for (let rowArray of generator) {
 }
 ```
 
-Сначала прочитаем первую строку. Используем индикатор `firstLaunch`, чтобы прочитать только её. Массив `row` будет содержать экспортируемую строку. Далее проходимся циклом по строке. Если индекс элемента не является названием куба, добавим элемент в массив `row` без изменений. Это проверяется условием, что индекс меньше длины всех измерений. Также создаем и заполняем массив `headersFile` всех заголовков мультикуба, включая названия кубов. 
+Сначала прочитаем первую строку. Используем индикатор `firstLaunch`, чтобы прочитать только её. Массив `row` будет содержать экспортируемую строку. Далее проходимся циклом по строке. Если индекс элемента не является названием куба, добавим элемент в массив `row` без изменений. Это проверяется условием, что индекс меньше длины всех измерений. Индексы столбцов логично просто хранить в отдельном словаре, специально для этого предназначенном. В качестве словаря выступает объект `indexMap`. В него запишем названия всех кубов, чтобы в дальнейшем получить доступ к ним по индексу. Наименования кубов хранятся в объекте `CUBES_MK` и записываются отдельно в конец строки.
 ```js
 let firstLaunch = true;
+let indexMap = {};
 
 for (let rowArray of generator) {
     let row = [];
@@ -171,66 +158,11 @@ for (let rowArray of generator) {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-            headersFile.push(element);
-        })
-        firstLaunch = false;
-
-    }
-}
-```
-
-Далее записываем все названия кубов, которые будем менять. Для этого прочитаем объект `CUBES_MK.valueCubes`, содержащий названия кубов, которые мы перезапишем. Переберем все значения свойств объекта и запишем их в массив `row`.
-
-```js
-let firstLaunch = true;
-
-for (let rowArray of generator) {
-    let row = [];
-    
-    if (firstLaunch) {
-        rowArray.forEach((element,index) => {
-            if (index < dimensionsLength) {
-                row.push(element);
-            }
-            headersFile.push(element);
-        })
-        const headers = Object.values(CUBES_MK.valueCubes);
-        headers.forEach(header => {
-            row.push(header);
+            indexMap[element] = index;
         });
+        row.push(CUBES_MK.cubePoints);
+        row.push(CUBES_MK.cubePrize);
         firstLaunch = false;
-    }
-}
-```
-Теперь можно переходить к следующей строке. Но нам необходимо прочитать свойство "Уровень игрока" в каждой строке. Для этого нужно знать индекс столбца файла, по которому можно получить искомый куб. Названия кубов, которые необходимо прочитать, хранятся в объекте `CUBES_MK.indexCubes`. Напишем функцию, которая запишет в объект индексы кубов файла. Для начала получим массив `names`, хранящий все названия кубов.  В массиве `headersFile` хранятся все заголовки по порядку. Пройдемся по всем заголовкам массива `headersFile` и найдем искомый индекс нужного куба с помощью функции [findIndex()](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex). Метод `findIndex` возвращает индекс в массиве, если элемент удовлетворяет условию проверяющей функции. В качестве элементов выступают значения объекта, которые перебираются в цикле `forEach`. Затем найденный индекс добавится в объект. Далее вызываем функцию.
-
-```js
-function writeIndexCubes() 
-{
-    const names = Object.keys(CUBES_MK.indexCubes);
-    
-    names.forEach(name => {
-        const index = headersFile.findIndex(header =>header === CUBES_MK.indexCubes[name] );
-        CUBES_MK.indexCubes[name] = index;
-    });
-}
-
-for (let rowArray of generator) {
-    let row = [];
-    
-    if (firstLaunch) {
-        rowArray.forEach((element,index) => {
-            if (index < dimensionsLength) {
-                row.push(element);
-            }
-            headersFile.push(element);
-        })
-    const headers = Object.values(CUBES_MK.valueCubes);
-    headers.forEach(header => {
-        row.push(header);
-    });
-    writeIndexCubes();
-    firstLaunch = false;
     }
 }
 ```
@@ -244,25 +176,22 @@ for (let rowArray of generator) {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-            headersFile.push(element);
-        })
-    const headers = Object.values(CUBES_MK.valueCubes);
-    headers.forEach(header => {
-        row.push(header);
-    });
-    writeIndexCubes();
-    firstLaunch = false;
+            indexMap[element] = index;
+        });
+        row.push(CUBES_MK.cubePoints);
+        row.push(CUBES_MK.cubePrize);
+        firstLaunch = false;
     }
     else {
         rowArray.forEach((element,index) => {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-        })
+        });
     }
 }
 ```
-Далее изменяем кубы. Свойство объекта `CUBES_MK.indexCubes.cubePoints` содержит индекс куба 'Уровень игрока' в массиве `rowArray`. Обратимся по индексу к кубу и проверим, что он больше пяти. В зависимости от этого условия модифицируем кубы объекта `CUBES_MK.valueCubes`. Затем получим массив значений кубов `valueCubes`. Добавляем значения массива в массив `row`, предварительно используя `spread` оператор.
+Далее изменяем кубы. Свойство объекта `CUBES_MK.cubePoints` содержит индекс куба 'Уровень игрока' в массиве `rowArray`. Обратимся по индексу к кубу и проверим, что он больше пяти. В зависимости от этого условия добавляем приз для игрока. Записываем в строку уровень и приз.
 ```js
 for (let rowArray of generator) {
     let row = [];
@@ -273,30 +202,29 @@ for (let rowArray of generator) {
                 row.push(element);
             }
             headersFile.push(element);
-        })
-    const headers = Object.values(CUBES_MK.valueCubes);
-    headers.forEach(header => {
-        row.push(header);
-    });
-    writeIndexCubes();
-    firstLaunch = false;
+        });
+        const headers = Object.values(CUBES_MK.valueCubes);
+        headers.forEach(header => {
+            row.push(header);
+        });
+        writeIndexCubes();
+        firstLaunch = false;
     }
     else {
         rowArray.forEach((element,index) => {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-        })
-        if (rowArray[CUBES_MK.indexCubes.cubePoints] > 5) {
-            CUBES_MK.valueCubes.cubePoints = Math.round(Math.random() * 10) + 5;
-            CUBES_MK.valueCubes.cubePrize = "Меч Иссинхдора";
+        });
+        let points = rowArray[indexMap[CUBES_MK.cubePoints]];
+        if (points > 5) {
+            row.push(Math.round(Math.random() * 10) + 5);
+            row.push("Меч Иссинхдора");
         }
         else {
-            CUBES_MK.valueCubes.cubePoints = rowArray[CUBES_MK.indexCubes.cubePoints];
-            CUBES_MK.valueCubes.cubePrize = "Меч 3 уровня";
+            row.push(points);
+            row.push( "Меч 3 уровня");
         }
-        const valueCubes = Object.values(CUBES_MK.valueCubes);
-        row.push(...valueCubes);
     }
 }
 ```
@@ -304,13 +232,8 @@ for (let rowArray of generator) {
 Итоговый код: 
 ```js
 const CUBES_MK = {
-    valueCubes: {
         cubePrize: "Приз",
         cubePoints: "Уровень игрока"
-    },
-    indexCubes: {
-        cubePoints: "Уровень игрока"
-    }
 };
 
 const multicubesTab = om.multicubes.multicubesTab();
@@ -319,34 +242,21 @@ const multicubeTab = multicubesTab.open("Уровни игроков");
 const pivot = multicubeTab.pivot();
 const grid = pivot.create();
 
-const storageExporter = grid.storageExporter().setFormat("csv");
+const storageExporter = grid.storageExporter().setFormat("csv").setEncoding("WINDOWS-1251");
 const exportResult = storageExporter.export().copyToLocal("export"); 
+const resultInfo = om.common.resultInfo();
 
 const localFileSystem = om.filesystems.local();
 const filePath = localFileSystem.getPathObj("export");
 const fileManager = om.filesystems.filesDataManager();
-const csvReader = fileManager.csvReader(filePath);
+const csvReader = fileManager.csvReader(filePath)
+                             .changeFileCharset("WINDOWS-1251");
 const generator = csvReader.generator();
 
-const definitionInfo = grid.getDefinitionInfo();
-const columnDimensions = definitionInfo.getColumnDimensions();
-const columnLength = columnDimensions.length;
-const rowDimensions = definitionInfo.getRowDimensions();
-const rowLength = rowDimensions.length;
-const dimensionsLength = rowLength + columnLength - 1;
-
+const dimensionsLength = 2;
 let firstLaunch = true;
-const headersFile = [];
+let indexMap = {};
 
-function writeIndexCubes() 
-{
-    const names = Object.keys(CUBES_MK.indexCubes);
-    
-    names.forEach(name => {
-        const index = headersFile.findIndex(header =>header === CUBES_MK.indexCubes[name] );
-        CUBES_MK.indexCubes[name] = index;
-    });
-}
 for (let rowArray of generator) {
     let row = [];
     
@@ -355,31 +265,28 @@ for (let rowArray of generator) {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-            headersFile.push(element);
-        })
-    const headers = Object.values(CUBES_MK.valueCubes);
-    headers.forEach(header => {
-        row.push(header);
-    });
-    writeIndexCubes();
-    firstLaunch = false;
+
+            indexMap[element] = index;
+        });
+        row.push(CUBES_MK.cubePoints);
+        row.push(CUBES_MK.cubePrize);
+        firstLaunch = false;
     }
     else {
         rowArray.forEach((element,index) => {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-        })
-        if (rowArray[CUBES_MK.indexCubes.cubePoints] > 5) {
-            CUBES_MK.valueCubes.cubePoints = Math.round(Math.random() * 10) + 5;
-            CUBES_MK.valueCubes.cubePrize = "Меч Иссинхдора";
+        });
+        let points = rowArray[indexMap[CUBES_MK.cubePoints]];
+        if (points > 5) {
+            row.push(Math.round(Math.random() * 10) + 5);
+            row.push("Меч Иссинхдора");
         }
         else {
-            CUBES_MK.valueCubes.cubePoints = rowArray[CUBES_MK.indexCubes.cubePoints];
-            CUBES_MK.valueCubes.cubePrize = "Меч 3 уровня";
+            row.push(points);
+            row.push( "Меч 3 уровня");
         }
-        const valueCubes = Object.values(CUBES_MK.valueCubes);
-        row.push(...valueCubes);
     }
 }
 ```
@@ -395,19 +302,14 @@ for (let rowArray of generator) {
     writer.writeRow(rowArray);
 }
 
-writer.save("import","WINDOWS-1251");
+writer.save("import");
 ```
 Нам необходимо будет записать массив row в файл.
 Итоговый код:
 ```js
 const CUBES_MK = {
-    valueCubes: {
         cubePrize: "Приз",
         cubePoints: "Уровень игрока"
-    },
-    indexCubes: {
-        cubePoints: "Уровень игрока"
-    }
 };
 
 const multicubesTab = om.multicubes.multicubesTab();
@@ -416,35 +318,22 @@ const multicubeTab = multicubesTab.open("Уровни игроков");
 const pivot = multicubeTab.pivot();
 const grid = pivot.create();
 
-const storageExporter = grid.storageExporter().setFormat("csv");
+const storageExporter = grid.storageExporter().setFormat("csv").setEncoding("WINDOWS-1251");
 const exportResult = storageExporter.export().copyToLocal("export"); 
+const resultInfo = om.common.resultInfo();
 
 const localFileSystem = om.filesystems.local();
 const filePath = localFileSystem.getPathObj("export");
 const fileManager = om.filesystems.filesDataManager();
-const csvReader = fileManager.csvReader(filePath);
+const csvReader = fileManager.csvReader(filePath)
+                             .changeFileCharset("WINDOWS-1251");
 const generator = csvReader.generator();
 let writer = fileManager.csvWriter();
 
-const definitionInfo = grid.getDefinitionInfo();
-const columnDimensions = definitionInfo.getColumnDimensions();
-const columnLength = columnDimensions.length;
-const rowDimensions = definitionInfo.getRowDimensions();
-const rowLength = rowDimensions.length;
-const dimensionsLength = rowLength + columnLength - 1;
+const dimensionsLength = 2;
 
 let firstLaunch = true;
-const headersFile = [];
-
-function writeIndexCubes() 
-{
-    const names = Object.keys(CUBES_MK.indexCubes);
-    
-    names.forEach(name => {
-        const index = headersFile.findIndex(header =>header === CUBES_MK.indexCubes[name] );
-        CUBES_MK.indexCubes[name] = index;
-    });
-}
+let indexMap = {};
 
 for (let rowArray of generator) {
     let row = [];
@@ -454,31 +343,28 @@ for (let rowArray of generator) {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-            headersFile.push(element);
-        })
-    const headers = Object.values(CUBES_MK.valueCubes);
-    headers.forEach(header => {
-        row.push(header);
-    });
-    writeIndexCubes();
-    firstLaunch = false;
+
+            indexMap[element] = index;
+        });
+        row.push(CUBES_MK.cubePoints);
+        row.push(CUBES_MK.cubePrize);
+        firstLaunch = false;
     }
     else {
         rowArray.forEach((element,index) => {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-        })
-        if (rowArray[CUBES_MK.indexCubes.cubePoints] > 5) {
-            CUBES_MK.valueCubes.cubePoints = Math.round(Math.random() * 10) + 5;
-            CUBES_MK.valueCubes.cubePrize = "Меч Иссинхдора";
+        });
+        let points = rowArray[indexMap[CUBES_MK.cubePoints]];
+        if (points > 5) {
+            row.push(Math.round(Math.random() * 10) + 5);
+            row.push("Меч Иссинхдора");
         }
         else {
-            CUBES_MK.valueCubes.cubePoints = rowArray[CUBES_MK.indexCubes.cubePoints];
-            CUBES_MK.valueCubes.cubePrize = "Меч 3 уровня";
+            row.push(points);
+            row.push( "Меч 3 уровня");
         }
-        const valueCubes = Object.values(CUBES_MK.valueCubes);
-        row.push(...valueCubes);
     }
     writer.writeRow(row);
 }
@@ -503,16 +389,11 @@ resultInfo.addFileHash(hashReport);
 
 ![Скрин отчета после импорта](./pic/csv_reportFile.jpg)
 
-Итоговый код :
+Итоговый код:
 ```js
 const CUBES_MK = {
-    valueCubes: {
         cubePrize: "Приз",
         cubePoints: "Уровень игрока"
-    },
-    indexCubes: {
-        cubePoints: "Уровень игрока"
-    }
 };
 
 const multicubesTab = om.multicubes.multicubesTab();
@@ -521,36 +402,22 @@ const multicubeTab = multicubesTab.open("Уровни игроков");
 const pivot = multicubeTab.pivot();
 const grid = pivot.create();
 
-const storageExporter = grid.storageExporter().setFormat("csv");
+const storageExporter = grid.storageExporter().setFormat("csv").setEncoding("WINDOWS-1251");
 const exportResult = storageExporter.export().copyToLocal("export"); 
 const resultInfo = om.common.resultInfo();
 
 const localFileSystem = om.filesystems.local();
 const filePath = localFileSystem.getPathObj("export");
 const fileManager = om.filesystems.filesDataManager();
-const csvReader = fileManager.csvReader(filePath);
+const csvReader = fileManager.csvReader(filePath)
+                             .changeFileCharset("WINDOWS-1251");
 const generator = csvReader.generator();
 let writer = fileManager.csvWriter();
 
-const definitionInfo = grid.getDefinitionInfo();
-const columnDimensions = definitionInfo.getColumnDimensions();
-const columnLength = columnDimensions.length;
-const rowDimensions = definitionInfo.getRowDimensions();
-const rowLength = rowDimensions.length;
-const dimensionsLength = rowLength + columnLength - 1;
+const dimensionsLength = 2;
 
 let firstLaunch = true;
-const headersFile = [];
-
-function writeIndexCubes() 
-{
-    const names = Object.keys(CUBES_MK.indexCubes);
-    
-    names.forEach(name => {
-        const index = headersFile.findIndex(header =>header === CUBES_MK.indexCubes[name] );
-        CUBES_MK.indexCubes[name] = index;
-    });
-}
+let indexMap = {};
 
 for (let rowArray of generator) {
     let row = [];
@@ -560,31 +427,28 @@ for (let rowArray of generator) {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-            headersFile.push(element);
-        })
-    const headers = Object.values(CUBES_MK.valueCubes);
-    headers.forEach(header => {
-        row.push(header);
-    });
-    writeIndexCubes();
-    firstLaunch = false;
+
+            indexMap[element] = index;
+        });
+        row.push(CUBES_MK.cubePoints);
+        row.push(CUBES_MK.cubePrize);
+        firstLaunch = false;
     }
     else {
         rowArray.forEach((element,index) => {
             if (index < dimensionsLength) {
                 row.push(element);
             }
-        })
-        if (rowArray[CUBES_MK.indexCubes.cubePoints] > 5) {
-            CUBES_MK.valueCubes.cubePoints = Math.round(Math.random() * 10) + 5;
-            CUBES_MK.valueCubes.cubePrize = "Меч Иссинхдора";
+        });
+        let points = rowArray[indexMap[CUBES_MK.cubePoints]];
+        if (points > 5) {
+            row.push(Math.round(Math.random() * 10) + 5);
+            row.push("Меч Иссинхдора");
         }
         else {
-            CUBES_MK.valueCubes.cubePoints = rowArray[CUBES_MK.indexCubes.cubePoints];
-            CUBES_MK.valueCubes.cubePrize = "Меч 3 уровня";
+            row.push(points);
+            row.push( "Меч 3 уровня");
         }
-        const valueCubes = Object.values(CUBES_MK.valueCubes);
-        row.push(...valueCubes);
     }
     writer.writeRow(row);
 }
@@ -596,10 +460,10 @@ const reportFilePath = storageImporter.setFilePath("import.csv").import().getRep
 const hashReport = localFileSystem.makeGlobalFile("report","csv",reportFilePath,false);
 resultInfo.addFileHash(hashReport);
 ```
+
 Мультикуб после изменений:
 
 ![Скрин результата работы скрипта](./pic/csv_resultScript.jpg)
-
 
 [Курс молодого бойца](cookBook.md)
 
