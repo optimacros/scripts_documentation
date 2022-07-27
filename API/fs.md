@@ -173,6 +173,7 @@ download(from: string, to: string): boolean
 
 &nbsp;
 
+<a name="Filesystem.makeGlobalFile"></a>
 ```js
 makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string
 ```

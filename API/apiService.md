@@ -1,4 +1,4 @@
-# ApiService
+# Web API сервисы
 
 Все интерфейсы этого раздела находятся в пространстве имён `ApiService`.
 
@@ -24,7 +24,7 @@ interface RequestInfo {
 ```js
 getMethod(): string
 ```
-Возвращает [`метод HTTP запроса`](https://ru.wikipedia.org/wiki/HTTP#%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B). API сервис поддерживает только методы GET и POST. 
+Возвращает [`метод HTTP запроса`](https://ru.wikipedia.org/wiki/HTTP#%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B). API сервис поддерживает только методы `GET` и `POST`. 
 
 &nbsp;
 
@@ -45,14 +45,14 @@ getCookieInfos(): ParamInfos
 ```js
 getHeaderInfos(): ParamInfos
 ```
-Возвращает ссылку на интерфейс [`ParamInfos`](#ParamInfos) для получения информации о [`HTTP-заголовках`](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_HTTP), которые передал клиент.
+Возвращает ссылку на интерфейс [`ParamInfos`](#ParamInfos) для получения информации о [`заголовках HTTP`](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_HTTP), которые передал клиент.
 
 &nbsp;
 
 ```js
 getUrlParamInfos(): ParamInfos
 ```
-Возвращает ссылку на интерфейс [`ParamInfos`](#ParamInfos) для получения информации о параметрах, которые передал клиент в URL адресе.
+Возвращает ссылку на интерфейс [`ParamInfos`](#ParamInfos) для получения информации о параметрах, которые передал клиент в URL.
 
 &nbsp;
 
@@ -66,14 +66,14 @@ getFileInfos(): RequestFileInfos
 ```js
 getBodyParamInfos(): ParamInfos
 ```
-Возвращает ссылку на интерфейс [`ParamInfos`](#ParamInfos) для получения информации о POST параметрах.
+Возвращает ссылку на интерфейс [`ParamInfos`](#ParamInfos) для получения информации о параметрах запроса.
 
 &nbsp;
 
 ```js
 getResponseInfo(): ResponseInfo
 ```
-Возвращает ссылку на интерфейс [`ResponseInfo`](#ResponseInfo)
+Возвращает ссылку на интерфейс [`ResponseInfo`](#ResponseInfo).
 
 &nbsp;
 
@@ -91,14 +91,14 @@ interface ClientInfo {
 ```js
 getAgent(): string
 ```
-Возвращает значение заголовка User-Agent, если он был передан.
+Возвращает значение заголовка `User-Agent`, если он был передан.
 
 &nbsp;
 
 ```js
 getIp(): string
 ```
-Возвращает значение IPv4 адреса клиента.
+Возвращает значение [IPv4](https://ru.wikipedia.org/wiki/IPv4) адреса клиента.
 
 &nbsp;
 
@@ -123,7 +123,7 @@ get(key: string): ParamInfo | null
 ```js
 getAll(): ParamInfo[]
 ```
-Возвращает все параметры в виде массива объектов [`ParamInfo`](#ParamInfo)
+Возвращает все параметры в виде массива объектов [`ParamInfo`](#ParamInfo).
 
 &nbsp;
 
@@ -173,7 +173,7 @@ get(key: string): RequestFileInfo | null
 ```js
 getAll(): RequestFileInfo[]
 ```
-Возвращает информацию о всех загруженных клиентом файлах в виде массива объектов [`RequestFileInfo`](#RequestFileInfo)
+Возвращает информацию о всех загруженных клиентом файлах в виде массива объектов [`RequestFileInfo`](#RequestFileInfo).
 
 &nbsp;
 
@@ -214,7 +214,7 @@ getFileSize(): number
 ```js
 copyToLocal(path: string): this
 ```
-Выполняет копирование файла из области мета данных зарегистрированного API запроса в локальную файловую систему. Локальная файловая система — временная папка на сервере, которая является [`рабочей директорией скрипта`](../appendix/glossary.md#scriptDir).
+Выполняет копирование файла из области метаданных зарегистрированного API запроса в локальную файловую систему. Локальная файловая система — временная папка на сервере, которая является [`рабочей директорией скрипта`](../appendix/glossary.md#scriptDir).
 
 &nbsp;
 
@@ -226,28 +226,28 @@ interface ResponseInfo {
     getBodyParamInfos(): ResponseBodyParamInfos;
 }
 ```
-Интерфейс для формирования ответа с типом RESPONSE.
+Интерфейс для формирования ответа с типом `RESPONSE`.
 
 &nbsp;
 
 ```js
 getCookieInfos(): ResponseCookieInfos
 ```
-Возвращает ссылку на интерфейс [`ResponseCookieInfos`](#ResponseCookieInfos)
+Возвращает ссылку на интерфейс [`ResponseCookieInfos`](#ResponseCookieInfos).
 
 &nbsp;
 
 ```js
 getFileInfos(): ResponseFileInfos
 ```
-Возвращает ссылку на интерфейс [`ResponseFileInfos`](#ResponseFileInfos)
+Возвращает ссылку на интерфейс [`ResponseFileInfos`](#ResponseFileInfos).
 
 &nbsp;
 
 ```js
 getBodyParamInfos(): ResponseBodyParamInfos
 ```
-Возвращает ссылку на интерфейс [`ResponseBodyParamInfos`](#ResponseBodyParamInfos)
+Возвращает ссылку на интерфейс [`ResponseBodyParamInfos`](#ResponseBodyParamInfos).
 
 &nbsp;
 
@@ -257,14 +257,14 @@ interface ResponseCookieInfos {
     append(name: string, value: string, ttl: number): this;
 }
 ```
-Интерфейс для формирования параметров в HTTP заголовке [`Cookies`](https://ru.wikipedia.org/wiki/Cookie).
+Интерфейс для формирования параметров в HTTP-заголовке [`Cookies`](https://ru.wikipedia.org/wiki/Cookie).
 
 &nbsp;
 
 ```js
 append(name: string, value: string, ttl: number): this
 ```
-Позволяет передать клиенту куку через ответный заголовок Set-Cookie, где ttl это время жизни куки на клиенте (>=1)
+Позволяет передать клиенту куку через ответный заголовок `Set-Cookie`, где `ttl` – это время жизни куки на клиенте (>=1).
 
 &nbsp;
 
@@ -281,7 +281,7 @@ interface ResponseFileInfos {
 ```js
 append(fileId: string): this
 ```
-Позволяет передать файл. В функцию передается индентификатор файла `fileId`, зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Идентификатор файла (хэш файла) можно получить с помощью функции `makeGlobalFile()`, которая находиться в интерфейсе [`Filesystem`](./fs.md#Filesystem).
+Позволяет передать файл. В функцию передается индентификатор файла `fileId`, зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Идентификатор (хэш) файла можно получить с помощью функции [`Filesystem.makeGlobalFile()`](./fs.md#Filesystem.makeGlobalFile).
 
 &nbsp;
 
@@ -298,7 +298,7 @@ interface ResponseBodyParamInfos {
 ```js
 append(name: string, value: number | string | boolean | object): this
 ```
-Позволяет передать свойство `name` с значением `value`. Принимает значения с типами number, string, bool, object, array.
+Позволяет передать свойство `name` с значением `value`. Принимает значения с типами `number`, `string`, `bool`, `object`, `array`.
 
 &nbsp;
 

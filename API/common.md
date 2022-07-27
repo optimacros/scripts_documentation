@@ -70,7 +70,7 @@ copyData(): CopyData
 ```js
 apiServiceRequestInfo(): ApiService.RequestInfo | null;
 ```
-Возвращает ссылку на интерфейс [`ApiService.RequestInfo`](./apiService.md#RequestInfo).
+Возвращает ссылку на интерфейс [`ApiService.RequestInfo`](./apiService.md#RequestInfo), если скрипт вызван через API Service, или `null` иначе.
 
 &nbsp;
 
