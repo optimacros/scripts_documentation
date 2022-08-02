@@ -167,10 +167,11 @@ getUpdatedPropertiesOnParentLevels(): boolean
 ### Интерфейс Versions<a name="Versions"></a>
 ```ts
 interface Versions {
-	versionsTab(): VersionsTab
+	versionsTab(): VersionsTab;
+	versionSubsetsTab(): VersionSubsetsTab;
 }
 ```
-Интерфейс для получения ссылки на [`VersionsTab`](#VersionsTab).
+Интерфейс работы с версиями.
 
 &nbsp;
 
@@ -178,6 +179,13 @@ interface Versions {
 versionsTab(): VersionsTab
 ```
 Возвращает ссылку на вкладку [`VersionsTab`](#VersionsTab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
+
+&nbsp;
+
+```js
+versionSubsetsTab(): VersionSubsetsTab
+```
+Возвращает ссылку на вкладку [`VersionSubsetsTab`](#VersionSubsetsTab) выборок версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии` -> `Выборки`.
 
 &nbsp;
 
@@ -195,6 +203,15 @@ interface VersionsTab extends Tab {
 copyVersion(from: string, to: string): Object
 ```
 Копирует срез по версии `from` в срез по версии `to` во всех мультикубах модели, которые имеют измерение версий, включающее обе эти версии. Возвращает объект вида `{"success": true}`.
+
+&nbsp;
+
+### Интерфейс VersionSubsetsTab<a name="VersionSubsetsTab"></a>
+```ts
+interface VersionSubsetsTab extends Tab {
+}
+```
+Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия.
 
 &nbsp;
 
