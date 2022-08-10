@@ -38,7 +38,7 @@ interface ListsTab extends Tab {
 ```js
 open(name: string): ListTab
 ```
-Возвращает ссылку на [`ListTab`](#ListTab) справочника `name`. В интерфейсе Optimacros аналогично открытию вкладки справочника `name`.
+Возвращает ссылку на [`ListTab`](#ListTab) справочника `name`. Если такой справочник отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки справочника `name`.
 
 &nbsp;
 

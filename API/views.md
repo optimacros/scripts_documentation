@@ -38,7 +38,7 @@ interface MulticubesTab extends Tab {
 ```js
 open(name: string): MulticubeTab
 ```
-Возвращает ссылку на [`MulticubeTab`](#MulticubeTab) куба `name`. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
+Возвращает ссылку на [`MulticubeTab`](#MulticubeTab) куба `name`. Если такой мультикуб отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
 
 &nbsp;
 
