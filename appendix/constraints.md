@@ -3,7 +3,7 @@
 <a name="singleModel"></a>
 ## Связь только с одной моделью
 
-Скрипты 1.0 хранятся внутри некоторой модели и при запуске глобальная переменная [`om`](../API/API.md#OM) автомагически соединяется с ней и только с ней. Возможность кросс-модельного взаимодействия отсутствует. Это [`реализовано`](https://github.com/optimacros/applications_documentation/blob/master/API/features.md#) в Application Manager.
+Скрипты 1.0 хранятся внутри некоторой модели и при запуске глобальная переменная [`om`](../API/API.md#OM) автомагически соединяется с ней и только с ней. Возможность кросс-модельного взаимодействия отсутствует. Это [`реализовано`](https://github.com/optimacros/applications_documentation/blob/master/features.md#) в Application Manager.
 
 &nbsp;
 
@@ -71,7 +71,7 @@ for (const chunk of generator) {
 <a name="syncOutput"></a>
 ## Вывод скрипта
 
-Вывод скрипта доступен только после его завершения. Если скрипт запускает длительную задачу, это может быть неудобно. Для частичного решения этой проблемы предусмотрен функционал [`RequestManager`](../API/common.md#RequestManager). Для полного – Application Manager, в нём вывод [`отображается`](https://github.com/optimacros/applications_documentation/blob/master/API/diff.md#asyncOutput) асинхронно непосредственно во время работы приложения.
+Вывод скрипта доступен только после его завершения. Если скрипт запускает длительную задачу, это может быть неудобно. Для частичного решения этой проблемы предусмотрен функционал [`RequestManager`](../API/common.md#RequestManager). Для полного – Application Manager, в нём вывод [`отображается`](https://github.com/optimacros/applications_documentation/blob/master/diff.md#asyncOutput) асинхронно непосредственно во время работы приложения.
 
 &nbsp;
 
@@ -90,7 +90,7 @@ console.log(message + '\n')
 console.log(`${message} \n`)
 ```
 
-Это неудобство [`отсутствует`](https://github.com/optimacros/applications_documentation/blob/master/API/diff.md#lineBreak) в Application Manager.
+Это неудобство [`отсутствует`](https://github.com/optimacros/applications_documentation/blob/master/diff.md#lineBreak) в Application Manager.
 
 
 [Приложения](appendix.md)
