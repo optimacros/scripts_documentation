@@ -103,6 +103,7 @@ logStatusMessage(message: string, print?: boolean): RequestManager
 
 &nbsp;
 
+<a name="RequestManager.setStatusMessage"></a>
 ```js
 setStatusMessage(message: string): RequestManager
 ```
