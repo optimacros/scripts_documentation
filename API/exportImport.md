@@ -363,6 +363,7 @@ interface StorageImporter extends Importer {
 	setIsCompressed(isCompressed: boolean): StorageImporter;
 	setEncoding(encoding: string): StorageImporter;
 	setDateFormat(dateFormat: string): StorageImporter;
+	setMappings(mappings: object): StorageImporter;
 }
 ```
 Интерфейс быстрого импорта. Доступен только в мультикубах. Интерфейс наследуется от [`Importer`](#Importer). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции возвращают `this`.
@@ -394,6 +395,13 @@ setEncoding(encoding: string): StorageImporter
 setDateFormat(dateFormat: string): StorageImporter
 ```
 Устанавливает формат дат. Аналогично функции [`StorageExporter.setDateFormat()`](#StorageExporter.setDateFormat).
+
+&nbsp;
+
+```js
+setMappings(mappings: object): StorageImporter;
+```
+Позволяет установить соответствие полей импортируемого `CSV` и мультикуба-приёмника.
 
 &nbsp;
 
