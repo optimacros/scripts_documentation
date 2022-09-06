@@ -26,6 +26,7 @@ interface Smtp.Builder {
 	setSubject(subject: string): this;
 	setBody(body: string): this;
 	attachFiles(paths: string[]): this;
+	isHtml(flag: boolean): this;
 	send(): Smtp.Result;
 }
 ```
@@ -57,7 +58,14 @@ setBody(body: string): this
 ```js
 attachFiles(paths: string[]): this
 ```
-***Не реализовано.***
+Прикрепляет к письму файлы из локальной директории скрипта, находящиеся по путям, переданным в `paths`. Возвращает `this`.
+
+&nbsp;
+
+```js
+isHtml(flag: boolean): this;
+```
+Устанавливает заголовок `contentType` равным `text/html`, что позволяет почтовым программам понять, что нужно рендерить письмо как `HTML`-содержимое. По умолчанию `false`. Возвращает `this`.
 
 &nbsp;
 
