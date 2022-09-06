@@ -7,6 +7,7 @@ interface Connectors {
 	postgresql(): SqlConnectorBuilder;
 	sqlServer(): MicrosoftSqlConnectorBuilder;
 	oracle(): OracleConnectorBuilder;
+	snowflake(): SnowflakeConnectorBuilder;
 	mongodb(): Mongodb.ConnectorBuilder;
 	http(): Http.HttpManager;
 	winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
@@ -41,6 +42,13 @@ sqlServer(): MicrosoftSqlConnectorBuilder
 oracle(): OracleConnectorBuilder
 ```
 Возвращает коннектор [`OracleConnectorBuilder`](./relationalDB.md#OracleConnectorBuilder) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database).
+
+&nbsp;
+
+```js
+snowflake(): SnowflakeConnectorBuilder;
+```
+Возвращает коннектор [`SnowflakeConnectorBuilder`](./relationalDB.md#SnowflakeConnectorBuilder) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/).
 
 &nbsp;
 
