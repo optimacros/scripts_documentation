@@ -219,7 +219,6 @@ interface VersionSubsetsTab extends Tab {
 ```ts
 interface Times {
 	optionsTab(): TimeOptionsTab;
-	typePeriod(identifier: string | number): TypePeriod;
         timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 ```
@@ -231,13 +230,6 @@ interface Times {
 optionsTab(): TimeOptionsTab
 ```
 Возвращает ссылку на вкладку [`TimeOptionsTab`](#TimeOptionsTab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
-
-&nbsp;
-
-```js
-typePeriod(identifier: string | number): TypePeriod;
-```
-***Метод не работает, назначение неизвестно***
 
 &nbsp;
 
@@ -270,16 +262,6 @@ resetForm(): Object
 applyForm(): Object
 ```
 Применяет все изменения данных. Возвращает объект вида `{"success": true}`.
-
-&nbsp;
-
-### Интерфейс TypePeriod<a name="TypePeriod"></a>
-```ts
-export interface TypePeriod {
-    tableTab(): Tab;
-}
-```
-***Назначение интерфейса неизвестно***
 
 &nbsp;
 
