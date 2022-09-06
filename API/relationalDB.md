@@ -265,6 +265,71 @@ setTNS(value: string): OracleConnectorBuilder
 
 &nbsp;
 
+### Интерфейс SnowflakeConnectorBuilder<a name="SnowflakeConnectorBuilder"></a>
+```ts
+export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
+    setAccount(account: string): this;
+    setRegion(region: string): this;
+    setInsecure(insecure: boolean): this;
+    setWarehouse(warehouse: string): this;
+    setSchema(schema: string): this;
+    setRole(role: string): this;
+    setProtocol(protocol: string): this;
+}
+```
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/) (для подключения используется [PHP PDO Driver](https://docs.snowflake.com/en/user-guide/php-pdo-driver.html)). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#SqlConnectorBuilder).
+
+&nbsp;
+
+```js
+setAccount(account: string): this;
+```
+Устанавливает [`имя аккаунта`](https://docs.snowflake.com/en/sql-reference/account-usage.html).
+
+&nbsp;
+
+```js
+setRegion(region: string): this;
+```
+Устанавливает [`имя региона`](https://docs.snowflake.com/en/user-guide/admin-account-identifier.html). Опциональный.
+
+&nbsp;
+
+```js
+setInsecure(insecure: boolean): this;
+```
+Устанавливает [`флаг проверки сертификата`](https://docs.snowflake.com/en/user-guide/snowsql-config.html#insecure-mode). По умолчанию `false`
+
+&nbsp;
+
+```js
+setWarehouse(warehouse: string): this;
+```
+Устанавливает [`название хранилища`](https://docs.snowflake.com/en/user-guide/warehouses-overview.html). Опциональный.
+
+&nbsp;
+
+```js
+setSchema(value: string): OracleConnectorBuilder
+```
+Устанавливает [`схему`](https://docs.snowflake.com/en/sql-reference/info-schema.html). Опциональный, по умолчанию `public`.
+
+&nbsp;
+
+```js
+setRole(role: string): this;
+```
+Устанавливает [`имя роли`](https://docs.snowflake.com/en/user-guide/security-access-control-overview.html#roles). Опциональный.
+
+&nbsp;
+
+```js
+setProtocol(protocol: string): this;
+```
+Устанавливает `название протокола`. Опциональный.
+
+&nbsp;
+
 ## Импорт<a name="DBimport"></a>
 
 ### Интерфейс MysqlImportBuilder<a name="MysqlImportBuilder"></a>
