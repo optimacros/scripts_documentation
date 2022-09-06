@@ -138,6 +138,7 @@ interface StringRequestBody {
 ```ts
 interface FormRequestBody {
 	params(): Params;
+	appendFile(fieldName: string, fileName: string, filePath: string): this;
 }
 ```
 Интерфейс генерации тела запроса для отправки в нём параметров [`формы`](https://ru.wikipedia.org/wiki/%D0%A4%D0%BE%D1%80%D0%BC%D0%B0_(HTML)).
@@ -148,6 +149,13 @@ interface FormRequestBody {
 	params(): Params
 ```
 Возвращает объект [`Params`](#Params) для установки значений параметров.
+
+&nbsp;
+
+```js
+	appendFile(fieldName: string, fileName: string, filePath: string): this;
+```
+Устанавливает заголовок `Content-Type` на `multipart/form-data`, что позволяет передавать бинарные данные (прикреплять к запросу файлы). Прикрепляет к запросу файл, расположенный по пути `filePath` локальной файловой системы скрипта. В заголовке [`Content-Disposition`](https://developer.mozilla.org/ru/docs/Web/HTTP/Headers/Content-Disposition) устанавливает значение параметра `name` как `fieldName`, параметра `filename` — `fileName`. Возвращает `this`.
 
 &nbsp;
 

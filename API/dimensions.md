@@ -219,9 +219,10 @@ interface VersionSubsetsTab extends Tab {
 ```ts
 interface Times {
 	optionsTab(): TimeOptionsTab;
+        timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 ```
-Интерфейс для получения ссылки на [`TimeOptionsTab`](#TimeOptionsTab).
+Интерфейс для получения доступа к настройкам и гридам измерений времени.
 
 &nbsp;
 
@@ -229,6 +230,13 @@ interface Times {
 optionsTab(): TimeOptionsTab
 ```
 Возвращает ссылку на вкладку [`TimeOptionsTab`](#TimeOptionsTab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
+
+&nbsp;
+
+```js
+timePeriodTab(identifier: string | number): TimePeriodTab;
+```
+Возвращает ссылку на вкладку [`TimePeriodTab`](#TimePeriodTab) измерения времени `identifier`. Доступны измерения `Days`, `Weeks`, `Periods`, `Months`, `Quarters`, `Half Years`, `Years`. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
 
 &nbsp;
 
@@ -254,6 +262,32 @@ resetForm(): Object
 applyForm(): Object
 ```
 Применяет все изменения данных. Возвращает объект вида `{"success": true}`.
+
+&nbsp;
+
+### Интерфейс TimePeriodTab<a name="TimePeriodTab"></a>
+```ts
+export interface TimePeriodTab extends Tab {
+    subsetsTab(): TimePeriodSubsetTab;
+}
+```
+Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
+
+&nbsp;
+
+```js
+subsetsTab(): TimePeriodSubsetTab;
+```
+Возвращает ссылку на вкладку [`TimePeriodSubsetTab`](#TimePeriodSubsetTab) выборок выбранного измерения времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+&nbsp;
+
+### Интерфейс TimePeriodSubsetTab<a name="TimePeriodSubsetTab"></a>
+```ts
+export interface TimePeriodSubsetTab extends Tab {
+
+}
+```
+Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#Tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
 
 &nbsp;
 
