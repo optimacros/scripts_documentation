@@ -642,7 +642,7 @@ interface SizeLimitParams {
 }
 ```
 
-Интерфейс для указания лимита размера, получаемого контента, в ответе на запрос.
+Интерфейс для указания лимита размера получаемого контента в ответе на запрос.
 
 &nbsp;
 
@@ -731,7 +731,7 @@ downloadFileParams(): DownloadFileParams
 ```js
 sizeLimitParams(): SizeLimitParams
 ```
-Возвращает интерфейс [`SizeLimitParams`](#DownloadFileParams) для указания лимита размера, получаемого контента, в ответе на запрос.
+Возвращает интерфейс [`SizeLimitParams`](#DownloadFileParams) для указания лимита размера получаемого контента в ответе на запрос.
 
 &nbsp;
 
