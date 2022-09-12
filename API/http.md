@@ -617,6 +617,42 @@ verify(): Verify
 
 &nbsp;
 
+### Интерфейс DownloadFileParams<a name="DownloadFileParams"></a>
+```ts
+interface DownloadFileParams {
+	setPath(path: string): DownloadFileParams;
+}
+```
+
+Интерфейс для указания настроек скачивания файлов.
+
+&nbsp;
+
+```js
+setPath(path: string): DownloadFileParams
+```
+Устанавливает путь в локальной директории скриптов, по которому будет сохранен скачиваемый файл. Файл будет загружен по данному пути после отправки запроса. По умолчанию параметр пути не задан - файл скачиваться не будет.
+
+&nbsp;
+
+### Интерфейс SizeLimitParams<a name="SizeLimitParams"></a>
+```ts
+interface SizeLimitParams {
+	setContentLengthLimit(lengthInBytes: number): SizeLimitParams;
+}
+```
+
+Интерфейс для указания лимита размера получаемого контента в ответе на запрос.
+
+&nbsp;
+
+```js
+setContentLengthLimit(lengthInBytes: number): SizeLimitParams
+```
+Устанавливает лимит получаемого контента в байтах. Если передать в аргумент `lengthInBytes` - `0` (числовой ноль), то проверка не будет происходить. Значение по умолчанию - `0`.
+
+&nbsp;
+
 ### Интерфейс RequestBuilder<a name="RequestBuilder"></a>
 ```ts
 interface RequestBuilder {
@@ -627,6 +663,8 @@ interface RequestBuilder {
 	options(): Options;
 	cookies(): Params;
 	headers(): Params;
+	downloadFileParams(): DownloadFileParams;
+	sizeLimitParams(): SizeLimitParams;
 	send(): Response;
 }
 ```
@@ -680,6 +718,20 @@ cookies(): Params
 headers(): Params
 ```
 Возвращает интерфейс [`Params`](#Params) для формирования [`HTTP-заголовков`](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_HTTP) запроса.
+
+&nbsp;
+
+```js
+downloadFileParams(): DownloadFileParams
+```
+Возвращает интерфейс [`DownloadFileParams`](#DownloadFileParams) для указания настроек скачивания файлов.
+
+&nbsp;
+
+```js
+sizeLimitParams(): SizeLimitParams
+```
+Возвращает интерфейс [`SizeLimitParams`](#DownloadFileParams) для указания лимита размера получаемого контента в ответе на запрос.
 
 &nbsp;
 

@@ -1546,6 +1546,14 @@ export namespace Http {
         verify(): Verify;
     }
 
+    export interface DownloadFileParams {
+        setPath(path: string): DownloadFileParams;
+    }
+
+    export interface SizeLimitParams {
+        setContentLengthLimit(lengthInBytes: number): SizeLimitParams;
+    }
+
     export interface ResponseErrors {
         getCode(): number;
 
@@ -1617,6 +1625,10 @@ export namespace Http {
         headers(): Params;
 
         send(): Response;
+
+        downloadFileParams(): DownloadFileParams;
+
+        sizeLimitParams(): SizeLimitParams;
     }
 
     export interface HttpManager {
