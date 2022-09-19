@@ -401,7 +401,55 @@ setDateFormat(dateFormat: string): StorageImporter
 ```js
 setMappings(mappings: object): StorageImporter;
 ```
-Позволяет установить соответствие полей импортируемого `CSV` и мультикуба-приёмника.
+Позволяет установить соответствие полей импортируемого `CSV` и мультикуба-приёмника. Передаётся в виде объекта. 
+Пример:
+```json
+{
+  "additionalDimensionMapping": [
+    {
+      "dimensionName": "vs.SubsetB",
+      "dimensionItemName": "Forecast2"
+    }
+  ],
+  "dimensionMapping": [
+    {
+      "from": "vs.SubsetA",
+      "to": "vs.SubsetB"
+    },
+    {
+      "from": "Города",
+      "to": "s.Большие Города"
+    }
+  ],
+  "cubeMapping": [
+    {
+      "from": "Цена",
+      "to": "Price"
+    },
+    {
+      "from": "Куб1",
+      "to": "КубB"
+    }
+  ],
+  "dimensionItemMapping": [
+    {
+      "dimensionName": "vs.SubsetB",
+      "dimensionItemMap": {
+        "Actual": "Forecast2",
+        "Budget": "Forecast3"
+      }
+    },
+    {
+      "dimensionName": "SKU",
+      "dimensionItemMap": {
+        "DD33": "LL1",
+        "CC11": "KK18",
+        "#45": "#370"
+      }
+    }
+  ]
+}
+```
 
 &nbsp;
 
