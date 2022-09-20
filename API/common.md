@@ -227,7 +227,8 @@ interface ModelInfo {
 	setModelCalculationMode(status: boolean): boolean;
 	repair(): boolean;
 	recalculate(): boolean;
-	backup(path: string): boolean;
+    backup(path: string): EntityInfo|boolean;
+    export(path: string): boolean;
 	exportObfuscationState(): ExportObfuscationState;
 }
 ```
@@ -285,9 +286,16 @@ recalculate(): boolean
 &nbsp;
 
 ```js
-backup(path: string): boolean
+export(path: string): boolean
 ```
 Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#scriptDir) скрипта по пути `path`. Возвращает `true`.
+
+&nbsp;
+
+```js
+backup(): EntityInfo|boolean
+```
+Сохраняет резервную копию в логах модели. Возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#EntityInfo).
 
 &nbsp;
 

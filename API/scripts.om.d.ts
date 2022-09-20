@@ -711,7 +711,9 @@ export interface ModelInfo {
 
     recalculate(): boolean;
 
-    backup(path: string): boolean;
+    backup(path: string): EntityInfo|boolean;
+
+    export(path: string): boolean;
     
     exportObfuscationState(): ExportObfuscationState;
 }
