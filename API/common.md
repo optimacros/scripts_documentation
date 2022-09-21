@@ -293,9 +293,9 @@ export(path: string): boolean
 &nbsp;
 
 ```js
-backup(): EntityInfo|boolean
+backup(path: string): EntityInfo|boolean
 ```
-Сохраняет резервную копию в логах модели. Возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#EntityInfo).
+Сохраняет резервную копию в логах модели. Если прописать путь `path`, вызовется метод `export()`. Возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#EntityInfo), или `true`, если был передан `path` .
 
 &nbsp;
 
