@@ -227,8 +227,8 @@ interface ModelInfo {
 	setModelCalculationMode(status: boolean): boolean;
 	repair(): boolean;
 	recalculate(): boolean;
-    backup(path: string): EntityInfo|boolean;
-    export(path: string): boolean;
+        backup(path: string): EntityInfo|boolean;
+        export(path: string): boolean;
 	exportObfuscationState(): ExportObfuscationState;
 }
 ```
@@ -295,7 +295,7 @@ export(path: string): boolean
 ```js
 backup(path: string): EntityInfo|boolean
 ```
-Сохраняет резервную копию в логах модели. Если прописать путь `path`, вызовется метод `export()`. Возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#EntityInfo), или `true`, если был передан `path` .
+Сохраняет резервную копию в логах модели ->`Центр безопастности`->`Логи`->`Резервные копии`. Если прописать путь `path`, вызовется метод `export()`. Возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#EntityInfo), или `true`, если был передан `path` .
 
 &nbsp;
 
