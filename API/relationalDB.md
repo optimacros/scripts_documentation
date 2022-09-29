@@ -205,7 +205,7 @@ loadImportBuilder(): MysqlImportBuilder
 ```ts
 interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 	setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
-    setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder;
+        setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder;
 	loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
