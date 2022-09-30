@@ -1250,6 +1250,11 @@ export interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
     setDriver(name: string): this;
 
     /**
+     * @param scrollType KEYSET|DYNAMIC|STATIC|BUFFERED
+     */
+    setScrollType(scrollType: string | null): this;
+
+    /**
      * https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility
      */
     loadBulkCopyBuilder(): SqlBulkCopyBuilder;

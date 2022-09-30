@@ -205,6 +205,7 @@ loadImportBuilder(): MysqlImportBuilder
 ```ts
 interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 	setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
+        setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder;
 	loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
@@ -222,6 +223,23 @@ setDriver(name: string | null): MicrosoftSqlConnectorBuilder
 Драйвер `ODBC` считается устаревшим.
 
 Для работы драйвера `SQLSRV` используется библиотека [`MS SQL для Linux`](https://docs.microsoft.com/ru-ru/sql/linux/sql-server-linux-overview). Её особенностью является подстановка параметров на стороне сервера, в связи с чем в его настройках установлено ограничение на максимальное их количество, по умолчанию: `1000`.
+
+&nbsp;
+
+```js
+setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
+```
+Позволяет создавать прокручиваемые результаты с помощью курсоров. Допустимые значения: `KEYSET`, `DYNAMIC`, `STATIC`, `BUFFERED`. Возвращает `this`.
+
+`KEYSEY` - Создает серверный курсор набора ключей. Курсор набора ключей не обновляет количество строк, если строка удаляется из таблицы (удаленная строка возвращается без значений).
+
+`DYNAMIC` - Создает серверный (без буферизации) динамический курсор, который позволяет осуществлять доступ к строкам в любом порядке и будет отражать изменения в базе данных.
+
+`STATIC` - Создает серверный статический курсор, который позволяет осуществлять доступ к строкам в любом порядке, но не будет отражать изменения в базе данных.
+
+`BUFFERED` - Создает клиентский (буферизованный) статический курсор, который помещает результирующий набор в память на клиентском компьютере.
+
+Подробнее о работе курсоров можно прочитать в статье [`Типы курсоров (драйвер PDO_SQLSRV)`](https://learn.microsoft.com/ru-ru/sql/connect/php/cursor-types-pdo-sqlsrv-driver)
 
 &nbsp;
 
