@@ -239,6 +239,8 @@ setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
 
 `BUFFERED` - Создает клиентский (буферизованный) статический курсор, который помещает результирующий набор в память на клиентском компьютере.
 
+Доступно, начиная с версии воркспейса `2.2.0`
+
 Подробнее о работе курсоров можно прочитать в статье [`Типы курсоров (драйвер PDO_SQLSRV)`](https://learn.microsoft.com/ru-ru/sql/connect/php/cursor-types-pdo-sqlsrv-driver)
 
 &nbsp;
