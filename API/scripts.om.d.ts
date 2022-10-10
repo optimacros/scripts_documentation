@@ -228,11 +228,11 @@ export interface BaseElementsCreator {
     create(): number[];
 }
 
-export interface NumericElementsCreator implements BaseElementsCreator {
+export interface NumericElementsCreator extends BaseElementsCreator {
     setCount(count: number): this;
 }
 
-export interface NamedElementsCreator implements BaseElementsCreator {
+export interface NamedElementsCreator extends BaseElementsCreator {
     setElementNames(names: string[]): this;
 }
 
@@ -1374,6 +1374,8 @@ export namespace Mongodb {
 
     export interface ConnectorBuilder {
         setDSN(value: string): ConnectorBuilder;
+
+        setDatabase(value: string): ConnectorBuilder;
 
         load(): Connection;
     }

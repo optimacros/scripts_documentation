@@ -8,6 +8,7 @@
 ```ts
 interface ConnectorBuilder {
 	setDSN(value: string): ConnectorBuilder;
+	setDatabase(value: string): ConnectorBuilder;
 	load(): Connection;
 }
 ```
@@ -19,6 +20,13 @@ interface ConnectorBuilder {
 setDSN(value: string): ConnectorBuilder
 ```
 Устанавливает [`DSN`](https://docs.mongodb.com/bi-connector/master/tutorial/create-system-dsn/) для подключения.
+
+&nbsp;
+
+```js
+setDatabase(value: string): ConnectorBuilder
+```
+Устанавливает имя базы данных. Возвращает `this`.
 
 &nbsp;
 
