@@ -230,6 +230,9 @@ interface ModelInfo {
         backup(path: string): EntityInfo|boolean;
         export(path: string): boolean;
 	exportObfuscationState(): ExportObfuscationState;
+	useUniqueLock(): this;
+	useSharedLock(): this;
+	unlock(): this;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -303,6 +306,27 @@ backup(path: string): EntityInfo|boolean
 exportObfuscationState(): ExportObfuscationState
 ```
 Возвращает интерфейс [`ExportObfuscationState`](#ExportObfuscationState) экспорта модели в обфусцированном состоянии.
+
+&nbsp;
+
+```js
+useUniqueLock(): this
+```
+Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Unique`. Необходим для изменения метаданных модели. В таком режиме одномоментно может испольняться только один запрос (работающий скрипт или пользователь), остальные будут стоять в очереди
+
+&nbsp;
+
+```js
+useSharedLock(): this
+```
+Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Shared`. Достаточен для чтения данных из модели и изменения значений кубов. В один момент может исполняться несколько запросов от скриптов и пользователей с таким режимом блокировки. Попытка изменения метаданных будет вызывать ошибку `Unique lock not defined`
+
+&nbsp;
+
+```js
+unlock(): this
+```
+Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Custom`. Скрипт перестанет отображаться в очереди модели (также перестанет отображаться плашка с информацией от скрипта!). Методы, связанные с моделью, будут вызывать ошибку `Model not defined`
 
 &nbsp;
 
