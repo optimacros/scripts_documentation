@@ -4,6 +4,7 @@
 ```ts
 interface ElementsCreator {
 	numeric(): NumericElementsCreator;
+	named(): NamedElementsCreator;
 }
 ```
 Абстрактный интерфейс, предоставляющий конкретные интерфейсы с различными возможностями добавления элементов.
@@ -17,19 +18,20 @@ numeric(): NumericElementsCreator
 
 &nbsp;
 
+```js
+named(): NamedElementsCreator
+```
+Возращает ссылку на [`NamedElementsCreator`](#NamedElementsCreator).
+
+&nbsp;
+
 ### Интерфейс NumericElementsCreator<a name="NumericElementsCreator"></a>
 ```ts
-interface NumericElementsCreator {
+interface NumericElementsCreator extends BaseElementsCreator {
 	setCount(count: number): NumericElementsCreator;
-	setPositionAfter(relativeLongId: number): NumericElementsCreator;
-	setPositionBefore(relativeLongId: number): NumericElementsCreator;
-	setPositionStart(): NumericElementsCreator;
-	setPositionEnd(): NumericElementsCreator;
-	setPositionChildOf(parentLongId: number): NumericElementsCreator;
-	create(): number[];
 }
 ```
-Интерфейс позволяет добавить заданное количество элементов в заданную позицию таблицы. Аналог кнопки "Добавить элементы" в интерфейсе Optimacros. Перед созданием элементов необходимо указать их количество (нет значения по умолчанию) и позицию добавления (по умолчанию: в конец).
+Интерфейс позволяет добавить заданное количество элементов в заданную позицию таблицы. Аналог кнопки "Добавить элементы" в интерфейсе Optimacros. Перед созданием элементов необходимо указать их количество (нет значения по умолчанию) и позицию добавления (по умолчанию: в конец). Интерфейс наследуется от [`BaseElementsCreator`](#BaseElementsCreator).
 
 &nbsp;
 
@@ -40,40 +42,70 @@ setCount(count: number): NumericElementsCreator
 
 &nbsp;
 
+### Интерфейс NamedElementsCreator<a name="NamedElementsCreator"></a>
+```ts
+interface NamedElementsCreator extends BaseElementsCreator {
+	setElementNames(names: string[]): NamedElementsCreator;
+}
+```
+Интерфейс позволяет добавить заданное количество элементов с именами в заданную позицию таблицы. Аналог кнопки "Добавить элементы с именами" в интерфейсе Optimacros. Перед созданием элементов необходимо указать список имен элементов и позицию добавления (по умолчанию: в конец). Интерфейс наследуется от [`BaseElementsCreator`](#BaseElementsCreator).
+
+&nbsp;
+
 ```js
-setPositionAfter(relativeLongId: number): NumericElementsCreator
+setElementNames(names: string[]): NamedElementsCreator
+```
+Устанавливает список имен `names` добавляемых элементов. Возвращает `this`.
+
+&nbsp;
+
+### Интерфейс BaseElementsCreator<a name="BaseElementsCreator"></a>
+```ts
+interface BaseElementsCreator {
+	setPositionAfter(relativeLongId: number): BaseElementsCreator;
+	setPositionBefore(relativeLongId: number): BaseElementsCreator;
+	setPositionStart(): BaseElementsCreator;
+	setPositionEnd(): BaseElementsCreator;
+	setPositionChildOf(parentLongId: number): BaseElementsCreator;
+	create(): number[];
+}
+```
+Базовый интерфейс для добавления новых элементов.
+
+&nbsp;
+
+```js
+setPositionAfter(relativeLongId: number): BaseElementsCreator
 ```
 Устанавливает позицию добавления после [`relativeLongId`](./views.md#longId). Возвращает `this`.
 
 &nbsp; 
 
 ```js
-setPositionBefore(relativeLongId: number): NumericElementsCreator
+setPositionBefore(relativeLongId: number): BaseElementsCreator
 ```
 Устанавливает позицию добавления до [`relativeLongId`](./views.md#longId). Возвращает `this`.
 
 &nbsp;
 
 ```js
-setPositionStart(): NumericElementsCreator
+setPositionStart(): BaseElementsCreator
 ```
 Устанавливает позицию добавления в начало. Возвращает `this`.
 
 &nbsp;
 
-<a name="NumericElementsCreator.setPositionEnd"></a>
 ```js
-setPositionEnd(): NumericElementsCreator
+setPositionEnd(): BaseElementsCreator
 ```
 Устанавливает позицию добавления в конец, это поведение по умолчанию. Этот вариант наиболее эффективный с точки зрения производительности. Возвращает `this`.
 
 &nbsp;
 
-<a name="NumericElementsCreator.setPositionChildOf"></a>
 ```js
-setPositionChildOf(parentLongId: number): NumericElementsCreator
+setPositionChildOf(parentLongId: number): BaseElementsCreator
 ```
-Устанавливает позицию добавления дочерней для [`parentLongId`](./views.md#longId). Возвращает `this`.
+Устанавливает позицию добавления элемента как дочернего для [`parentLongId`](./views.md#longId). Возвращает `this`.
 
 &nbsp;
 
