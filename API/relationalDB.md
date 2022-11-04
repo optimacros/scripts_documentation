@@ -216,8 +216,6 @@ interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 ```js
 setDriver(name: string | null): MicrosoftSqlConnectorBuilder
 ```
-Описание актуально для версии `2.5.3`
-
 Устанавливает драйвер взаимодействия с MS SQL Server. Допустимые значения: `DBLIB`, `ODBC`, `SQLSRV`. Значение по умолчанию: `DBLIB`. Возвращает `this`.
 
 Для подключения к серверу с помощью `DBLIB` в случае аутентификации по протоколу [NTLMv2](https://ru.wikipedia.org/wiki/NTLMv2) необходимо настроить SQL-соединение в манифесте администратора воркспейса. Если это невозможно, рекомендуется использовать драйвер `SQLSRV`. `DBLIB` **не позволяет** использовать `setScrollType` (что нужно для работы запросов в `WITH`, `DECLARE` и т.д.), но **позволяет** использовать доменную аутентификацию `DOMAIN\username` и `username@domain.zone`.
@@ -231,8 +229,6 @@ setDriver(name: string | null): MicrosoftSqlConnectorBuilder
 ```js
 setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
 ```
-Описание актуально для версии `2.5.3`
-
 **Для работы нужно использовать драйвер `SQLSRV`**
 
 Позволяет создавать прокручиваемые результаты с помощью курсоров. Допустимые значения: `KEYSET`, `DYNAMIC`, `STATIC`, `BUFFERED`. Возвращает `this`.
@@ -245,7 +241,6 @@ setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
 
 `BUFFERED` - Создает клиентский (буферизованный) статический курсор, который помещает результирующий набор в память на клиентском компьютере.
 
-Доступно, начиная с версии воркспейса `2.2.0`
 
 Подробнее о работе курсоров можно прочитать в статье [`Типы курсоров (драйвер PDO_SQLSRV)`](https://learn.microsoft.com/ru-ru/sql/connect/php/cursor-types-pdo-sqlsrv-driver)
 
