@@ -233,6 +233,8 @@ interface ModelInfo {
 	useUniqueLock(): this;
 	useSharedLock(): this;
 	unlock(): this;
+        getStorageInstancePriority(): number;
+        setStorageInstancePriority(priority: number): number;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -327,6 +329,20 @@ useSharedLock(): this
 unlock(): this
 ```
 Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Custom`. Скрипт перестанет отображаться в очереди модели (также перестанет отображаться плашка с информацией от скрипта!). Методы, связанные с моделью, будут вызывать ошибку `Model not defined`. Подробнее о режимах блокировки [тут](../advancedFeatues/modelLock.md)
+
+&nbsp;
+
+```js
+getStorageInstancePriority(): number;
+```
+Возвращает текущий приоритет процесса OLAP модели (значение [nice](https://www.ibm.com/docs/ru/aix/7.1?topic=processes-running-command-nice-command), число от -20 до 19)
+
+&nbsp;
+
+```js
+setStorageInstancePriority(priority: number): number;
+```
+Устанавливает приоритет процесса OLAP модели (значение [nice](https://www.ibm.com/docs/ru/aix/7.1?topic=processes-running-command-nice-command)). В параметре принимает число от 0 до 19, отрицательные значения не разрешены. Возвращает предыдущее значение приоритета.
 
 &nbsp;
 
