@@ -716,6 +716,10 @@ export interface ModelInfo {
     export(path: string): boolean;
     
     exportObfuscationState(): ExportObfuscationState;
+
+    getStorageInstancePriority(): number;
+
+    setStorageInstancePriority(priority: number): number;
 }
 
 export interface ButtonInfoOptions {
