@@ -5,15 +5,79 @@ and changes image captiones and link
 
 import json
 import re
+import string
 
 contents_file = 'publish/contents.json'
-out_file = 'combined.md'
+out_file = 'publish/combined.md'
 
 link_line_regex = r'^[\t0-9\.\s]*?\[.+?\]\(.+?\)[\s]*?$'
+
+internal_link_regex = r'([^!])(\[.+?\]\(.+?\))'
+internal_link_parse_regex = r'\[(.+?)\]\((.+?)\)'
+header_line_regex = r'^[#\s]+(.+)$'
+anchor_regex = r'#(.+?)'
+md_file_link = r'.+\.md'
 
 image_regex = r'(!\[.+?\]\(.+?\))'
 caption_regex = r'\[(.+?)\]'
 link_regex = r'\((.+?)\)'
+
+github_anchor_regex = r'^<a name=".+?"></a>[\s]+$'
+
+
+def get_header_from_file(path):
+    with open(path, 'r', encoding='utf-8') as file_with_header:
+        first_line = file_with_header.readline()
+        return re.search(header_line_regex, first_line).group(1)
+
+
+def get_verbouse_link(link, folder, contents):
+    splitted = re.split(anchor_regex, link)
+    if not splitted[0]:
+        # if the link has only anchor then it gives ['', %anchor% ,'']
+        # in-file link
+        return ""
+    path = splitted[0]
+    if not re.search(md_file_link, path):
+        # not an .md file
+        return ""
+    if path.startswith('../'):
+        # other folder
+        path = splitted[0][3:]
+        dest_folder = path.split('/')[0]
+        full_path = path
+    else:
+        # current folder
+        splitted_path = path.split('/')
+        filename = splitted_path[0] if len(splitted_path) == 1 else splitted_path[1]
+        dest_folder = folder
+        full_path = folder + '/' + filename
+
+    return '**' + get_header_from_file(dest_folder+'/'+contents[dest_folder][0]) + '** — **' + get_header_from_file(full_path) + '**'
+
+
+def fix_internal_link(line, folder, contents):
+    out = ""
+    splitted = re.split(internal_link_regex, line)
+    if len(splitted) == 1:
+        # for lines of code which start with '['
+        return line
+    for i, token in enumerate(splitted):
+        if token.startswith('['):
+            match = re.search(internal_link_parse_regex, token)
+            caption = match.group(1)
+            link = match.group(2)
+            if not link.startswith('http'):
+                # i.e. not external link
+                link = get_verbouse_link(link, folder, contents)
+                link_repr = ' (см. ' + link + ')' if link else ""
+                if len(splitted) >= i+2 and splitted[i+1] and splitted[i+1][0] not in string.punctuation:
+                    link_repr += ' '
+                token = caption + link_repr
+        out += token
+        
+    return out
+
 
 def fix_image(line, folder, chapter_num, picture_num):
     out = ""
@@ -30,18 +94,23 @@ def fix_image(line, folder, chapter_num, picture_num):
     
 
 def is_link_line(line):
-    return re.match(link_line_regex, line)
+    return re.match(github_anchor_regex, line) or re.match(link_line_regex, line)
 
 
-def proccess_file(file_num, file, folder, chapter_num, picture_num, out):
+def proccess_file(file_num, file, folder, chapter_num, picture_num, out, contents):
     with open(folder+'/'+file, 'r', encoding='utf-8') as f:
-        for line in f.readlines():
-            if is_link_line(line):
-                continue
-            if file_num and line.startswith('#'):
-                line = '#' + line
-            line = fix_image(line, folder, chapter_num, picture_num)
-            out.write(line)
+            for line in f.readlines():
+                try:
+                    if is_link_line(line):
+                        continue
+                    if file_num and line.startswith('#'):
+                        line = '#' + line
+                    else:
+                        line = fix_image(line, folder, chapter_num, picture_num)
+                        line = fix_internal_link(line, folder, contents)
+                except Exception as ex:
+                    raise(ex)
+                out.write(line)
 
 
 def combine(contents):
@@ -55,7 +124,7 @@ def combine(contents):
         for chapter_num, folder in enumerate(contents):
             picture_num = 1
             for file_num, file in enumerate(contents[folder]):
-                proccess_file(file_num, file, folder, chapter_num, picture_num, out)
+                proccess_file(file_num, file, folder, chapter_num, picture_num, out, contents)
         
 
 if __name__ == "__main__":

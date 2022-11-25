@@ -3,15 +3,45 @@
         "README.md",
         "prerequisities.md"
     ],
+    "API": [
+        "API.md",
+        "common.md",
+        "scriptChains.md",
+        "apiService.md",
+        "env.md",
+        "views.md",
+        "cubeCell.md",
+        "dimensions.md",
+        "elementsManipulator.md",
+        "sync.md",
+        "exportImport.md",
+        "fs.md",
+        "csv.md",
+        "optimization.md",
+        "connectors.md",
+        "relationalDB.md",
+        "mongoDB.md",
+        "http.md",
+        "winAgent.md",
+        "notifications.md"
+    ],
     "advancedFeatues": [
         "advancedFeatues.md",
         "limits.md",
         "modelLock.md"
     ],
+    "appendix": [
+        "appendix.md",
+        "constraints.md",
+        "glossary.md"
+    ],
     "cookBook": [
         "cookBook.md",
+        "hw.md",
         "rowsColumnsFilters.md",
-        "cellsAccess.md"
-    ]
-    
+        "cellsAccess.md",
+        "csv.md",
+        "partialListCopy.md",
+        "listReduce.md"
+    ] 
 }
