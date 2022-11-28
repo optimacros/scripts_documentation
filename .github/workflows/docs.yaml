@@ -10,13 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Make single .md
-      - run: python ./publish/combine.py
+        run: python ./publish/combine.py
       - name: Convert to docx
-      - uses: docker://pandoc/latex:2.9
+        uses: docker://pandoc/latex:2.9
         with:
             args: ./publish/combined.md --reference-doc=./publish/reference.docx -o ./publish/docs.docx
       - name: Append to release
-      - uses: xresloader/upload-to-github-release@v1
+        uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
