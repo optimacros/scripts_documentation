@@ -6,6 +6,7 @@ and changes image captiones and link
 import json
 import re
 import string
+from dataclasses import dataclass
 
 contents_file = 'publish/contents.json'
 out_file = 'publish/combined.md'
@@ -25,13 +26,23 @@ link_regex = r'\((.+?)\)'
 github_anchor_regex = r'^<a name=".+?"></a>[\s]+$'
 
 
+@dataclass
+class Info:
+    contents: dict
+    folder: str = "."
+    chapter_num: int = 0
+    file: str = ""
+    file_num: int = 0
+    picture_num: int = 1
+
+
 def get_header_from_file(path):
     with open(path, 'r', encoding='utf-8') as file_with_header:
         first_line = file_with_header.readline()
         return re.search(header_line_regex, first_line).group(1)
 
 
-def get_verbouse_link(link, folder, contents):
+def get_verbouse_link(link, info):
     splitted = re.split(anchor_regex, link)
     if not splitted[0]:
         # if the link has only anchor then it gives ['', %anchor% ,'']
@@ -50,13 +61,13 @@ def get_verbouse_link(link, folder, contents):
         # current folder
         splitted_path = path.split('/')
         filename = splitted_path[0] if len(splitted_path) == 1 else splitted_path[1]
-        dest_folder = folder
-        full_path = folder + '/' + filename
+        dest_folder = info.folder
+        full_path = info.folder + '/' + filename
 
     return '**' + get_header_from_file(dest_folder+'/'+contents[dest_folder][0]) + '** — **' + get_header_from_file(full_path) + '**'
 
 
-def fix_internal_link(line, folder, contents):
+def fix_internal_link(line, info):
     out = ""
     splitted = re.split(internal_link_regex, line)
     if len(splitted) == 1:
@@ -69,7 +80,7 @@ def fix_internal_link(line, folder, contents):
             link = match.group(2)
             if not link.startswith('http'):
                 # i.e. not external link
-                link = get_verbouse_link(link, folder, contents)
+                link = get_verbouse_link(link, info)
                 link_repr = ' (см. ' + link + ')' if link else ""
                 if len(splitted) >= i+2 and splitted[i+1] and splitted[i+1][0] not in string.punctuation:
                     link_repr += ' '
@@ -79,15 +90,16 @@ def fix_internal_link(line, folder, contents):
     return out
 
 
-def fix_image(line, folder, chapter_num, picture_num):
+def fix_image(line, info):
     out = ""
     splitted = re.split(image_regex, line)
     for token in splitted:
         if token.startswith('!['):
             caption = re.search(caption_regex, token).group(1)
             link = re.search(link_regex, token).group(1)
-            link = link[0:2] + folder + '/' + link[2:]
-            token = '![' + 'Рисунок ' + str(chapter_num + 1) + '-' + str(picture_num) + ' — ' + caption + '](' + link + ')'
+            link = link[0:2] + info.folder + '/' + link[2:]
+            token = '![' + 'Рисунок ' + str(info.chapter_num + 1) + '-' + str(info.picture_num) + ' — ' + caption + '](' + link + ')'
+            info.picture_num += 1
         out += token
         
     return out
@@ -97,23 +109,23 @@ def is_link_line(line):
     return re.match(github_anchor_regex, line) or re.match(link_line_regex, line)
 
 
-def proccess_file(file_num, file, folder, chapter_num, picture_num, out, contents):
-    with open(folder+'/'+file, 'r', encoding='utf-8') as f:
+def proccess_file(out, info):
+    with open(info.folder+'/'+info.file, 'r', encoding='utf-8') as f:
             for line in f.readlines():
                 try:
                     if is_link_line(line):
                         continue
-                    if file_num and line.startswith('#'):
+                    if info.file_num and line.startswith('#'):
                         line = '#' + line
                     else:
-                        line = fix_image(line, folder, chapter_num, picture_num)
-                        line = fix_internal_link(line, folder, contents)
+                        line = fix_image(line, info)
+                        line = fix_internal_link(line, info)
                 except Exception as ex:
                     raise(ex)
                 out.write(line)
 
 
-def combine(contents):
+def combine(info):
     with open(out_file, 'w', encoding='utf-8') as out:
         """
         Folders are supposed to be chapters
@@ -122,12 +134,17 @@ def combine(contents):
         in other files headers will be inflated (+1 to the header order)
         """
         for chapter_num, folder in enumerate(contents):
-            picture_num = 1
+            info.folder = folder
+            info.chapter_num = chapter_num
+            info.picture_num = 1
             for file_num, file in enumerate(contents[folder]):
-                proccess_file(file_num, file, folder, chapter_num, picture_num, out, contents)
+                info.file_num = file_num
+                info.file = file
+                proccess_file(out, info)
         
 
 if __name__ == "__main__":
     with open(contents_file, 'r', encoding='utf-8') as f:
         contents = json.load(f)
-    combine(contents)
+    info = Info(contents)
+    combine(info)
