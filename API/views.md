@@ -492,41 +492,6 @@ columns(): Labels
 
 &nbsp;
 
-## Интерфейс LabelsGroup<a name="LabelsGroup"></a>
-```ts
-interface LabelsGroup {
-	all(): Label[];
-	first(): Label;
-	cells(): Cells;
-}
-```
-Интерфейс, представляющий многоуровневый набор заголовков конкретной строки или столбца.
-
-&nbsp;
-
-```js
-all(): Label[]
-```
-Возвращает массив конкретных заголовков [`Label`](#Label).
-
-&nbsp;
-
-```js
-first(): Label
-```
-Аналог `all()[0]`.
-
-&nbsp;
-
-```js
-cells(): Cells
-```
-Возвращает интерфейс [`Cells`](#Cells), предоставляющий доступ к ячейкам данной строки или столбца.
-
-В случае плоской таблицы [`возвращает`](../appendix/constraints.md#flatTable) `null`.
-
-&nbsp;
-
 ### Интерфейс Labels<a name="Labels"></a>
 ```ts
 interface Labels {
@@ -585,6 +550,41 @@ chunkInstance(): GridRangeChunk
 findLabelByLongId(longId: number): Label | null
 ```
 Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в `this`, иначе — `null`.
+
+&nbsp;
+
+## Интерфейс LabelsGroup<a name="LabelsGroup"></a>
+```ts
+interface LabelsGroup {
+	all(): Label[];
+	first(): Label;
+	cells(): Cells;
+}
+```
+Интерфейс, представляющий многоуровневый набор заголовков конкретной строки или столбца.
+
+&nbsp;
+
+```js
+all(): Label[]
+```
+Возвращает массив конкретных заголовков [`Label`](#Label).
+
+&nbsp;
+
+```js
+first(): Label
+```
+Аналог `all()[0]`.
+
+&nbsp;
+
+```js
+cells(): Cells
+```
+Возвращает интерфейс [`Cells`](#Cells), предоставляющий доступ к ячейкам данной строки или столбца.
+
+В случае плоской таблицы [`возвращает`](../appendix/constraints.md#flatTable) `null`.
 
 &nbsp;
 
