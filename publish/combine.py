@@ -29,11 +29,11 @@ github_anchor_regex = r'^<a name=".+?"></a>[\s]+$'
 @dataclass
 class Info:
     contents: dict
-    folder: str = "."
-    chapter_num: int = 0
-    file: str = ""
-    file_num: int = 0
-    picture_num: int = 1
+    folder: str = None
+    chapter_num: int = None
+    file: str = None
+    file_num: int = None
+    picture_num: int = None
 
 
 def get_header_from_file(path):

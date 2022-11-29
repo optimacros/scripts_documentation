@@ -1,6 +1,6 @@
 # Интерфейс Common
 
-### Интерфейс Common<a name="Common"></a>
+## Интерфейс Common<a name="Common"></a>
 ```ts
 interface Common {
 	createCellBuffer(): CellBuffer;
@@ -74,7 +74,7 @@ apiServiceRequestInfo(): ApiService.RequestInfo | null;
 
 &nbsp;
 
-### Интерфейс RequestManager<a name="RequestManager"></a>
+## Интерфейс RequestManager<a name="RequestManager"></a>
 ```ts
 interface RequestManager {
 	log(message: string, print?: boolean): RequestManager;
@@ -113,7 +113,7 @@ setStatusMessage(message: string): RequestManager
 
 &nbsp;
 
-### Интерфейс CellBuffer<a name="CellBuffer"></a>
+## Интерфейс CellBuffer<a name="CellBuffer"></a>
 ```ts
 interface CellBuffer {
 	set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
@@ -176,7 +176,7 @@ canLoadCellsValues(value: boolean): CellBuffer
 
 &nbsp;
 
-### Интерфейс ExportObfuscationState<a name="ExportObfuscationState"></a>
+## Интерфейс ExportObfuscationState<a name="ExportObfuscationState"></a>
 ```ts
 interface ExportObfuscationState {
 	setPath(path: string): ExportObfuscationState;
@@ -217,7 +217,7 @@ export(): boolean
 
 &nbsp;
 
-### Интерфейс ModelInfo<a name="ModelInfo"></a>
+## Интерфейс ModelInfo<a name="ModelInfo"></a>
 ```ts
 interface ModelInfo {
 	id(): string;
@@ -379,7 +379,7 @@ getRole(): EntityInfo
 
 &nbsp;
 
-### Интерфейс ResultInfo<a name="ResultInfo"></a>
+## Интерфейс ResultInfo<a name="ResultInfo"></a>
 ```ts
 interface ResultInfo {
 	addFileHash(hash: string): ResultInfo;
@@ -413,7 +413,7 @@ setProperty(name: string, value: any): ResultInfo
 
 &nbsp;
 
-### Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
+## Интерфейс EntitiesInfo<a name="EntitiesInfo"></a>
 ```ts
 interface EntitiesInfo {
 	get(longId: number): EntityInfo | null;
@@ -438,7 +438,7 @@ getCollection(longId: number[]): EntityInfo[]
 
 &nbsp;
 
-### Интерфейс CopyData<a name="CopyData"></a>
+## Интерфейс CopyData<a name="CopyData"></a>
 ```ts
 interface CopyData {
 	setSourceLongId(longId: number): CopyData;

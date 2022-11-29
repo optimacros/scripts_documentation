@@ -16,11 +16,11 @@ jobs:
       - name: Convert to docx
         uses: docker://pandoc/core:2.19.2-ubuntu
         with:
-            args: ./publish/combined.md --reference-doc=./publish/reference.docx -o ./publish/workspace_script_api_for_${{ github.event.release.tag_name }}.docx
+            args: ./publish/combined.md --reference-doc=./publish/reference.docx -o ./publish/workspace_${{ github.event.release.tag_name }}_script_api.docx
       - name: Append to release
         uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: ./publish/workspace_script_api_for_${{ github.event.release.tag_name }}.docx
+          file: ./publish/workspace_${{ github.event.release.tag_name }}_script_api.docx
           tag_name: ${{ github.event.release.tag_name }}

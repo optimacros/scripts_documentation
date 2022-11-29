@@ -21,7 +21,7 @@
 1. [Цепочки скриптов](scriptChains.md)
 1. [Web API сервисы](apiService.md)
 
-### Интерфейс OM<a name="OM"></a>
+## Интерфейс OM<a name="OM"></a>
 ```ts
 interface OM {
 	readonly common: Common;

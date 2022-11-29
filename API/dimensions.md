@@ -90,6 +90,7 @@ listTab(): ListTab
 Возвращает интерфейс [`ListTab`](#ListTab) вкладки того справочника, чьи выборки представляет собой `this`.
 
 &nbsp;
+
 ### Интерфейс CustomPropertiesTab<a name="CustomPropertiesTab"></a>
 ```ts
 interface CustomPropertiesTab extends Tab {
