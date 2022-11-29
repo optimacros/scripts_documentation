@@ -1,6 +1,6 @@
 # Представления
 
-### Интерфейс Multicubes<a name="Multicubes"></a>
+## Интерфейс Multicubes<a name="Multicubes"></a>
 ```ts
 interface Multicubes {
 	multicubesTab(): MulticubesTab;
@@ -42,7 +42,7 @@ open(name: string): MulticubeTab
 
 &nbsp;
 
-### Интерфейс Tab<a name="Tab"></a>
+## Интерфейс Tab<a name="Tab"></a>
 ```ts
 interface Tab {
 	open(name: string): Tab;
@@ -233,7 +233,7 @@ addDependentContext(identifier: number): Pivot
 
 &nbsp;
 
-### Интерфейс Grid<a name="Grid"></a>
+## Интерфейс Grid<a name="Grid"></a>
 ```ts
 interface Grid {
 	range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange;
@@ -492,6 +492,102 @@ columns(): Labels
 
 &nbsp;
 
+## Интерфейс LabelsGroup<a name="LabelsGroup"></a>
+```ts
+interface LabelsGroup {
+	all(): Label[];
+	first(): Label;
+	cells(): Cells;
+}
+```
+Интерфейс, представляющий многоуровневый набор заголовков конкретной строки или столбца.
+
+&nbsp;
+
+```js
+all(): Label[]
+```
+Возвращает массив конкретных заголовков [`Label`](#Label).
+
+&nbsp;
+
+```js
+first(): Label
+```
+Аналог `all()[0]`.
+
+&nbsp;
+
+```js
+cells(): Cells
+```
+Возвращает интерфейс [`Cells`](#Cells), предоставляющий доступ к ячейкам данной строки или столбца.
+
+В случае плоской таблицы [`возвращает`](../appendix/constraints.md#flatTable) `null`.
+
+&nbsp;
+
+### Интерфейс Labels<a name="Labels"></a>
+```ts
+interface Labels {
+	start(): number;
+	count(): number;
+	all(): LabelsGroup[];
+	get(index: number): LabelsGroup | null;
+	chunkInstance(): GridRangeChunk;
+	findLabelByLongId(longId: number): Label | null;
+}
+```
+Интерфейс, представляющий набор объектов [`LabelsGroup`](#LabelsGroup), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#GridRangeChunk).
+
+&nbsp;
+
+```js
+start(): number
+```
+Возвращает номер первой строки/столбца текущего [`GridRangeChunk`](#GridRangeChunk) в таблице [`Grid`](#Grid).
+
+&nbsp;
+
+```js
+count(): number
+```
+Возвращает количество строк/столбцов в наборе.
+
+Если `this` относится к строкам, то это значение, которое было посчитано в функции [`GridRange`](#GridRange).[`generator(size)`](#generator) на основе аргумента `size`.
+
+Если `this` относится к столбцам, то это в точности значение аргумента `columnCount` функции [`Grid`](#Grid).[`range(rowStart, rowCount, columnStart, columnCount)`](#range).
+
+&nbsp;
+
+```js
+all(): LabelsGroup[]
+```
+Возвращает набор объектов заголовков каждой строки/столбца[`LabelsGroup`](#LabelsGroup) в виде массива.
+
+&nbsp;
+
+```js
+get(index: number): LabelsGroup | null
+```
+Аналог `all()[index]`.
+
+&nbsp;
+
+```js
+chunkInstance(): GridRangeChunk
+```
+Возвращает обратную ссылку на [`GridRangeChunk`](#GridRangeChunk), из которого был получен `this`.
+
+&nbsp;
+
+```js
+findLabelByLongId(longId: number): Label | null
+```
+Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в `this`, иначе — `null`.
+
+&nbsp;
+
 ### Интерфейс EntityInfo (Label)<a name="EntityInfo"></a> <a name="Label"></a>
 ```ts
 interface Label {
@@ -560,53 +656,51 @@ parentLongId(): number
 
 &nbsp;
 
-### Интерфейс Labels<a name="Labels"></a>
+### Интерфейс Cells<a name="Cells"></a>
 ```ts
-interface Labels {
-	start(): number;
+interface Cells {
+	all(): Cell[];
+	first(): Cell;
+	setValue(value: number | string | null);
 	count(): number;
-	all(): LabelsGroup[];
-	get(index: number): LabelsGroup | null;
 	chunkInstance(): GridRangeChunk;
-	findLabelByLongId(longId: number): Label | null;
+	getByIndexes(indexes: number[]): Cells | null;
 }
 ```
-Интерфейс, представляющий набор объектов [`LabelsGroup`](#LabelsGroup), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#GridRangeChunk).
+Интерфейс, представляющий (как правило, прямоугольный) набор клеток таблицы.
 
 &nbsp;
 
 ```js
-start(): number
+all(): Cell[]
 ```
-Возвращает номер первой строки/столбца текущего [`GridRangeChunk`](#GridRangeChunk) в таблице [`Grid`](#Grid).
+Возвращает одномерный массив всех клеток [`Cell`](#Cell).
+
+&nbsp;
+
+```js
+first(): Cell
+```
+Аналог `all()[0]`.
+
+&nbsp;
+
+<a name="Cells.setValue"></a>
+```js
+setValue(value: number | string | null)
+```
+Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
 
 &nbsp;
 
 ```js
 count(): number
 ```
-Возвращает количество строк/столбцов в наборе.
-
-Если `this` относится к строкам, то это значение, которое было посчитано в функции [`GridRange`](#GridRange).[`generator(size)`](#generator) на основе аргумента `size`.
-
-Если `this` относится к столбцам, то это в точности значение аргумента `columnCount` функции [`Grid`](#Grid).[`range(rowStart, rowCount, columnStart, columnCount)`](#range).
+Возвращает количество клеток в наборе.
 
 &nbsp;
 
-```js
-all(): LabelsGroup[]
-```
-Возвращает набор объектов заголовков каждой строки/столбца[`LabelsGroup`](#LabelsGroup) в виде массива.
-
-&nbsp;
-
-```js
-get(index: number): LabelsGroup | null
-```
-Аналог `all()[index]`.
-
-&nbsp;
-
+<a name="chunkInstance"></a>
 ```js
 chunkInstance(): GridRangeChunk
 ```
@@ -615,44 +709,9 @@ chunkInstance(): GridRangeChunk
 &nbsp;
 
 ```js
-findLabelByLongId(longId: number): Label | null
+getByIndexes(indexes: number[]): Cells | null
 ```
-Возвращает объект [`Label`](#Label) по его [`longId`](#longId), если он присутствует в `this`, иначе — `null`.
-
-&nbsp;
-
-### Интерфейс LabelsGroup<a name="LabelsGroup"></a>
-```ts
-interface LabelsGroup {
-	all(): Label[];
-	first(): Label;
-	cells(): Cells;
-}
-```
-Интерфейс, представляющий многоуровневый набор заголовков конкретной строки или столбца.
-
-&nbsp;
-
-```js
-all(): Label[]
-```
-Возвращает массив конкретных заголовков [`Label`](#Label).
-
-&nbsp;
-
-```js
-first(): Label
-```
-Аналог `all()[0]`.
-
-&nbsp;
-
-```js
-cells(): Cells
-```
-Возвращает интерфейс [`Cells`](#Cells), предоставляющий доступ к ячейкам данной строки или столбца.
-
-В случае плоской таблицы [`возвращает`](../appendix/constraints.md#flatTable) `null`.
+Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#Cells). В этом случае функция [`chunkInstance()`](#chunkInstance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#GridRangeChunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#Cells).
 
 &nbsp;
 
@@ -751,65 +810,6 @@ getFormatType(): string
 isEditable(): boolean
 ```
 Возвращает признак возможности редактирования ячейки пользователем.
-
-&nbsp;
-
-### Интерфейс Cells<a name="Cells"></a>
-```ts
-interface Cells {
-	all(): Cell[];
-	first(): Cell;
-	setValue(value: number | string | null);
-	count(): number;
-	chunkInstance(): GridRangeChunk;
-	getByIndexes(indexes: number[]): Cells | null;
-}
-```
-Интерфейс, представляющий (как правило, прямоугольный) набор клеток таблицы.
-
-&nbsp;
-
-```js
-all(): Cell[]
-```
-Возвращает одномерный массив всех клеток [`Cell`](#Cell).
-
-&nbsp;
-
-```js
-first(): Cell
-```
-Аналог `all()[0]`.
-
-&nbsp;
-
-<a name="Cells.setValue"></a>
-```js
-setValue(value: number | string | null)
-```
-Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
-
-&nbsp;
-
-```js
-count(): number
-```
-Возвращает количество клеток в наборе.
-
-&nbsp;
-
-<a name="chunkInstance"></a>
-```js
-chunkInstance(): GridRangeChunk
-```
-Возвращает обратную ссылку на [`GridRangeChunk`](#GridRangeChunk), из которого был получен `this`.
-
-&nbsp;
-
-```js
-getByIndexes(indexes: number[]): Cells | null
-```
-Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#Cells). В этом случае функция [`chunkInstance()`](#chunkInstance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#GridRangeChunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#Cells).
 
 &nbsp;
 

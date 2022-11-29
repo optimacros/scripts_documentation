@@ -1,6 +1,6 @@
 # Оптимизационные запросы
 
-### Интерфейс Optimization<a name="Optimization"></a>
+## Интерфейс Optimization<a name="Optimization"></a>
 ```ts
 interface Optimization {
 	optimizationRequestsTab(): OptimizationRequestTab

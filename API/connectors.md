@@ -1,6 +1,6 @@
 # Коннекторы
 
-### Интерфейс Connectors<a name="Connectors"></a>
+## Интерфейс Connectors<a name="Connectors"></a>
 ```ts
 interface Connectors {
 	mysql(): MysqlConnectorBuilder;

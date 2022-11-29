@@ -4,7 +4,7 @@
 
 &nbsp;
 
-### Интерфейс ConnectorBuilder<a name="ConnectorBuilder"></a>
+## Интерфейс ConnectorBuilder<a name="ConnectorBuilder"></a>
 ```ts
 interface ConnectorBuilder {
 	setDSN(value: string): ConnectorBuilder;
@@ -37,7 +37,7 @@ load(): Connection
 
 &nbsp;
 
-### Интерфейс Connection<a name="Connection"></a>
+## Интерфейс Connection<a name="Connection"></a>
 ```ts
 interface Connection {
 	collectionCreator(): CollectionCreator;

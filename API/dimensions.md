@@ -1,6 +1,6 @@
 # Измерения
 
-### Интерфейс Lists<a name="Lists"></a>
+## Интерфейс Lists<a name="Lists"></a>
 ```ts
 interface Lists {
 	listsTab(): ListsTab;

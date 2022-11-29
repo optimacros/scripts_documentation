@@ -2,7 +2,7 @@
 
 Все интерфейсы этого раздела находятся в пространстве имён `Notifications`.
 
-### Интерфейс Manager<a name="Manager"></a>
+## Интерфейс Manager<a name="Manager"></a>
 ```ts
 interface Manager {
 	smtp(channel: string): Smtp.Builder;

@@ -4,7 +4,7 @@
 
 &nbsp;
 
-### Интерфейс RequestInfo<a name="RequestInfo"></a>
+## Интерфейс RequestInfo<a name="RequestInfo"></a>
 ```ts
 interface RequestInfo {
     getMethod(): string;

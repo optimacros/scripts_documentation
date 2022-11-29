@@ -1,6 +1,6 @@
 # Синхронизация мультикубов и справочников
 
-### Интерфейс SyncBuilder<a name="SyncBuilder"></a>
+## Интерфейс SyncBuilder<a name="SyncBuilder"></a>
 ```ts
 interface SyncBuilder {
 	setSrcModelId(modelId: string): SyncBuilder;

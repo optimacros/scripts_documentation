@@ -4,7 +4,7 @@ WinAgent – сервис создания отчётов MS Word и Excel, ра
 
 Все интерфейсы этого раздела находятся в пространстве имён `WinAgent`.
 
-### Интерфейс WinAgentBuilder<a name="WinAgentBuilder"></a>
+## Интерфейс WinAgentBuilder<a name="WinAgentBuilder"></a>
 ```js
 interface WinAgentBuilder {
 	setCommandUrl(url: string): this;

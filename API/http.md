@@ -2,6 +2,55 @@
 
 Все интерфейсы этого раздела, кроме [`ObjectOfStringArray`](#ObjectOfStringArray), находятся в пространстве имён `Http`.
 
+## Интерфейс HttpManager<a name="HttpManager"></a>
+```ts
+interface HttpManager {
+	requestBuilder(): RequestBuilder;
+	urlEncode(value: string): string;
+	urlDecode(value: string): string;
+	base64Encode(value: string): string;
+	base64Decode(value: string): string | boolean;
+}
+```
+Коннектор для подключения к серверу по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP).
+
+&nbsp;
+
+```js
+requestBuilder(): RequestBuilder
+```
+Возвращает объект [`RequestBuilder`](#RequestBuilder) построения запроса.
+
+&nbsp;
+
+```js
+urlEncode(value: string): string
+```
+Возвращает строку `value`, закодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
+
+&nbsp;
+
+```js
+urlDecode(value: string): string
+```
+Возвращает строку `value`, раскодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
+
+&nbsp;
+
+```js
+base64Encode(value: string): string
+```
+Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64).
+
+&nbsp;
+
+```js
+base64Decode(value: string): string | boolean
+```
+Возвращает строку `value`, раскодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` в случае ошибки.
+
+&nbsp;
+
 ### Интерфейс Params<a name="Params"></a>
 ```ts
 interface Params {
@@ -742,57 +791,7 @@ send(): Response
 
 &nbsp;
 
-### Интерфейс HttpManager<a name="HttpManager"></a>
-```ts
-interface HttpManager {
-	requestBuilder(): RequestBuilder;
-	urlEncode(value: string): string;
-	urlDecode(value: string): string;
-	base64Encode(value: string): string;
-	base64Decode(value: string): string | boolean;
-}
-```
-Коннектор для подключения к серверу по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP).
-
-&nbsp;
-
-```js
-requestBuilder(): RequestBuilder
-```
-Возвращает объект [`RequestBuilder`](#RequestBuilder) построения запроса.
-
-&nbsp;
-
-```js
-urlEncode(value: string): string
-```
-Возвращает строку `value`, закодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
-
-&nbsp;
-
-```js
-urlDecode(value: string): string
-```
-Возвращает строку `value`, раскодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
-
-&nbsp;
-
-```js
-base64Encode(value: string): string
-```
-Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64).
-
-
-&nbsp;
-
-```js
-base64Decode(value: string): string | boolean
-```
-Возвращает строку `value`, раскодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` в случае ошибки.
-
-&nbsp;
-
-### Тип ObjectOfStringArray<a name="ObjectOfStringArray"></a>
+## Тип ObjectOfStringArray<a name="ObjectOfStringArray"></a>
 ```ts
 type ObjectOfStringArray = {
 	[key: string]: string[];
@@ -802,32 +801,7 @@ type ObjectOfStringArray = {
 
 &nbsp;
 
-### Интерфейс ResponseErrors<a name="ResponseErrors"></a>
-```ts
-interface ResponseErrors {
-	getCode(): number;
-	getMessage(): string;
-}
-```
-Интерфейс доступа к [`ошибке`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP) транспортного уровня HTTP.
-
-&nbsp;
-
-```js
-getCode(): number
-```
-Возвращает код ошибки.
-
-&nbsp;
-
-```js
-getMessage(): string
-```
-Возвращает текст ошибки.
-
-&nbsp;
-
-### Интерфейс Response<a name="Response"></a>
+## Интерфейс Response<a name="Response"></a>
 ```ts
 interface Response {
 	headers(): ObjectOfStringArray;
@@ -900,6 +874,30 @@ getErrors(): ResponseErrors
 
 &nbsp;
 
+### Интерфейс ResponseErrors<a name="ResponseErrors"></a>
+```ts
+interface ResponseErrors {
+	getCode(): number;
+	getMessage(): string;
+}
+```
+Интерфейс доступа к [`ошибке`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP) транспортного уровня HTTP.
+
+&nbsp;
+
+```js
+getCode(): number
+```
+Возвращает код ошибки.
+
+&nbsp;
+
+```js
+getMessage(): string
+```
+Возвращает текст ошибки.
+
+&nbsp;
 
 [API Reference](API.md)
 
