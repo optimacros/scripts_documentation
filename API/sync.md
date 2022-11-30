@@ -51,6 +51,13 @@ setFilters(filters: Record<string, string[]>): SyncBuilder
 &nbsp;
 
 ```js
+setMappings(mappings: ImportMappings): SyncBuilder
+```
+Устанавливает ETL меппинги, которые применятся при синхронизации.
+
+&nbsp;
+
+```js
 sync(): SyncResult
 ```
 Запускает процесс синхронизации и возвращает интерфейс результата [`SyncResult`](#SyncResult).
