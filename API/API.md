@@ -1,22 +1,29 @@
 # API Reference
 
+В этом разделе находится техническое описание предоставляемых платформой интерфейсов. Их можно разделеить на 4 группы:
+
+* выполнение скрипта: информация об окружении и управление выводом/действиями после завершения работы (см. `Common`, `Environment`, `Optimization`),
+* взаимодействие с моделью, как сущностью: создание бэкапа, пересчёт всё модели (см. `Common.ModelInfo`),
+* взаимодействие с данными и метаданными модели (см. `Multicubes`, `Times`, `Versions`, `Lists`, `Common.CopyData`),
+* взаимодействие с внешним миром (см. `Common.ApiService`, `Filesystems`, `Connectors`, `Notifications`).
+
 1. [Интерфейс скриптов 1.0 (на языке TypeScript)](scripts.om.d.ts)
 1. [Интерфейс Common](common.md)
 1. [Окружение](env.md)
 1. [Представления](views.md)
-	1. [Измерения](dimensions.md)
-	1. [Манипуляция элементами](elementsManipulator.md)
-	1. [Низкоуровневый доступ к клеткам и кубам](cubeCell.md)
-	1. [Синхронизация мультикубов и справочников](sync.md)
+    1. [Измерения](dimensions.md)
+    1. [Манипуляция элементами](elementsManipulator.md)
+    1. [Низкоуровневый доступ к клеткам и кубам](cubeCell.md)
+    1. [Синхронизация мультикубов и справочников](sync.md)
 1. [Экспорт и импорт](exportImport.md)
 1. [Файловые системы](fs.md)
 1. [Файлы CSV](csv.md)
 1. [Оптимизационные запросы](optimization.md)
 1. [Коннекторы](connectors.md)
-	1. [Реляционные БД](relationalDB.md)
-	1. [MongoDB](mongoDB.md)
-	1. [HTTP](http.md)
-	1. [WinAgent](winAgent.md)
+    1. [Реляционные БД](relationalDB.md)
+    1. [MongoDB](mongoDB.md)
+    1. [HTTP](http.md)
+    1. [WinAgent](winAgent.md)
 1. [Уведомление пользователя](notifications.md)
 1. [Цепочки скриптов](scriptChains.md)
 1. [Web API сервисы](apiService.md)
