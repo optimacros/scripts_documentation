@@ -45,7 +45,7 @@ var om: OM;
 ```js
 readonly common: Common
 ```
-Ссылка на интерфейс [`Common`](./common.md#Common).
+Ссылка на интерфейс [`Common`](./common.md#common).
 
 &nbsp;
 
