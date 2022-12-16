@@ -20,7 +20,7 @@ interface Common {
 ```js
 createCellBuffer(): CellBuffer
 ```
-Возвращает ссылку на интерфейс [`CellBuffer`](#cell-buffer).
+Возвращает ссылку на интерфейс [`CellBuffer`](#cellBuffer).
 
 &nbsp;
 
@@ -113,7 +113,7 @@ setStatusMessage(message: string): RequestManager
 
 &nbsp;
 
-### Интерфейс CellBuffer<a name="cell-buffer"></a>
+### Интерфейс CellBuffer<a name="cellBuffer"></a>
 ```ts
 interface CellBuffer {
 	set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
