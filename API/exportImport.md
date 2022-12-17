@@ -5,7 +5,7 @@
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 
-### Интерфейс Exporter<a name="Exporter"></a>
+### Интерфейс Exporter<a name="exporter"></a>
 ```ts
 interface Exporter {
 	setEncoding(encoding: string): Exporter;
@@ -24,7 +24,7 @@ interface Exporter {
 	export(): ExportResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы. Доступен для всех [`Grid`](./views.md#Grid). Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый экспорт таблицы. Доступен для всех [`Grid`](./views.md#grid). Все функции, кроме [`export()`](#exporter.export), возвращают `this`.
 
 &nbsp;
 
@@ -85,7 +85,7 @@ setFileName(fileName: string): Exporter
 
 &nbsp;
 
-<a name="setDelimiter"></a>
+<a name="set-delimiter"></a>
 ```js
 setDelimiter(delimiter: string): Exporter
 ```
@@ -93,7 +93,7 @@ setDelimiter(delimiter: string): Exporter
 
 &nbsp;
 
-<a name="setEnclosure"></a>
+<a name="set-enclosure"></a>
 ```js
 setEnclosure(enclosure: string): Exporter
 ```
@@ -101,7 +101,7 @@ setEnclosure(enclosure: string): Exporter
 
 &nbsp;
 
-<a name="setEscape"></a>
+<a name="set-escape"></a>
 ```js
 setEscape(escape: string): Exporter
 ```
@@ -123,15 +123,15 @@ setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 
 &nbsp;
 
-<a name="Exporter.export"></a>
+<a name="exporter.export"></a>
 ```js
 export(): ExportResult
 ```
-Производит экспорт представления в соответствии с настройками, регистрирует файл в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry) и возвращает ссылку на [`ExportResult`](#ExportResult).
+Производит экспорт представления в соответствии с настройками, регистрирует файл в [`глобальном реестре`](../appendix/glossary.md#global-file-registry) и возвращает ссылку на [`ExportResult`](#export-result).
 
 &nbsp;
 
-### Интерфейс StorageExporter<a name="StorageExporter"></a>
+### Интерфейс StorageExporter<a name="storage-exporter"></a>
 ```ts
 interface StorageExporter extends Exporter {
 	setFormat(format: string): StorageExporter;
@@ -142,7 +142,7 @@ interface StorageExporter extends Exporter {
 	setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
 }
 ```
-Интерфейс быстрого экспорта. Доступен только в мультикубах. Интерфейс наследуется от [`Exporter`](#Exporter). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции, кроме [`export()`](#Exporter.export), возвращают `this`.
+Интерфейс быстрого экспорта. Доступен только в мультикубах. Интерфейс наследуется от [`Exporter`](#exporter). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции, кроме [`export()`](#exporter.export), возвращают `this`.
 
 &nbsp;
 
@@ -153,7 +153,7 @@ setFormat(format: string): StorageExporter
 
 &nbsp;
 
-<a name="setLineDelimiter"></a>
+<a name="set-line-delimiter"></a>
 ```js
 setLineDelimiter(lineDelimiter: string): StorageExporter
 ```
@@ -164,7 +164,7 @@ setLineDelimiter(lineDelimiter: string): StorageExporter
 ```js
 setFilterFormula(filterFormula: string): StorageExporter
 ```
-Устанавливает булеву формулу, которая будет применяться в качестве аналога [`setBooleanCubeIdentifier()`](#setBooleanCubeIdentifier), но без создания булева куба.
+Устанавливает булеву формулу, которая будет применяться в качестве аналога [`setBooleanCubeIdentifier()`](#set-boolean-cube-identifier), но без создания булева куба.
 
 &nbsp;
 
@@ -175,7 +175,7 @@ setDecimalSeparator(decimalSeparator: string): StorageExporter
 
 &nbsp;
 
-<a name="StorageExporter.setDateFormat"></a>
+<a name="storage-exporter.set-date-format"></a>
 ```js
 setDateFormat(dateFormat: string): StorageExporter
 ```
@@ -183,7 +183,7 @@ setDateFormat(dateFormat: string): StorageExporter
 
 &nbsp;
 
-<a name="setBooleanCubeIdentifier"></a>
+<a name="set-boolean-cube-identifier"></a>
 ```js
 setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter
 ```
@@ -191,7 +191,7 @@ setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter
 
 &nbsp;
 
-### Интерфейс ExportResult<a name="ExportResult"></a>
+### Интерфейс ExportResult<a name="export-result"></a>
 ```ts
 interface ExportResult {
 	mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult;
@@ -214,27 +214,27 @@ mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): 
 ```js
 getHash(): string | null
 ```
-Возвращает идентификатор файла в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry), или `null`, если файл там отсутствует. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
+Возвращает идентификатор файла в [`глобальном реестре`](../appendix/glossary.md#global-file-registry), или `null`, если файл там отсутствует. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#result-info.add-file-hash).
 
 &nbsp;
 
 ```js
 copyToLocal(path: string): ExportResult
 ```
-Копирует экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir). Возвращает `this`.
+Копирует экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir). Возвращает `this`.
 
 &nbsp;
 
 ```js
 moveToLocal(path: string): ExportResult
 ```
-Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) и убирает его из [`глобального реестра`](../appendix/glossary.md#globalFileRegistry). Возвращает `this`.
+Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) и убирает его из [`глобального реестра`](../appendix/glossary.md#global-file-registry). Возвращает `this`.
 
 &nbsp;
 
 ## Импорт в мультикубы и справочники<a name="import"></a>
 
-### Интерфейс CSVParams<a name="CSVParams"></a>
+### Интерфейс CSVParams<a name="csv-params"></a>
 ```ts
 interface CSVParams {
 	setDelimiter(delimiter: string): CSVParams;
@@ -254,7 +254,7 @@ interface CSVParams {
 ```js
 setDelimiter(delimiter: string): CSVParams
 ```
-Устанавливает разделитель полей. Аналогично `Exporter`.[`setDelimiter()`](#setDelimiter). Возвращает `this`.
+Устанавливает разделитель полей. Аналогично `Exporter`.[`setDelimiter()`](#set-delimiter). Возвращает `this`.
 
 &nbsp;
 
@@ -268,7 +268,7 @@ getDelimiter(): string
 ```js
 setEnclosure(enclosure: string): CSVParams
 ```
-Устанавливает обрамляющий символ. Аналогично `Exporter`.[`setEnclosure()`](#setEnclosure). Возвращает `this`.
+Устанавливает обрамляющий символ. Аналогично `Exporter`.[`setEnclosure()`](#set-enclosure). Возвращает `this`.
 
 &nbsp;
 
@@ -282,7 +282,7 @@ getEnclosure(): string
 ```js
 setEscape(escape: string): CSVParams
 ```
-Устанавливает символ для экранирования обрамляющего символа. Аналогично `Exporter`.[`setEscape()`](#setEscape). Возвращает `this`.
+Устанавливает символ для экранирования обрамляющего символа. Аналогично `Exporter`.[`setEscape()`](#set-escape). Возвращает `this`.
 
 &nbsp;
 
@@ -296,7 +296,7 @@ getEscape(): string
 ```js
 setLineDelimiter(escape: string): CSVParams
 ```
-Устанавливает разделитель строк. Аналогично `StorageExporter`.[`setLineDelimiter()`](#setLineDelimiter). Возвращает `this`.
+Устанавливает разделитель строк. Аналогично `StorageExporter`.[`setLineDelimiter()`](#set-line-delimiter). Возвращает `this`.
 
 &nbsp;
 
@@ -307,7 +307,7 @@ getLineDelimiter(): string
 
 &nbsp;
 
-### Интерфейс Importer<a name="Importer"></a>
+### Интерфейс Importer<a name="importer"></a>
 ```ts
 interface Importer {
 	csv(): CSVParams;
@@ -317,14 +317,14 @@ interface Importer {
 	import(): Importer;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](./views.md#Grid). Доступен в мультикубах и в справочниках. Результатом импорта является файл отчёта.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](./views.md#grid). Доступен в мультикубах и в справочниках. Результатом импорта является файл отчёта.
 
 &nbsp;
 
 ```js
 csv(): CSVParams
 ```
-Возвращает ссылку на интерфейс [`CSVParams`](#CSVParams), предоставляющий доступ к настройкам CSV. В случае импорта из Excel не имеет смысла.
+Возвращает ссылку на интерфейс [`CSVParams`](#csv-params), предоставляющий доступ к настройкам CSV. В случае импорта из Excel не имеет смысла.
 
 &nbsp;
 
@@ -352,11 +352,11 @@ getReportFilePath(): string | null
 ```js
 import(): Importer
 ```
-Производит импорт в [`Grid`](./views.md#Grid) в соответствии с настройками. Возвращает `this`.
+Производит импорт в [`Grid`](./views.md#grid) в соответствии с настройками. Возвращает `this`.
 
 &nbsp;
 
-### Интерфейс StorageImporter<a name="StorageImporter"></a>
+### Интерфейс StorageImporter<a name="storage-importer"></a>
 ```ts
 interface StorageImporter extends Importer {
 	setMaxFailures(maxFailures: number): StorageImporter;
@@ -366,7 +366,7 @@ interface StorageImporter extends Importer {
 	setMappings(mappings: object): StorageImporter;
 }
 ```
-Интерфейс быстрого импорта. Доступен только в мультикубах. Интерфейс наследуется от [`Importer`](#Importer). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции возвращают `this`.
+Интерфейс быстрого импорта. Доступен только в мультикубах. Интерфейс наследуется от [`Importer`](#importer). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции возвращают `this`.
 
 &nbsp;
 
@@ -394,7 +394,7 @@ setEncoding(encoding: string): StorageImporter
 ```js
 setDateFormat(dateFormat: string): StorageImporter
 ```
-Устанавливает формат дат. Аналогично функции [`StorageExporter.setDateFormat()`](#StorageExporter.setDateFormat).
+Устанавливает формат дат. Аналогично функции [`StorageExporter.setDateFormat()`](#storage-exporter.set-date-format).
 
 &nbsp;
 

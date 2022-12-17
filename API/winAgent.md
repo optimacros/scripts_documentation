@@ -4,7 +4,7 @@ WinAgent – сервис создания отчётов MS Word и Excel, ра
 
 Все интерфейсы этого раздела находятся в пространстве имён `WinAgent`.
 
-### Интерфейс WinAgentBuilder<a name="WinAgentBuilder"></a>
+### Интерфейс WinAgentBuilder<a name="win-agent-builder"></a>
 ```js
 interface WinAgentBuilder {
 	setCommandUrl(url: string): this;
@@ -37,7 +37,7 @@ setDownloadUrl(url: string): this
 ```js
 auth(): Http.HttpAuth
 ```
-Возвращает интерфейс [`Http.HttpAuth`](./http.md#HttpAuth) доступа к настройкам аутентификации WinAgent.
+Возвращает интерфейс [`Http.HttpAuth`](./http.md#http-auth) доступа к настройкам аутентификации WinAgent.
 
 &nbsp;
 
@@ -66,11 +66,11 @@ setOperationTimeout(sec: number): this
 ```js
 makeRunMacrosAction(): RunMacroAction
 ```
-Возвращает интерфейс [`RunMacroAction`](#RunMacroAction) настройки и запуска макроса.
+Возвращает интерфейс [`RunMacroAction`](#run-macro-action) настройки и запуска макроса.
 
 &nbsp;
 
-### Интерфейс BaseAction<a name="BaseAction"></a>
+### Интерфейс BaseAction<a name="base-action"></a>
 ```ts
 interface BaseAction {
 	run(): BaseActionResult;
@@ -83,11 +83,11 @@ interface BaseAction {
 ```js
 run(): BaseActionResult
 ```
-Выполняет действие и возвращает базовый интерфейс [`BaseActionResult`](#BaseActionResult) доступа к данным его результата.
+Выполняет действие и возвращает базовый интерфейс [`BaseActionResult`](#base-action-result) доступа к данным его результата.
 
 &nbsp;
 
-### Интерфейс RunMacroAction<a name="RunMacroAction"></a>
+### Интерфейс RunMacroAction<a name="run-macro-action"></a>
 ```еs
 interface RunMacroAction extends BaseAction {
 	setMacroName(macroName: string): this;
@@ -96,7 +96,7 @@ interface RunMacroAction extends BaseAction {
 	run(): RunMacroActionResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки запуска макроса. Наследуется от [`BaseAction`](#BaseAction).
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки запуска макроса. Наследуется от [`BaseAction`](#base-action).
 
 &nbsp;
 
@@ -124,11 +124,11 @@ setDataFilePaths(dataFilePaths: string[]): this
 ```js
 run(): RunMacroActionResult
 ```
-Запускает макрос и возвращает интерфейс [`RunMacroActionResult`](#RunMacroActionResult) доступа к данным его результата.
+Запускает макрос и возвращает интерфейс [`RunMacroActionResult`](#run-macro-action-result) доступа к данным его результата.
 
 &nbsp;
 
-### Интерфейс BaseActionResult<a name="BaseActionResult"></a>
+### Интерфейс BaseActionResult<a name="base-action-result"></a>
 ```ts
 interface BaseActionResult {
 
@@ -138,13 +138,13 @@ interface BaseActionResult {
 
 &nbsp;
 
-### Интерфейс RunMacroActionResult<a name="RunMacroActionResult"></a>
+### Интерфейс RunMacroActionResult<a name="run-macro-action-result"></a>
 ```ts
 interface RunMacroActionResult extends BaseActionResult {
 	getFilePaths(): string[];
 }
 ```
-Интерфейс доступа к данным результата выполнения макроса. Наследуется от [`BaseActionResult`](#BaseActionResult).
+Интерфейс доступа к данным результата выполнения макроса. Наследуется от [`BaseActionResult`](#base-action-result).
 
 &nbsp;
 

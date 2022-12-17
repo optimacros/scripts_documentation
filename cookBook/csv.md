@@ -24,13 +24,13 @@ const multicubeTab = multicubesTab.open("Уровни игроков");
 const pivot = multicubeTab.pivot();
 const grid = pivot.create();
 ```
-Теперь нам нужен интерфейс экспорта таблицы. Существует интерфейс [Exporter](../API/exportImport.md#Exporter) базового экспорта таблицы и интерфейс [StorageExporter](../API/exportImport.md#StorageExporter) быстрого экспорта таблицы. Рассмотрим их различия. Интерфейс `StorageExporter` наследуется от `Exporter`. Доступен только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов (отображаемых имен) экспортируются только их имена. По умолчанию обычный экспорт, если есть псевдонимы, выводит псевдоним или имя как в справочнике.
+Теперь нам нужен интерфейс экспорта таблицы. Существует интерфейс [Exporter](../API/exportImport.md#exporter) базового экспорта таблицы и интерфейс [StorageExporter](../API/exportImport.md#storage-exporter) быстрого экспорта таблицы. Рассмотрим их различия. Интерфейс `StorageExporter` наследуется от `Exporter`. Доступен только в мультикубах. В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов (отображаемых имен) экспортируются только их имена. По умолчанию обычный экспорт, если есть псевдонимы, выводит псевдоним или имя как в справочнике.
 
 На практике рассмотрим отличия в csv файлах. Для этого сначала сохраним экспортированные файлы по локальным путям и скачаем их.  
 
 Получим доступ к интерфейсу быстрого экспорта таблицы `StorageExporter` с помощью функции `storageExporter()`. Устанавливаем формат экспортируемого файла csv, используя функцию `setFormat`. Для чтения файла в нужной кодировке используем функцию `setEncoding`. Будьте осторожны с изменением кодировки файла. Так как кодировка файла поменялась, необходимо будет указать новую кодировку при чтении csv.
 
-Производим экспорт файла в соответствии с настройками с помощью функции `export()` и получаем ссылку на интерфейс [ExportResult](../API/exportImport.md#ExportResult). Сохраним экспортированный файл по пути `storageExporter` с помощью функции `copyToLocal()` для последующего доступа по сохраненному пути.
+Производим экспорт файла в соответствии с настройками с помощью функции `export()` и получаем ссылку на интерфейс [ExportResult](../API/exportImport.md#export-result). Сохраним экспортированный файл по пути `storageExporter` с помощью функции `copyToLocal()` для последующего доступа по сохраненному пути.
 ```js
 const storageExporter = grid.storageExporter().setFormat("csv").setEncoding("WINDOWS-1251");
 const storageExportResult = storageExporter.export().copyToLocal("storageExporter"); 
@@ -42,7 +42,7 @@ const storageExportResult = storageExporter.export().copyToLocal("storageExporte
 const exporter = grid.exporter().setFormat("csv").setEncoding("WINDOWS-1251");
 const exportResult = exporter.export().copyToLocal("export"); 
 ```
-Для скачивания файлов необходимо получить идентификатор файла в глобальном реестре, чтобы передать его в функцию `ResultInfo.addFileHash()`, используя интерфейс [ResultInfo](../API/common.md#ResultInfo). Чтобы получить идентификатор воспользуемся функцией `getHash()` интерфейса `ExportResult`. Функция `addFileHash()` скачивает файл в браузере.
+Для скачивания файлов необходимо получить идентификатор файла в глобальном реестре, чтобы передать его в функцию `ResultInfo.addFileHash()`, используя интерфейс [ResultInfo](../API/common.md#result-info). Чтобы получить идентификатор воспользуемся функцией `getHash()` интерфейса `ExportResult`. Функция `addFileHash()` скачивает файл в браузере.
 ```js
 const hashStorageExport = storageExportResult.getHash();
 const hashExport = exportResult.getHash();
@@ -99,9 +99,9 @@ const exportResult = storageExporter.export().copyToLocal("export");
 
 ##  Чтение csv и модификация
 Теперь можно построчно читать данные входного мультикуба. 
-Получаем доступ к интерфейсу локальной файловой системы [Filesystem](../API/fs.md#Filesystem) с помощью функции `getPathObj()`, в качестве параметра передается путь файла `export`. Этот интерфейс хранит в себе путь к файлу и ссылку на файловую систему. Он понадобится для чтения файла по выбранному пути.
+Получаем доступ к интерфейсу локальной файловой системы [Filesystem](../API/fs.md#filesystem) с помощью функции `getPathObj()`, в качестве параметра передается путь файла `export`. Этот интерфейс хранит в себе путь к файлу и ссылку на файловую систему. Он понадобится для чтения файла по выбранному пути.
 
-Получим интерфейс [FilesDataManager](../API/csv.md#FilesDataManager) для чтения файла с помощью функции `csvReader()`, в качестве параметра укажем интерфейс PathObj. Не забываем, что кодировка сохраненного файла изменилась на "WINDOWS-1251", поэтому изменяем настройки интерфейса `CsvReader`. Для этого вызываем функцию `changeFileCharset` с параметром "WINDOWS-1251". Чтобы прочитать файл построчно вызовем  функцию-генератор – `generator()` – интерфейса `CsvReader` возвращающую массив строк вида `string[][]`.
+Получим интерфейс [FilesDataManager](../API/csv.md#files-data-manager) для чтения файла с помощью функции `csvReader()`, в качестве параметра укажем интерфейс PathObj. Не забываем, что кодировка сохраненного файла изменилась на "WINDOWS-1251", поэтому изменяем настройки интерфейса `CsvReader`. Для этого вызываем функцию `changeFileCharset` с параметром "WINDOWS-1251". Чтобы прочитать файл построчно вызовем  функцию-генератор – `generator()` – интерфейса `CsvReader` возвращающую массив строк вида `string[][]`.
 ```js
 const localFileSystem = om.filesystems.local();
 const filePath = localFileSystem.getPathObj("export");
@@ -293,7 +293,7 @@ for (let rowArray of generator) {
 ## Запись в новый csv   
 Для записи в новый csv понадобится интерфейс CsvWriter.
 
-У интерфейса `FilesDataManager` вызовем функцию `csvWriter()` и получим интерфейс [CsvWriter](../API/csv.md#CsvWriter). В цикле запишем строку с помощью функции `writeRow()`.
+У интерфейса `FilesDataManager` вызовем функцию `csvWriter()` и получим интерфейс [CsvWriter](../API/csv.md#csv-writer). В цикле запишем строку с помощью функции `writeRow()`.
 Для записи массива типа `string[][]` нужно использовать функцию `writeRows()`. Когда все строки из цикла записаны, используем функцию `save` для сохранения файла в рабочей директории скрипта под именем `import`. 
 ```js
 let writer = fileManager.csvWriter();
@@ -372,7 +372,7 @@ for (let rowArray of generator) {
 writer.save("import");
 ```
 ## Импорт обратно в мультикуб
-Получаем ссылку на быстрый интерфейс импорта [StorageImporter](../API/exportImport.md#StorageImporter) с помощью функции `storageImporter()` полученного выше интерфейса `Tab`. Задаем имя импортируемого файла `import.csv` и производим импорт в `grid`.
+Получаем ссылку на быстрый интерфейс импорта [StorageImporter](../API/exportImport.md#storage-importer) с помощью функции `storageImporter()` полученного выше интерфейса `Tab`. Задаем имя импортируемого файла `import.csv` и производим импорт в `grid`.
 ```js
 const storageImporter = multicubeTab.storageImporter();
 storageImporter.setFilePath("import.csv").import();

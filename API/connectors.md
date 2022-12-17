@@ -1,6 +1,6 @@
 # Коннекторы
 
-### Интерфейс Connectors<a name="Connectors"></a>
+### Интерфейс Connectors<a name="connectors"></a>
 ```ts
 interface Connectors {
 	mysql(): MysqlConnectorBuilder;
@@ -20,56 +20,56 @@ interface Connectors {
 ```js
 mysql(): MysqlConnectorBuilder
 ```
-Возвращает коннектор [`MysqlConnectorBuilder`](./relationalDB.md#MysqlConnectorBuilder) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
+Возвращает коннектор [`MysqlConnectorBuilder`](./relationalDB.md#mysql-connector-builder) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
 
 &nbsp;
 
 ```js
 postgresql(): SqlConnectorBuilder
 ```
-Возвращает коннектор [`SqlConnectorBuilder`](./relationalDB.md#SqlConnectorBuilder) для подключения к базе данных [`PostgreSQL`](https://ru.wikipedia.org/wiki/PostgreSQL).
+Возвращает коннектор [`SqlConnectorBuilder`](./relationalDB.md#sql-connector-builder) для подключения к базе данных [`PostgreSQL`](https://ru.wikipedia.org/wiki/PostgreSQL).
 
 &nbsp;
 
 ```js
 sqlServer(): MicrosoftSqlConnectorBuilder
 ```
-Возвращает коннектор [`MicrosoftSqlConnectorBuilder`](./relationalDB.md#MicrosoftSqlConnectorBuilder) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
+Возвращает коннектор [`MicrosoftSqlConnectorBuilder`](./relationalDB.md#microsoft-sql-connector-builder) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
 
 &nbsp;
 
 ```js
 oracle(): OracleConnectorBuilder
 ```
-Возвращает коннектор [`OracleConnectorBuilder`](./relationalDB.md#OracleConnectorBuilder) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database).
+Возвращает коннектор [`OracleConnectorBuilder`](./relationalDB.md#oracle-connector-builder) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database).
 
 &nbsp;
 
 ```js
 snowflake(): SnowflakeConnectorBuilder;
 ```
-Возвращает коннектор [`SnowflakeConnectorBuilder`](./relationalDB.md#SnowflakeConnectorBuilder) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/).
+Возвращает коннектор [`SnowflakeConnectorBuilder`](./relationalDB.md#snowflake-connector-builder) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/).
 
 &nbsp;
 
 ```js
 mongodb(): Mongodb.ConnectorBuilder
 ```
-Возвращает коннектор [`Mongodb.ConnectorBuilder`](./mongoDB.md#ConnectorBuilder) для подключения к базе данных [`MongoDB`](https://ru.wikipedia.org/wiki/MongoDB).
+Возвращает коннектор [`Mongodb.ConnectorBuilder`](./mongoDB.md#connector-builder) для подключения к базе данных [`MongoDB`](https://ru.wikipedia.org/wiki/MongoDB).
 
 &nbsp;
 
 ```js
 http(): Http.HttpManager
 ```
-Возвращает коннектор [`Http.HttpManager`](./http.md#HttpManager) соединения по протоколу HTTP.
+Возвращает коннектор [`Http.HttpManager`](./http.md#http-manager) соединения по протоколу HTTP.
 
 &nbsp;
 
 ```js
 winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
 ```
-Возвращает коннектор [`WinAgent.WinAgentBuilder`](./winAgent.md#WinAgentBuilder) для взаимодействия с [`WinAgent`](./winAgent.md). Параметр `builtIn` указывает использовать встроенную конфигурацию воркспейса. Значение по умолчанию: `false`.
+Возвращает коннектор [`WinAgent.WinAgentBuilder`](./winAgent.md#win-agent-builder) для взаимодействия с [`WinAgent`](./winAgent.md). Параметр `builtIn` указывает использовать встроенную конфигурацию воркспейса. Значение по умолчанию: `false`.
 
 &nbsp;
 
