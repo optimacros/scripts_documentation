@@ -1,6 +1,6 @@
 # Файлы CSV
 
-### Интерфейс CsvWriter<a name="CsvWriter"></a>
+### Интерфейс CsvWriter<a name="csv-writer"></a>
 ```ts
 interface CsvWriter {
 	params(): CSVParams;
@@ -9,14 +9,14 @@ interface CsvWriter {
 	save(name: string, charset?: string): string;
 }
 ```
-Интерфейс для записи в новый файл формата [`CSV`](https://ru.wikipedia.org/wiki/CSV). Запись ведётся во временный буфер, и лишь функция [`save()`](#CsvWriter.save) сохраняет файл в памяти. Редактировать существующий файл невозможно, вместо этого нужно читать из одного файла и писать в другой.
+Интерфейс для записи в новый файл формата [`CSV`](https://ru.wikipedia.org/wiki/CSV). Запись ведётся во временный буфер, и лишь функция [`save()`](#csv-writer.save) сохраняет файл в памяти. Редактировать существующий файл невозможно, вместо этого нужно читать из одного файла и писать в другой.
 
 &nbsp;
 
 ```js
 params(): CSVParams
 ```
-Возвращает ссылку на интерфейс [`CSVParams`](./exportImport.md#CSVParams), предоставляющий доступ к настройкам CSV.
+Возвращает ссылку на интерфейс [`CSVParams`](./exportImport.md#csv-params), предоставляющий доступ к настройкам CSV.
 
 &nbsp;
 
@@ -34,15 +34,15 @@ writeRows(rows: string[][]): CsvWriter
 
 &nbsp;
 
-<a name="CsvWriter.save"></a>
+<a name="csv-writer.save"></a>
 ```js
 save(name: string, charset?: string): string
 ```
-Сохраняет файл в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) под именем `{name}.csv` в кодировке `charset` (допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`). Возвращает имя файла с расширением: `{name}.csv`.
+Сохраняет файл в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) под именем `{name}.csv` в кодировке `charset` (допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`). Возвращает имя файла с расширением: `{name}.csv`.
 
 &nbsp;
 
-### Интерфейс CsvReader<a name="CsvReader"></a>
+### Интерфейс CsvReader<a name="csv-reader"></a>
 ```ts
 interface CsvReader {
 	params(): CSVParams;
@@ -57,7 +57,7 @@ interface CsvReader {
 ```js
 params(): CSVParams
 ```
-Возвращает ссылку на интерфейс [`CSVParams`](./exportImport.md#CSVParams), предоставляющий доступ к настройкам CSV.
+Возвращает ссылку на интерфейс [`CSVParams`](./exportImport.md#csv-params), предоставляющий доступ к настройкам CSV.
 
 &nbsp;
 
@@ -75,7 +75,7 @@ generator(): string[][]
 
 &nbsp;
 
-### Интерфейс BaseConverter<a name="BaseConverter"></a>
+### Интерфейс BaseConverter<a name="base-converter"></a>
 ```ts
 interface BaseConverter {
 	setSource(path: string): this;
@@ -100,13 +100,13 @@ convert(): string
 
 &nbsp;
 
-### Интерфейс ExcelToCsvConverter<a name="ExcelToCsvConverter"></a>
+### Интерфейс ExcelToCsvConverter<a name="excel-to-csv-converter"></a>
 ```ts
 interface ExcelToCsvConverter extends BaseConverter {
 	setSheetIdentifier(identifier: string | number): ExcelToCsvConverter;
 }
 ```
-Интерфейс преобразования файлов Excel в CSV. Наследуется от [`BaseConverter`](#BaseConverter).
+Интерфейс преобразования файлов Excel в CSV. Наследуется от [`BaseConverter`](#base-converter).
 
 &nbsp;
 
@@ -117,7 +117,7 @@ setSheetIdentifier(identifier: string | number): ExcelToCsvConverter
 
 &nbsp;
 
-### Интерфейс ConverterManager<a name="ConverterManager"></a>
+### Интерфейс ConverterManager<a name="converter-manager"></a>
 ```ts
 interface ConverterManager {
 	excelToCsv(): ExcelToCsvConverter;
@@ -130,11 +130,11 @@ interface ConverterManager {
 ```js
 excelToCsv(): ExcelToCsvConverter
 ```
-Возвращает ссылку на интерфейс [`ExcelToCsvConverter`](#ExcelToCsvConverter) преобразования файлов Excel в CSV.
+Возвращает ссылку на интерфейс [`ExcelToCsvConverter`](#excel-to-csv-converter) преобразования файлов Excel в CSV.
 
 &nbsp;
 
-### Интерфейс FilesDataManager<a name="FilesDataManager"></a>
+### Интерфейс FilesDataManager<a name="files-data-manager"></a>
 ```ts
 interface FilesDataManager {
 	csvWriter(): CsvWriter;
@@ -142,7 +142,7 @@ interface FilesDataManager {
 	converterManager(): ConverterManager;
 }
 ```
-Интерфейс, который группирует интерфейсы для работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
+Интерфейс, который группирует интерфейсы для работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
 &nbsp;
 
@@ -150,21 +150,21 @@ interface FilesDataManager {
 ```js
 csvWriter(): CsvWriter
 ```
-Возвращает ссылку на [`CsvWriter`](#CsvWriter).
+Возвращает ссылку на [`CsvWriter`](#csv-writer).
 
 &nbsp;
 
 ```js
 csvReader(path: PathObj): CsvReader
 ```
-Возвращает ссылку на [`CsvReader`](#CsvReader) для чтения файла `path` в формате [`PathObj`](./fs.md#PathObj).
+Возвращает ссылку на [`CsvReader`](#csv-reader) для чтения файла `path` в формате [`PathObj`](./fs.md#path-obj).
 
 &nbsp;
 
 ```js
 converterManager(): ConverterManager
 ```
-Возвращает ссылку на [`ConverterManager`](#ConverterManager).
+Возвращает ссылку на [`ConverterManager`](#converter-manager).
 
 &nbsp;
 
