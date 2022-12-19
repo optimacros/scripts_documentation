@@ -3,7 +3,7 @@
 <a name="single-model"></a>
 ## Связь только с одной моделью
 
-Скрипты 1.0 хранятся внутри некоторой модели и при запуске глобальная переменная [`om`](../API/API.md#om) автоматически соединяется с ней и только с ней. Возможность кросс-модельного взаимодействия отсутствует. Это [`реализовано`](https://github.com/optimacros/applications_documentation/blob/master/features.md) в Application Manager.
+Скрипты 1.0 хранятся внутри некоторой модели и при запуске глобальная переменная [`om`](../API/API.md#om) автоматически соединяется с ней и только с ней. Возможность кросс-модельного взаимодействия отсутствует. Это [`реализовано`](https://github.com/optimacros/applications_documentation/blob/master/diff.md#model-access) в Application Manager.
 
 &nbsp;
 
