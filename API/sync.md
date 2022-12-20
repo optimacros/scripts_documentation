@@ -8,6 +8,7 @@ interface SyncBuilder {
 	setSrcEntityId(entityId: number): SyncBuilder;
 	setDestEntityId(entityId: number): SyncBuilder;
 	setFilters(filters: Record<string, string[]>): SyncBuilder;
+	setMappings(mappings: ImportMappings): SyncBuilder;
 	sync(): SyncResult;
 }
 ```
@@ -53,7 +54,7 @@ setFilters(filters: Record<string, string[]>): SyncBuilder
 ```js
 setMappings(mappings: ImportMappings): SyncBuilder
 ```
-Устанавливает ETL меппинги, которые применятся при синхронизации.
+Устанавливает ETL меппинги через [`ImportMappings`](#ImportMappings), которые применятся при синхронизации.
 
 &nbsp;
 
@@ -167,6 +168,88 @@ interface SyncResult {
 getReportPath(): string
 ```
 Возвращает имя файла отчёта.
+
+&nbsp;
+
+### Интерфейс ImportMappings<a name="ImportMappings"></a>
+```ts
+interface ImportMappings {
+    dimensionMapping?: SimpleMapping[];
+    cubeMapping?: SimpleMapping[];
+    namespaceMapping?: SimpleMapping[];
+    additionalDimensionMapping?: AdditionalDimensionMapping[];
+    dimensionItemMapping?: DimensionItemMapping[];
+}
+```
+Интерфейс для установки мэппингов при осуществлении синхронизации сущностей.
+
+&nbsp;
+
+```js
+dimensionMapping?: SimpleMapping[]
+```
+Мэппинги димэншэнов. Являют экземпляром интерфейса [`SimpleMapping`](#SimpleMapping).
+
+&nbsp;
+
+```js
+cubeMapping?: SimpleMapping[]
+```
+Мэппинги кубов. Являют экземпляром интерфейса [`SimpleMapping`](#SimpleMapping).
+
+&nbsp;
+
+```js
+namespaceMapping?: SimpleMapping[]
+```
+Мэппинги нэймспэйсов. Являют экземпляром интерфейса [`SimpleMapping`](#SimpleMapping).
+
+&nbsp;
+
+```js
+additionalDimensionMapping?: AdditionalDimensionMapping[]
+```
+Мэппинги дополнительных димэншэнов. Являют экземпляром интерфейса [`AdditionalDimensionMapping`](#AdditionalDimensionMapping).
+
+&nbsp;
+
+```js
+dimensionItemMapping?: DimensionItemMapping[]
+```
+Мэппинги элементов димэншэнов. Являют экземпляром интерфейса [`DimensionItemMapping`](#DimensionItemMapping).
+
+&nbsp;
+
+### Интерфейс SimpleMapping<a name="SimpleMapping"></a>
+```ts
+interface SimpleMapping {
+    from: string;
+    to: string;
+}
+```
+Интерфейс для установки стандартных мэппингов.
+
+&nbsp;
+
+### Интерфейс DimensionItemMapping<a name="DimensionItemMapping"></a>
+```ts
+interface DimensionItemMapping {
+    dimensionName: string;
+    dimensionItemMap: StringMap;
+}
+```
+Интерфейс для установки мэппингов димэншэнов.
+
+&nbsp;
+
+### Интерфейс AdditionalDimensionMapping<a name="AdditionalDimensionMapping"></a>
+```ts
+interface AdditionalDimensionMapping {
+    dimensionName: string;
+    dimensionItemName: string;
+}
+```
+Интерфейс для установки мэппингов дополнительных димэншэнов.
 
 &nbsp;
 
