@@ -1,6 +1,6 @@
 # Синхронизация мультикубов и справочников
 
-### Интерфейс SyncBuilder<a name="SyncBuilder"></a>
+### Интерфейс SyncBuilder<a name="sync-builder"></a>
 ```ts
 interface SyncBuilder {
 	setSrcModelId(modelId: string): SyncBuilder;
@@ -54,18 +54,18 @@ setFilters(filters: Record<string, string[]>): SyncBuilder
 ```js
 setMappings(mappings: ImportMappings): SyncBuilder
 ```
-Устанавливает ETL меппинги через [`ImportMappings`](#ImportMappings), которые применятся при синхронизации.
+Устанавливает ETL меппинги через [`ImportMappings`](#import-mappings), которые применятся при синхронизации.
 
 &nbsp;
 
 ```js
 sync(): SyncResult
 ```
-Запускает процесс синхронизации и возвращает интерфейс результата [`SyncResult`](#SyncResult).
+Запускает процесс синхронизации и возвращает интерфейс результата [`SyncResult`](#sync-result).
 
 &nbsp;
 
-### Интерфейс SyncMulticubeBuilder<a name="SyncMulticubeBuilder"></a>
+### Интерфейс SyncMulticubeBuilder<a name="sync-multicube-builder"></a>
 ```ts
 interface SyncMulticubeBuilder extends SyncBuilder {
 	setOmitEmptyRows(status: boolean): SyncMulticubeBuilder;
@@ -73,7 +73,7 @@ interface SyncMulticubeBuilder extends SyncBuilder {
 	setUseCodeInsteadLabel(status: boolean): SyncMulticubeBuilder;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), синхронизации мультикубов. Наследуется от [`SyncBuilder`](#SyncBuilder). Все функции возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), синхронизации мультикубов. Наследуется от [`SyncBuilder`](#sync-builder). Все функции возвращают `this`.
 
 &nbsp;
 
@@ -98,7 +98,7 @@ setUseCodeInsteadLabel(status: boolean): SyncMulticubeBuilder
  
 &nbsp;
 
-### Интерфейс SyncListBuilder<a name="SyncListBuilder"></a>
+### Интерфейс SyncListBuilder<a name="sync-list-builder"></a>
 ```ts
 interface SyncListBuilder extends SyncBuilder {
 	setViewId(viewId: number): SyncListBuilder;
@@ -116,7 +116,7 @@ interface SyncListBuilder extends SyncBuilder {
 	setReportFileFormat(format: string): SyncListBuilder;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), синхронизации справочников. Наследуется от [`SyncBuilder`](#SyncBuilder). Все функции возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), синхронизации справочников. Наследуется от [`SyncBuilder`](#sync-builder). Все функции возвращают `this`.
 
 &nbsp;
 
@@ -154,7 +154,7 @@ setReportFileFormat(format: string): SyncListBuilder
 
 &nbsp;
 
-### Интерфейс SyncResult<a name="SyncResult"></a>
+### Интерфейс SyncResult<a name="sync-result"></a>
 ```ts
 interface SyncResult {
 	getReportPath(): string;
@@ -171,7 +171,7 @@ getReportPath(): string
 
 &nbsp;
 
-### Интерфейс ImportMappings<a name="ImportMappings"></a>
+### Интерфейс ImportMappings<a name="import-mappings"></a>
 ```ts
 interface ImportMappings {
     dimensionMapping?: SimpleMapping[];
@@ -181,75 +181,75 @@ interface ImportMappings {
     dimensionItemMapping?: DimensionItemMapping[];
 }
 ```
-Интерфейс для установки мэппингов при осуществлении синхронизации сущностей.
+Интерфейс для установки маппингов при осуществлении синхронизации сущностей.
 
 &nbsp;
 
 ```js
 dimensionMapping?: SimpleMapping[]
 ```
-Мэппинги димэншэнов. Являют экземпляром интерфейса [`SimpleMapping`](#SimpleMapping).
+Маппинг измерений. Является экземпляром интерфейса [`SimpleMapping`](#simple-mapping).
 
 &nbsp;
 
 ```js
 cubeMapping?: SimpleMapping[]
 ```
-Мэппинги кубов. Являют экземпляром интерфейса [`SimpleMapping`](#SimpleMapping).
+Маппинг кубов. Является экземпляром интерфейса [`SimpleMapping`](#simple-mapping).
 
 &nbsp;
 
 ```js
 namespaceMapping?: SimpleMapping[]
 ```
-Мэппинги нэймспэйсов. Являют экземпляром интерфейса [`SimpleMapping`](#SimpleMapping).
+Маппинг нэймспэйсов. Является экземпляром интерфейса [`SimpleMapping`](#simple-mapping).
 
 &nbsp;
 
 ```js
 additionalDimensionMapping?: AdditionalDimensionMapping[]
 ```
-Мэппинги дополнительных димэншэнов. Являют экземпляром интерфейса [`AdditionalDimensionMapping`](#AdditionalDimensionMapping).
+Маппинг дополнительных измерений. Является экземпляром интерфейса [`AdditionalDimensionMapping`](#additional-dimension-mapping).
 
 &nbsp;
 
 ```js
 dimensionItemMapping?: DimensionItemMapping[]
 ```
-Мэппинги элементов димэншэнов. Являют экземпляром интерфейса [`DimensionItemMapping`](#DimensionItemMapping).
+Маппинг элементов измерений. Является экземпляром интерфейса [`DimensionItemMapping`](#dimension-item-mapping).
 
 &nbsp;
 
-### Интерфейс SimpleMapping<a name="SimpleMapping"></a>
+### Интерфейс SimpleMapping<a name="simple-mapping"></a>
 ```ts
 interface SimpleMapping {
     from: string;
     to: string;
 }
 ```
-Интерфейс для установки стандартных мэппингов.
+Интерфейс для установки стандартных маппингов.
 
 &nbsp;
 
-### Интерфейс DimensionItemMapping<a name="DimensionItemMapping"></a>
+### Интерфейс DimensionItemMapping<a name="dimension-item-mapping"></a>
 ```ts
 interface DimensionItemMapping {
     dimensionName: string;
     dimensionItemMap: StringMap;
 }
 ```
-Интерфейс для установки мэппингов димэншэнов.
+Интерфейс для установки маппингов измерений.
 
 &nbsp;
 
-### Интерфейс AdditionalDimensionMapping<a name="AdditionalDimensionMapping"></a>
+### Интерфейс AdditionalDimensionMapping<a name="additional-dimension-mapping"></a>
 ```ts
 interface AdditionalDimensionMapping {
     dimensionName: string;
     dimensionItemName: string;
 }
 ```
-Интерфейс для установки мэппингов дополнительных димэншэнов.
+Интерфейс для установки маппингов дополнительных измерений.
 
 &nbsp;
 
