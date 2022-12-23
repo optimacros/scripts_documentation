@@ -1,6 +1,6 @@
 # Файловые системы
 
-### Интерфейс Filesystems<a name="Filesystems"></a>
+### Интерфейс Filesystems<a name="filesystems"></a>
 ```ts
 interface Filesystems {
 	ftp(): FTPAdapter;
@@ -16,7 +16,7 @@ interface Filesystems {
 ```js
 ftp(): FTPAdapter
 ```
-Возвращает ссылку на интерфейс [`FTPAdapter`](#FTPAdapter) доступа к FTP.
+Возвращает ссылку на интерфейс [`FTPAdapter`](#ftp-adapter) доступа к FTP.
 
 &nbsp;
 
@@ -24,25 +24,25 @@ ftp(): FTPAdapter
 ```js
 local(): Filesystem
 ```
-Возвращает ссылку на интерфейс [`Filesystem`](#Filesystem) доступа к локальной файловой системе. Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***НЕ*** может выйти за её пределы.
+Возвращает ссылку на интерфейс [`Filesystem`](#filesystem) доступа к локальной файловой системе. Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***НЕ*** может выйти за её пределы.
 
 &nbsp;
 
 ```js
 sharedFolder(id: string): Filesystem
 ```
-Возвращает интерфейс [`Filesystem`](#Filesystem) доступа к shared folder – папке на сервере, которая была добавлена администратором при установке Workspace через manifest внутрь контейнера workspace.
+Возвращает интерфейс [`Filesystem`](#filesystem) доступа к shared folder – папке на сервере, которая была добавлена администратором при установке Workspace через manifest внутрь контейнера workspace.
 
 &nbsp; 
 
 ```js
 filesDataManager(): FilesDataManager
 ```
-Возвращает интерфейс [`FilesDataManager`](./csv.md#FilesDataManager) работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
+Возвращает интерфейс [`FilesDataManager`](./csv.md#files-data-manager) работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
 &nbsp;
 
-### Интерфейс Filesystem<a name="Filesystem"></a>
+### Интерфейс Filesystem<a name="filesystem"></a>
 ```ts
 interface Filesystem {
 	has(path: string): boolean;
@@ -148,14 +148,14 @@ deleteDir(path: string): boolean
 ```js
 listContents(path: string, recursive: boolean): FileMeta[]
 ```
-Возвращает массив объектов [`FileMeta`](#FileMeta), содержащих информацию об объектах внутри папки `path`. Если включен флаг `recursive`, возвращается также информация и о вложенных объектах.
+Возвращает массив объектов [`FileMeta`](#file-meta), содержащих информацию об объектах внутри папки `path`. Если включен флаг `recursive`, возвращается также информация и о вложенных объектах.
 
 &nbsp;
 
 ```js
 getMetadata(path: string): Object
 ```
-Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#FileMeta), однако часть полей может отсутствовать.
+Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#file-meta), однако часть полей может отсутствовать.
 
 &nbsp;
 
@@ -173,22 +173,22 @@ download(from: string, to: string): boolean
 
 &nbsp;
 
-<a name="Filesystem.makeGlobalFile"></a>
+<a name="filesystem.make-global-file"></a>
 ```js
 makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string
 ```
-Функция доступа *только* для [`локальной`](#local) файловой системы. Регистрирует уже существующий файл `path` в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry) под именем `{name}.{extension}`. Аргумент `copy` определяет, копировать или перемещать файл `path` в глобальный реестр; по умолчанию: `true`. Возвращает хэш файла. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#ResultInfo.addFileHash).
+Функция доступа *только* для [`локальной`](#local) файловой системы. Регистрирует уже существующий файл `path` в [`глобальном реестре`](../appendix/glossary.md#global-file-registry) под именем `{name}.{extension}`. Аргумент `copy` определяет, копировать или перемещать файл `path` в глобальный реестр; по умолчанию: `true`. Возвращает хэш файла. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#result-info.add-file-hash).
 
 &nbsp;
 
 ```js
 getPathObj(path: string): PathObj
 ```
-Возвращает интерфейс [`PathObj`](#PathObj).
+Возвращает интерфейс [`PathObj`](#path-obj).
 
 &nbsp;
 
-### Интерфейс FileMeta<a name="FileMeta"></a>
+### Интерфейс FileMeta<a name="file-meta"></a>
 ```ts
 interface FileMeta {
 	type: string;
@@ -216,7 +216,7 @@ type: string
 ```js
 path: string
 ```
-Путь к объекту в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
+Путь к объекту в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
 &nbsp;
 
@@ -237,7 +237,7 @@ size: number
 ```js
 dirname: string
 ```
-Папка, в которой находится объект. Для объектов в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir) это пустая строка.
+Папка, в которой находится объект. Для объектов в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) это пустая строка.
 
 &nbsp;
 
@@ -269,7 +269,7 @@ timestamp: number
 
 &nbsp;
 
-### Интерфейс PathObj<a name="PathObj"></a>
+### Интерфейс PathObj<a name="path-obj"></a>
 ```ts
 interface PathObj {
 	getSystem(): Filesystem;
@@ -294,7 +294,7 @@ getPath(): string
 
 &nbsp;
 
-### Интерфейс BaseAdapter<a name="BaseAdapter"></a>
+### Интерфейс BaseAdapter<a name="base-adapter"></a>
 ```ts
 interface BaseAdapter {
 	load(): Filesystem;
@@ -307,11 +307,11 @@ interface BaseAdapter {
 ```js
 load(): Filesystem
 ```
-Возвращает объект файловой системы [`Filesystem`](#Filesystem) с предварительно установленными настройками.
+Возвращает объект файловой системы [`Filesystem`](#filesystem) с предварительно установленными настройками.
 
 &nbsp;
 
-### Интерфейс FTPAdapter<a name="FTPAdapter"></a>
+### Интерфейс FTPAdapter<a name="ftp-adapter"></a>
 ```ts
 interface FTPAdapter extends BaseAdapter {
 	setHost(host: string): FTPAdapter;
@@ -346,7 +346,7 @@ interface FTPAdapter extends BaseAdapter {
 }
 ```
 
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для соединения с сервером [`FTP`](https://ru.wikipedia.org/wiki/FTP). Наследуется от интерфейса [`BaseAdapter`](#BaseAdapter).
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для соединения с сервером [`FTP`](https://ru.wikipedia.org/wiki/FTP). Наследуется от интерфейса [`BaseAdapter`](#base-adapter).
 
 &nbsp;
 

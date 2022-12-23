@@ -4,7 +4,7 @@
 
 &nbsp;
 
-### Интерфейс ConnectorBuilder<a name="ConnectorBuilder"></a>
+### Интерфейс ConnectorBuilder<a name="connector-builder"></a>
 ```ts
 interface ConnectorBuilder {
 	setDSN(value: string): ConnectorBuilder;
@@ -33,11 +33,11 @@ setDatabase(value: string): ConnectorBuilder
 ```js
 load(): Connection
 ```
-Создаёт соединение с БД и возвращает его интерфейс [`Connection`](#Connection).
+Создаёт соединение с БД и возвращает его интерфейс [`Connection`](#connection).
 
 &nbsp;
 
-### Интерфейс Connection<a name="Connection"></a>
+### Интерфейс Connection<a name="connection"></a>
 ```ts
 interface Connection {
 	collectionCreator(): CollectionCreator;
@@ -53,7 +53,7 @@ interface Connection {
 ```js
 collectionCreator(): CollectionCreator
 ```
-Возвращает интерфейс создания коллекции [`CollectionCreator`](#CollectionCreator).
+Возвращает интерфейс создания коллекции [`CollectionCreator`](#collection-creator).
 
 &nbsp;
 
@@ -67,18 +67,18 @@ dropCollection(name: string): Object
 ```js
 selectCollection(name: string): Collection
 ```
-Возвращает интерфейс [`Collection`](#Collection) работы с коллекцией `name`.
+Возвращает интерфейс [`Collection`](#collection) работы с коллекцией `name`.
 
 &nbsp;
 
 ```js
 types(): Types
 ```
-Возвращает вспомогательный интерфейс [`Types`](#Types).
+Возвращает вспомогательный интерфейс [`Types`](#types).
 
 &nbsp;
 
-### Интерфейс CollectionCreator<a name="CollectionCreator"></a>
+### Интерфейс CollectionCreator<a name="collection-creator"></a>
 ```ts
 interface CollectionCreator {
 	setOptions(options: Object): CollectionCreator;
@@ -112,7 +112,7 @@ create(): { ok: number, errmsg?: string }
 
 &nbsp;
 
-### Интерфейс Collection<a name="Collection"></a>
+### Интерфейс Collection<a name="collection"></a>
 ```ts
 interface Collection {
 	count(filter: Object): number;
@@ -132,7 +132,7 @@ interface Collection {
 
 `filter` – фильтр (или запрос) данных коллекции. Подробнее о принципах его построения см. в [`документации`](https://docs.mongodb.com/manual/reference/method/db.collection.find/) (параметр `query`).
 
-`options` – опции запроса [`FilterOptions`](#FilterOptions).
+`options` – опции запроса [`FilterOptions`](#filter-options).
 
 &nbsp;
 
@@ -146,7 +146,7 @@ count(filter: Object): number
 ```js
 find(filter: Object, options?: FilterOptions): Cursor
 ```
-Передаёт в MongoDB запрос [`find()`](https://docs.mongodb.com/manual/reference/method/db.collection.find/) поиска документов и возвращает [`Cursor`](#Cursor).
+Передаёт в MongoDB запрос [`find()`](https://docs.mongodb.com/manual/reference/method/db.collection.find/) поиска документов и возвращает [`Cursor`](#cursor).
 
 &nbsp;
 
@@ -157,55 +157,55 @@ findOne(filter: Object, options?: FilterOptions): Object
 
 &nbsp;
 
-<a name="insertOne"></a>
+<a name="insert-one"></a>
 ```js
 insertOne(document: Object): InsertOneResult
 ```
-Передаёт в MongoDB запрос [`insertOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/) добавления одного документа `document` в коллекцию и возвращает интерфейс [`InsertOneResult`](#InsertOneResult) доступа к результатам этого запроса.
+Передаёт в MongoDB запрос [`insertOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.insertOne/) добавления одного документа `document` в коллекцию и возвращает интерфейс [`InsertOneResult`](#insert-one-result) доступа к результатам этого запроса.
 
 &nbsp;
 
-<a name="insertMany"></a>
+<a name="insert-many"></a>
 ```js
 insertMany(documents: Object[]): InsertManyResult
 ```
-Передаёт в MongoDB запрос [`insertMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.insertMany/) добавления массива документов `documents` в коллекцию и возвращает интерфейс [`InsertManyResult`](#InsertManyResult) доступа к результатам этого запроса.
+Передаёт в MongoDB запрос [`insertMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.insertMany/) добавления массива документов `documents` в коллекцию и возвращает интерфейс [`InsertManyResult`](#insert-many-result) доступа к результатам этого запроса.
 
 &nbsp;
 
-<a name="updateOne"></a>
+<a name="update-one"></a>
 ```js
 updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult
 ```
-Передаёт в MongoDB запрос [`updateOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.updateOne/) изменения объектом `update` одного документа, определяемого запросом `filter`, и возвращает интерфейс [`UpdateResult`](#UpdateResult) доступа к результатам этого запроса.
+Передаёт в MongoDB запрос [`updateOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.updateOne/) изменения объектом `update` одного документа, определяемого запросом `filter`, и возвращает интерфейс [`UpdateResult`](#update-result) доступа к результатам этого запроса.
 
 &nbsp;
 
-<a name="updateMany"></a>
+<a name="update-many"></a>
 ```js
 updateMany(filter: Object, update: Object, options?: FilterOptions): UpdateResult
 ```
-Передаёт в MongoDB запрос [`updateMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.updateMany/) изменения объектом `update` нескольких документов, определяемых запросом `filter`, и возвращает интерфейс [`UpdateResult`](#UpdateResult) доступа к результатам этого запроса.
+Передаёт в MongoDB запрос [`updateMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.updateMany/) изменения объектом `update` нескольких документов, определяемых запросом `filter`, и возвращает интерфейс [`UpdateResult`](#update-result) доступа к результатам этого запроса.
 
 &nbsp;
 
-<a name="deleteOne"></a>
+<a name="delete-one"></a>
 ```js
 deleteOne(filter: Object, options?: FilterOptions): DeleteResult
 ```
-Передаёт в MongoDB запрос [`deleteOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne/) удаления одного документа, определяемого запросом `filter`, и возвращает интерфейс [`DeleteResult`](#DeleteResult) доступа к результатам этого запроса.
+Передаёт в MongoDB запрос [`deleteOne()`](https://docs.mongodb.com/manual/reference/method/db.collection.deleteOne/) удаления одного документа, определяемого запросом `filter`, и возвращает интерфейс [`DeleteResult`](#delete-result) доступа к результатам этого запроса.
 
 &nbsp;
 
-<a name="deleteMany"></a>
+<a name="delete-many"></a>
 ```js
 deleteMany(filter: Object, options?: FilterOptions): DeleteResult
 ```
-Передаёт в MongoDB запрос [`deleteMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/) удаления нескольких документов, определяемых запросом `filter`, и возвращает интерфейс [`DeleteResult`](#DeleteResult) доступа к результатам этого запроса.
+Передаёт в MongoDB запрос [`deleteMany()`](https://docs.mongodb.com/manual/reference/method/db.collection.deleteMany/) удаления нескольких документов, определяемых запросом `filter`, и возвращает интерфейс [`DeleteResult`](#delete-result) доступа к результатам этого запроса.
 
 &nbsp;
 
-### Интерфейс InsertOneResult<a name="InsertOneResult"></a>
+### Интерфейс InsertOneResult<a name="insert-one-result"></a>
 ```ts
 interface InsertOneResult {
 	getInsertedCount(): number;
@@ -213,7 +213,7 @@ interface InsertOneResult {
 	isAcknowledged(): boolean;
 }
 ```
-Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функцией[`insertOne()`](#insertOne).
+Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функцией[`insertOne()`](#insert-one).
 
 &nbsp;
 
@@ -227,11 +227,11 @@ getInsertedCount(): number
 ```js
 getInsertedId(): Types.ObjectId
 ```
-Возвращает [`Types.ObjectId`](#Types.ObjectId) вставленного документа.
+Возвращает [`Types.ObjectId`](#types.object-id) вставленного документа.
 
 &nbsp;
 
-<a name="InsertOneResult.isAcknowledged"></a>
+<a name="insert-one-result.is-acknowledged"></a>
 ```js
 isAcknowledged(): boolean
 ```
@@ -239,7 +239,7 @@ isAcknowledged(): boolean
 
 &nbsp;
 
-### Интерфейс InsertManyResult<a name="InsertManyResult"></a>
+### Интерфейс InsertManyResult<a name="insert-many-result"></a>
 ```ts
 interface InsertManyResult {
 	getInsertedCount(): number;
@@ -247,7 +247,7 @@ interface InsertManyResult {
 	isAcknowledged(): boolean;
 }
 ```
-Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функцией[`insertMany()`](#insertMany).
+Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функцией[`insertMany()`](#insert-many).
 
 &nbsp;
 
@@ -261,18 +261,18 @@ getInsertedCount(): number
 ```js
 getInsertedIds(): Types.ObjectId[]
 ```
-Возвращает массив [`Types.ObjectId`](#Types.ObjectId) вставленных документов.
+Возвращает массив [`Types.ObjectId`](#types.object-id) вставленных документов.
 
 &nbsp;
 
 ```js
 isAcknowledged(): boolean
 ```
-То же, что и [`InsertOneResult.isAcknowledged()`](#InsertOneResult.isAcknowledged).
+То же, что и [`InsertOneResult.isAcknowledged()`](#insert-one-result.is-acknowledged).
 
 &nbsp;
 
-### Интерфейс UpdateResult<a name="UpdateResult"></a>
+### Интерфейс UpdateResult<a name="update-result"></a>
 ```ts
 interface UpdateResult {
 	getMatchedCount(): number;
@@ -282,7 +282,7 @@ interface UpdateResult {
 	isAcknowledged(): boolean;
 }
 ```
-Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функциями[`updateOne()`](#updateOne) и [`updateMany()`](#updateMany).
+Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функциями[`updateOne()`](#update-one) и [`updateMany()`](#update-many).
 
 &nbsp;
 
@@ -310,25 +310,25 @@ getUpsertedCount(): number
 ```js
 getUpsertedId(): Types.ObjectId
 ```
-Возвращает [`Types.ObjectId`](#Types.ObjectId) документа, вставленного по опции [`upsert`](https://docs.mongodb.com/manual/reference/method/db.collection.update/#std-label-upsert-behavior).
+Возвращает [`Types.ObjectId`](#types.object-id) документа, вставленного по опции [`upsert`](https://docs.mongodb.com/manual/reference/method/db.collection.update/#std-label-upsert-behavior).
 
 &nbsp;
 
 ```js
 isAcknowledged(): boolean
 ```
-То же, что и [`InsertOneResult.isAcknowledged()`](#InsertOneResult.isAcknowledged).
+То же, что и [`InsertOneResult.isAcknowledged()`](#insert-one-result.is-acknowledged).
 
 &nbsp;
 
-### Интерфейс DeleteResult<a name="DeleteResult"></a>
+### Интерфейс DeleteResult<a name="delete-result"></a>
 ```ts
 interface DeleteResult {
 	getDeletedCount(): number;
 	isAcknowledged(): boolean;
 }
 ```
-Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функциями[`deleteOne()`](#deleteOne) и [`deleteMany()`](#deleteMany).
+Интерфейс доступа к данным, возвращаемым MongoDB в ответ на запрос функциями[`deleteOne()`](#delete-one) и [`deleteMany()`](#delete-many).
 
 &nbsp;
 
@@ -342,11 +342,11 @@ getDeletedCount(): number
 ```js
 isAcknowledged(): boolean
 ```
-То же, что и [`InsertOneResult.isAcknowledged()`](#InsertOneResult.isAcknowledged).
+То же, что и [`InsertOneResult.isAcknowledged()`](#insert-one-result.is-acknowledged).
 
 &nbsp;
 
-### Интерфейс Cursor<a name="Cursor"></a>
+### Интерфейс Cursor<a name="cursor"></a>
 ```ts
 interface Cursor {
 	all(): Object[];
@@ -371,7 +371,7 @@ generator(): Object[]
 
 &nbsp;
 
-### Интерфейс FilterOptions<a name="FilterOptions"></a>
+### Интерфейс FilterOptions<a name="filter-options"></a>
 ```ts
 interface FilterOptions extends Object {
 	sort: Object,
@@ -430,7 +430,7 @@ max: Object
 
 &nbsp;
 
-### Интерфейс Types<a name="Types"></a>
+### Интерфейс Types<a name="types"></a>
 ```ts
 interface Types {
 	ObjectId(id?: string): Types.ObjectId;
@@ -445,7 +445,7 @@ interface Types {
 ```js
 ObjectId(id?: string): Types.ObjectId
 ```
-Без аргументов генерирует и возвращает новый [`Types.ObjectId`](#Types.ObjectId). В случае с переданным `id` преобразует его в тип [`Types.ObjectId`](#Types.ObjectId) и возвращает. 
+Без аргументов генерирует и возвращает новый [`Types.ObjectId`](#types.object-id). В случае с переданным `id` преобразует его в тип [`Types.ObjectId`](#types.object-id) и возвращает. 
 
 &nbsp;
 
@@ -463,7 +463,7 @@ date(milliseconds: number): Object
 
 &nbsp;
 
-### Интерфейс Types.ObjectId<a name="Types.ObjectId"></a>
+### Интерфейс Types.ObjectId<a name="types.object-id"></a>
 ```ts
 namespace Types {
 	interface ObjectId {

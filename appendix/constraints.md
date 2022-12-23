@@ -1,16 +1,16 @@
 # Ограничения скриптов 1.0
 
-<a name="singleModel"></a>
+<a name="single-model"></a>
 ## Связь только с одной моделью
 
-Скрипты 1.0 хранятся внутри некоторой модели и при запуске глобальная переменная [`om`](../API/API.md#OM) автомагически соединяется с ней и только с ней. Возможность кросс-модельного взаимодействия отсутствует. Это [`реализовано`](https://github.com/optimacros/applications_documentation/blob/master/features.md#) в Application Manager.
+Скрипты 1.0 хранятся внутри некоторой модели и при запуске глобальная переменная [`om`](../API/API.md#om) автоматически соединяется с ней и только с ней. Возможность кросс-модельного взаимодействия отсутствует. Это [`реализовано`](https://github.com/optimacros/applications_documentation/blob/master/diff.md#model-access) в Application Manager.
 
 &nbsp;
 
-<a name="flatTable"></a>
+<a name="flat-table"></a>
 ## Плоские таблицы
 
-Если в сводной таблице на столбцах нет измерений (в этом случае в интерфейсе отображается один столбец), то к ячейкам невозможно получить доступ через функцию [`LabelsGroup`](../API/views.md#LabelsGroup).`cells()`. В этой ситуации она возвращает `null`:
+Если в сводной таблице на столбцах нет измерений (в этом случае в интерфейсе отображается один столбец), то к ячейкам невозможно получить доступ через функцию [`LabelsGroup`](../API/views.md#labels-group).`cells()`. В этой ситуации она возвращает `null`:
 
 ```js
 for (const chunk of generator) {
@@ -26,9 +26,9 @@ definitionInfo.getColumnDimensions()[0]getDimensionEntity().name()
 
 вернёт специальное значение `'Empty 1 0'`.
 
-Характерный пример плоской таблицы – [`вкладка`](../API/dimensions.md#TimeOptionsTab) настроек времени.
+Характерный пример плоской таблицы – [`вкладка`](../API/dimensions.md#time-options-tab) настроек времени.
 
-Для решения этой проблемы следует использовать функцию [`GridRangeChunk`](../API/views.md#GridRangeChunk).`cells()`, которая возвращает линейный массив, параллельный массиву [`GridRangeChunk`](../API/views.md#GridRangeChunk).`rows()`. Пример кода, который в настройках времени устанавливает нужное значение в ячейку `Current Month`, используя такой подход:
+Для решения этой проблемы следует использовать функцию [`GridRangeChunk`](../API/views.md#grid-range-chunk).`cells()`, которая возвращает линейный массив, параллельный массиву [`GridRangeChunk`](../API/views.md#grid-range-chunk).`rows()`. Пример кода, который в настройках времени устанавливает нужное значение в ячейку `Current Month`, используя такой подход:
 
 ```js
 for (const chunk of generator) {
@@ -57,25 +57,25 @@ for (const chunk of generator) {
 <a name="pivot"></a>
 ## Сводная таблица Tab.pivot()
 
-Функция [`Tab.pivot()`](../API/views.md#Tab.pivot) — единственный способ получить доступ к представлению мультикуба. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба в скриптах 1.0 отсутствует, поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
+Функция [`Tab.pivot()`](../API/views.md#tab.pivot) — единственный способ получить доступ к представлению мультикуба. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба в скриптах 1.0 отсутствует, поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
 &nbsp;
 
 <a name="generator"></a>
 ## Генератор GridRange.generator()
 
-В функции [`GridRange.generator()`](../API/views.md#generator) значение параметра `size` ограничено сверху значением `5000`, поэтому в скриптах 1.0 невозможно работать с [`GridRange`](../API/views.md#GridRange) с бОльшим количеством столбцов. Для решения этой проблемы предлагается окропить святой водой моделлера, который создаёт такие таблицы.
+В функции [`GridRange.generator()`](../API/views.md#generator) значение параметра `size` ограничено сверху значением `5000`, поэтому в скриптах 1.0 невозможно работать с [`GridRange`](../API/views.md#grid-range) с бОльшим количеством столбцов. Для решения этой проблемы предлагается окропить святой водой моделлера, который создаёт такие таблицы.
 
 &nbsp;
 
-<a name="syncOutput"></a>
+<a name="sync-output"></a>
 ## Вывод скрипта
 
-Вывод скрипта доступен только после его завершения. Если скрипт запускает длительную задачу, это может быть неудобно. Для частичного решения этой проблемы предусмотрен функционал [`RequestManager`](../API/common.md#RequestManager). Для полного – Application Manager, в нём вывод [`отображается`](https://github.com/optimacros/applications_documentation/blob/master/diff.md#asyncOutput) асинхронно непосредственно во время работы приложения.
+Вывод скрипта доступен только после его завершения. Если скрипт запускает длительную задачу, это может быть неудобно. Для частичного решения этой проблемы предусмотрен функционал [`RequestManager`](../API/common.md#request-manager). Для полного – Application Manager, в нём вывод [`отображается`](https://github.com/optimacros/applications_documentation/blob/master/diff.md#async-output) асинхронно непосредственно во время работы приложения.
 
 &nbsp;
 
-<a name="noLineBreak"></a>
+<a name="no-line-break"></a>
 ## `console.log()` не добавляет символ переноса строки
 
 Для получения удобочитаемого вывода рекомендуется добавлять этот символ самостоятельно:
@@ -90,7 +90,7 @@ console.log(message + '\n')
 console.log(`${message} \n`)
 ```
 
-Это неудобство [`отсутствует`](https://github.com/optimacros/applications_documentation/blob/master/diff.md#lineBreak) в Application Manager.
+Это неудобство [`отсутствует`](https://github.com/optimacros/applications_documentation/blob/master/diff.md#line-break) в Application Manager.
 
 
 [Приложения](appendix.md)

@@ -2,7 +2,7 @@
 
 ## Общие интерфейсы<a name="general"></a>
 
-### Интерфейс SqlQueryResult<a name="SqlQueryResult"></a>
+### Интерфейс SqlQueryResult<a name="sql-query-result"></a>
 ```ts
 interface SqlQueryResult {
 	count(): number;
@@ -75,7 +75,7 @@ lastId(): number
 
 &nbsp;
 
-### Интерфейс SqlQueryBuilder<a name="SqlQueryBuilder"></a>
+### Интерфейс SqlQueryBuilder<a name="sql-query-builder"></a>
 ```ts
 interface SqlQueryBuilder {
 	execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): SqlQueryResult;
@@ -88,7 +88,7 @@ interface SqlQueryBuilder {
 ```js
 execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): SqlQueryResult
 ```
-Конструирует SQL-запрос из строки `sql`, используя параметры привязки `bindings`, передаёт его на исполнение в СУБД и возвращает интерфейс [`SqlQueryResult`](#SqlQueryResult) доступа к результатам запроса.
+Конструирует SQL-запрос из строки `sql`, используя параметры привязки `bindings`, передаёт его на исполнение в СУБД и возвращает интерфейс [`SqlQueryResult`](#sql-query-result) доступа к результатам запроса.
 
 Для конструирования запроса в параметре `sql` заполнители `'?'` последовательно заменяются элементами массива `bindings`. Пример:
 
@@ -108,7 +108,7 @@ const queryResult = mySqlConn.qb().execute(sqlQuery, { price: 100 });
 
 &nbsp;
 
-### Интерфейс SqlConnection<a name="SqlConnection"></a>
+### Интерфейс SqlConnection<a name="sql-connection"></a>
 ```ts
 interface SqlConnection {
 	qb(): SqlQueryBuilder;
@@ -121,13 +121,13 @@ interface SqlConnection {
 ```js
 qb(): SqlQueryBuilder
 ```
-Возвращает интерфейс [`SqlQueryBuilder`](#SqlQueryBuilder) построения запроса к базе данных.
+Возвращает интерфейс [`SqlQueryBuilder`](#sql-query-builder) построения запроса к базе данных.
 
 &nbsp;
 
-## Соединение с конкретными БД<a name="connectorsBuilders"></a>
+## Соединение с конкретными БД<a name="connectors-builders"></a>
 
-### Интерфейс SqlConnectorBuilder<a name="SqlConnectorBuilder"></a>
+### Интерфейс SqlConnectorBuilder<a name="sql-connector-builder"></a>
 ```ts
 interface SqlConnectorBuilder {
 	setHost(value: string): SqlConnectorBuilder;
@@ -180,28 +180,28 @@ setDatabase(value: string): SqlConnectorBuilder
 ```js
 load(): SqlConnection
 ```
-Соединяется с БД и возвращает объект соединения [`SqlConnection`](#SqlConnection).
+Соединяется с БД и возвращает объект соединения [`SqlConnection`](#sql-connection).
 
 &nbsp;
 
-### Интерфейс MysqlConnectorBuilder<a name="MysqlConnectorBuilder"></a>
+### Интерфейс MysqlConnectorBuilder<a name="mysql-connector-builder"></a>
 ```ts
 interface MysqlConnectorBuilder extends SqlConnectorBuilder {
 	loadImportBuilder(): MysqlImportBuilder;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL). Интерфейс наследуется от [`SqlConnectorBuilder`](#SqlConnectorBuilder).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL). Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
 
 &nbsp;
 
 ```js
 loadImportBuilder(): MysqlImportBuilder
 ```
-Возвращает ссылку на интерфейс [`MysqlImportBuilder`](#MysqlImportBuilder) импорта из файла CSV.
+Возвращает ссылку на интерфейс [`MysqlImportBuilder`](#mysql-import-builder) импорта из файла CSV.
 
 &nbsp;
 
-### Интерфейс MicrosoftSqlConnectorBuilder<a name="MicrosoftSqlConnectorBuilder"></a>
+### Интерфейс MicrosoftSqlConnectorBuilder<a name="microsoft-sql-connector-builder"></a>
 ```ts
 interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 	setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
@@ -209,7 +209,7 @@ interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 	loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server). Интерфейс наследуется от [`SqlConnectorBuilder`](#SqlConnectorBuilder).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server). Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
 
 &nbsp;
 
@@ -249,11 +249,11 @@ setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
 ```js
 loadBulkCopyBuilder(): SqlBulkCopyBuilder
 ```
-Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#SqlBulkCopyBuilder) импорта/экспорта через файл CSV.
+Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#sql-bulk-copy-builder) импорта/экспорта через файл CSV.
 
 &nbsp;
 
-### Интерфейс OracleConnectorBuilder<a name="OracleConnectorBuilder"></a>
+### Интерфейс OracleConnectorBuilder<a name="oracle-connector-builder"></a>
 ```ts
 export interface OracleConnectorBuilder extends SqlConnectorBuilder {
 	setServiceName(value: string): OracleConnectorBuilder;
@@ -261,7 +261,7 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
 	setTNS(value: string): OracleConnectorBuilder;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#SqlConnectorBuilder).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
 
 &nbsp;
 
@@ -286,7 +286,7 @@ setTNS(value: string): OracleConnectorBuilder
 
 &nbsp;
 
-### Интерфейс SnowflakeConnectorBuilder<a name="SnowflakeConnectorBuilder"></a>
+### Интерфейс SnowflakeConnectorBuilder<a name="snowflake-connector-builder"></a>
 ```ts
 export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
     setAccount(account: string): this;
@@ -298,7 +298,7 @@ export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
     setProtocol(protocol: string): this;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/) (для подключения используется [PHP PDO Driver](https://docs.snowflake.com/en/user-guide/php-pdo-driver.html)). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#SqlConnectorBuilder).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/) (для подключения используется [PHP PDO Driver](https://docs.snowflake.com/en/user-guide/php-pdo-driver.html)). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
 
 &nbsp;
 
@@ -353,7 +353,7 @@ setProtocol(protocol: string): this;
 
 ## Импорт<a name="DBimport"></a>
 
-### Интерфейс MysqlImportBuilder<a name="MysqlImportBuilder"></a>
+### Интерфейс MysqlImportBuilder<a name="mysql-import-builder"></a>
 ```js
 interface MysqlImportBuilder {
 	setTable(name: string): MysqlImportBuilder;
@@ -487,19 +487,19 @@ setColumns(names: string[]): MysqlImportBuilder
 ```js
 setFilePath(path: string): MysqlImportBuilder
 ```
-Устанавливает путь к файлу в [`рабочей директории скрипта`](../appendix/glossary.md#scriptDir).
+Устанавливает путь к файлу в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
 &nbsp;
 
-<a name="MysqlImportBuilder.import"></a>
+<a name="mysql-import-builder.import"></a>
 ```js
 import(): MysqlImportResult
 ```
-Формирует из флагов команду на вызов *mysqlimport*, дожидается завершения импорта и возвращает ссылку на [`MysqlImportResult`](#MysqlImportResult).
+Формирует из флагов команду на вызов *mysqlimport*, дожидается завершения импорта и возвращает ссылку на [`MysqlImportResult`](#mysql-import-result).
 
 &nbsp;
 
-### Интерфейс MysqlImportResult<a name="MysqlImportResult"></a>
+### Интерфейс MysqlImportResult<a name="mysql-import-result"></a>
 ```js
 interface MysqlImportResult {
 	hasErrors(): boolean;
@@ -510,7 +510,7 @@ interface MysqlImportResult {
 	getStats(): Object;
 }
 ```
-Интерфейс просмотра результатов импорта, осуществлённого с помощью [`MysqlImportBuilder`](#MysqlImportBuilder).
+Интерфейс просмотра результатов импорта, осуществлённого с помощью [`MysqlImportBuilder`](#mysql-import-builder).
 
 &nbsp;
 
@@ -538,7 +538,7 @@ getOutput(): string
 ```js
 getCommand(): string
 ```
-Возвращает сформированную команду на вызов *mysqlimport*, которая была выполнена в момент вызова [`MysqlImportBuilder.import()`](#MysqlImportBuilder.import). Параметры будут сохранены в конфигурационном файле, доступ к которому можно получить функцией `getConfig()`.
+Возвращает сформированную команду на вызов *mysqlimport*, которая была выполнена в момент вызова [`MysqlImportBuilder.import()`](#mysql-import-builder.import). Параметры будут сохранены в конфигурационном файле, доступ к которому можно получить функцией `getConfig()`.
 
 &nbsp;
 
@@ -556,7 +556,7 @@ getStats(): Object
 
 &nbsp;
 
-### Интерфейс SqlBulkCopyBuilder<a name="SqlBulkCopyBuilder"></a>
+### Интерфейс SqlBulkCopyBuilder<a name="sql-bulk-copy-builder"></a>
 ```ts
 interface SqlBulkCopyBuilder {
 	setServerName(value: string): SqlBulkCopyBuilder;
@@ -597,11 +597,11 @@ interface SqlBulkCopyBuilder {
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MS SQL из файла CSV с помощью утилиты [*bcp*](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility). Все функции, начинающиеся с `set...()`, возвращают `this`.
 
-Порядок полей в файле CSV и таблице должен строго совпадать, даже при импорте в таблицу с полем [`IDENTITY`](https://docs.microsoft.com/ru-ru/sql/t-sql/statements/create-table-transact-sql-identity-property), так как в утилите *bcp* имеется баг, из-за которого работоспособность функций [`setFormatFile()`](#SqlBulkCopyBuilder.setFormatFile) и [`format()`](#SqlBulkCopyBuilder.format) не гарантирована.
+Порядок полей в файле CSV и таблице должен строго совпадать, даже при импорте в таблицу с полем [`IDENTITY`](https://docs.microsoft.com/ru-ru/sql/t-sql/statements/create-table-transact-sql-identity-property), так как в утилите *bcp* имеется баг, из-за которого работоспособность функций [`setFormatFile()`](#sql-bulk-copy-builder.set-format-file) и [`format()`](#sql-bulk-copy-builder.format) не гарантирована.
 
 &nbsp;
 
-<a name="setServerName"></a>
+<a name="set-server-name"></a>
 ```js
 setServerName(value: string): SqlBulkCopyBuilder
 ```
@@ -674,7 +674,7 @@ setCodePage(code: string): SqlBulkCopyBuilder
 ```js
 setDsnMode(status: boolean): SqlBulkCopyBuilder
 ```
-Устанавливает режим, в котором значение, передаваемое в функцию [`setServerName()`](#setServerName) интерпретируется как имя источника данных (DSN); [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#D) *bcp*: *-D*.
+Устанавливает режим, в котором значение, передаваемое в функцию [`setServerName()`](#set-server-name) интерпретируется как имя источника данных (DSN); [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#D) *bcp*: *-D*.
 
 &nbsp;
 
@@ -692,7 +692,7 @@ setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder
 
 &nbsp;
 
-<a name="SqlBulkCopyBuilder.setFormatFile"></a>
+<a name="sql-bulk-copy-builder.set-format-file"></a>
 ```js
 setFormatFile(path: string): SqlBulkCopyBuilder
 ```
@@ -812,33 +812,33 @@ setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
 
 &nbsp;
 
-<a name="SqlBulkCopyBuilder.import"></a>
+<a name="sql-bulk-copy-builder.import"></a>
 ```js
 import(path: string): SqlBulkCopyResult
 ```
-Формирует из флагов команду на вызов *bcp*, дожидается завершения импорта из файла `path` и возвращает ссылку на [`SqlBulkCopyResult`](#SqlBulkCopyResult).
+Формирует из флагов команду на вызов *bcp*, дожидается завершения импорта из файла `path` и возвращает ссылку на [`SqlBulkCopyResult`](#sql-bulk-copy-result).
 
 &nbsp;
 
-<a name="SqlBulkCopyBuilder.export"></a>
+<a name="sql-bulk-copy-builder.export"></a>
 ```js
 export(path: string): SqlBulkCopyResult
 ```
-Формирует из флагов команду на вызов *bcp*, дожидается завершения экспорта в файл `path` и возвращает ссылку на [`SqlBulkCopyResult`](#SqlBulkCopyResult).
+Формирует из флагов команду на вызов *bcp*, дожидается завершения экспорта в файл `path` и возвращает ссылку на [`SqlBulkCopyResult`](#sql-bulk-copy-result).
 
 &nbsp;
 
-<a name="SqlBulkCopyBuilder.format"></a>
+<a name="sql-bulk-copy-builder.format"></a>
 ```js
 format(path: string, xml: boolean): SqlBulkCopyResult
 ```
-Формирует из флагов команду на вызов *bcp [`format`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#format)*, которая создаёт файл форматирования `path`, основанный на указанных параметрах, дожидается завершения и возвращает ссылку на [`SqlBulkCopyResult`](#SqlBulkCopyResult). Если указан флаг `xml` ([`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#x) *bcp*: *-x*), файл форматирования будет создан на основе [`XML`](https://ru.wikipedia.org/wiki/XML); по умолчанию: `true`.
+Формирует из флагов команду на вызов *bcp [`format`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#format)*, которая создаёт файл форматирования `path`, основанный на указанных параметрах, дожидается завершения и возвращает ссылку на [`SqlBulkCopyResult`](#sql-bulk-copy-result). Если указан флаг `xml` ([`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#x) *bcp*: *-x*), файл форматирования будет создан на основе [`XML`](https://ru.wikipedia.org/wiki/XML); по умолчанию: `true`.
 
-Файл форматирования можно использовать для последующего экспорта/импорта при вызове функции [`setFormatFile()`](#SqlBulkCopyBuilder.setFormatFile).
+Файл форматирования можно использовать для последующего экспорта/импорта при вызове функции [`setFormatFile()`](#sql-bulk-copy-builder.set-format-file).
 
 &nbsp;
 
-### Интерфейс SqlBulkCopyResult<a name="SqlBulkCopyResult"></a>
+### Интерфейс SqlBulkCopyResult<a name="sql-bulk-copy-result"></a>
 ```ts
 interface SqlBulkCopyResult {
 	hasErrors(): boolean;
@@ -847,7 +847,7 @@ interface SqlBulkCopyResult {
 	getCommand(): string;
 }
 ```
-Интерфейс просмотра результатов импорта/экспорта, осуществлённого с помощью [`SqlBulkCopyBuilder`](#SqlBulkCopyBuilder).
+Интерфейс просмотра результатов импорта/экспорта, осуществлённого с помощью [`SqlBulkCopyBuilder`](#sql-bulk-copy-builder).
 
 &nbsp;
 
@@ -875,7 +875,7 @@ getOutput(): string
 ```js
 getCommand(): string
 ```
-Возвращает сформированную команду на вызов *bcp*, которая была выполнена в момент вызова одной из функций [`SqlBulkCopyBuilder.import()`](#SqlBulkCopyBuilder.import), [`SqlBulkCopyBuilder.export()`](#SqlBulkCopyBuilder.export), [`SqlBulkCopyBuilder.format()`](#SqlBulkCopyBuilder.format).
+Возвращает сформированную команду на вызов *bcp*, которая была выполнена в момент вызова одной из функций [`SqlBulkCopyBuilder.import()`](#sql-bulk-copy-builder.import), [`SqlBulkCopyBuilder.export()`](#sql-bulk-copy-builder.export), [`SqlBulkCopyBuilder.format()`](#sql-bulk-copy-builder.format).
 
 &nbsp;
 

@@ -6,7 +6,7 @@
 
 ## Доступ к клеткам и кубам<a name="lowlevel"></a>
 
-### Интерфейс CubeCell<a name="CubeCell"></a>
+### Интерфейс CubeCell<a name="cube-cell"></a>
 ```ts
 interface CubeCell {
 	definitions(): number[];
@@ -19,7 +19,7 @@ interface CubeCell {
 
 &nbsp;
 
-<a name="CubeCell.definitions"></a>
+<a name="cube-cell.definitions"></a>
 ```js
 definitions(): number[]
 ```
@@ -30,14 +30,14 @@ definitions(): number[]
 ```js
 getDimensionIds(): number[]
 ```
-Возвращает массив идентификаторов тех элементов измерений куба, которыми определена клетка.  Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
+Возвращает массив идентификаторов тех элементов измерений куба, которыми определена клетка.  Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#cube-info.get-dimensions).
 
 &nbsp;
 
 ```js
 getDimensionItems(): EntityInfo[]
 ```
-Возвращает массив [`EntityInfo`](./views.md#EntityInfo) элементов измерений куба, которыми определена клетка. Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
+Возвращает массив [`EntityInfo`](./views.md#entity-info) элементов измерений куба, которыми определена клетка. Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#cube-info.get-dimensions).
 
 &nbsp;
 
@@ -48,7 +48,7 @@ getValue(): number | string | null | boolean
 
 &nbsp;
 
-### Интерфейс CubeInfo<a name="CubeInfo"></a>
+### Интерфейс CubeInfo<a name="cube-info"></a>
 ```ts
 interface CubeInfo extends EntityInfo {
 	getFormula(): string | null;
@@ -56,7 +56,7 @@ interface CubeInfo extends EntityInfo {
 	getDimensions(): EntityInfo[];
 }
 ```
-Интерфейс информации о кубе. Интерфейс наследуется от [`EntityInfo`](./views.md#EntityInfo).
+Интерфейс информации о кубе. Интерфейс наследуется от [`EntityInfo`](./views.md#entity-info).
 
 &nbsp;
 
@@ -70,19 +70,19 @@ getFormula(): string | null
 ```js
 getFormatInfo(): CubeFormatInfo
 ```
-Возвращает интерфейс [`CubeFormatInfo`](#CubeFormatInfo) для получения информации о формате куба.
+Возвращает интерфейс [`CubeFormatInfo`](#cube-format-info) для получения информации о формате куба.
 
 &nbsp;
 
-<a name="CubeInfo.getDimensions"></a>
+<a name="cube-info.get-dimensions"></a>
 ```js
 getDimensions(): EntityInfo[]
 ```
-Возвращает массив [`EntityInfo`](./views.md#EntityInfo) измерений куба.
+Возвращает массив [`EntityInfo`](./views.md#entity-info) измерений куба.
 
 &nbsp;
 
-### Интерфейс CubeFormatInfo<a name="CubeFormatInfo"></a>
+### Интерфейс CubeFormatInfo<a name="cube-format-info"></a>
 ```ts
 interface CubeFormatInfo {
 	getFormatTypeEntity(): EntityInfo;
@@ -96,7 +96,7 @@ interface CubeFormatInfo {
 ```js
 getFormatTypeEntity(): EntityInfo
 ```
-Возвращает сущность [`EntityInfo`](./views.md#EntityInfo) формата куба.
+Возвращает сущность [`EntityInfo`](./views.md#entity-info) формата куба.
 
 &nbsp;
 
@@ -110,7 +110,7 @@ getDimensionEntity(): EntityInfo | null
 
 ## Получение клеток куба с помощью формулы<a name="select"></a>
 
-### Интерфейс CubeCellSelectorBuilder<a name="CubeCellSelectorBuilder"></a>
+### Интерфейс CubeCellSelectorBuilder<a name="cube-cell-selector-builder"></a>
 ```ts
 interface CubeCellSelectorBuilder {
 	setFormula(formula: string): this;
@@ -133,7 +133,7 @@ setFormula(formula: string): this
 ```js
 setStartCell(longIds: number[]): this
 ```
-Устанавливает клетку, начиная с которой будет выполняться выбор. В качестве аргумента передается массив идентификаторов тех элементов измерений куба, которыми определена клетка. Массив идентификаторов можно получить с помощью метода `getDimensionIds()` интерфейса [`CubeCell`](#CubeCell).
+Устанавливает клетку, начиная с которой будет выполняться выбор. В качестве аргумента передается массив идентификаторов тех элементов измерений куба, которыми определена клетка. Массив идентификаторов можно получить с помощью метода `getDimensionIds()` интерфейса [`CubeCell`](#cube-cell).
 
 &nbsp;
 
@@ -147,11 +147,11 @@ setMaxCount(count: number): this
 ```js
 load(): CubeCellSelector
 ```
-Производит выбор клеток и возвращает интерфейс [`CubeCellSelector`](#CubeCellSelector).
+Производит выбор клеток и возвращает интерфейс [`CubeCellSelector`](#cube-cell-selector).
 
 &nbsp;
 
-### Интерфейс CubeCellSelector<a name="CubeCellSelector"></a>
+### Интерфейс CubeCellSelector<a name="cube-cell-selector"></a>
 ```ts
 interface CubeCellSelector {
 	getCubeInfo(): CubeInfo;
@@ -167,7 +167,7 @@ interface CubeCellSelector {
 ```js
 getCubeInfo(): CubeInfo
 ```
-Возвращает интерфейс [`CubeInfo`](#CubeInfo) для получения информации о кубе.
+Возвращает интерфейс [`CubeInfo`](#cube-info) для получения информации о кубе.
 
 &nbsp;
 
@@ -181,20 +181,20 @@ getCubeIdentifier(): number
 ```js
 getCubeDimensions(): EntityInfo[]
 ```
-То же, что и [`CubeInfo.getDimensions()`](#CubeInfo.getDimensions).
+То же, что и [`CubeInfo.getDimensions()`](#cube-info.get-dimensions).
 
 &nbsp;
 
 ```js
 generator(): IterableIterator<CubeCell>
 ```
-Возвращает генератор, при каждом обращении возвращающий интерфейс [`CubeCell`](#CubeCell) очередной полученной в выборке клетки куба.
+Возвращает генератор, при каждом обращении возвращающий интерфейс [`CubeCell`](#cube-cell) очередной полученной в выборке клетки куба.
 
 &nbsp;
 
 ## Обновление клеток куба по формуле<a name="update"></a>
 
-### Интерфейс CubeCellUpdaterBuilder<a name="CubeCellUpdaterBuilder"></a>
+### Интерфейс CubeCellUpdaterBuilder<a name="cube-cell-updater-builder"></a>
 ```ts
 interface CubeCellUpdaterBuilder {
 	setConditionFormula(formula: string): this;
@@ -223,11 +223,11 @@ setFormula(formula: string): this
 ```js
 load(): CubeCellUpdater
 ```
-Устанавливает значения в клетках куба в соответствии с формулой и условной формулой, возвращает интерфейс [`CubeCellUpdater`](#CubeCellUpdater).
+Устанавливает значения в клетках куба в соответствии с формулой и условной формулой, возвращает интерфейс [`CubeCellUpdater`](#cube-cell-updater).
 
 &nbsp;
 
-### Интерфейс CubeCellUpdater<a name="CubeCellUpdater"></a>
+### Интерфейс CubeCellUpdater<a name="cube-cell-updater"></a>
 ```ts
 interface CubeCellUpdater {
 	getCount(): number;

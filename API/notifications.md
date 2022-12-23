@@ -2,7 +2,7 @@
 
 Все интерфейсы этого раздела находятся в пространстве имён `Notifications`.
 
-### Интерфейс Manager<a name="Manager"></a>
+### Интерфейс Manager<a name="manager"></a>
 ```ts
 interface Manager {
 	smtp(channel: string): Smtp.Builder;
@@ -15,11 +15,11 @@ interface Manager {
 ```js
 smtp(channel: string): Smtp.Builder
 ```
-Возвращает интерфейс [`Smtp.Builder`](#Smtp.Builder) канала с именем `channel` уведомления пользователя по протоколу [`SMTP`](https://ru.wikipedia.org/wiki/SMTP).
+Возвращает интерфейс [`Smtp.Builder`](#smtp.builder) канала с именем `channel` уведомления пользователя по протоколу [`SMTP`](https://ru.wikipedia.org/wiki/SMTP).
 
 &nbsp;
 
-### Интерфейс Smtp.Builder<a name="Smtp.Builder"></a>
+### Интерфейс Smtp.Builder<a name="smtp.builder"></a>
 ```ts
 interface Smtp.Builder {
 	setTo(to: string | string[]): this;
@@ -72,11 +72,11 @@ isHtml(flag: boolean): this;
 ```js
 send(): Smtp.Result
 ```
-Запускает механизм асинхронной отправки письма. Возвращает интерфейс [`Smtp.Result`](#Smtp.Result).
+Запускает механизм асинхронной отправки письма. Возвращает интерфейс [`Smtp.Result`](#smtp.result).
 
 &nbsp;
 
-### Интерфейс Smtp.Result<a name="Smtp.Result"></a>
+### Интерфейс Smtp.Result<a name="smtp.result"></a>
 ```ts
 interface Smtp.Result {
 }

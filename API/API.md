@@ -21,7 +21,7 @@
 1. [Цепочки скриптов](scriptChains.md)
 1. [Web API сервисы](apiService.md)
 
-### Интерфейс OM<a name="OM"></a>
+### Интерфейс OM<a name="om"></a>
 ```ts
 interface OM {
 	readonly common: Common;
@@ -45,70 +45,70 @@ var om: OM;
 ```js
 readonly common: Common
 ```
-Ссылка на интерфейс [`Common`](./common.md#Common).
+Ссылка на интерфейс [`Common`](./common.md#common).
 
 &nbsp;
 
 ```js
 readonly environment: Environment
 ```
-Ссылка на интерфейс [`Environment`](./env.md#Environment).
+Ссылка на интерфейс [`Environment`](./env.md#environment).
 
 &nbsp;
 
 ```js
 readonly multicubes: Multicubes
 ```
-Ссылка на интерфейс [`Multicubes`](./views.md#Multicubes).
+Ссылка на интерфейс [`Multicubes`](./views.md#multicubes).
 
 &nbsp;
 
 ```js
 readonly times: Times
 ```
-Ссылка на интерфейс [`Times`](./dimensions.md#Times).
+Ссылка на интерфейс [`Times`](./dimensions.md#times).
 
 &nbsp;
 
 ```js
 readonly versions: Versions
 ```
-Ссылка на интерфейс [`Versions`](./dimensions.md#Versions).
+Ссылка на интерфейс [`Versions`](./dimensions.md#versions).
 
 &nbsp;
 
 ```js
 readonly lists: Lists
 ```
-Ссылка на интерфейс [`Lists`](./dimensions.md#Lists).
+Ссылка на интерфейс [`Lists`](./dimensions.md#lists).
 
 &nbsp;
 
 ```js
 readonly filesystems: Filesystems
 ```
-Ссылка на интерфейс [`Filesystems`](./fs.md#Filesystems).
+Ссылка на интерфейс [`Filesystems`](./fs.md#filesystems).
 
 &nbsp;
 
 ```js
 readonly optimization: Optimization
 ```
-Ссылка на интерфейс [`Optimization`](./optimization.md#Optimization).
+Ссылка на интерфейс [`Optimization`](./optimization.md#optimization).
 
 &nbsp;
 
 ```js
 readonly connectors: Connectors
 ```
-Ссылка на интерфейс [`Connectors`](./connectors.md#Connectors).
+Ссылка на интерфейс [`Connectors`](./connectors.md#connectors).
 
 &nbsp;
 
 ```js
 readonly notifications: Notifications.Manager
 ```
-Ссылка на интерфейс [`Notifications.Manager`](./notifications.md#Manager).
+Ссылка на интерфейс [`Notifications.Manager`](./notifications.md#manager).
 
 &nbsp;
 
