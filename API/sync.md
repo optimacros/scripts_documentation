@@ -54,7 +54,7 @@ setFilters(filters: Record<string, string[]>): SyncBuilder
 ```js
 setMappings(mappings: ImportMappings): SyncBuilder
 ```
-Устанавливает ETL меппинги через [`ImportMappings`](#import-mappings), которые применятся при синхронизации.
+Устанавливает ETL маппинги через [`ImportMappings`](#import-mappings), которые применятся при синхронизации.
 
 &nbsp;
 
@@ -202,7 +202,7 @@ cubeMapping?: SimpleMapping[]
 ```js
 namespaceMapping?: SimpleMapping[]
 ```
-Маппинг нэймспэйсов. Является экземпляром интерфейса [`SimpleMapping`](#simple-mapping).
+Маппинг пространств имен. Является экземпляром интерфейса [`SimpleMapping`](#simple-mapping).
 
 &nbsp;
 
