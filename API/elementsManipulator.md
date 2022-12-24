@@ -106,7 +106,7 @@ setPositionEnd(): BaseElementsCreator
 ```js
 setPositionChildOf(parentLongId: number): BaseElementsCreator
 ```
-Устанавливает позицию добавления элемента как дочернего для [`parentLongId`](./views.md#longId). Возвращает `this`.
+Устанавливает позицию добавления элемента как дочернего для [`parentLongId`](./views.md#long-id). Возвращает `this`.
 
 &nbsp;
 

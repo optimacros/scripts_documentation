@@ -189,7 +189,7 @@ versionSubsetsTab(): VersionSubsetsTab
 
 &nbsp;
 
-### Интерфейс VersionsTab<a name=versions-tab"></a>
+### Интерфейс VersionsTab<a name="versions-tab"></a>
 ```ts
 interface VersionsTab extends Tab {
 	copyVersion(from: string, to: string): Object;
