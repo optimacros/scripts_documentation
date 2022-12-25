@@ -4,6 +4,10 @@ export type ObjectOfStringArray = {
     [key: string]: string[];
 }
 
+export type StringMap = {
+    [key: string]: string;
+};
+
 export interface Cell {
     setValue(value: number | string | null | boolean);
 
@@ -379,7 +383,32 @@ export interface SyncBuilder {
 
     setFilters(filters: Record<string, string[]>): SyncBuilder;
 
+    setMappings(mappings: ImportMappings): SyncBuilder;
+
     sync(): SyncResult;
+}
+
+export interface ImportMappings {
+    dimensionMapping?: SimpleMapping[];
+    cubeMapping?: SimpleMapping[];
+    namespaceMapping?: SimpleMapping[];
+    additionalDimensionMapping?: AdditionalDimensionMapping[];
+    dimensionItemMapping?: DimensionItemMapping[];
+}
+
+export interface SimpleMapping {
+    from: string;
+    to: string;
+}
+
+export interface AdditionalDimensionMapping {
+    dimensionName: string;
+    dimensionItemName: string;
+}
+
+export interface DimensionItemMapping {
+    dimensionName: string;
+    dimensionItemMap: StringMap;
 }
 
 export interface SyncMulticubeBuilder extends SyncBuilder {

@@ -8,6 +8,7 @@ interface SyncBuilder {
 	setSrcEntityId(entityId: number): SyncBuilder;
 	setDestEntityId(entityId: number): SyncBuilder;
 	setFilters(filters: Record<string, string[]>): SyncBuilder;
+	setMappings(mappings: ImportMappings): SyncBuilder;
 	sync(): SyncResult;
 }
 ```
@@ -47,6 +48,13 @@ setDestEntityId(entityId: number): SyncBuilder
 setFilters(filters: Record<string, string[]>): SyncBuilder
 ```
 Устанавливает фильтры – объект, в котором ключами являются строки с `id` измерений, а значениями – массивы строк с `id` значений фильтрации. Сейчас существует только один способ корректно сформировать этот объект: открыть вручную окно импорта из мультикуба в интерфейсе Optimacros: `Данные` -> `Импорт из мультикуба`, установить исходные модель и мультикуб, выбрать переключатель `Настраиваемый`, выбрать вручную нужные кубы и элементы измерений, нажать кнопку `Копировать параметры`, в появившемся окне `Редактор JSON` свойство `"selectedItems"` будет искомым объектом фильтров.
+
+&nbsp;
+
+```js
+setMappings(mappings: ImportMappings): SyncBuilder
+```
+Устанавливает ETL маппинги через [`ImportMappings`](#import-mappings), которые применятся при синхронизации.
 
 &nbsp;
 
@@ -160,6 +168,88 @@ interface SyncResult {
 getReportPath(): string
 ```
 Возвращает имя файла отчёта.
+
+&nbsp;
+
+### Интерфейс ImportMappings<a name="import-mappings"></a>
+```ts
+interface ImportMappings {
+    dimensionMapping?: SimpleMapping[];
+    cubeMapping?: SimpleMapping[];
+    namespaceMapping?: SimpleMapping[];
+    additionalDimensionMapping?: AdditionalDimensionMapping[];
+    dimensionItemMapping?: DimensionItemMapping[];
+}
+```
+Интерфейс для установки маппингов при осуществлении синхронизации сущностей.
+
+&nbsp;
+
+```js
+dimensionMapping?: SimpleMapping[]
+```
+Маппинг измерений. Является экземпляром интерфейса [`SimpleMapping`](#simple-mapping).
+
+&nbsp;
+
+```js
+cubeMapping?: SimpleMapping[]
+```
+Маппинг кубов. Является экземпляром интерфейса [`SimpleMapping`](#simple-mapping).
+
+&nbsp;
+
+```js
+namespaceMapping?: SimpleMapping[]
+```
+Маппинг пространств имен. Является экземпляром интерфейса [`SimpleMapping`](#simple-mapping).
+
+&nbsp;
+
+```js
+additionalDimensionMapping?: AdditionalDimensionMapping[]
+```
+Маппинг дополнительных измерений. Является экземпляром интерфейса [`AdditionalDimensionMapping`](#additional-dimension-mapping).
+
+&nbsp;
+
+```js
+dimensionItemMapping?: DimensionItemMapping[]
+```
+Маппинг элементов измерений. Является экземпляром интерфейса [`DimensionItemMapping`](#dimension-item-mapping).
+
+&nbsp;
+
+### Интерфейс SimpleMapping<a name="simple-mapping"></a>
+```ts
+interface SimpleMapping {
+    from: string;
+    to: string;
+}
+```
+Интерфейс для установки стандартных маппингов.
+
+&nbsp;
+
+### Интерфейс DimensionItemMapping<a name="dimension-item-mapping"></a>
+```ts
+interface DimensionItemMapping {
+    dimensionName: string;
+    dimensionItemMap: StringMap;
+}
+```
+Интерфейс для установки маппингов измерений.
+
+&nbsp;
+
+### Интерфейс AdditionalDimensionMapping<a name="additional-dimension-mapping"></a>
+```ts
+interface AdditionalDimensionMapping {
+    dimensionName: string;
+    dimensionItemName: string;
+}
+```
+Интерфейс для установки маппингов дополнительных измерений.
 
 &nbsp;
 
