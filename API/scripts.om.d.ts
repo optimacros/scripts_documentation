@@ -568,6 +568,10 @@ export interface CustomPropertiesTab extends Tab {
 
 }
 
+export interface ListUserAccessTab extends Tab {
+
+}
+
 export interface ListTab extends Tab {
     listSubsetTab(): ListSubsetsTab; //OBSOLETE in favor of subsetTab()
     
@@ -578,6 +582,8 @@ export interface ListTab extends Tab {
     accessModelTab(): ListAccessModelTab;
     
     customPropertiesTab(): CustomPropertiesTab;
+    
+    uamTab(): ListUserAccessTab;
 
     importer(): ListImporter;
 }
