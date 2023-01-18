@@ -138,7 +138,7 @@ interface SqlConnectorBuilder {
 	load(): SqlConnection;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), базовый интерфейс [`коннекторов`](../appendix/glossary.md#connector) для подключения к реляционной базе данных. Используется для подключения к базе данных [`PostgreSQL`](https://ru.wikipedia.org/wiki/PostgreSQL).
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), базовый интерфейс [`коннекторов`](../appendix/glossary.md#connector) для подключения к реляционной базе данных.
 
 &nbsp;
 
@@ -198,6 +198,23 @@ interface MysqlConnectorBuilder extends SqlConnectorBuilder {
 loadImportBuilder(): MysqlImportBuilder
 ```
 Возвращает ссылку на интерфейс [`MysqlImportBuilder`](#mysql-import-builder) импорта из файла CSV.
+
+&nbsp;
+
+### Интерфейс PostgresqlConnectorBuilder<a name="postgresql-connector-builder"></a>
+```ts
+export interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
+    loadImportBuilder(): PostgresqlImportBuilder;
+}
+```
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Postgresql`](https://ru.wikipedia.org/wiki/PostgreSQL). Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
+
+&nbsp;
+
+```js
+loadImportBuilder(): PostgresqlImportBuilder
+```
+Возвращает ссылку на интерфейс [`PostgresqlImportBuilder`](#postgresql-import-builder) импорта из файла CSV.
 
 &nbsp;
 
@@ -553,6 +570,97 @@ getConfig(): string
 getStats(): Object
 ```
 Если импорт завершён без ошибок, возвращает объект вида `{"records": 3, "deleted": 0, "skipped": 0, "warnings": 0}`.
+
+&nbsp;
+
+### Интерфейс PostgresqlImportBuilder<a name="postgresql-import-builder"></a>
+```js
+export interface PostgresqlImportBuilder {
+    setTable(name: string): PostgresqlImportBuilder;
+    setDelimiter(delimiter: string): PostgresqlImportBuilder;
+    setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
+    setColumns(names: string[]): PostgresqlImportBuilder;
+    setFilePath(path: string): PostgresqlImportBuilder;
+    import(): PostgresqlImportResult;
+}
+```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД Postgresql из файла CSV с помощью команды `\copy`. Все функции, кроме `import()`, возвращают `this`.
+
+&nbsp;
+
+```js
+setTable(name: string): PostgresqlImportBuilder
+```
+Устанавливает таблицу, из которой будет производиться импорт.
+
+&nbsp;
+
+```js
+setDelimiter(delimiter: string): PostgresqlImportBuilder
+```
+Устанавливает разделитель полей. По умолчанию: `;`.
+
+&nbsp;
+
+```js
+setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder
+```
+Игнорированать ли хедер; [`опция`] По умолчанию: `false`.
+
+&nbsp;
+
+```js
+setColumns(names: string[]): PostgresqlImportBuilder
+```
+Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла CSV; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_columns) *mysqlimport*: *--columns*. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
+
+&nbsp;
+
+```js
+setFilePath(path: string): PostgresqlImportBuilder
+```
+Устанавливает путь к файлу в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
+
+&nbsp;
+
+<a name="postgresql-import-builder.import"></a>
+```js
+import(): PostgresqlImportResult
+```
+Формирует из флагов команду импорт, дожидается завершения импорта и возвращает ссылку на [`PostgresqlImportResult`](#postgresql-import-result).
+
+&nbsp;
+
+### Интерфейс PostgresqlImportResult<a name="postgresql-import-result"></a>
+```js
+interface PostgresqlImportResult {
+    hasErrors(): boolean;
+    getErrorOutput(): string;
+    getCommand(): string;
+}
+```
+Интерфейс просмотра результатов импорта, осуществлённого с помощью [`PostgresqlImportBuilder`](#postgresql-import-builder).
+
+&nbsp;
+
+```js
+hasErrors(): boolean
+```
+Возвращает `getErrorOutput() != ''`.
+
+&nbsp;
+
+```js
+getErrorOutput(): string
+```
+Возвращает вывод команды \copy в `stderr`.
+
+&nbsp;
+
+```js
+getCommand(): string
+```
+Возвращает сформированную команду на вызов `\copy`, которая была выполнена в момент вызова [`PostgresqlImportBuilder.import()`](#postgresql-import-builder.import).
 
 &nbsp;
 
