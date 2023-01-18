@@ -47,6 +47,7 @@ open(name: string): ListTab
 interface ListTab extends Tab {
 	listSubsetTab(): ListSubsetsTab;
 	customPropertiesTab(): CustomPropertiesTab;
+	uamTab(): ListUserAccessTab;
 	importer(): ListImporter;
 }
 ```
@@ -64,6 +65,12 @@ listSubsetTab(): ListSubsetsTab
 customPropertiesTab(): CustomPropertiesTab
 ```
 Возвращает интерфейс [`CustomPropertiesTab`](#custom-properties-tab) доступа к свойствам справочников.
+
+&nbsp;
+```js
+uamTab(): ListUserAccessTab;
+```
+Возвращает интерфейс [`ListUserAccessTab`](#list-user-access-tab) доступа к управлению UAM (МДП) элементов справочника.
 
 &nbsp;
 
@@ -96,6 +103,14 @@ interface CustomPropertiesTab extends Tab {
 }
 ```
 Интерфейс доступа к свойствам справочника. В интерфейсе Optimacros аналогично открытию вкладки `Свойства` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab). Реализован только метод [`pivot()`](./views.md#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек, но не на добавление/удаление/перемещение свойств.
+
+&nbsp;
+### Интерфейс ListUserAccessTab<a name="list-user-access-tab"></a>
+```ts
+interface ListUserAccessTab extends Tab {
+}
+```
+Интерфейс доступа к UAM (МДП) элементов справочника. В интерфейсе Optimacros аналогично открытию вкладки `UAM`/`МДП` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab). Реализован только метод [`pivot()`](./views.md#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек.
 
 &nbsp;
 
