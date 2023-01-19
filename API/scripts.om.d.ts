@@ -1750,6 +1750,14 @@ export interface MysqlImportResult {
     getStats(): object;
 }
 
+export interface PostgresqlImportResult {
+    hasErrors(): boolean;
+
+    getErrorOutput(): string;
+
+    getCommand(): string;
+}
+
 export interface MysqlImportBuilder {
     setTable(name: string): this;
 
@@ -1786,8 +1794,26 @@ export interface MysqlImportBuilder {
     import(): MysqlImportResult;
 }
 
+export interface PostgresqlImportBuilder {
+    setTable(name: string): PostgresqlImportBuilder;
+
+    setDelimiter(delimiter: string): PostgresqlImportBuilder;
+
+    setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
+
+    setColumns(names: string[]): PostgresqlImportBuilder;
+
+    setFilePath(path: string): PostgresqlImportBuilder;
+
+    import(): PostgresqlImportResult;
+}
+
 export interface MysqlConnectorBuilder extends SqlConnectorBuilder {
     loadImportBuilder(): this;
+}
+
+export interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
+    loadImportBuilder(): PostgresqlImportBuilder;
 }
 
 export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
@@ -1814,7 +1840,7 @@ export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
 export interface Connectors {
     mysql(): MysqlConnectorBuilder;
 
-    postgresql(): SqlConnectorBuilder;
+    postgresql(): PostgresqlConnectorBuilder;
 
     sqlServer(): MicrosoftSqlConnectorBuilder;
 

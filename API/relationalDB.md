@@ -591,7 +591,7 @@ export interface PostgresqlImportBuilder {
 ```js
 setTable(name: string): PostgresqlImportBuilder
 ```
-Устанавливает таблицу, из которой будет производиться импорт.
+Устанавливает таблицу, в которую будет производиться импорт.
 
 &nbsp;
 
@@ -605,14 +605,14 @@ setDelimiter(delimiter: string): PostgresqlImportBuilder
 ```js
 setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder
 ```
-Игнорированать ли хедер; [`опция`] По умолчанию: `false`.
+Устанавливает флаг игнорирования заголовка; [`опция`] По умолчанию: `false`.
 
 &nbsp;
 
 ```js
 setColumns(names: string[]): PostgresqlImportBuilder
 ```
-Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла CSV; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_columns) *mysqlimport*: *--columns*. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
+Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла CSV; По умолчанию импорт будет производиться в столбцы таблицы последовательно.
 
 &nbsp;
 
