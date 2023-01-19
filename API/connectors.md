@@ -4,7 +4,7 @@
 ```ts
 interface Connectors {
 	mysql(): MysqlConnectorBuilder;
-	postgresql(): SqlConnectorBuilder;
+	postgresql(): PostgresqlConnectorBuilder;
 	sqlServer(): MicrosoftSqlConnectorBuilder;
 	oracle(): OracleConnectorBuilder;
 	snowflake(): SnowflakeConnectorBuilder;
@@ -25,9 +25,9 @@ mysql(): MysqlConnectorBuilder
 &nbsp;
 
 ```js
-postgresql(): SqlConnectorBuilder
+postgresql(): PostgresqlConnectorBuilder
 ```
-Возвращает коннектор [`SqlConnectorBuilder`](./relationalDB.md#sql-connector-builder) для подключения к базе данных [`PostgreSQL`](https://ru.wikipedia.org/wiki/PostgreSQL).
+Возвращает коннектор [`PostgresqlConnectorBuilder`](./relationalDB.md#postgresql-connector-builder) для подключения к базе данных [`PostgreSQL`](https://ru.wikipedia.org/wiki/PostgreSQL).
 
 &nbsp;
 
