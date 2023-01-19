@@ -34,6 +34,7 @@ interface OM {
 	readonly optimization: Optimization;
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
+        readonly variables: Variables;
 }
 
 var om: OM;
@@ -109,6 +110,13 @@ readonly connectors: Connectors
 readonly notifications: Notifications.Manager
 ```
 Ссылка на интерфейс [`Notifications.Manager`](./notifications.md#manager).
+
+&nbsp;
+
+```js
+readonly variables: Variables;
+```
+Ссылка на интерфейс [`Variables`](./variables.md#variables).
 
 &nbsp;
 
