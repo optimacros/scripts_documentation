@@ -605,7 +605,7 @@ setDelimiter(delimiter: string): PostgresqlImportBuilder
 ```js
 setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder
 ```
-Устанавливает флаг игнорирования заголовка; По умолчанию: `false`.
+Устанавливает флаг игнорирования заголовка. По умолчанию: `false`.
 
 &nbsp;
 
