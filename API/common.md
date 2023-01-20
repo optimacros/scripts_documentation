@@ -227,14 +227,14 @@ interface ModelInfo {
 	setModelCalculationMode(status: boolean): boolean;
 	repair(): boolean;
 	recalculate(): boolean;
-        backup(path: string): EntityInfo|boolean;
-        export(path: string): boolean;
+	backup(path: string): EntityInfo|boolean;
+	export(path: string): boolean;
 	exportObfuscationState(): ExportObfuscationState;
 	useUniqueLock(): this;
 	useSharedLock(): this;
 	unlock(): this;
-        getStorageInstancePriority(): number;
-        setStorageInstancePriority(priority: number): number;
+	getStorageInstancePriority(): number;
+	setStorageInstancePriority(priority: number): number;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -314,35 +314,35 @@ exportObfuscationState(): ExportObfuscationState
 ```js
 useUniqueLock(): this
 ```
-Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Unique`. Необходим для изменения метаданных модели. В таком режиме одномоментно может испольняться только один запрос (работающий скрипт или пользователь), остальные будут стоять в очереди. Подробнее о режимах блокировки [тут](../advancedFeatues/modelLock.md)
+Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Unique`. Необходим для изменения метаданных модели. В таком режиме одномоментно может испольняться только один запрос (работающий скрипт или пользователь), остальные будут стоять в очереди. Подробнее о режимах блокировки [здесь](../advancedFeatues/modelLock.md).
 
 &nbsp;
 
 ```js
 useSharedLock(): this
 ```
-Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Shared`. Достаточен для чтения данных из модели и изменения значений кубов. В один момент может исполняться несколько запросов от скриптов и пользователей с таким режимом блокировки. Попытка изменения метаданных будет вызывать ошибку `Unique lock not defined`. Подробнее о режимах блокировки [тут](../advancedFeatues/modelLock.md)
+Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Shared`. Достаточен для чтения данных из модели и изменения значений кубов. В один момент может исполняться несколько запросов от скриптов и пользователей с таким режимом блокировки. Попытка изменения метаданных будет вызывать ошибку `Unique lock not defined`. Подробнее о режимах блокировки [здесь](../advancedFeatues/modelLock.md).
 
 &nbsp;
 
 ```js
 unlock(): this
 ```
-Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Custom`. Скрипт перестанет отображаться в очереди модели (также перестанет отображаться плашка с информацией от скрипта!). Методы, связанные с моделью, будут вызывать ошибку `Model not defined`. Подробнее о режимах блокировки [тут](../advancedFeatues/modelLock.md)
+Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Custom`. Скрипт перестанет отображаться в очереди модели (также перестанет отображаться плашка с информацией от скрипта!). Методы, связанные с моделью, будут вызывать ошибку `Model not defined`. Подробнее о режимах блокировки [здесь](../advancedFeatues/modelLock.md).
 
 &nbsp;
 
 ```js
 getStorageInstancePriority(): number;
 ```
-Возвращает текущий приоритет OLAP-процесса модели - значение [nice](https://ru.wikipedia.org/wiki/Nice), число от -20 (наивысший приоритет) до +19 (наименьший приоритет)
+Возвращает текущий приоритет OLAP-процесса модели — значение [nice](https://ru.wikipedia.org/wiki/Nice), число от `-20` (наивысший приоритет) до `+19` (наименьший приоритет).
 
 &nbsp;
 
 ```js
 setStorageInstancePriority(priority: number): number;
 ```
-Устанавливает приоритет OLAP-процесса модели (значение [nice](https://ru.wikipedia.org/wiki/Nice)). В параметре принимает число от 0 до 19, отрицательные значения не разрешены. Возвращает предыдущее значение приоритета.
+Устанавливает приоритет OLAP-процесса модели (значение [nice](https://ru.wikipedia.org/wiki/Nice)). В параметре принимает число от `0` до `19`, отрицательные значения не разрешены. Возвращает предыдущее значение приоритета.
 
 <details><summary>Дополнительно о приоритете процесса</summary>
 &nbsp;
