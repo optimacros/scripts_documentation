@@ -1888,6 +1888,16 @@ export namespace Notifications {
     }
 }
 
+export interface Variable {
+    isEntity(): boolean;
+
+    getValue(): number | string | null | boolean | EntityInfo;
+}
+
+export interface Variables {
+    get(varName: string): Variable;
+}
+
 export interface OM {
     readonly common: Common;
     readonly environment: Environment;
@@ -1899,6 +1909,7 @@ export interface OM {
     readonly optimization: Optimization;
     readonly connectors: Connectors;
     readonly notifications: Notifications.Manager;
+    readonly variables: Variables;
 }
 
 export var om: OM;
