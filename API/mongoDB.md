@@ -19,7 +19,7 @@ interface ConnectorBuilder {
 ```js
 setDSN(value: string): ConnectorBuilder
 ```
-Устанавливает [`DSN`](https://docs.mongodb.com/bi-connector/master/tutorial/create-system-dsn/) для подключения. Возвращает `this`.
+Устанавливает [`DSN`](https://www.mongodb.com/docs/manual/reference/connection-string/) для подключения. См. [документацию](https://docs.mongodb.com/bi-connector/master/tutorial/create-system-dsn/) по созданию DSN. Возвращает `this`.
 
 &nbsp;
 
