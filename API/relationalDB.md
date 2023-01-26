@@ -368,7 +368,7 @@ setProtocol(protocol: string): this;
 
 &nbsp;
 
-## Импорт<a name="DBimport"></a>
+## Импорт<a name="db-import"></a>
 
 ### Интерфейс MysqlImportBuilder<a name="mysql-import-builder"></a>
 ```js
