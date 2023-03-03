@@ -487,7 +487,7 @@ setUseListOptions(useListOptions: boolean): FTPAdapter
 ```js
 getUseListOptions(): boolean
 ```
-Возвращает признак использованися флагов `-aln` у FTP-команды `LIST`.
+Возвращает признак использования флагов `-aln` у FTP-команды `LIST`.
 
 &nbsp;
 

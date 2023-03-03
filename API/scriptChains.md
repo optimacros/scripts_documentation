@@ -10,42 +10,42 @@ interface ResultActionsInfo {
 	makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
 }
 ```
-Интерфейс создания действий, которые можно автомагически осуществить после исполнения текущего скрипта.
+Интерфейс создания действий, которые можно автоматически осуществить после исполнения текущего скрипта.
 
 &nbsp;
 
 ```js
 makeMacrosAction(identifier: string | number): ResultMacrosAction
 ```
-Создаёт и возвращает действие [`ResultMacrosAction`](#ResultMacrosAction) запуска существущего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) скрипта.
+Создаёт и возвращает действие [`ResultMacrosAction`](#ResultMacrosAction) запуска существующего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) скрипта.
 
 &nbsp;
 
 ```js
 makeDashboardOpenAction(identifier: string | number): ResultOpenAction
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) дашборда.
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существующего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) дашборда.
 
 &nbsp;
 
 ```js
 makeContextTableOpenAction(identifier: string | number): ResultOpenAction
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) контекстной таблицы.
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существующей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) контекстной таблицы.
 
 &nbsp;
 
 ```js
 makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) мультикуба, `view` означает имя или [`longId`](./views.md#longId) представления.
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существующего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) мультикуба, `view` означает имя или [`longId`](./views.md#longId) представления.
 
 &nbsp;
 
 ```js
 makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существущего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) справочника, `view` означает имя или [`longId`](./views.md#longId) представления.
+Создаёт и возвращает действие [`ResultOpenAction`](#ResultOpenAction) открытия существующего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./views.md#longId) справочника, `view` означает имя или [`longId`](./views.md#longId) представления.
 
 &nbsp;
 
@@ -174,7 +174,7 @@ setAutoRunTimeout(seconds: number): this
 
 Если `buttonInfo()` *не* была вызвана, после исполнения текущего скрипта произойдёт ожидание заданного тайм-аута и запустится следующий скрипт, однако результат вывода текущего скрипта на экране не отобразится.
 
-Если `buttonInfo()` была вызвана, после исполнения текущего скрипта на экране отобразится его вывод и кнопки, указанные в описании этой функции. При этом на кнопке [`ButtonInfo`](#ButtonInfo) будет располагаться таймер обратного отсчёта заданного тайм-аута. Если пользователь не произведёт за это время действий, автомагически будет нажата эта кнопка.
+Если `buttonInfo()` была вызвана, после исполнения текущего скрипта на экране отобразится его вывод и кнопки, указанные в описании этой функции. При этом на кнопке [`ButtonInfo`](#ButtonInfo) будет располагаться таймер обратного отсчёта заданного тайм-аута. Если пользователь не произведёт за это время действий, автоматически будет нажата эта кнопка.
 
 Возвращает `this`.
 

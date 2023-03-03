@@ -281,7 +281,7 @@ interface ResponseFileInfos {
 ```js
 append(fileId: string): this
 ```
-Позволяет передать файл. В функцию передается индентификатор файла `fileId`, зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Идентификатор (хэш) файла можно получить с помощью функции [`Filesystem.makeGlobalFile()`](./fs.md#Filesystem.makeGlobalFile).
+Позволяет передать файл. В функцию передается идентификатор файла `fileId`, зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#globalFileRegistry). Идентификатор (хэш) файла можно получить с помощью функции [`Filesystem.makeGlobalFile()`](./fs.md#Filesystem.makeGlobalFile).
 
 &nbsp;
 
