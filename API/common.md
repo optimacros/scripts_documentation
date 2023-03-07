@@ -233,6 +233,7 @@ interface ModelInfo {
 	useUniqueLock(): this;
 	useSharedLock(): this;
 	unlock(): this;
+	recalculateIfManualCalculable(identifiers: number[]): boolean;
 	getStorageInstancePriority(): number;
 	setStorageInstancePriority(priority: number): number;
 }
@@ -329,6 +330,13 @@ useSharedLock(): this
 unlock(): this
 ```
 Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Custom`. Скрипт перестанет отображаться в очереди модели (также перестанет отображаться плашка с информацией от скрипта!). Методы, связанные с моделью, будут вызывать ошибку `Model not defined`. Подробнее о режимах блокировки [здесь](../advancedFeatues/modelLock.md).
+
+&nbsp;
+
+```js
+recalculateIfManualCalculable(identifiers: number[]): boolean
+```
+Производит перерасчет сущностей, если на них не стоит флаг автокалькуляции. Автоматически перерасчитываемые сущности пропускаются. При успешном перерасчете возвращает true.
 
 &nbsp;
 
