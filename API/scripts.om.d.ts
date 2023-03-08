@@ -749,8 +749,20 @@ export interface ModelInfo {
     backup(path: string): EntityInfo|boolean;
 
     export(path: string): boolean;
-    
+
+    recalculateIfManualCalculable(identifiers: number[]): boolean;
+
     exportObfuscationState(): ExportObfuscationState;
+
+    unlock(): ModelInfo;
+
+    useSharedLock(): ModelInfo;
+
+    useUniqueLock(): ModelInfo;
+
+    hasSharedLock(): boolean;
+
+    hasUniqueLock(): boolean;
 
     getStorageInstancePriority(): number;
 

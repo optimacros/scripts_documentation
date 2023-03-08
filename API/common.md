@@ -232,6 +232,8 @@ interface ModelInfo {
 	exportObfuscationState(): ExportObfuscationState;
 	useUniqueLock(): this;
 	useSharedLock(): this;
+	hasSharedLock(): boolean;
+	hasUniqueLock(): boolean;
 	unlock(): this;
 	recalculateIfManualCalculable(identifiers: number[]): boolean;
 	getStorageInstancePriority(): number;
@@ -323,6 +325,20 @@ useUniqueLock(): this
 useSharedLock(): this
 ```
 Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Shared`. Достаточен для чтения данных из модели и изменения значений кубов. В один момент может исполняться несколько запросов от скриптов и пользователей с таким режимом блокировки. Попытка изменения метаданных будет вызывать ошибку `Unique lock not defined`. Подробнее о режимах блокировки [здесь](../advancedFeatues/modelLock.md).
+
+&nbsp;
+
+```js
+hasSharedLock(): boolean
+```
+Находится ли модель под shared блокировкой.
+
+&nbsp;
+
+```js
+hasUniqueLock(): boolean
+```
+Находится ли модель под unique блокировкой.
 
 &nbsp;
 
