@@ -232,7 +232,10 @@ interface ModelInfo {
 	exportObfuscationState(): ExportObfuscationState;
 	useUniqueLock(): this;
 	useSharedLock(): this;
+	hasSharedLock(): boolean;
+	hasUniqueLock(): boolean;
 	unlock(): this;
+	recalculateIfManualCalculable(identifiers: number[]): boolean;
 	getStorageInstancePriority(): number;
 	setStorageInstancePriority(priority: number): number;
 }
@@ -326,9 +329,30 @@ useSharedLock(): this
 &nbsp;
 
 ```js
+hasSharedLock(): boolean
+```
+Находится ли модель под `shared` блокировкой. Если скрипт находится вне контекста модели (режим запуска `Custom` или использован метод `unlock()`), то вернёт `false`.
+
+&nbsp;
+
+```js
+hasUniqueLock(): boolean
+```
+Находится ли модель под `unique` блокировкой. Если скрипт находится вне контекста модели (режим запуска `Custom` или использован метод `unlock()`), то вернёт `false`.
+
+&nbsp;
+
+```js
 unlock(): this
 ```
 Устанавливает режим блокировки модели скриптом (`Lock Mode`) `Custom`. Скрипт перестанет отображаться в очереди модели (также перестанет отображаться плашка с информацией от скрипта!). Методы, связанные с моделью, будут вызывать ошибку `Model not defined`. Подробнее о режимах блокировки [здесь](../advancedFeatues/modelLock.md).
+
+&nbsp;
+
+```js
+recalculateIfManualCalculable(identifiers: number[]): boolean
+```
+Производит перерасчет сущностей, если на них не стоит флаг автокалькуляции. Автоматически перерасчитываемые сущности пропускаются. При успешном перерасчете возвращает `true`.
 
 &nbsp;
 
