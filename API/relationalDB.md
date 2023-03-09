@@ -223,8 +223,8 @@ loadImportBuilder(): PostgresqlImportBuilder
 interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 	setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
 	setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder;
-	loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 	setRequestTimeout(timeout: number): MicrosoftSqlConnectorBuilder;
+	loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server). Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
@@ -275,7 +275,7 @@ loadBulkCopyBuilder(): SqlBulkCopyBuilder
 setRequestTimeout(timeout: number): MicrosoftSqlConnectorBuilder
 ```
 
-Устанавливает таймаут запроса в секундах. По умолчанию - таймаут отсутствует. Отрицательные значения не допускаются. Фактически устанавливает значение для аттрибута SQLSRV_ATTR_QUERY_TIMEOUT (https://learn.microsoft.com/en-us/sql/connect/php/pdostatement-setattribute?view=sql-server-ver16).
+Устанавливает таймаут запроса в секундах. По умолчанию таймаут равен 30 секундам. Отрицательные и дробные значения не допускаются.
 
 &nbsp;
 
