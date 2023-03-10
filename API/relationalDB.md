@@ -1008,7 +1008,7 @@ interface OracleImportBuilder {
 	import(): OracleImportResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД Oracle из файла CSV с помощью утилиты [*sqlldr*](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader.html). Все функции, кроме `import()`, возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД Oracle из файла CSV с помощью утилиты [`sqlldr`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader.html). Все функции, кроме `import()`, возвращают `this`.
 
 &nbsp;
 
@@ -1029,35 +1029,35 @@ setDelimiter(delimiter: string): OracleImportBuilder
 ```js
 setFirstIgnoreLines(count: number): OracleImportBuilder
 ```
-Устанавливает количество первых строк, которые будут пропущены; [`Опция`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-2BB41EA6-C94D-41C1-94DE-966B291943E6) *sqlldr*: *skip=n*. По умолчанию `0`.
+Устанавливает количество первых строк, которые будут пропущены; [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-2BB41EA6-C94D-41C1-94DE-966B291943E6) `sqlldr`: `skip=n`. По умолчанию `0`.
 
 &nbsp;
 
 ```js
 setColumns(names: string[]): OracleImportBuilder
 ```
-Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла CSV; [`Опция`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-413DEE17-FA16-4AD7-A5E6-0A6D8BFE0057) *sqlldr*: *control file*. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
+Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла `CSV`; [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-413DEE17-FA16-4AD7-A5E6-0A6D8BFE0057) `sqlldr`: `control file`. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
 
 &nbsp;
 
 ```js
 setFilePath(path: string): OracleImportBuilder
 ```
-Устанавливает путь к файлу в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
+Устанавливает путь к файлу в формате `CSV`, содержащему строки для импорта, в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
 &nbsp;
 
 ```js
 setDirect(value: boolean): OracleImportBuilder
 ```
-Параметр определяющий будет ли импорт осуществляться с помощью Insert запросов(значение `false`) или напрямую в файлы базы данных(значение `true`); Второй способ обычно намного быстрее. [`Опция`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-628A6D43-DA99-4677-9B88-445928933246) *sqlldr*. По умолчанию `false`.
+Параметр, определяющий, будет ли импорт осуществляться с помощью `INSERT`-запросов (значение `false`) или напрямую в файлы базы данных (значение `true`). Второй способ обычно намного быстрее. [`Опция`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-628A6D43-DA99-4677-9B88-445928933246) `sqlldr`. По умолчанию `false`.
 
 &nbsp;
 
 ```js
 setUserBadFileFileLink(fileLink: string): OracleImportBuilder
 ```
-Метод позволяющий установить путь к файлу, содержащему информацию о пропущенных строках при импорте
+Метод, позволяющий установить путь к файлу, содержащему информацию о пропущенных строках при импорте.
 
 &nbsp;
 
@@ -1065,11 +1065,11 @@ setUserBadFileFileLink(fileLink: string): OracleImportBuilder
 ```js
 import(): OracleImportResult
 ```
-Формирует из флагов команду на вызов *sqlldr*, дожидается завершения импорта и возвращает ссылку на [`OracleImportResult`](#oracle-import-result).
+Формирует из флагов команду на вызов `sqlldr`, дожидается завершения импорта и возвращает ссылку на [`OracleImportResult`](#oracle-import-result).
 
 &nbsp;
 
-### Интерфейс OracleImportResult<a name="mysql-import-result"></a>
+### Интерфейс OracleImportResult<a name="oracle-import-result"></a>
 ```js
 interface OracleImportResult {
 	hasErrors(): boolean;
@@ -1100,7 +1100,7 @@ getErrorOutput(): string
 ```js
 getCommand(): string
 ```
-Возвращает сформированную команду на вызов *sqlldr*, которая была выполнена в момент вызова [`OracleImportBuilder.import()`](#oracle-import-builder.import). Параметры будут сохранены в конфигурационном файле, доступ к которому можно получить функцией `getConfig()`.
+Возвращает сформированную команду на вызов `sqlldr`, которая была выполнена в момент вызова [`OracleImportBuilder.import()`](#oracle-import-builder.import). Параметры будут сохранены в конфигурационном файле, доступ к которому можно получить функцией `getConfig()`.
 
 &nbsp;
 
@@ -1114,7 +1114,7 @@ getStats(): Object
 ```js
 getBadFileLink(): string
 ```
-Возвращает путь к файлу содержащему все пропущенные при импорте строки.
+Возвращает путь к файлу, содержащему все пропущенные при импорте строки.
 
 &nbsp;
 
