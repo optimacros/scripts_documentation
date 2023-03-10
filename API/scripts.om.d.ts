@@ -1281,9 +1281,9 @@ export interface OracleImportResult {
 
     getCommand(): string;
 
-    getStats(): object
+    getStats(): object;
 
-    getBadFileLink(): string
+    getBadFileLink(): string;
 }
 
 export interface OracleImportBuilder {
@@ -1298,8 +1298,6 @@ export interface OracleImportBuilder {
     setFirstIgnoreLines(count: number): this;
 
     setDirect(value: boolean): this;
-
-    setParallel(value: boolean): this;
 
     setUserBadFileFileLink(fileLink: string): this;
 
