@@ -1050,7 +1050,7 @@ setFilePath(path: string): OracleImportBuilder
 ```js
 setDirect(value: boolean): OracleImportBuilder
 ```
-Параметр, определяющий, будет ли импорт осуществляться с помощью `INSERT`-запросов (значение `false`) или напрямую в файлы базы данных (значение `true`). Второй способ обычно намного быстрее. [`Опция`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-628A6D43-DA99-4677-9B88-445928933246) `sqlldr`. По умолчанию `false`.
+Параметр, определяющий, будет ли импорт осуществляться с помощью `INSERT`-запросов (значение `false`) или напрямую в файлы базы данных (значение `true`). Второй способ обычно намного быстрее. [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-628A6D43-DA99-4677-9B88-445928933246) `sqlldr`. По умолчанию `false`.
 
 &nbsp;
 
