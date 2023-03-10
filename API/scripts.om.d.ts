@@ -1274,12 +1274,46 @@ export interface SqlBulkCopyBuilder {
     format(path: string, xml: boolean): SqlBulkCopyResult;
 }
 
+export interface OracleImportResult {
+    hasErrors(): boolean;
+
+    getErrorOutput(): string;
+
+    getCommand(): string;
+
+    getStats(): object
+
+    getBadFileLink(): string
+}
+
+export interface OracleImportBuilder {
+    setTable(name: string): this;
+
+    setDelimiter(delimiter: string): this;
+
+    setColumns(names: string[]): this;
+
+    setFilePath(path: string): this;
+
+    setFirstIgnoreLines(count: number): this;
+
+    setDirect(value: boolean): this;
+
+    setParallel(value: boolean): this;
+
+    setUserBadFileFileLink(fileLink: string): this;
+
+    import(): OracleImportResult;
+}
+
 export interface OracleConnectorBuilder extends SqlConnectorBuilder {
     setServiceName(value: string): this;
 
     setSchema(value: string): this;
 
     setTNS(value: string): this;
+
+    loadImportBuilder(): OracleImportBuilder;
 }
 
 export interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
