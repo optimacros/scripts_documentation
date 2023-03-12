@@ -1050,7 +1050,7 @@ setFilePath(path: string): OracleImportBuilder
 ```js
 setDirect(value: boolean): OracleImportBuilder
 ```
-Параметр, определяющий, будет ли импорт осуществляться с помощью `INSERT`-запросов (значение `false`) или напрямую в файлы базы данных (значение `true`). Второй способ обычно намного быстрее. [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-628A6D43-DA99-4677-9B88-445928933246) `sqlldr`. По умолчанию `false`.
+Параметр, определяющий, будет ли импорт осуществляться с помощью `INSERT`-запросов (значение `false`) или напрямую в файлы базы данных (значение `true`). Второй способ обычно намного быстрее. [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-26686C49-D768-4F55-8AED-771B9A8C6552) `sqlldr` *direct=true|false*. По умолчанию `false`.
 
 &nbsp;
 
@@ -1074,7 +1074,6 @@ import(): OracleImportResult
 interface OracleImportResult {
 	hasErrors(): boolean;
 	getErrorOutput(): string;
-	getCommand(): string;
 	getStats(): object;
 	getBadFileLink(): string;
 }
@@ -1094,13 +1093,6 @@ hasErrors(): boolean
 getErrorOutput(): string
 ```
 Возвращает вывод команды *sqlldr* в `stderr`.
-
-&nbsp;
-
-```js
-getCommand(): string
-```
-Возвращает сформированную команду на вызов `sqlldr`, которая была выполнена в момент вызова [`OracleImportBuilder.import()`](#oracle-import-builder.import). Параметры будут сохранены в конфигурационном файле, доступ к которому можно получить функцией `getConfig()`.
 
 &nbsp;
 

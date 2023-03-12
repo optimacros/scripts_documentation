@@ -1279,8 +1279,6 @@ export interface OracleImportResult {
 
     getErrorOutput(): string;
 
-    getCommand(): string;
-
     getStats(): object;
 
     getBadFileLink(): string;
