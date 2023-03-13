@@ -1274,12 +1274,16 @@ export interface SqlBulkCopyBuilder {
     format(path: string, xml: boolean): SqlBulkCopyResult;
 }
 
+export interface OracleImportStats {
+    getIgnored(): number;
+}
+
 export interface OracleImportResult {
     hasErrors(): boolean;
 
     getErrorOutput(): string;
 
-    getStats(): object;
+    getStats(): OracleImportStats;
 
     getBadFileLink(): string;
 }

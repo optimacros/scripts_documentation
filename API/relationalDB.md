@@ -1074,7 +1074,7 @@ import(): OracleImportResult
 interface OracleImportResult {
 	hasErrors(): boolean;
 	getErrorOutput(): string;
-	getStats(): object;
+	getStats(): OracleImportStats;
 	getBadFileLink(): string;
 }
 ```
@@ -1097,9 +1097,9 @@ getErrorOutput(): string
 &nbsp;
 
 ```js
-getStats(): Object
+getStats(): OracleImportStats
 ```
-Если импорт завершён без ошибок, возвращает объект вида `{"ignored": 0}`, содержащий информацию о пропущенных строках.
+Если импорт завершён без ошибок, возвращает ссылку на [`OracleImportStats`](#oracle-import-stats), содержащий информацию о пропущенных строках.
 
 &nbsp;
 
@@ -1107,6 +1107,23 @@ getStats(): Object
 getBadFileLink(): string
 ```
 Возвращает путь к файлу, содержащему все пропущенные при импорте строки.
+
+&nbsp;
+
+### Интерфейс OracleImportStats<a name="oracle-import-stats"></a>
+```js
+export interface OracleImportStats {
+	getIgnored(): number;
+}
+```
+Интерфейс просмотра статистики импорта, осуществлённого с помощью [`OracleImportBuilder`](#oracle-import-builder).
+
+&nbsp;
+
+```js
+getIgnored(): number
+```
+Возвращает количество строк, которое не удалось импортировать.
 
 &nbsp;
 
