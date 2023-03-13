@@ -1036,7 +1036,7 @@ setFirstIgnoreLines(count: number): OracleImportBuilder
 ```js
 setColumns(names: string[]): OracleImportBuilder
 ```
-Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла `CSV`; [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-413DEE17-FA16-4AD7-A5E6-0A6D8BFE0057) `sqlldr`: `control file`. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
+Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла `CSV`; [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-413DEE17-FA16-4AD7-A5E6-0A6D8BFE0057) `sqlldr` `control file`. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
 
 &nbsp;
 
