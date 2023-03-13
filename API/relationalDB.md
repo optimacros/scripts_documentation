@@ -1008,7 +1008,7 @@ interface OracleImportBuilder {
 	import(): OracleImportResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД Oracle из файла CSV с помощью утилиты [`sqlldr`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader.html). Все функции, кроме `import()`, возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД Oracle из файла `CSV` с помощью утилиты [`sqlldr`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader.html). Все функции, кроме `import()`, возвращают `this`.
 
 &nbsp;
 
@@ -1050,7 +1050,7 @@ setFilePath(path: string): OracleImportBuilder
 ```js
 setDirect(value: boolean): OracleImportBuilder
 ```
-Параметр, определяющий, будет ли импорт осуществляться с помощью `INSERT`-запросов (значение `false`) или напрямую в файлы базы данных (значение `true`). Второй способ обычно намного быстрее. [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-26686C49-D768-4F55-8AED-771B9A8C6552) `sqlldr` *direct=true|false*. По умолчанию `false`.
+Параметр, определяющий, будет ли импорт осуществляться с помощью `INSERT`-запросов (значение `false`) или напрямую в файлы базы данных (значение `true`). Второй способ обычно намного быстрее. [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-26686C49-D768-4F55-8AED-771B9A8C6552) `sqlldr`: `direct=true|false`. По умолчанию `false`.
 
 &nbsp;
 
