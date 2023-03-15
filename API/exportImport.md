@@ -135,6 +135,7 @@ export(): ExportResult
 ```ts
 interface StorageExporter extends Exporter {
 	setFormat(format: string): StorageExporter;
+	setDelimiter(delimiter: string): StorageExporter;
 	setLineDelimiter(lineDelimiter: string): StorageExporter;
 	setFilterFormula(filterFormula: string): StorageExporter;
 	setDecimalSeparator(decimalSeparator: string): StorageExporter;
@@ -150,6 +151,13 @@ interface StorageExporter extends Exporter {
 setFormat(format: string): StorageExporter
 ```
 Устанавливает формат экспортируемого файла. Допустимые значения: `'csv', 'txt', 'gz', 'zip'`. По умолчанию: `'csv'`.
+
+&nbsp;
+
+```js
+setDelimiter(delimiter: string): StorageExporter
+```
+Устанавливает разделитель полей. В отличие от аналагичного метода интерфейса `Exporter` можно установить любое значение.  По умолчанию: `;`.
 
 &nbsp;
 
