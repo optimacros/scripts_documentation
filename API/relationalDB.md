@@ -276,6 +276,7 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
 	setServiceName(value: string): OracleConnectorBuilder;
 	setSchema(value: string): OracleConnectorBuilder;
 	setTNS(value: string): OracleConnectorBuilder;
+	loadImportBuilder(): OracleImportBuilder;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
@@ -300,6 +301,13 @@ setSchema(value: string): OracleConnectorBuilder
 setTNS(value: string): OracleConnectorBuilder
 ```
 Устанавливает имя службы TNS. Протокол TNS (Transparent Network Substrate) — уровень связи, используемый базами данных Oracle. Имя службы TNS — это имя, с которым экземпляр базы данных Oracle представлен в сети. Имя службы TNS назначается при настройке подключений к базе данных Oracle. 
+
+&nbsp;
+
+```js
+loadImportBuilder(): OracleImportBuilder
+```
+Возвращает ссылку на интерфейс [`OracleImportBuilder`](#oracle-import-builder) импорта из файла CSV.
 
 &nbsp;
 
@@ -984,6 +992,138 @@ getOutput(): string
 getCommand(): string
 ```
 Возвращает сформированную команду на вызов *bcp*, которая была выполнена в момент вызова одной из функций [`SqlBulkCopyBuilder.import()`](#sql-bulk-copy-builder.import), [`SqlBulkCopyBuilder.export()`](#sql-bulk-copy-builder.export), [`SqlBulkCopyBuilder.format()`](#sql-bulk-copy-builder.format).
+
+&nbsp;
+
+### Интерфейс OracleImportBuilder<a name="oracle-import-builder"></a>
+```js
+interface OracleImportBuilder {
+	setTable(name: string): OracleImportBuilder;
+	setDelimiter(delimiter: string): OracleImportBuilder;
+	setColumns(names: string[]): OracleImportBuilder;
+	setFilePath(path: string): OracleImportBuilder;
+	setFirstIgnoreLines(count: number): OracleImportBuilder;
+	setDirect(value: boolean): OracleImportBuilder;
+	setUserBadFileFileLink(fileLink: string): OracleImportBuilder;
+	import(): OracleImportResult;
+}
+```
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД Oracle из файла `CSV` с помощью утилиты [`sqlldr`](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader.html). Все функции, кроме `import()`, возвращают `this`.
+
+&nbsp;
+
+```js
+setTable(name: string): OracleImportBuilder
+```
+Устанавливает таблицу, в которую будет производиться импорт.
+
+&nbsp;
+
+```js
+setDelimiter(delimiter: string): OracleImportBuilder
+```
+Устанавливает разделитель полей. По умолчанию `;`.
+
+&nbsp;
+
+```js
+setFirstIgnoreLines(count: number): OracleImportBuilder
+```
+Устанавливает количество первых строк, которые будут пропущены; [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-2BB41EA6-C94D-41C1-94DE-966B291943E6) `sqlldr`: `skip=n`. По умолчанию `0`.
+
+&nbsp;
+
+```js
+setColumns(names: string[]): OracleImportBuilder
+```
+Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла `CSV`; [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-413DEE17-FA16-4AD7-A5E6-0A6D8BFE0057) `sqlldr` `control file`. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
+
+&nbsp;
+
+```js
+setFilePath(path: string): OracleImportBuilder
+```
+Устанавливает путь к файлу в формате `CSV`, содержащему строки для импорта, в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
+
+&nbsp;
+
+```js
+setDirect(value: boolean): OracleImportBuilder
+```
+Параметр, определяющий, будет ли импорт осуществляться с помощью `INSERT`-запросов (значение `false`) или напрямую в файлы базы данных (значение `true`). Второй способ обычно намного быстрее. [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-26686C49-D768-4F55-8AED-771B9A8C6552) `sqlldr`: `direct=true|false`. По умолчанию `false`.
+
+&nbsp;
+
+```js
+setUserBadFileFileLink(fileLink: string): OracleImportBuilder
+```
+Метод, позволяющий установить путь к файлу, который будет информацию о пропущенных строках при импорте.
+
+&nbsp;
+
+<a name="oracle-import-builder.import"></a>
+```js
+import(): OracleImportResult
+```
+Формирует из флагов команду на вызов `sqlldr`, дожидается завершения импорта и возвращает ссылку на [`OracleImportResult`](#oracle-import-result).
+
+&nbsp;
+
+### Интерфейс OracleImportResult<a name="oracle-import-result"></a>
+```js
+interface OracleImportResult {
+	hasErrors(): boolean;
+	getErrorOutput(): string;
+	getStats(): OracleImportStats;
+	getBadFileLink(): string;
+}
+```
+Интерфейс просмотра результатов импорта, осуществлённого с помощью [`OracleImportBuilder`](#oracle-import-builder).
+
+&nbsp;
+
+```js
+hasErrors(): boolean
+```
+Возвращает `getErrorOutput() != ''`.
+
+&nbsp;
+
+```js
+getErrorOutput(): string
+```
+Возвращает вывод команды *sqlldr* в `stderr`.
+
+&nbsp;
+
+```js
+getStats(): OracleImportStats
+```
+Если импорт завершён без ошибок, возвращает ссылку на [`OracleImportStats`](#oracle-import-stats), содержащий информацию о пропущенных строках.
+
+&nbsp;
+
+```js
+getBadFileLink(): string
+```
+Возвращает путь к файлу, содержащему все пропущенные при импорте строки.
+
+&nbsp;
+
+### Интерфейс OracleImportStats<a name="oracle-import-stats"></a>
+```js
+export interface OracleImportStats {
+	getIgnored(): number;
+}
+```
+Интерфейс просмотра статистики импорта, осуществлённого с помощью [`OracleImportBuilder`](#oracle-import-builder).
+
+&nbsp;
+
+```js
+getIgnored(): number
+```
+Возвращает количество строк, которое не удалось импортировать.
 
 &nbsp;
 
