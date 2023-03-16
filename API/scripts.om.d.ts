@@ -1293,6 +1293,8 @@ export interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
      */
     setScrollType(scrollType: string | null): this;
 
+    setRequestTimeout(timeout: number): this;
+    
     /**
      * https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility
      */
