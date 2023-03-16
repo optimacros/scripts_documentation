@@ -265,17 +265,17 @@ setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
 &nbsp;
 
 ```js
-loadBulkCopyBuilder(): SqlBulkCopyBuilder
+setRequestTimeout(timeout: number): MicrosoftSqlConnectorBuilder
 ```
-Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#sql-bulk-copy-builder) импорта/экспорта через файл CSV.
+
+Устанавливает таймаут запроса в секундах. По умолчанию таймаут равен 30 секундам. Значение 0 задает бесконечный таймаут. Отрицательные и дробные значения не допускаются.
 
 &nbsp;
 
 ```js
-setRequestTimeout(timeout: number): MicrosoftSqlConnectorBuilder
+loadBulkCopyBuilder(): SqlBulkCopyBuilder
 ```
-
-Устанавливает таймаут запроса в секундах. По умолчанию таймаут равен 30 секундам. Отрицательные и дробные значения не допускаются.
+Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#sql-bulk-copy-builder) импорта/экспорта через файл CSV.
 
 &nbsp;
 
