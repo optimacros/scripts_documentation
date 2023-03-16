@@ -267,7 +267,6 @@ setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
 ```js
 setRequestTimeout(timeout: number): MicrosoftSqlConnectorBuilder
 ```
-
 Устанавливает таймаут запроса в секундах. По умолчанию таймаут равен 30 секундам. Значение 0 задает бесконечный таймаут. Отрицательные и дробные значения не допускаются.
 
 &nbsp;
