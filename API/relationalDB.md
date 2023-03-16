@@ -222,7 +222,8 @@ loadImportBuilder(): PostgresqlImportBuilder
 ```ts
 interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 	setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
-        setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder;
+	setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder;
+	setRequestTimeout(timeout: number): MicrosoftSqlConnectorBuilder;
 	loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
@@ -260,6 +261,13 @@ setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
 
 
 Подробнее о работе курсоров можно прочитать в статье [`Типы курсоров (драйвер PDO_SQLSRV)`](https://learn.microsoft.com/ru-ru/sql/connect/php/cursor-types-pdo-sqlsrv-driver)
+
+&nbsp;
+
+```js
+setRequestTimeout(timeout: number): MicrosoftSqlConnectorBuilder
+```
+Устанавливает таймаут запроса в секундах. По умолчанию таймаут равен 30 секундам. Значение 0 задает бесконечный таймаут. Отрицательные и дробные значения не допускаются.
 
 &nbsp;
 
