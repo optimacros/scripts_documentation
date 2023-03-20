@@ -1065,7 +1065,7 @@ setDirect(value: boolean): OracleImportBuilder
 ```js
 setUserBadFileFileLink(fileLink: string): OracleImportBuilder
 ```
-Метод, позволяющий установить путь к файлу, который будет информацию о пропущенных строках при импорте.
+Метод, позволяющий установить путь к файлу, который будет содержать информацию о пропущенных строках при импорте.
 
 &nbsp;
 
