@@ -104,8 +104,8 @@ interface SyncListBuilder extends SyncBuilder {
 	setViewId(viewId: number): SyncListBuilder;
 
 	setSrcToDesListMap(map: {
-		srcId: number,
-		destId: number,
+		sourceListLongId: number,
+        destinationListLongId: number,
 	}[]): SyncListBuilder;
 
 	setProxySrcColumnDataMap(map: {
@@ -128,12 +128,12 @@ setViewId(viewId: number): SyncListBuilder
 &nbsp;
 
 ```js
-setSrcToDesListMap(map: { 
-	srcId: number,
-	destId: number,
+setSrcToDesListMap(map: {
+    sourceListLongId: number,
+    destinationListLongId: number,
 }[]): SyncListBuilder
 ```
-Задаёт карту соответствия элементов источника элементам приёмника.
+Задаёт карту отношений справочников источника к справочникам прёмника.
 
 &nbsp;
 
