@@ -105,7 +105,7 @@ interface SyncListBuilder extends SyncBuilder {
 
 	setSrcToDesListMap(map: {
 		sourceListLongId: number,
-        destinationListLongId: number,
+	 	destinationListLongId: number,
 	}[]): SyncListBuilder;
 
 	setProxySrcColumnDataMap(map: {
@@ -133,7 +133,7 @@ setSrcToDesListMap(map: {
 	destinationListLongId: number,
 }[]): SyncListBuilder
 ```
-Задаёт карту отношений справочников источника к справочникам прёмника.
+Задаёт карту отношений справочников источника к справочникам приёмника.
 
 &nbsp;
 
