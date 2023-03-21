@@ -128,9 +128,9 @@ setViewId(viewId: number): SyncListBuilder
 &nbsp;
 
 ```js
-setSrcToDesListMap(map: {
-    sourceListLongId: number,
-    destinationListLongId: number,
+setSrcToDesListMap(map: { 
+	sourceListLongId: number,
+	destinationListLongId: number,
 }[]): SyncListBuilder
 ```
 Задаёт карту отношений справочников источника к справочникам прёмника.
