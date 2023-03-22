@@ -423,8 +423,8 @@ export interface SyncListBuilder extends SyncBuilder {
     setViewId(viewId: number): SyncListBuilder;
 
     setSrcToDesListMap(map: {
-        srcId: number,
-        destId: number,
+        sourceListLongId: number,
+        destinationListLongId: number,
     }[]): SyncListBuilder;
 
     setProxySrcColumnDataMap(map: {

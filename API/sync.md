@@ -104,8 +104,8 @@ interface SyncListBuilder extends SyncBuilder {
 	setViewId(viewId: number): SyncListBuilder;
 
 	setSrcToDesListMap(map: {
-		srcId: number,
-		destId: number,
+		sourceListLongId: number,
+	 	destinationListLongId: number,
 	}[]): SyncListBuilder;
 
 	setProxySrcColumnDataMap(map: {
@@ -129,11 +129,11 @@ setViewId(viewId: number): SyncListBuilder
 
 ```js
 setSrcToDesListMap(map: { 
-	srcId: number,
-	destId: number,
+	sourceListLongId: number,
+	destinationListLongId: number,
 }[]): SyncListBuilder
 ```
-Задаёт карту соответствия элементов источника элементам приёмника.
+Задаёт карту отношений справочников источника к справочникам приёмника, что необходимо при импорте в справочник, дочерний по отношению к другому справочнику. Необходимо указывать только родительские уровни. Сами указанные справочники не будут изменены (для этого нужно отдельно делать в них импорт), но таким образом можно обновить вводимые свойства и сабсеты родительских элементов в дочернем справочнике.
 
 &nbsp;
 
