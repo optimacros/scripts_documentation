@@ -16,7 +16,6 @@
   - дата и время;
 - навыки работы с технической документацией.
 
-1. [Требования к разработчику скриптов](prerequisities.md)
 1. [Курс молодого бойца / Cook book](./cookBook/cookBook.md)
 1. [Расширенные возможности](./advancedFeatues/advancedFeatues.md)
 1. [Библиотека скриптов импорта-экспорта](./importExportLib/importExportLib.md)
