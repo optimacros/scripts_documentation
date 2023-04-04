@@ -262,7 +262,7 @@ interface CSVParams {
 ```js
 setDelimiter(delimiter: string): CSVParams
 ```
-Устанавливает разделитель полей. Аналогично `Exporter`.[`setDelimiter()`](#set-delimiter). Возвращает `this`.
+Устанавливает разделитель полей. Аналогично `Exporter`.[`setDelimiter()`](#set-delimiter). Возвращает `this`. При использовании для интерфейса `CsvWriter` разделитель может быть произвольной строкой. При использовании для интерфейса `CsvReader` должен быть однобайтным символом.
 
 &nbsp;
 
