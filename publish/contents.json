@@ -1,7 +1,6 @@
 {
     "." : [
-        "README.md",
-        "prerequisities.md"
+        "README.md"
     ],
     "API": [
         "API.md",
