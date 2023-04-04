@@ -23,7 +23,8 @@
         "mongoDB.md",
         "http.md",
         "winAgent.md",
-        "notifications.md"
+        "notifications.md",
+        "variables.md"
     ],
     "advancedFeatues": [
         "advancedFeatues.md",
