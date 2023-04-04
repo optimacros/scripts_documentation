@@ -1,6 +1,6 @@
 # Окружение
 
-### Интерфейс Environment<a name="environment"></a>
+## Интерфейс Environment<a name="environment"></a>
 ```ts
 interface Environment {
 	load(name: string): Environment;

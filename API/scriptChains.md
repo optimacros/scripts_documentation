@@ -1,5 +1,54 @@
 # Цепочки скриптов
 
+## Интерфейс ResultActionsInfo<a name="result-actions-info"></a>
+```ts
+interface ResultActionsInfo {
+	makeMacrosAction(identifier: string | number): ResultMacrosAction;
+	makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
+	makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
+	makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
+	makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
+}
+```
+Интерфейс создания действий, которые можно автоматически осуществить после исполнения текущего скрипта.
+
+&nbsp;
+
+```js
+makeMacrosAction(identifier: string | number): ResultMacrosAction
+```
+Создаёт и возвращает действие [`ResultMacrosAction`](#result-macros-action) запуска существующего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) скрипта.
+
+&nbsp;
+
+```js
+makeDashboardOpenAction(identifier: string | number): ResultOpenAction
+```
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) дашборда.
+
+&nbsp;
+
+```js
+makeContextTableOpenAction(identifier: string | number): ResultOpenAction
+```
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) контекстной таблицы.
+
+&nbsp;
+
+```js
+makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction
+```
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) мультикуба, `view` означает имя или [`longId`](./views.md#long-id) представления.
+
+&nbsp;
+
+```js
+makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction
+```
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) справочника, `view` означает имя или [`longId`](./views.md#long-id) представления.
+
+&nbsp;
+
 ### Интерфейс ButtonInfoOptions<a name="button-info-options"></a>
 ```ts
 interface ButtonInfoOptions {
@@ -125,7 +174,7 @@ setAutoRunTimeout(seconds: number): this
 
 Если `buttonInfo()` *не* была вызвана, после исполнения текущего скрипта произойдёт ожидание заданного тайм-аута и запустится следующий скрипт, однако результат вывода текущего скрипта на экране не отобразится.
 
-Если `buttonInfo()` была вызвана, после исполнения текущего скрипта на экране отобразится его вывод и кнопки, указанные в описании этой функции. При этом на кнопке [`ButtonInfo`](#button-info) будет располагаться таймер обратного отсчёта заданного тайм-аута. Если пользователь не произведёт за это время действий, автомагически будет нажата эта кнопка.
+Если `buttonInfo()` была вызвана, после исполнения текущего скрипта на экране отобразится его вывод и кнопки, указанные в описании этой функции. При этом на кнопке [`ButtonInfo`](#button-info) будет располагаться таймер обратного отсчёта заданного тайм-аута. Если пользователь не произведёт за это время действий, автоматически будет нажата эта кнопка.
 
 Возвращает `this`.
 
@@ -160,55 +209,6 @@ interface ResultOpenAction extends ResultBaseAction {
 buttonInfo(): ButtonInfo
 ```
 Работает так же, как и [`ResultMacrosAction`](#result-macros-action).[`buttonInfo()`](#result-macros-action.button-info).
-
-&nbsp;
-
-### Интерфейс ResultActionsInfo<a name="result-actions-info"></a>
-```ts
-interface ResultActionsInfo {
-	makeMacrosAction(identifier: string | number): ResultMacrosAction;
-	makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
-	makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
-	makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
-	makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
-}
-```
-Интерфейс создания действий, которые можно автомагически осуществить после исполнения текущего скрипта.
-
-&nbsp;
-
-```js
-makeMacrosAction(identifier: string | number): ResultMacrosAction
-```
-Создаёт и возвращает действие [`ResultMacrosAction`](#result-macros-action) запуска существущего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) скрипта.
-
-&nbsp;
-
-```js
-makeDashboardOpenAction(identifier: string | number): ResultOpenAction
-```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существущего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) дашборда.
-
-&nbsp;
-
-```js
-makeContextTableOpenAction(identifier: string | number): ResultOpenAction
-```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существущей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) контекстной таблицы.
-
-&nbsp;
-
-```js
-makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction
-```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существущего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) мультикуба, `view` означает имя или [`longId`](./views.md#long-id) представления.
-
-&nbsp;
-
-```js
-makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction
-```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существущего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) справочника, `view` означает имя или [`longId`](./views.md#long-id) представления.
 
 &nbsp;
 

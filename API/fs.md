@@ -1,6 +1,6 @@
 # Файловые системы
 
-### Интерфейс Filesystems<a name="filesystems"></a>
+## Интерфейс Filesystems<a name="filesystems"></a>
 ```ts
 interface Filesystems {
 	ftp(): FTPAdapter;
@@ -42,7 +42,7 @@ filesDataManager(): FilesDataManager
 
 &nbsp;
 
-### Интерфейс Filesystem<a name="filesystem"></a>
+## Интерфейс Filesystem<a name="filesystem"></a>
 ```ts
 interface Filesystem {
 	has(path: string): boolean;
@@ -294,7 +294,7 @@ getPath(): string
 
 &nbsp;
 
-### Интерфейс BaseAdapter<a name="base-adapter"></a>
+## Интерфейс BaseAdapter<a name="base-adapter"></a>
 ```ts
 interface BaseAdapter {
 	load(): Filesystem;

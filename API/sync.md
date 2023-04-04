@@ -1,6 +1,6 @@
 # Синхронизация мультикубов и справочников
 
-### Интерфейс SyncBuilder<a name="sync-builder"></a>
+## Интерфейс SyncBuilder<a name="sync-builder"></a>
 ```ts
 interface SyncBuilder {
 	setSrcModelId(modelId: string): SyncBuilder;
@@ -94,7 +94,7 @@ setOmitSummaryRows(status: boolean): SyncMulticubeBuilder
 ```js
 setUseCodeInsteadLabel(status: boolean): SyncMulticubeBuilder
 ```
-Устнавливает режим выгрузки кодов (если они есть) для заголовков и элементов измерений вместо имён. Если код отсутствует, в любом случае будет выгружаться имя. Значение по умолчанию: `true`.
+Устанавливает режим выгрузки кодов (если они есть) для заголовков и элементов измерений вместо имён. Если код отсутствует, в любом случае будет выгружаться имя. Значение по умолчанию: `true`.
  
 &nbsp;
 

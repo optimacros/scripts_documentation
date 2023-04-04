@@ -1,5 +1,39 @@
 # Файлы CSV
 
+## Интерфейс FilesDataManager<a name="files-data-manager"></a>
+```ts
+interface FilesDataManager {
+	csvWriter(): CsvWriter;
+	csvReader(path: PathObj): CsvReader;
+	converterManager(): ConverterManager;
+}
+```
+Интерфейс, который группирует интерфейсы для работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
+
+&nbsp;
+
+
+```js
+csvWriter(): CsvWriter
+```
+Возвращает ссылку на [`CsvWriter`](#csv-writer).
+
+&nbsp;
+
+```js
+csvReader(path: PathObj): CsvReader
+```
+Возвращает ссылку на [`CsvReader`](#csv-reader) для чтения файла `path` в формате [`PathObj`](./fs.md#path-obj).
+
+&nbsp;
+
+```js
+converterManager(): ConverterManager
+```
+Возвращает ссылку на [`ConverterManager`](#converter-manager).
+
+&nbsp;
+
 ### Интерфейс CsvWriter<a name="csv-writer"></a>
 ```ts
 interface CsvWriter {
@@ -131,40 +165,6 @@ interface ConverterManager {
 excelToCsv(): ExcelToCsvConverter
 ```
 Возвращает ссылку на интерфейс [`ExcelToCsvConverter`](#excel-to-csv-converter) преобразования файлов Excel в CSV.
-
-&nbsp;
-
-### Интерфейс FilesDataManager<a name="files-data-manager"></a>
-```ts
-interface FilesDataManager {
-	csvWriter(): CsvWriter;
-	csvReader(path: PathObj): CsvReader;
-	converterManager(): ConverterManager;
-}
-```
-Интерфейс, который группирует интерфейсы для работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
-
-&nbsp;
-
-
-```js
-csvWriter(): CsvWriter
-```
-Возвращает ссылку на [`CsvWriter`](#csv-writer).
-
-&nbsp;
-
-```js
-csvReader(path: PathObj): CsvReader
-```
-Возвращает ссылку на [`CsvReader`](#csv-reader) для чтения файла `path` в формате [`PathObj`](./fs.md#path-obj).
-
-&nbsp;
-
-```js
-converterManager(): ConverterManager
-```
-Возвращает ссылку на [`ConverterManager`](#converter-manager).
 
 &nbsp;
 

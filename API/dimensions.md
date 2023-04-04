@@ -1,6 +1,6 @@
 # Измерения
 
-### Интерфейс Lists<a name="lists"></a>
+## Интерфейс Lists<a name="lists"></a>
 ```ts
 interface Lists {
 	listsTab(): ListsTab;
@@ -97,6 +97,7 @@ listTab(): ListTab
 Возвращает интерфейс [`ListTab`](#list-tab) вкладки того справочника, чьи выборки представляет собой `this`.
 
 &nbsp;
+
 ### Интерфейс CustomPropertiesTab<a name="custom-properties-tab"></a>
 ```ts
 interface CustomPropertiesTab extends Tab {
@@ -140,7 +141,7 @@ setFilePath(path: string): ListImporter
 ```js
 setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
 ```
-Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществуещие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
+Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществующие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 

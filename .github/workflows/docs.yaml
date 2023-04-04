@@ -1,0 +1,26 @@
+name: Publish documentation as docx
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  convert_md_to_docx:
+    runs-on:  ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Make single .md
+        run: |
+          pip3 install dataclasses
+          python3 ./publish/combine.py
+      - name: Convert to docx
+        uses: docker://pandoc/core:2.19.2-ubuntu
+        with:
+            args: ./publish/combined.md --reference-doc=./publish/reference.docx -o ./publish/workspace_${{ github.event.release.tag_name }}_script_api.docx
+      - name: Append to release
+        uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          file: ./publish/workspace_${{ github.event.release.tag_name }}_script_api.docx
+          tag_name: ${{ github.event.release.tag_name }}
