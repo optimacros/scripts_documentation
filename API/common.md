@@ -229,7 +229,7 @@ interface ModelInfo {
 	setModelCalculationMode(status: boolean): boolean;
 	repair(): boolean;
 	recalculate(): boolean;
-	backup(path: string): EntityInfo|boolean;
+	backup(path: string): EntityInfo | boolean;
 	export(path: string): boolean;
 	exportObfuscationState(): ExportObfuscationState;
 	useUniqueLock(): this;
@@ -303,9 +303,9 @@ export(path: string): boolean
 &nbsp;
 
 ```js
-backup(path: string): EntityInfo|boolean
+backup(path: string): EntityInfo | boolean
 ```
-Сохраняет резервную копию в логах модели ->`Центр безопастности`->`Логи`->`Резервные копии`. Если прописать путь `path`, вызовется метод `export()`. Возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#entity-info), или `true`, если был передан `path` .
+Сохраняет резервную копию в логах модели ->`Центр безопастности`->`Логи`->`Резервные копии`. Если указан путь `path`, после создания копии вызовется функция `export()` и вернётся её результат типа `boolean`. Если `path` не указан, возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#entity-info).
 
 &nbsp;
 
