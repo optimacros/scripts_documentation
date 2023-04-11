@@ -155,12 +155,65 @@ setModelId(modelId: string): this
 
 &nbsp;
 
+### Интерфейс ResultTaskAction<a name="result-task-action"></a>
+```ts
+interface ResultTaskAction {
+    	getOutput(): string;
+    	getDescription(): string;
+    	getEnvironmentInfo(): EnvironmentInfo
+}
+```
+Интерфейс результата запуска таски.
+
+&nbsp;
+
+```js
+getOutput(): string
+```
+Возвращает вывод скрипта.
+
+&nbsp;
+
+```js
+getDescription(): string
+```
+Возвращает описание таски скрипта.
+
+&nbsp;
+
+```js
+getEnvironmentInfo(): EnvironmentInfo
+```
+Возвращает интерфейс [`EnvironmentInfo`](#environment-info) для передачи [`переменных окружения`](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B) скрипту.
+
+&nbsp;
+
+### Интерфейс TaskPromise<a name="task-promise"></a>
+```ts
+interface TaskPromise {
+    	wait(wait: number): ResultTaskAction|null;
+}
+```
+Интерфейс промиса для таски
+
+&nbsp;
+
+```js
+wait(wait: number): ResultTaskAction|null
+```
+Устанавливает время ожидания промиса в секундах. Возвращает [`ResultTaskAction`](#result-task-action), если ответ пришёл в рамках установленного времени, иначе `null`
+
+&nbsp;
+
 ### Интерфейс ResultMacrosAction<a name="result-macros-action"></a>
 ```ts
 interface ResultMacrosAction extends ResultBaseAction {
 	setAutoRunTimeout(seconds: number): this;
 	buttonInfo(): ButtonInfo;
 	environmentInfo(): EnvironmentInfo;
+    	withPromise(withPromise: boolean): this;
+        setTaskDescription(description: string): this;
+        run(): TaskPromise|null;
 }
 ```
 Интерфейс действия запуска скрипта. Наследуется от [`ResultBaseAction`](#result-base-action).
@@ -192,6 +245,28 @@ buttonInfo(): ButtonInfo
 environmentInfo(): EnvironmentInfo
 ```
 Возвращает интерфейс [`EnvironmentInfo`](#environment-info) для передачи [`переменных окружения`](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B) скрипту.
+
+&nbsp;
+
+```js
+withPromise(withPromise: boolean): this
+```
+Устанавливает опцию для запуска скрипта с промисом. По умолчанию `false`
+
+&nbsp;
+
+```js
+setTaskDescription(description: string): this
+```
+Устанавливает описание для таски скрипта.
+
+&nbsp;
+
+```js
+run(): TaskPromise|null
+```
+Запускает скрипт. 
+Если до запуска скрипта был вызван `withPromise(true)`, возвращает [`TaskPromise`](#task-promise), иначе `null`
 
 &nbsp;
 

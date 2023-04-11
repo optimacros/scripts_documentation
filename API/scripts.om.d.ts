@@ -210,7 +210,7 @@ export interface Pivot {
     create(): Grid;
 
     rowsFilter(...data: string[] | number[]): Pivot;
-    
+
     columnsFilter(...data: string[] | number[]): Pivot;
 
     withoutValues(): Pivot;
@@ -279,7 +279,7 @@ export interface Tab {
 
 export interface Environment {
     load(name: string): Environment;
-    
+
     loadFromMulticube(name: string, view?: string | null): Environment;
 
     get(key: string, def?: any): any;
@@ -450,7 +450,7 @@ export interface MulticubeTab extends Tab {
     cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 
     getCubeInfo(identifier: string | number): CubeInfo;
-    
+
     cubesTab(): CubesTab;
 }
 
@@ -460,7 +460,7 @@ export interface MulticubesTab extends Tab {
 
 export interface Multicubes {
     multicubesTab(): MulticubesTab;
-    
+
     syncMulticube(): SyncMulticubeBuilder;
 }
 
@@ -482,7 +482,7 @@ export interface Times {
 
     //v1.0 only
     typePeriod(identifier: string | number): TypePeriod;
-    
+
     //v2.0 only
     timePeriodTab(identifier: string | number): TimePeriodTab;
 }
@@ -544,7 +544,7 @@ export interface StorageImporter extends Importer {
     setEncoding(encoding: string): this;
 
     setDateFormat(dateFormat: string): this;
-    
+
     setMappings(mappings: object): this;
 }
 
@@ -574,15 +574,15 @@ export interface ListUserAccessTab extends Tab {
 
 export interface ListTab extends Tab {
     listSubsetTab(): ListSubsetsTab; //OBSOLETE in favor of subsetTab()
-    
+
     subsetTab(): ListSubsetsTab;
-    
+
     propertiesTab(): ListPropertiesTab;
-    
+
     accessModelTab(): ListAccessModelTab;
-    
+
     customPropertiesTab(): CustomPropertiesTab;
-    
+
     uamTab(): ListUserAccessTab;
 
     importer(): ListImporter;
@@ -605,7 +605,7 @@ export interface ListsTab extends Tab {
 
 export interface Lists {
     listsTab(): ListsTab;
-    
+
     syncList(): SyncListBuilder;
 }
 
@@ -791,7 +791,7 @@ export interface ButtonInfo {
 
 export interface ResultBaseAction {
     appendAfter(): this;
-    
+
     /**
      * @param modelId Model string identifier or name
      */
@@ -810,6 +810,24 @@ export interface ResultMacrosAction extends ResultBaseAction {
     buttonInfo(): ButtonInfo;
 
     environmentInfo(): EnvironmentInfo;
+
+    withPromise(withPromise: boolean): this;
+
+    setTaskDescription(description: string): this;
+
+    run(): TaskPromise|null;
+}
+
+export interface TaskPromise {
+    wait(wait: number): ResultTaskAction|null;
+}
+
+export interface ResultTaskAction {
+    getOutput(): string;
+
+    getDescription(): string;
+
+    getEnvironmentInfo(): EnvironmentInfo
 }
 
 export interface ResultOpenAction extends ResultBaseAction {
@@ -874,7 +892,7 @@ export interface Common {
     entitiesInfo(): EntitiesInfo;
 
     copyData(): CopyData;
-    
+
     apiServiceRequestInfo(): ApiService.RequestInfo | null;
 }
 
@@ -920,7 +938,7 @@ export interface Filesystem {
     upload(from: string, to: string): boolean;
 
     download(from: string, to: string): boolean;
-    
+
     //2.0 only
     makeLocalFile(hash: string, path?: string): string;
 
@@ -1046,19 +1064,19 @@ export interface Optimization {
 
 export interface SqlQueryResult {
     count(): number;
-    
+
     generator(likeArray?: boolean): object | object[];
-    
+
     all(): object[];
-    
+
     first(): object | undefined;
-    
+
     column(columnName: string): unknown[];
-    
+
     cell(columnName: string, rowIndex?: number): unknown;
-    
+
     updated(): number | undefined;
-    
+
     lastId(): number | string | undefined;
 }
 
@@ -1340,7 +1358,7 @@ export interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
     setScrollType(scrollType: string | null): this;
 
     setRequestTimeout(timeout: number): this;
-    
+
     /**
      * https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility
      */
@@ -1770,7 +1788,7 @@ export namespace WinAgent {
         setDownloadUrl(url: string): this;
 
         auth(): Http.HttpAuth;
-        
+
         /**
          * @param sec Default value is 10 sec
          */
@@ -1899,7 +1917,7 @@ export interface Connectors {
     sqlServer(): MicrosoftSqlConnectorBuilder;
 
     oracle(): OracleConnectorBuilder;
-    
+
     snowflake(): SnowflakeConnectorBuilder;
 
     mongodb(): Mongodb.ConnectorBuilder;
