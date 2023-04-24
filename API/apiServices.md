@@ -17,6 +17,8 @@ apiServicesTab(): ApiServicesTab
 Возвращает ссылку на вкладку управления (создания, сортировки, удаления) элементами списка `Api Services`.
 !!!В интерфейсе Optimacros эта вкладка не реализована, доступна только в скриптах.
 
+Работать с apiServicesTab() необходимо ВНЕ контекста модели, т.е. перед вызовом нужно выполнить `om.common.modelInfo().unlock()`
+
 &nbsp;
 
 ### Интерфейс ApiServicesTab<a name="apiServicesTab"></a>
