@@ -600,6 +600,7 @@ interface Label {
 	alias(): string | null;
 	label(): string | null;
 	parentLongId(): number;
+    	hierarchyLongId(): number;
 }
 
 interface EntityInfo = Label;
@@ -656,6 +657,15 @@ parentLongId(): number
 Если сущность является элементом, у которого есть родительский элемент, то возвращает [`longId`](#long-id) сущности родителя.
 
 Если родительской сущности нет, возвращает `-1`.
+
+&nbsp;
+
+```js
+hierarchyLongId(): number
+```
+Если сущность является элементом справочника, времени, версий или их сабсетов, то метод возвратит `longId` справочника, времени, версии или их сабсета
+
+Иначе вернёт `-1`.
 
 &nbsp;
 
