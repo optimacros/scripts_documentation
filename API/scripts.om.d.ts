@@ -804,7 +804,13 @@ export interface EnvironmentInfo {
     get(key: string): unknown;
 }
 
-export interface ResultMacrosAction extends ResultBaseAction {
+export interface BaseCodeExecutionAction extends ResultBaseAction {
+    /**
+     * @param value CUSTOM|SHARED|UNIQUE
+     * Default is UNIQUE
+     */
+    setLockMode(value: string): this;
+
     setAutoRunTimeout(seconds: number): this;
 
     buttonInfo(): ButtonInfo;
@@ -816,6 +822,10 @@ export interface ResultMacrosAction extends ResultBaseAction {
     setTaskDescription(description: string): this;
 
     run(): TaskPromise|null;
+}
+
+export interface ResultMacrosAction extends BaseCodeExecutionAction {
+
 }
 
 export interface TaskPromise {
@@ -830,12 +840,20 @@ export interface ResultTaskAction {
     getEnvironmentInfo(): EnvironmentInfo
 }
 
+export interface CodeExecutionAction extends BaseCodeExecutionAction {
+    setMemoryLimit(value: number): this;
+
+    setTimeLimit(value: number): this;
+}
+
 export interface ResultOpenAction extends ResultBaseAction {
     buttonInfo(): ButtonInfo;
 }
 
 export interface ResultActionsInfo {
     makeMacrosAction(identifier: string | number): ResultMacrosAction;
+
+    makeCodeExecutionAction(code: string): CodeExecutionAction;Zz
 
     makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
 

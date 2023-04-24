@@ -4,6 +4,7 @@
 ```ts
 interface ResultActionsInfo {
 	makeMacrosAction(identifier: string | number): ResultMacrosAction;
+    	makeCodeExecutionAction(code: string): CodeExecutionAction;
 	makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
 	makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
 	makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
@@ -18,6 +19,13 @@ interface ResultActionsInfo {
 makeMacrosAction(identifier: string | number): ResultMacrosAction
 ```
 Создаёт и возвращает действие [`ResultMacrosAction`](#result-macros-action) запуска существующего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) скрипта.
+
+&nbsp;
+
+```js
+makeCodeExecutionAction(code: string): CodeExecutionAction
+```
+Создаёт и возвращает действие [`CodeExecutionAction`](#code-execution-action) запуска динамического кода. Аргумент `code` - строка с кодом.
 
 &nbsp;
 
@@ -205,9 +213,14 @@ wait(wait: number): ResultTaskAction|null
 
 &nbsp;
 
-### Интерфейс ResultMacrosAction<a name="result-macros-action"></a>
+### Интерфейс BaseCodeExecutionAction<a name="base-code-execution-action"></a>
 ```ts
-interface ResultMacrosAction extends ResultBaseAction {
+interface BaseCodeExecutionAction extends ResultBaseAction {
+	/**
+	* @param value CUSTOM|SHARED|UNIQUE
+	* Default is UNIQUE
+	*/
+	setLockMode(value: string): this;
 	setAutoRunTimeout(seconds: number): this;
 	buttonInfo(): ButtonInfo;
 	environmentInfo(): EnvironmentInfo;
@@ -216,7 +229,14 @@ interface ResultMacrosAction extends ResultBaseAction {
         run(): TaskPromise|null;
 }
 ```
-Интерфейс действия запуска скрипта. Наследуется от [`ResultBaseAction`](#result-base-action).
+Базовый интерфейс действия запуска скрипта. Наследуется от [`ResultBaseAction`](#result-base-action).
+
+&nbsp;
+
+```js
+setLockMode(value: string): this
+```
+Устанавливает режим блокировки модели, где `value` соответствует режиму Lock Mode (CUSTOM|SHARED|UNIQUE). Значение по умолчанию UNIQUE
 
 &nbsp;
 
@@ -267,6 +287,42 @@ run(): TaskPromise|null
 ```
 Запускает скрипт. 
 Если до запуска скрипта был вызван `withPromise(true)`, возвращает [`TaskPromise`](#task-promise), иначе `null`
+
+&nbsp;
+
+## Интерфейс ResultMacrosAction<a name="result-macros-action"></a>
+```ts
+interface ResultMacrosAction extends BaseCodeExecutionAction {
+
+}
+```
+Интерфейс действия запуска скрипта. Наследуется от [`BaseCodeExecutionAction`](#base-code-execution-action).
+
+&nbsp;
+
+## Интерфейс CodeExecutionAction<a name="code-execution-action"></a>
+```ts
+interface CodeExecutionAction extends BaseCodeExecutionAction {
+    setMemoryLimit(value: number): this;
+
+    setTimeLimit(value: number): this;
+}
+```
+Интерфейс действия запуска динамического кода. Наследуется от [`BaseCodeExecutionAction`](#base-code-execution-action).
+
+&nbsp;
+
+```js
+setMemoryLimit(value: number): this
+```
+Устанавливает ограничение памяти.
+
+&nbsp;
+
+```js
+setTimeLimit(value: number): this
+```
+Устанавливает ограничение времени.
 
 &nbsp;
 
