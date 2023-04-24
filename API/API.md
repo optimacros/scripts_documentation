@@ -42,6 +42,7 @@ interface OM {
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
 	readonly variables: Variables;
+        readonly apiServices ApiServices;
 }
 
 var om: OM;
@@ -124,6 +125,13 @@ readonly notifications: Notifications.Manager
 readonly variables: Variables;
 ```
 Ссылка на интерфейс [`Variables`](./variables.md#variables).
+
+&nbsp;
+
+```js
+readonly apiServices: ApiServices;
+```
+Ссылка на интерфейс [`ApiServices`](./apiServices.md#apiServices).
 
 &nbsp;
 
