@@ -59,6 +59,8 @@ export interface Label {
     label(): string | null;
 
     parentLongId(): number;
+
+    hierarchyLongId(): number;
 }
 
 export interface LabelsGroup {
