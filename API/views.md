@@ -134,21 +134,21 @@ cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
 ```js
 cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder
 ```
-Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#cube-cell-selector-builder) выборки клеток для куба `identifier`.
+Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#cube-cell-selector-builder) выборки клеток для куба `identifier`. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
 ```js
 cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder
 ```
-Возвращает интерфейс [`CubeCellUpdaterBuilder`](./cubeCell.md#cube-cell-updater-builder) обновления клеток куба с именем или идентификатором `identifier` по формуле.
+Возвращает интерфейс [`CubeCellUpdaterBuilder`](./cubeCell.md#cube-cell-updater-builder) обновления клеток куба с именем или идентификатором `identifier` по формуле. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
 ```js
 getCubeInfo(identifier: string | number): CubeInfo
 ```
-Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`.
+Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 ```js
