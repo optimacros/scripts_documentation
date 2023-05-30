@@ -472,6 +472,7 @@ export interface TimePeriodSubsetTab extends Tab {
 
 export interface TimePeriodTab extends Tab {
     subsetsTab(): TimePeriodSubsetTab;
+    importer(): TimePeriodImporter;
 }
 
 
@@ -575,6 +576,10 @@ export interface MulticubeImporter extends Importer {
 }
 
 export interface VersionsImporter extends Importer {
+
+}
+
+export interface TimePeriodImporter extends Importer {
 
 }
 

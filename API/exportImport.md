@@ -542,6 +542,17 @@ interface VersionsImporter extends Importer {
 ```
 Интерфейс импорта в справочник версий. Интерфейс наследуется от [`Importer`](#importer).
 
+&nbsp;
+
+### Интерфейс TimePeriodImporter<a name="timePeriod-importer"></a>
+```ts
+interface TimePeriodImporter extends Importer {
+}
+```
+Интерфейс импорта в справочник времени. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
 [API Reference](API.md)
 
 [Оглавление](../README.md)
