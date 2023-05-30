@@ -125,9 +125,33 @@ storageImporter(): StorageImporter
 ### Интерфейс CubesTab<a name="cubes-tab"></a>
 ```ts
 interface CubesTab extends Tab {
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 ```
 Интерфейс доступа к кубам мультикуба. В интерфейсе Optimacros аналогично открытию вкладки `Режим редактирования` мультикуба. Наследуется от интерфейса [`Tab`](#tab). Реализован только метод [`pivot()`](#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек, но не на добавление/удаление/перемещение кубов.
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
 
 &nbsp;
 

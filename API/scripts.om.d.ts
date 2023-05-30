@@ -441,7 +441,9 @@ export interface SyncListBuilder extends SyncBuilder {
 }
 
 export interface CubesTab extends Tab {
-
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface MulticubeTab extends Tab {
