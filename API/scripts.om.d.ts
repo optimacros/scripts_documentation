@@ -460,6 +460,9 @@ export interface MulticubeTab extends Tab {
 
 export interface MulticubesTab extends Tab {
     open(name: string): MulticubeTab | undefined;
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface Multicubes {
