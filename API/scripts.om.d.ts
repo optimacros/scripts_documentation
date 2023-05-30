@@ -472,7 +472,9 @@ export interface Multicubes {
 }
 
 export interface TimePeriodSubsetTab extends Tab {
-
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface TimePeriodTab extends Tab {
@@ -510,7 +512,9 @@ export interface VersionsTab extends Tab {
 }
 
 export interface VersionSubsetsTab extends Tab {
-
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface Versions {
@@ -589,7 +593,9 @@ export interface TimePeriodImporter extends Importer {
 }
 
 export interface CustomPropertiesTab extends Tab {
-
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface ListUserAccessTab extends Tab {
@@ -609,11 +615,22 @@ export interface ListTab extends Tab {
     
     uamTab(): ListUserAccessTab;
 
+    elementsCreator(): ElementsCreator;
+
+    elementsDeleter(): ElementsDeleter;
+
+    elementsReorder(): ElementsReorder;
+
     importer(): ListImporter;
+
+    storageImporter(): StorageImporter;
 }
 
 export interface ListChildTab extends Tab {
     listTab(): ListTab;
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export type ListSubsetsTab = ListChildTab;
@@ -625,6 +642,9 @@ export interface ListAccessModelTab extends ListChildTab {
 
 export interface ListsTab extends Tab {
     open(name: string): ListTab | undefined;
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface Lists {
