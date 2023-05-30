@@ -28,7 +28,7 @@ syncMulticube(): SyncMulticubeBuilder
 ### Интерфейс MulticubesTab<a name="multicubes-tab"></a>
 ```ts
 interface MulticubesTab extends Tab {
-	open(name: string): MulticubeTab;
+    	open(name: string): MulticubeTab;
 }
 ```
 Интерфейс для получения ссылки на [`MulticubeTab`](#multicube-tab). Интерфейс наследуется от [`Tab`](#tab).
@@ -45,25 +45,10 @@ open(name: string): MulticubeTab
 ## Интерфейс Tab<a name="tab"></a>
 ```ts
 interface Tab {
-	open(name: string): Tab;
 	pivot(viewName?: string): Pivot;
-
-	elementsCreator(): ElementsCreator;
-	elementsDeleter(): ElementsDeleter;
-	elementsReorder(): ElementsReorder;
-
-	importer(): Importer;
-	storageImporter(): StorageImporter;
 }
 ```
 Базовый интерфейс для вкладок.
-
-&nbsp;
-
-```js
-open(name: string): Tab
-```
-Возвращает ссылку на [`Tab`](#tab) по имени `name`. В интерфейсе Optimacros аналогично открытию вкладки `name`.
 
 &nbsp;
 
@@ -71,42 +56,7 @@ open(name: string): Tab
 ```js
 pivot(viewName?: string): Pivot
 ```
-Возвращает ссылку на объект [`Pivot`](#pivot) представления `viewName` текущего мультикуба. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](../appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
-
-&nbsp;
-
-```js
-elementsCreator(): ElementsCreator
-```
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
-
-&nbsp;
-
-```js
-elementsDeleter(): ElementsDeleter
-```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
-
-&nbsp;
-
-```js
-elementsReorder(): ElementsReorder
-```
-Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
-
-&nbsp;
-
-```js
-importer(): Importer
-```
-Возвращает ссылку на базовый интерфейс импорта [`Importer`](./exportImport.md#importer).
-
-&nbsp;
-
-```js
-storageImporter(): StorageImporter
-```
-Возвращает ссылку на быстрый интерфейс импорта [`StorageImporter`](./exportImport.md#storage-importer).
+Возвращает ссылку на объект [`Pivot`](#pivot) представления `viewName`. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](../appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
 &nbsp;
 
@@ -118,6 +68,8 @@ interface MulticubeTab extends Tab {
 	cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 	getCubeInfo(identifier: string | number): CubeInfo;
 	cubesTab(): CubesTab;
+	importer(): MulticubeImporter;
+	storageImporter(): StorageImporter;
 }
 ```
 Вкладка мультикуба. Интерфейс наследуется от [`Tab`](#tab).
@@ -155,6 +107,18 @@ getCubeInfo(identifier: string | number): CubeInfo
 cubesTab(): CubesTab
 ```
 Возвращает интерфейс [`CubesTab`](#cubes-tab) доступа к режиму редактирования мультикуба.
+
+&nbsp;
+```js
+importer(): MulticubeImporter
+```
+Возвращает интерфейс [`MulticubeImporter`](./exportImport.md#multicube-importer) для импорта данных в мультикуб.
+
+&nbsp;
+```js
+storageImporter(): StorageImporter
+```
+Возвращает интерфейс [`storageImporter`](./exportImport.md#storage-importer) для быстрого импорта данных в мультикуб.
 
 &nbsp;
 

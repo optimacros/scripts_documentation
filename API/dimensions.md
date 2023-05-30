@@ -77,7 +77,7 @@ uamTab(): ListUserAccessTab;
 ```js
 importer(): ListImporter
 ```
-Возвращает интерфейс [`ListImporter`](#list-importer) для импорта данных в справочник.
+Возвращает интерфейс [`ListImporter`](./exportImport.md#list-importer) для импорта данных в справочник.
 
 &nbsp;
 
@@ -112,71 +112,6 @@ interface ListUserAccessTab extends Tab {
 }
 ```
 Интерфейс доступа к UAM (МДП) элементов справочника. В интерфейсе Optimacros аналогично открытию вкладки `UAM`/`МДП` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab). Реализован только метод [`pivot()`](./views.md#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек.
-
-&nbsp;
-
-### Интерфейс ListImporter<a name="list-importer"></a>
-```ts
-interface ListImporter extends Importer {
-	setFilePath(path: string): ListImporter;
-	setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter;
-	getObligatoryListCodes(): boolean;
-	setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
-	getImportToChildListOnly(): boolean;
-	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
-	getUpdatedPropertiesOnParentLevels(): boolean;
-}
-```
-Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](./exportImport.md#importer).
-
-&nbsp;
-
-```js
-setFilePath(path: string): ListImporter
-```
-Устанавливает имя импортируемого файла. Возвращает `this`.
-
-&nbsp;
-
-```js
-setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
-```
-Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществующие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getObligatoryListCodes(): boolean
-```
-Возвращает признак режима обязательных кодов.
-
-&nbsp;
-
-```js
-setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
-```
-Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getImportToChildListOnly(): boolean
-```
-Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
-
-&nbsp;
-
-```js
-setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
-```
-Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getUpdatedPropertiesOnParentLevels(): boolean
-```
-Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
 
 &nbsp;
 
