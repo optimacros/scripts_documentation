@@ -144,6 +144,11 @@ versionSubsetsTab(): VersionSubsetsTab
 ```ts
 interface VersionsTab extends Tab {
 	copyVersion(from: string, to: string): Object;
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
+	importer(): VersionsImporter;
+    
 }
 ```
 Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
@@ -157,6 +162,33 @@ copyVersion(from: string, to: string): Object
 
 &nbsp;
 
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+
+&nbsp;
+
+```js
+importer(): VersionsImporter
+```
+Возвращает ссылку на интерфейс импорта [`VersionsImporter`](./exportImport.md#versions-importer).
+
+&nbsp;
 ### Интерфейс VersionSubsetsTab<a name="version-subsets-tab"></a>
 ```ts
 interface VersionSubsetsTab extends Tab {

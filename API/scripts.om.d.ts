@@ -497,6 +497,10 @@ export interface TimeOptionsTab extends Tab {
 
 export interface VersionsTab extends Tab {
     copyVersion(from: string, to: string): any;
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
+    importer(): VersionsImporter;
 }
 
 export interface VersionSubsetsTab extends Tab {
@@ -564,6 +568,14 @@ export interface ListImporter extends Importer {
     setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): this;
 
     getUpdatedPropertiesOnParentLevels(): boolean;
+}
+
+export interface MulticubeImporter extends Importer {
+
+}
+
+export interface VersionsImporter extends Importer {
+
 }
 
 export interface CustomPropertiesTab extends Tab {

@@ -533,6 +533,15 @@ interface MulticubeImporter extends Importer {
 ```
 Интерфейс импорта в мультикуб. Интерфейс наследуется от [`Importer`](#importer).
 
+&nbsp;
+
+### Интерфейс VersionsImporter<a name="versions-importer"></a>
+```ts
+interface VersionsImporter extends Importer {
+}
+```
+Интерфейс импорта в справочник версий. Интерфейс наследуется от [`Importer`](#importer).
+
 [API Reference](API.md)
 
 [Оглавление](../README.md)
