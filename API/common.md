@@ -245,6 +245,10 @@ interface ModelInfo {
 	recalculateIfManualCalculable(identifiers: number[]): boolean;
 	getStorageInstancePriority(): number;
 	setStorageInstancePriority(priority: number): number;
+    setModelStorageReadMode(type: string): boolean;
+    setModelStorageWriteMode(type: string): boolean;
+    getStorageReadMode(): string;
+    getStorageWriteMode(): string;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -385,6 +389,36 @@ setStorageInstancePriority(priority: number): number;
 </details>
 
 &nbsp;
+
+```js
+setModelStorageReadMode(type: string): boolean;
+```
+Устанавливает режим чтения в модели. Аналог в интерфейсе Optimacros: меню пользователя -> `Параметры` -> `Расширенные` -> `Режим чтения`. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. Возвращает `true`.
+
+&nbsp;
+
+
+```js
+setModelStorageWriteMode(type: string): boolean;
+```
+Устанавливает режим записи в модели. Аналог в интерфейсе Optimacros: меню пользователя -> `Параметры` -> `Расширенные` -> `Режим записи`. В параметре принимает одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`. Возвращает `true`.
+
+&nbsp;
+
+```js
+getStorageReadMode(): string;
+```
+Возвращает установленный режим чтения модели(одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
+
+&nbsp;
+
+```js
+getStorageWriteMode(): string;
+```
+Возвращает установленный режим записи модели(одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`).
+
+&nbsp;
+
 
 ### Интерфейс UserInfo<a name="user-info"></a>
 ```ts

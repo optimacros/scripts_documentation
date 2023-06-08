@@ -769,6 +769,22 @@ export interface ModelInfo {
     getStorageInstancePriority(): number;
 
     setStorageInstancePriority(priority: number): number;
+
+    /**
+     * Default: CONSISTENT_READ
+     * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
+     */
+    setModelStorageReadMode(type: string): boolean;
+
+    /**
+     * Default: CONSISTENT_WRITE
+     * @param type CONSISTENT_WRITE|FAST_WRITE
+     */
+    setModelStorageWriteMode(type: string): boolean;
+
+    getStorageReadMode(): string;
+
+    getStorageWriteMode(): string;
 }
 
 export interface ButtonInfoOptions {
