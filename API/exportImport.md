@@ -544,7 +544,7 @@ interface VersionsImporter extends Importer {
 
 &nbsp;
 
-### Интерфейс TimePeriodImporter<a name="timePeriod-importer"></a>
+### Интерфейс TimePeriodImporter<a name="time-period-importer"></a>
 ```ts
 interface TimePeriodImporter extends Importer {
 }

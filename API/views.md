@@ -41,28 +41,28 @@ interface MulticubesTab extends Tab {
 ```js
 open(name: string): MulticubeTab
 ```
-Возвращает ссылку на [`MulticubeTab`](#multicube-tab) куба `name`. Если такой мультикуб отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
+Возвращает ссылку на [`MulticubeTab`](#multicube-tab) мультикуба `name`. Если такой мультикуб отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
 
 &nbsp;
 
 ```js
 elementsCreator(): ElementsCreator
 ```
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления мультикубов.
 
 &nbsp;
 
 ```js
 elementsDeleter(): ElementsDeleter
 ```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления мультикубов.
 
 &nbsp;
 
 ```js
 elementsReorder(): ElementsReorder
 ```
-Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования мультикубов.
 
 &nbsp;
 
@@ -154,28 +154,28 @@ interface CubesTab extends Tab {
     elementsReorder(): ElementsReorder;
 }
 ```
-Интерфейс доступа к кубам мультикуба. В интерфейсе Optimacros аналогично открытию вкладки `Режим редактирования` мультикуба. Наследуется от интерфейса [`Tab`](#tab). Реализован только метод [`pivot()`](#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек, но не на добавление/удаление/перемещение кубов.
+Интерфейс доступа к кубам мультикуба. В интерфейсе Optimacros аналогично открытию вкладки `Режим редактирования` мультикуба. Наследуется от интерфейса [`Tab`](#tab).
 
 &nbsp;
 
 ```js
 elementsCreator(): ElementsCreator
 ```
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления кубов.
 
 &nbsp;
 
 ```js
 elementsDeleter(): ElementsDeleter
 ```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления кубов.
 
 &nbsp;
 
 ```js
 elementsReorder(): ElementsReorder
 ```
-Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования кубов.
 
 &nbsp;
 

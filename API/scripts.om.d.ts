@@ -609,8 +609,6 @@ export interface ListTab extends Tab {
     
     propertiesTab(): ListPropertiesTab;
     
-    accessModelTab(): ListAccessModelTab;
-    
     customPropertiesTab(): CustomPropertiesTab;
     
     uamTab(): ListUserAccessTab;
@@ -622,8 +620,6 @@ export interface ListTab extends Tab {
     elementsReorder(): ElementsReorder;
 
     importer(): ListImporter;
-
-    storageImporter(): StorageImporter;
 }
 
 export interface ListChildTab extends Tab {

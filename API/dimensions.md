@@ -48,21 +48,21 @@ open(name: string): ListTab
 ```js
 elementsCreator(): ElementsCreator
 ```
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления справочников.
 
 &nbsp;
 
 ```js
 elementsDeleter(): ElementsDeleter
 ```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления справочников.
 
 &nbsp;
 
 ```js
 elementsReorder(): ElementsReorder
 ```
-Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования справочников.
 
 &nbsp;
 
@@ -76,7 +76,6 @@ interface ListTab extends Tab {
 	elementsDeleter(): ElementsDeleter;
 	elementsReorder(): ElementsReorder;
 	importer(): ListImporter;
-	storageImporter(): StorageImporter;
 }
 ```
 Вкладка справочника. Интерфейс наследуется от [`Tab`](./views.md#tab).
@@ -130,13 +129,6 @@ importer(): ListImporter
 
 &nbsp;
 
-```js
-storageImporter(): StorageImporter
-```
-Возвращает интерфейс [`storageImporter`](./exportImport.md#storage-importer) для быстрого импорта данных в мультикуб.
-
-&nbsp;
-
 ### Интерфейс ListSubsetsTab<a name="list-subsets-tab"></a>
 ```ts
 interface ListSubsetsTab extends Tab {
@@ -160,21 +152,21 @@ listTab(): ListTab
 ```js
 elementsCreator(): ElementsCreator
 ```
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления выборок.
 
 &nbsp;
 
 ```js
 elementsDeleter(): ElementsDeleter
 ```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления выборок.
 
 &nbsp;
 
 ```js
 elementsReorder(): ElementsReorder
 ```
-Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
 
 &nbsp;
 
@@ -193,21 +185,21 @@ interface CustomPropertiesTab extends Tab {
 ```js
 elementsCreator(): ElementsCreator
 ```
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления свойств.
 
 &nbsp;
 
 ```js
 elementsDeleter(): ElementsDeleter
 ```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления свойств.
 
 &nbsp;
 
 ```js
 elementsReorder(): ElementsReorder
 ```
-Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования свойств.
 
 &nbsp;
 ### Интерфейс ListUserAccessTab<a name="list-user-access-tab"></a>
@@ -290,7 +282,7 @@ elementsReorder(): ElementsReorder
 ```js
 importer(): VersionsImporter
 ```
-Возвращает ссылку на интерфейс импорта [`VersionsImporter`](./exportImport.md#versions-importer).
+Возвращает интерфейс [`VersionsImporter`](./exportImport.md#versions-importer) для импорта данных в справочник.
 
 &nbsp;
 ### Интерфейс VersionSubsetsTab<a name="version-subsets-tab"></a>
@@ -308,21 +300,21 @@ interface VersionSubsetsTab extends Tab {
 ```js
 elementsCreator(): ElementsCreator
 ```
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления выборок.
 
 &nbsp;
 
 ```js
 elementsDeleter(): ElementsDeleter
 ```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления выборок.
 
 &nbsp;
 
 ```js
 elementsReorder(): ElementsReorder
 ```
-Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
 
 &nbsp;
 
@@ -394,9 +386,9 @@ subsetsTab(): TimePeriodSubsetTab;
 &nbsp;
 
 ```js
-importer(): VersionsImporter
+importer(): TimePeriodImporter
 ```
-Возвращает ссылку на интерфейс импорта [`TimePeriodImporter`](./exportImport.md#timePeriod-importer).
+Возвращает ссылку на интерфейс импорта [`TimePeriodImporter`](./exportImport.md#time-period-importer).
 &nbsp;
 
 ### Интерфейс TimePeriodSubsetTab<a name="time-period-subset-tab"></a>
@@ -414,21 +406,21 @@ export interface TimePeriodSubsetTab extends Tab {
 ```js
 elementsCreator(): ElementsCreator
 ```
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления выборок.
 
 &nbsp;
 
 ```js
 elementsDeleter(): ElementsDeleter
 ```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления выборок.
 
 &nbsp;
 
 ```js
 elementsReorder(): ElementsReorder
 ```
-Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
 
 &nbsp;
 
