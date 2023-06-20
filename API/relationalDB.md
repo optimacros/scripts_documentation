@@ -595,6 +595,8 @@ export interface PostgresqlImportBuilder {
     setTable(name: string): PostgresqlImportBuilder;
     setDelimiter(delimiter: string): PostgresqlImportBuilder;
     setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
+    setEscape(escape: string): PostgresqlImportBuilder;
+    setQuote(quote: string): PostgresqlImportBuilder;
     setColumns(names: string[]): PostgresqlImportBuilder;
     setFilePath(path: string): PostgresqlImportBuilder;
     import(): PostgresqlImportResult;
@@ -622,6 +624,20 @@ setDelimiter(delimiter: string): PostgresqlImportBuilder
 setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder
 ```
 Устанавливает флаг игнорирования заголовка. По умолчанию: `false`.
+
+&nbsp;
+
+```js
+setEscape(escape: string): PostgresqlImportBuilder
+```
+Задает символ, который должен стоять перед обрамляющим символом. Это должен быть одиночный однобайтовый символ. По умолчанию: `\ `.
+
+&nbsp;
+
+```js
+setQuote(quote: string): PostgresqlImportBuilder;
+```
+Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей. По умолчанию: `"`
 
 &nbsp;
 

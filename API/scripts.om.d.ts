@@ -1857,6 +1857,10 @@ export interface PostgresqlImportBuilder {
 
     setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
 
+    setEscape(escape: string): PostgresqlImportBuilder;
+
+    setQuote(quote: string): PostgresqlImportBuilder;
+
     setColumns(names: string[]): PostgresqlImportBuilder;
 
     setFilePath(path: string): PostgresqlImportBuilder;
