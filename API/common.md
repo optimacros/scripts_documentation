@@ -11,6 +11,7 @@ interface Common {
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
+	enterpriseLicenseManager(): EnterpriseLicenseManager;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -71,6 +72,13 @@ copyData(): CopyData
 apiServiceRequestInfo(): ApiService.RequestInfo | null;
 ```
 Возвращает ссылку на интерфейс [`ApiService.RequestInfo`](./apiService.md#request-info), если скрипт вызван через API Service, или `null` иначе.
+
+&nbsp;
+
+```js
+enterpriseLicenseManager(): EnterpriseLicenseManager
+```
+Возвращает ссылку на интерфейс [`EnterpriseLicenseManager`](#enterprise-license-manager).
 
 &nbsp;
 
@@ -556,6 +564,103 @@ setMulticubeByNames(names: string[]): CopyData
 copy(): CopyData
 ```
 Выполняет копирование.
+
+&nbsp;
+
+### Интерфейс EnterpriseLicenseManager<a name="enterprise-license-manager"></a>
+```ts
+interface ModelInfo {
+	getWorkspaceLicenseStatus(): boolean;
+	getWorkspaceLicenseInfo(): object;
+		
+	createKey(password: string): string;
+	validateKey(password: string, key: string): boolean;
+	
+	validateLicenseJson(jsonStr: string): boolean;
+	createLicense(password: string, key: string, jsonStr: string): string;
+	validateLicense(password: string, key: string, licenseData: string, id?: string | null): object;
+}
+```
+Интерфейс получения информации о лицензи и о связанных с лицензией сущностями (ключ лицензии и т.п.) и произведения с ними некоторых манипуляций.
+
+&nbsp;
+
+```js
+getWorkspaceLicenseStatus(): boolean
+```
+Возвращает `true` (если лицензия установлена) или `false` (если нет лицезии).
+
+&nbsp;
+
+```js
+getWorkspaceLicenseInfo(): object
+```
+Следует использовать **только** для случая установленной лицензии.
+
+Возвращает стандартный JS-объект с полями, указанными в исходной структуре лицензии. Смотри `validateLicenseJson`. 
+
+&nbsp;
+
+```js
+createKey(password: string): string
+```
+Создаёт ключ (зашифрованные данные на основе пароля), которым подписывается лицензия и с помощью которого лицензия проверяется.
+
+Возвращает строку с ключом. 
+Пример использования: `om.common.enterpriseLicenseManager().createKey('some#$%password')`
+
+&nbsp;
+
+```js
+validateKey(password: string, key: string): boolean
+```
+Проверяет ранее созданный ключ на соответствие паролю и на соответсвие стандарту шифрования. Возвращает `true` или выкидывает исключение с описанием ошибки.
+
+&nbsp;
+
+```js
+validateLicenseJson(jsonStr: string): boolean
+```
+Проверяет текстовое представление структуры лицензии (строка, содержащая данные в формате JSON). Возвращает `true` или выкидывает исключение с описанием ошибки. 
+
+&nbsp;
+
+```js
+createLicense(password: string, key: string, jsonStr: string): string
+```
+Создаёт лицензию (зашифрованные данные на основе пароля, ключа и JSON-данных лицензии).
+
+Возвращает строку с лицензией или выкидывает исключение с описанием ошибки.
+Пример использования: `om.common.enterpriseLicenseManager().createLicense(licensePassword, licenseKey, licenseJson)`
+
+&nbsp;
+
+```js
+validateLicense(password: string, key: string, licenseData: string, id?: string | null): object
+```
+Проверяет ранее созданную лицензию на соответствие паролю и ключу и на соответсвие стандарту шифрования. Возвращает стандартный JS-объект с полями, указанными в исходной структуре лицензии, или выкидывает исключение с описанием ошибки. Смотри `validateLicenseJson`.
+
+#### Пример использования API `enterpriseLicenseManager`
+
+Например, мы создали мультикуб с названием **Create License** и хотим автоматизировать создание лицензий.
+
+![Пример мультикуба с исходными данными](./pic/licenseOriginalData.png)
+
+Пример скрипта, который обращается к клеткам мультикуба и использует API:
+```js
+om.environment.loadFromMulticube('Create License');
+
+const license = om.environment.get('Create License');
+
+console.log('\n\nPassword: ' + license.Password);
+console.log('\n\nKey: ' + license.Key);
+console.log('\n\nJSON: ' + license.JSON);
+
+const licenseData = om.common.enterpriseLicenseManager().createLicense(license.Password, license.Key, license.JSON);
+
+console.log('\n\nLicense: ' + licenseData);
+```
+
 
 &nbsp;
 
