@@ -328,7 +328,7 @@ elementsReorder(): ElementsReorder
 ### Интерфейс Times<a name="times"></a>
 ```ts
 interface Times {
-	optionsTab(): TimeOptionsTab;
+    optionsTab(): TimeOptionsTab;
     timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 ```
