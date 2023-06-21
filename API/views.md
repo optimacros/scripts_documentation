@@ -28,7 +28,7 @@ syncMulticube(): SyncMulticubeBuilder
 ### Интерфейс MulticubesTab<a name="multicubes-tab"></a>
 ```ts
 interface MulticubesTab extends Tab {
-    open(name: string): MulticubeTab;
+	open(name: string): MulticubeTab;
 
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
@@ -152,9 +152,9 @@ storageImporter(): StorageImporter
 ### Интерфейс CubesTab<a name="cubes-tab"></a>
 ```ts
 interface CubesTab extends Tab {
-    elementsCreator(): ElementsCreator;
-    elementsDeleter(): ElementsDeleter;
-    elementsReorder(): ElementsReorder;
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
 }
 ```
 Интерфейс доступа к кубам мультикуба. В интерфейсе Optimacros аналогично открытию вкладки `Режим редактирования` мультикуба. Наследуется от интерфейса [`Tab`](#tab).

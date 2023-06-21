@@ -177,9 +177,9 @@ elementsReorder(): ElementsReorder
 ### Интерфейс CustomPropertiesTab<a name="custom-properties-tab"></a>
 ```ts
 interface CustomPropertiesTab extends Tab {
-    elementsCreator(): ElementsCreator;
-    elementsDeleter(): ElementsDeleter;
-    elementsReorder(): ElementsReorder;
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
 }
 ```
 Интерфейс доступа к свойствам справочника. В интерфейсе Optimacros аналогично открытию вкладки `Свойства` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab).
@@ -295,9 +295,9 @@ importer(): VersionsImporter
 ### Интерфейс VersionSubsetsTab<a name="version-subsets-tab"></a>
 ```ts
 interface VersionSubsetsTab extends Tab {
-    elementsCreator(): ElementsCreator;
-    elementsDeleter(): ElementsDeleter;
-    elementsReorder(): ElementsReorder;
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
 }
 ```
 Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
@@ -328,8 +328,8 @@ elementsReorder(): ElementsReorder
 ### Интерфейс Times<a name="times"></a>
 ```ts
 interface Times {
-    optionsTab(): TimeOptionsTab;
-    timePeriodTab(identifier: string | number): TimePeriodTab;
+	optionsTab(): TimeOptionsTab;
+	timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 ```
 Интерфейс для получения доступа к настройкам и гридам измерений времени.
@@ -378,8 +378,8 @@ applyForm(): Object
 ### Интерфейс TimePeriodTab<a name="time-period-tab"></a>
 ```ts
 export interface TimePeriodTab extends Tab {
-    subsetsTab(): TimePeriodSubsetTab;
-    importer(): TimePeriodImporter;
+	subsetsTab(): TimePeriodSubsetTab;
+	importer(): TimePeriodImporter;
 }
 ```
 Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
