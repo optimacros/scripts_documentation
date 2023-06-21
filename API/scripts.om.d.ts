@@ -632,10 +632,6 @@ export interface ListChildTab extends Tab {
 export type ListSubsetsTab = ListChildTab;
 export type ListPropertiesTab = ListChildTab;
 
-export interface ListAccessModelTab extends ListChildTab {
-    isEnabled(): boolean;
-}
-
 export interface ListsTab extends Tab {
     open(name: string): ListTab | undefined;
     elementsCreator(): ElementsCreator;

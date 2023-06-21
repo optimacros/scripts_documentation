@@ -29,12 +29,13 @@ syncList(): SyncListBuilder
 ```ts
 interface ListsTab extends Tab {
 	open(name: string): ListTab;
+
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
 	elementsReorder(): ElementsReorder;
 }
 ```
-Интерфейс для получения ссылки на [`ListTab`](#list-tab). Интерфейс наследуется от [`Tab`](./views.md#tab). Несмотря на это, функция `open()` **не реализована**.
+Вкладка `Справочники`. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -72,9 +73,11 @@ interface ListTab extends Tab {
 	listSubsetTab(): ListSubsetsTab;
 	customPropertiesTab(): CustomPropertiesTab;
 	uamTab(): ListUserAccessTab;
+
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
 	elementsReorder(): ElementsReorder;
+
 	importer(): ListImporter;
 }
 ```
@@ -133,6 +136,7 @@ importer(): ListImporter
 ```ts
 interface ListSubsetsTab extends Tab {
 	listTab(): ListTab;
+
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
 	elementsReorder(): ElementsReorder;
@@ -178,7 +182,7 @@ interface CustomPropertiesTab extends Tab {
     elementsReorder(): ElementsReorder;
 }
 ```
-Интерфейс доступа к свойствам справочника. В интерфейсе Optimacros аналогично открытию вкладки `Свойства` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab). Реализован только метод [`pivot()`](./views.md#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек, но не на добавление/удаление/перемещение свойств.
+Интерфейс доступа к свойствам справочника. В интерфейсе Optimacros аналогично открытию вкладки `Свойства` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -202,6 +206,7 @@ elementsReorder(): ElementsReorder
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования свойств.
 
 &nbsp;
+
 ### Интерфейс ListUserAccessTab<a name="list-user-access-tab"></a>
 ```ts
 interface ListUserAccessTab extends Tab {
@@ -240,11 +245,12 @@ versionSubsetsTab(): VersionSubsetsTab
 ```ts
 interface VersionsTab extends Tab {
 	copyVersion(from: string, to: string): Object;
+
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
 	elementsReorder(): ElementsReorder;
+
 	importer(): VersionsImporter;
-    
 }
 ```
 Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
@@ -285,6 +291,7 @@ importer(): VersionsImporter
 Возвращает интерфейс [`VersionsImporter`](./exportImport.md#versions-importer) для импорта данных в справочник.
 
 &nbsp;
+
 ### Интерфейс VersionSubsetsTab<a name="version-subsets-tab"></a>
 ```ts
 interface VersionSubsetsTab extends Tab {
@@ -322,7 +329,7 @@ elementsReorder(): ElementsReorder
 ```ts
 interface Times {
 	optionsTab(): TimeOptionsTab;
-        timePeriodTab(identifier: string | number): TimePeriodTab;
+    timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 ```
 Интерфейс для получения доступа к настройкам и гридам измерений времени.
@@ -383,12 +390,14 @@ export interface TimePeriodTab extends Tab {
 subsetsTab(): TimePeriodSubsetTab;
 ```
 Возвращает ссылку на вкладку [`TimePeriodSubsetTab`](#time-period-subset-tab) выборок выбранного измерения времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+
 &nbsp;
 
 ```js
 importer(): TimePeriodImporter
 ```
 Возвращает ссылку на интерфейс импорта [`TimePeriodImporter`](./exportImport.md#time-period-importer).
+
 &nbsp;
 
 ### Интерфейс TimePeriodSubsetTab<a name="time-period-subset-tab"></a>
