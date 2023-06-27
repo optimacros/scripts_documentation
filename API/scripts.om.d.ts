@@ -472,7 +472,6 @@ export interface TimePeriodTab extends Tab {
     subsetsTab(): TimePeriodSubsetTab;
 }
 
-
 export interface TypePeriod {
     tableTab(): Tab;
 }
@@ -1946,6 +1945,14 @@ export interface Variables {
     get(varName: string): Variable;
 }
 
+export interface ApiServices {
+    apiServicesTab(): ApiServicesTab;
+}
+
+export interface ApiServicesTab extends Tab {
+    
+}
+
 export interface OM {
     readonly common: Common;
     readonly environment: Environment;
@@ -1958,6 +1965,7 @@ export interface OM {
     readonly connectors: Connectors;
     readonly notifications: Notifications.Manager;
     readonly variables: Variables;
+    readonly apiServices: ApiServices;
 }
 
 export var om: OM;
