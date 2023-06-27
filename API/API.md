@@ -133,7 +133,7 @@ readonly variables: Variables;
 ```js
 readonly apiServices: ApiServices;
 ```
-Ссылка на интерфейс [`ApiServices`](./apiServicesAdministration.md.md#api-services).
+Ссылка на интерфейс [`ApiServices`](./apiServicesAdministration.md#api-services).
 
 &nbsp;
 
