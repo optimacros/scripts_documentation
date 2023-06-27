@@ -243,12 +243,14 @@ interface ModelInfo {
 	unlock(): this;
 	
 	recalculateIfManualCalculable(identifiers: number[]): boolean;
+
 	getStorageInstancePriority(): number;
 	setStorageInstancePriority(priority: number): number;
-    setModelStorageReadMode(type: string): boolean;
-    setModelStorageWriteMode(type: string): boolean;
-    getStorageReadMode(): string;
-    getStorageWriteMode(): string;
+
+	setModelStorageReadMode(type: string): boolean;
+	setModelStorageWriteMode(type: string): boolean;
+	getStorageReadMode(): string;
+	getStorageWriteMode(): string;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -393,7 +395,7 @@ setStorageInstancePriority(priority: number): number;
 ```js
 setModelStorageReadMode(type: string): boolean;
 ```
-Устанавливает режим чтения в модели. Аналог в интерфейсе Optimacros: меню пользователя -> `Параметры` -> `Расширенные` -> `Режим чтения`. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. Возвращает `true`.
+Устанавливает режим чтения в модели. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Расширенные` -> `Режим чтения`. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе пользователю (или скрипту) будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Возвращает `true`.
 
 &nbsp;
 
@@ -401,21 +403,21 @@ setModelStorageReadMode(type: string): boolean;
 ```js
 setModelStorageWriteMode(type: string): boolean;
 ```
-Устанавливает режим записи в модели. Аналог в интерфейсе Optimacros: меню пользователя -> `Параметры` -> `Расширенные` -> `Режим записи`. В параметре принимает одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`. Возвращает `true`.
+Устанавливает режим записи в модели. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Расширенные` -> `Режим записи`. В параметре принимает одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`. `CONSISTENT_WRITE` существовал и до этого: при модификации ответ на запрос о модификации возвращался после того, как все порождённым им пересчёты были завершены. `FAST_WRITE` позволяет не ждать завершения пересчётов при модификации, а сразу продолжать работу. Возвращает `true`.
 
 &nbsp;
 
 ```js
 getStorageReadMode(): string;
 ```
-Возвращает установленный режим чтения модели(одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
+Возвращает установленный режим чтения модели (одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
 
 &nbsp;
 
 ```js
 getStorageWriteMode(): string;
 ```
-Возвращает установленный режим записи модели(одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`).
+Возвращает установленный режим записи модели (одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`).
 
 &nbsp;
 
