@@ -441,7 +441,9 @@ export interface SyncListBuilder extends SyncBuilder {
 }
 
 export interface CubesTab extends Tab {
-
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface MulticubeTab extends Tab {
@@ -458,6 +460,9 @@ export interface MulticubeTab extends Tab {
 
 export interface MulticubesTab extends Tab {
     open(name: string): MulticubeTab | undefined;
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface Multicubes {
@@ -467,11 +472,14 @@ export interface Multicubes {
 }
 
 export interface TimePeriodSubsetTab extends Tab {
-
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface TimePeriodTab extends Tab {
     subsetsTab(): TimePeriodSubsetTab;
+    importer(): TimePeriodImporter;
 }
 
 export interface TypePeriod {
@@ -496,10 +504,16 @@ export interface TimeOptionsTab extends Tab {
 
 export interface VersionsTab extends Tab {
     copyVersion(from: string, to: string): any;
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
+    importer(): VersionsImporter;
 }
 
 export interface VersionSubsetsTab extends Tab {
-
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface Versions {
@@ -565,8 +579,22 @@ export interface ListImporter extends Importer {
     getUpdatedPropertiesOnParentLevels(): boolean;
 }
 
-export interface CustomPropertiesTab extends Tab {
+export interface MulticubeImporter extends Importer {
 
+}
+
+export interface VersionsImporter extends Importer {
+
+}
+
+export interface TimePeriodImporter extends Importer {
+
+}
+
+export interface CustomPropertiesTab extends Tab {
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface ListUserAccessTab extends Tab {
@@ -580,28 +608,34 @@ export interface ListTab extends Tab {
     
     propertiesTab(): ListPropertiesTab;
     
-    accessModelTab(): ListAccessModelTab;
-    
     customPropertiesTab(): CustomPropertiesTab;
     
     uamTab(): ListUserAccessTab;
+
+    elementsCreator(): ElementsCreator;
+
+    elementsDeleter(): ElementsDeleter;
+
+    elementsReorder(): ElementsReorder;
 
     importer(): ListImporter;
 }
 
 export interface ListChildTab extends Tab {
     listTab(): ListTab;
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export type ListSubsetsTab = ListChildTab;
 export type ListPropertiesTab = ListChildTab;
 
-export interface ListAccessModelTab extends ListChildTab {
-    isEnabled(): boolean;
-}
-
 export interface ListsTab extends Tab {
     open(name: string): ListTab | undefined;
+    elementsCreator(): ElementsCreator;
+    elementsDeleter(): ElementsDeleter;
+    elementsReorder(): ElementsReorder;
 }
 
 export interface Lists {
