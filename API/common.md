@@ -672,7 +672,7 @@ createLicense(password: string, key: string, jsonStr: string): string
 &nbsp;
 
 ```js
-validateLicense(password: string, key: string, licenseData: string, id?: string | null): object
+validateLicense(password: string, key: string, licenseData: string): object
 ```
 Проверяет ранее созданную лицензию на соответствие паролю и ключу и на соответсвие стандарту шифрования. Возвращает стандартный JS-объект с полями, указанными в исходной структуре лицензии, или выкидывает исключение с описанием ошибки. Смотри `validateLicenseJson`.
 
