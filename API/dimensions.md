@@ -29,9 +29,13 @@ syncList(): SyncListBuilder
 ```ts
 interface ListsTab extends Tab {
 	open(name: string): ListTab;
+
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
 }
 ```
-Интерфейс для получения ссылки на [`ListTab`](#list-tab). Интерфейс наследуется от [`Tab`](./views.md#tab). Несмотря на это, функция `open()` **не реализована**.
+Вкладка `Справочники`. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -42,12 +46,38 @@ open(name: string): ListTab
 
 &nbsp;
 
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления справочников.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления справочников.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования справочников.
+
+&nbsp;
+
 ### Интерфейс ListTab<a name="list-tab"></a>
 ```ts
 interface ListTab extends Tab {
 	listSubsetTab(): ListSubsetsTab;
 	customPropertiesTab(): CustomPropertiesTab;
 	uamTab(): ListUserAccessTab;
+
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
+
 	importer(): ListImporter;
 }
 ```
@@ -75,9 +105,30 @@ uamTab(): ListUserAccessTab;
 &nbsp;
 
 ```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+
+&nbsp;
+
+```js
 importer(): ListImporter
 ```
-Возвращает интерфейс [`ListImporter`](#list-importer) для импорта данных в справочник.
+Возвращает интерфейс [`ListImporter`](./exportImport.md#list-importer) для импорта данных в справочник.
 
 &nbsp;
 
@@ -85,6 +136,10 @@ importer(): ListImporter
 ```ts
 interface ListSubsetsTab extends Tab {
 	listTab(): ListTab;
+
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
 }
 ```
 Вкладка `Выборки` справочника. Интерфейс наследуется от [`Tab`](./views.md#tab). В отличие от аналогичной вкладки в интерфейсе Optimacros, её [`Grid`](./views.md#grid) не имеет ни измерений на столбцах, ни ячеек; доступ можно получить только к заголовкам строк, являющихся названиями выборок справочника.
@@ -98,85 +153,66 @@ listTab(): ListTab
 
 &nbsp;
 
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления выборок.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления выборок.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
+
+&nbsp;
+
 ### Интерфейс CustomPropertiesTab<a name="custom-properties-tab"></a>
 ```ts
 interface CustomPropertiesTab extends Tab {
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
 }
 ```
-Интерфейс доступа к свойствам справочника. В интерфейсе Optimacros аналогично открытию вкладки `Свойства` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab). Реализован только метод [`pivot()`](./views.md#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек, но не на добавление/удаление/перемещение свойств.
+Интерфейс доступа к свойствам справочника. В интерфейсе Optimacros аналогично открытию вкладки `Свойства` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab).
 
 &nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления свойств.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления свойств.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования свойств.
+
+&nbsp;
+
 ### Интерфейс ListUserAccessTab<a name="list-user-access-tab"></a>
 ```ts
 interface ListUserAccessTab extends Tab {
 }
 ```
 Интерфейс доступа к UAM (МДП) элементов справочника. В интерфейсе Optimacros аналогично открытию вкладки `UAM`/`МДП` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab). Реализован только метод [`pivot()`](./views.md#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек.
-
-&nbsp;
-
-### Интерфейс ListImporter<a name="list-importer"></a>
-```ts
-interface ListImporter extends Importer {
-	setFilePath(path: string): ListImporter;
-	setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter;
-	getObligatoryListCodes(): boolean;
-	setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
-	getImportToChildListOnly(): boolean;
-	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
-	getUpdatedPropertiesOnParentLevels(): boolean;
-}
-```
-Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](./exportImport.md#importer).
-
-&nbsp;
-
-```js
-setFilePath(path: string): ListImporter
-```
-Устанавливает имя импортируемого файла. Возвращает `this`.
-
-&nbsp;
-
-```js
-setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
-```
-Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществующие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getObligatoryListCodes(): boolean
-```
-Возвращает признак режима обязательных кодов.
-
-&nbsp;
-
-```js
-setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
-```
-Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getImportToChildListOnly(): boolean
-```
-Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
-
-&nbsp;
-
-```js
-setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
-```
-Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getUpdatedPropertiesOnParentLevels(): boolean
-```
-Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
 
 &nbsp;
 
@@ -209,6 +245,12 @@ versionSubsetsTab(): VersionSubsetsTab
 ```ts
 interface VersionsTab extends Tab {
 	copyVersion(from: string, to: string): Object;
+
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
+
+	importer(): VersionsImporter;
 }
 ```
 Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
@@ -222,12 +264,64 @@ copyVersion(from: string, to: string): Object
 
 &nbsp;
 
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
+
+&nbsp;
+
+```js
+importer(): VersionsImporter
+```
+Возвращает интерфейс [`VersionsImporter`](./exportImport.md#versions-importer) для импорта данных в справочник.
+
+&nbsp;
+
 ### Интерфейс VersionSubsetsTab<a name="version-subsets-tab"></a>
 ```ts
 interface VersionSubsetsTab extends Tab {
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
 }
 ```
 Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления выборок.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления выборок.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
 
 &nbsp;
 
@@ -235,7 +329,7 @@ interface VersionSubsetsTab extends Tab {
 ```ts
 interface Times {
 	optionsTab(): TimeOptionsTab;
-        timePeriodTab(identifier: string | number): TimePeriodTab;
+	timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 ```
 Интерфейс для получения доступа к настройкам и гридам измерений времени.
@@ -284,7 +378,8 @@ applyForm(): Object
 ### Интерфейс TimePeriodTab<a name="time-period-tab"></a>
 ```ts
 export interface TimePeriodTab extends Tab {
-    subsetsTab(): TimePeriodSubsetTab;
+	subsetsTab(): TimePeriodSubsetTab;
+	importer(): TimePeriodImporter;
 }
 ```
 Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
@@ -295,15 +390,46 @@ export interface TimePeriodTab extends Tab {
 subsetsTab(): TimePeriodSubsetTab;
 ```
 Возвращает ссылку на вкладку [`TimePeriodSubsetTab`](#time-period-subset-tab) выборок выбранного измерения времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+
+&nbsp;
+
+```js
+importer(): TimePeriodImporter
+```
+Возвращает ссылку на интерфейс импорта [`TimePeriodImporter`](./exportImport.md#time-period-importer).
+
 &nbsp;
 
 ### Интерфейс TimePeriodSubsetTab<a name="time-period-subset-tab"></a>
 ```ts
 export interface TimePeriodSubsetTab extends Tab {
-
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
 }
 ```
 Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+
+&nbsp;
+
+```js
+elementsCreator(): ElementsCreator
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления выборок.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления выборок.
+
+&nbsp;
+
+```js
+elementsReorder(): ElementsReorder
+```
+Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
 
 &nbsp;
 
