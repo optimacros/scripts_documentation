@@ -596,7 +596,7 @@ export interface PostgresqlImportBuilder {
     setDelimiter(delimiter: string): PostgresqlImportBuilder;
     setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
     setEscape(escape: string): PostgresqlImportBuilder;
-    setQuote(quote: string): PostgresqlImportBuilder;
+    setEnclosure(enclosure: string): PostgresqlImportBuilder;
     setColumns(names: string[]): PostgresqlImportBuilder;
     setFilePath(path: string): PostgresqlImportBuilder;
     import(): PostgresqlImportResult;
@@ -635,7 +635,7 @@ setEscape(escape: string): PostgresqlImportBuilder
 &nbsp;
 
 ```js
-setQuote(quote: string): PostgresqlImportBuilder;
+setEnclosure(enclosure: string): PostgresqlImportBuilder;
 ```
 Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей. По умолчанию: `"`
 

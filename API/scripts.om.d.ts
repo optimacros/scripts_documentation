@@ -1859,7 +1859,7 @@ export interface PostgresqlImportBuilder {
 
     setEscape(escape: string): PostgresqlImportBuilder;
 
-    setQuote(quote: string): PostgresqlImportBuilder;
+    setEnclosure(quote: string): PostgresqlImportBuilder;
 
     setColumns(names: string[]): PostgresqlImportBuilder;
 
