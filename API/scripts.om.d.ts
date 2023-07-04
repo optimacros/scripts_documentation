@@ -752,6 +752,22 @@ export interface UserInfo {
     getRole(): EntityInfo;
 }
 
+export interface EnterpriseLicenseManager {
+    getWorkspaceLicenseStatus(): boolean;
+
+    getWorkspaceLicenseInfo(): object;
+
+    createKey(password: string): string;
+
+    validateKey(password: string, key: string): boolean;
+
+    validateLicenseJson(jsonStr: string): boolean;
+
+    createLicense(password: string, key: string, jsonStr: string): string;
+
+    validateLicense(password: string, key: string, licenseData: string, id?: string | null): object;
+}
+
 export interface ExportObfuscationState {
     setPath(path: string): ExportObfuscationState;
 
@@ -927,6 +943,8 @@ export interface Common {
     copyData(): CopyData;
     
     apiServiceRequestInfo(): ApiService.RequestInfo | null;
+
+    enterpriseLicenseManager(): EnterpriseLicenseManager;
 }
 
 export interface FileMeta {

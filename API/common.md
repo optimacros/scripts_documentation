@@ -11,6 +11,7 @@ interface Common {
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
+	enterpriseLicenseManager(): EnterpriseLicenseManager;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -71,6 +72,13 @@ copyData(): CopyData
 apiServiceRequestInfo(): ApiService.RequestInfo | null;
 ```
 Возвращает ссылку на интерфейс [`ApiService.RequestInfo`](./apiService.md#request-info), если скрипт вызван через API Service, или `null` иначе.
+
+&nbsp;
+
+```js
+enterpriseLicenseManager(): EnterpriseLicenseManager
+```
+Возвращает ссылку на интерфейс [`EnterpriseLicenseManager`](#enterprise-license-manager).
 
 &nbsp;
 
@@ -592,6 +600,74 @@ setMulticubeByNames(names: string[]): CopyData
 copy(): CopyData
 ```
 Выполняет копирование.
+
+&nbsp;
+
+### Интерфейс EnterpriseLicenseManager<a name="enterprise-license-manager"></a>
+```ts
+interface EnterpriseLicenseManager {
+	getWorkspaceLicenseStatus(): boolean;
+	getWorkspaceLicenseInfo(): object;
+		
+	createKey(password: string): string;
+	validateKey(password: string, key: string): boolean;
+	
+	validateLicenseJson(jsonStr: string): boolean;
+	createLicense(password: string, key: string, jsonStr: string): string;
+	validateLicense(password: string, key: string, licenseData: string): object;
+}
+```
+Интерфейс для работы с лицензиями воркспейса: получения информации об установленной на воркспейсе лицензии, создании шифрованной лицензионной строки и её валидации. Текст лицензии — `JSON`-строка, содержащая произвольную информацию. Документации на поля этого `JSON` на данный момент нет, но основное, что там должно содержаться, — информация об объекте лицензирования (домене, на котором будет развёрнут воркспейс) и допустимых параметрах воркспейса (число моделеров, число обычных пользователей и т. п.).
+
+Для создания лицензии требуется пароль (произвольная строка) и ключ, сгенерированный на основе этого пароля. Далее текст лицензии шифруется с помощью пароля и ключа. После этого пароль, ключ и идентификатор лицензии (который будет отображаться в панели администратора) зашиваются в дистрибутив, который будет установлен на сервере клиента, а зашифрованная лицензия передаётся клиенту и должна быть введена в панели администратора воркспейса в специальное поле в настройках воркспейса.
+
+&nbsp;
+
+```js
+getWorkspaceLicenseStatus(): boolean
+```
+Если на воркспейсе в панели администратора установлена лицензия, соответствующая зашитым в дистрибутив паролю и ключу, возвращает `true`. В противном случае возвращает `false`.
+
+&nbsp;
+
+```js
+getWorkspaceLicenseInfo(): object
+```
+Если на воркспейсе установлена валидная лицензия, возвращает стандартный JS-объект с полями, указанными в исходной структуре лицензии. В случае отсутствия лицензии выбрасывается исключение `License not valid`.
+
+&nbsp;
+
+```js
+createKey(password: string): string
+```
+Создаёт ключ на основе пароля `password`, которым можно в дальнейшем подписать лицензию. Повторный вызов приводит к генерации нового ключа.
+
+&nbsp;
+
+```js
+validateKey(password: string, key: string): boolean
+```
+Проверяет ранее созданный ключ `key` на соответствие паролю `password`. Возвращает `true`, если проверка пройдена, иначе выбрасывает исключение.
+
+&nbsp;
+
+```js
+validateLicenseJson(jsonStr: string): boolean
+```
+Проверяет текстовое представление структуры лицензии `jsonStr` на соответствие формату `JSON`, никак не проверяет содержимое лицензии. Возвращает `true` или выкидывает исключение об ошибке синтаксиса. 
+
+&nbsp;
+
+```js
+createLicense(password: string, key: string, jsonStr: string): string
+```
+Создаёт лицензию — зашифрованные данные на основе пароля `password`, ключа `key` и JSON-данных лицензии `jsonStr`. Возвращает строку с лицензией.
+&nbsp;
+
+```js
+validateLicense(password: string, key: string, licenseData: string): object
+```
+Проверяет ранее созданную лицензию `licenseData` на соответствие паролю `password` и ключу `key`. Возвращает объект с полями, указанными в исходной структуре лицензии, но у каждого названия свойства объекта появляется префикс `$`. В случае несоответствия лицензии ключу и паролю возвращается объект с текстом ошибки: `{"$errors": "Содержание лицензии не распознается"}`.
 
 &nbsp;
 
