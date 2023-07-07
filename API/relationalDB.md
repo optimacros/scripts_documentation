@@ -594,9 +594,9 @@ getStats(): Object
 export interface PostgresqlImportBuilder {
     setTable(name: string): PostgresqlImportBuilder;
     setDelimiter(delimiter: string): PostgresqlImportBuilder;
-    setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
-    setEscape(escape: string): PostgresqlImportBuilder;
     setEnclosure(enclosure: string): PostgresqlImportBuilder;
+    setEscape(escape: string): PostgresqlImportBuilder;
+    setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
     setColumns(names: string[]): PostgresqlImportBuilder;
     setFilePath(path: string): PostgresqlImportBuilder;
     import(): PostgresqlImportResult;
@@ -621,23 +621,23 @@ setDelimiter(delimiter: string): PostgresqlImportBuilder
 &nbsp;
 
 ```js
-setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder
+setEnclosure(enclosure: string): PostgresqlImportBuilder;
 ```
-Устанавливает флаг игнорирования заголовка. По умолчанию: `false`.
+Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей или строк. По умолчанию: `"`
 
 &nbsp;
 
 ```js
 setEscape(escape: string): PostgresqlImportBuilder
 ```
-Задает символ, который должен стоять перед обрамляющим символом. Это должен быть одиночный однобайтовый символ. По умолчанию: `\ `.
+Устанавливает символ для экранирования обрамляющего символа, если он встретится в текстовом поле. По умолчанию равен обрамляющему символу.
 
 &nbsp;
 
 ```js
-setEnclosure(enclosure: string): PostgresqlImportBuilder;
+setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder
 ```
-Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей. По умолчанию: `"`
+Устанавливает флаг игнорирования заголовка. По умолчанию: `false`.
 
 &nbsp;
 

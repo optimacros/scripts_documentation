@@ -1855,11 +1855,11 @@ export interface PostgresqlImportBuilder {
 
     setDelimiter(delimiter: string): PostgresqlImportBuilder;
 
-    setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
+    setEnclosure(quote: string): PostgresqlImportBuilder;
 
     setEscape(escape: string): PostgresqlImportBuilder;
 
-    setEnclosure(quote: string): PostgresqlImportBuilder;
+    setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
 
     setColumns(names: string[]): PostgresqlImportBuilder;
 
