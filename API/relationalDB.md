@@ -594,6 +594,8 @@ getStats(): Object
 export interface PostgresqlImportBuilder {
     setTable(name: string): PostgresqlImportBuilder;
     setDelimiter(delimiter: string): PostgresqlImportBuilder;
+    setEnclosure(enclosure: string): PostgresqlImportBuilder;
+    setEscape(escape: string): PostgresqlImportBuilder;
     setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
     setColumns(names: string[]): PostgresqlImportBuilder;
     setFilePath(path: string): PostgresqlImportBuilder;
@@ -615,6 +617,20 @@ setTable(name: string): PostgresqlImportBuilder
 setDelimiter(delimiter: string): PostgresqlImportBuilder
 ```
 Устанавливает разделитель полей. По умолчанию: `;`.
+
+&nbsp;
+
+```js
+setEnclosure(enclosure: string): PostgresqlImportBuilder;
+```
+Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей или строк. По умолчанию: `"`
+
+&nbsp;
+
+```js
+setEscape(escape: string): PostgresqlImportBuilder
+```
+Устанавливает символ для экранирования обрамляющего символа, если он встретится в текстовом поле. По умолчанию равен обрамляющему символу.
 
 &nbsp;
 

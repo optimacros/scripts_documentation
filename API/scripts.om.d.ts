@@ -1922,6 +1922,10 @@ export interface PostgresqlImportBuilder {
 
     setDelimiter(delimiter: string): PostgresqlImportBuilder;
 
+    setEnclosure(quote: string): PostgresqlImportBuilder;
+
+    setEscape(escape: string): PostgresqlImportBuilder;
+
     setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
 
     setColumns(names: string[]): PostgresqlImportBuilder;
