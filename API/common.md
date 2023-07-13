@@ -363,6 +363,7 @@ hasUniqueLock(): boolean
 
 &nbsp;
 
+<a name="model-info.unlock"></a>
 ```js
 unlock(): this
 ```
