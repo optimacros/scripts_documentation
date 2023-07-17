@@ -672,6 +672,51 @@ validateLicense(password: string, key: string, licenseData: string): object
 
 &nbsp;
 
+### Интерфейс MetricsManager<a name="metrics-manager"></a>
+```ts
+export type MetricData = {
+    name(): string;
+    value(): number;
+    tags(): string;
+};
+
+interface MetricsManager {
+    getAllMetrics(): MetricData[];
+
+    setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+
+    getMetricValue(name: string, tags?: StringMap[]): number | null;
+}
+```
+Интерфейс для работы с метриками воркспейса: получения всех доступных метрик, сохранение именованной метрики, получение именованной метрики.
+
+&nbsp;
+
+```js
+getAllMetrics(): MetricData[];
+```
+Получение всех доступных метрик в виде массива `MetricData`.
+<br>Каждый элемент массива предоставляет функции для доступа к свойствам метрики: `name()` - возвращает имя метрики в виде строки, `value()` - возвращает значение метрики в виде числа, `tags()` - возвращает строку с тэгами, ассоциированными с метрикой (тэги разделяются запятыми, может быть ноль или больше тэгов).
+
+&nbsp;
+
+```js
+setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+```
+Сохраняет именованную метрику. Обязательные параметры `name` (строка с именем метрики) и `value` (число со значением метрики).
+<br>Опционально можно задать тэги для метрики с помощью строкового ассоциативного массива `tags` (например: `{'source': 'macroses', 'scope': 'incoming'}` - задаёт два тэга `source` и `scope`).
+<br>Метод `setMetricValue()` можно вызывать в цепочке друг за другом, например: `metricsManager().setMetricValue('test_metric1', 12.1).setMetricValue('test_metric2', 13.1).setMetricValue('test_metric3', 14.1)`.
+
+&nbsp;
+
+```js
+getMetricValue(name: string, tags?: StringMap[]): number | null;
+```
+Получение именованной метрики. Обязательный параметр `name` (строка с именем метрики). Опционально можно указать тэги для метрики с помощью строкового ассоциативного массива `tags`.
+<br>Возвращается значение метрики в виде числа (если именованная метрика существует) или `null` (если именованная метрика не существует).
+
+&nbsp;
+
 [API Reference](API.md)
 
 [Оглавление](../README.md)
