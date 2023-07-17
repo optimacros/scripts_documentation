@@ -959,6 +959,8 @@ export interface Common {
     apiServiceRequestInfo(): ApiService.RequestInfo | null;
 
     enterpriseLicenseManager(): EnterpriseLicenseManager;
+
+    metricsManager(): MetricsManager;
 }
 
 export interface FileMeta {
