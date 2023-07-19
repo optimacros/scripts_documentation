@@ -12,6 +12,7 @@ interface Common {
 	copyData(): CopyData;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseLicenseManager(): EnterpriseLicenseManager;
+	metricsManager(): MetricsManager;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -79,6 +80,13 @@ apiServiceRequestInfo(): ApiService.RequestInfo | null;
 enterpriseLicenseManager(): EnterpriseLicenseManager
 ```
 Возвращает ссылку на интерфейс [`EnterpriseLicenseManager`](#enterprise-license-manager).
+
+&nbsp;
+
+```js
+metricsManager(): MetricsManager
+```
+Возвращает ссылку на интерфейс [`MetricsManager`](#metrics-manager).
 
 &nbsp;
 
@@ -674,7 +682,7 @@ validateLicense(password: string, key: string, licenseData: string): object
 
 ### Интерфейс MetricsManager<a name="metrics-manager"></a>
 ```ts
-export type MetricData = {
+type MetricData = {
     name(): string;
     value(): number;
     tags(): string;
@@ -689,6 +697,13 @@ interface MetricsManager {
 }
 ```
 Интерфейс для работы с метриками воркспейса: получения всех доступных метрик, сохранение именованной метрики, получение именованной метрики.
+<br>Тип `MetricData` описывает объекты метрик и предоставляет функции для доступа к имени метрики, её значению и к тэгам метрики. Например:
+```js
+const metrics = om.common.metricsManager().getAllMetrics();
+for(let metric of metrics) {
+    console.log(metric.name() + ': ' + metric.value() + ' (' + metric.tags() + ')');
+}
+```
 
 &nbsp;
 
