@@ -163,9 +163,9 @@ setModelId(modelId: string): this
 
 &nbsp;
 
-### Интерфейс ResultTaskAction<a name="result-task-action"></a>
+### Интерфейс TaskPromiseResult<a name="task-promise-result"></a>
 ```ts
-interface ResultTaskAction {
+interface TaskPromiseResult {
     	getOutput(): string;
     	getDescription(): string;
     	getEnvironmentInfo(): EnvironmentInfo
@@ -199,7 +199,8 @@ getEnvironmentInfo(): EnvironmentInfo
 ### Интерфейс TaskPromise<a name="task-promise"></a>
 ```ts
 interface TaskPromise {
-    	wait(wait: number): ResultTaskAction|null;
+    	wait(wait: number): TaskPromiseResult|null;
+	getStatus(): string|null;
 }
 ```
 Интерфейс промиса для таски
@@ -207,9 +208,16 @@ interface TaskPromise {
 &nbsp;
 
 ```js
-wait(wait: number): ResultTaskAction|null
+wait(wait: number): TaskPromiseResult|null
 ```
-Устанавливает время ожидания промиса в секундах. Возвращает [`ResultTaskAction`](#result-task-action), если ответ пришёл в рамках установленного времени, иначе `null`
+Устанавливает время ожидания промиса в секундах. Возвращает [`TaskPromiseResult`](#task-promise-result), если ответ пришёл в рамках установленного времени, иначе `null`
+
+&nbsp;
+
+```js
+getStatus(): string|null
+```
+Возвращает одно из значений статуса таски: `NONE`, `WAIT_IN_QUEUE`, `IN_PROGRESS`, `SUCCESS`, `FAILED`, `ABORTED`. Иначе `null`
 
 &nbsp;
 

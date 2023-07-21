@@ -829,10 +829,10 @@ export interface ResultMacrosAction extends BaseCodeExecutionAction {
 }
 
 export interface TaskPromise {
-    wait(wait: number): ResultTaskAction|null;
+    wait(wait: number): TaskPromiseResult|null;
 }
 
-export interface ResultTaskAction {
+export interface TaskPromiseResult {
     getOutput(): string;
 
     getDescription(): string;
