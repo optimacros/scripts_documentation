@@ -700,7 +700,7 @@ interface MetricsManager {
 ```
 Интерфейс для работы с [`метриками воркспейса`](https://github.com/optimacros/ws_metrics_api/tree/27378_metrics_service). Каждая метрика `MetricData` идентифицируется именем `name` и (возможно, пустым) набором тегов `tags`. То есть, могут существовать разные одноимённые метрики с разными наборами тегов.
 
-Тип `MetricData` описывает объекты метрик и предоставляет функции для доступа к имени метрики, её численому значению и к тегам метрики. Пример использования:
+Тип `MetricData` описывает метрику в виде объекта, который предоставляет методы для доступа к имени метрики, ее числовому значению и тегам. Пример использования:
 ```js
 	const metrics = om.common.metricsManager().getAllMetrics();
 	for (let metric of metrics) {
@@ -711,23 +711,23 @@ interface MetricsManager {
 &nbsp;
 
 ```js
-getAllMetrics(): MetricData[];
+getAllMetrics(): MetricData[]
 ```
 Возвращает массив всех доступных метрик.
 
 &nbsp;
 
 ```js
-setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager
 ```
-Сохраняет метрику с именем `name` и тегами `tags`, присваивая ей численное значением `value`. Возвращает `this`.
+Сохраняет метрику с именем `name` и тегами `tags`, присваивая ей числовое значение `value`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getMetricValue(name: string, tags?: StringMap[]): number | null;
+getMetricValue(name: string, tags?: StringMap[]): number | null
 ```
-Возвращает численное значение метрики с именем `name` и тегами `tags`, или `null`, если метрика не существует.
+Возвращает числовое значение метрики с именем `name` и тегами `tags`, или `null`, если метрика не существует.
 
 &nbsp;
 
