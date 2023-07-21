@@ -168,7 +168,7 @@ setModelId(modelId: string): this
 interface ResultTaskAction {
 	getOutput(): string;
 	getDescription(): string;
-	getEnvironmentInfo(): EnvironmentInfo
+	getEnvironmentInfo(): EnvironmentInfo;
 }
 ```
 Интерфейс результата разрешения промиса — задачи, запущенной с опцией `withPromise(true)` с помощью метода `run()`.
@@ -337,7 +337,7 @@ interface ResultOpenAction extends ResultBaseAction {
 ```js
 buttonInfo(): ButtonInfo
 ```
-Работает так же, как и [`ResultMacrosAction`](#result-macros-action).[`buttonInfo()`](#result-macros-action.button-info).
+Работает так же, как и [`ResultMacrosAction`](#result-macros-action). [`buttonInfo()`](#result-macros-action.button-info).
 
 &nbsp;
 
