@@ -4,7 +4,7 @@
 ```ts
 interface ResultActionsInfo {
 	makeMacrosAction(identifier: string | number): ResultMacrosAction;
-    	makeCodeExecutionAction(code: string): CodeExecutionAction;
+	makeCodeExecutionAction(code: string): CodeExecutionAction;
 	makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
 	makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
 	makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
@@ -159,7 +159,7 @@ appendAfter(): this
 ```js
 setModelId(modelId: string): this
 ```
-Устанавливает имя или `id` модели, к которой будет относиться выполнение действия. Этот механизм позволяет запустить скрипт из другой модели.
+Устанавливает имя или `id` модели, к которой будет относиться выполнение действия. Этот механизм позволяет запустить скрипт или код в другой модели.
 
 &nbsp;
 
@@ -171,7 +171,7 @@ interface TaskPromiseResult {
     	getEnvironmentInfo(): EnvironmentInfo
 }
 ```
-Интерфейс результата запуска таски.
+Интерфейс результата разрешения промиса — задачи, запущенной с опцией `withPromise(true)` с помощью метода `run()`.
 
 &nbsp;
 
@@ -185,14 +185,14 @@ getOutput(): string
 ```js
 getDescription(): string
 ```
-Возвращает описание таски скрипта.
+Возвращает описание задачи, установленное методом `setTaskDescription()`.
 
 &nbsp;
 
 ```js
 getEnvironmentInfo(): EnvironmentInfo
 ```
-Возвращает интерфейс [`EnvironmentInfo`](#environment-info) для передачи [`переменных окружения`](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B) скрипту.
+Возвращает интерфейс [`EnvironmentInfo`](#environment-info) для чтения [`переменных окружения`](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B), которые были доступны скрипту.
 
 &nbsp;
 
@@ -203,21 +203,21 @@ interface TaskPromise {
 	getStatus(): string|null;
 }
 ```
-Интерфейс промиса для таски
+Интерфейс взаимодействия с [промисом](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) для задачи. Строго говоря, данный промис не является реализацией родного промиса `javascript`, а специальным механизмом асинхронного выполнения скриптов в `OM`.
 
 &nbsp;
 
 ```js
 wait(wait: number): TaskPromiseResult|null
 ```
-Устанавливает время ожидания промиса в секундах. Возвращает [`TaskPromiseResult`](#task-promise-result), если ответ пришёл в рамках установленного времени, иначе `null`
+Устанавливает время ожидания разрешения промиса в секундах. Если установить параметр `wait` равным `0`, то метод будет ждать завершения задачи. Возвращает [`ResultTaskAction`](#result-task-action), если ответ пришёл в рамках установленного времени, иначе `null`.
 
 &nbsp;
 
 ```js
 getStatus(): string|null
 ```
-Возвращает одно из значений статуса таски: `NONE`, `WAIT_IN_QUEUE`, `IN_PROGRESS`, `SUCCESS`, `FAILED`, `ABORTED`. Иначе `null`
+Возвращает одно из значений статуса задачи промиса: `NONE`, `WAIT_IN_QUEUE`, `IN_PROGRESS`, `SUCCESS`, `FAILED`, `ABORTED`. Иначе `null`
 
 &nbsp;
 
@@ -232,9 +232,9 @@ interface BaseCodeExecutionAction extends ResultBaseAction {
 	setAutoRunTimeout(seconds: number): this;
 	buttonInfo(): ButtonInfo;
 	environmentInfo(): EnvironmentInfo;
-    	withPromise(withPromise: boolean): this;
-        setTaskDescription(description: string): this;
-        run(): TaskPromise|null;
+	withPromise(withPromise: boolean): this;
+	setTaskDescription(description: string): this;
+	run(): TaskPromise|null;
 }
 ```
 Базовый интерфейс действия запуска скрипта. Наследуется от [`ResultBaseAction`](#result-base-action).
@@ -244,7 +244,7 @@ interface BaseCodeExecutionAction extends ResultBaseAction {
 ```js
 setLockMode(value: string): this
 ```
-Устанавливает режим блокировки модели, где `value` соответствует режиму Lock Mode (CUSTOM|SHARED|UNIQUE). Значение по умолчанию UNIQUE
+Устанавливает режим блокировки модели, где `value` соответствует режиму `Lock Mode` (`CUSTOM`|`SHARED`|`UNIQUE`). Значение по умолчанию `UNIQUE`. Подробнее о режимах блокировки [здесь](../advancedFeatues/modelLock.md).
 
 &nbsp;
 
@@ -265,7 +265,7 @@ setAutoRunTimeout(seconds: number): this
 ```js
 buttonInfo(): ButtonInfo
 ```
-В случае вызова этой функции после завершения работы скрипта в интерфейсе Optimacros появятся 2 кнопки: `Отмена`, которая отменяет запуск действия, и кнопка, чьи вид и поведение определяются интерфейсом [`ButtonInfo`](#button-info), который и возвращает функция.
+В случае вызова этой функции после завершения работы скрипта в интерфейсе Optimacros появятся 2 кнопки: `Отмена`, которая отменяет запуск действия, и кнопка, чьи вид и поведение определяются интерфейсом [`ButtonInfo`](#button-info), который и возвращает функция. Данный функционал работает только при запуске через `appendAfter()`.
 
 &nbsp;
 
@@ -279,22 +279,21 @@ environmentInfo(): EnvironmentInfo
 ```js
 withPromise(withPromise: boolean): this
 ```
-Устанавливает опцию для запуска скрипта с промисом. По умолчанию `false`
+Устанавливает опцию для запуска скрипта с [промисом](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise). По умолчанию `false`.
 
 &nbsp;
 
 ```js
 setTaskDescription(description: string): this
 ```
-Устанавливает описание для таски скрипта.
+Устанавливает описание для задачи.
 
 &nbsp;
 
 ```js
 run(): TaskPromise|null
 ```
-Запускает скрипт. 
-Если до запуска скрипта был вызван `withPromise(true)`, возвращает [`TaskPromise`](#task-promise), иначе `null`
+Запускает скрипт с помощью асинхронного механизма выполнения. Вызов метода породит задачу, которая не будет дожидаться завершения текущей задачи, а будет выполняться сразу. На данный момент существует защита от погружения в бесконечную рекурсию и задача, запущенная через `run()`, не может сама использовать этот метод. Также стоит учитывать, что т.к. родительская задача не завершается и может работать параллельно с дочерней, то нужно учитывать совместимость режимов блокировок родительской и дочерней задач (иначе можно попасть в `dead lock`). Если до запуска скрипта был вызван метод `withPromise(true)`, возвращает [`TaskPromise`](#task-promise), иначе `null`.
 
 &nbsp;
 
@@ -304,7 +303,7 @@ interface ResultMacrosAction extends BaseCodeExecutionAction {
 
 }
 ```
-Интерфейс действия запуска скрипта. Наследуется от [`BaseCodeExecutionAction`](#base-code-execution-action).
+Интерфейс действия запуска скрипта, сохраненного в модели в списке скриптов модели. Наследуется от [`BaseCodeExecutionAction`](#base-code-execution-action).
 
 &nbsp;
 
@@ -312,7 +311,6 @@ interface ResultMacrosAction extends BaseCodeExecutionAction {
 ```ts
 interface CodeExecutionAction extends BaseCodeExecutionAction {
     setMemoryLimit(value: number): this;
-
     setTimeLimit(value: number): this;
 }
 ```
@@ -323,14 +321,14 @@ interface CodeExecutionAction extends BaseCodeExecutionAction {
 ```js
 setMemoryLimit(value: number): this
 ```
-Устанавливает ограничение памяти.
+Устанавливает ограничение памяти. Работает аналогично ограничению памяти, выставляемому каждому скрипту в списке скриптов модели.
 
 &nbsp;
 
 ```js
 setTimeLimit(value: number): this
 ```
-Устанавливает ограничение времени.
+Устанавливает ограничение времени. Работает аналогично ограничению времени выполнения, выставляемому каждому скрипту в списке скриптов модели.
 
 &nbsp;
 
@@ -340,14 +338,14 @@ interface ResultOpenAction extends ResultBaseAction {
 	buttonInfo(): ButtonInfo;
 }
 ```
-Интерфейс действия открытия некоторого объекта Optimacros. Наследуется от [`ResultBaseAction`](#result-base-action).
+Интерфейс действия открытия некоторого объекта `Optimacros`. Наследуется от [`ResultBaseAction`](#result-base-action).
 
 &nbsp;
 
 ```js
 buttonInfo(): ButtonInfo
 ```
-Работает так же, как и [`ResultMacrosAction`](#result-macros-action).[`buttonInfo()`](#result-macros-action.button-info).
+Работает так же, как и [`ResultMacrosAction`](#result-macros-action). [`buttonInfo()`](#result-macros-action.button-info).
 
 &nbsp;
 
