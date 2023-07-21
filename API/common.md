@@ -12,6 +12,7 @@ interface Common {
 	copyData(): CopyData;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseLicenseManager(): EnterpriseLicenseManager;
+	metricsManager(): MetricsManager;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -79,6 +80,13 @@ apiServiceRequestInfo(): ApiService.RequestInfo | null;
 enterpriseLicenseManager(): EnterpriseLicenseManager
 ```
 Возвращает ссылку на интерфейс [`EnterpriseLicenseManager`](#enterprise-license-manager).
+
+&nbsp;
+
+```js
+metricsManager(): MetricsManager
+```
+Возвращает ссылку на интерфейс [`MetricsManager`](#metrics-manager).
 
 &nbsp;
 
@@ -669,6 +677,57 @@ createLicense(password: string, key: string, jsonStr: string): string
 validateLicense(password: string, key: string, licenseData: string): object
 ```
 Проверяет ранее созданную лицензию `licenseData` на соответствие паролю `password` и ключу `key`. Возвращает объект с полями, указанными в исходной структуре лицензии, но у каждого названия свойства объекта появляется префикс `$`. В случае несоответствия лицензии ключу и паролю возвращается объект с текстом ошибки: `{"$errors": "Содержание лицензии не распознается"}`.
+
+&nbsp;
+
+### Интерфейс MetricsManager<a name="metrics-manager"></a>
+```ts
+type StringMap = {
+	[key: string]: string;
+};
+
+type MetricData = {
+	name(): string;
+	value(): number;
+	tags(): string;
+};
+
+interface MetricsManager {
+	getAllMetrics(): MetricData[];
+	setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+	getMetricValue(name: string, tags?: StringMap[]): number | null;
+}
+```
+Интерфейс для работы с [`метриками воркспейса`](https://github.com/optimacros/ws_metrics_api/tree/27378_metrics_service). Каждая метрика `MetricData` идентифицируется именем `name` и (возможно, пустым) набором тегов `tags`. То есть, могут существовать разные одноимённые метрики с разными наборами тегов.
+
+Тип `MetricData` описывает метрику в виде объекта, который предоставляет методы для доступа к имени метрики, её числовому значению и тегам. Пример использования:
+```js
+	const metrics = om.common.metricsManager().getAllMetrics();
+	for (let metric of metrics) {
+		console.log(metric.name() + ': ' + metric.value() + ' (' + metric.tags() + ')');
+	}
+```
+
+&nbsp;
+
+```js
+getAllMetrics(): MetricData[]
+```
+Возвращает массив всех доступных метрик.
+
+&nbsp;
+
+```js
+setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager
+```
+Сохраняет метрику с именем `name` и тегами `tags`, присваивая ей числовое значение `value`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getMetricValue(name: string, tags?: StringMap[]): number | null
+```
+Возвращает числовое значение метрики с именем `name` и тегами `tags`, или `null`, если метрика не существует.
 
 &nbsp;
 

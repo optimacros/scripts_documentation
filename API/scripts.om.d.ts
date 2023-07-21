@@ -768,6 +768,20 @@ export interface EnterpriseLicenseManager {
     validateLicense(password: string, key: string, licenseData: string, id?: string | null): object;
 }
 
+export type MetricData = {
+    name(): string;
+    value(): number;
+    tags(): string;
+};
+
+export interface MetricsManager {
+    getAllMetrics(): MetricData[];
+
+    setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+
+    getMetricValue(name: string, tags?: StringMap[]): number | null;
+}
+
 export interface ExportObfuscationState {
     setPath(path: string): ExportObfuscationState;
 
@@ -945,6 +959,8 @@ export interface Common {
     apiServiceRequestInfo(): ApiService.RequestInfo | null;
 
     enterpriseLicenseManager(): EnterpriseLicenseManager;
+
+    metricsManager(): MetricsManager;
 }
 
 export interface FileMeta {
