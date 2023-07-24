@@ -23,7 +23,8 @@
         "http.md",
         "winAgent.md",
         "notifications.md",
-        "variables.md"
+        "variables.md",
+        "apiServicesAdministration.md"
     ],
     "advancedFeatues": [
         "advancedFeatues.md",
@@ -34,14 +35,5 @@
         "appendix.md",
         "constraints.md",
         "glossary.md"
-    ],
-    "cookBook": [
-        "cookBook.md",
-        "hw.md",
-        "rowsColumnsFilters.md",
-        "cellsAccess.md",
-        "csv.md",
-        "partialListCopy.md",
-        "listReduce.md"
-    ] 
+    ]
 }
