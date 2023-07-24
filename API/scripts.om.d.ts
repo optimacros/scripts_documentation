@@ -829,6 +829,8 @@ export interface ResultMacrosAction extends BaseCodeExecutionAction {
 }
 
 export interface TaskPromise {
+    getStatus(): string|null;
+
     wait(wait: number): TaskPromiseResult|null;
 }
 

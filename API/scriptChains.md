@@ -166,9 +166,9 @@ setModelId(modelId: string): this
 ### Интерфейс TaskPromiseResult<a name="task-promise-result"></a>
 ```ts
 interface TaskPromiseResult {
-    	getOutput(): string;
-    	getDescription(): string;
-    	getEnvironmentInfo(): EnvironmentInfo
+	getOutput(): string;
+	getDescription(): string;
+	getEnvironmentInfo(): EnvironmentInfo
 }
 ```
 Интерфейс результата разрешения промиса — задачи, запущенной с опцией `withPromise(true)` с помощью метода `run()`.
@@ -178,7 +178,7 @@ interface TaskPromiseResult {
 ```js
 getOutput(): string
 ```
-Возвращает вывод скрипта.
+Возвращает вывод скрипта, который тот отправил с помощью метода `console.log()`.
 
 &nbsp;
 
@@ -199,8 +199,8 @@ getEnvironmentInfo(): EnvironmentInfo
 ### Интерфейс TaskPromise<a name="task-promise"></a>
 ```ts
 interface TaskPromise {
-    	wait(wait: number): TaskPromiseResult|null;
 	getStatus(): string|null;
+	wait(wait: number): TaskPromiseResult|null;
 }
 ```
 Интерфейс взаимодействия с [промисом](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise) для задачи. Строго говоря, данный промис не является реализацией родного промиса `javascript`, а специальным механизмом асинхронного выполнения скриптов в `OM`.
@@ -208,16 +208,16 @@ interface TaskPromise {
 &nbsp;
 
 ```js
-wait(wait: number): TaskPromiseResult|null
+getStatus(): string|null
 ```
-Устанавливает время ожидания разрешения промиса в секундах. Если установить параметр `wait` равным `0`, то метод будет ждать завершения задачи. Возвращает [`ResultTaskAction`](#result-task-action), если ответ пришёл в рамках установленного времени, иначе `null`.
+Возвращает одно из значений статуса выполнения задачи: `NONE` — задача ещё не инициализирована, `WAIT_IN_QUEUE` — задача ожидает очереди на выполнение, `IN_PROGRESS` — задача выполняется прямо сейчас, `SUCCESS` — задача успешно завершена, `FAILED` — задача завершилась с ошибкой, `ABORTED` — задача была отменена. Иначе `null`.
 
 &nbsp;
 
 ```js
-getStatus(): string|null
+wait(wait: number): TaskPromiseResult|null
 ```
-Возвращает одно из значений статуса задачи промиса: `NONE`, `WAIT_IN_QUEUE`, `IN_PROGRESS`, `SUCCESS`, `FAILED`, `ABORTED`. Иначе `null`
+Устанавливает время ожидания разрешения промиса в секундах. Если установить параметр `wait` равным `0`, то метод будет ждать завершения задачи. Возвращает [`TaskPromiseResult`](#task-promise-result), если ответ пришёл в рамках установленного времени, иначе `null`.
 
 &nbsp;
 
