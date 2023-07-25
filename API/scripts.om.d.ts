@@ -1071,7 +1071,7 @@ export interface CsvReader {
      */
     changeFileCharset(charset: string): CsvReader;
 
-    generator(): [][];
+    generator(): string[][];
 }
 
 export interface CsvWriter {
