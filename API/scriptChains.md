@@ -171,7 +171,7 @@ interface TaskPromiseResult {
 	getEnvironmentInfo(): EnvironmentInfo
 }
 ```
-Интерфейс результата разрешения промиса — задачи, запущенной с опцией `withPromise(true)` с помощью метода `run()`.
+Интерфейс результата разрешения промиса — задачи, запущенной с опцией [`withPromise(true)`](#base-code-execution-action) с помощью метода `run()`.
 
 &nbsp;
 
@@ -185,7 +185,7 @@ getOutput(): string
 ```js
 getDescription(): string
 ```
-Возвращает описание задачи, установленное методом `setTaskDescription()`.
+Возвращает описание задачи, установленное методом [`setTaskDescription()`](#base-code-execution-action).
 
 &nbsp;
 
@@ -224,10 +224,6 @@ wait(wait: number): TaskPromiseResult|null
 ### Интерфейс BaseCodeExecutionAction<a name="base-code-execution-action"></a>
 ```ts
 interface BaseCodeExecutionAction extends ResultBaseAction {
-	/**
-	* @param value CUSTOM|SHARED|UNIQUE
-	* Default is UNIQUE
-	*/
 	setLockMode(value: string): this;
 	setAutoRunTimeout(seconds: number): this;
 	buttonInfo(): ButtonInfo;
@@ -293,7 +289,7 @@ setTaskDescription(description: string): this
 ```js
 run(): TaskPromise|null
 ```
-Запускает скрипт с помощью асинхронного механизма выполнения. Вызов метода породит задачу, которая не будет дожидаться завершения текущей задачи, а будет выполняться сразу. На данный момент существует защита от погружения в бесконечную рекурсию и задача, запущенная через `run()`, не может сама использовать этот метод. Также стоит учитывать, что т.к. родительская задача не завершается и может работать параллельно с дочерней, то нужно учитывать совместимость режимов блокировок родительской и дочерней задач (иначе можно попасть в `dead lock`). Если до запуска скрипта был вызван метод `withPromise(true)`, возвращает [`TaskPromise`](#task-promise), иначе `null`.
+Запускает скрипт с помощью асинхронного механизма выполнения. Вызов метода породит задачу, которая не будет дожидаться завершения текущей задачи, а будет выполняться сразу. Так как родительская задача не завершается и может работать параллельно с дочерней, то важно следить за совместимостью режимов блокировок родительской и дочерней задач (иначе можно попасть в `dead lock`). На данный момент существует защита от погружения в бесконечную рекурсию и задача, запущенная через `run()`, не может сама использовать этот метод. Если до запуска скрипта был вызван метод `withPromise(true)`, возвращает [`TaskPromise`](#task-promise), иначе — `null`.
 
 &nbsp;
 
@@ -321,14 +317,14 @@ interface CodeExecutionAction extends BaseCodeExecutionAction {
 ```js
 setMemoryLimit(value: number): this
 ```
-Устанавливает ограничение памяти. Работает аналогично ограничению памяти, выставляемому каждому скрипту в списке скриптов модели.
+Устанавливает ограничение памяти. Работает аналогично ограничению памяти, выставляемому каждому скрипту в списке скриптов модели на вкладке Макросы -> Скрипты.
 
 &nbsp;
 
 ```js
 setTimeLimit(value: number): this
 ```
-Устанавливает ограничение времени. Работает аналогично ограничению времени выполнения, выставляемому каждому скрипту в списке скриптов модели.
+Устанавливает ограничение времени. Работает аналогично ограничению времени выполнения, выставляемому каждому скрипту в списке скриптов модели на вкладке Макросы -> Скрипты.
 
 &nbsp;
 
@@ -345,7 +341,7 @@ interface ResultOpenAction extends ResultBaseAction {
 ```js
 buttonInfo(): ButtonInfo
 ```
-Работает так же, как и [`ResultMacrosAction`](#result-macros-action). [`buttonInfo()`](#result-macros-action.button-info).
+Работает так же, как и [`ResultMacrosAction`](#result-macros-action).[`buttonInfo()`](#result-macros-action.button-info).
 
 &nbsp;
 
