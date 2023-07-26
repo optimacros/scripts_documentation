@@ -885,12 +885,48 @@ export interface EnvironmentInfo {
     get(key: string): unknown;
 }
 
-export interface ResultMacrosAction extends ResultBaseAction {
+export interface BaseCodeExecutionAction extends ResultBaseAction {
+    /**
+     * @param value CUSTOM|SHARED|UNIQUE
+     * Default is UNIQUE
+     */
+    setLockMode(value: string): this;
+
     setAutoRunTimeout(seconds: number): this;
 
     buttonInfo(): ButtonInfo;
 
     environmentInfo(): EnvironmentInfo;
+
+    withPromise(withPromise: boolean): this;
+
+    setTaskDescription(description: string): this;
+
+    run(): TaskPromise|null;
+}
+
+export interface ResultMacrosAction extends BaseCodeExecutionAction {
+
+}
+
+export interface TaskPromise {
+    getStatus(): string|null;
+
+    wait(wait: number): TaskPromiseResult|null;
+}
+
+export interface TaskPromiseResult {
+    getOutput(): string;
+
+    getDescription(): string;
+
+    getEnvironmentInfo(): EnvironmentInfo
+}
+
+export interface CodeExecutionAction extends BaseCodeExecutionAction {
+    setMemoryLimit(value: number): this;
+
+    setTimeLimit(value: number): this;
 }
 
 export interface ResultOpenAction extends ResultBaseAction {
@@ -899,6 +935,8 @@ export interface ResultOpenAction extends ResultBaseAction {
 
 export interface ResultActionsInfo {
     makeMacrosAction(identifier: string | number): ResultMacrosAction;
+
+    makeCodeExecutionAction(code: string): CodeExecutionAction;Zz
 
     makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
 
