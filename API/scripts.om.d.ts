@@ -757,7 +757,7 @@ export interface FileMeta {
 export interface Filesystem {
     has(path: string): boolean;
 
-    read(path: string): string;
+    read(path: string, encoding?: string): string;
 
     readAndDelete(path: string): string;
 
@@ -850,7 +850,7 @@ export interface CsvReader {
      */
     changeFileCharset(charset: string): CsvReader;
 
-    generator(): [][];
+    generator(): string[][];
 }
 
 export interface CsvWriter {
