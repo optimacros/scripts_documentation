@@ -85,27 +85,24 @@ setFileName(fileName: string): Exporter
 
 &nbsp;
 
-<a name="setDelimiter"></a>
 ```js
 setDelimiter(delimiter: string): Exporter
 ```
-Устанавливает разделитель полей. Допустимые значения: `,`, `;`, `\t`.  По умолчанию: `;`.
+Устанавливает разделитель полей. Аналогично `CSVParams`.[`setDelimiter()`](#CSVParams.setDelimiter).
 
 &nbsp;
 
-<a name="setEnclosure"></a>
 ```js
 setEnclosure(enclosure: string): Exporter
 ```
-Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей. Допустимые значения: `'` и `"`. По умолчанию: `"`.
+Устанавливает обрамляющий символ. Аналогично `CSVParams`.[`setEnclosure()`](#CSVParams.setEnclosure).
 
 &nbsp;
 
-<a name="setEscape"></a>
 ```js
 setEscape(escape: string): Exporter
 ```
-Устанавливает символ для экранирования обрамляющего символа, если встретится в строке ещё и он, и символа переноса строки. Допустимые значения: `\` и `"`. По умолчанию равен обрамляющему символу.
+Устанавливает экранирующий символ. Аналогично `CSVParams`.[`setEscape()`](#CSVParams.setEscape).
 
 &nbsp;
 
@@ -153,7 +150,6 @@ setFormat(format: string): StorageExporter
 
 &nbsp;
 
-<a name="setLineDelimiter"></a>
 ```js
 setLineDelimiter(lineDelimiter: string): StorageExporter
 ```
@@ -239,10 +235,13 @@ moveToLocal(path: string): ExportResult
 interface CSVParams {
 	setDelimiter(delimiter: string): CSVParams;
 	getDelimiter(): string;
+	
 	setEnclosure(enclosure: string): CSVParams;
 	getEnclosure(): string;
+	
 	setEscape(escape: string): CSVParams;
 	getEscape(): string;
+	
 	setLineDelimiter(escape: string): CSVParams;
 	getLineDelimiter(): string;
 }
@@ -251,10 +250,11 @@ interface CSVParams {
 
 &nbsp;
 
+<a name="CSVParams.setDelimiter"></a>
 ```js
 setDelimiter(delimiter: string): CSVParams
 ```
-Устанавливает разделитель полей. Аналогично `Exporter`.[`setDelimiter()`](#setDelimiter). Возвращает `this`.
+Устанавливает разделитель полей.  Допустим лишь один однобайтовый символ.  По умолчанию: `;`. Возвращает `this`.
 
 &nbsp;
 
@@ -265,10 +265,11 @@ getDelimiter(): string
 
 &nbsp;
 
+<a name="CSVParams.setEnclosure"></a>
 ```js
 setEnclosure(enclosure: string): CSVParams
 ```
-Устанавливает обрамляющий символ. Аналогично `Exporter`.[`setEnclosure()`](#setEnclosure). Возвращает `this`.
+Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей, пробел, табуляция или сам обрамляющий символ. Допустим лишь один однобайтовый символ. По умолчанию: `"`. См. также [`экранирующий символ`](#CSVParams.setEscape). Возвращает `this`.
 
 &nbsp;
 
@@ -279,24 +280,31 @@ getEnclosure(): string
 
 &nbsp;
 
+<a name="CSVParams.setEscape"></a>
 ```js
 setEscape(escape: string): CSVParams
 ```
-Устанавливает символ для экранирования обрамляющего символа. Аналогично `Exporter`.[`setEscape()`](#setEscape). Возвращает `this`.
+Устанавливает экранирующий символ: если в тексте встретится экранирующий символ и вслед за ним обрамляющий, эта последовательность останется неизменной; а если обрамляющий символ будет без экранирующего, он удвоится.
+
+**Однако если задать в качестве экранирующего символа пустую строку, отключится механизм [`обрамления`](#CSVParams.setEnclosure)!**
+
+Допустим лишь один однобайтовый символ. По умолчанию: `\`. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getEscape(): string
 ```
-Возвращает символ для экранирования обрамляющего символа.
+Возвращает экранирующий символ.
 
 &nbsp;
 
+<a name="CSVParams.setLineDelimiter"></a>
 ```js
 setLineDelimiter(escape: string): CSVParams
 ```
-Устанавливает разделитель строк. Аналогично `StorageExporter`.[`setLineDelimiter()`](#setLineDelimiter). Возвращает `this`.
+Устанавливает разделитель строк. По умолчанию: `\n`. Возвращает `this`.
+
 
 &nbsp;
 
