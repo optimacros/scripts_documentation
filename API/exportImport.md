@@ -88,7 +88,7 @@ setFileName(fileName: string): Exporter
 ```js
 setDelimiter(delimiter: string): Exporter
 ```
-Устанавливает разделитель полей. Аналогично `CSVParams`.[`setDelimiter()`](#CSVParams.setDelimiter).
+Устанавливает разделитель полей. Допустимые значения: `,`, `;`, `\t`. Значение по умолчанию: `;`.
 
 &nbsp;
 
