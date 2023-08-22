@@ -534,7 +534,7 @@ export interface CSVParams {
 
     getEscape(): string;
 
-    setLineDelimiter(escape: string): CSVParams;
+    setLineDelimiter(lineDelimiter: string): CSVParams;
 
     getLineDelimiter(): string;
 }
