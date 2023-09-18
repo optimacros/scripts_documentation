@@ -1,6 +1,6 @@
 ## Манипуляция элементами
 
-### Интерфейс ElementsCreator<a name="ElementsCreator"></a>
+### Интерфейс ElementsCreator<a name="elements-creator"></a>
 ```ts
 interface ElementsCreator {
 	numeric(): NumericElementsCreator;
@@ -22,40 +22,6 @@ numeric(): NumericElementsCreator
 named(): NamedElementsCreator
 ```
 Возращает ссылку на [`NamedElementsCreator`](#named-elements-creator).
-
-&nbsp;
-
-### Интерфейс NumericElementsCreator<a name="numeric-elements-creator"></a>
-```ts
-interface NumericElementsCreator extends BaseElementsCreator {
-	setCount(count: number): NumericElementsCreator;
-}
-```
-Интерфейс позволяет добавить заданное количество элементов в заданную позицию таблицы. Аналог кнопки "Добавить элементы" в интерфейсе Optimacros. Перед созданием элементов необходимо указать их количество (нет значения по умолчанию) и позицию добавления (по умолчанию: в конец). Интерфейс наследуется от [`BaseElementsCreator`](#base-elements-creator).
-
-&nbsp;
-
-```js
-setCount(count: number): NumericElementsCreator
-```
-Устанавливает количество добавляемых элементов. Возвращает `this`.
-
-&nbsp;
-
-### Интерфейс NamedElementsCreator<a name="named-elements-creator"></a>
-```ts
-interface NamedElementsCreator extends BaseElementsCreator {
-	setElementNames(names: string[]): NamedElementsCreator;
-}
-```
-Интерфейс позволяет добавить заданное количество элементов с именами в заданную позицию таблицы. Аналог кнопки "Добавить элементы с именами" в интерфейсе Optimacros. Перед созданием элементов необходимо указать список имен элементов и позицию добавления (по умолчанию: в конец). Интерфейс наследуется от [`BaseElementsCreator`](#base-elements-creator).
-
-&nbsp;
-
-```js
-setElementNames(names: string[]): NamedElementsCreator
-```
-Устанавливает список имен `names` добавляемых элементов. Возвращает `this`.
 
 &nbsp;
 
@@ -114,6 +80,40 @@ setPositionChildOf(parentLongId: number): BaseElementsCreator
 create(): number[]
 ```
 Добавляет элементы и возвращает массив их [`longId`](./views.md#long-id).
+
+&nbsp;
+
+### Интерфейс NumericElementsCreator<a name="numeric-elements-creator"></a>
+```ts
+interface NumericElementsCreator extends BaseElementsCreator {
+	setCount(count: number): NumericElementsCreator;
+}
+```
+Интерфейс позволяет добавить заданное количество элементов в заданную позицию таблицы. Аналог кнопки "Добавить элементы" в интерфейсе Optimacros. Перед созданием элементов необходимо указать их количество (нет значения по умолчанию) и позицию добавления (по умолчанию в конец). Интерфейс наследуется от [`BaseElementsCreator`](#base-elements-creator).
+
+&nbsp;
+
+```js
+setCount(count: number): NumericElementsCreator
+```
+Устанавливает количество добавляемых элементов. Возвращает `this`.
+
+&nbsp;
+
+### Интерфейс NamedElementsCreator<a name="named-elements-creator"></a>
+```ts
+interface NamedElementsCreator extends BaseElementsCreator {
+	setElementNames(names: string[]): NamedElementsCreator;
+}
+```
+Интерфейс позволяет добавить заданное количество элементов с именами в заданную позицию таблицы. Аналог кнопки "Добавить элементы с именами" в интерфейсе Optimacros. Перед созданием элементов необходимо указать список имен элементов и позицию добавления (по умолчанию в конец). Интерфейс наследуется от [`BaseElementsCreator`](#base-elements-creator).
+
+&nbsp;
+
+```js
+setElementNames(names: string[]): NamedElementsCreator
+```
+Устанавливает список имён `names` добавляемых элементов. Возвращает `this`.
 
 &nbsp;
 
