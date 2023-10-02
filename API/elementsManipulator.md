@@ -113,7 +113,7 @@ interface NamedElementsCreator extends BaseElementsCreator {
 ```js
 setElementNames(names: string[]): NamedElementsCreator
 ```
-Устанавливает список имён `names` добавляемых элементов. Возвращает `this`.
+Устанавливает список имён `names` добавляемых элементов. Имена должны быть уникальны. В случае добавления в справочник имена вдобавок не должны совпадать с названиями его свойств. Возвращает `this`.
 
 &nbsp;
 
