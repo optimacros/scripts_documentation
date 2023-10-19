@@ -267,6 +267,11 @@ interface ModelInfo {
 	setModelStorageWriteMode(type: string): boolean;
 	getStorageReadMode(): string;
 	getStorageWriteMode(): string;
+	
+	recalculateCubes(identifiers: number[]): boolean;
+	recalculateCubesWithTheirSources(identifiers: number[]): boolean;
+	recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
+	recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -435,6 +440,34 @@ getStorageReadMode(): string;
 getStorageWriteMode(): string;
 ```
 Возвращает установленный режим записи модели (одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`).
+
+&nbsp;
+
+```js
+recalculateCubes(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, без пересчета связанных кубов. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` -> `Только этот куб`. Возвращает `true`, в случае успешного выполнения, либо `false`, если был передан пустой список кубов.
+
+&nbsp;
+
+```js
+recalculateCubesWithTheirSources(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, а также кубов, на которые ссылаются эти кубы. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` -> `Источники для куба и сам куб`. Возвращает `true`, в случае успешного выполнения, либо `false`, если был передан пустой список кубов.
+
+&nbsp;
+
+```js
+recalculateCubesWithTheirDestinations(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, а также кубов, которые ссылаются на эти кубы. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` -> `Этот куб и все приемники куба`. Возвращает `true`, в случае успешного выполнения, либо `false`, если был передан пустой список кубов.
+
+&nbsp;
+
+```js
+recalculateCubesWithLinkedCubes(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, и всех связанных кубов. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` - `Источники для куба и все приемники`. Возвращает `true`, в случае успешного выполнения, либо `false`, если был передан пустой список кубов.
 
 &nbsp;
 
