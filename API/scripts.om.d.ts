@@ -817,6 +817,14 @@ export interface ModelInfo {
 
     recalculateIfManualCalculable(identifiers: number[]): boolean;
 
+    recalculateCubes(identifiers: number[]): boolean;
+
+    recalculateCubesWithTheirSources(identifiers: number[]): boolean;
+
+    recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
+
+    recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
+
     exportObfuscationState(): ExportObfuscationState;
 
     unlock(): ModelInfo;
