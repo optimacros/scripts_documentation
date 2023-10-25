@@ -267,6 +267,11 @@ interface ModelInfo {
 	setModelStorageWriteMode(type: string): boolean;
 	getStorageReadMode(): string;
 	getStorageWriteMode(): string;
+	
+	recalculateCubes(identifiers: number[]): boolean;
+	recalculateCubesWithTheirSources(identifiers: number[]): boolean;
+	recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
+	recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -379,6 +384,7 @@ unlock(): this
 
 &nbsp;
 
+<a name="model-info.recalculate-if-manual-calculable"></a>
 ```js
 recalculateIfManualCalculable(identifiers: number[]): boolean
 ```
@@ -416,7 +422,6 @@ setModelStorageReadMode(type: string): boolean;
 
 &nbsp;
 
-
 ```js
 setModelStorageWriteMode(type: string): boolean;
 ```
@@ -438,6 +443,34 @@ getStorageWriteMode(): string;
 
 &nbsp;
 
+<a name="model-info.recalculate-cubes"></a>
+```js
+recalculateCubes(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, без пересчёта связанных кубов. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` -> `Только этот куб`. Возвращает `true` в случае успешного выполнения и `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
+
+&nbsp;
+
+```js
+recalculateCubesWithTheirSources(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, а также кубов, на которые ссылаются эти кубы, – рекурсивно. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` -> `Источники для куба и сам куб`. Возвращает `true` в случае успешного выполнения и `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
+
+&nbsp;
+
+```js
+recalculateCubesWithTheirDestinations(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, а также кубов, которые ссылаются на эти кубы, – рекурсивно. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` -> `Этот куб и все приёмники куба`. Возвращает `true` в случае успешного выполнения и `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
+
+&nbsp;
+
+```js
+recalculateCubesWithLinkedCubes(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, и всех связанных кубов – рекурсивно. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` - `Источники для куба и все приёмники`. Возвращает `true`, в случае успешного выполнения, либо `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
+
+&nbsp;
 
 ### Интерфейс UserInfo<a name="user-info"></a>
 ```ts
