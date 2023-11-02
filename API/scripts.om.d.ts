@@ -1178,7 +1178,7 @@ export interface Optimization {
 export interface SqlQueryResult {
     count(): number;
     
-    generator(likeArray?: boolean): object | object[];
+    generator(likeArray?: boolean): object[] | string[][];
     
     all(): object[];
     
@@ -1463,7 +1463,7 @@ export interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
     /**
      * @param name DBLIB|ODBC|SQLSRV
      */
-    setDriver(name: string): this;
+    setDriver(name: string | null): this;
 
     /**
      * @param scrollType KEYSET|DYNAMIC|STATIC|BUFFERED
