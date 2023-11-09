@@ -856,6 +856,10 @@ export interface ModelInfo {
     getStorageReadMode(): string;
 
     getStorageWriteMode(): string;
+
+    setModelMacrosStorageReadMode(type: string): boolean;
+
+    getModelMacrosStorageReadMode(): string;
 }
 
 export interface ButtonInfoOptions {
@@ -1007,6 +1011,10 @@ export interface Common {
     enterpriseLicenseManager(): EnterpriseLicenseManager;
 
     metricsManager(): MetricsManager;
+
+    setCurrentMacrosStorageReadMode(type: string): boolean;
+
+    getCurrentMacrosStorageReadMode(): string;
 }
 
 export interface FileMeta {

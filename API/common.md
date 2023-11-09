@@ -13,6 +13,8 @@ interface Common {
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseLicenseManager(): EnterpriseLicenseManager;
 	metricsManager(): MetricsManager;
+    	setCurrentMacrosStorageReadMode(type: string): boolean;
+    	getCurrentMacrosStorageReadMode(): string;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -87,6 +89,20 @@ enterpriseLicenseManager(): EnterpriseLicenseManager
 metricsManager(): MetricsManager
 ```
 Возвращает ссылку на интерфейс [`MetricsManager`](#metrics-manager).
+
+&nbsp;
+
+```js
+setCurrentMacrosStorageReadMode(type: string): boolean
+```
+Устанавливает режим чтения в скрипте. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Возвращает `true`.
+
+&nbsp;
+
+```js
+getCurrentMacrosStorageReadMode(): string;
+```
+Возвращает режим чтения скрипта. Возвращаемое значение может быть одно из `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`.
 
 &nbsp;
 
@@ -272,6 +288,9 @@ interface ModelInfo {
 	recalculateCubesWithTheirSources(identifiers: number[]): boolean;
 	recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
 	recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
+
+    	setModelMacrosStorageReadMode(type: string): boolean;
+    	getModelMacrosStorageReadMode(): string;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -469,6 +488,20 @@ recalculateCubesWithTheirDestinations(identifiers: number[]): boolean
 recalculateCubesWithLinkedCubes(identifiers: number[]): boolean
 ```
 Выполняет пересчёт кубов, переданных в качестве аргумента, и всех связанных кубов – рекурсивно. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` - `Источники для куба и все приёмники`. Возвращает `true`, в случае успешного выполнения, либо `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
+
+&nbsp;
+
+```js
+setModelMacrosStorageReadMode(type: string): boolean;
+```
+Устанавливает режим чтения в модели для скриптов. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим чтения для скриптов`. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе пользователю (или скрипту) будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Возвращает `true`.
+
+&nbsp;
+
+```js
+getModelMacrosStorageReadMode(): string;
+```
+Возвращает установленный режим чтения модели для скриптов (одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
 
 &nbsp;
 
