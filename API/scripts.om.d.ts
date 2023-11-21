@@ -1635,6 +1635,7 @@ export namespace Http {
 
     export interface FormRequestBody {
         params(): Params;
+        appendFile(fieldName: string, fileName: string, filePath: string): FormRequestBody;
     }
 
     export interface RequestBody {
