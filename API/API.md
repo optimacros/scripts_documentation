@@ -45,6 +45,7 @@ interface OM {
 	readonly notifications: Notifications.Manager;
 	readonly variables: Variables;
 	readonly apiServices ApiServices;
+    	readonly audit Audit;
 }
 
 var om: OM;
@@ -134,6 +135,13 @@ readonly variables: Variables;
 readonly apiServices: ApiServices;
 ```
 Ссылка на интерфейс [`ApiServices`](./apiServicesAdministration.md#api-services).
+
+&nbsp;
+
+```js
+readonly audit: Audit;
+```
+Ссылка на интерфейс [`Audit`](./dimensions.md#audit).
 
 &nbsp;
 

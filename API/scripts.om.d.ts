@@ -2089,6 +2089,26 @@ export interface ApiServicesTab extends Tab {
     
 }
 
+export interface Audit {
+    auditTab(): AuditTab;
+}
+
+export interface AuditTab extends Tab {
+    pivot(viewName?: string): AuditPivot;
+}
+
+export interface AuditPivot extends Pivot {
+    eventTypeFilter(data: string[] | string | number | number[]): AuditPivot
+
+    dateFilter(beginAt?: string | number, endAt?:  string | number): AuditPivot
+
+    statusFilter(status: number): AuditPivot
+
+    authorFilter(name: string): AuditPivot
+
+    detailsFilter(details4: string): AuditPivot
+}
+
 export interface OM {
     readonly common: Common;
     readonly environment: Environment;
@@ -2102,6 +2122,7 @@ export interface OM {
     readonly notifications: Notifications.Manager;
     readonly variables: Variables;
     readonly apiServices: ApiServices;
+    readonly audit: Audit;
 }
 
 export var om: OM;

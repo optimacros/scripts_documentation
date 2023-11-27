@@ -433,6 +433,106 @@ elementsReorder(): ElementsReorder
 
 &nbsp;
 
+## Интерфейс Audit<a name="audit"></a>
+```ts
+interface Audit {
+	auditTab(): AuditTab
+}
+```
+Интерфейс аудита.
+
+&nbsp;
+
+```js
+auditTab(): AuditTab
+```
+Возвращает ссылку на интерфейс [`AuditTab`](#audit-tab). В интерфейсе Optimacros аналогично открытию вкладки `Центр безопасности` -> `Логи` -> `Аудит`.
+
+&nbsp;
+
+### Интерфейс AuditTab<a name="audit-tab"></a>
+```ts
+interface AuditTab extends Tab {
+	auditPivot(): AuditPivot
+}
+```
+Вкладка `Аудит`. Интерфейс наследуется от [`Tab`](./views.md#tab).
+
+&nbsp;
+
+### Интерфейс AuditPivot<a name="audit-pivot"></a>
+```ts
+interface AuditPivot extends Pivot {
+    	eventTypeFilter(data: string[] | string | number | number[]): AuditPivot
+    	dateFilter(beginAt?: string | number, endAt?:  string | number): AuditPivot
+    	statusFilter(status: number): AuditPivot
+    	authorFilter(name: string): AuditPivot
+    	detailsFilter(details4: string): AuditPivot
+}
+```
+Интерфейс представления Аудита. Интерфейс наследуется от [`Pivot`](./views.md#pivot).
+
+&nbsp;
+
+```js
+eventTypeFilter(data: string[] | string | number | number[]): AuditPivot
+```
+Позволяет ограничить отображаемые строки по типу события аудита заданными значениями. Значения можно задать следующими способами:
+
+`string` — название типа события;
+
+`string[]` — массив названий типов событий;
+
+`number` — [`longId`](#long-id) типа события;
+
+`number[]` — массив [`longId`](#long-id) типов событий.
+
+Возвращает `this`.
+
+&nbsp;
+
+```js
+dateFilter(data: string[] | string | number | number[]): AuditPivot
+```
+Позволяет ограничить отображаемые строки по дате в диапазоне от и до. Даты можно писать как в виде строки, так и в виде Unix time числа.
+
+Возвращает `this`.
+
+&nbsp;
+
+```js
+statusFilter(status: number): AuditPivot
+```
+Позволяет ограничить отображаемые строки по статусу. Принимает 3 значения
+
+`0` - Без статуса,
+
+`1` - Успех,
+
+`2`- Неудача,
+
+Возвращает `this`.
+
+&nbsp;
+
+```js
+authorFilter(name: string): AuditPivot
+```
+Позволяет ограничить отображаемые строки по имени автора или целевого пользователя.
+
+Возвращает `this`.
+
+&nbsp;
+
+```js
+detailsFilter(details4: string): AuditPivot
+```
+Позволяет ограничить отображаемые строки по колонке **Details4**. Функция будет работать, только если перед этим было произведено ограничение по типу события `Изменение значения клетки`.
+
+Возвращает `this`.
+
+&nbsp;
+
 [API Reference](API.md)
 
 [Оглавление](../README.md)
