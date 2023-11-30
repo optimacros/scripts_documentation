@@ -453,10 +453,17 @@ auditTab(): AuditTab
 ### Интерфейс AuditTab<a name="audit-tab"></a>
 ```ts
 interface AuditTab extends Tab {
-	auditPivot(): AuditPivot
+	pivot(): AuditPivot
 }
 ```
 Вкладка `Аудит`. Интерфейс наследуется от [`Tab`](./views.md#tab).
+
+&nbsp;
+
+```js
+pivot(): AuditPivot
+```
+Возвращает ссылку на объект [`AuditPivot`](#audit-pivot) представления Аудита.
 
 &nbsp;
 
@@ -487,14 +494,52 @@ eventTypeFilter(data: string[] | string | number | number[]): AuditPivot
 
 `number[]` — массив [`longId`](#long-id) типов событий.
 
+Таблица событий:
+
+| name  | longId |
+|-------|--------|
+| Client Auth | 119000000001 |
+| User Model Change Role | 119000000002 |
+| Cube Cell Value Change | 119000000003 |
+| Create Model Backup Point | 119000000004 |
+| Delete Model Backup Point | 119000000005 |
+| Erase Model Backup Point | 119000000006 |
+| Revert Model Backup Point | 119000000007 |
+| Report Export | 119000000008 |
+| Export Model Backup Point | 119000000009 |
+| File Download | 119000000010 |
+| Formula Change | 119000000011 |
+| User Ban Status Change | 119000000012 |
+| Script Change | 119000000013 |
+| Script Add | 119000000014 |
+| Script Delete | 119000000015 |
+| Script Rename | 119000000016 |
+| Audit Records Cleaned | 119000000017 |
+
+Примеры передач:
+```
+om.audit.auditTab().pivot().eventTypeFilter("Script Change").create(); // передача в виде строки
+om.audit.auditTab().pivot().eventTypeFilter(119000000011).create(); // передача в виде longId
+om.audit.auditTab().pivot().eventTypeFilter(["Script Change", 119000000011]).create(); // передача в виде множества
+```
+
 Возвращает `this`.
 
 &nbsp;
 
 ```js
-dateFilter(data: string[] | string | number | number[]): AuditPivot
+dateFilter(beginAt?: string | number, endAt?:  string | number): AuditPivot
 ```
-Позволяет ограничить отображаемые строки по дате в диапазоне от и до. Даты можно писать как в виде строки, так и в виде Unix time числа.
+Позволяет ограничить отображаемые строки по дате в диапазоне от и до. Даты можно писать в виде строки на английском языке/даты/времени, примеры ниже. Так же даты можно передать в виде Unix time значения.**Внимание**, воркспейс работает во временой зоне: `Etc/UTC (UTC, +0000)`, на это стоит делать поправку при передаче в Unix Time. Например число `1701317458` будет считаться как `2023-11-30 04:10:58`. Параметры можно указать как `undefined` или `null` и не задавать интервал «с — до»
+
+Примеры дат в виде строк:
+```
+...dateFilter("10 September 2023");
+...dateFilter("+1 week 2 days 4 hours 2 seconds");
+...dateFilter("last Monday");
+...dateFilter("2023-11-30 04:10:58");
+...dateFilter("2023-11-30");
+```
 
 Возвращает `this`.
 
