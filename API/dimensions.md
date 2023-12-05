@@ -471,7 +471,7 @@ pivot(): AuditPivot
 ```ts
 interface AuditPivot extends Pivot {
     	eventTypeFilter(data: string[] | string | number | number[]): AuditPivot
-    	dateFilter(beginAt?: string | number, endAt?:  string | number): AuditPivot
+    	dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): AuditPivot
     	statusFilter(status: number): AuditPivot
     	authorFilter(name: string): AuditPivot
     	detailsFilter(details4: string): AuditPivot
@@ -528,9 +528,9 @@ om.audit.auditTab().pivot().eventTypeFilter(["Script Change", 119000000011]).cre
 &nbsp;
 
 ```js
-dateFilter(beginAt?: string | number, endAt?:  string | number): AuditPivot
+dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): AuditPivot
 ```
-Позволяет ограничить отображаемые строки по дате в диапазоне от и до. Даты можно писать в виде строки на английском языке/даты/времени, примеры ниже. Так же даты можно передать в виде Unix time значения.**Внимание**, воркспейс работает во временой зоне: `Etc/UTC (UTC, +0000)`, на это стоит делать поправку при передаче в Unix Time. Например число `1701317458` будет считаться как `2023-11-30 04:10:58`. Параметры можно указать как `undefined` или `null` и не задавать интервал «с — до»
+Позволяет ограничить отображаемые строки по дате в диапазоне от и до. Полный список допустимых форматов даты и времени можно посмотреть здесь - [Форматы даты и времени](https://www.php.net/manual/ru/datetime.formats.php#datetime.formats.time). Так же даты можно передать в виде Unix time значения. **Внимание**, воркспейс работает во временой зоне: `Etc/UTC (UTC, +0000)`, следовательно в веб-интерфейсе в аудите, время отображается в **UTC+0**. На это стоит делать поправку при передаче в Unix Time. Например число `1701317458` будет считаться как `2023-11-30 04:10:58`. Параметры можно указать как `undefined` или `null` и не задавать интервал «с — до»
 
 Примеры дат в виде строк:
 ```

@@ -2100,7 +2100,7 @@ export interface AuditTab extends Tab {
 export interface AuditPivot extends Pivot {
     eventTypeFilter(data: string[] | string | number | number[]): AuditPivot
 
-    dateFilter(beginAt?: string | number, endAt?:  string | number): AuditPivot
+    dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): AuditPivot
 
     statusFilter(status: number): AuditPivot
 
