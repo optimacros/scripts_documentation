@@ -455,7 +455,7 @@ interface MulticubeImporter extends Importer {
 interface VersionsImporter extends Importer {
 }
 ```
-Интерфейс импорта в справочник версий. Интерфейс наследуется от [`Importer`](#importer).
+Интерфейс импорта в системный справочник версий. Интерфейс наследуется от [`Importer`](#importer).
 
 &nbsp;
 
@@ -464,7 +464,7 @@ interface VersionsImporter extends Importer {
 interface TimePeriodImporter extends Importer {
 }
 ```
-Интерфейс импорта в справочник времени. Интерфейс наследуется от [`Importer`](#importer).
+Интерфейс импорта в системный справочник времени. Интерфейс наследуется от [`Importer`](#importer).
 
 &nbsp;
 
