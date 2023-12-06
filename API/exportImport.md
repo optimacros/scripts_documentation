@@ -1,7 +1,8 @@
 # Экспорт и импорт
 
 1. [Экспорт из мультикубов и справочников](#export)
-1. [Импорт в мультикубы и справочники](#import)
+1. [Импорт в мультикубы, справочники и системные измерения](#import)
+1. [Быстрый импорт в мультикубы](#om-import)
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 
@@ -237,7 +238,7 @@ moveToLocal(path: string): ExportResult
 
 &nbsp;
 
-## Импорт в мультикубы и справочники<a name="import"></a>
+## Импорт в мультикубы, справочники и системные измерения<a name="import"></a>
 
 ### Интерфейс CSVParams<a name="csv-params"></a>
 ```ts
@@ -336,7 +337,7 @@ interface Importer {
 	import(): Importer;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](./views.md#grid). Доступен в мультикубах и в справочниках. Результатом импорта является файл отчёта.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](./views.md#grid). Результатом импорта является файл отчёта.
 
 &nbsp;
 
@@ -374,6 +375,100 @@ import(): Importer
 Производит импорт в [`Grid`](./views.md#grid) в соответствии с настройками. Возвращает `this`.
 
 &nbsp;
+
+### Интерфейс ListImporter<a name="list-importer"></a>
+```ts
+interface ListImporter extends Importer {
+	setFilePath(path: string): ListImporter;
+	setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter;
+	getObligatoryListCodes(): boolean;
+	setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
+	getImportToChildListOnly(): boolean;
+	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
+	getUpdatedPropertiesOnParentLevels(): boolean;
+}
+```
+Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
+```js
+setFilePath(path: string): ListImporter
+```
+Устанавливает имя импортируемого файла. Возвращает `this`.
+
+&nbsp;
+
+```js
+setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
+```
+Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществующие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getObligatoryListCodes(): boolean
+```
+Возвращает признак режима обязательных кодов.
+
+&nbsp;
+
+```js
+setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
+```
+Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getImportToChildListOnly(): boolean
+```
+Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
+
+&nbsp;
+
+```js
+setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
+```
+Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getUpdatedPropertiesOnParentLevels(): boolean
+```
+Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
+
+&nbsp;
+
+### Интерфейс MulticubeImporter<a name="multicube-importer"></a>
+```ts
+interface MulticubeImporter extends Importer {
+}
+```
+Интерфейс импорта в мультикуб. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
+### Интерфейс VersionsImporter<a name="versions-importer"></a>
+```ts
+interface VersionsImporter extends Importer {
+}
+```
+Интерфейс импорта в системный справочник версий. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
+### Интерфейс TimePeriodImporter<a name="time-period-importer"></a>
+```ts
+interface TimePeriodImporter extends Importer {
+}
+```
+Интерфейс импорта в системный справочник времени. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
+## Быстрый импорт в мультикубы<a name="om-import"></a>
 
 ### Интерфейс StorageImporter<a name="storage-importer"></a>
 ```ts
@@ -469,98 +564,6 @@ setMappings(mappings: object): StorageImporter;
   ]
 }
 ```
-
-&nbsp;
-
-### Интерфейс ListImporter<a name="list-importer"></a>
-```ts
-interface ListImporter extends Importer {
-	setFilePath(path: string): ListImporter;
-	setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter;
-	getObligatoryListCodes(): boolean;
-	setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
-	getImportToChildListOnly(): boolean;
-	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
-	getUpdatedPropertiesOnParentLevels(): boolean;
-}
-```
-Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](#importer).
-
-&nbsp;
-
-```js
-setFilePath(path: string): ListImporter
-```
-Устанавливает имя импортируемого файла. Возвращает `this`.
-
-&nbsp;
-
-```js
-setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
-```
-Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществующие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getObligatoryListCodes(): boolean
-```
-Возвращает признак режима обязательных кодов.
-
-&nbsp;
-
-```js
-setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
-```
-Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getImportToChildListOnly(): boolean
-```
-Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
-
-&nbsp;
-
-```js
-setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
-```
-Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getUpdatedPropertiesOnParentLevels(): boolean
-```
-Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
-
-&nbsp;
-
-### Интерфейс MulticubeImporter<a name="multicube-importer"></a>
-```ts
-interface MulticubeImporter extends Importer {
-}
-```
-Интерфейс импорта в мультикуб. Интерфейс наследуется от [`Importer`](#importer).
-
-&nbsp;
-
-### Интерфейс VersionsImporter<a name="versions-importer"></a>
-```ts
-interface VersionsImporter extends Importer {
-}
-```
-Интерфейс импорта в справочник версий. Интерфейс наследуется от [`Importer`](#importer).
-
-&nbsp;
-
-### Интерфейс TimePeriodImporter<a name="time-period-importer"></a>
-```ts
-interface TimePeriodImporter extends Importer {
-}
-```
-Интерфейс импорта в справочник времени. Интерфейс наследуется от [`Importer`](#importer).
 
 &nbsp;
 

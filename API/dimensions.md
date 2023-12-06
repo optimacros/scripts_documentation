@@ -288,7 +288,7 @@ elementsReorder(): ElementsReorder
 ```js
 importer(): VersionsImporter
 ```
-Возвращает интерфейс [`VersionsImporter`](./exportImport.md#versions-importer) для импорта данных в справочник.
+Возвращает интерфейс [`VersionsImporter`](./exportImport.md#versions-importer) импорта данных в системный справочник версий.
 
 &nbsp;
 
