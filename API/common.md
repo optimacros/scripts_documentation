@@ -13,8 +13,8 @@ interface Common {
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseLicenseManager(): EnterpriseLicenseManager;
 	metricsManager(): MetricsManager;
-    	setCurrentMacrosStorageReadMode(type: string): boolean;
-    	getCurrentMacrosStorageReadMode(): null | string;
+	setCurrentMacrosStorageReadMode(type: string): boolean;
+	getCurrentMacrosStorageReadMode(): string;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
@@ -95,14 +95,14 @@ metricsManager(): MetricsManager
 ```js
 setCurrentMacrosStorageReadMode(type: string): boolean
 ```
-Устанавливает режим чтения в **текущем** скрипте. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Возвращает `true`.
+Устанавливает режим чтения в текущем скрипте. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getCurrentMacrosStorageReadMode(): null | string;
+getCurrentMacrosStorageReadMode(): string
 ```
-Возвращает режим чтения в **текущем** скрипте. Возвращаемое значение может быть одно из `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`.
+Возвращает режим чтения в текущем скрипте. Возвращаемое значение может быть одно из `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`.
 
 &nbsp;
 
@@ -289,7 +289,8 @@ interface ModelInfo {
 	recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
 	recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
 
-    	setModelMacrosStorageReadMode(type: string): boolean;
+	setModelMacrosStorageReadMode(type: string): boolean;
+	getModelMacrosStorageReadMode(): string;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -450,14 +451,14 @@ setModelStorageWriteMode(type: string): boolean;
 ```js
 getStorageReadMode(): string;
 ```
-Возвращает установленный режим чтения **В** модели для скриптов (одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
+Возвращает установленный режим чтения в модели (одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
 
 &nbsp;
 
 ```js
 getStorageWriteMode(): string;
 ```
-Возвращает установленный режим записи модели (одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`).
+Возвращает установленный режим записи в модели (одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`).
 
 &nbsp;
 
@@ -491,9 +492,16 @@ recalculateCubesWithLinkedCubes(identifiers: number[]): boolean
 &nbsp;
 
 ```js
-setModelMacrosStorageReadMode(type: string): boolean;
+setModelMacrosStorageReadMode(type: string): boolean
 ```
 Устанавливает режим чтения в модели для скриптов. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим чтения для скриптов`. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе пользователю (или скрипту) будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Метод ожидает завершения всех запросов в модели и только после переключает режим. Возвращает `true`.
+
+&nbsp;
+
+```js
+getModelMacrosStorageReadMode(): string
+```
+Возвращает установленный режим чтения в модели для скриптов (одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
 
 &nbsp;
 

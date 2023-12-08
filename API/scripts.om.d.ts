@@ -1014,7 +1014,7 @@ export interface Common {
 
     setCurrentMacrosStorageReadMode(type: string): boolean;
 
-    getCurrentMacrosStorageReadMode(): null | string;
+    getCurrentMacrosStorageReadMode(): string;
 }
 
 export interface FileMeta {
