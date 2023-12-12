@@ -283,14 +283,14 @@ interface ModelInfo {
 	setModelStorageWriteMode(type: string): boolean;
 	getStorageReadMode(): string;
 	getStorageWriteMode(): string;
+
+	setMacrosStorageReadMode(type: string): boolean;
+	getMacrosStorageReadMode(): string;
 	
 	recalculateCubes(identifiers: number[]): boolean;
 	recalculateCubesWithTheirSources(identifiers: number[]): boolean;
 	recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
 	recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
-
-	setModelMacrosStorageReadMode(type: string): boolean;
-	getModelMacrosStorageReadMode(): string;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
@@ -462,6 +462,20 @@ getStorageWriteMode(): string;
 
 &nbsp;
 
+```js
+setMacrosStorageReadMode(type: string): boolean
+```
+Устанавливает режим чтения в модели для скриптов. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим чтения для скриптов`. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе пользователю (или скрипту) будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Метод ожидает завершения всех запросов в модели и только после переключает режим. Возвращает `true`.
+
+&nbsp;
+
+```js
+getMacrosStorageReadMode(): string
+```
+Возвращает установленный режим чтения в модели для скриптов (одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
+
+&nbsp;
+
 <a name="model-info.recalculate-cubes"></a>
 ```js
 recalculateCubes(identifiers: number[]): boolean
@@ -488,20 +502,6 @@ recalculateCubesWithTheirDestinations(identifiers: number[]): boolean
 recalculateCubesWithLinkedCubes(identifiers: number[]): boolean
 ```
 Выполняет пересчёт кубов, переданных в качестве аргумента, и всех связанных кубов – рекурсивно. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` - `Источники для куба и все приёмники`. Возвращает `true`, в случае успешного выполнения, либо `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
-
-&nbsp;
-
-```js
-setModelMacrosStorageReadMode(type: string): boolean
-```
-Устанавливает режим чтения в модели для скриптов. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим чтения для скриптов`. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе пользователю (или скрипту) будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Метод ожидает завершения всех запросов в модели и только после переключает режим. Возвращает `true`.
-
-&nbsp;
-
-```js
-getModelMacrosStorageReadMode(): string
-```
-Возвращает установленный режим чтения в модели для скриптов (одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
 
 &nbsp;
 

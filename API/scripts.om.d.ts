@@ -857,9 +857,12 @@ export interface ModelInfo {
 
     getStorageWriteMode(): string;
 
-    setModelMacrosStorageReadMode(type: string): boolean;
+    /**
+     * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
+     */
+    setMacrosStorageReadMode(type: string): boolean;
 
-    getModelMacrosStorageReadMode(): string;
+    getMacrosStorageReadMode(): string;
 }
 
 export interface ButtonInfoOptions {
@@ -1012,6 +1015,9 @@ export interface Common {
 
     metricsManager(): MetricsManager;
 
+    /**
+     * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
+     */
     setCurrentMacrosStorageReadMode(type: string): boolean;
 
     getCurrentMacrosStorageReadMode(): string;
