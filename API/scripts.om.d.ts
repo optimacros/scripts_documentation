@@ -1983,6 +1983,8 @@ export interface MysqlImportBuilder {
 export interface PostgresqlImportBuilder {
     setTable(name: string): PostgresqlImportBuilder;
 
+    setSchema(name: string): PostgresqlImportBuilder;
+
     setDelimiter(delimiter: string): PostgresqlImportBuilder;
 
     setEnclosure(quote: string): PostgresqlImportBuilder;
