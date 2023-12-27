@@ -13,9 +13,12 @@ interface Common {
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseLicenseManager(): EnterpriseLicenseManager;
 	metricsManager(): MetricsManager;
+
+	setCurrentMacrosStorageReadMode(type: string): boolean;
+	getCurrentMacrosStorageReadMode(): string;
 }
 ```
-Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
+Интерфейс, группирующий некоторые общие интерфейсы и методы, не связанные друг с другом.
 
 &nbsp;
 
@@ -90,42 +93,17 @@ metricsManager(): MetricsManager
 
 &nbsp;
 
-### Интерфейс RequestManager<a name="request-manager"></a>
-```ts
-interface RequestManager {
-	log(message: string, print?: boolean): RequestManager;
-	logStatusMessage(message: string, print?: boolean): RequestManager;
-	setStatusMessage(message: string): RequestManager;
-}
+```js
+setCurrentMacrosStorageReadMode(type: string): boolean
 ```
-Интерфейс для записи в лог (устаревший функционал) и работы со статусными сообщениями. Все функции возвращают `this`.
+Устанавливает режим чтения данных модели для текущего скрипта. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). Возвращает `true`.
 
 &nbsp;
 
 ```js
-log(message: string, print?: boolean): RequestManager
+getCurrentMacrosStorageReadMode(): string
 ```
-Выводит сообщение `message` в лог, доступ к которому можно получить в панели администратора. Если `print === true` (по умолчанию: `false`), дублирует сообщение `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
-
-![Лог в панели администратора](./pic/requestInfo.png)
-
-&nbsp;
-
-<a name="request-manager.log-status-message"></a>
-```js
-logStatusMessage(message: string, print?: boolean): RequestManager
-```
-Делает то же, что и `setStatusMessage()`. Если `print === true` (по умолчанию: `false`), дублирует сообщение `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
-
-&nbsp;
-
-<a name="request-manager.set-status-message"></a>
-```js
-setStatusMessage(message: string): RequestManager
-```
-Устанавливает статусное сообщение `message`. Может использоваться для уведомления пользователя во время длительной работы скрипта об этапах или процентах выполненных работ.
-
-![Пример отображения статусного сообщения](./pic/statusMessage.png)
+Возвращает режим чтения данных модели для текущего скрипта. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). 
 
 &nbsp;
 
@@ -191,6 +169,45 @@ canLoadCellsValues(value: boolean): CellBuffer
 Устанавливает значение `value`, указывающее, нужно ли перезагружать значения клеток в буфере, если они изменятся. Возвращает `this`.
 
 По умолчанию: `true`. Использование значения по умолчанию сохранено для обратной совместимости и приводит к снижению производительности. Рекомендуется сразу после инициализации объекта вызвать функцию canLoadCellsValues и передать ей значение `false`.
+
+&nbsp;
+
+### Интерфейс RequestManager<a name="request-manager"></a>
+```ts
+interface RequestManager {
+	log(message: string, print?: boolean): RequestManager;
+	logStatusMessage(message: string, print?: boolean): RequestManager;
+	setStatusMessage(message: string): RequestManager;
+}
+```
+Интерфейс для записи в лог (устаревший функционал) и работы со статусными сообщениями. Все функции возвращают `this`.
+
+&nbsp;
+
+```js
+log(message: string, print?: boolean): RequestManager
+```
+Выводит сообщение `message` в лог, доступ к которому можно получить в панели администратора. Если `print === true` (по умолчанию: `false`), дублирует сообщение `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
+
+![Лог в панели администратора](./pic/requestInfo.png)
+
+&nbsp;
+
+<a name="request-manager.log-status-message"></a>
+```js
+logStatusMessage(message: string, print?: boolean): RequestManager
+```
+Делает то же, что и `setStatusMessage()`. Если `print === true` (по умолчанию: `false`), дублирует сообщение `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
+
+&nbsp;
+
+<a name="request-manager.set-status-message"></a>
+```js
+setStatusMessage(message: string): RequestManager
+```
+Устанавливает статусное сообщение `message`. Может использоваться для уведомления пользователя во время длительной работы скрипта об этапах или процентах выполненных работ.
+
+![Пример отображения статусного сообщения](./pic/statusMessage.png)
 
 &nbsp;
 
@@ -267,6 +284,9 @@ interface ModelInfo {
 	setModelStorageWriteMode(type: string): boolean;
 	getStorageReadMode(): string;
 	getStorageWriteMode(): string;
+
+	setMacrosStorageReadMode(type: string): boolean;
+	getMacrosStorageReadMode(): string;
 	
 	recalculateCubes(identifiers: number[]): boolean;
 	recalculateCubesWithTheirSources(identifiers: number[]): boolean;
@@ -418,28 +438,42 @@ setStorageInstancePriority(priority: number): number;
 ```js
 setModelStorageReadMode(type: string): boolean;
 ```
-Устанавливает режим чтения в модели. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Расширенные` -> `Режим чтения`. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе пользователю (или скрипту) будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Возвращает `true`.
+Устанавливает режим чтения данных модели для пользователей. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим чтения для пользователей`. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode).  Возвращает `true`.
 
 &nbsp;
 
 ```js
 setModelStorageWriteMode(type: string): boolean;
 ```
-Устанавливает режим записи в модели. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Расширенные` -> `Режим записи`. В параметре принимает одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`. `CONSISTENT_WRITE` существовал и до этого: при модификации ответ на запрос о модификации возвращался после того, как все порождённым им пересчёты были завершены. `FAST_WRITE` позволяет не ждать завершения пересчётов при модификации, а сразу продолжать работу. Возвращает `true`.
+Устанавливает режим записи данных в модель. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим записи для пользователей и скриптов`. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#write-mode). Возвращает `true`.
 
 &nbsp;
 
 ```js
 getStorageReadMode(): string;
 ```
-Возвращает установленный режим чтения модели (одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
+Возвращает установленный режим чтения данных модели. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode).
 
 &nbsp;
 
 ```js
 getStorageWriteMode(): string;
 ```
-Возвращает установленный режим записи модели (одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`).
+Возвращает установленный режим записи данных в модель. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#write-mode).
+
+&nbsp;
+
+```js
+setMacrosStorageReadMode(type: string): boolean
+```
+Устанавливает режим чтения данных модели для скриптов. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим чтения для скриптов`. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). Метод ожидает завершения всех запросов в модели и только после этого переключает режим. Возвращает `true`.
+
+&nbsp;
+
+```js
+getMacrosStorageReadMode(): string
+```
+Возвращает установленный режим чтения данных модели для скриптов. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode).
 
 &nbsp;
 

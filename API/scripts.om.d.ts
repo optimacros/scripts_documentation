@@ -856,6 +856,13 @@ export interface ModelInfo {
     getStorageReadMode(): string;
 
     getStorageWriteMode(): string;
+
+    /**
+     * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
+     */
+    setMacrosStorageReadMode(type: string): boolean;
+
+    getMacrosStorageReadMode(): string;
 }
 
 export interface ButtonInfoOptions {
@@ -1007,6 +1014,13 @@ export interface Common {
     enterpriseLicenseManager(): EnterpriseLicenseManager;
 
     metricsManager(): MetricsManager;
+
+    /**
+     * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
+     */
+    setCurrentMacrosStorageReadMode(type: string): boolean;
+
+    getCurrentMacrosStorageReadMode(): string;
 }
 
 export interface FileMeta {
@@ -1635,6 +1649,7 @@ export namespace Http {
 
     export interface FormRequestBody {
         params(): Params;
+        appendFile(fieldName: string, fileName: string, filePath: string): FormRequestBody;
     }
 
     export interface RequestBody {
