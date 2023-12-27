@@ -29,6 +29,7 @@
 1. [Цепочки скриптов](scriptChains.md)
 1. [Web API сервисы](apiService.md)
 1. [Администрирование Web API сервисов](apiServicesAdministration.md)
+1. [Аудит](audit.md)
 
 ## Интерфейс OM<a name="om"></a>
 ```ts
@@ -44,8 +45,8 @@ interface OM {
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
 	readonly variables: Variables;
-	readonly apiServices ApiServices;
-    	readonly audit Audit;
+	readonly apiServices: ApiServices;
+	readonly audit: Audit;
 }
 
 var om: OM;
@@ -141,7 +142,7 @@ readonly apiServices: ApiServices;
 ```js
 readonly audit: Audit;
 ```
-Ссылка на интерфейс [`Audit`](./dimensions.md#audit).
+Ссылка на интерфейс [`Audit`](./audit.md).
 
 &nbsp;
 

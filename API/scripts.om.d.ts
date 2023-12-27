@@ -2113,15 +2113,15 @@ export interface AuditTab extends Tab {
 }
 
 export interface AuditPivot extends Pivot {
-    eventTypeFilter(data: string[] | string | number | number[]): AuditPivot
+    eventTypeFilter(data: string | number | (string | number)[]): AuditPivot;
 
-    dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): AuditPivot
+    dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): AuditPivot;
 
-    statusFilter(status: number): AuditPivot
+    statusFilter(status: number): AuditPivot;
 
-    authorFilter(name: string): AuditPivot
+    authorFilter(name: string): AuditPivot;
 
-    detailsFilter(details4: string): AuditPivot
+    detailsFilter(details4: string): AuditPivot;
 }
 
 export interface OM {
