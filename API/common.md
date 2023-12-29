@@ -298,6 +298,7 @@ interface ModelInfo {
 
 &nbsp;
 
+<a name="model-id"></a>
 ```js
 id(): string
 ```
