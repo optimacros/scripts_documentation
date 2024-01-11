@@ -131,7 +131,7 @@ interface ElementsDeleter {
 ```js
 appendIdentifier(identifier: number): ElementsDeleter
 ```
-Добавляет в буфер элемент, чей [`longId`](./views.md#long-id) равен `identifier`. Возращает `this`.
+Добавляет в буфер элемент, чей [`longId`](./views.md#long-id) равен `identifier`. Повторное добавление элемента в очередь **не** приводит к ошибкам. Возращает `this`.
 
 &nbsp;
 
