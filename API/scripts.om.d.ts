@@ -856,6 +856,13 @@ export interface ModelInfo {
     getStorageReadMode(): string;
 
     getStorageWriteMode(): string;
+
+    /**
+     * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
+     */
+    setMacrosStorageReadMode(type: string): boolean;
+
+    getMacrosStorageReadMode(): string;
 }
 
 export interface ButtonInfoOptions {
@@ -1007,6 +1014,13 @@ export interface Common {
     enterpriseLicenseManager(): EnterpriseLicenseManager;
 
     metricsManager(): MetricsManager;
+
+    /**
+     * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
+     */
+    setCurrentMacrosStorageReadMode(type: string): boolean;
+
+    getCurrentMacrosStorageReadMode(): string;
 }
 
 export interface FileMeta {
@@ -2092,6 +2106,26 @@ export interface ApiServicesTab extends Tab {
     
 }
 
+export interface Audit {
+    auditTab(): AuditTab;
+}
+
+export interface AuditTab extends Tab {
+    pivot(viewName?: string): AuditPivot;
+}
+
+export interface AuditPivot extends Pivot {
+    eventTypeFilter(data: string | number | (string | number)[]): AuditPivot;
+
+    dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): AuditPivot;
+
+    statusFilter(status: number): AuditPivot;
+
+    authorFilter(name: string): AuditPivot;
+
+    detailsFilter(details4: string): AuditPivot;
+}
+
 export interface OM {
     readonly common: Common;
     readonly environment: Environment;
@@ -2105,6 +2139,7 @@ export interface OM {
     readonly notifications: Notifications.Manager;
     readonly variables: Variables;
     readonly apiServices: ApiServices;
+    readonly audit: Audit;
 }
 
 export var om: OM;

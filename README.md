@@ -21,4 +21,4 @@
 1. [Библиотека скриптов импорта-экспорта](./importExportLib/importExportLib.md)
 1. [API Reference](./API/API.md)
 1. [Приложения](./appendix/appendix.md)
-1. [История изменений документации](https://htmlpreview.github.io/?https://github.com/optimacros/scripts_documentation/blob/changelog/changelog.html)
+1. [История изменений документации](https://htmlpreview.github.io/?https://github.com/optimacros/scripts_documentation/blob/main/changelog.html)
