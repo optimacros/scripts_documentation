@@ -617,7 +617,7 @@ setTable(name: string): PostgresqlImportBuilder
 ```js
 setSchema(name: string): PostgresqlImportBuilder
 ```
-Устанавливает схему, в которую будет производиться импорт.
+Устанавливает [схему](https://www.postgresql.org/docs/current/ddl-schemas.html).
 
 &nbsp;
 
