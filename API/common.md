@@ -630,8 +630,8 @@ interface CopyData {
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет скопировать срезы кубов по некоторому элементу *заданного измерения* в срезы других кубов по другому элементу того же измерения. Для использования нужно:
-- вызвать них функции `setSourceLongId()` и `setDestLongId()` на двух элементах одного и того же измерения, которое здесь будем называть *заданным измерением*;
-- указать кубы, срезы в которых нужно копировать, вызовом одной из четырёх функций: `enableCopyAllCubes()`, `enableCustomProperties()`, `setMulticubeLongIds()`, `setMulticubeByNames()`;
+- указать два элемента одного и того же измерения, которое здесь будем называть *заданным измерением*, вызовом функций `setSourceLongId()` и `setDestLongId()`;
+- указать кубы или свойства справочников, срезы в которых нужно копировать, вызовом одной из четырёх функций: `enableCopyAllCubes()`, `enableCustomProperties()`, `setMulticubeLongIds()`, `setMulticubeByNames()`;
 - вызвать функцию `copy()`.
 Все функции возвращают `this`.
 
@@ -640,14 +640,14 @@ interface CopyData {
 ```js
 setSourceLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./views.md#long-id) элемента измерения источника.
+Устанавливает [`longId`](./views.md#long-id) элемента-источника *заданного измерения*.
 
 &nbsp;
 
 ```js
 setDestLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./views.md#long-id) элемента измерения приёмника.
+Устанавливает [`longId`](./views.md#long-id) элемента-приёмника *заданного измерения*.
 
 &nbsp;
 
