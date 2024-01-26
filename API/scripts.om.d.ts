@@ -796,6 +796,12 @@ export interface ExportObfuscationState {
     export(): boolean;
 }
 
+export type UpdateInputCellsViaFormulaRequest = {
+    cubeLongId: number;
+    valueFormula: string;
+    conditionFormula?: string;
+}
+
 export interface ModelInfo {
     id(): string;
 
@@ -816,6 +822,8 @@ export interface ModelInfo {
     export(path: string): boolean;
 
     recalculateIfManualCalculable(identifiers: number[]): boolean;
+
+    batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean;
 
     recalculateCubes(identifiers: number[]): boolean;
 

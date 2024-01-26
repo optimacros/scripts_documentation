@@ -277,6 +277,8 @@ interface ModelInfo {
 	
 	recalculateIfManualCalculable(identifiers: number[]): boolean;
 
+    batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean;
+
 	getStorageInstancePriority(): number;
 	setStorageInstancePriority(priority: number): number;
 
@@ -410,6 +412,16 @@ unlock(): this
 recalculateIfManualCalculable(identifiers: number[]): boolean
 ```
 Производит пересчёт сущностей (кубов или свойств в справочниках) `identifiers`, если на них не стоит флаг автопересчёта. Если массив `identifiers` пустой, вместо него берётся массив всех сущностей модели. Автоматически пересчитываемые сущности пропускаются. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
+
+&nbsp;
+
+<a name="model-info.batch-update-input-cells-via-formula"></a>
+```js
+batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean
+```
+Производит пересчёт сущностей (кубов или свойств в справочниках) с отдельными формулами в передаваемом массиве типов `UpdateInputCellsViaFormulaRequest`. Передаваемая формула НЕ переписывает текущую формулы у данной сущности, а только производит пересчёт. Пересчёт будет произведён независимо от того, стоит ли флаг автопересчёта. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
+
+Тип `UpdateInputCellsViaFormulaRequest` содержит информацию о сущности в свойстве `cubeLongId`, формулу для пересчёта в свойстве `valueFormula`, и условную формулу, которая будет применяться к каждой клетке куба в свойстве `conditionFormula`, которое не является обязательным и по умолчанию имеет значение `TRUE`.
 
 &nbsp;
 
