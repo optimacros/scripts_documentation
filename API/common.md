@@ -252,6 +252,20 @@ export(): boolean
 
 &nbsp;
 
+### Тип UpdateInputCellsViaFormulaRequest<a name="update-input-cells-via-formula-request"></a>
+```js
+type UpdateInputCellsViaFormulaRequest = {
+	cubeLongId: number;
+	valueFormula: string;
+	conditionFormula?: string;
+}
+```
+Тип содержит информацию о сущности в свойстве `cubeLongId`, формулу для пересчёта в свойстве `valueFormula`, и условную формулу, которая будет применяться к каждой клетке куба в свойстве `conditionFormula`, которое не является обязательным и по умолчанию имеет значение `true`.
+
+Используется как параметр функции `Modelinfo`.[`batchUpdateInputCellsViaFormula()`](#model-info.batch-update-input-cells-via-formula).
+
+&nbsp;
+
 ### Интерфейс ModelInfo<a name="model-info"></a>
 ```ts
 interface ModelInfo {
@@ -277,7 +291,7 @@ interface ModelInfo {
 	
 	recalculateIfManualCalculable(identifiers: number[]): boolean;
 
-    batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean;
+	batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean;
 
 	getStorageInstancePriority(): number;
 	setStorageInstancePriority(priority: number): number;
@@ -419,9 +433,7 @@ recalculateIfManualCalculable(identifiers: number[]): boolean
 ```js
 batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean
 ```
-Производит пересчёт сущностей (кубов или свойств в справочниках) с отдельными формулами в передаваемом массиве типов `UpdateInputCellsViaFormulaRequest`. Передаваемая формула НЕ переписывает текущую формулы у данной сущности, а только производит пересчёт. Пересчёт будет произведён независимо от того, стоит ли флаг автопересчёта. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
-
-Тип `UpdateInputCellsViaFormulaRequest` содержит информацию о сущности в свойстве `cubeLongId`, формулу для пересчёта в свойстве `valueFormula`, и условную формулу, которая будет применяться к каждой клетке куба в свойстве `conditionFormula`, которое не является обязательным и по умолчанию имеет значение `TRUE`.
+Производит пересчёт (независимо от флага автопересчёта) сущностей (кубов или свойств справочников), заданных массивом `requests` типа [`UpdateInputCellsViaFormulaRequest`](#update-input-cells-via-formula-request). Передаваемая формула *не* переписывает текущую формулу данной сущности. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
 
 &nbsp;
 
