@@ -252,6 +252,20 @@ export(): boolean
 
 &nbsp;
 
+### Тип UpdateInputCellsViaFormulaRequest<a name="update-input-cells-via-formula-request"></a>
+```js
+type UpdateInputCellsViaFormulaRequest = {
+	cubeLongId: number;
+	valueFormula: string;
+	conditionFormula?: string;
+}
+```
+Тип содержит информацию о сущности в свойстве `cubeLongId`, формулу для пересчёта в свойстве `valueFormula`, и условную формулу, которая будет применяться к каждой клетке куба в свойстве `conditionFormula`, которое не является обязательным и по умолчанию имеет значение `true`.
+
+Используется как параметр функции `Modelinfo`.[`batchUpdateInputCellsViaFormula()`](#model-info.batch-update-input-cells-via-formula).
+
+&nbsp;
+
 ### Интерфейс ModelInfo<a name="model-info"></a>
 ```ts
 interface ModelInfo {
@@ -276,6 +290,8 @@ interface ModelInfo {
 	unlock(): this;
 	
 	recalculateIfManualCalculable(identifiers: number[]): boolean;
+
+	batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean;
 
 	getStorageInstancePriority(): number;
 	setStorageInstancePriority(priority: number): number;
@@ -410,6 +426,14 @@ unlock(): this
 recalculateIfManualCalculable(identifiers: number[]): boolean
 ```
 Производит пересчёт сущностей (кубов или свойств в справочниках) `identifiers`, если на них не стоит флаг автопересчёта. Если массив `identifiers` пустой, вместо него берётся массив всех сущностей модели. Автоматически пересчитываемые сущности пропускаются. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
+
+&nbsp;
+
+<a name="model-info.batch-update-input-cells-via-formula"></a>
+```js
+batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean
+```
+Производит пересчёт (независимо от флага автопересчёта) сущностей (кубов или свойств справочников), заданных массивом `requests` типа [`UpdateInputCellsViaFormulaRequest`](#update-input-cells-via-formula-request). Передаваемая формула *не* переписывает текущую формулу данной сущности. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
 
 &nbsp;
 
