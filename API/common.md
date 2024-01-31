@@ -644,56 +644,62 @@ getCollection(longId: number[]): EntityInfo[]
 interface CopyData {
 	setSourceLongId(longId: number): CopyData;
 	setDestLongId(longId: number): CopyData;
-	enableCustomProperties(): CopyData;
+	
 	enableCopyAllCubes(): CopyData;
+	enableCustomProperties(): CopyData;
 	setMulticubeLongIds(longIds: number[]): CopyData;
 	setMulticubeByNames(names: string[]): CopyData;
+	
 	copy(): CopyData;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет скопировать срез куба в другой куб внутри одного мультикуба. Для указания кубов, которые необходимо копировать, необходимо вызвать одну из трёх функций: `enableCopyAllCubes()`, `setMulticubeLongIds()`, `setMulticubeByNames()`. Все методы возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет скопировать данные срезов кубов или свойств справочника по некоторому элементу *заданного измерения* в другой элемент того же измерения. Для использования нужно:
+- указать два элемента одного и того же измерения, которое здесь будем называть *заданным измерением*, вызовом функций `setSourceLongId()` и `setDestLongId()`;
+- указать кубы или свойства справочников, срезы которых нужно копировать, вызовом одной из четырёх функций: `enableCopyAllCubes()`, `enableCustomProperties()`, `setMulticubeLongIds()`, `setMulticubeByNames()`;
+- вызвать функцию `copy()`.
+Все функции возвращают `this`.
 
 &nbsp;
 
 ```js
 setSourceLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./views.md#long-id) измерения источника.
+Устанавливает [`longId`](./views.md#long-id) элемента-источника *заданного измерения*.
 
 &nbsp;
 
 ```js
 setDestLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./views.md#long-id) измерения приёмника.
-
-&nbsp;
-
-```js
-enableCustomProperties(): CopyData
-```
-Предписывает пройти по всем справочникам, которые имеют связь с источником и приёмником, и произведёт копирование пользовательских свойств.
+Устанавливает [`longId`](./views.md#long-id) элемента-приёмника *заданного измерения*.
 
 &nbsp;
 
 ```js
 enableCopyAllCubes(): CopyData
 ```
-Предписывает произвести копирование во всех кубах.
+Предписывает произвести копирование во всех кубах модели, содержащих *заданное измерение*.
+
+&nbsp;
+
+```js
+enableCustomProperties(): CopyData
+```
+Предписывает произвести копирование данных из пользовательских свойств элемента-источника в свойства элемента-приёмника во всех справочниках, содержащих оба этих элемента.
 
 &nbsp;
 
 ```js
 setMulticubeLongIds(longIds: number[]): CopyData
 ```
-Устанавливает [`longId`](./views.md#long-id) мультикубов.
+Предписывает произвести копирование в указанных по [`longId`](./views.md#long-id) мультикубах, которые содержат *заданное измерение*.
 
 &nbsp;
 
 ```js
 setMulticubeByNames(names: string[]): CopyData
 ```
-Устанавливает имена мультикубов.
+Предписывает произвести копирование в указанных по именам мультикубах, которые содержат *заданное измерение*.
 
 &nbsp;
 
