@@ -47,6 +47,7 @@ interface OM {
 	readonly variables: Variables;
 	readonly apiServices: ApiServices;
 	readonly audit: Audit;
+    	readonly users: Users;
 }
 
 var om: OM;
@@ -143,6 +144,13 @@ readonly apiServices: ApiServices;
 readonly audit: Audit;
 ```
 Ссылка на интерфейс [`Audit`](./audit.md).
+
+&nbsp;
+
+```js
+readonly users: Users;
+```
+Ссылка на интерфейс [`Users`](./audit.md).
 
 &nbsp;
 
