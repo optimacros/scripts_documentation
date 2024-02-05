@@ -50,6 +50,7 @@ interface OM {
 	readonly apiServices: ApiServices;
 	readonly audit: Audit;
 	readonly crypto: Crypto;
+    readonly users: Users;
 }
 
 var om: OM;
@@ -153,6 +154,13 @@ readonly audit: Audit;
 readonly crypto: Crypto;
 ```
 Ссылка на интерфейс [`Crypto`](./crypto.md).
+
+&nbsp;
+
+```js
+readonly users: Users;
+```
+Ссылка на интерфейс [`Users`](./audit.md).
 
 &nbsp;
 

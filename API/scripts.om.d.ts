@@ -2138,6 +2138,19 @@ export interface AuditPivot extends Pivot {
     detailsFilter(details4: string): AuditPivot;
 }
 
+export interface Users {
+    modelUsersTab(): ModelUsersTab;
+    workspaceUsersTab(): WorkspaceUsersTab;
+}
+
+export interface WorkspaceUsersTab extends Tab {
+    pivot(): Pivot;
+}
+
+export interface ModelUsersTab extends Tab {
+    pivot(): Pivot;
+}
+
 export interface OM {
     readonly common: Common;
     readonly environment: Environment;
@@ -2152,6 +2165,7 @@ export interface OM {
     readonly variables: Variables;
     readonly apiServices: ApiServices;
     readonly audit: Audit;
+    readonly users: Users;
     readonly crypto: Crypto;
 }
 
