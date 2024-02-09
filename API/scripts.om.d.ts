@@ -1043,6 +1043,17 @@ export interface FileMeta {
     timestamp: number;
 }
 
+export interface Crypto {
+
+    /**
+     * @param string $data: Message to be hashed
+     * @param bool $binary: When set to true, outputs raw binary data. false outputs lowercase hexits
+     *
+     * @return string Returns a string containing the calculated message digest as lowercase hexits unless binary is set to true in which case the raw binary representation of the message digest is returned.
+     */
+    sha1($data:string , $binary:boolean = false): string
+}
+
 export interface Filesystem {
     has(path: string): boolean;
 
