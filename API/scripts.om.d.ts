@@ -1069,7 +1069,6 @@ export interface FileMeta {
     timestamp: number;
 }
 
-
 export interface Filesystem {
     has(path: string): boolean;
 

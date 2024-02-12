@@ -108,9 +108,8 @@ getCurrentMacrosStorageReadMode(): string
 
 &nbsp;
 
-```jd
+```js
 crypto(): Crypto;
-
 ```
 
 Возвращает ссылку на интерфейс [`Crypto`](#crypto).
@@ -907,7 +906,6 @@ sha1(data: string, binary: boolean): string
 interface RequestSignatureManager extends AwsSignatureV4Builder {
 
 }
-
 ```
 
 &nbsp;
