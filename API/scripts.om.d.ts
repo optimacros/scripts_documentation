@@ -1003,25 +1003,7 @@ export interface CopyData {
 }
 
 export interface Crypto {
-    base64Encode(value: string): string | boolean;
-
-    base64Decode(value: string): string | boolean;
-
-    hmac(algo: string, message: string, secret: string, binary?: boolean): string
-
-    hash(algo: string, data: string, binary: boolean): string
-
     sha1(data: string, binary: boolean): string
-}
-
-export interface RequestSignatureManager extends AwsSignatureV4Builder {
-
-}
-
-export interface AwsSignatureV4Builder {
-    getSignatureAWS4(): string
-
-    getCredentialAWS4(): string
 }
 
 export interface Common {
@@ -1045,16 +1027,14 @@ export interface Common {
 
     metricsManager(): MetricsManager;
 
-    crypto(): Crypto;
-
-    requestSignatureManager(): RequestSignatureManager;
-
     /**
      * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
      */
     setCurrentMacrosStorageReadMode(type: string): boolean;
 
     getCurrentMacrosStorageReadMode(): string;
+
+    crypto(): Crypto;
 }
 
 export interface FileMeta {
