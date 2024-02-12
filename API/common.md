@@ -13,9 +13,10 @@ interface Common {
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseLicenseManager(): EnterpriseLicenseManager;
 	metricsManager(): MetricsManager;
-
 	setCurrentMacrosStorageReadMode(type: string): boolean;
 	getCurrentMacrosStorageReadMode(): string;
+    crypto(): Crypto;
+    requestSignatureManager(): RequestSignatureManager;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы и методы, не связанные друг с другом.
@@ -104,6 +105,23 @@ setCurrentMacrosStorageReadMode(type: string): boolean
 getCurrentMacrosStorageReadMode(): string
 ```
 Возвращает режим чтения данных модели для текущего скрипта. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). 
+
+&nbsp;
+
+```jd
+crypto(): Crypto;
+
+```
+
+Возвращает ссылку на интерфейс [`Crypto`](#crypto).
+
+&nbsp;
+
+```js
+requestSignatureManager(): RequestSignatureManager;
+```
+
+Возвращает ссылку на интерфейс [`RequestSignatureManager`](#request-signature-manager).
 
 &nbsp;
 
@@ -828,6 +846,84 @@ getMetricValue(name: string, tags?: StringMap[]): number | null
 Возвращает числовое значение метрики с именем `name` и тегами `tags`, или `null`, если метрика не существует.
 
 &nbsp;
+
+### Интерфейс Crypto<a name="crypto"></a>
+
+```js
+interface Crypto {
+    base64Encode(value: string): string | boolean;
+
+    base64Decode(value: string): string | boolean;
+
+    hmac(algo: string, message: string, secret: string, binary?: boolean): string
+
+    hash(algo: string, data: string, binary: boolean): string
+
+    sha1(data: string, binary: boolean): string
+}
+```
+
+Интерфейс для работы с криптографией
+
+&nbsp;
+
+```js
+base64Encode(value: string): string | boolean;
+```
+
+&nbsp;
+
+```js
+base64Decode(value: string): string | boolean;
+```
+
+&nbsp;
+
+```js
+hmac(algo: string, message: string, secret: string, binary?: boolean): string
+```
+
+&nbsp;
+
+```js
+hash(algo: string, data: string, binary: boolean): string
+````
+
+&nbsp;
+
+```js
+sha1(data: string, binary: boolean): string
+```
+
+Возвращает SHA1-хэш строки `string`, вычисленный по алгоритму US Secure Hash Algorithm 1.
+Если необязательный аргумент `binary` имеет значение `true`, хеш возвращается в виде бинарной строки из 20 символов, иначе (по умолчанию) он будет возвращён в виде 40-символьного шестнадцатеричного числа.
+
+&nbsp;
+
+
+### Интерфейс RequestSignatureManager<a name="request-signature-manager"></a>
+
+```js
+interface RequestSignatureManager extends AwsSignatureV4Builder {
+
+}
+
+```
+
+&nbsp;
+
+### Интерфейс AwsSignatureV4Builder<a name="aws-signature-v4-builder"></a>
+
+```js
+interface AwsSignatureV4Builder {
+
+    getSignatureAWS4(): string
+
+    getCredentialAWS4(): string
+}
+```
+
+&npsp;
 
 [API Reference](API.md)
 

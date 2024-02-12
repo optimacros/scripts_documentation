@@ -1002,6 +1002,28 @@ export interface CopyData {
     copy(): CopyData;
 }
 
+export interface Crypto {
+    base64Encode(value: string): string | boolean;
+
+    base64Decode(value: string): string | boolean;
+
+    hmac(algo: string, message: string, secret: string, binary?: boolean): string
+
+    hash(algo: string, data: string, binary: boolean): string
+
+    sha1(data: string, binary: boolean): string
+}
+
+export interface RequestSignatureManager extends AwsSignatureV4Builder {
+
+}
+
+export interface AwsSignatureV4Builder {
+    getSignatureAWS4(): string
+
+    getCredentialAWS4(): string
+}
+
 export interface Common {
     createCellBuffer(): CellBuffer;
 
@@ -1023,6 +1045,10 @@ export interface Common {
 
     metricsManager(): MetricsManager;
 
+    crypto(): Crypto;
+
+    requestSignatureManager(): RequestSignatureManager;
+
     /**
      * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
      */
@@ -1043,16 +1069,6 @@ export interface FileMeta {
     timestamp: number;
 }
 
-export interface Crypto {
-
-    /**
-     * @param string $data: Message to be hashed
-     * @param bool $binary: When set to true, outputs raw binary data. false outputs lowercase hexits
-     *
-     * @return string Returns a string containing the calculated message digest as lowercase hexits unless binary is set to true in which case the raw binary representation of the message digest is returned.
-     */
-    sha1($data:string , $binary:boolean = false): string
-}
 
 export interface Filesystem {
     has(path: string): boolean;
