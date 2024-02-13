@@ -844,7 +844,7 @@ interface Crypto {
 sha1(data: string): string
 ```
 
-Возвращает SHA1-хэш строки `data` в UTF-8, вычисленный по алгоритму US Secure Hash Algorithm 1 в виде 40-символьного шестнадцатеричного числа. Пример использования:
+Возвращает [`SHA1-хэш`](https://en.wikipedia.org/wiki/SHA-1) строки `data` в UTF-8, вычисленный по алгоритму US Secure Hash Algorithm 1 в виде 40-символьного шестнадцатеричного числа. Пример использования:
 
 ```js
 let data = 'data';
