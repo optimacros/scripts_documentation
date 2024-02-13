@@ -1003,7 +1003,8 @@ export interface CopyData {
 }
 
 export interface Crypto {
-    sha1(data: string, binary: boolean): string
+    // returns hexadecimal string given utf-8 string (which is intermediately converted into bytes)
+    sha1(data: string): string
 }
 
 export interface Common {
@@ -2154,6 +2155,7 @@ export interface OM {
     readonly variables: Variables;
     readonly apiServices: ApiServices;
     readonly audit: Audit;
+    readonly crypto: Crypto;
 }
 
 export var om: OM;

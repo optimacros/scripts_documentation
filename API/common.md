@@ -15,7 +15,6 @@ interface Common {
 	metricsManager(): MetricsManager;
 	setCurrentMacrosStorageReadMode(type: string): boolean;
 	getCurrentMacrosStorageReadMode(): string;
-	crypto(): Crypto;
 }
 ```
 Интерфейс, группирующий некоторые общие интерфейсы и методы, не связанные друг с другом.
@@ -104,14 +103,6 @@ setCurrentMacrosStorageReadMode(type: string): boolean
 getCurrentMacrosStorageReadMode(): string
 ```
 Возвращает режим чтения данных модели для текущего скрипта. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). 
-
-&nbsp;
-
-```js
-crypto(): Crypto;
-```
-
-Возвращает ссылку на интерфейс [`Crypto`](#crypto).
 
 &nbsp;
 
@@ -841,7 +832,7 @@ getMetricValue(name: string, tags?: StringMap[]): number | null
 
 ```js
 interface Crypto {
-	sha1(data: string, binary: boolean): string
+	sha1(data: string): string
 }
 ```
 
@@ -850,11 +841,19 @@ interface Crypto {
 &nbsp;
 
 ```js
-sha1(data: string, binary: boolean): string
+sha1(data: string): string
 ```
 
-Возвращает SHA1-хэш строки `string`, вычисленный по алгоритму US Secure Hash Algorithm 1.
-Если необязательный аргумент `binary` имеет значение `true`, хеш возвращается в виде бинарной строки из 20 символов, иначе (по умолчанию) он будет возвращён в виде 40-символьного шестнадцатеричного числа.
+Возвращает SHA1-хэш строки `data` в UTF-8, вычисленный по алгоритму US Secure Hash Algorithm 1 в виде 40-символьного шестнадцатеричного числа. Пример использования:
+
+```js
+let data = 'data';
+let hash = om.crypto.sha1(data);
+console.log(
+    hash, // a17c9aaa61e80a1bf71d0d850af4e5baa9800bbd
+    typeof(hash) // string
+);
+```
 
 &nbsp;
 
