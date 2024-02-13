@@ -150,7 +150,7 @@ readonly audit: Audit;
 ```js
 readonly users: Users;
 ```
-Ссылка на интерфейс [`Users`](./audit.md).
+Ссылка на интерфейс [`Users`](./users.md).
 
 &nbsp;
 
