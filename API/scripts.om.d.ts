@@ -1034,8 +1034,6 @@ export interface Common {
     setCurrentMacrosStorageReadMode(type: string): boolean;
 
     getCurrentMacrosStorageReadMode(): string;
-
-    crypto(): Crypto;
 }
 
 export interface FileMeta {
