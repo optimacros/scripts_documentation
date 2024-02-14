@@ -35,7 +35,7 @@ interface ModelUsersTab extends Tab {
 
 &nbsp;
 
-### Интерфейс ModelUsersTab<a name="workspace-users-tab"></a>
+### Интерфейс WorkspaceUsersTab<a name="workspace-users-tab"></a>
 ```ts
 interface WorkspaceUsersTab extends Tab {
     
