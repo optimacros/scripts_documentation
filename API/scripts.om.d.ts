@@ -2140,11 +2140,11 @@ export interface Users {
 }
 
 export interface WorkspaceUsersTab extends Tab {
-    pivot(): Pivot;
+
 }
 
 export interface ModelUsersTab extends Tab {
-    pivot(): Pivot;
+
 }
 
 export interface OM {
