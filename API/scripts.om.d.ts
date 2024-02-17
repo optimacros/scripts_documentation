@@ -9,11 +9,11 @@ export type StringMap = {
 };
 
 export interface Cell {
-    setValue(value: number | string | null | boolean);
+    setValue(value: number | string | boolean | null);
 
-    getValue(): number | string | null | boolean;
+    getValue(): number | string | null; // a boolean cube value is returned as string 'true'/'false'
 
-    getNativeValue(): number | string | null | boolean;
+    getNativeValue(): number | string | null;
 
     //2.0 only
     getTextValue(): number | string | null;
@@ -211,9 +211,9 @@ export interface Exporter {
 export interface Pivot {
     create(): Grid;
 
-    rowsFilter(...data: string[] | number[]): Pivot;
+    rowsFilter(data: string | string[] | number | number[]): Pivot;
     
-    columnsFilter(...data: string[] | number[]): Pivot;
+    columnsFilter(data: string | string[] | number | number[]): Pivot;
 
     withoutValues(): Pivot;
 
@@ -645,7 +645,7 @@ export interface Lists {
 }
 
 export interface CellBuffer {
-    set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
+    set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer;
 
     apply(): CellBuffer;
 
@@ -1139,7 +1139,7 @@ export interface CsvReader {
      */
     changeFileCharset(charset: string): CsvReader;
 
-    generator(): string[][];
+    generator(): IterableIterator<string[]>;
 }
 
 export interface CsvWriter {

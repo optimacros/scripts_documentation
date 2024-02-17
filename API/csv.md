@@ -81,7 +81,7 @@ save(name: string, charset?: string): string
 interface CsvReader {
 	params(): CSVParams;
 	changeFileCharset(charset: string): CsvReader;
-	generator(): string[][];
+	generator(): IterableIterator<string[]>;
 }
 ```
 Интерфейс для чтения файла формата [`CSV`](https://ru.wikipedia.org/wiki/CSV).
@@ -103,7 +103,7 @@ changeFileCharset(charset: string): CsvReader
 &nbsp;
 
 ```js
-generator(): string[][]
+generator(): IterableIterator<string[]>
 ```
 Возвращает генератор, при каждом обращении читающий одну строку файла CSV и возвращающий её в виде `string[]`. Генератор вернёт `null`, если исходный файл был длиной 0 байт.
 
