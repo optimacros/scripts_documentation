@@ -30,6 +30,7 @@
 1. [Web API сервисы](apiService.md)
 1. [Администрирование Web API сервисов](apiServicesAdministration.md)
 1. [Аудит](audit.md)
+1. [Криптография, хэширование и вспомогательные функции](crypto.md)
 
 ## Интерфейс OM<a name="om"></a>
 ```ts
@@ -47,6 +48,7 @@ interface OM {
 	readonly variables: Variables;
 	readonly apiServices: ApiServices;
 	readonly audit: Audit;
+	readonly crypto: Crypto;
 }
 
 var om: OM;
@@ -143,6 +145,13 @@ readonly apiServices: ApiServices;
 readonly audit: Audit;
 ```
 Ссылка на интерфейс [`Audit`](./audit.md).
+
+&nbsp;
+
+```js
+readonly crypto: Crypto;
+```
+Ссылка на интерфейс [`Crypto`](./crypto.md).
 
 &nbsp;
 

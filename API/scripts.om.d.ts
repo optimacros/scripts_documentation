@@ -1003,8 +1003,7 @@ export interface CopyData {
 }
 
 export interface Crypto {
-    // returns hexadecimal string given utf-8 string (which is intermediately converted into bytes)
-    sha1(data: string): string
+    sha1(data: string): string;
 }
 
 export interface Common {

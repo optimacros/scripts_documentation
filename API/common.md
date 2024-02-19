@@ -828,35 +828,6 @@ getMetricValue(name: string, tags?: StringMap[]): number | null
 
 &nbsp;
 
-### Интерфейс Crypto<a name="crypto"></a>
-
-```js
-interface Crypto {
-	sha1(data: string): string
-}
-```
-
-Интерфейс для работы с криптографией
-
-&nbsp;
-
-```js
-sha1(data: string): string
-```
-
-Возвращает [`SHA1-хэш`](https://en.wikipedia.org/wiki/SHA-1) строки `data` в UTF-8, вычисленный по алгоритму US Secure Hash Algorithm 1 в виде 40-символьного шестнадцатеричного числа. Пример использования:
-
-```js
-let data = 'data';
-let hash = om.crypto.sha1(data);
-console.log(
-    hash, // a17c9aaa61e80a1bf71d0d850af4e5baa9800bbd
-    typeof(hash) // string
-);
-```
-
-&nbsp;
-
 [API Reference](API.md)
 
 [Оглавление](../README.md)
