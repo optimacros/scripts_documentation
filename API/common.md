@@ -13,6 +13,7 @@ interface Common {
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseLicenseManager(): EnterpriseLicenseManager;
 	metricsManager(): MetricsManager;
+
 	setCurrentMacrosStorageReadMode(type: string): boolean;
 	getCurrentMacrosStorageReadMode(): string;
 }
