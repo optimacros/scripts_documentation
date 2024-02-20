@@ -1002,6 +1002,10 @@ export interface CopyData {
     copy(): CopyData;
 }
 
+export interface Crypto {
+    sha1(data: string): string;
+}
+
 export interface Common {
     createCellBuffer(): CellBuffer;
 
@@ -2148,6 +2152,7 @@ export interface OM {
     readonly variables: Variables;
     readonly apiServices: ApiServices;
     readonly audit: Audit;
+    readonly crypto: Crypto;
 }
 
 export var om: OM;
