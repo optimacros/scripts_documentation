@@ -4,17 +4,17 @@
 ```ts
 interface Users {
 	modelUsersTab(): ModelUsersTab;
-    	workspaceUsersTab(): WorkspaceUsersTab;
+    workspaceUsersTab(): WorkspaceUsersTab;
 }
 ```
-Интерфейс для получения доступа к гридам пользователей.
+Интерфейс для получения доступа к гридам пользователей в модели.
 
 &nbsp;
 
 ```js
 modelUsersTab(): ModelUsersTab;
 ```
-Возвращает ссылку на интерфейс [`ModelUsersTab`](#model-users-tab). В интерфейсе Optimacros аналогично открытию вкладки `Центр безопасности` -> `Пользователи`.
+Возвращает ссылку на интерфейс [`ModelUsersTab`](#model-users-tab). В интерфейсе Optimacros аналогично открытию вкладки `Центр безопасности` -> `Пользователи` -> `Пользователи модели`.
 
 &nbsp;
 
@@ -31,8 +31,21 @@ interface ModelUsersTab extends Tab {
     
 }
 ```
-Вкладка `Пользователи модели`. Интерфейс наследуется от [`Tab`](./views.md#tab).
+Вкладка `Пользователи модели`. Содержит пользователей модели и их настройки. Интерфейс наследуется от [`Tab`](./views.md#tab).
+[`Grid`](./views.md#grid) данного [`Tab`](./views.md#tab) доступен только пользователям с правами моделера.
 
+Для данного [`Tab`](./views.md#tab) недоступны методы:
+- `importer()`
+- `storageImporter()`
+
+Для [`Pivot`](./views.md#интерфейс-pivot) данного [`Tab`](./views.md#tab) не работают мотоды:
+- `rowsFilter()`
+- `addDependentContext()`
+
+У [`Grid`](./views.md#grid) недоступны методы:
+- `storageExporter()`
+
+Для изменения натроек пользователей нужна роль равная им или выше. (Моделер -> Администратор -> Сервисный администратор)
 &nbsp;
 
 ### Интерфейс WorkspaceUsersTab<a name="workspace-users-tab"></a>
@@ -41,7 +54,15 @@ interface WorkspaceUsersTab extends Tab {
     
 }
 ```
-Вкладка `Другие пользователи сервера`. Интерфейс наследуется от [`Tab`](./views.md#tab). Доступен только пользователям с правами администратора.
+Вкладка `Другие пользователи сервера`. Содержит пользхователей воркспейса, у которых нет доступа к даннй модели и их настройки. Интерфейс наследуется от [`Tab`](./views.md#tab). Доступен только пользователям с правами администратора.
+
+Для данного [`Tab`](./views.md#tab) недоступны методы:
+- `importer()`
+- `storageImporter()`
+
+Для [`Pivot`](./views.md#интерфейс-pivot) данного [`Tab`](./views.md#tab) не работают мотоды:
+- `rowsFilter()`
+- `addDependentContext()`
 
 &nbsp;
 

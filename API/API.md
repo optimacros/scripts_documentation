@@ -4,7 +4,7 @@
 
 * выполнение скрипта: информация об окружении и управление выводом/действиями после завершения работы (см. `Common`, `Environment`, `Optimization`);
 * взаимодействие с моделью, как сущностью: создание бэкапа, пересчёт всей модели (см. `Common.ModelInfo`);
-* взаимодействие с данными и метаданными модели (см. `Multicubes`, `Times`, `Versions`, `Lists`, `Common.CopyData`;
+* взаимодействие с данными и метаданными модели (см. `Multicubes`, `Times`, `Versions`, `Lists`, `Common.CopyData`);
 * взаимодействие с внешним миром (см. `Common.ApiService`, `Filesystems`, `Connectors`, `Notifications`);
 * администрирование воркспейса (см. `ApiServices`).
 
@@ -30,6 +30,7 @@
 1. [Web API сервисы](apiService.md)
 1. [Администрирование Web API сервисов](apiServicesAdministration.md)
 1. [Аудит](audit.md)
+1. [Пользователи](users.md)
 
 ## Интерфейс OM<a name="om"></a>
 ```ts
@@ -47,7 +48,7 @@ interface OM {
 	readonly variables: Variables;
 	readonly apiServices: ApiServices;
 	readonly audit: Audit;
-    	readonly users: Users;
+    readonly users: Users;
 }
 
 var om: OM;
