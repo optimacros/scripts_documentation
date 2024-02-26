@@ -5,11 +5,11 @@
 ## Интерфейс Crypto<a name="crypto"></a>
 ```ts
 interface Crypto {
-	sha1(data: string): string;
+	sha1(data: string): string | null;
 
-	hash(algo: string , data: string , binary?: boolean): string;
+	hash(algo: string , data: string , binary?: boolean): string | null;
 
-	hmac(algo: string, data: string, key: string, binary?: boolean): string;
+	hmac(algo: string, data: string, key: string, binary?: boolean): string | null;
 }
 ```
 Интерфейс для работы с криптографическими и их дополняющими функциями.
@@ -17,9 +17,10 @@ interface Crypto {
 &nbsp;
 
 ```js
-sha1(data: string): string
+sha1(data: string): string | null
 ```
 Возвращает [`SHA1-хэш`](https://en.wikipedia.org/wiki/SHA-1) строки `data` (переданной в кодировке `UTF-8`), вычисленный по алгоритму `US Secure Hash Algorithm 1` в виде `40`-символьного шестнадцатеричного числа.
+В случае ошибки (не прошла валидация входных параметров или что-то ещё) возвращается `null`.
 
 Пример использования:
 
@@ -34,11 +35,12 @@ console.log(
 &nbsp;
 
 ```js
-hash(algo: string , data: string , binary?: boolean): string
+hash(algo: string , data: string , binary?: boolean): string | null
 ```
 Возвращает хэш строки `data` (переданной в кодировке `UTF-8`), вычисленный по указанному в `algo` алгоритму ("sha1", "md5", "sha256" и т.д.).
 Если `binary` не выставлено в `true` (по умолчание не выставлено), то хэш возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре.
 Если `binary` выставлено в `true`, то хэш возвращается в виде бинарных данных.
+В случае ошибки (не прошла валидация входных параметров или что-то ещё) возвращается `null`.
 
 Пример использования:
 
@@ -53,11 +55,12 @@ console.log(
 &nbsp;
 
 ```js
-hmac(algo: string, data: string, key: string, binary?: boolean): string
+hmac(algo: string, data: string, key: string, binary?: boolean): string | null
 ```
 Возвращает [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием переданного `key`. Аналогично `hash` используется переданный в `algo` алгоритм ("sha1", "sha256", "sha512" и т.д.) для хэширования.
 Если `binary` не выставлено в `true` (по умолчание не выставлено), то hmac возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре.
 Если `binary` выставлено в `true`, то hmac возвращается в виде бинарных данных, закодированных с помощью Base64 в формате "==Base64String==".
+В случае ошибки (не прошла валидация входных параметров или что-то ещё) возвращается `null`.
 
 Пример использования:
 
