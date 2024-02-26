@@ -55,7 +55,7 @@ console.log(
 ```js
 hmac(algo: string, data: string, key: string, binary?: boolean): string
 ```
-Возвращает [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием переданного `key`. Аналогично `hash` спользуется переданный в `algo` алгоритм ("sha1", "sha256", "sha512" и т.д.) для хэширования.
+Возвращает [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием переданного `key`. Аналогично `hash` используется переданный в `algo` алгоритм ("sha1", "sha256", "sha512" и т.д.) для хэширования.
 Если `binary` не выставлено в `true` (по умолчание не выставлено), то hmac возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре.
 Если `binary` выставлено в `true`, то hmac возвращается в виде бинарных данных, закодированных с помощью Base64 в формате "==Base64String==".
 
