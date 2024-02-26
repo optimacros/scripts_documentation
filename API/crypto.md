@@ -6,10 +6,6 @@
 ```ts
 interface Crypto {
 	sha1(data: string): string;
-
-	hash(algo: string , data: string , binary?: boolean): string;
-
-	hmac(algo: string, data: string, key: string, binary?: boolean): string;
 }
 ```
 Интерфейс для работы с криптографическими и их дополняющими функциями.
@@ -27,54 +23,10 @@ sha1(data: string): string
 let data = 'data';
 let hash = om.crypto.sha1(data);
 console.log(
-    hash // a17c9aaa61e80a1bf71d0d850af4e5baa9800bbd
+    hash, // a17c9aaa61e80a1bf71d0d850af4e5baa9800bbd
+    typeof(hash) // string
 );
 ```
-
-&nbsp;
-
-```js
-hash(algo: string , data: string , binary?: boolean): string
-```
-Возвращает хэш строки `data` (переданной в кодировке `UTF-8`), вычисленный по указанному в `algo` алгоритму ("sha1", "md5", "sha256" и т.д.).
-Если `binary` не выставлено в `true` (по умолчание не выставлено), то хэш возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре.
-Если `binary` выставлено в `true`, то хэш возвращается в виде бинарных данных.
-
-Пример использования:
-
-```js
-let data = 'data';
-let hash = om.crypto.hash('sha1', data);
-console.log(
-    hash // a17c9aaa61e80a1bf71d0d850af4e5baa9800bbd
-);
-```
-
-&nbsp;
-
-```js
-hmac(algo: string, data: string, key: string, binary?: boolean): string
-```
-Возвращает [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием переданного `key`. Аналогично `hash` спользуется переданный в `algo` алгоритм ("sha1", "sha256", "sha512" и т.д.) для хэширования.
-Если `binary` не выставлено в `true` (по умолчание не выставлено), то hmac возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре.
-Если `binary` выставлено в `true`, то hmac возвращается в виде бинарных данных, закодированных с помощью Base64 в формате "==Base64String==".
-
-Пример использования:
-
-```js
-let data = 'data';
-let hash = om.crypto.hmac('sha1', data, 'some secret key');
-console.log(
-    hash // 8b992587610f000c8e5cae70826b2a46d872bfb5
-);
-
-let hash = om.crypto.hmac('sha1', data, 'some secret key', true);
-console.log(
-    hash // ==i5klh2EPAAyOXK5wgmsqRthyv7U===
-);
-
-```
-
 
 &nbsp;
 
