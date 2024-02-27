@@ -11,9 +11,9 @@ interface Crypto {
 
 	hmac(algo: string, data: string, key: string, binary?: boolean): string | null;
 
-	getHashAlgorithms(): string[]
+	getHashAlgorithms(): string[];
 
-	getHmacAlgorithms(): string[]
+	getHmacAlgorithms(): string[];
 }
 ```
 Интерфейс для работы с криптографическими и их дополняющими функциями.

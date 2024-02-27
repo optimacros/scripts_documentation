@@ -1003,7 +1003,11 @@ export interface CopyData {
 }
 
 export interface Crypto {
-    sha1(data: string): string;
+    sha1(data: string): string | null;
+    hash(algo: string , data: string , binary?: boolean): string | null; // binary - default false
+    hmac(algo: string, data: string, key: string, binary?: boolean): string | null; // binary - default false
+    getHashAlgorithms(): string[];
+    getHmacAlgorithms(): string[];
 }
 
 export interface Common {
