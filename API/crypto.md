@@ -7,9 +7,9 @@
 interface Crypto {
 	sha1(data: string): string | null;
 
-	hash(algo: string , data: string , binary?: boolean): string | null;
+	hash(algo: string , data: string , binary: boolean = false): string | null;
 
-	hmac(algo: string, data: string, key: string, binary?: boolean): string | null;
+	hmac(algo: string, data: string, key: string, binary: boolean = false): string | null;
 
 	getHashAlgorithms(): string[];
 
