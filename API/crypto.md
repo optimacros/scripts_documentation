@@ -103,14 +103,14 @@ algos.forEach(algo => {
 &nbsp;
 
 ```js
-getHmacAlgorithms(): string[]
+getHmacHashAlgorithms(): string[]
 ```
 Возвращает список алгоритмов хэширования, которые могут быть использованы в параметре `algo` для метода `hmac`.
 
 Пример использования:
 
 ```js
-let algos = om.crypto.getHmacAlgorithms();
+let algos = om.crypto.getHmacHashAlgorithms();
 console.log('Available hashing algorithms for HMAC:\n');
 algos.forEach(algo => {
     console.log('    ' + algo + '\n');
