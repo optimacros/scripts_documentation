@@ -1003,9 +1003,9 @@ export interface CopyData {
 }
 
 export interface Crypto {
-    sha1(data: string): string | null;
-    hash(algo: string , data: string , binary?: boolean): string | null; // binary - default false
-    hmac(algo: string, data: string, key: string, binary?: boolean): string | null; // binary - default false
+    sha1(data: string): string;
+    hash(algo: string , data: string , binary?: boolean): string; // binary - default false
+    hmac(algo: string, data: string, key: string, binary?: boolean): string; // binary - default false
     getHashAlgorithms(): string[];
     getHmacAlgorithms(): string[];
 }
