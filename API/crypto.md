@@ -138,7 +138,7 @@ algos.forEach(algo => {
 ## Интерфейс BinaryData<a name="binarydata"></a>
 ```ts
 interface BinaryData {
-    getData(): string;
+    getAsRawString(): string;
 }
 ```
 Служебный интерфейс для работы с бинарными данными, которые могут быть получены в результате вычисления хэшей.<br>
@@ -147,7 +147,7 @@ interface BinaryData {
 &nbsp;
 
 ```js
-getData(): string
+getAsRawString(): string
 ```
 Возвращает бинарные данные.
 
@@ -156,7 +156,7 @@ getData(): string
 ```js
 const signature = om.crypto.hmac(algo, stringToSign, signingKey, true);
 
-console.log(signature.getData());
+console.log(signature.getAsRawString());
 
 ```
 

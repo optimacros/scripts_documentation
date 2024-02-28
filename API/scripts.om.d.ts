@@ -1003,7 +1003,7 @@ export interface CopyData {
 }
 
 export interface BinaryData {
-    getData(): string;
+    getAsRawString(): string;
 }
 
 export interface Crypto {
