@@ -1002,10 +1002,14 @@ export interface CopyData {
     copy(): CopyData;
 }
 
+export interface BinaryData {
+    getData(): string;
+}
+
 export interface Crypto {
     sha1(data: string): string;
-    hash(algo: string , data: string , binary?: boolean): string; // binary - default false
-    hmac(algo: string, data: string, key: string, binary?: boolean): string; // binary - default false
+    hash(algo: string, data: string, binary?: boolean): string | BinaryData; // binary - default false
+    hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData; // binary - default false
     getHashAlgorithms(): string[];
     getHmacAlgorithms(): string[];
 }

@@ -5,11 +5,11 @@
 ## Интерфейс Crypto<a name="crypto"></a>
 ```ts
 interface Crypto {
-	sha1(data: string): string | null;
+	sha1(data: string): string;
 
-	hash(algo: string , data: string , binary: boolean = false): string | null;
+	hash(algo: string , data: string , binary: boolean = false): string | BinaryData;
 
-	hmac(algo: string, data: string, key: string, binary: boolean = false): string | null;
+	hmac(algo: string, data: string, key: string | BinaryData, binary: boolean = false): string | BinaryData;
 
 	getHashAlgorithms(): string[];
 
@@ -29,8 +29,7 @@ sha1(data: string): string
 Пример использования:
 
 ```js
-let data = 'data';
-let hash = om.crypto.sha1(data);
+let hash = om.crypto.sha1('data');
 console.log(
     hash // a17c9aaa61e80a1bf71d0d850af4e5baa9800bbd
 );
@@ -39,18 +38,17 @@ console.log(
 &nbsp;
 
 ```js
-hash(algo: string , data: string , binary?: boolean): string
+hash(algo: string , data: string , binary: boolean = false): string | BinaryData
 ```
 Возвращает хэш строки `data` (переданной в кодировке `UTF-8`), вычисленный по указанному в `algo` алгоритму ("sha1", "md5", "sha256" и т.д.). Полный список доступных алгоритмов может быть получен с помощью метода `getHashAlgorithms()`.<br>
 Если `binary` не выставлено в `true` (по умолчание не выставлено), то хэш возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре.<br>
-Если `binary` выставлено в `true`, то хэш возвращается в виде бинарных данных.<br>
-В случае ошибки (апример, не прошла валидация входных параметров) выбрасывается исключение.
+Если `binary` выставлено в `true`, то хэш возвращается в виде бинарных данных инкапсулированных в специальный объект `BinaryData`.<br>
+В случае ошибки (например, не прошла валидация входных параметров) выбрасывается исключение.
 
 Пример использования:
 
 ```js
-let data = 'data';
-let hash = om.crypto.hash('sha1', data);
+let hash = om.crypto.hash('sha1', 'data');
 console.log(
     hash // a17c9aaa61e80a1bf71d0d850af4e5baa9800bbd
 );
@@ -58,7 +56,7 @@ console.log(
 ```js
 try {
     // 'sha2' will trigger exception
-    let hash = om.crypto.hash('sha2' , 'some data');
+    let hash = om.crypto.hash('sha2', 'some data');
     console.log(hash);
 } catch (e) {
     console.log(`Error: ${e.message}`);
@@ -69,27 +67,34 @@ try {
 &nbsp;
 
 ```js
-hmac(algo: string, data: string, key: string, binary?: boolean): string | null
+hmac(algo: string, data: string, key: string | BinaryData, binary: boolean = false): string | BinaryData
 ```
-Возвращает [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием переданного `key` (переданного в кодировке `UTF-8`). Аналогично `hash` используется переданный в `algo` алгоритм ("sha1", "sha256", "sha512" и т.д.) для хэширования. Полный список доступных алгоритмов может быть получен с помощью метода `getHmacAlgorithms()`.<br>
+Возвращает [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`).<br>
+Для подписи используется `key`, который может быть строкой в кодировке `UTF-8` или бинарными данными инкапсулированными в специальный объект `BinaryData`.<br>
+Аналогично `hash` используется переданный в `algo` алгоритм ("sha1", "sha256", "sha512" и т.д.) для хэширования. Полный список доступных алгоритмов может быть получен с помощью метода `getHmacAlgorithms()`.<br>
 Если `binary` не выставлено в `true` (по умолчание не выставлено), то hmac возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре.<br>
-Если `binary` выставлено в `true`, то hmac возвращается в виде бинарных данных, закодированных с помощью Base64 в формате "==Base64String==".<br>
+Если `binary` выставлено в `true`, то хэш возвращается в виде бинарных данных инкапсулированных в специальный объект `BinaryData`.<br>
 В случае ошибки (апример, не прошла валидация входных параметров) выбрасывается исключение.
 
 Пример использования:
 
 ```js
-let data = 'data';
-let hash = om.crypto.hmac('sha1', data, 'some secret key');
+let hash = om.crypto.hmac('sha1', 'data', 'some secret key');
+console.log(
+    typeof hash // string
+);
 console.log(
     hash // 8b992587610f000c8e5cae70826b2a46d872bfb5
 );
-
-let hash = om.crypto.hmac('sha1', data, 'some secret key', true);
+```
+```js
+let hash = om.crypto.hmac('sha1', 'data', 'some secret key', true);
 console.log(
-    hash // ==i5klh2EPAAyOXK5wgmsqRthyv7U===
+    typeof hash // object
 );
-
+console.log(
+    hash.getData() // ��%�a
+);
 ```
 
 &nbsp;
@@ -125,6 +130,33 @@ console.log('Available hashing algorithms for HMAC:\n');
 algos.forEach(algo => {
     console.log('    ' + algo + '\n');
 });
+
+```
+
+&nbsp;
+
+## Интерфейс BinaryData<a name="binarydata"></a>
+```ts
+interface BinaryData {
+    getData(): string;
+}
+```
+Служебный интерфейс для работы с бинарными данными, которые могут быть получены в результате вычисления хэшей.<br>
+Не используется напрямую, разве только кому-нибудь захочется посмотреть, как выглядят бинарные данные. 
+
+&nbsp;
+
+```js
+getData(): string
+```
+Возвращает бинарные данные.
+
+Пример использования:
+
+```js
+const signature = om.crypto.hmac(algo, stringToSign, signingKey, true);
+
+console.log(signature.getData());
 
 ```
 
