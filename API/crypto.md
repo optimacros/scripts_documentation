@@ -93,7 +93,7 @@ console.log(
     typeof hash // object
 );
 console.log(
-    hash.getData() // ��%�a
+    hash.getAsRawString() // ��%�a
 );
 ```
 
