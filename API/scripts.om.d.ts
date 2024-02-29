@@ -1008,9 +1008,22 @@ export interface BinaryData {
 
 export interface Crypto {
     sha1(data: string): string;
-    hash(algo: string, data: string, binary?: boolean): string | BinaryData; // binary - default false
-    hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData; // binary - default false
+
+    /**
+     * 
+     * @param algo available values can be retrieved by getHashAlgorithms()
+     * @param binary defaults to false
+     */
+    hash(algo: string, data: string, binary?: boolean): string | BinaryData;
+    /**
+     * 
+     * @param algo available values can be retrieved by getHmacHashAlgorithms()
+     * @param binary defaults to false
+     */
+    hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData;
+
     getHashAlgorithms(): string[];
+
     getHmacAlgorithms(): string[];
 }
 
