@@ -3,7 +3,7 @@
 В этом разделе находится техническое описание предоставляемых платформой интерфейсов. Их можно разделить на 6 групп:
 
 * выполнение скрипта: информация об окружении и управление выводом/действиями после завершения работы (см. `Common`, `Environment`, `Optimization`);
-* взаимодействие с моделью, как сущностью: создание бэкапа, пересчёт всей модели (см. `Common.ModelInfo`);
+* взаимодействие с моделью, как сущностью: создание бэкапа, пересчёт всей модели (см. `Common.ModelInfo`, `Users`);
 * взаимодействие с данными и метаданными модели (см. `Multicubes`, `Times`, `Versions`, `Lists`, `Common.CopyData`);
 * взаимодействие с внешним миром (см. `Common.ApiService`, `Filesystems`, `Connectors`, `Notifications`);
 * административное: настройка API-сервисов (`ApiServices`), работа с аудитом (`Audit`);
@@ -51,7 +51,7 @@ interface OM {
 	readonly apiServices: ApiServices;
 	readonly audit: Audit;
 	readonly crypto: Crypto;
-    readonly users: Users;
+	readonly users: Users;
 }
 
 var om: OM;
