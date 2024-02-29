@@ -12,7 +12,7 @@ interface CubeCell {
 	definitions(): number[];
 	getDimensionIds(): number[];
 	getDimensionItems(): EntityInfo[];
-	getValue(): number | string | null | boolean;
+	getValue(): number | string | boolean | null;
 }
 ```
 Низкоуровневый интерфейс доступа к данным клетки куба.
@@ -42,7 +42,7 @@ getDimensionItems(): EntityInfo[]
 &nbsp;
 
 ```js
-getValue(): number | string | null | boolean
+getValue(): number | string | boolean | null
 ```
 Возвращает значение клетки. Если формат клетки – справочник или дата, возвращает идентификатор элемента.
 
