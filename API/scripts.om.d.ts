@@ -1993,19 +1993,28 @@ export namespace Notifications {
 
         export interface Builder {
             setTo(to: string | string[]): this;
-
             setSubject(subject: string): this;
-
             setBody(body: string): this;
-
             attachFiles(paths: string[]): this;
-
             send(): Result;
         }
     }
 
+    namespace Web {
+        export interface Result {
+            messageId: string;
+        }
+
+        export interface Builder {
+            setTo(to: string | string[]): this;
+            setSubject(subject: string): this;
+            setBody(body: string): this;
+            send(): Result;
+        }
+    }
     export interface Manager {
         smtp(channel: string): Smtp.Builder;
+        web(channel: string): Web.Builder;
     }
 }
 
