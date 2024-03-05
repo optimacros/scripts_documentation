@@ -23,7 +23,8 @@ smtp(channel: string): Smtp.Builder
 ```js
 web(channel: string): Web.Builder
 ```
-Возвращает интерфейс [`Web.Builder`](#web.builder) канала с именем `channel` уведомления пользователя по протоколу [`HTTP,WS`](https://ru.wikipedia.org/wiki/SMTP https://ru.wikipedia.org/wiki/WebSocket).
+Возвращает интерфейс [`Web.Builder`](#web.builder) канала с именем `channel` уведомления пользователя по протоколу [`HTTP,WS`](https://ru.wikipedia.org/wiki/SMTP https://ru.wikipedia.org/wiki/WebSocket).<br>
+По умолчанию, в системе присутствует один единственный канал `WEB notices`. Администраторы могут создать дополнительные каналы в интерфейсе управления workspace.
 
 &nbsp;
 
@@ -109,21 +110,31 @@ interface Web.Builder {
 ```js
 setTo(to: string | string[]): this
 ```
-Устанавливает адресата или адресатов. Возвращает `this`.
+Устанавливает адресата или адресатов. В качестве адресатов используются e-mail пользователей.<br>
+Также, для упрощения рассылки сообщений в `sendTo` могут использоваться следующие строковые константы:<br>
+◾️ `'%ALL_USERS%'` - все пользователи workspace<br>
+◾️ `'%ALL_GENERAL_USERS%'` - обычные пользователи workspace, у которых нет привилегий `modeller`, `admin`, `service user`<br>
+◾️ `'%ALL_SERVICE_USERS%'` - пользователи workspace, у которых есть привилегии `service user`<br>
+◾️ `'%ALL_ADMINS%'` - пользователи workspace, у которых есть привилегии `admin`<br>
+◾️ `'%ALL_MODELLERS%'` - пользователи workspace, у которых есть привилегии `modeller`<br>
+◾️ `'%URGENT_NOTICE%'` - повышает важность сообщения, может быть использованно при отображении уведомления на клиенте<br>
+Возвращает `this`.
 
 &nbsp;
 
 ```js
 setSubject(subject: string): this
 ```
-Устанавливает тему уведомления. Возвращает `this`.
+Устанавливает тему уведомления (строка передаётся в кодировке `UTF-8`, длина строки ограничена 4096 символами).<br>
+Возвращает `this`.
 
 &nbsp;
 
 ```js
 setBody(body: string): this
 ```
-Устанавливает тело уведомления. Возвращает `this`.
+Устанавливает тело уведомления (строка передаётся в кодировке `UTF-8`, длина строки ограничена 262144 символами).<br>
+Возвращает `this`.
 
 &nbsp;
 
@@ -131,6 +142,27 @@ setBody(body: string): this
 send(): Web.Result
 ```
 Запускает механизм асинхронной отправки уведомления. Возвращает интерфейс [`Web.Result`](#web.result).
+
+Пример использования:
+
+```js
+const channelName = 'WEB notices';
+const recepients = ['tester1@example.com','tester2@example.com','%ALL_MODELLERS%'];
+const sender = om.notifications.web(channelName);
+
+try {
+    const result = sender
+        .setTo(recepients)
+        .setSubject('Hello from scripts!')
+        .setBody('Some message')
+        .send();
+
+    console.log('Success:\n\n');
+    console.log(result.messageId);
+} catch (e) {
+    console.log(`Error: ${e.message}`);
+}
+```
 
 &nbsp;
 
@@ -140,7 +172,8 @@ interface Web.Result {
     messageId: string;
 }
 ```
-Интерфейс доступа к результатам отправки уведомления. Содержит строку `messageId` с идентификатором отправленного уведомления.
+Интерфейс доступа к результатам отправки уведомления. Содержит строку `messageId` с идентификатором отправленного уведомления.<br>
+Администраторы могут использовать идентификатор для поиска сообщения в интерфейсе управления workspace.
 
 &nbsp;
 
