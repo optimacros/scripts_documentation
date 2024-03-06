@@ -2001,6 +2001,18 @@ export namespace Notifications {
     }
 
     namespace Web {
+        export const enum Preset {
+            CommonChannel = 'WEB notices'
+        }
+
+        export const enum GroupAlias {
+            AllUsers = '%ALL_USERS%',
+            AllGeneralUsers = '%ALL_GENERAL_USERS%',
+            AllServiceUsers = '%ALL_SERVICE_USERS%',
+            AllAdmins = '%ALL_ADMINS%',
+            AllModellers = '%ALL_MODELLERS%'
+        }
+
         export interface Result {
             messageId: string;
         }

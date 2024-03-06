@@ -24,7 +24,7 @@ smtp(channel: string): Smtp.Builder
 web(channel: string): Web.Builder
 ```
 Возвращает интерфейс [`Web.Builder`](#web.builder) канала с именем `channel` уведомления пользователя по протоколу [`HTTP,WS`](https://ru.wikipedia.org/wiki/SMTP https://ru.wikipedia.org/wiki/WebSocket).<br>
-По умолчанию, в системе присутствует один единственный канал `WEB notices`. Администраторы могут создать дополнительные каналы в интерфейсе управления workspace.
+По умолчанию, в системе присутствует один единственный канал `WEB notices` (смотри `Web.Preset`. Администраторы могут создать дополнительные каналы в интерфейсе управления workspace.
 
 &nbsp;
 
@@ -112,12 +112,7 @@ interface Web.Builder {
 setTo(to: string | string[]): this
 ```
 Устанавливает адресата или адресатов. В качестве адресатов используются e-mail пользователей.<br>
-Также, для упрощения рассылки сообщений в `sendTo` могут использоваться следующие строковые константы:<br>
-◾️ `'%ALL_USERS%'` - все пользователи workspace<br>
-◾️ `'%ALL_GENERAL_USERS%'` - обычные пользователи workspace, у которых нет привилегий `modeller`, `admin`, `service user`<br>
-◾️ `'%ALL_SERVICE_USERS%'` - пользователи workspace, у которых есть привилегии `service user`<br>
-◾️ `'%ALL_ADMINS%'` - пользователи workspace, у которых есть привилегии `admin`<br>
-◾️ `'%ALL_MODELLERS%'` - пользователи workspace, у которых есть привилегии `modeller`<br>
+Также, для упрощения рассылки сообщений в `sendTo` могут использоваться специальные строковые константы `Web.GroupAlias`.<br>
 Возвращает `this`.
 
 &nbsp;
@@ -202,6 +197,30 @@ interface Web.Result {
 ```
 Интерфейс доступа к результатам отправки уведомления. Содержит строку `messageId` с идентификатором отправленного уведомления.<br>
 Администраторы могут использовать идентификатор для поиска сообщения в интерфейсе управления workspace.
+
+&nbsp;
+
+### Константы
+```ts
+export const enum Web.Preset {
+    CommonChannel = 'WEB notices'
+}
+```
+
+```ts
+export const enum Web.GroupAlias {
+    AllUsers = '%ALL_USERS%',
+    AllGeneralUsers = '%ALL_GENERAL_USERS%',
+    AllServiceUsers = '%ALL_SERVICE_USERS%',
+    AllAdmins = '%ALL_ADMINS%',
+    AllModellers = '%ALL_MODELLERS%'
+}
+```
+◾️ `'%ALL_USERS%'` - все пользователи workspace<br>
+◾️ `'%ALL_GENERAL_USERS%'` - обычные пользователи workspace, у которых нет привилегий `modeller`, `admin`, `service user`<br>
+◾️ `'%ALL_SERVICE_USERS%'` - пользователи workspace, у которых есть привилегии `service user`<br>
+◾️ `'%ALL_ADMINS%'` - пользователи workspace, у которых есть привилегии `admin`<br>
+◾️ `'%ALL_MODELLERS%'` - пользователи workspace, у которых есть привилегии `modeller`<br>
 
 &nbsp;
 
