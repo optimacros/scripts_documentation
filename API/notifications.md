@@ -100,6 +100,7 @@ interface Web.Builder {
 	setTo(to: string | string[]): this;
 	setSubject(subject: string): this;
 	setBody(body: string): this;
+	markUrgent(): this;
 	send(): Web.Result;
 }
 ```
@@ -117,7 +118,6 @@ setTo(to: string | string[]): this
 ◾️ `'%ALL_SERVICE_USERS%'` - пользователи workspace, у которых есть привилегии `service user`<br>
 ◾️ `'%ALL_ADMINS%'` - пользователи workspace, у которых есть привилегии `admin`<br>
 ◾️ `'%ALL_MODELLERS%'` - пользователи workspace, у которых есть привилегии `modeller`<br>
-◾️ `'%URGENT_NOTICE%'` - повышает важность сообщения, может быть использованно при отображении уведомления на клиенте<br>
 Возвращает `this`.
 
 &nbsp;
@@ -139,11 +139,19 @@ setBody(body: string): this
 &nbsp;
 
 ```js
+markUrgent(): this
+```
+Повышает важность сообщения, может быть использованно при отображении уведомления на клиенте.<br>
+Возвращает `this`.
+
+&nbsp;
+
+```js
 send(): Web.Result
 ```
 Запускает механизм асинхронной отправки уведомления. Возвращает интерфейс [`Web.Result`](#web.result).
 
-Пример использования:
+Примеры использования:
 
 ```js
 const channelName = 'WEB notices';
@@ -155,6 +163,26 @@ try {
         .setTo(recepients)
         .setSubject('Hello from scripts!')
         .setBody('Some message')
+        .send();
+
+    console.log('Success:\n\n');
+    console.log(result.messageId);
+} catch (e) {
+    console.log(`Error: ${e.message}`);
+}
+```
+
+```js
+const channelName = 'WEB notices';
+const recepients = ['tester1@example.com','tester2@example.com','%ALL_MODELLERS%'];
+const sender = om.notifications.web(channelName);
+
+try {
+    const result = sender
+        .setTo(recepients)
+        .setSubject('Hello from scripts!')
+        .setBody('Some URGENT message!')
+        .markUrgent()
         .send();
 
     console.log('Success:\n\n');

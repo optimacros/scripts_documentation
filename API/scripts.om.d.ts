@@ -2009,6 +2009,7 @@ export namespace Notifications {
             setTo(to: string | string[]): this;
             setSubject(subject: string): this;
             setBody(body: string): this;
+            markUrgent(): this;
             send(): Result;
         }
     }
