@@ -431,9 +431,9 @@ recalculateIfManualCalculable(identifiers: number[]): boolean
 
 <a name="model-info.batch-update-input-cells-via-formula"></a>
 ```js
-batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean
+batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[], sortByDependenciesValueFormula: boolean, sortByDependenciesConditionFormula: boolean): boolean;
 ```
-Производит пересчёт (независимо от флага автопересчёта) сущностей (кубов или свойств справочников), заданных массивом `requests` типа [`UpdateInputCellsViaFormulaRequest`](#update-input-cells-via-formula-request). Передаваемая формула *не* переписывает текущую формулу данной сущности. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
+Производит пересчёт (независимо от флага автопересчёта) сущностей (кубов или свойств справочников), заданных массивом `requests` типа [`UpdateInputCellsViaFormulaRequest`](#update-input-cells-via-formula-request), булевыми значениями `sortByDependenciesValueFormula` и `sortByDependenciesConditionFormula`, отвечающие за учитывание формул при определении порядка расчётов кубов. Передаваемая формула *не* переписывает текущую формулу данной сущности. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
 
 &nbsp;
 
