@@ -40,7 +40,7 @@ hash(algo: string , data: string , binary: boolean): string | BinaryData
 
 Если `binary = false` (по умолчанию), то хэш возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре ([`hexits`](https://en.wiktionary.org/wiki/hexit)).
 
-Если `binary = true`, то хэш возвращается в виде бинарных данных инкапсулированных в специальный объект [`BinaryData`](#binarydata).
+Если `binary = true`, то хэш возвращается в виде бинарных данных, инкапсулированных в специальный объект [`BinaryData`](#binarydata).
 
 Пример использования:
 
