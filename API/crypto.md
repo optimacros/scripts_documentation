@@ -36,7 +36,7 @@ console.log(
 ```js
 hash(algo: string , data: string , binary: boolean): string | BinaryData
 ```
-Метод для получения хэша строки `data` (переданной в кодировке `UTF-8`) по указанному в алгоритму `algo`. Полный список доступных алгоритмов может быть получен с помощью метода `getHashAlgorithms()`.
+Метод для получения хэша строки `data` (переданной в кодировке `UTF-8`) по указанному алгоритму `algo`. Полный список доступных алгоритмов может быть получен с помощью метода `getHashAlgorithms()`.
 
 Если `binary = false` (по умолчанию), то хэш возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре ([`hexits`](https://en.wiktionary.org/wiki/hexit)).
 
@@ -56,22 +56,22 @@ console.log(
 ```js
 hmac(algo: string, data: string, key: string | BinaryData, binary: boolean): string | BinaryData
 ```
-Метод для получения подписи [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием ключа `key`и алгоритма хэширования `algo`.
+Метод для получения подписи [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием ключа `key` и алгоритма хэширования `algo`.
 
-Ключ `key` может быть передан в виде строки в кодировке `UTF-8` или в бинарном виде инкапсулированным в объект [`BinaryData`](#binarydata). Аналогично `hash`, полный список доступных алгоритмов хэширования `algo` может быть получен с помощью метода `getHmacHashAlgorithms()`.
+Ключ `key` может быть передан в виде строки в кодировке `UTF-8` или в бинарном виде — инкапсулированным в объект [`BinaryData`](#binarydata). Аналогично методу `hash()`, полный список доступных алгоритмов хэширования `algo` может быть получен с помощью метода `getHmacHashAlgorithms()`.
 
 Если `binary = false` (по умолчанию), то хэш возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре ([`hexits`](https://en.wiktionary.org/wiki/hexit)).
 
-Если `binary = true`, то хэш возвращается в виде бинарных данных инкапсулированных в специальный объект [`BinaryData`](#binarydata).
+Если `binary = true`, то хэш возвращается в виде бинарных данных, инкапсулированных в специальный объект [`BinaryData`](#binarydata).
 
-Пример использования для получения подписи сервисы [`AWS s3`](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-streaming.html):
+Демонстрация использования на примере получения подписи для сервиса [`AWS s3`](https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-streaming.html):
 
 ```js
 const dateKey = om.crypto.hmac('sha-256', '20130524', 'AWS4' + 'very_secret_key', true);
 const regionKey = om.crypto.hmac('sha-256', 'us-east-1', dateKey, true);
 const serviceKey = om.crypto.hmac('sha-256', 's3', regionKey, true);
 const signingKey = om.crypto.hmac('sha-256', 'aws4_request' , serviceKey, true);
-const signature = om.crypto.hmac('sha-256', stringToSign, signingKey);
+const signature = om.crypto.hmac('sha-256', 'stringToSign', signingKey);
 ```
 
 &nbsp;
@@ -79,14 +79,14 @@ const signature = om.crypto.hmac('sha-256', stringToSign, signingKey);
 ```js
 getHashAlgorithms(): string[]
 ```
-Возвращает список алгоритмов хэширования, которые могут быть использованы в параметре `algo` метода `hash`.
+Возвращает список алгоритмов хэширования, которые могут быть использованы в параметре `algo` метода `hash()`.
 
 &nbsp;
 
 ```js
 getHmacHashAlgorithms(): string[]
 ```
-Возвращает список алгоритмов хэширования, которые могут быть использованы в параметре `algo` метода `hmac`.
+Возвращает список алгоритмов хэширования, которые могут быть использованы в параметре `algo` метода `hmac()`.
 
 &nbsp;
 
