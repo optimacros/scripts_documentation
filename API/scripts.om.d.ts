@@ -9,11 +9,14 @@ export type StringMap = {
 };
 
 export interface Cell {
-    setValue(value: number | string | null | boolean);
+    setValue(value: number | string | boolean | null);
 
-    getValue(): number | string | null | boolean;
+    /**
+     * returns {number | string | null} boolean cube values are returned as strings 'true'/'false'
+     */
+    getValue(): number | string | null;
 
-    getNativeValue(): number | string | null | boolean;
+    getNativeValue(): number | string | null;
 
     //2.0 only
     getTextValue(): number | string | null;
@@ -211,9 +214,9 @@ export interface Exporter {
 export interface Pivot {
     create(): Grid;
 
-    rowsFilter(...data: string[] | number[]): Pivot;
+    rowsFilter(data: string | string[] | number | number[]): Pivot;
     
-    columnsFilter(...data: string[] | number[]): Pivot;
+    columnsFilter(data: string | string[] | number | number[]): Pivot;
 
     withoutValues(): Pivot;
 
@@ -645,7 +648,7 @@ export interface Lists {
 }
 
 export interface CellBuffer {
-    set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
+    set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer;
 
     apply(): CellBuffer;
 
@@ -1164,7 +1167,7 @@ export interface CsvReader {
      */
     changeFileCharset(charset: string): CsvReader;
 
-    generator(): string[][];
+    generator(): IterableIterator<string[]>;
 }
 
 export interface CsvWriter {
@@ -2159,6 +2162,32 @@ export interface AuditPivot extends Pivot {
     detailsFilter(details4: string): AuditPivot;
 }
 
+export interface Users {
+    modelUsersTab(): ModelUsersTab;
+    workspaceUsersTab(): WorkspaceUsersTab;
+}
+
+export interface WorkspaceUsersTab extends Tab {
+
+}
+
+export interface ModelUsersTab extends Tab {
+
+}
+
+export interface Users {
+    modelUsersTab(): ModelUsersTab;
+    workspaceUsersTab(): WorkspaceUsersTab;
+}
+
+export interface WorkspaceUsersTab extends Tab {
+
+}
+
+export interface ModelUsersTab extends Tab {
+
+}
+
 export interface OM {
     readonly common: Common;
     readonly environment: Environment;
@@ -2174,6 +2203,7 @@ export interface OM {
     readonly apiServices: ApiServices;
     readonly audit: Audit;
     readonly crypto: Crypto;
+    readonly users: Users;
 }
 
 export var om: OM;

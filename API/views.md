@@ -744,7 +744,7 @@ getByIndexes(indexes: number[]): Cells | null
 ### Интерфейс Cell<a name="cell"></a>
 ```ts
 interface Cell {
-	setValue(value: number | string | null);
+	setValue(value: number | string | boolean | null);
 	getValue(): number | string | null;
 	getNativeValue(): number | string | null;
 	getContextValue(): string | null;
@@ -762,7 +762,7 @@ interface Cell {
 
 <a name="cell.set-value"></a>
 ```js
-setValue(value: number | string | null)
+setValue(value: number | string | boolean | null)
 ```
 Устанавливает значение клетки. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
 
@@ -772,7 +772,7 @@ setValue(value: number | string | null)
 ```js
 getValue(): number | string | null
 ```
-Возвращает значение клетки, которое видит пользователь.
+Возвращает значение клетки, которое видит пользователь. Если клетка имеет логический формат, то возвращается строковое значение `'true'` или `'false'`.
 
 &nbsp;
 

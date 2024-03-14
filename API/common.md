@@ -110,7 +110,7 @@ getCurrentMacrosStorageReadMode(): string
 ### Интерфейс CellBuffer<a name="cell-buffer"></a>
 ```ts
 interface CellBuffer {
-	set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
+	set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer;
 	apply(): CellBuffer;
 	count(): number;
 	canLoadCellsValues(value: boolean): CellBuffer;
@@ -142,7 +142,7 @@ interface CellBuffer {
 &nbsp;
 
 ```js
-set(cell: Cell | CubeCell, value: number | string | null): CellBuffer
+set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer
 ```
 Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
 

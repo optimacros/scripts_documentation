@@ -3,8 +3,8 @@
 В этом разделе находится техническое описание предоставляемых платформой интерфейсов. Их можно разделить на 6 групп:
 
 * выполнение скрипта: информация об окружении и управление выводом/действиями после завершения работы (см. `Common`, `Environment`, `Optimization`);
-* взаимодействие с моделью, как сущностью: создание бэкапа, пересчёт всей модели (см. `Common.ModelInfo`);
-* взаимодействие с данными и метаданными модели (см. `Multicubes`, `Times`, `Versions`, `Lists`, `Common.CopyData`;
+* взаимодействие с моделью, как сущностью: создание бэкапа, пересчёт всей модели (см. `Common.ModelInfo`, `Users`);
+* взаимодействие с данными и метаданными модели (см. `Multicubes`, `Times`, `Versions`, `Lists`, `Common.CopyData`);
 * взаимодействие с внешним миром (см. `Common.ApiService`, `Filesystems`, `Connectors`, `Notifications`);
 * административное: настройка API-сервисов (`ApiServices`), работа с аудитом (`Audit`);
 * функции, напрямую не связанные с Оптимакросом, функции помощники — интерфейс `Crypto`.
@@ -32,6 +32,7 @@
 1. [Администрирование Web API сервисов](apiServicesAdministration.md)
 1. [Аудит](audit.md)
 1. [Криптография, хэширование и вспомогательные функции](crypto.md)
+1. [Пользователи](users.md)
 
 ## Интерфейс OM<a name="om"></a>
 ```ts
@@ -50,6 +51,7 @@ interface OM {
 	readonly apiServices: ApiServices;
 	readonly audit: Audit;
 	readonly crypto: Crypto;
+	readonly users: Users;
 }
 
 var om: OM;
@@ -153,6 +155,13 @@ readonly audit: Audit;
 readonly crypto: Crypto;
 ```
 Ссылка на интерфейс [`Crypto`](./crypto.md).
+
+&nbsp;
+
+```js
+readonly users: Users;
+```
+Ссылка на интерфейс [`Users`](./users.md).
 
 &nbsp;
 
