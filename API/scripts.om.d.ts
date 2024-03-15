@@ -826,7 +826,7 @@ export interface ModelInfo {
 
     recalculateIfManualCalculable(identifiers: number[]): boolean;
 
-    batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean;
+    batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[], sortByDependenciesValueFormula: boolean, sortByDependenciesConditionFormula: boolean): boolean;
 
     recalculateCubes(identifiers: number[]): boolean;
 
