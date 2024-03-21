@@ -291,7 +291,7 @@ interface ModelInfo {
 	
 	recalculateIfManualCalculable(identifiers: number[]): boolean;
 
-	batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[]): boolean;
+	batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[], sortByDependenciesValueFormula?: boolean, sortByDependenciesConditionFormula?: boolean): boolean;
 
 	getStorageInstancePriority(): number;
 	setStorageInstancePriority(priority: number): number;
@@ -431,21 +431,27 @@ recalculateIfManualCalculable(identifiers: number[]): boolean
 
 <a name="model-info.batch-update-input-cells-via-formula"></a>
 ```js
-batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[], sortByDependenciesValueFormula: boolean, sortByDependenciesConditionFormula: boolean): boolean;
+batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[], sortByDependenciesValueFormula?: boolean, sortByDependenciesConditionFormula?: boolean): boolean
 ```
-Производит пересчёт (независимо от флага автопересчёта) сущностей (кубов или свойств справочников), заданных массивом `requests` типа [`UpdateInputCellsViaFormulaRequest`](#update-input-cells-via-formula-request), булевыми значениями `sortByDependenciesValueFormula` и `sortByDependenciesConditionFormula`, отвечающие за учитывание формул при определении порядка расчётов кубов. Передаваемая формула *не* переписывает текущую формулу данной сущности. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
+Производит пересчёт (независимо от флага автопересчёта) сущностей (вводимых кубов или свойств справочников), заданных массивом `requests` типа [`UpdateInputCellsViaFormulaRequest`](#update-input-cells-via-formula-request). Передаваемая формула *не* переписывает текущую формулу данной сущности. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
+
+Дополнительные булевые параметры влияют на порядок выполнения запросов.
+- `sortByDependenciesValueFormula` - учитывать формулы при определении порядка расчётов кубов.
+- `sortByDependenciesConditionFormula` - учитывать формулы, передаваемые в условии, при определении порядка расчёта кубов.
+
+Значение `true` указывает, что при построении порядка расчётов нужно учитывать зависимости между кубами в формулах, т.е. если `куб2` ссылается на `куб1`, то `куб1` должен считаться раньше. Значение `false` указывает, что порядок расчётов не важен и система сама решит, в каком порядке выполнить пересчет в данный момент времени (порядок может отличаться при разных запусках). По умолчанию оба параметра имеют значение `true`.
 
 &nbsp;
 
 ```js
-getStorageInstancePriority(): number;
+getStorageInstancePriority(): number
 ```
 Возвращает текущий приоритет OLAP-процесса модели — значение [nice](https://ru.wikipedia.org/wiki/Nice), число от `-20` (наивысший приоритет) до `+19` (наименьший приоритет).
 
 &nbsp;
 
 ```js
-setStorageInstancePriority(priority: number): number;
+setStorageInstancePriority(priority: number): number
 ```
 Устанавливает приоритет OLAP-процесса модели (значение [nice](https://ru.wikipedia.org/wiki/Nice)). В параметре принимает число от `0` до `19`, отрицательные значения не разрешены. Возвращает предыдущее значение приоритета.
 
@@ -461,28 +467,28 @@ setStorageInstancePriority(priority: number): number;
 &nbsp;
 
 ```js
-setModelStorageReadMode(type: string): boolean;
+setModelStorageReadMode(type: string): boolean
 ```
 Устанавливает режим чтения данных модели для пользователей. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим чтения для пользователей`. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode).  Возвращает `true`.
 
 &nbsp;
 
 ```js
-setModelStorageWriteMode(type: string): boolean;
+setModelStorageWriteMode(type: string): boolean
 ```
 Устанавливает режим записи данных в модель. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим записи для пользователей и скриптов`. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#write-mode). Возвращает `true`.
 
 &nbsp;
 
 ```js
-getStorageReadMode(): string;
+getStorageReadMode(): string
 ```
 Возвращает установленный режим чтения данных модели. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode).
 
 &nbsp;
 
 ```js
-getStorageWriteMode(): string;
+getStorageWriteMode(): string
 ```
 Возвращает установленный режим записи данных в модель. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#write-mode).
 
