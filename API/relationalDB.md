@@ -188,6 +188,8 @@ load(): SqlConnection
 ```ts
 interface MysqlConnectorBuilder extends SqlConnectorBuilder {
 	loadImportBuilder(): MysqlImportBuilder;
+
+    load(): MysqlConnection
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL). Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
@@ -198,6 +200,48 @@ interface MysqlConnectorBuilder extends SqlConnectorBuilder {
 loadImportBuilder(): MysqlImportBuilder
 ```
 Возвращает ссылку на интерфейс [`MysqlImportBuilder`](#mysql-import-builder) импорта из файла CSV.
+
+&nbsp;
+
+```js
+load(): MysqlConnection
+```
+Соединяется с БД и возвращает объект соединения [`MysqlConnection`](#sql-connection).
+
+&nbsp;
+
+### Интерфейс MysqlConnection<a name="mysql-connection"></a>
+```ts
+interface MysqlConnection extends SqlConnection {
+    beginTransaction(): this;
+
+    commit(): this;
+
+    rollback(): this;
+}
+```
+Объект соединения с реляционной базой данных MySQL.
+
+&nbsp;
+
+```js
+beginTransaction(): this
+```
+Создает транзакцию.
+
+&nbsp;
+
+```js
+commit(): this
+```
+Фиксирует транзакцию.
+
+&nbsp;
+
+```js
+rollback(): this
+```
+Откатывает транзакцию.
 
 &nbsp;
 

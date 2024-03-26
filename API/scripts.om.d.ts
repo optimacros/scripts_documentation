@@ -1251,6 +1251,14 @@ export interface SqlConnection {
     qb(): SqlQueryBuilder;
 }
 
+export interface MysqlConnection extends SqlConnection {
+    beginTransaction(): this;
+
+    commit(): this;
+
+    rollback(): this;
+}
+
 export interface SqlConnectorBuilder {
     setHost(value: string): this;
 
@@ -2052,6 +2060,8 @@ export interface PostgresqlImportBuilder {
 
 export interface MysqlConnectorBuilder extends SqlConnectorBuilder {
     loadImportBuilder(): this;
+
+    load(): MysqlConnection;
 }
 
 export interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
