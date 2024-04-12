@@ -254,7 +254,7 @@ for (let rowArray of generator) {
         }
         else {
             row.push(points);
-            row.push( "Меч 3 уровня");
+            row.push("Меч 3 уровня");
         }
     }
 }
@@ -317,7 +317,7 @@ for (let rowArray of generator) {
         }
         else {
             row.push(points);
-            row.push( "Меч 3 уровня");
+            row.push("Меч 3 уровня");
         }
     }
 }
@@ -399,7 +399,7 @@ for (let rowArray of generator) {
         }
         else {
             row.push(points);
-            row.push( "Меч 3 уровня");
+            row.push("Меч 3 уровня");
         }
     }
     writer.writeRow(row);
@@ -489,7 +489,7 @@ for (let rowArray of generator) {
         }
         else {
             row.push(points);
-            row.push( "Меч 3 уровня");
+            row.push("Меч 3 уровня");
         }
     }
     writer.writeRow(row);
