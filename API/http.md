@@ -17,35 +17,35 @@ interface HttpManager {
 &nbsp;
 
 ```js
-requestBuilder(): RequestBuilder
+requestBuilder(): RequestBuilder;
 ```
 Возвращает объект [`RequestBuilder`](#request-builder) построения запроса.
 
 &nbsp;
 
 ```js
-urlEncode(value: string): string
+urlEncode(value: string): string;
 ```
 Возвращает строку `value`, закодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
 
 &nbsp;
 
 ```js
-urlDecode(value: string): string
+urlDecode(value: string): string;
 ```
 Возвращает строку `value`, раскодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
 
 &nbsp;
 
 ```js
-base64Encode(value: string): string
+base64Encode(value: string): string;
 ```
 Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64).
 
 &nbsp;
 
 ```js
-base64Decode(value: string): string | boolean
+base64Decode(value: string): string | boolean;
 ```
 Возвращает строку `value`, раскодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` в случае ошибки.
 
@@ -68,49 +68,49 @@ interface Params {
 &nbsp;
 
 ```js
-getAll(): Object
+getAll(): Object;
 ```
 Возвращает все параметры в виде [`Object`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object).
 
 &nbsp;
 
 ```js
-setAll(pairs: Object): boolean
+setAll(pairs: Object): boolean;
 ```
 Не работает.
 
 &nbsp;
 
 ```js
-get(name: string): any
+get(name: string): any;
 ```
 Возвращает значение параметра `name`.
 
 &nbsp;
 
 ```js
-set(name: string, value: any): boolean
+set(name: string, value: any): boolean;
 ```
 Устанавливает значение параметра `name`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-del(name: string): boolean
+del(name: string): boolean;
 ```
 Удаляет параметр `name`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-has(name: string): boolean
+has(name: string): boolean;
 ```
 Возвращает признак наличия параметра `name`.
 
 &nbsp;
 
 ```js
-clear(): boolean
+clear(): boolean;
 ```
 Удаляет все параметры. Возвращает `true`.
 
@@ -120,7 +120,7 @@ clear(): boolean
 ```ts
 interface UrlParams extends Params {
 	stringify(): string;
-	setEncodingType(type: string): UrlParams;
+	setEncodingType(type: string): this;
 	getEncodingType(): string;
 }
 ```
@@ -129,21 +129,21 @@ interface UrlParams extends Params {
 &nbsp;
 
 ```js
-stringify(): string
+stringify(): string;
 ```
 Возвращает строковое представление значений параметров вида `paramOne=5&paramTwo=hello&paramThree=world`.
 
 &nbsp;
 
 ```js
-setEncodingType(type: string): UrlParams
+setEncodingType(type: string): this;
 ```
 Устанавливает стандарт кодировки параметров URL. Допустимые значения: `NONE`, `RFC1738`, `RFC3986`. Значение по умолчанию: `RFC1738`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getEncodingType(): string
+getEncodingType(): string;
 ```
 Возвращает стандарт кодировки параметров URL.
 
@@ -160,7 +160,7 @@ interface JsonRequestBody {
 &nbsp;
 
 ```js
-setJson(value: string | Object): boolean
+setJson(value: string | Object): boolean;
 ```
 Устанавливает в тело запроса переданный JSON. Если передаётся строка, она предварительно конвертируется в JSON с помощью [`JSON.parse()`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse). Возвращает `true`. ***Передача в функцию `value` типа `Object` работает некорректно.***
 
@@ -177,7 +177,7 @@ interface StringRequestBody {
 &nbsp;
 
 ```js
-	setBody(value: string): boolean
+	setBody(value: string): boolean;
 ```
 Устанавливает переданную строку в тело запроса. Возвращает `true`.
 
@@ -195,7 +195,7 @@ interface FormRequestBody {
 &nbsp;
 
 ```js
-	params(): Params
+	params(): Params;
 ```
 Возвращает объект [`Params`](#params) для установки значений параметров.
 
@@ -221,21 +221,21 @@ interface RequestBody {
 &nbsp;
 
 ```js
-jsonBody(): JsonRequestBody
+jsonBody(): JsonRequestBody;
 ```
 Устанавливает значение [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type: application/json`, возвращает интерфейс [`JsonRequestBody`](#json-request-body) для отправки [`JSON`](https://ru.wikipedia.org/wiki/JSON) в теле запроса.
 
 &nbsp;
 
 ```js
-stringBody(): StringRequestBody
+stringBody(): StringRequestBody;
 ```
 *Не* устанавливает [`заголовок HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type`, возвращает интерфейс [`StringRequestBody`](#string-request-body) для отправки строки в теле запроса.
 
 &nbsp;
 
 ```js
-formBody(): FormRequestBody
+formBody(): FormRequestBody;
 ```
 Устанавливает значение [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type: application/x-www-form-urlencoded`, возвращает интерфейс [`FormRequestBody`](#form-request-body) для отправки формы в теле запроса.
 
@@ -268,119 +268,119 @@ interface Url {
 &nbsp;
 
 ```js
-setUrl(url: string): boolean
+setUrl(url: string): boolean;
 ```
 Устанавливает URL целиком. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getUrl(): string
+getUrl(): string;
 ```
 Возвращает URL.
 
 &nbsp;
 
 ```js
-setUrlPath(path: string): boolean
+setUrlPath(path: string): boolean;
 ```
 Устанавливает путь на сервере. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getUrlPath(): string
+getUrlPath(): string;
 ```
 Возвращает путь на сервере.
 
 &nbsp;
 
 ```js
-setUrlScheme(scheme: string): boolean
+setUrlScheme(scheme: string): boolean;
 ```
 Устанавливает схему URL (протокол). Возвращает `true`.
 
 &nbsp;
 
 ```js
-getUrlScheme(): string
+getUrlScheme(): string;
 ```
 Возвращает схему URL (протокол).
 
 &nbsp;
 
 ```js
-setHost(host: string): boolean
+setHost(host: string): boolean;
 ```
 Устанавливает имя или адрес хоста. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getHost(): string
+getHost(): string;
 ```
 Возвращает имя или адрес хоста, установленное в URL.
 
 &nbsp;
 
 ```js
-setPort(port: number | string): boolean
+setPort(port: number | string): boolean;
 ```
 Устанавливает номер порта. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getPort(): number | null
+getPort(): number | null;
 ```
 Возвращает номер порта.
 
 &nbsp;
 
 ```js
-setUser(user: string): boolean
+setUser(user: string): boolean;
 ```
 Устанавливает имя пользователя. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getUser(): string
+getUser(): string;
 ```
 Возвращает имя пользователя.
 
 &nbsp;
 
 ```js
-setPassword(password: string): boolean
+setPassword(password: string): boolean;
 ```
 Устанавливает пароль. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getPassword(): string | null
+getPassword(): string | null;
 ```
 Возвращает пароль.
 
 &nbsp;
 
 ```js
-setFragment(fragment: string): boolean
+setFragment(fragment: string): boolean;
 ```
 Устанавливает идентификатор якоря.  Возвращает `true`.
 
 &nbsp;
 
 ```js
-getFragment(): string | null
+getFragment(): string | null;
 ```
 Возвращает идентификатор якоря.
 
 &nbsp;
 
 ```js
-params(): UrlParams
+params(): UrlParams;
 ```
 Возвращает интерфейс доступа [`UrlParams`](#url-params) к параметрам URL.
 
@@ -410,70 +410,70 @@ interface AllowRedirects {
 &nbsp;
 
 ```js
-setStatus(status: boolean): boolean
+setStatus(status: boolean): boolean;
 ```
 Устанавливает флаг разрешения перенаправлений HTTP-запросов. Значение по умолчанию: `true`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getStatus(): boolean
+getStatus(): boolean;
 ```
 Возвращает флаг разрешения перенаправлений HTTP-запросов.
 
 &nbsp;
 
 ```js
-setMax(max: number): boolean
+setMax(max: number): boolean;
 ```
 Устанавливает максимальное количество перенаправлений. Значение по умолчанию: `5`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getMax(): number
+getMax(): number;
 ```
 Возвращает максимальное количество перенаправлений.
 
 &nbsp;
 
 ```js
-setStrict(strict: boolean): boolean
+setStrict(strict: boolean): boolean;
 ```
 Не реализовано.
 
 &nbsp;
 
 ```js
-getStrict(): boolean
+getStrict(): boolean;
 ```
 Не реализовано.
 
 &nbsp;
 
 ```js
-setWithReferer(withReferer: boolean): boolean
+setWithReferer(withReferer: boolean): boolean;
 ```
 Устанавливает флаг передачи [`HTTP referer`](https://ru.wikipedia.org/wiki/HTTP_referer) в заголовке запроса. Значение по умолчанию: `false`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getWithReferer(): boolean
+getWithReferer(): boolean;
 ```
 Возвращает флаг передачи [`HTTP referer`](https://ru.wikipedia.org/wiki/HTTP_referer) в заголовке запроса.
 
 &nbsp;
 
 ```js
-setProtocols(protocols: string[]): boolean
+setProtocols(protocols: string[]): boolean;
 ```
 Устанавливает список протоколов, для которых разрешены перенаправления. Значение по умолчанию: `['http', 'https']`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getProtocols(): string[]
+getProtocols(): string[];
 ```
 Возвращает список протоколов, для которых разрешены перенаправления.
 
@@ -482,10 +482,10 @@ getProtocols(): string[]
 ### Интерфейс HttpAuth<a name="http-auth"></a>
 ```ts
 interface HttpAuth {
-	setUser(user: string): HttpAuth;
-	setPassword(password: string): HttpAuth;
-	setType(type: string): HttpAuth;
-	setStatus(status: boolean): HttpAuth;
+	setUser(user: string): this;
+	setPassword(password: string): this;
+	setType(type: string): this;
+	setStatus(status: boolean): this;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настроек аутентификации HTTP. Все функции возвращают `this`.
@@ -493,28 +493,28 @@ interface HttpAuth {
 &nbsp;
 
 ```js
-setUser(user: string): HttpAuth
+setUser(user: string): this;
 ```
 Устанавливает имя пользователя.
 
 &nbsp;
 
 ```js
-setPassword(password: string): HttpAuth
+setPassword(password: string): this;
 ```
 Устанавливает пароль.
 
 &nbsp;
 
 ```js
-setType(type: string): HttpAuth
+setType(type: string): this;
 ```
 Устанавливает тип аутентификации. Допустимые значения: [`basic`](https://ru.wikipedia.org/wiki/%D0%90%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F_%D0%B2_%D0%98%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82%D0%B5#%D0%91%D0%B0%D0%B7%D0%BE%D0%B2%D0%B0%D1%8F_%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F), [`digest`](https://ru.wikipedia.org/wiki/%D0%94%D0%B0%D0%B9%D0%B4%D0%B6%D0%B5%D1%81%D1%82-%D0%B0%D1%83%D1%82%D0%B5%D0%BD%D1%82%D0%B8%D1%84%D0%B8%D0%BA%D0%B0%D1%86%D0%B8%D1%8F), [`ntlm`](https://ru.wikipedia.org/wiki/NTLM).
 
 &nbsp;
 
 ```js
-setStatus(status: boolean): HttpAuth
+setStatus(status: boolean): this;
 ```
 Устанавливает флаг аутентификации HTTP. Значение по умолчанию: `false`.
 
@@ -523,9 +523,9 @@ setStatus(status: boolean): HttpAuth
 ### Интерфейс Cert<a name="cert"></a>
 ```ts
 interface Cert {
-	setPath(path: string): Cert;
+	setPath(path: string): this;
 	getPath(path: string): string;
-	setPassphrase(passphrase: string): Cert;
+	setPassphrase(passphrase: string): this;
 }
 ```
 Интерфейс настройки сертификата аутентификации HTTP. ***Не реализован.***
@@ -533,21 +533,21 @@ interface Cert {
 &nbsp;
 
 ```js
-setPath(path: string): Cert
+setPath(path: string): this;
 ```
 Устанавливает путь к файлу сертификата. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getPath(path: string): string
+getPath(path: string): string;
 ```
 Возвращает путь к файлу сертификата.
 
 &nbsp;
 
 ```js
-setPassphrase(passphrase: string): Cert
+setPassphrase(passphrase: string): this;
 ```
 Устанавливает парольную фразу. Возвращает `this`.
 
@@ -563,14 +563,14 @@ interface Verify {
 Интерфейс верификации сертификатов [`SSL`](https://ru.wikipedia.org/wiki/SSL).
 
 ```js
-setStatus(value: boolean): boolean
+setStatus(value: boolean): boolean;
 ```
 Устанавливает признак верификации сертификата SSL. Значение по умолчанию: `true`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-setPath(path: string): boolean
+setPath(path: string): boolean;
 ```
 Не реализовано.
 
@@ -597,70 +597,70 @@ interface Options {
 &nbsp;
 
 ```js
-setConnTimeout(seconds: number): boolean
+setConnTimeout(seconds: number): boolean;
 ```
 Устанавливает тайм-аут соединения в секундах. Значение по умолчанию: `10`, максимальное значение: `60`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getConnTimeout(): number
+getConnTimeout(): number;
 ```
 Возвращает тайм-аут соединения.
 
 &nbsp;
 
 ```js
-setReqTimeout(seconds: number): boolean
+setReqTimeout(seconds: number): boolean;
 ```
 Устанавливает тайм-аут ожидания ответа в секундах. Значение по умолчанию: `30`, максимальное значение: `300`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getReqTimeout(): number
+getReqTimeout(): number;
 ```
 Возвращает тайм-аут ожидания ответа.
 
 &nbsp;
 
 ```js
-setCanDecodeContent(value: boolean): boolean
+setCanDecodeContent(value: boolean): boolean;
 ```
 Устанавливает признак распаковки тела ответа сервера. В случае `true` архивированное тело ответа будет деархивироваться, в случае `false` – нет. Значение по умолчанию: `true`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getCanDecodeContent(): boolean
+getCanDecodeContent(): boolean;
 ```
 Возвращает признак распаковки тела ответа сервера.
 
 &nbsp;
 
 ```js
-allowRedirects(): AllowRedirects
+allowRedirects(): AllowRedirects;
 ```
 Возвращает интерфейс [`AllowRedirects`](#allow-redirects) доступа к настройкам перенаправлений HTTP.
 
 &nbsp;
 
 ```js
-auth(): HttpAuth
+auth(): HttpAuth;
 ```
 Возвращает интерфейс [`HttpAuth`](#http-auth) доступа к настройкам аутентификации HTTP.
 
 &nbsp;
 
 ```js
-cert(): Cert
+cert(): Cert;
 ```
 Возвращает интерфейс [`Cert`](#cert) для настройки аутентификации по сертификату. ***Не реализовано.***
 
 &nbsp;
 
 ```js
-verify(): Verify
+verify(): Verify;
 ```
 Возвращает интерфейс [`Verify`](#verify) проверки сертификатов SSL.
 
@@ -669,7 +669,7 @@ verify(): Verify
 ### Интерфейс DownloadFileParams<a name="download-file-params"></a>
 ```ts
 interface DownloadFileParams {
-	setPath(path: string): DownloadFileParams;
+	setPath(path: string): this;
 }
 ```
 
@@ -678,16 +678,16 @@ interface DownloadFileParams {
 &nbsp;
 
 ```js
-setPath(path: string): DownloadFileParams
+setPath(path: string): this;
 ```
-Устанавливает путь в локальной директории скриптов, по которому будет сохранен скачиваемый файл. Файл будет загружен по данному пути после отправки запроса. По умолчанию параметр пути не задан - файл скачиваться не будет.
+Устанавливает путь в локальной директории скриптов, по которому будет сохранён скачиваемый файл. Файл будет загружен по данному пути после отправки запроса. По умолчанию параметр пути не задан - файл скачиваться не будет. Возвращает `this`.
 
 &nbsp;
 
 ### Интерфейс SizeLimitParams<a name="size-limit-params"></a>
 ```ts
 interface SizeLimitParams {
-	setContentLengthLimit(lengthInBytes: number): SizeLimitParams;
+	setContentLengthLimit(lengthInBytes: number): this;
 }
 ```
 
@@ -696,9 +696,9 @@ interface SizeLimitParams {
 &nbsp;
 
 ```js
-setContentLengthLimit(lengthInBytes: number): SizeLimitParams
+setContentLengthLimit(lengthInBytes: number): this;
 ```
-Устанавливает лимит получаемого контента в байтах. Если передать в аргумент `lengthInBytes` - `0` (числовой ноль), то проверка не будет происходить. Значение по умолчанию - `0`.
+Устанавливает лимит получаемого контента в байтах. Если передать в аргумент `lengthInBytes` - `0` (числовой ноль), то проверка не будет происходить. Значение по умолчанию - `0`. Возвращает `this`.
 
 &nbsp;
 
@@ -722,70 +722,70 @@ interface RequestBuilder {
 &nbsp;
 
 ```js
-url(): Url
+url(): Url;
 ```
 Возвращает объект [`Url`](#url) построения URL.
 
 &nbsp;
 
 ```js
-setMethod(type: string): boolean
+setMethod(type: string): boolean;
 ```
 Устанавливает [`метод HTTP `](https://ru.wikipedia.org/wiki/HTTP#%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B). Доступные значения: `GET`, `POST`, `DELETE`, `PUT`, `HEAD`, `OPTIONS`. Значение по умолчанию: `GET`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getMethod(): string
+getMethod(): string;
 ```
 Возвращает [`метод HTTP `](https://ru.wikipedia.org/wiki/HTTP#%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B). 
 
 &nbsp;
 
 ```js
-body(): RequestBody
+body(): RequestBody;
 ```
 Возвращает интерфейс [`RequestBody`](#request-body) формирования тела запроса.
 
 &nbsp;
 
 ```js
-options(): Options
+options(): Options;
 ```
 Возвращает интерфейс [`Options`](#options) настройки опций соединения.
 
 &nbsp;
 
 ```js
-cookies(): Params
+cookies(): Params;
 ```
 Возвращает интерфейс [`Params`](#params) для доступа к [`cookies`](https://ru.wikipedia.org/wiki/Cookie).
 
 &nbsp;
 
 ```js
-headers(): Params
+headers(): Params;
 ```
 Возвращает интерфейс [`Params`](#params) для формирования [`HTTP-заголовков`](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_HTTP) запроса.
 
 &nbsp;
 
 ```js
-downloadFileParams(): DownloadFileParams
+downloadFileParams(): DownloadFileParams;
 ```
 Возвращает интерфейс [`DownloadFileParams`](#download-file-params) для указания настроек скачивания файлов.
 
 &nbsp;
 
 ```js
-sizeLimitParams(): SizeLimitParams
+sizeLimitParams(): SizeLimitParams;
 ```
 Возвращает интерфейс [`SizeLimitParams`](#download-file-params) для указания лимита размера получаемого контента в ответе на запрос.
 
 &nbsp;
 
 ```js
-send(): Response
+send(): Response;
 ```
 Отправляет HTTP-запрос, дожидается ответа и возвращает интерфейс [`Response`](#response) доступа к данным ответа сервера.
 
@@ -819,21 +819,21 @@ interface Response {
 &nbsp;
 
 ```js
-headers(): ObjectOfStringArray
+headers(): ObjectOfStringArray;
 ```
 Возвращает заголовки ответа в виде [`ObjectOfStringArray`](#object-of-string-array).
 
 &nbsp;
 
 ```js
-getStringData(length?: number, catchEof?: boolean): string
+getStringData(length?: number, catchEof?: boolean): string;
 ```
 Возвращает данные ответа. Размер данных ограничен лимитом в `length` байт. Параметр `length` может принимать значения от 1 байта до 100 Мбайт = 100 * 2<sup>20</sup> байт; значение по умолчанию: `100 Мбайт`. Если размер данных превышает лимит и `catchEof === true`, выбрасывается исключение. Значение `catchEof` по умолчанию: `true`.
 
 &nbsp;
 
 ```js
-getStringDataLikeJson(): Object | boolean
+getStringDataLikeJson(): Object | boolean;
 ```
 Получает первые `length` байт тела ответа, прогоняет их через функцию [`JSON.parse()`](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) и возвращает её результат или `false` в случае ошибки. Величина `length` – значение по умолчанию аналогичного параметра функции `getStringData()`.
 
@@ -854,21 +854,21 @@ getBinaryDataGenerator(length?: number): string[];
 &nbsp;
 
 ```js
-getStatusCode(): number
+getStatusCode(): number;
 ```
 Возвращает [`код состояния HTTP`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP).
 
 &nbsp;
 
 ```js
-isOk(): boolean
+isOk(): boolean;
 ```
 Возвращает признак того, что код состояния HTTP [`успешный`](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%BA%D0%BE%D0%B4%D0%BE%D0%B2_%D1%81%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D1%8F_HTTP#%D0%A3%D1%81%D0%BF%D0%B5%D1%85), то есть `getStatusCode() === 200`.
 
 &nbsp;
 
 ```js
-getErrors(): ResponseErrors
+getErrors(): ResponseErrors;
 ```
 Возвращает интерфейс [`ResponseErrors`](#response-errors) доступа к ошибкам HTTP.
 
@@ -886,14 +886,14 @@ interface ResponseErrors {
 &nbsp;
 
 ```js
-getCode(): number
+getCode(): number;
 ```
 Возвращает код ошибки.
 
 &nbsp;
 
 ```js
-getMessage(): string
+getMessage(): string;
 ```
 Возвращает текст ошибки.
 

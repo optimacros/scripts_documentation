@@ -1659,7 +1659,7 @@ export namespace Http {
     }
     export interface UrlParams extends Params {
         // NONE|RFC1738|RFC3986
-        setEncodingType(type: string): UrlParams;
+        setEncodingType(type: string): this;
 
         getEncodingType(): string;
 
@@ -1676,7 +1676,7 @@ export namespace Http {
 
     export interface FormRequestBody {
         params(): Params;
-        appendFile(fieldName: string, fileName: string, filePath: string): FormRequestBody;
+        appendFile(fieldName: string, fileName: string, filePath: string): this;
     }
 
     export interface RequestBody {
@@ -1694,11 +1694,11 @@ export namespace Http {
     }
 
     export interface Cert {
-        setPath(path: string): Cert;
+        setPath(path: string): this;
 
         getPath(path: string): string;
 
-        setPassphrase(passphrase: string): Cert;
+        setPassphrase(passphrase: string): this;
     }
 
     export interface Url {
@@ -1778,16 +1778,16 @@ export namespace Http {
     }
 
     export interface HttpAuth {
-        setUser(user: string): HttpAuth;
+        setUser(user: string): this;
 
-        setPassword(password: string): HttpAuth;
+        setPassword(password: string): this;
 
         /**
          * @param type basic|digest|ntlm
          */
-        setType(type: string): HttpAuth;
+        setType(type: string): this;
 
-        setStatus(status: boolean): HttpAuth;
+        setStatus(status: boolean): this;
     }
 
     export interface Options {
@@ -1816,11 +1816,11 @@ export namespace Http {
     }
 
     export interface DownloadFileParams {
-        setPath(path: string): DownloadFileParams;
+        setPath(path: string): this;
     }
 
     export interface SizeLimitParams {
-        setContentLengthLimit(lengthInBytes: number): SizeLimitParams;
+        setContentLengthLimit(lengthInBytes: number): this;
     }
 
     export interface ResponseErrors {
