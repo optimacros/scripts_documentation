@@ -12,7 +12,7 @@ interface ApiServices {
 &nbsp;
 
 ```js
-apiServicesTab(): ApiServicesTab
+apiServicesTab(): ApiServicesTab;
 ```
 Возвращает ссылку на вкладку управления (создания, сортировки, удаления) элементами списка `Api Services` — списка веб-сервисов воркспейса, достпупного в панели администратора воркспейса.
 
