@@ -864,13 +864,13 @@ export interface ModelInfo {
 }
 
 export interface ButtonInfoOptions {
-    setLabel(label: string): ButtonInfoOptions;
+    setLabel(label: string): this;
 
     /**
      * PRIMARY|SECONDARY
      * @param style
      */
-    setStyle(style: string): ButtonInfoOptions;
+    setStyle(style: string): this;
 }
 
 export interface ButtonInfo {
@@ -878,7 +878,7 @@ export interface ButtonInfo {
      * GENERAL|CLOSE
      * @param type
      */
-    setType(type: string): ButtonInfo;
+    setType(type: string): this;
 
     options(): ButtonInfoOptions;
 }
@@ -893,9 +893,9 @@ export interface ResultBaseAction {
 }
 
 export interface EnvironmentInfo {
-    set(key: string, value: unknown): this;
+    set(key: string, value: any): this;
 
-    get(key: string): unknown;
+    get(key: string): any;
 }
 
 export interface BaseCodeExecutionAction extends ResultBaseAction {
@@ -915,7 +915,7 @@ export interface BaseCodeExecutionAction extends ResultBaseAction {
 
     setTaskDescription(description: string): this;
 
-    run(): TaskPromise|null;
+    run(): TaskPromise | null;
 }
 
 export interface ResultMacrosAction extends BaseCodeExecutionAction {
@@ -923,9 +923,9 @@ export interface ResultMacrosAction extends BaseCodeExecutionAction {
 }
 
 export interface TaskPromise {
-    getStatus(): string|null;
+    getStatus(): string | null;
 
-    wait(wait: number): TaskPromiseResult|null;
+    wait(wait: number): TaskPromiseResult | null;
 }
 
 export interface TaskPromiseResult {
@@ -933,7 +933,7 @@ export interface TaskPromiseResult {
 
     getDescription(): string;
 
-    getEnvironmentInfo(): EnvironmentInfo
+    getEnvironmentInfo(): EnvironmentInfol
 }
 
 export interface CodeExecutionAction extends BaseCodeExecutionAction {
