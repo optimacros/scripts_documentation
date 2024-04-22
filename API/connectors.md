@@ -18,28 +18,28 @@ interface Connectors {
 &nbsp;
 
 ```js
-mysql(): MysqlConnectorBuilder
+mysql(): MysqlConnectorBuilder;
 ```
 Возвращает коннектор [`MysqlConnectorBuilder`](./relationalDB.md#mysql-connector-builder) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL).
 
 &nbsp;
 
 ```js
-postgresql(): PostgresqlConnectorBuilder
+postgresql(): PostgresqlConnectorBuilder;
 ```
 Возвращает коннектор [`PostgresqlConnectorBuilder`](./relationalDB.md#postgresql-connector-builder) для подключения к базе данных [`PostgreSQL`](https://ru.wikipedia.org/wiki/PostgreSQL).
 
 &nbsp;
 
 ```js
-sqlServer(): MicrosoftSqlConnectorBuilder
+sqlServer(): MicrosoftSqlConnectorBuilder;
 ```
 Возвращает коннектор [`MicrosoftSqlConnectorBuilder`](./relationalDB.md#microsoft-sql-connector-builder) для подключения к базе данных [`Microsoft SQL Server`](https://ru.wikipedia.org/wiki/Microsoft_SQL_Server).
 
 &nbsp;
 
 ```js
-oracle(): OracleConnectorBuilder
+oracle(): OracleConnectorBuilder;
 ```
 Возвращает коннектор [`OracleConnectorBuilder`](./relationalDB.md#oracle-connector-builder) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database).
 
@@ -53,21 +53,21 @@ snowflake(): SnowflakeConnectorBuilder;
 &nbsp;
 
 ```js
-mongodb(): Mongodb.ConnectorBuilder
+mongodb(): Mongodb.ConnectorBuilder;
 ```
 Возвращает коннектор [`Mongodb.ConnectorBuilder`](./mongoDB.md#connector-builder) для подключения к базе данных [`MongoDB`](https://ru.wikipedia.org/wiki/MongoDB).
 
 &nbsp;
 
 ```js
-http(): Http.HttpManager
+http(): Http.HttpManager;
 ```
 Возвращает коннектор [`Http.HttpManager`](./http.md#http-manager) соединения по протоколу HTTP.
 
 &nbsp;
 
 ```js
-winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
+winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 ```
 Возвращает коннектор [`WinAgent.WinAgentBuilder`](./winAgent.md#win-agent-builder) для взаимодействия с [`WinAgent`](./winAgent.md). Параметр `builtIn` указывает использовать встроенную конфигурацию воркспейса. Значение по умолчанию: `false`.
 
