@@ -14,14 +14,14 @@ interface Environment {
 &nbsp;
 
 ```js
-load(name: string): Environment;
+load(name: string): this;
 ```
 Загружает значения переменных окружения из нуль-мерного мультикуба `name`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-loadFromMulticube(name: string, view?: string | null): Environment;
+loadFromMulticube(name: string, view?: string | null): this;
 ```
 Загружает данные в переменную окружения `view` (или `name`, если `view` не задано) из представления `view` мультикуба `name`. Если `view` не задано, используется представление по умолчанию. Возвращает `this`.
 
@@ -84,7 +84,7 @@ get(key: string, def?: any): any;
 &nbsp;
 
 ```js
-set(name: string, value: number | string | null): Environment;
+set(name: string, value: number | string | null): this;
 ```
 Устанавливает значение переменной окружения `key` в значение `value`. Возвращает `this`.
 
