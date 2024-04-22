@@ -350,7 +350,7 @@ export interface CubeInfo extends EntityInfo {
 }
 
 export interface StorageExporter extends Exporter {
-    setLineDelimiter(lineDelimiter: string): Exporter;
+    setLineDelimiter(lineDelimiter: string): this;
 
     setFilterFormula(filterFormula: string): this;
 
@@ -525,19 +525,19 @@ export interface Versions {
 }
 
 export interface CSVParams {
-    setDelimiter(delimiter: string): CSVParams;
+    setDelimiter(delimiter: string): this;
 
     getDelimiter(): string;
 
-    setEnclosure(enclosure: string): CSVParams;
+    setEnclosure(enclosure: string): this;
 
     getEnclosure(): string;
 
-    setEscape(escape: string): CSVParams;
+    setEscape(escape: string): this;
 
     getEscape(): string;
 
-    setLineDelimiter(lineDelimiter: string): CSVParams;
+    setLineDelimiter(lineDelimiter: string): this;
 
     getLineDelimiter(): string;
 }
