@@ -22,56 +22,56 @@ interface RequestInfo {
 &nbsp;
 
 ```js
-getMethod(): string
+getMethod(): string;
 ```
 Возвращает [`метод HTTP запроса`](https://ru.wikipedia.org/wiki/HTTP#%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D1%8B). API сервис поддерживает только методы `GET` и `POST`. 
 
 &nbsp;
 
 ```js
-getClientInfo(): ClientInfo
+getClientInfo(): ClientInfo;
 ```
 Возвращает ссылку на интерфейс [`ClientInfo`](#client-info).
 
 &nbsp;
 
 ```js
-getCookieInfos(): ParamInfos
+getCookieInfos(): ParamInfos;
 ```
 Возвращает ссылку на интерфейс [`ParamInfos`](#param-infos) для получения информации о куках, которые передал клиент в HTTP заголовке [`Cookies`](https://ru.wikipedia.org/wiki/Cookie).
 
 &nbsp;
 
 ```js
-getHeaderInfos(): ParamInfos
+getHeaderInfos(): ParamInfos;
 ```
 Возвращает ссылку на интерфейс [`ParamInfos`](#param-infos) для получения информации о [`заголовках HTTP`](https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_HTTP), которые передал клиент.
 
 &nbsp;
 
 ```js
-getUrlParamInfos(): ParamInfos
+getUrlParamInfos(): ParamInfos;
 ```
 Возвращает ссылку на интерфейс [`ParamInfos`](#param-infos) для получения информации о параметрах, которые передал клиент в URL.
 
 &nbsp;
 
 ```js
-getFileInfos(): RequestFileInfos
+getFileInfos(): RequestFileInfos;
 ```
 Возвращает ссылку на интерфейс [`RequestFileInfos`](#request-file-infos).
 
 &nbsp;
 
 ```js
-getBodyParamInfos(): ParamInfos
+getBodyParamInfos(): ParamInfos;
 ```
 Возвращает ссылку на интерфейс [`ParamInfos`](#param-infos) для получения информации о параметрах запроса.
 
 &nbsp;
 
 ```js
-getResponseInfo(): ResponseInfo
+getResponseInfo(): ResponseInfo;
 ```
 Возвращает ссылку на интерфейс [`ResponseInfo`](#response-info).
 
@@ -89,14 +89,14 @@ interface ClientInfo {
 &nbsp;
 
 ```js
-getAgent(): string
+getAgent(): string;
 ```
 Возвращает значение заголовка `User-Agent`, если он был передан.
 
 &nbsp;
 
 ```js
-getIp(): string
+getIp(): string;
 ```
 Возвращает значение [IPv4](https://ru.wikipedia.org/wiki/IPv4) адреса клиента.
 
@@ -114,14 +114,14 @@ interface ParamInfos {
 &nbsp;
 
 ```js
-get(key: string): ParamInfo | null
+get(key: string): ParamInfo | null;
 ```
 Возвращает ссылку на интерфейс [`ParamInfo`](#param-info) по имени поля `key`.
 
 &nbsp;
 
 ```js
-getAll(): ParamInfo[]
+getAll(): ParamInfo[];
 ```
 Возвращает все параметры в виде массива объектов [`ParamInfo`](#param-info).
 
@@ -139,14 +139,14 @@ interface ParamInfo {
 &nbsp;
 
 ```js
-getName(): string
+getName(): string;
 ```
 Возвращает имя параметра.
 
 &nbsp;
 
 ```js
-getValue(): string | null
+getValue(): string | null;
 ```
 Возвращает значение параметра.
 
@@ -164,14 +164,14 @@ interface RequestFileInfos {
 &nbsp;
 
 ```js
-get(key: string): RequestFileInfo | null
+get(key: string): RequestFileInfo | null;
 ```
 Возвращает ссылку на интерфейс [`RequestFileInfo`](#request-file-info) по имени поля `key`, переданного в теле запроса.
 
 &nbsp;
 
 ```js
-getAll(): RequestFileInfo[]
+getAll(): RequestFileInfo[];
 ```
 Возвращает информацию о всех загруженных клиентом файлах в виде массива объектов [`RequestFileInfo`](#request-file-info).
 
@@ -191,30 +191,30 @@ interface RequestFileInfo {
 &nbsp;
 
 ```js
-getName(): string
+getName(): string;
 ```
 Возвращает имя поля, которое содержит информацию о файле.
 
 &nbsp;
 
 ```js
-getFileName(): string
+getFileName(): string;
 ```
 Возвращает имя файла.
 
 &nbsp;
 
 ```js
-getFileSize(): number
+getFileSize(): number;
 ```
 Возвращает размер файла.
 
 &nbsp;
 
 ```js
-copyToLocal(path: string): this
+copyToLocal(path: string): this;
 ```
-Выполняет копирование файла из области метаданных зарегистрированного API запроса в локальную файловую систему. Локальная файловая система — временная папка на сервере, которая является [`рабочей директорией скрипта`](../appendix/glossary.md#script-dir).
+Выполняет копирование файла из области метаданных зарегистрированного API запроса в локальную файловую систему. Локальная файловая система — временная папка на сервере, которая является [`рабочей директорией скрипта`](../appendix/glossary.md#script-dir). Возвращает `this`.
 
 &nbsp;
 
@@ -231,21 +231,21 @@ interface ResponseInfo {
 &nbsp;
 
 ```js
-getCookieInfos(): ResponseCookieInfos
+getCookieInfos(): ResponseCookieInfos;
 ```
 Возвращает ссылку на интерфейс [`ResponseCookieInfos`](#response-cookie-infos).
 
 &nbsp;
 
 ```js
-getFileInfos(): ResponseFileInfos
+getFileInfos(): ResponseFileInfos;
 ```
 Возвращает ссылку на интерфейс [`ResponseFileInfos`](#response-file-infos).
 
 &nbsp;
 
 ```js
-getBodyParamInfos(): ResponseBodyParamInfos
+getBodyParamInfos(): ResponseBodyParamInfos;
 ```
 Возвращает ссылку на интерфейс [`ResponseBodyParamInfos`](#response-body-param-infos).
 
@@ -262,9 +262,9 @@ interface ResponseCookieInfos {
 &nbsp;
 
 ```js
-append(name: string, value: string, ttl: number): this
+append(name: string, value: string, ttl: number): this;
 ```
-Позволяет передать клиенту куку через ответный заголовок `Set-Cookie`, где `ttl` – это время жизни куки на клиенте (>=1).
+Позволяет передать клиенту куку через ответный заголовок `Set-Cookie`, где `ttl` – это время жизни куки на клиенте (>=1). Возвращает `this`.
 
 &nbsp;
 
@@ -279,9 +279,9 @@ interface ResponseFileInfos {
 &nbsp;
 
 ```js
-append(fileId: string): this
+append(fileId: string): this;
 ```
-Позволяет передать файл. В функцию передается индентификатор файла `fileId`, зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#global-file-registry). Идентификатор (хэш) файла можно получить с помощью функции [`Filesystem.makeGlobalFile()`](./fs.md#filesystem.make-global-file).
+Позволяет передать файл. В функцию передается индентификатор файла `fileId`, зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#global-file-registry). Идентификатор (хэш) файла можно получить с помощью функции [`Filesystem.makeGlobalFile()`](./fs.md#filesystem.make-global-file). Возвращает `this`.
 
 &nbsp;
 
@@ -296,9 +296,9 @@ interface ResponseBodyParamInfos {
 &nbsp;
 
 ```js
-append(name: string, value: number | string | boolean | object): this
+append(name: string, value: number | string | boolean | object): this;
 ```
-Позволяет передать свойство `name` с значением `value`. Принимает значения с типами `number`, `string`, `bool`, `object`, `array`.
+Позволяет передать свойство `name` с значением `value`. Принимает значения с типами `number`, `string`, `bool`, `object`, `array`. Возвращает `this`.
 
 &nbsp;
 
