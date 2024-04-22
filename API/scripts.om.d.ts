@@ -251,19 +251,19 @@ export interface ElementsCreator {
 }
 
 export interface ElementsDeleter {
-    appendIdentifier(identifier: number): ElementsDeleter;
+    appendIdentifier(identifier: number): this;
 
-    delete(): ElementsDeleter;
+    delete(): this;
 }
 
 export interface ElementsReorder {
-    append(longId: number, relativeLongId: number, position: string): ElementsReorder;
+    append(longId: number, relativeLongId: number, position: string): this;
 
-    reorder(): ElementsReorder;
+    reorder(): this;
 
     count(): number;
 
-    reverse(): ElementsReorder;
+    reverse(): this;
 }
 
 export interface Tab {

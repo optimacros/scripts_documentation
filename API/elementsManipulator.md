@@ -12,14 +12,14 @@ interface ElementsCreator {
 &nbsp;
 
 ```js
-numeric(): NumericElementsCreator
+numeric(): NumericElementsCreator;
 ```
 Возращает ссылку на [`NumericElementsCreator`](#numeric-elements-creator).
 
 &nbsp;
 
 ```js
-named(): NamedElementsCreator
+named(): NamedElementsCreator;
 ```
 Возращает ссылку на [`NamedElementsCreator`](#named-elements-creator).
 
@@ -28,11 +28,11 @@ named(): NamedElementsCreator
 ### Интерфейс BaseElementsCreator<a name="base-elements-creator"></a>
 ```ts
 interface BaseElementsCreator {
-	setPositionAfter(relativeLongId: number): BaseElementsCreator;
-	setPositionBefore(relativeLongId: number): BaseElementsCreator;
-	setPositionStart(): BaseElementsCreator;
-	setPositionEnd(): BaseElementsCreator;
-	setPositionChildOf(parentLongId: number): BaseElementsCreator;
+	setPositionAfter(relativeLongId: number): this;
+	setPositionBefore(relativeLongId: number): this;
+	setPositionStart(): this;
+	setPositionEnd(): this;
+	setPositionChildOf(parentLongId: number): this;
 	create(): number[];
 }
 ```
@@ -41,28 +41,28 @@ interface BaseElementsCreator {
 &nbsp;
 
 ```js
-setPositionAfter(relativeLongId: number): BaseElementsCreator
+setPositionAfter(relativeLongId: number): this;
 ```
 Устанавливает позицию добавления после [`relativeLongId`](./views.md#long-id). Возвращает `this`.
 
 &nbsp; 
 
 ```js
-setPositionBefore(relativeLongId: number): BaseElementsCreator
+setPositionBefore(relativeLongId: number): this;
 ```
 Устанавливает позицию добавления до [`relativeLongId`](./views.md#long-id). Возвращает `this`.
 
 &nbsp;
 
 ```js
-setPositionStart(): BaseElementsCreator
+setPositionStart(): this;
 ```
 Устанавливает позицию добавления в начало. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setPositionEnd(): BaseElementsCreator
+setPositionEnd(): this;
 ```
 Устанавливает позицию добавления в конец, это поведение по умолчанию. Этот вариант наиболее эффективный с точки зрения производительности. Возвращает `this`.
 
@@ -70,14 +70,14 @@ setPositionEnd(): BaseElementsCreator
 
 <a name="base-elements-creator.set-position-child-of"></a>
 ```js
-setPositionChildOf(parentLongId: number): BaseElementsCreator
+setPositionChildOf(parentLongId: number): this;
 ```
 Устанавливает позицию добавления элемента как дочернего для [`parentLongId`](./views.md#long-id). Возвращает `this`.
 
 &nbsp;
 
 ```js
-create(): number[]
+create(): number[];
 ```
 Добавляет элементы и возвращает массив их [`longId`](./views.md#long-id).
 
@@ -86,7 +86,7 @@ create(): number[]
 ### Интерфейс NumericElementsCreator<a name="numeric-elements-creator"></a>
 ```ts
 interface NumericElementsCreator extends BaseElementsCreator {
-	setCount(count: number): NumericElementsCreator;
+	setCount(count: number): this;
 }
 ```
 Интерфейс позволяет добавить заданное количество элементов в заданную позицию таблицы. Аналог кнопки "Добавить элементы" в интерфейсе Optimacros. Перед созданием элементов необходимо указать их количество (нет значения по умолчанию) и позицию добавления (по умолчанию в конец). Интерфейс наследуется от [`BaseElementsCreator`](#base-elements-creator).
@@ -94,7 +94,7 @@ interface NumericElementsCreator extends BaseElementsCreator {
 &nbsp;
 
 ```js
-setCount(count: number): NumericElementsCreator
+setCount(count: number): this;
 ```
 Устанавливает количество добавляемых элементов. Возвращает `this`.
 
@@ -103,7 +103,7 @@ setCount(count: number): NumericElementsCreator
 ### Интерфейс NamedElementsCreator<a name="named-elements-creator"></a>
 ```ts
 interface NamedElementsCreator extends BaseElementsCreator {
-	setElementNames(names: string[]): NamedElementsCreator;
+	setElementNames(names: string[]): this;
 }
 ```
 Интерфейс позволяет добавить заданное количество элементов с именами в заданную позицию таблицы. Аналог кнопки "Добавить элементы с именами" в интерфейсе Optimacros. Перед созданием элементов необходимо указать список имён элементов и позицию добавления (по умолчанию в конец). Интерфейс наследуется от [`BaseElementsCreator`](#base-elements-creator).
@@ -111,7 +111,7 @@ interface NamedElementsCreator extends BaseElementsCreator {
 &nbsp;
 
 ```js
-setElementNames(names: string[]): NamedElementsCreator
+setElementNames(names: string[]): this;
 ```
 Устанавливает список имён `names` добавляемых элементов. Имена должны быть уникальны. В случае добавления в справочник имена вдобавок не должны совпадать с названиями его свойств. Возвращает `this`.
 
@@ -120,8 +120,8 @@ setElementNames(names: string[]): NamedElementsCreator
 ### Интерфейс ElementsDeleter<a name="elements-deleter"></a>
 ```ts
 interface ElementsDeleter {
-	appendIdentifier(identifier: number): ElementsDeleter;
-	delete(): ElementsDeleter;
+	appendIdentifier(identifier: number): this;
+	delete(): this;
 }
 ```
 Интерфейс позволяет удалить элементы таблицы. Аналог кнопки "Удалить" в интерфейсе Optimacros.
@@ -129,14 +129,14 @@ interface ElementsDeleter {
 &nbsp;
 
 ```js
-appendIdentifier(identifier: number): ElementsDeleter
+appendIdentifier(identifier: number): this;
 ```
 Добавляет в буфер элемент, чей [`longId`](./views.md#long-id) равен `identifier`. Повторное добавление элемента в очередь **не** приводит к ошибкам. Возращает `this`.
 
 &nbsp;
 
 ```js
-delete(): ElementsDeleter
+delete(): this;
 ```
 Фактически удаляет все элементы в буфере из таблицы. Возвращает `this`.
 
@@ -145,10 +145,10 @@ delete(): ElementsDeleter
 ### Интерфейс ElementsReorder<a name="elements-reorder"></a>
 ```ts
 interface ElementsReorder {
-	append(longId: number, relativeLongId?: number, position?: string): ElementsReorder;
-	reorder(): ElementsReorder;
+	append(longId: number, relativeLongId?: number, position?: string): this;
+	reorder(): this;
 	count(): number;
-	reverse(): ElementsReorder;
+	reverse(): this;
 }
 ```
 Интерфейс позволяет перетасовать элементы и доступен только для элементов справочников. Во время работы хранит очередь элементов, которые функцией [`reorder()`](#reorder) будут переданы на сервер для перепозиционирования в порядке этой очереди.
@@ -158,7 +158,7 @@ interface ElementsReorder {
 &nbsp;
 
 ```js
-append(longId: number, relativeLongId?: number, position?: string): ElementsReorder
+append(longId: number, relativeLongId?: number, position?: string): this;
 ```
 Добавляет в очередь данные о [`longId`](./views.md#long-id) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId` (значение по умолчанию: `-1`). Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
 
@@ -174,21 +174,21 @@ append(longId: number, relativeLongId?: number, position?: string): ElementsReor
 
 <a name="reorder"></a>
 ```js
-reorder(): ElementsReorder
+reorder(): this;
 ```
 Передаёт на сервер данные для фактического перемещения их в модели и очищает буфер. Возвращает `this`.
 
 &nbsp;
 
 ```js
-count(): number
+count(): number;
 ```
 Возвращает количество элементов в очереди.
 
 &nbsp;
 
 ```js
-reverse(): ElementsReorder
+reverse(): this;
 ```
 Переворачивает очередь. Возвращает `this`.
 
