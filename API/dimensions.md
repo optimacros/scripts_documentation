@@ -258,35 +258,35 @@ interface VersionsTab extends Tab {
 &nbsp;
 
 ```js
-copyVersion(from: string, to: string): Object
+copyVersion(from: string, to: string): Object;
 ```
 Копирует срез по версии `from` в срез по версии `to` во всех мультикубах модели, которые имеют измерение версий, включающее обе эти версии. Возвращает объект вида `{"success": true}`.
 
 &nbsp;
 
 ```js
-elementsCreator(): ElementsCreator
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
 
 ```js
-elementsDeleter(): ElementsDeleter
+elementsDeleter(): ElementsDeleter;
 ```
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
 
 &nbsp;
 
 ```js
-elementsReorder(): ElementsReorder
+elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
 
 &nbsp;
 
 ```js
-importer(): VersionsImporter
+importer(): VersionsImporter;
 ```
 Возвращает интерфейс [`VersionsImporter`](./exportImport.md#versions-importer) импорта данных в системный справочник версий.
 
@@ -305,21 +305,21 @@ interface VersionSubsetsTab extends Tab {
 &nbsp;
 
 ```js
-elementsCreator(): ElementsCreator
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления выборок.
 
 &nbsp;
 
 ```js
-elementsDeleter(): ElementsDeleter
+elementsDeleter(): ElementsDeleter;
 ```
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления выборок.
 
 &nbsp;
 
 ```js
-elementsReorder(): ElementsReorder
+elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
 
@@ -337,7 +337,7 @@ interface Times {
 &nbsp;
 
 ```js
-optionsTab(): TimeOptionsTab
+optionsTab(): TimeOptionsTab;
 ```
 Возвращает ссылку на вкладку [`TimeOptionsTab`](#time-options-tab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
 
@@ -362,14 +362,14 @@ interface TimeOptionsTab {
 &nbsp;
 
 ```js
-resetForm(): Object
+resetForm(): Object;
 ```
 Сбрасывает все изменения данных во вкладке. Возвращает объект вида `{"success": true}`.
 
 &nbsp;
 
 ```js
-applyForm(): Object
+applyForm(): Object;
 ```
 Применяет все изменения данных. Возвращает объект вида `{"success": true}`.
 
@@ -394,7 +394,7 @@ subsetsTab(): TimePeriodSubsetTab;
 &nbsp;
 
 ```js
-importer(): TimePeriodImporter
+importer(): TimePeriodImporter;
 ```
 Возвращает ссылку на интерфейс импорта [`TimePeriodImporter`](./exportImport.md#time-period-importer).
 
@@ -413,21 +413,21 @@ export interface TimePeriodSubsetTab extends Tab {
 &nbsp;
 
 ```js
-elementsCreator(): ElementsCreator
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления выборок.
 
 &nbsp;
 
 ```js
-elementsDeleter(): ElementsDeleter
+elementsDeleter(): ElementsDeleter;
 ```
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления выборок.
 
 &nbsp;
 
 ```js
-elementsReorder(): ElementsReorder
+elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
 
