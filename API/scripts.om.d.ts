@@ -1531,9 +1531,9 @@ export namespace Mongodb {
             autoIndexId?: boolean,
             size?: number,
             max?: number
-        }): CollectionCreator;
+        }): this;
 
-        setName(name: string): CollectionCreator;
+        setName(name: string): this;
 
         create(): { ok: number, errmsg?: string };
     }
@@ -1632,9 +1632,9 @@ export namespace Mongodb {
     }
 
     export interface ConnectorBuilder {
-        setDSN(value: string): ConnectorBuilder;
+        setDSN(value: string): this;
 
-        setDatabase(value: string): ConnectorBuilder;
+        setDatabase(value: string): this;
 
         load(): Connection;
     }
