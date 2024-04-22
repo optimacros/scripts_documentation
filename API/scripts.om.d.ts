@@ -369,26 +369,26 @@ export interface SyncBuilder {
     /**
      * @param modelId Source model string identifier or name
      */
-    setSrcModelId(modelId: string): SyncBuilder;
+    setSrcModelId(modelId: string): this;
 
     /**
      * @param modelId Destination model string identifier or name
      */
-    setDestModelId(modelId: string): SyncBuilder;
+    setDestModelId(modelId: string): this;
 
     /**
      * @param entityId Source entity identifier
      */
-    setSrcEntityId(entityId: number): SyncBuilder;
+    setSrcEntityId(entityId: number): this;
 
     /**
      * @param entityId Destination entity identifier
      */
-    setDestEntityId(entityId: number): SyncBuilder;
+    setDestEntityId(entityId: number): this;
 
-    setFilters(filters: Record<string, string[]>): SyncBuilder;
+    setFilters(filters: Record<string, string[]>): this;
 
-    setMappings(mappings: ImportMappings): SyncBuilder;
+    setMappings(mappings: ImportMappings): this;
 
     sync(): SyncResult;
 }
@@ -417,30 +417,30 @@ export interface DimensionItemMapping {
 }
 
 export interface SyncMulticubeBuilder extends SyncBuilder {
-    setOmitEmptyRows(status: boolean): SyncMulticubeBuilder;
+    setOmitEmptyRows(status: boolean): this;
 
-    setOmitSummaryRows(status: boolean): SyncMulticubeBuilder;
+    setOmitSummaryRows(status: boolean): this;
 
-    setUseCodeInsteadLabel(status: boolean): SyncMulticubeBuilder;
+    setUseCodeInsteadLabel(status: boolean): this;
 }
 
 export interface SyncListBuilder extends SyncBuilder {
-    setViewId(viewId: number): SyncListBuilder;
+    setViewId(viewId: number): this;
 
     setSrcToDesListMap(map: {
         sourceListLongId: number,
         destinationListLongId: number,
-    }[]): SyncListBuilder;
+    }[]): this;
 
     setProxySrcColumnDataMap(map: {
         fromName: string;
         toName: string;
-    }[]): SyncListBuilder;
+    }[]): this;
 
     /**
      * @param format Values: XLSX|CSV, Default: CSV
      */
-    setReportFileFormat(format: string): SyncListBuilder;
+    setReportFileFormat(format: string): this;
 }
 
 export interface CubesTab extends Tab {
