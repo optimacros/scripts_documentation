@@ -13,7 +13,7 @@ interface Manager {
 &nbsp;
 
 ```js
-smtp(channel: string): Smtp.Builder
+smtp(channel: string): Smtp.Builder;
 ```
 Возвращает интерфейс [`Smtp.Builder`](#smtp.builder) канала с именем `channel` уведомления пользователя по протоколу [`SMTP`](https://ru.wikipedia.org/wiki/SMTP).
 
@@ -35,28 +35,28 @@ interface Smtp.Builder {
 &nbsp;
 
 ```js
-setTo(to: string | string[]): this
+setTo(to: string | string[]): this;
 ```
 Устанавливает адресата или адресатов. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setSubject(subject: string): this
+setSubject(subject: string): this;
 ```
 Устанавливает тему письма. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setBody(body: string): this
+setBody(body: string): this;
 ```
 Устанавливает тело письма. Возвращает `this`.
 
 &nbsp;
 
 ```js
-attachFiles(paths: string[]): this
+attachFiles(paths: string[]): this;
 ```
 Прикрепляет к письму файлы из локальной директории скрипта, находящиеся по путям, переданным в `paths`. Возвращает `this`.
 
@@ -70,7 +70,7 @@ isHtml(flag: boolean): this;
 &nbsp;
 
 ```js
-send(): Smtp.Result
+send(): Smtp.Result;
 ```
 Запускает механизм асинхронной отправки письма. Возвращает интерфейс [`Smtp.Result`](#smtp.result).
 

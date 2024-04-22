@@ -2106,6 +2106,8 @@ export namespace Notifications {
 
             attachFiles(paths: string[]): this;
 
+            isHtml(flag: boolean): this;
+
             send(): Result;
         }
     }
