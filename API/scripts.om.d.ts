@@ -2022,21 +2022,21 @@ export interface MysqlImportBuilder {
 }
 
 export interface PostgresqlImportBuilder {
-    setTable(name: string): PostgresqlImportBuilder;
+    setTable(name: string): this;
 
-    setSchema(name: string): PostgresqlImportBuilder;
+    setSchema(name: string): this;
 
-    setDelimiter(delimiter: string): PostgresqlImportBuilder;
+    setDelimiter(delimiter: string): this;
 
-    setEnclosure(quote: string): PostgresqlImportBuilder;
+    setEnclosure(quote: string): this;
 
-    setEscape(escape: string): PostgresqlImportBuilder;
+    setEscape(escape: string): this;
 
-    setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
+    setIgnoreHeader(ignoreHeader: boolean): this;
 
-    setColumns(names: string[]): PostgresqlImportBuilder;
+    setColumns(names: string[]): this;
 
-    setFilePath(path: string): PostgresqlImportBuilder;
+    setFilePath(path: string): this;
 
     import(): PostgresqlImportResult;
 }
