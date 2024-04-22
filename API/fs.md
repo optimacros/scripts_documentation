@@ -14,7 +14,7 @@ interface Filesystems {
 &nbsp;
 
 ```js
-ftp(): FTPAdapter
+ftp(): FTPAdapter;
 ```
 Возвращает ссылку на интерфейс [`FTPAdapter`](#ftp-adapter) доступа к FTP.
 
@@ -22,21 +22,21 @@ ftp(): FTPAdapter
 
 <a name="local"></a>
 ```js
-local(): Filesystem
+local(): Filesystem;
 ```
 Возвращает ссылку на интерфейс [`Filesystem`](#filesystem) доступа к локальной файловой системе. Локальная файловая система — временная папка на сервере, которая является рабочей директорией скрипта. Скрипт ***НЕ*** может выйти за её пределы.
 
 &nbsp;
 
 ```js
-sharedFolder(id: string): Filesystem
+sharedFolder(id: string): Filesystem;
 ```
 Возвращает интерфейс [`Filesystem`](#filesystem) доступа к shared folder – папке на сервере, которая была добавлена администратором при установке Workspace через manifest внутрь контейнера workspace.
 
 &nbsp; 
 
 ```js
-filesDataManager(): FilesDataManager
+filesDataManager(): FilesDataManager;
 ```
 Возвращает интерфейс [`FilesDataManager`](./csv.md#files-data-manager) работы с файлами в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
@@ -69,105 +69,105 @@ interface Filesystem {
 &nbsp;
 
 ```js
-has(path: string): boolean
+has(path: string): boolean;
 ```
 Возвращает признак существования файла/папки по адресу `path`.
 
 &nbsp;
 
 ```js
-read(path: string): string
+read(path: string): string;
 ```
 Читает целиком файл `path` и возвращает его содержимое.
 
 &nbsp;
 
 ```js
-readAndDelete(path: string): string
+readAndDelete(path: string): string;
 ```
 Читает целиком файл `path`, удаляет его и возвращает его содержимое.
 
 &nbsp;
 
 ```js
-write(path: string, contents: string): boolean
+write(path: string, contents: string): boolean;
 ```
 Если файла `path` не существует, создаёт его; при необходимости создаёт промежуточные папки. Затем записывает текст `contents` в файл `path` и возвращает признак успешного выполнения. 
 
 &nbsp;
 
 ```js
-delete(path: string): boolean
+delete(path: string): boolean;
 ```
 Удаляет файл `path`. Возвращает признак успешного выполнения. Если файл не существует, выбрасывает исключение.
 
 &nbsp;
 
 ```js
-rename(from: string, to: string): boolean
+rename(from: string, to: string): boolean;
 ```
 Переименовывает объект `from` в `to`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-copy(from: string, to: string): boolean
+copy(from: string, to: string): boolean;
 ```
 Копирует файл `from` в путь `to`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-getTimestamp(path: string): string
+getTimestamp(path: string): string;
 ```
 Возвращает время последнего изменения в формате [`Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
 &nbsp;
 
 ```js
-getSize(path: string): number | boolean
+getSize(path: string): number | boolean;
 ```
 Возвращает размер файла в байтах. Если `path` является папкой, возвращает `false`.
 
 &nbsp;
 
 ```js
-createDir(path: string): boolean
+createDir(path: string): boolean;
 ```
 Создаёт папку `path`; при необходимости создаёт промежуточные папки. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-deleteDir(path: string): boolean
+deleteDir(path: string): boolean;
 ```
 Удаляет папку `path`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-listContents(path: string, recursive: boolean): FileMeta[]
+listContents(path: string, recursive: boolean): FileMeta[];
 ```
 Возвращает массив объектов [`FileMeta`](#file-meta), содержащих информацию об объектах внутри папки `path`. Если включен флаг `recursive`, возвращается также информация и о вложенных объектах.
 
 &nbsp;
 
 ```js
-getMetadata(path: string): Object
+getMetadata(path: string): Object;
 ```
 Возвращает объект с метаданными о файле/папке, аналогичный [`FileMeta`](#file-meta), однако часть полей может отсутствовать.
 
 &nbsp;
 
 ```js
-upload(from: string, to: string): boolean
+upload(from: string, to: string): boolean;
 ```
 Копирует файл `from` с [`локальной`](#local) файловой системы в путь `to` файловой системы `this`. Возвращает признак успешного выполнения.
 
 &nbsp;
 
 ```js
-download(from: string, to: string): boolean
+download(from: string, to: string): boolean;
 ```
 Копирует файл `from` с файловой системы `this` в путь `to` [`локальной`](#local) файловой системы. Возвращает признак успешного выполнения.
 
@@ -175,14 +175,14 @@ download(from: string, to: string): boolean
 
 <a name="filesystem.make-global-file"></a>
 ```js
-makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string
+makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 ```
 Функция доступа *только* для [`локальной`](#local) файловой системы. Регистрирует уже существующий файл `path` в [`глобальном реестре`](../appendix/glossary.md#global-file-registry) под именем `{name}.{extension}`. Аргумент `copy` определяет, копировать или перемещать файл `path` в глобальный реестр; по умолчанию: `true`. Возвращает хэш файла. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#result-info.add-file-hash).
 
 &nbsp;
 
 ```js
-getPathObj(path: string): PathObj
+getPathObj(path: string): PathObj;
 ```
 Возвращает интерфейс [`PathObj`](#path-obj).
 
@@ -207,63 +207,63 @@ interface FileMeta {
 &nbsp;
 
 ```js
-type: string
+type: string;
 ```
 Тип объекта: `file` или `dir`.
 
 &nbsp;
 
 ```js
-path: string
+path: string;
 ```
 Путь к объекту в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
 &nbsp;
 
 ```js
-visibility: string
+visibility: string;
 ```
 Доступность объекта: `private` или `public`.
 
 &nbsp;
 
 ```js
-size: number
+size: number;
 ```
 У файла: размер в байтах. У папок поле отсутствует.
 
 &nbsp;
 
 ```js
-dirname: string
+dirname: string;
 ```
 Папка, в которой находится объект. Для объектов в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) это пустая строка.
 
 &nbsp;
 
 ```js
-basename: string
+basename: string;
 ```
 Имя объекта *с расширением*.
 
 &nbsp;
 
 ```js
-extension: string
+extension: string;
 ```
 Расширение имени без точки. Если расширения нет, поле отсутствует.
 
 &nbsp;
 
 ```js
-filename: string
+filename: string;
 ```
 Имя объекта (файла или папки) *без последней точки и расширения*.
 
 &nbsp;
 
 ```js
-timestamp: number
+timestamp: number;
 ```
 Время последнего изменения в [`формате Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
@@ -281,14 +281,14 @@ interface PathObj {
 &nbsp;
 
 ```js
-getSystem(): Filesystem
+getSystem(): Filesystem;
 ```
 Возвращает ссылку на файловую систему.
 
 &nbsp;
 
 ```js
-getPath(): string
+getPath(): string;
 ```
 Возвращает путь к файлу.
 
@@ -305,7 +305,7 @@ interface BaseAdapter {
 &nbsp;
 
 ```js
-load(): Filesystem
+load(): Filesystem;
 ```
 Возвращает объект файловой системы [`Filesystem`](#filesystem) с предварительно установленными настройками.
 
@@ -314,34 +314,34 @@ load(): Filesystem
 ### Интерфейс FTPAdapter<a name="ftp-adapter"></a>
 ```ts
 interface FTPAdapter extends BaseAdapter {
-	setHost(host: string): FTPAdapter;
+	setHost(host: string): this;
 	getHost(): string;
 
-	setPort(port: number): FTPAdapter;
+	setPort(port: number): this;
 	getPort(): number;
 
-	setUsername(username: string): FTPAdapter;
+	setUsername(username: string): this;
 	getUsername(): string;
 
-	setPassword(password: string): FTPAdapter;
+	setPassword(password: string): this;
 	getPassword(): string;
 
-	setRoot(root: string): FTPAdapter;
+	setRoot(root: string): this;
 	getRoot(): string;
 
-	setPassive(passive: boolean): FTPAdapter;
+	setPassive(passive: boolean): this;
 	getPassive(): boolean;
 	
-	setIgnorePassiveAddress(ignore: boolean): FTPAdapter; 
+	setIgnorePassiveAddress(ignore: boolean): this; 
 	getIgnorePassiveAddress(): boolean; 
 
-	setSsl(ssl: boolean): FTPAdapter;
+	setSsl(ssl: boolean): this;
 	getSsl(): boolean;
 
-	setTimeout(timeout: number): FTPAdapter;
+	setTimeout(timeout: number): this;
 	getTimeout(): number;
 
-	setUseListOptions(useListOptions: boolean): FTPAdapter;
+	setUseListOptions(useListOptions: boolean): this;
 	getUseListOptions(): boolean;
 }
 ```
@@ -351,91 +351,91 @@ interface FTPAdapter extends BaseAdapter {
 &nbsp;
 
 ```js
-setHost(host: string): FTPAdapter
+setHost(host: string): this;
 ```
 Устанавливает адрес хоста. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getHost(): string
+getHost(): string;
 ```
 Возвращает адрес хоста.
 
 &nbsp;
 
 ```js
-setPort(port: number): FTPAdapter
+setPort(port: number): this;
 ```
 Устанавливает номер порта. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getPort(): number
+getPort(): number;
 ```
 Возвращает номер порта.
 
 &nbsp;
 
 ```js
-setUsername(username: string): FTPAdapter
+setUsername(username: string): this;
 ```
 Устанавливает имя пользователя. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getUsername(): string
+getUsername(): string;
 ```
 Возвращает имя пользователя.
 
 &nbsp;
 
 ```js
-setPassword(password: string): FTPAdapter
+setPassword(password: string): this;
 ```
 Устанавливает пароль. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getPassword(): string
+getPassword(): string;
 ```
 Возвращает пароль.
 
 &nbsp;
 
 ```js
-setRoot(root: string): FTPAdapter
+setRoot(root: string): this;
 ```
 Устанавливает начальный путь для работы с FTP. По умолчанию: `/`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getRoot(): string
+getRoot(): string;
 ```
 Возвращает начальный путь для работы с FTP.
 
 &nbsp;
 
 ```js
-setPassive(passive: boolean): FTPAdapter
+setPassive(passive: boolean): this;
 ```
 Устанавливает активный или пассивный режим соединения. По умолчанию: `true`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getPassive(): boolean
+getPassive(): boolean;
 ```
 Возвращает признак пассивности режима соединения.
 
 &nbsp;
 
 ```js
-setIgnorePassiveAddress(ignore: boolean) : FTPAdapter
+setIgnorePassiveAddress(ignore: boolean): this;
 ```
 Устанавливает режим игнорирования IP-адреса, полученного от FTP-сервера в пассивном режиме. По умолчанию: `false`. Возвращает `this`.
 
@@ -443,49 +443,49 @@ setIgnorePassiveAddress(ignore: boolean) : FTPAdapter
 
 
 ```js
-getIgnorePassiveAddress(ignore: boolean) : boolean
+getIgnorePassiveAddress(ignore: boolean): boolean;
 ```
 Возвращает признак игнорирования IP-адреса, полученного от FTP-сервера в пассивном режиме.
 
 &nbsp;
 
 ```js
-setSsl(ssl: boolean): FTPAdapter
+setSsl(ssl: boolean): this;
 ```
 Устанавливает признак использования протокола [`SSL`](https://ru.wikipedia.org/wiki/SSL) поверх FTP ([`FTPS`](https://ru.wikipedia.org/wiki/FTPS)). По умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getSsl(): boolean
+getSsl(): boolean;
 ```
 Возвращает признак использования протокола SSL.
 
 &nbsp;
 
 ```js
-setTimeout(timeout: number): FTPAdapter
+setTimeout(timeout: number): this;
 ```
 Устанавливает таймаут подключения к серверу в секундах. По умолчанию: `30`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getTimeout(): number
+getTimeout(): number;
 ```
 Возвращает таймаут подключения к серверу в секундах.
 
 &nbsp;
 
 ```js
-setUseListOptions(useListOptions: boolean): FTPAdapter
+setUseListOptions(useListOptions: boolean): this;
 ```
 Устанавливает флаги `-aln` у FTP-команды `LIST`. На некоторых серверах (например, ProFTPD) список файлов в директории может ошибочно возвращаться пустым. В этом случае нужно переключить этот параметр на `false`.  По умолчанию: `true`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getUseListOptions(): boolean
+getUseListOptions(): boolean;
 ```
 Возвращает признак использования флагов `-aln` у FTP-команды `LIST`.
 

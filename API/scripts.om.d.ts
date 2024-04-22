@@ -1108,39 +1108,43 @@ export interface BaseAdapter {
 }
 
 export interface FTPAdapter extends BaseAdapter {
-    setHost(host: string): FTPAdapter;
+    setHost(host: string): this;
 
     getHost(): string | undefined;
 
-    setPort(port: number): FTPAdapter;
+    setPort(port: number): this;
 
     getPort(): number | undefined;
 
-    setUsername(username: string): FTPAdapter;
+    setUsername(username: string): this;
 
     getUsername(): string | undefined;
 
-    setPassword(password: string): FTPAdapter;
+    setPassword(password: string): this;
 
     getPassword(): string | undefined;
 
-    setRoot(root: string): FTPAdapter;
+    setRoot(root: string): this;
 
     getRoot(): string;
 
-    setPassive(passive: boolean): FTPAdapter;
+    setPassive(passive: boolean): this;
 
     getPassive(): boolean | undefined;
+    
+	setIgnorePassiveAddress(ignore: boolean): this; 
+    
+	getIgnorePassiveAddress(): boolean; 
 
-    setSsl(ssl: boolean): FTPAdapter;
+    setSsl(ssl: boolean): this;
 
     getSsl(): boolean;
 
-    setTimeout(timeout: number): FTPAdapter;
+    setTimeout(timeout: number): this;
 
     getTimeout(): number;
 
-    setUseListOptions(useListOptions: boolean): FTPAdapter;
+    setUseListOptions(useListOptions: boolean): this;
 
     getUseListOptions(): boolean;
 }
