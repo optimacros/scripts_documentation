@@ -283,13 +283,13 @@ export interface Tab {
 }
 
 export interface Environment {
-    load(name: string): Environment;
+    load(name: string): this;
     
-    loadFromMulticube(name: string, view?: string | null): Environment;
+    loadFromMulticube(name: string, view?: string | null): this;
 
     get(key: string, def?: any): any;
 
-    set(name: string, value: unknown): Environment;
+    set(name: string, value: unknown): this;
 }
 
 export interface CubeCell {
