@@ -12,14 +12,14 @@ interface Lists {
 &nbsp;
 
 ```js
-listsTab(): ListsTab
+listsTab(): ListsTab;
 ```
 Возвращает ссылку на интерфейс [`ListsTab`](#lists-tab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Справочники`.
 
 &nbsp;
 
 ```js
-syncList(): SyncListBuilder
+syncList(): SyncListBuilder;
 ```
 Возвращает интерфейс [`SyncListBuilder`](./sync.md#sync-list-builder) синхронизации справочников.
 
@@ -40,28 +40,28 @@ interface ListsTab extends Tab {
 &nbsp;
 
 ```js
-open(name: string): ListTab
+open(name: string): ListTab;
 ```
 Возвращает ссылку на [`ListTab`](#list-tab) справочника `name`. Если такой справочник отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки справочника `name`.
 
 &nbsp;
 
 ```js
-elementsCreator(): ElementsCreator
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления справочников.
 
 &nbsp;
 
 ```js
-elementsDeleter(): ElementsDeleter
+elementsDeleter(): ElementsDeleter;
 ```
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления справочников.
 
 &nbsp;
 
 ```js
-elementsReorder(): ElementsReorder
+elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования справочников.
 
@@ -86,13 +86,13 @@ interface ListTab extends Tab {
 &nbsp;
 
 ```js
-listSubsetTab(): ListSubsetsTab
+listSubsetTab(): ListSubsetsTab;
 ```
 Возвращает ссылку на интерфейс [`ListSubsetsTab`](#list-subsets-tab). В интерфейсе Optimacros аналогично открытию вкладки `Выборки` справочника `name`.
 
 &nbsp;
 ```js
-customPropertiesTab(): CustomPropertiesTab
+customPropertiesTab(): CustomPropertiesTab;
 ```
 Возвращает интерфейс [`CustomPropertiesTab`](#custom-properties-tab) доступа к свойствам справочников.
 
@@ -105,28 +105,28 @@ uamTab(): ListUserAccessTab;
 &nbsp;
 
 ```js
-elementsCreator(): ElementsCreator
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления элементов.
 
 &nbsp;
 
 ```js
-elementsDeleter(): ElementsDeleter
+elementsDeleter(): ElementsDeleter;
 ```
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления элементов.
 
 &nbsp;
 
 ```js
-elementsReorder(): ElementsReorder
+elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования элементов.
 
 &nbsp;
 
 ```js
-importer(): ListImporter
+importer(): ListImporter;
 ```
 Возвращает интерфейс [`ListImporter`](./exportImport.md#list-importer) для импорта данных в справочник.
 
@@ -147,28 +147,28 @@ interface ListSubsetsTab extends Tab {
 &nbsp;
 
 ```js
-listTab(): ListTab
+listTab(): ListTab;
 ```
 Возвращает интерфейс [`ListTab`](#list-tab) вкладки того справочника, чьи выборки представляет собой `this`.
 
 &nbsp;
 
 ```js
-elementsCreator(): ElementsCreator
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления выборок.
 
 &nbsp;
 
 ```js
-elementsDeleter(): ElementsDeleter
+elementsDeleter(): ElementsDeleter;
 ```
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления выборок.
 
 &nbsp;
 
 ```js
-elementsReorder(): ElementsReorder
+elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
 
@@ -187,21 +187,21 @@ interface CustomPropertiesTab extends Tab {
 &nbsp;
 
 ```js
-elementsCreator(): ElementsCreator
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления свойств.
 
 &nbsp;
 
 ```js
-elementsDeleter(): ElementsDeleter
+elementsDeleter(): ElementsDeleter;
 ```
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления свойств.
 
 &nbsp;
 
 ```js
-elementsReorder(): ElementsReorder
+elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования свойств.
 
@@ -228,14 +228,14 @@ interface Versions {
 &nbsp;
 
 ```js
-versionsTab(): VersionsTab
+versionsTab(): VersionsTab;
 ```
 Возвращает ссылку на вкладку [`VersionsTab`](#versions-tab) настроек версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии`.
 
 &nbsp;
 
 ```js
-versionSubsetsTab(): VersionSubsetsTab
+versionSubsetsTab(): VersionSubsetsTab;
 ```
 Возвращает ссылку на вкладку [`VersionSubsetsTab`](#version-subsets-tab) выборок версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии` -> `Выборки`.
 
