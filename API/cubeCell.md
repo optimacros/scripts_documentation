@@ -21,28 +21,28 @@ interface CubeCell {
 
 <a name="cube-cell.definitions"></a>
 ```js
-definitions(): number[]
+definitions(): number[];
 ```
 Возвращает такой же массив идентификаторов, что и `getDimensionIds()`. Однако дополнительно первым элементом является идентификатор самого куба.
 
 &nbsp;
 
 ```js
-getDimensionIds(): number[]
+getDimensionIds(): number[];
 ```
 Возвращает массив идентификаторов тех элементов измерений куба, которыми определена клетка.  Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#cube-info.get-dimensions).
 
 &nbsp;
 
 ```js
-getDimensionItems(): EntityInfo[]
+getDimensionItems(): EntityInfo[];
 ```
 Возвращает массив [`EntityInfo`](./views.md#entity-info) элементов измерений куба, которыми определена клетка. Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#cube-info.get-dimensions).
 
 &nbsp;
 
 ```js
-getValue(): number | string | boolean | null
+getValue(): number | string | boolean | null;
 ```
 Возвращает значение клетки. Если формат клетки – справочник или дата, возвращает идентификатор элемента.
 
@@ -61,14 +61,14 @@ interface CubeInfo extends EntityInfo {
 &nbsp;
 
 ```js
-getFormula(): string | null
+getFormula(): string | null;
 ```
 Возвращает формулу Optimacros, заданную для куба, или `null`, если её нет.
 
 &nbsp;
 
 ```js
-getFormatInfo(): CubeFormatInfo
+getFormatInfo(): CubeFormatInfo;
 ```
 Возвращает интерфейс [`CubeFormatInfo`](#cube-format-info) для получения информации о формате куба.
 
@@ -76,7 +76,7 @@ getFormatInfo(): CubeFormatInfo
 
 <a name="cube-info.get-dimensions"></a>
 ```js
-getDimensions(): EntityInfo[]
+getDimensions(): EntityInfo[];
 ```
 Возвращает массив [`EntityInfo`](./views.md#entity-info) измерений куба.
 
@@ -94,14 +94,14 @@ interface CubeFormatInfo {
 &nbsp;
 
 ```js
-getFormatTypeEntity(): EntityInfo
+getFormatTypeEntity(): EntityInfo;
 ```
 Возвращает сущность [`EntityInfo`](./views.md#entity-info) формата куба.
 
 &nbsp;
 
 ```js
-getDimensionEntity(): EntityInfo | null
+getDimensionEntity(): EntityInfo | null;
 ```
 Возвращает идентификатор измерения, выбранного в качестве формата, если формат – один из `List`, `Time`, `Version`, `CubeSubset`, и `null` в противном случае.
 ***Не работает.***
@@ -124,28 +124,28 @@ interface CubeCellSelectorBuilder {
 &nbsp;
 
 ```js
-setFormula(formula: string): this
+setFormula(formula: string): this;
 ```
 Устанавливает формулу выбора.
 
 &nbsp;
 
 ```js
-setStartCell(longIds: number[]): this
+setStartCell(longIds: number[]): this;
 ```
 Устанавливает клетку, начиная с которой будет выполняться выбор. В качестве аргумента передается массив идентификаторов тех элементов измерений куба, которыми определена клетка. Массив идентификаторов можно получить с помощью метода `getDimensionIds()` интерфейса [`CubeCell`](#cube-cell).
 
 &nbsp;
 
 ```js
-setMaxCount(count: number): this
+setMaxCount(count: number): this;
 ```
 Устанавливает максимальное количество выбранных клеток. Если это значение не устанавливать, будет лимит `500 000` клеток. Верхняя граница параметра `count` не определена, поэтому стабильность не гарантируется и возможно возникновение ошибки. Рекомендуется перебирать большие кубы чанками.
 
 &nbsp;
 
 ```js
-load(): CubeCellSelector
+load(): CubeCellSelector;
 ```
 Производит выбор клеток и возвращает интерфейс [`CubeCellSelector`](#cube-cell-selector).
 
@@ -165,28 +165,28 @@ interface CubeCellSelector {
 &nbsp;
 
 ```js
-getCubeInfo(): CubeInfo
+getCubeInfo(): CubeInfo;
 ```
 Возвращает интерфейс [`CubeInfo`](#cube-info) для получения информации о кубе.
 
 &nbsp;
 
 ```js
-getCubeIdentifier(): number
+getCubeIdentifier(): number;
 ```
 Возвращает идентификатор куба.
 
 &nbsp;
 
 ```js
-getCubeDimensions(): EntityInfo[]
+getCubeDimensions(): EntityInfo[];
 ```
 То же, что и [`CubeInfo.getDimensions()`](#cube-info.get-dimensions).
 
 &nbsp;
 
 ```js
-generator(): IterableIterator<CubeCell>
+generator(): IterableIterator<CubeCell>;
 ```
 Возвращает генератор, при каждом обращении возвращающий интерфейс [`CubeCell`](#cube-cell) очередной полученной в выборке клетки куба.
 
@@ -207,21 +207,21 @@ interface CubeCellUpdaterBuilder {
 &nbsp;
 
 ```js
-setConditionFormula(formula: string): this
+setConditionFormula(formula: string): this;
 ```
 Устанавливает условную формулу, которая будет применяться к каждой клетке куба, и возвращать значение типа `Boolean`. Значение по умолчанию: `'TRUE'`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setFormula(formula: string): this
+setFormula(formula: string): this;
 ```
 Устанавливает формулу в формате Optimacros, которая будет применяться к тем клеткам куба, на которых условная формула вернула значение `'TRUE'`, и возвращать для них значение, тип которого должен соответствовать формату куба. Значение по умолчанию отсутствует. Возвращает `this`.
 
 &nbsp;
 
 ```js
-load(): CubeCellUpdater
+load(): CubeCellUpdater;
 ```
 Устанавливает значения в клетках куба в соответствии с формулой и условной формулой, возвращает интерфейс [`CubeCellUpdater`](#cube-cell-updater).
 
@@ -238,7 +238,7 @@ interface CubeCellUpdater {
 &nbsp;
 
 ```js
-getCount(): number
+getCount(): number;
 ```
 Должна возвращать количество ячеек, модифицированных применением формулы. ***Не реализовано; возвращает `-1`.***
 

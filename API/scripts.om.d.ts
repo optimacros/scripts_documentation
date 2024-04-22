@@ -1152,7 +1152,7 @@ export interface CsvReader {
      * UTF-8, WINDOWS-1251
      * @param charset
      */
-    changeFileCharset(charset: string): CsvReader;
+    changeFileCharset(charset: string): this;
 
     generator(): IterableIterator<string[]>;
 }
@@ -1160,9 +1160,9 @@ export interface CsvReader {
 export interface CsvWriter {
     params(): CSVParams;
 
-    writeRow(row: string[]): CsvWriter;
+    writeRow(row: string[]): this;
 
-    writeRows(rows: string[][]): CsvWriter;
+    writeRows(rows: string[][]): this;
 
     /**
      *
