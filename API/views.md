@@ -88,7 +88,7 @@ pivot(viewName?: string): Pivot;
 ### Интерфейс MulticubeTab<a name="multicube-tab"></a>
 ```ts
 interface MulticubeTab extends Tab {
-	cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
+	cleanCellsData(cubesIdentifiers?: number[]): this;
 	cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 	cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 
@@ -104,7 +104,7 @@ interface MulticubeTab extends Tab {
 &nbsp;
 
 ```js
-cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
+cleanCellsData(cubesIdentifiers?: number[]): this;
 ```
 Очищает всё содержимое кубов `cubesIdentifiers` или весь мультикуб при вызове без параметров. Возвращает `this`.
 
@@ -120,6 +120,7 @@ cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 ```js
 cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 ```
+
 Возвращает интерфейс [`CubeCellUpdaterBuilder`](./cubeCell.md#cube-cell-updater-builder) обновления клеток куба с именем или идентификатором `identifier` по формуле. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
@@ -130,18 +131,21 @@ getCubeInfo(identifier: string | number): CubeInfo;
 Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
+
 ```js
 cubesTab(): CubesTab;
 ```
 Возвращает интерфейс [`CubesTab`](#cubes-tab) доступа к режиму редактирования мультикуба.
 
 &nbsp;
+
 ```js
 importer(): MulticubeImporter;
 ```
 Возвращает интерфейс [`MulticubeImporter`](./exportImport.md#multicube-importer) для импорта данных в мультикуб.
 
 &nbsp;
+
 ```js
 storageImporter(): StorageImporter;
 ```
@@ -186,10 +190,10 @@ elementsReorder(): ElementsReorder;
 ```ts
 interface Pivot {
 	create(): Grid;
-	rowsFilter(data: string | string[] | number | number[]): Pivot;
-	columnsFilter(data: string | string[] | number | number[]): Pivot;
-	withoutValues(): Pivot;
-	addDependentContext(identifier: number): Pivot;
+	rowsFilter(data: string | string[] | number | number[]): this;
+	columnsFilter(data: string | string[] | number | number[]): this;
+	withoutValues(): this;
+	addDependentContext(identifier: number): this;
 }
 ```
 Интерфейс представления (сводной таблицы). Функции интерфейса настраивают будущее отображение таблицы и ***не*** запрашивают данные.
@@ -229,7 +233,7 @@ columnsFilter(data: string | string[] | number | number[]): Pivot;
 &nbsp;
 
 ```js
-withoutValues(): Pivot;
+withoutValues(): this;
 ```
 Устанавливает признак загрузки с сервера данных без значений ячеек. В этом случае функции интерфейса [`Cell`](#cell) [`getValue()`](#cell.get-value), [`getNativeValue()`](#cell.get-native-value) и [`getContextValue()`](#get-context-value) будут возвращать `null`, однако функции [`Cell`](#cell).[`setValue()`](#cell.set-value), [`Cells`](#cells).[`setValue()`](#cells.set-value) и [`CellBuffer`](./common.md#cell-buffer).[`apply()`](#apply) не теряют свою магическую силу. Возвращает `this`.
 
@@ -239,7 +243,7 @@ withoutValues(): Pivot;
 
 <a name="add-dependent-context"></a>
 ```js
-addDependentContext(identifier: number): Pivot;
+addDependentContext(identifier: number): this;
 ```
 Добавляет в фильтр по строкам весь зависимый контекст переданного [`longId`](#long-id) `identifier`: материнские и дочерние элементы всех уровней.
 
@@ -749,8 +753,8 @@ interface Cell {
 	getNativeValue(): number | string | null;
 	getContextValue(): string | null;
 	definitions(): number[];
-	columns(): LabelsGroup;
-	rows(): LabelsGroup;
+	columns(): LabelsGroup | null;
+	rows(): LabelsGroup | null;
 	dropDown(): Labels;
 	getFormatType(): string;
 	isEditable(): boolean;
@@ -804,14 +808,14 @@ definitions(): number[];
 &nbsp;
 
 ```js
-columns(): LabelsGroup;
+columns(): LabelsGroup | null;
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца.
 
 &nbsp;
 
 ```js
-rows(): LabelsGroup;
+rows(): LabelsGroup | null;
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки.
 

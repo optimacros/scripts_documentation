@@ -25,9 +25,9 @@ export interface Cell {
 
     definitions(): number[];
 
-    columns(): LabelsGroup | undefined;
+    columns(): LabelsGroup | null;
 
-    rows(): LabelsGroup | undefined;
+    rows(): LabelsGroup | null;
 
     dropDown(): Labels;
 
@@ -214,13 +214,13 @@ export interface Exporter {
 export interface Pivot {
     create(): Grid;
 
-    rowsFilter(data: string | string[] | number | number[]): Pivot;
+    rowsFilter(data: string | string[] | number | number[]): this;
     
-    columnsFilter(data: string | string[] | number | number[]): Pivot;
+    columnsFilter(data: string | string[] | number | number[]): this;
 
-    withoutValues(): Pivot;
+    withoutValues(): this;
 
-    addDependentContext(identifier: number): Pivot
+    addDependentContext(identifier: number): this
 }
 
 export interface BaseElementsCreator {
@@ -450,7 +450,7 @@ export interface CubesTab extends Tab {
 }
 
 export interface MulticubeTab extends Tab {
-    cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
+    cleanCellsData(cubesIdentifiers?: number[]): this;
 
     cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 
