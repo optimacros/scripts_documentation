@@ -23,14 +23,14 @@ interface Common {
 &nbsp;
 
 ```js
-createCellBuffer(): CellBuffer
+createCellBuffer(): CellBuffer;
 ```
 Возвращает ссылку на интерфейс [`CellBuffer`](#cell-buffer).
 
 &nbsp;
 
 ```js
-requestInfo(): RequestManager
+requestInfo(): RequestManager;
 ```
 Возвращает ссылку на интерфейс [`RequestManager`](#request-manager).
 
@@ -38,35 +38,35 @@ requestInfo(): RequestManager
 
 
 ```js
-modelInfo(): ModelInfo
+modelInfo(): ModelInfo;
 ```
 Возвращает ссылку на интерфейс [`ModelInfo`](#model-info).
 
 &nbsp;
 
 ```js
-userInfo(): UserInfo
+userInfo(): UserInfo;
 ```
 Возвращает ссылку на интерфейс [`UserInfo`](#user-info).
 
 &nbsp;
 
 ```js
-resultInfo(): ResultInfo
+resultInfo(): ResultInfo;
 ```
 Возвращает ссылку на интерфейс [`ResultInfo`](#result-info).
 
 &nbsp;
 
 ```js
-entitiesInfo(): EntitiesInfo
+entitiesInfo(): EntitiesInfo;
 ```
 Возвращает ссылку на интерфейс [`EntitiesInfo`](#entities-info).
 
 &nbsp;
 
 ```js
-copyData(): CopyData
+copyData(): CopyData;
 ```
 Возвращает ссылку на интерфейс [`CopyData`](#copy-data).
 
@@ -80,28 +80,28 @@ apiServiceRequestInfo(): ApiService.RequestInfo | null;
 &nbsp;
 
 ```js
-enterpriseLicenseManager(): EnterpriseLicenseManager
+enterpriseLicenseManager(): EnterpriseLicenseManager;
 ```
 Возвращает ссылку на интерфейс [`EnterpriseLicenseManager`](#enterprise-license-manager).
 
 &nbsp;
 
 ```js
-metricsManager(): MetricsManager
+metricsManager(): MetricsManager;
 ```
 Возвращает ссылку на интерфейс [`MetricsManager`](#metrics-manager).
 
 &nbsp;
 
 ```js
-setCurrentMacrosStorageReadMode(type: string): boolean
+setCurrentMacrosStorageReadMode(type: string): boolean;
 ```
 Устанавливает режим чтения данных модели для текущего скрипта. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). Возвращает `true`.
 
 &nbsp;
 
 ```js
-getCurrentMacrosStorageReadMode(): string
+getCurrentMacrosStorageReadMode(): string;
 ```
 Возвращает режим чтения данных модели для текущего скрипта. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). 
 
@@ -110,10 +110,10 @@ getCurrentMacrosStorageReadMode(): string
 ### Интерфейс CellBuffer<a name="cell-buffer"></a>
 ```ts
 interface CellBuffer {
-	set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer;
-	apply(): CellBuffer;
+	set(cell: Cell | CubeCell, value: number | string | boolean | null): this;
+	apply(): this;
 	count(): number;
-	canLoadCellsValues(value: boolean): CellBuffer;
+	canLoadCellsValues(value: boolean): this;
 }
 ```
 Буфер, куда можно временно поместить значения набора ячеек, не обязательно смежных, чтобы изменить их перед отправкой на сервер.
@@ -175,9 +175,9 @@ canLoadCellsValues(value: boolean): CellBuffer;
 ### Интерфейс RequestManager<a name="request-manager"></a>
 ```ts
 interface RequestManager {
-	log(message: string, print?: boolean): RequestManager;
-	logStatusMessage(message: string, print?: boolean): RequestManager;
-	setStatusMessage(message: string): RequestManager;
+	log(message: string, print?: boolean): this;
+	logStatusMessage(message: string, print?: boolean): this;
+	setStatusMessage(message: string): this;
 }
 ```
 Интерфейс для записи в лог (устаревший функционал) и работы со статусными сообщениями. Все функции возвращают `this`.
@@ -185,7 +185,7 @@ interface RequestManager {
 &nbsp;
 
 ```js
-log(message: string, print?: boolean): RequestManager;
+log(message: string, print?: boolean): this;
 ```
 Выводит сообщение `message` в лог, доступ к которому можно получить в панели администратора. Если `print === true` (по умолчанию: `false`), дублирует сообщение `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
 
@@ -195,7 +195,7 @@ log(message: string, print?: boolean): RequestManager;
 
 <a name="request-manager.log-status-message"></a>
 ```js
-logStatusMessage(message: string, print?: boolean): RequestManager;
+logStatusMessage(message: string, print?: boolean): this;
 ```
 Делает то же, что и `setStatusMessage()`. Если `print === true` (по умолчанию: `false`), дублирует сообщение `message` в консоль и дополнительно переносит курсор на новую строку. *Устаревшая функция.*
 
@@ -203,7 +203,7 @@ logStatusMessage(message: string, print?: boolean): RequestManager;
 
 <a name="request-manager.set-status-message"></a>
 ```js
-setStatusMessage(message: string): RequestManager;
+setStatusMessage(message: string): this;
 ```
 Устанавливает статусное сообщение `message`. Может использоваться для уведомления пользователя во время длительной работы скрипта об этапах или процентах выполненных работ.
 
@@ -214,9 +214,9 @@ setStatusMessage(message: string): RequestManager;
 ### Интерфейс ExportObfuscationState<a name="export-obfuscation-state"></a>
 ```ts
 interface ExportObfuscationState {
-	setPath(path: string): ExportObfuscationState;
-	setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState;
-	setDataArchiveType(type: string): ExportObfuscationState;
+	setPath(path: string): this;
+	setEmailWhiteList(emailWhiteList: string[]): this;
+	setDataArchiveType(type: string): this;
 	export(): boolean;
 }
 ```
@@ -225,21 +225,21 @@ interface ExportObfuscationState {
 &nbsp;
 
 ```js
-setPath(path: string): ExportObfuscationState;
+setPath(path: string): this;
 ```
 Устанавливает путь к файлу модели. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState;
+setEmailWhiteList(emailWhiteList: string[]): this;
 ```
 Устанавливает список email пользователей модели, которые *не* будут обфусцированы. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setDataArchiveType(type: string): ExportObfuscationState;
+setDataArchiveType(type: string): this;
 ```
 Устанавливает тип формата выгруженных данных модели. Допустимые значения: `TXT`, `BIN`. Значение по умолчанию: `BIN`. Возвращает `this`.
 
@@ -365,16 +365,16 @@ recalculate(): boolean;
 &nbsp;
 
 ```js
-export(path: string): boolean;
+backup(path?: string): EntityInfo | boolean;
 ```
-Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#script-dir) скрипта по пути `path`. Возвращает `true`.
+Сохраняет резервную копию в логах модели ->`Центр безопастности`->`Логи`->`Резервные копии`. Если указан путь `path`, после создания копии вызовется функция `export()` и вернётся её результат типа `boolean`. Если `path` не указан, возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#entity-info).
 
 &nbsp;
 
 ```js
-backup(path?: string): EntityInfo | boolean;
+export(path: string): boolean;
 ```
-Сохраняет резервную копию в логах модели ->`Центр безопастности`->`Логи`->`Резервные копии`. Если указан путь `path`, после создания копии вызовется функция `export()` и вернётся её результат типа `boolean`. Если `path` не указан, возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#entity-info).
+Сохраняет резервную копию в [`рабочую директорию`](../appendix/glossary.md#script-dir) скрипта по пути `path`. Возвращает `true`.
 
 &nbsp;
 
@@ -589,9 +589,9 @@ getRole(): EntityInfo;
 ### Интерфейс ResultInfo<a name="result-info"></a>
 ```ts
 interface ResultInfo {
-	addFileHash(hash: string): ResultInfo;
+	addFileHash(hash: string): this;
 	actionsInfo(): ResultActionsInfo;
-	setProperty(name: string, value: any): ResultInfo;
+	setProperty(name: string, value: any): this;
 }
 ```
 Интерфейс управления ответом на запрос о запуске скрипта.
@@ -648,15 +648,15 @@ getCollection(longId: number[]): EntityInfo[];
 ### Интерфейс CopyData<a name="copy-data"></a>
 ```ts
 interface CopyData {
-	setSourceLongId(longId: number): CopyData;
-	setDestLongId(longId: number): CopyData;
+	setSourceLongId(longId: number): this;
+	setDestLongId(longId: number): this;
 	
-	enableCopyAllCubes(): CopyData;
-	enableCustomProperties(): CopyData;
-	setMulticubeLongIds(longIds: number[]): CopyData;
-	setMulticubeByNames(names: string[]): CopyData;
+	enableCopyAllCubes(): this;
+	enableCustomProperties(): this;
+	setMulticubeLongIds(longIds: number[]): this;
+	setMulticubeByNames(names: string[]): this;
 	
-	copy(): CopyData;
+	copy(): this;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет скопировать данные срезов кубов или свойств справочника по некоторому элементу *заданного измерения* в другой элемент того же измерения. Для использования нужно:
@@ -668,49 +668,49 @@ interface CopyData {
 &nbsp;
 
 ```js
-setSourceLongId(longId: number): CopyData;
+setSourceLongId(longId: number): this;
 ```
 Устанавливает [`longId`](./views.md#long-id) элемента-источника *заданного измерения*.
 
 &nbsp;
 
 ```js
-setDestLongId(longId: number): CopyData;
+setDestLongId(longId: number): this;
 ```
 Устанавливает [`longId`](./views.md#long-id) элемента-приёмника *заданного измерения*.
 
 &nbsp;
 
 ```js
-enableCopyAllCubes(): CopyData;
+enableCopyAllCubes(): this;
 ```
 Предписывает произвести копирование во всех кубах модели, содержащих *заданное измерение*.
 
 &nbsp;
 
 ```js
-enableCustomProperties(): CopyData;
+enableCustomProperties(): this;
 ```
 Предписывает произвести копирование данных из пользовательских свойств элемента-источника в свойства элемента-приёмника во всех справочниках, содержащих оба этих элемента.
 
 &nbsp;
 
 ```js
-setMulticubeLongIds(longIds: number[]): CopyData;
+setMulticubeLongIds(longIds: number[]): this;
 ```
 Предписывает произвести копирование в указанных по [`longId`](./views.md#long-id) мультикубах, которые содержат *заданное измерение*.
 
 &nbsp;
 
 ```js
-setMulticubeByNames(names: string[]): CopyData;
+setMulticubeByNames(names: string[]): this;
 ```
 Предписывает произвести копирование в указанных по именам мультикубах, которые содержат *заданное измерение*.
 
 &nbsp;
 
 ```js
-copy(): CopyData;
+copy(): this;
 ```
 Выполняет копирование.
 
@@ -721,7 +721,7 @@ copy(): CopyData;
 interface EnterpriseLicenseManager {
 	getWorkspaceLicenseStatus(): boolean;
 	getWorkspaceLicenseInfo(): object;
-		
+	
 	createKey(password: string): string;
 	validateKey(password: string, key: string): boolean;
 	
@@ -798,7 +798,7 @@ type MetricData = {
 
 interface MetricsManager {
 	getAllMetrics(): MetricData[];
-	setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+	setMetricValue(name: string, value: number, tags?: StringMap[]): this;
 	getMetricValue(name: string, tags?: StringMap[]): number | null;
 }
 ```

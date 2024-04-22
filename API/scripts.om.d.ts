@@ -648,13 +648,13 @@ export interface Lists {
 }
 
 export interface CellBuffer {
-    set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer;
+    set(cell: Cell | CubeCell, value: number | string | boolean | null): this;
 
-    apply(): CellBuffer;
+    apply(): this;
 
     count(): number;
 
-    canLoadCellsValues(value: boolean): CellBuffer;
+    canLoadCellsValues(value: boolean): this;
 }
 
 export namespace ApiService {
@@ -736,11 +736,11 @@ export namespace ApiService {
 }
 
 export interface RequestManager {
-    log(message: string, print?: boolean): RequestManager;
+    log(message: string, print?: boolean): this;
 
-    logStatusMessage(message: string, print?: boolean): RequestManager;
+    logStatusMessage(message: string, print?: boolean): this;
 
-    setStatusMessage(message: string): RequestManager;
+    setStatusMessage(message: string): this;
 }
 
 export interface UserInfo {
@@ -780,21 +780,21 @@ export type MetricData = {
 export interface MetricsManager {
     getAllMetrics(): MetricData[];
 
-    setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+    setMetricValue(name: string, value: number, tags?: StringMap[]): this;
 
     getMetricValue(name: string, tags?: StringMap[]): number | null;
 }
 
 export interface ExportObfuscationState {
-    setPath(path: string): ExportObfuscationState;
+    setPath(path: string): this;
 
-    setEmailWhiteList(emailWhiteList: string[]): ExportObfuscationState;
+    setEmailWhiteList(emailWhiteList: string[]): this;
 
     /**
      * Default: BIN
      * @param type TXT|BIN
      */
-    setDataArchiveType(type: string): ExportObfuscationState;
+    setDataArchiveType(type: string): this;
 
     export(): boolean;
 }
@@ -807,22 +807,24 @@ export type UpdateInputCellsViaFormulaRequest = {
 
 export interface ModelInfo {
     id(): string;
-
     name(): string;
-
     lastSyncDate(): number;
 
     autoCalcStatus(): boolean;
-
     setModelCalculationMode(status: boolean): boolean;
 
     repair(): boolean;
-
     recalculate(): boolean;
-
     backup(path?: string): EntityInfo | boolean;
 
     export(path: string): boolean;
+    exportObfuscationState(): ExportObfuscationState;
+
+    useUniqueLock(): this;
+    useSharedLock(): this;
+    hasSharedLock(): boolean;
+    hasUniqueLock(): boolean;
+    unlock(): this;
 
     recalculateIfManualCalculable(identifiers: number[]): boolean;
 
@@ -833,28 +835,7 @@ export interface ModelInfo {
      */
     batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[], sortByDependenciesValueFormula?: boolean, sortByDependenciesConditionFormula?: boolean): boolean;
 
-    recalculateCubes(identifiers: number[]): boolean;
-
-    recalculateCubesWithTheirSources(identifiers: number[]): boolean;
-
-    recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
-
-    recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
-
-    exportObfuscationState(): ExportObfuscationState;
-
-    unlock(): ModelInfo;
-
-    useSharedLock(): ModelInfo;
-
-    useUniqueLock(): ModelInfo;
-
-    hasSharedLock(): boolean;
-
-    hasUniqueLock(): boolean;
-
     getStorageInstancePriority(): number;
-
     setStorageInstancePriority(priority: number): number;
 
     /**
@@ -862,23 +843,24 @@ export interface ModelInfo {
      * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
      */
     setModelStorageReadMode(type: string): boolean;
-
     /**
      * Default: CONSISTENT_WRITE
      * @param type CONSISTENT_WRITE|FAST_WRITE
      */
     setModelStorageWriteMode(type: string): boolean;
-
     getStorageReadMode(): string;
-
     getStorageWriteMode(): string;
 
     /**
      * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
      */
     setMacrosStorageReadMode(type: string): boolean;
-
     getMacrosStorageReadMode(): string;
+
+    recalculateCubes(identifiers: number[]): boolean;
+    recalculateCubesWithTheirSources(identifiers: number[]): boolean;
+    recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
+    recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
 }
 
 export interface ButtonInfoOptions {
@@ -995,19 +977,19 @@ export interface EntitiesInfo {
 }
 
 export interface CopyData {
-    setSourceLongId(longId: number): CopyData;
+    setSourceLongId(longId: number): this;
 
-    setDestLongId(longId: number): CopyData;
+    setDestLongId(longId: number): this;
 
-    enableCopyAllCubes(): CopyData;
+    enableCopyAllCubes(): this;
 
-    enableCustomProperties(): CopyData;
+    enableCustomProperties(): this;
 
-    setMulticubeLongIds(longIds: number[]): CopyData;
+    setMulticubeLongIds(longIds: number[]): this;
 
-    setMulticubeByNames(names: string[]): CopyData;
+    setMulticubeByNames(names: string[]): this;
 
-    copy(): CopyData;
+    copy(): this;
 }
 
 export interface BinaryData {
