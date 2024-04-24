@@ -720,14 +720,14 @@ copy(): this;
 ```ts
 interface EnterpriseLicenseManager {
 	getWorkspaceLicenseStatus(): boolean;
-	getWorkspaceLicenseInfo(): object;
+	getWorkspaceLicenseInfo(): Object;
 	
 	createKey(password: string): string;
 	validateKey(password: string, key: string): boolean;
 	
 	validateLicenseJson(jsonStr: string): boolean;
 	createLicense(password: string, key: string, jsonStr: string): string;
-	validateLicense(password: string, key: string, licenseData: string): object;
+	validateLicense(password: string, key: string, licenseData: string): Object;
 }
 ```
 Интерфейс для работы с лицензиями воркспейса: получения информации об установленной на воркспейсе лицензии, создании шифрованной лицензионной строки и её валидации. Текст лицензии — `JSON`-строка, содержащая произвольную информацию. Документации на поля этого `JSON` на данный момент нет, но основное, что там должно содержаться, — информация об объекте лицензирования (домене, на котором будет развёрнут воркспейс) и допустимых параметрах воркспейса (число моделеров, число обычных пользователей и т. п.).
@@ -744,7 +744,7 @@ getWorkspaceLicenseStatus(): boolean;
 &nbsp;
 
 ```js
-getWorkspaceLicenseInfo(): object;
+getWorkspaceLicenseInfo(): Object;
 ```
 Если на воркспейсе установлена валидная лицензия, возвращает стандартный JS-объект с полями, указанными в исходной структуре лицензии. В случае отсутствия лицензии выбрасывается исключение `License not valid`.
 
@@ -778,7 +778,7 @@ createLicense(password: string, key: string, jsonStr: string): string;
 &nbsp;
 
 ```js
-validateLicense(password: string, key: string, licenseData: string): object;
+validateLicense(password: string, key: string, licenseData: string): Object;
 ```
 Проверяет ранее созданную лицензию `licenseData` на соответствие паролю `password` и ключу `key`. Возвращает объект с полями, указанными в исходной структуре лицензии, но у каждого названия свойства объекта появляется префикс `$`. В случае несоответствия лицензии ключу и паролю возвращается объект с текстом ошибки: `{"$errors": "Содержание лицензии не распознается"}`.
 

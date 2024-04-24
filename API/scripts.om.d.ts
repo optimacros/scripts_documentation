@@ -563,7 +563,7 @@ export interface StorageImporter extends Importer {
 
     setDateFormat(dateFormat: string): this;
     
-    setMappings(mappings: object): this;
+    setMappings(mappings: Object): this;
 }
 
 export interface ListImporter extends Importer {
@@ -699,7 +699,7 @@ export namespace ApiService {
     }
 
     export interface ResponseBodyParamInfos {
-        append(name: string, value: number | string | boolean | object): this;
+        append(name: string, value: number | string | boolean | Object): this;
     }
 
     export interface ResponseInfo {
@@ -758,7 +758,7 @@ export interface UserInfo {
 export interface EnterpriseLicenseManager {
     getWorkspaceLicenseStatus(): boolean;
 
-    getWorkspaceLicenseInfo(): object;
+    getWorkspaceLicenseInfo(): Object;
 
     createKey(password: string): string;
 
@@ -768,7 +768,7 @@ export interface EnterpriseLicenseManager {
 
     createLicense(password: string, key: string, jsonStr: string): string;
 
-    validateLicense(password: string, key: string, licenseData: string, id?: string | null): object;
+    validateLicense(password: string, key: string, licenseData: string, id?: string | null): Object;
 }
 
 export type MetricData = {
@@ -1083,7 +1083,7 @@ export interface Filesystem {
 
     listContents(path: string, recursive: boolean): FileMeta[];
 
-    getMetadata(path: string): object;
+    getMetadata(path: string): Object;
 
     upload(from: string, to: string): boolean;
 
@@ -1219,11 +1219,11 @@ export interface Optimization {
 export interface SqlQueryResult {
     count(): number;
     
-    generator(likeArray?: boolean): object[] | string[][];
+    generator(likeArray?: boolean): Object[] | string[][];
     
-    all(): object[];
+    all(): Object[];
     
-    first(): object | undefined;
+    first(): Object | undefined;
     
     column(columnName: string): unknown[];
     
@@ -1235,7 +1235,7 @@ export interface SqlQueryResult {
 }
 
 export interface SqlQueryBuilder {
-    execute(sql: string, bindings?: object): SqlQueryResult;
+    execute(sql: string, bindings?: Object): SqlQueryResult;
 }
 
 export interface SqlConnection {
@@ -1573,13 +1573,13 @@ export namespace Mongodb {
     }
 
     export interface Cursor {
-        all(): object[];
+        all(): Object[];
 
-        generator(): object[];
+        generator(): Object[];
     }
 
     export interface FilterOptions extends Object {
-        sort: object,
+        sort: Object,
         skip: number,
         limit: number,
         showRecordId: boolean,
@@ -1588,23 +1588,23 @@ export namespace Mongodb {
     }
 
     export interface Collection {
-        count(filter: object): number;
+        count(filter: Object): number;
 
-        find(filter: object, options?: FilterOptions): Cursor;
+        find(filter: Object, options?: FilterOptions): Cursor;
 
-        findOne(filter: object, options?: FilterOptions): object | undefined;
+        findOne(filter: Object, options?: FilterOptions): Object | undefined;
 
-        insertOne(document: object): InsertOneResult;
+        insertOne(document: Object): InsertOneResult;
 
-        insertMany(documents: object[]): InsertManyResult;
+        insertMany(documents: Object[]): InsertManyResult;
 
-        updateOne(filter: object, update: object, options?: FilterOptions): UpdateResult;
+        updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult;
 
-        updateMany(filter: object, update: object, options?: FilterOptions): UpdateResult;
+        updateMany(filter: Object, update: Object, options?: FilterOptions): UpdateResult;
 
-        deleteOne(filter: object, options?: FilterOptions): DeleteResult;
+        deleteOne(filter: Object, options?: FilterOptions): DeleteResult;
 
-        deleteMany(filter: object, options?: FilterOptions): DeleteResult;
+        deleteMany(filter: Object, options?: FilterOptions): DeleteResult;
     }
 
     export namespace Types {
@@ -1616,9 +1616,9 @@ export namespace Mongodb {
     export interface Types {
         objectId(id?: string): Types.ObjectId;
 
-        regex(pattern: string, flags?: string): object;
+        regex(pattern: string, flags?: string): Object;
 
-        date(milliseconds: number): object;
+        date(milliseconds: number): Object;
     }
 
     export interface Connection {
@@ -1643,9 +1643,9 @@ export namespace Mongodb {
 export namespace Http {
 
     export interface Params {
-        getAll(): object;
+        getAll(): Object;
 
-        setAll(pairs: object): boolean;
+        setAll(pairs: Object): boolean;
 
         get(name: string): any;
 
@@ -1667,7 +1667,7 @@ export namespace Http {
     }
 
     export interface JsonRequestBody {
-        setJson(value: string | object): boolean;
+        setJson(value: string | Object): boolean;
     }
 
     export interface StringRequestBody {
@@ -1842,7 +1842,7 @@ export namespace Http {
         /**
          * Limit to parse first 50MB of response data
          */
-        getStringDataLikeJson(): object | boolean;
+        getStringDataLikeJson(): Object | boolean;
 
         /**
          * @param length Default 1MB
@@ -1974,7 +1974,7 @@ export interface MysqlImportResult {
 
     getConfig(): string;
 
-    getStats(): object;
+    getStats(): Object;
 }
 
 export interface PostgresqlImportResult {

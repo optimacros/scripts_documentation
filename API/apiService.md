@@ -288,7 +288,7 @@ append(fileId: string): this;
 ### Интерфейс ResponseBodyParamInfos<a name="response-body-param-infos"></a>
 ```ts
 interface ResponseBodyParamInfos {
-    append(name: string, value: number | string | boolean | object): this;
+    append(name: string, value: number | string | boolean | Object): this;
 }
 ```
 Интерфейс для формирования параметров в ответе.
@@ -296,7 +296,7 @@ interface ResponseBodyParamInfos {
 &nbsp;
 
 ```js
-append(name: string, value: number | string | boolean | object): this;
+append(name: string, value: number | string | boolean | Object): this;
 ```
 Позволяет передать свойство `name` с значением `value`. Принимает значения с типами `number`, `string`, `bool`, `object`, `array`. Возвращает `this`.
 

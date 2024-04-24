@@ -478,7 +478,7 @@ interface StorageImporter extends Importer {
 	setIsCompressed(isCompressed: boolean): this;
 	setEncoding(encoding: string): this;
 	setDateFormat(dateFormat: string): this;
-	setMappings(mappings: object): this;
+	setMappings(mappings: Object): this;
 }
 ```
 Интерфейс быстрого импорта. Наследуется от [`Importer`](#importer). Доступен только в мультикубах. В отличие от базового импорта, формат файла фиксирован: сначала идут столбцы с измерениями, далее — столбцы кубов. Для идентификации элемента измерения используются имена элементов (`Item Name`). Все функции возвращают `this`.
@@ -514,7 +514,7 @@ setDateFormat(dateFormat: string): this;
 &nbsp;
 
 ```js
-setMappings(mappings: object): this;
+setMappings(mappings: Object): this;
 ```
 Позволяет установить соответствие полей импортируемого `CSV` и мультикуба-приёмника. Передаётся в виде объекта. 
 Пример:
