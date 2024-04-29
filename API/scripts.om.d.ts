@@ -15,24 +15,16 @@ export interface Cell {
      * returns {number | string | null} boolean cube values are returned as strings 'true'/'false'
      */
     getValue(): number | string | null;
-
+    getVisualValue(): string | null;
     getNativeValue(): number | string | null;
-
-    //2.0 only
-    getTextValue(): number | string | null;
-
     getContextValue(): string | null;
 
     definitions(): number[];
-
     columns(): LabelsGroup | null;
-
     rows(): LabelsGroup | null;
 
     dropDown(): Labels;
-
     getFormatType(): string;
-
     isEditable(): boolean;
 }
 

@@ -749,12 +749,16 @@ getByIndexes(indexes: number[]): Cells | null;
 ```ts
 interface Cell {
 	setValue(value: number | string | boolean | null);
+	
 	getValue(): number | string | null;
+	getVisualValue(): string | null;
 	getNativeValue(): number | string | null;
 	getContextValue(): string | null;
+	
 	definitions(): number[];
 	columns(): LabelsGroup | null;
 	rows(): LabelsGroup | null;
+	
 	dropDown(): Labels;
 	getFormatType(): string;
 	isEditable(): boolean;
@@ -777,6 +781,13 @@ setValue(value: number | string | boolean | null);
 getValue(): number | string | null;
 ```
 Возвращает значение клетки, которое видит пользователь. Если клетка имеет логический формат, то возвращается строковое значение `'true'` или `'false'`.
+
+&nbsp;
+
+```js
+getVisualValue(): string | null;
+```
+Возвращает отображаемое значение в ячейке, если куб в формате даты или справочника, для других форматов куба возвращает `null`.
 
 &nbsp;
 
