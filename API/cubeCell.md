@@ -85,8 +85,8 @@ getDimensions(): EntityInfo[];
 ### Интерфейс CubeFormatInfo<a name="cube-format-info"></a>
 ```ts
 interface CubeFormatInfo {
-	getFormatTypeEntity(): EntityInfo;
-	getDimensionEntity(): EntityInfo | null;
+	getFormatTypeEntity(): EntityInfo | undefined;
+	getDimensionEntity(): EntityInfo | undefined;
 }
 ```
 Интерфейс информации о формате куба.
@@ -94,14 +94,14 @@ interface CubeFormatInfo {
 &nbsp;
 
 ```js
-getFormatTypeEntity(): EntityInfo;
+getFormatTypeEntity(): EntityInfo | undefined;
 ```
 Возвращает сущность [`EntityInfo`](./views.md#entity-info) формата куба.
 
 &nbsp;
 
 ```js
-getDimensionEntity(): EntityInfo | null;
+getDimensionEntity(): EntityInfo | undefined;
 ```
 Возвращает идентификатор измерения, выбранного в качестве формата, если формат – один из `List`, `Time`, `Version`, `CubeSubset`, и `null` в противном случае.
 ***Не работает.***

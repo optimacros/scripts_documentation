@@ -80,7 +80,7 @@ save(name: string, charset?: string): string;
 ```ts
 interface CsvReader {
 	params(): CSVParams;
-	changeFileCharset(charset: string): CsvReader;
+	changeFileCharset(charset: string): this;
 	generator(): IterableIterator<string[]>;
 }
 ```

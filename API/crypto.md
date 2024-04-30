@@ -93,7 +93,7 @@ getHmacHashAlgorithms(): string[];
 ## Интерфейс BinaryData<a name="binarydata"></a>
 ```ts
 interface BinaryData {
-    getAsRawString(): string;
+	getAsRawString(): string;
 }
 ```
 Служебный интерфейс для работы с бинарными данными, которые могут быть получены в результате вычисления хэшей. Создан для передачи бинарных данных между `js` и `php` компонентами платформы.

@@ -285,8 +285,8 @@ interface ModelInfo {
 	
 	useUniqueLock(): this;
 	useSharedLock(): this;
-	hasSharedLock(): boolean;
 	hasUniqueLock(): boolean;
+	hasSharedLock(): boolean;
 	unlock(): this;
 	
 	recalculateIfManualCalculable(identifiers: number[]): boolean;
@@ -400,16 +400,16 @@ useSharedLock(): this;
 &nbsp;
 
 ```js
-hasSharedLock(): boolean;
+hasUniqueLock(): boolean;
 ```
-Находится ли модель под `shared` блокировкой. Если скрипт находится вне контекста модели (режим запуска `Custom` или использован метод `unlock()`), то вернёт `false`.
+Находится ли модель под `unique` блокировкой. Если скрипт находится вне контекста модели (режим запуска `Custom` или использован метод `unlock()`), то вернёт `false`.
 
 &nbsp;
 
 ```js
-hasUniqueLock(): boolean;
+hasSharedLock(): boolean;
 ```
-Находится ли модель под `unique` блокировкой. Если скрипт находится вне контекста модели (режим запуска `Custom` или использован метод `unlock()`), то вернёт `false`.
+Находится ли модель под `shared` блокировкой. Если скрипт находится вне контекста модели (режим запуска `Custom` или использован метод `unlock()`), то вернёт `false`.
 
 &nbsp;
 

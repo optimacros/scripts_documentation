@@ -131,7 +131,6 @@ run(): RunMacroActionResult;
 ### Интерфейс BaseActionResult<a name="base-action-result"></a>
 ```ts
 interface BaseActionResult {
-
 }
 ```
 Базовый интерфейс результата действия. Он пустой.

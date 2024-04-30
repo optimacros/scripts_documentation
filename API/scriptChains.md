@@ -296,7 +296,6 @@ run(): TaskPromise | null;
 ## Интерфейс ResultMacrosAction<a name="result-macros-action"></a>
 ```ts
 interface ResultMacrosAction extends BaseCodeExecutionAction {
-
 }
 ```
 Интерфейс действия запуска скрипта, сохраненного в модели в списке скриптов модели. Наследуется от [`BaseCodeExecutionAction`](#base-code-execution-action).

@@ -204,7 +204,7 @@ loadImportBuilder(): MysqlImportBuilder;
 ### Интерфейс PostgresqlConnectorBuilder<a name="postgresql-connector-builder"></a>
 ```ts
 export interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
-    loadImportBuilder(): PostgresqlImportBuilder;
+	loadImportBuilder(): PostgresqlImportBuilder;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Postgresql`](https://ru.wikipedia.org/wiki/PostgreSQL). Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
@@ -322,13 +322,13 @@ loadImportBuilder(): OracleImportBuilder;
 ### Интерфейс SnowflakeConnectorBuilder<a name="snowflake-connector-builder"></a>
 ```ts
 export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
-    setAccount(account: string): this;
-    setRegion(region: string): this;
-    setInsecure(insecure: boolean): this;
-    setWarehouse(warehouse: string): this;
-    setSchema(schema: string): this;
-    setRole(role: string): this;
-    setProtocol(protocol: string): this;
+	setAccount(account: string): this;
+	setRegion(region: string): this;
+	setInsecure(insecure: boolean): this;
+	setWarehouse(warehouse: string): this;
+	setSchema(schema: string): this;
+	setRole(role: string): this;
+	setProtocol(protocol: string): this;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/) (для подключения используется [PHP PDO Driver](https://docs.snowflake.com/en/user-guide/php-pdo-driver.html)). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
@@ -674,9 +674,9 @@ import(): PostgresqlImportResult;
 ### Интерфейс PostgresqlImportResult<a name="postgresql-import-result"></a>
 ```js
 interface PostgresqlImportResult {
-    hasErrors(): boolean;
-    getErrorOutput(): string;
-    getCommand(): string;
+	hasErrors(): boolean;
+	getErrorOutput(): string;
+	getCommand(): string;
 }
 ```
 Интерфейс просмотра результатов импорта, осуществлённого с помощью [`PostgresqlImportBuilder`](#postgresql-import-builder).
@@ -1037,6 +1037,7 @@ interface OracleImportBuilder {
 	setFirstIgnoreLines(count: number): this;
 	setDirect(value: boolean): this;
 	setUserBadFileFileLink(fileLink: string): this;
+	
 	import(): OracleImportResult;
 }
 ```

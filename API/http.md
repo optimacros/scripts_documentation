@@ -56,8 +56,10 @@ base64Decode(value: string): string | boolean;
 interface Params {
 	getAll(): Object;
 	setAll(pairs: Object): boolean;
+	
 	get(name: string): any;
 	set(name: string, value: any): boolean;
+	
 	del(name: string): boolean;
 	has(name: string): boolean;
 	clear(): boolean;
@@ -120,6 +122,7 @@ clear(): boolean;
 ```ts
 interface UrlParams extends Params {
 	stringify(): string;
+	
 	setEncodingType(type: string): this;
 	getEncodingType(): string;
 }
@@ -246,20 +249,28 @@ formBody(): FormRequestBody;
 interface Url {
 	setUrl(url: string): boolean;
 	getUrl(): string;
+	
 	setUrlPath(path: string): boolean;
 	getUrlPath(): string;
+	
 	setUrlScheme(scheme: string): boolean;
 	getUrlScheme(): string;
+	
 	setHost(host: string): boolean;
 	getHost(): string;
+	
 	setPort(port: number | string): boolean;
 	getPort(): number | null;
+	
 	setUser(user: string): boolean;
 	getUser(): string;
+	
 	setPassword(password: string): boolean;
 	getPassword(): string | null;
+	
 	setFragment(fragment: string): boolean;
 	getFragment(): string | null;
+	
 	params(): UrlParams;
 }
 ```
@@ -581,10 +592,13 @@ setPath(path: string): boolean;
 interface Options {
 	setConnTimeout(seconds: number): boolean;
 	getConnTimeout(): number;
+	
 	setReqTimeout(seconds: number): boolean;
 	getReqTimeout(): number;
+	
 	setCanDecodeContent(value: boolean): boolean;
 	getCanDecodeContent(): boolean;
+	
 	allowRedirects(): AllowRedirects;
 	auth(): HttpAuth;
 	cert(): Cert;

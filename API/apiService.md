@@ -7,14 +7,14 @@
 ### Интерфейс RequestInfo<a name="request-info"></a>
 ```ts
 interface RequestInfo {
-    getMethod(): string;
-    getClientInfo(): ClientInfo;
-    getCookieInfos(): ParamInfos;
-    getHeaderInfos(): ParamInfos;
-    getUrlParamInfos(): ParamInfos;
-    getFileInfos(): RequestFileInfos;
-    getBodyParamInfos(): ParamInfos;
-    getResponseInfo(): ResponseInfo;
+	getMethod(): string;
+	getClientInfo(): ClientInfo;
+	getCookieInfos(): ParamInfos;
+	getHeaderInfos(): ParamInfos;
+	getUrlParamInfos(): ParamInfos;
+	getFileInfos(): RequestFileInfos;
+	getBodyParamInfos(): ParamInfos;
+	getResponseInfo(): ResponseInfo;
 }
 ```
 Интерфейс для получения информации о запросе, который был отправлен по протоколу [`HTTP`](https://ru.wikipedia.org/wiki/HTTP) к API сервису.
@@ -80,8 +80,8 @@ getResponseInfo(): ResponseInfo;
 ### Интерфейс ClientInfo<a name="client-info"></a>
 ```ts
 interface ClientInfo {
-    getAgent(): string;
-    getIp(): string;
+	getAgent(): string;
+	getIp(): string;
 }
 ```
 Интерфейс для получения информации о клиенте, который отправил запрос к API сервису.
@@ -105,8 +105,8 @@ getIp(): string;
 ### Интерфейс ParamInfos<a name="param-infos"></a>
 ```ts
 interface ParamInfos {
-    get(key: string): ParamInfo | null;
-    getAll(): ParamInfo[];
+	get(key: string): ParamInfo | null;
+	getAll(): ParamInfo[];
 }
 ```
 Интерфейс, представляющий набор переданных параметров.
@@ -130,8 +130,8 @@ getAll(): ParamInfo[];
 ### Интерфейс ParamInfo<a name="param-info"></a>
 ```ts
 interface ParamInfo {
-    getName(): string;
-    getValue(): string | null;
+	getName(): string;
+	getValue(): string | null;
 }
 ```
 Интерфейс для получения информации о параметре.
@@ -155,8 +155,8 @@ getValue(): string | null;
 ### Интерфейс RequestFileInfos<a name="request-file-infos"></a>
 ```ts
 interface RequestFileInfos {
-    get(key: string): RequestFileInfo | null;
-    getAll(): RequestFileInfo[];
+	get(key: string): RequestFileInfo | null;
+	getAll(): RequestFileInfo[];
 }
 ```
 Интерфейс для получения информации о загруженных клиентом файлах.
@@ -180,10 +180,10 @@ getAll(): RequestFileInfo[];
 ### Интерфейс RequestFileInfo<a name="request-file-info"></a>
 ```ts
 interface RequestFileInfo {
-    getName(): string;
-    getFileName(): string;
-    getFileSize(): number;
-    copyToLocal(path: string): this;
+	getName(): string;
+	getFileName(): string;
+	getFileSize(): number;
+	copyToLocal(path: string): this;
 }
 ```
 Интерфейс для получения информации о загруженном клиентом файле.
@@ -221,9 +221,9 @@ copyToLocal(path: string): this;
 ### Интерфейс ResponseInfo<a name="response-info"></a>
 ```ts
 interface ResponseInfo {
-    getCookieInfos(): ResponseCookieInfos;
-    getFileInfos(): ResponseFileInfos;
-    getBodyParamInfos(): ResponseBodyParamInfos;
+	getCookieInfos(): ResponseCookieInfos;
+	getFileInfos(): ResponseFileInfos;
+	getBodyParamInfos(): ResponseBodyParamInfos;
 }
 ```
 Интерфейс для формирования ответа с типом `RESPONSE`.
@@ -254,7 +254,7 @@ getBodyParamInfos(): ResponseBodyParamInfos;
 ### Интерфейс ResponseCookieInfos<a name="response-cookie-infos"></a>
 ```ts
 interface ResponseCookieInfos {
-    append(name: string, value: string, ttl: number): this;
+	append(name: string, value: string, ttl: number): this;
 }
 ```
 Интерфейс для формирования параметров в HTTP-заголовке [`Cookies`](https://ru.wikipedia.org/wiki/Cookie).
@@ -271,7 +271,7 @@ append(name: string, value: string, ttl: number): this;
 ### Интерфейс ResponseFileInfos<a name="response-file-infos"></a>
 ```ts
 interface ResponseFileInfos {
-    append(fileId: string): this;
+	append(fileId: string): this;
 }
 ```
 Интерфейс для отправки файлов в ответе.
@@ -288,7 +288,7 @@ append(fileId: string): this;
 ### Интерфейс ResponseBodyParamInfos<a name="response-body-param-infos"></a>
 ```ts
 interface ResponseBodyParamInfos {
-    append(name: string, value: number | string | boolean | Object): this;
+	append(name: string, value: number | string | boolean | Object): this;
 }
 ```
 Интерфейс для формирования параметров в ответе.

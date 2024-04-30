@@ -3,7 +3,7 @@
 ### Интерфейс ApiServices<a name="api-services"></a>
 ```ts
 interface ApiServices {
-    apiServicesTab(): ApiServicesTab;
+	apiServicesTab(): ApiServicesTab;
 }
 
 ```

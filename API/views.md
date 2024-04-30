@@ -28,7 +28,7 @@ syncMulticube(): SyncMulticubeBuilder;
 ### Интерфейс MulticubesTab<a name="multicubes-tab"></a>
 ```ts
 interface MulticubesTab extends Tab {
-	open(name: string): MulticubeTab;
+	open(name: string): MulticubeTab | undefined;
 
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
@@ -40,7 +40,7 @@ interface MulticubesTab extends Tab {
 &nbsp;
 
 ```js
-open(name: string): MulticubeTab;
+open(name: string): MulticubeTab | undefined;
 ```
 Возвращает ссылку на [`MulticubeTab`](#multicube-tab) мультикуба `name`. Если такой мультикуб отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
 
@@ -366,7 +366,7 @@ getColumnDimensions(): GridDimension[];
 ### Интерфейс GridDimension<a name="grid-dimension"></a>
 ```ts
 interface GridDimension {
-	getDimensionEntity(): EntityInfo;
+	getDimensionEntity(): EntityInfo | undefined;
 }
 ```
 Интерфейс предоставляет данные об измерении мультикуба.
@@ -374,7 +374,7 @@ interface GridDimension {
 &nbsp;
 
 ```js
-getDimensionEntity(): EntityInfo;
+getDimensionEntity(): EntityInfo | undefined;
 ```
 Возвращает ссылку на сущность [`EntityInfo`](#entity-info) измерения мультикуба.
 
@@ -519,10 +519,10 @@ columns(): Labels;
 interface Labels {
 	start(): number;
 	count(): number;
-	all(): LabelsGroup[];
-	get(index: number): LabelsGroup | null;
+	all(): (LabelsGroup | undefined)[];
+	get(index: number): LabelsGroup | undefined;
 	chunkInstance(): GridRangeChunk;
-	findLabelByLongId(longId: number): Label | null;
+	findLabelByLongId(longId: number): Label | undefined;
 }
 ```
 Интерфейс, представляющий набор объектов [`LabelsGroup`](#labels-group), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#grid-range-chunk).
@@ -548,14 +548,14 @@ count(): number;
 &nbsp;
 
 ```js
-all(): LabelsGroup[];
+all(): (LabelsGroup | undefined)[];
 ```
 Возвращает набор объектов заголовков каждой строки/столбца [`LabelsGroup`](#labels-group) в виде массива.
 
 &nbsp;
 
 ```js
-get(index: number): LabelsGroup | null;
+get(index: number): LabelsGroup | undefined;
 ```
 Аналог `all()[index]`.
 
@@ -569,7 +569,7 @@ chunkInstance(): GridRangeChunk;
 &nbsp;
 
 ```js
-findLabelByLongId(longId: number): Label | null;
+findLabelByLongId(longId: number): Label | undefined;
 ```
 Возвращает объект [`Label`](#label) по его [`longId`](#long-id), если он присутствует в `this`, иначе — `null`.
 
@@ -614,7 +614,7 @@ cells(): Cells;
 ```ts
 interface Label {
 	longId(): number;
-	name(): string;
+	name(): string | null;
 	code(): string | null;
 	alias(): string | null;
 	label(): string | null;
@@ -638,7 +638,7 @@ longId(): number;
 
 <a name="label.name"></a>
 ```js
-name(): string;
+name(): string | null;
 ```
 Возвращает имя сущности.
 
@@ -690,7 +690,7 @@ hierarchyLongId(): number;
 ```ts
 interface Cells {
 	all(): Cell[];
-	first(): Cell;
+	first(): Cell | undefined;
 	setValue(value: number | string | null);
 	count(): number;
 	chunkInstance(): GridRangeChunk;
@@ -709,7 +709,7 @@ all(): Cell[];
 &nbsp;
 
 ```js
-first(): Cell;
+first(): Cell | undefined;
 ```
 Аналог `all()[0]`.
 

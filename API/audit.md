@@ -67,11 +67,11 @@ pivot(): AuditPivot;
 ### Интерфейс AuditPivot<a name="audit-pivot"></a>
 ```ts
 interface AuditPivot extends Pivot {
-    	eventTypeFilter(data: string | number | (string | number)[]): this;
-    	dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): this;
-    	statusFilter(status: number): this;
-    	authorFilter(name: string): this;
-    	detailsFilter(details4: string): this;
+	eventTypeFilter(data: string | number | (string | number)[]): this;
+	dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): this;
+	statusFilter(status: number): this;
+	authorFilter(name: string): this;
+	detailsFilter(details4: string): this;
 }
 ```
 Интерфейс представления аудита. Интерфейс наследуется от [`Pivot`](./views.md#pivot).

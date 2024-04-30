@@ -105,7 +105,7 @@ interface SyncListBuilder extends SyncBuilder {
 
 	setSrcToDesListMap(map: {
 		sourceListLongId: number,
-	 	destinationListLongId: number,
+		destinationListLongId: number,
 	}[]): this;
 
 	setProxySrcColumnDataMap(map: {
@@ -174,11 +174,11 @@ getReportPath(): string;
 ### Интерфейс ImportMappings<a name="import-mappings"></a>
 ```ts
 interface ImportMappings {
-    dimensionMapping?: SimpleMapping[];
-    cubeMapping?: SimpleMapping[];
-    namespaceMapping?: SimpleMapping[];
-    additionalDimensionMapping?: AdditionalDimensionMapping[];
-    dimensionItemMapping?: DimensionItemMapping[];
+	dimensionMapping?: SimpleMapping[];
+	cubeMapping?: SimpleMapping[];
+	namespaceMapping?: SimpleMapping[];
+	additionalDimensionMapping?: AdditionalDimensionMapping[];
+	dimensionItemMapping?: DimensionItemMapping[];
 }
 ```
 Интерфейс для установки маппингов при осуществлении синхронизации сущностей.
@@ -223,8 +223,8 @@ dimensionItemMapping?: DimensionItemMapping[];
 ### Интерфейс SimpleMapping<a name="simple-mapping"></a>
 ```ts
 interface SimpleMapping {
-    from: string;
-    to: string;
+	from: string;
+	to: string;
 }
 ```
 Интерфейс для установки стандартных маппингов.
@@ -234,8 +234,8 @@ interface SimpleMapping {
 ### Интерфейс DimensionItemMapping<a name="dimension-item-mapping"></a>
 ```ts
 interface DimensionItemMapping {
-    dimensionName: string;
-    dimensionItemMap: StringMap;
+	dimensionName: string;
+	dimensionItemMap: StringMap;
 }
 ```
 Интерфейс для установки маппингов измерений.
@@ -245,8 +245,8 @@ interface DimensionItemMapping {
 ### Интерфейс AdditionalDimensionMapping<a name="additional-dimension-mapping"></a>
 ```ts
 interface AdditionalDimensionMapping {
-    dimensionName: string;
-    dimensionItemName: string;
+	dimensionName: string;
+	dimensionItemName: string;
 }
 ```
 Интерфейс для установки маппингов дополнительных измерений.

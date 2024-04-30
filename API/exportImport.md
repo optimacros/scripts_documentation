@@ -381,10 +381,13 @@ import(): this;
 ```ts
 interface ListImporter extends Importer {
 	setFilePath(path: string): this;
+	
 	setObligatoryListCodes(obligatoryListCodes: boolean): this;
 	getObligatoryListCodes(): boolean;
+	
 	setImportToChildListOnly(importToChildListOnly: boolean): this;
 	getImportToChildListOnly(): boolean;
+	
 	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): this;
 	getUpdatedPropertiesOnParentLevels(): boolean;
 }

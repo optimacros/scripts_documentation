@@ -28,7 +28,6 @@ workspaceUsersTab(): ModelUsersTab;
 ### Интерфейс ModelUsersTab<a name="model-users-tab"></a>
 ```ts
 interface ModelUsersTab extends Tab {
-	
 }
 ```
 Вкладка `Пользователи модели`. Содержит пользователей модели и их настройки. Интерфейс наследуется от [`Tab`](./views.md#tab).
@@ -55,7 +54,6 @@ interface ModelUsersTab extends Tab {
 ### Интерфейс WorkspaceUsersTab<a name="workspace-users-tab"></a>
 ```ts
 interface WorkspaceUsersTab extends Tab {
-	
 }
 ```
 Вкладка `Другие пользователи сервера`. Содержит пользователей воркспейса, у которых нет доступа к даннй модели и их настройки. Интерфейс наследуется от [`Tab`](./views.md#tab).

@@ -116,12 +116,16 @@ create(): { ok: number, errmsg?: string };
 ```ts
 interface Collection {
 	count(filter: Object): number;
+	
 	find(filter: Object, options?: FilterOptions): Cursor;
 	findOne(filter: Object, options?: FilterOptions): Object;
+	
 	insertOne(document: Object): InsertOneResult;
 	insertMany(documents: Object[]): InsertManyResult;
+	
 	updateOne(filter: Object, update: Object, options?: FilterOptions): UpdateResult;
 	updateMany(filter: Object, update: Object, options?: FilterOptions): UpdateResult;
+	
 	deleteOne(filter: Object, options?: FilterOptions): DeleteResult;
 	deleteMany(filter: Object, options?: FilterOptions): DeleteResult;
 }
