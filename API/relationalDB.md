@@ -203,7 +203,7 @@ loadImportBuilder(): MysqlImportBuilder;
 
 ### Интерфейс PostgresqlConnectorBuilder<a name="postgresql-connector-builder"></a>
 ```ts
-export interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
+interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
 	loadImportBuilder(): PostgresqlImportBuilder;
 }
 ```
@@ -280,7 +280,7 @@ loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 
 ### Интерфейс OracleConnectorBuilder<a name="oracle-connector-builder"></a>
 ```ts
-export interface OracleConnectorBuilder extends SqlConnectorBuilder {
+interface OracleConnectorBuilder extends SqlConnectorBuilder {
 	setServiceName(value: string): this;
 	setSchema(value: string): this;
 	setTNS(value: string): this;
@@ -321,7 +321,7 @@ loadImportBuilder(): OracleImportBuilder;
 
 ### Интерфейс SnowflakeConnectorBuilder<a name="snowflake-connector-builder"></a>
 ```ts
-export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
+interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
 	setAccount(account: string): this;
 	setRegion(region: string): this;
 	setInsecure(insecure: boolean): this;
@@ -591,7 +591,7 @@ getStats(): Object;
 
 ### Интерфейс PostgresqlImportBuilder<a name="postgresql-import-builder"></a>
 ```js
-export interface PostgresqlImportBuilder {
+interface PostgresqlImportBuilder {
 	setTable(name: string): this;
 	setSchema(name: string): this;
 	setDelimiter(delimiter: string): this;
@@ -1145,7 +1145,7 @@ getBadFileLink(): string;
 
 ### Интерфейс OracleImportStats<a name="oracle-import-stats"></a>
 ```js
-export interface OracleImportStats {
+interface OracleImportStats {
 	getIgnored(): number;
 }
 ```

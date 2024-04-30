@@ -377,7 +377,7 @@ applyForm(): Object;
 
 ### Интерфейс TimePeriodTab<a name="time-period-tab"></a>
 ```ts
-export interface TimePeriodTab extends Tab {
+interface TimePeriodTab extends Tab {
 	subsetsTab(): TimePeriodSubsetTab;
 	importer(): TimePeriodImporter;
 }
@@ -402,7 +402,7 @@ importer(): TimePeriodImporter;
 
 ### Интерфейс TimePeriodSubsetTab<a name="time-period-subset-tab"></a>
 ```ts
-export interface TimePeriodSubsetTab extends Tab {
+interface TimePeriodSubsetTab extends Tab {
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
 	elementsReorder(): ElementsReorder;
