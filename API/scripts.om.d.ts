@@ -2113,19 +2113,41 @@ export namespace Notifications {
 
         export interface Builder {
             setTo(to: string | string[]): this;
-
             setSubject(subject: string): this;
-
             setBody(body: string): this;
-
             attachFiles(paths: string[]): this;
-
             send(): Result;
         }
     }
 
+    namespace Web {
+        export const enum Preset {
+            CommonChannel = 'WEB notices'
+        }
+
+        export const enum GroupAlias {
+            AllUsers = '%ALL_USERS%',
+            AllGeneralUsers = '%ALL_GENERAL_USERS%',
+            AllServiceUsers = '%ALL_SERVICE_USERS%',
+            AllAdmins = '%ALL_ADMINS%',
+            AllModellers = '%ALL_MODELLERS%'
+        }
+
+        export interface Result {
+            messageId: string;
+        }
+
+        export interface Builder {
+            setTo(to: string | string[]): this;
+            setSubject(subject: string): this;
+            setBody(body: string): this;
+            markUrgent(): this;
+            send(): Result;
+        }
+    }
     export interface Manager {
         smtp(channel: string): Smtp.Builder;
+        web(channel: string): Web.Builder;
     }
 }
 
