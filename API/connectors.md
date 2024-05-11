@@ -69,6 +69,11 @@ http(): Http.HttpManager
 ```js
 winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder
 ```
+
+```
+Deprecation warning! Данный интерфейс более не развивается и будет удален в будущих версиях приложения. Если вы его используете, вам необходимо перевести взаимодействие через коннектор `http`
+```
+
 Возвращает коннектор [`WinAgent.WinAgentBuilder`](./winAgent.md#win-agent-builder) для взаимодействия с [`WinAgent`](./winAgent.md). Параметр `builtIn` указывает использовать встроенную конфигурацию воркспейса. Значение по умолчанию: `false`.
 
 &nbsp;

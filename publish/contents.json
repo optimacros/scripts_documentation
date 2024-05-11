@@ -6,8 +6,8 @@
         "API.md",
         "common.md",
         "scriptChains.md",
-        "apiService.md",
         "env.md",
+        "variables.md",
         "views.md",
         "cubeCell.md",
         "dimensions.md",
@@ -16,14 +16,15 @@
         "exportImport.md",
         "fs.md",
         "csv.md",
+        "apiService.md",
+        "apiServicesAdministration.md",
         "optimization.md",
         "connectors.md",
         "relationalDB.md",
         "mongoDB.md",
         "http.md",
         "winAgent.md",
-        "notifications.md",
-        "variables.md"
+        "notifications.md"
     ],
     "advancedFeatues": [
         "advancedFeatues.md",

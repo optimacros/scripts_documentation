@@ -14,17 +14,18 @@ interface Manager {
 &nbsp;
 
 ```js
-smtp(channel: string): Smtp.Builder
+smtp(channel: string): Smtp.Builder;
 ```
 Возвращает интерфейс [`Smtp.Builder`](#smtp.builder) канала с именем `channel` уведомления пользователя по протоколу [`SMTP`](https://ru.wikipedia.org/wiki/SMTP).
 
 &nbsp;
 
 ```js
-web(channel: string): Web.Builder
+web(channel: string): Web.Builder;
 ```
-Возвращает интерфейс [`Web.Builder`](#web.builder) канала с именем `channel` уведомления пользователя по протоколу [`HTTP,WS`](https://ru.wikipedia.org/wiki/SMTP https://ru.wikipedia.org/wiki/WebSocket).<br>
-По умолчанию, в системе присутствует один единственный канал `WEB notices` (смотри `Web.Preset`. Администраторы могут создать дополнительные каналы в интерфейсе управления workspace.
+Возвращает интерфейс [`Web.Builder`](#web.builder) канала с именем `channel` уведомления пользователя в веб-приложении Optimacros. Технически уведомление будет доставлено через веб-сокет по протоколу взаимодействия воркспейс — веб-приложение. 
+
+По умолчанию, в системе присутствует один единственный канал `WEB notices` (см. [`Web.Preset`](#web.constants)). Администраторы могут создать дополнительные каналы в интерфейсе администрирования воркспейса.
 
 &nbsp;
 
@@ -44,28 +45,28 @@ interface Smtp.Builder {
 &nbsp;
 
 ```js
-setTo(to: string | string[]): this
+setTo(to: string | string[]): this;
 ```
 Устанавливает адресата или адресатов. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setSubject(subject: string): this
+setSubject(subject: string): this;
 ```
 Устанавливает тему письма. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setBody(body: string): this
+setBody(body: string): this;
 ```
 Устанавливает тело письма. Возвращает `this`.
 
 &nbsp;
 
 ```js
-attachFiles(paths: string[]): this
+attachFiles(paths: string[]): this;
 ```
 Прикрепляет к письму файлы из локальной директории скрипта, находящиеся по путям, переданным в `paths`. Возвращает `this`.
 
@@ -79,7 +80,7 @@ isHtml(flag: boolean): this;
 &nbsp;
 
 ```js
-send(): Smtp.Result
+send(): Smtp.Result;
 ```
 Запускает механизм асинхронной отправки письма. Возвращает интерфейс [`Smtp.Result`](#smtp.result).
 
@@ -104,45 +105,40 @@ interface Web.Builder {
 	send(): Web.Result;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки и отправки уведомления по протоколу [`HTTP,WS`](https://ru.wikipedia.org/wiki/SMTP https://ru.wikipedia.org/wiki/WebSocket).
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки и отправки уведомления в веб-приложение Optimacros.
 
 &nbsp;
 
 ```js
-setTo(to: string | string[]): this
+setTo(to: string | string[]): this;
 ```
-Устанавливает адресата или адресатов. В качестве адресатов используются e-mail пользователей.<br>
-Также, для упрощения рассылки сообщений в `sendTo` могут использоваться специальные строковые константы `Web.GroupAlias`.<br>
-Возвращает `this`.
+Устанавливает адресата или адресатов. В качестве идетнификатора адресата используется `e-mail` пользователей, который использовался им для регистрации в системе в Login Centre, или — для упрощения рассылки сообщений — специальные строковые константы [`Web.GroupAlias`](#web.constants). Возвращает `this`.
 
 &nbsp;
 
 ```js
-setSubject(subject: string): this
+setSubject(subject: string): this;
 ```
-Устанавливает тему уведомления (строка передаётся в кодировке `UTF-8`, длина строки ограничена 4096 символами).<br>
-Возвращает `this`.
+Устанавливает тему уведомления. Строка передаётся в кодировке `UTF-8`, длина строки ограничена 4'096 символами. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setBody(body: string): this
+setBody(body: string): this;
 ```
-Устанавливает тело уведомления (строка передаётся в кодировке `UTF-8`, длина строки ограничена 262144 символами).<br>
-Возвращает `this`.
+Устанавливает тело уведомления. Строка передаётся в кодировке `UTF-8`, длина строки ограничена 262'144 символами. Возвращает `this`.
 
 &nbsp;
 
 ```js
-markUrgent(): this
+markUrgent(): this;
 ```
-Повышает важность сообщения, может быть использованно при отображении уведомления на клиенте.<br>
-Возвращает `this`.
+Устанавливает метку "важное" ("неотложное") для сообщения, что может быть использованно при отображении уведомления на клиенте. Возвращает `this`.
 
 &nbsp;
 
 ```js
-send(): Web.Result
+send(): Web.Result;
 ```
 Запускает механизм асинхронной отправки уведомления. Возвращает интерфейс [`Web.Result`](#web.result).
 
@@ -195,12 +191,13 @@ interface Web.Result {
     messageId: string;
 }
 ```
-Интерфейс доступа к результатам отправки уведомления. Содержит строку `messageId` с идентификатором отправленного уведомления.<br>
-Администраторы могут использовать идентификатор для поиска сообщения в интерфейсе управления workspace.
+Интерфейс доступа к результатам отправки уведомления. Содержит строку `messageId` с идентификатором отправленного уведомления.
+
+Администраторы могут использовать идентификатор для поиска сообщения в интерфейсе админимтрирования воркспейса.
 
 &nbsp;
 
-### Константы
+### Константы<a name="web.constants"></a>
 ```ts
 export const enum Web.Preset {
     CommonChannel = 'WEB notices'
@@ -213,14 +210,18 @@ export const enum Web.GroupAlias {
     AllGeneralUsers = '%ALL_GENERAL_USERS%',
     AllServiceUsers = '%ALL_SERVICE_USERS%',
     AllAdmins = '%ALL_ADMINS%',
-    AllModellers = '%ALL_MODELLERS%'
+    AllModellers = '%ALL_MODELLERS%',
 }
 ```
-◾️ `'%ALL_USERS%'` - все пользователи workspace<br>
-◾️ `'%ALL_GENERAL_USERS%'` - обычные пользователи workspace, у которых нет привилегий `modeller`, `admin`, `service user`<br>
-◾️ `'%ALL_SERVICE_USERS%'` - пользователи workspace, у которых есть привилегии `service user`<br>
-◾️ `'%ALL_ADMINS%'` - пользователи workspace, у которых есть привилегии `admin`<br>
-◾️ `'%ALL_MODELLERS%'` - пользователи workspace, у которых есть привилегии `modeller`<br>
+◾️ `'%ALL_USERS%'` - все пользователи воркспейса
+
+◾️ `'%ALL_GENERAL_USERS%'` - обычные пользователи, у которых нет привилегий `modeller`, `admin`, `service user`
+
+◾️ `'%ALL_SERVICE_USERS%'` - пользователи, у которых есть привилегии `service user`
+
+◾️ `'%ALL_ADMINS%'` - пользователи, у которых есть привилегии `admin`
+
+◾️ `'%ALL_MODELLERS%'` - пользователи, у которых есть привилегии `modeller`
 
 &nbsp;
 

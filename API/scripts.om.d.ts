@@ -1809,6 +1809,9 @@ export namespace Http {
     }
 }
 
+/**
+ * DEPRECATED
+ */
 export namespace WinAgent {
 
     export interface BaseActionResult {
@@ -1980,6 +1983,7 @@ export interface Connectors {
     http(): Http.HttpManager;
 
     /**
+     * DEPRECATED
      * @param builtIn Use built-in configuration if exists. Default is 'false'
      */
     winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
@@ -2002,7 +2006,7 @@ export namespace Notifications {
 
     namespace Web {
         export const enum Preset {
-            CommonChannel = 'WEB notices'
+            CommonChannel = 'WEB notices',
         }
 
         export const enum GroupAlias {
@@ -2010,7 +2014,7 @@ export namespace Notifications {
             AllGeneralUsers = '%ALL_GENERAL_USERS%',
             AllServiceUsers = '%ALL_SERVICE_USERS%',
             AllAdmins = '%ALL_ADMINS%',
-            AllModellers = '%ALL_MODELLERS%'
+            AllModellers = '%ALL_MODELLERS%',
         }
 
         export interface Result {
