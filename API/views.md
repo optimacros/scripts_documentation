@@ -678,7 +678,7 @@ parentLongId(): number
 ```js
 hierarchyLongId(): number
 ```
-Если сущность является элементом или сабсетом справочника (включая справочники времени и версий), возвращает  [`longId`](#long-id) самого справочника. Если родительского справочника нет, возвращает `-1`.
+Если сущность является элементом или сабсетом справочника (включая справочники времени и версий), возвращает  [`longId`](#long-id) самого справочника. Если родительского справочника нет, возвращает `-1`. На данный момент этот метод может некорректно работать в зависимости от способа получения `EntityInfo`, для корректной работы рекомендуется получать сущность с помощью интерфейса [`EntitiesInfo`](./common.md#entities-info).
 
 &nbsp;
 
@@ -744,7 +744,7 @@ getByIndexes(indexes: number[]): Cells | null
 ### Интерфейс Cell<a name="cell"></a>
 ```ts
 interface Cell {
-	setValue(value: number | string | null);
+	setValue(value: number | string | boolean | null);
 	getValue(): number | string | null;
 	getNativeValue(): number | string | null;
 	getContextValue(): string | null;
@@ -762,7 +762,7 @@ interface Cell {
 
 <a name="cell.set-value"></a>
 ```js
-setValue(value: number | string | null)
+setValue(value: number | string | boolean | null)
 ```
 Устанавливает значение клетки. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
 
@@ -772,7 +772,7 @@ setValue(value: number | string | null)
 ```js
 getValue(): number | string | null
 ```
-Возвращает значение клетки, которое видит пользователь.
+Возвращает значение клетки, которое видит пользователь. Если клетка имеет логический формат, то возвращается строковое значение `'true'` или `'false'`.
 
 &nbsp;
 

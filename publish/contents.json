@@ -35,14 +35,5 @@
         "appendix.md",
         "constraints.md",
         "glossary.md"
-    ],
-    "cookBook": [
-        "cookBook.md",
-        "hw.md",
-        "rowsColumnsFilters.md",
-        "cellsAccess.md",
-        "csv.md",
-        "partialListCopy.md",
-        "listReduce.md"
-    ] 
+    ]
 }

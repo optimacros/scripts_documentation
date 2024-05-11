@@ -593,6 +593,7 @@ getStats(): Object
 ```js
 export interface PostgresqlImportBuilder {
     setTable(name: string): PostgresqlImportBuilder;
+    setSchema(name: string): PostgresqlImportBuilder;
     setDelimiter(delimiter: string): PostgresqlImportBuilder;
     setEnclosure(enclosure: string): PostgresqlImportBuilder;
     setEscape(escape: string): PostgresqlImportBuilder;
@@ -610,6 +611,13 @@ export interface PostgresqlImportBuilder {
 setTable(name: string): PostgresqlImportBuilder
 ```
 Устанавливает таблицу, в которую будет производиться импорт.
+
+&nbsp;
+
+```js
+setSchema(name: string): PostgresqlImportBuilder
+```
+Устанавливает [схему](https://www.postgresql.org/docs/current/ddl-schemas.html).
 
 &nbsp;
 

@@ -9,11 +9,14 @@ export type StringMap = {
 };
 
 export interface Cell {
-    setValue(value: number | string | null | boolean);
+    setValue(value: number | string | boolean | null);
 
-    getValue(): number | string | null | boolean;
+    /**
+     * returns {number | string | null} boolean cube values are returned as strings 'true'/'false'
+     */
+    getValue(): number | string | null;
 
-    getNativeValue(): number | string | null | boolean;
+    getNativeValue(): number | string | null;
 
     //2.0 only
     getTextValue(): number | string | null;
@@ -211,9 +214,9 @@ export interface Exporter {
 export interface Pivot {
     create(): Grid;
 
-    rowsFilter(...data: string[] | number[]): Pivot;
+    rowsFilter(data: string | string[] | number | number[]): Pivot;
     
-    columnsFilter(...data: string[] | number[]): Pivot;
+    columnsFilter(data: string | string[] | number | number[]): Pivot;
 
     withoutValues(): Pivot;
 
@@ -534,7 +537,7 @@ export interface CSVParams {
 
     getEscape(): string;
 
-    setLineDelimiter(escape: string): CSVParams;
+    setLineDelimiter(lineDelimiter: string): CSVParams;
 
     getLineDelimiter(): string;
 }
@@ -645,7 +648,7 @@ export interface Lists {
 }
 
 export interface CellBuffer {
-    set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
+    set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer;
 
     apply(): CellBuffer;
 
@@ -768,6 +771,20 @@ export interface EnterpriseLicenseManager {
     validateLicense(password: string, key: string, licenseData: string, id?: string | null): object;
 }
 
+export type MetricData = {
+    name(): string;
+    value(): number;
+    tags(): string;
+};
+
+export interface MetricsManager {
+    getAllMetrics(): MetricData[];
+
+    setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+
+    getMetricValue(name: string, tags?: StringMap[]): number | null;
+}
+
 export interface ExportObfuscationState {
     setPath(path: string): ExportObfuscationState;
 
@@ -780,6 +797,12 @@ export interface ExportObfuscationState {
     setDataArchiveType(type: string): ExportObfuscationState;
 
     export(): boolean;
+}
+
+export type UpdateInputCellsViaFormulaRequest = {
+    cubeLongId: number;
+    valueFormula: string;
+    conditionFormula?: string;
 }
 
 export interface ModelInfo {
@@ -797,11 +820,26 @@ export interface ModelInfo {
 
     recalculate(): boolean;
 
-    backup(path: string): EntityInfo | boolean;
+    backup(path?: string): EntityInfo | boolean;
 
     export(path: string): boolean;
 
     recalculateIfManualCalculable(identifiers: number[]): boolean;
+
+    /**
+     * @param requests
+     * @param sortByDependenciesValueFormula Default is true
+     * @param sortByDependenciesConditionFormula Default is true
+     */
+    batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[], sortByDependenciesValueFormula?: boolean, sortByDependenciesConditionFormula?: boolean): boolean;
+
+    recalculateCubes(identifiers: number[]): boolean;
+
+    recalculateCubesWithTheirSources(identifiers: number[]): boolean;
+
+    recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
+
+    recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
 
     exportObfuscationState(): ExportObfuscationState;
 
@@ -834,6 +872,13 @@ export interface ModelInfo {
     getStorageReadMode(): string;
 
     getStorageWriteMode(): string;
+
+    /**
+     * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
+     */
+    setMacrosStorageReadMode(type: string): boolean;
+
+    getMacrosStorageReadMode(): string;
 }
 
 export interface ButtonInfoOptions {
@@ -871,12 +916,48 @@ export interface EnvironmentInfo {
     get(key: string): unknown;
 }
 
-export interface ResultMacrosAction extends ResultBaseAction {
+export interface BaseCodeExecutionAction extends ResultBaseAction {
+    /**
+     * @param value CUSTOM|SHARED|UNIQUE
+     * Default is UNIQUE
+     */
+    setLockMode(value: string): this;
+
     setAutoRunTimeout(seconds: number): this;
 
     buttonInfo(): ButtonInfo;
 
     environmentInfo(): EnvironmentInfo;
+
+    withPromise(withPromise: boolean): this;
+
+    setTaskDescription(description: string): this;
+
+    run(): TaskPromise|null;
+}
+
+export interface ResultMacrosAction extends BaseCodeExecutionAction {
+
+}
+
+export interface TaskPromise {
+    getStatus(): string|null;
+
+    wait(wait: number): TaskPromiseResult|null;
+}
+
+export interface TaskPromiseResult {
+    getOutput(): string;
+
+    getDescription(): string;
+
+    getEnvironmentInfo(): EnvironmentInfo
+}
+
+export interface CodeExecutionAction extends BaseCodeExecutionAction {
+    setMemoryLimit(value: number): this;
+
+    setTimeLimit(value: number): this;
 }
 
 export interface ResultOpenAction extends ResultBaseAction {
@@ -885,6 +966,8 @@ export interface ResultOpenAction extends ResultBaseAction {
 
 export interface ResultActionsInfo {
     makeMacrosAction(identifier: string | number): ResultMacrosAction;
+
+    makeCodeExecutionAction(code: string): CodeExecutionAction;Zz
 
     makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
 
@@ -927,6 +1010,31 @@ export interface CopyData {
     copy(): CopyData;
 }
 
+export interface BinaryData {
+    getAsRawString(): string;
+}
+
+export interface Crypto {
+    sha1(data: string): string;
+
+    /**
+     * 
+     * @param algo available values can be retrieved by getHashAlgorithms()
+     * @param binary defaults to false
+     */
+    hash(algo: string, data: string, binary?: boolean): string | BinaryData;
+    /**
+     * 
+     * @param algo available values can be retrieved by getHmacHashAlgorithms()
+     * @param binary defaults to false
+     */
+    hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData;
+
+    getHashAlgorithms(): string[];
+
+    getHmacAlgorithms(): string[];
+}
+
 export interface Common {
     createCellBuffer(): CellBuffer;
 
@@ -945,6 +1053,15 @@ export interface Common {
     apiServiceRequestInfo(): ApiService.RequestInfo | null;
 
     enterpriseLicenseManager(): EnterpriseLicenseManager;
+
+    metricsManager(): MetricsManager;
+
+    /**
+     * @param type CONSISTENT_READ|FAST_READ|FAST_READ_METADATA
+     */
+    setCurrentMacrosStorageReadMode(type: string): boolean;
+
+    getCurrentMacrosStorageReadMode(): string;
 }
 
 export interface FileMeta {
@@ -1055,7 +1172,7 @@ export interface CsvReader {
      */
     changeFileCharset(charset: string): CsvReader;
 
-    generator(): [][];
+    generator(): IterableIterator<string[]>;
 }
 
 export interface CsvWriter {
@@ -1116,7 +1233,7 @@ export interface Optimization {
 export interface SqlQueryResult {
     count(): number;
     
-    generator(likeArray?: boolean): object | object[];
+    generator(likeArray?: boolean): object[] | string[][];
     
     all(): object[];
     
@@ -1401,7 +1518,7 @@ export interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
     /**
      * @param name DBLIB|ODBC|SQLSRV
      */
-    setDriver(name: string): this;
+    setDriver(name: string | null): this;
 
     /**
      * @param scrollType KEYSET|DYNAMIC|STATIC|BUFFERED
@@ -1573,6 +1690,7 @@ export namespace Http {
 
     export interface FormRequestBody {
         params(): Params;
+        appendFile(fieldName: string, fileName: string, filePath: string): FormRequestBody;
     }
 
     export interface RequestBody {
@@ -1923,6 +2041,8 @@ export interface MysqlImportBuilder {
 export interface PostgresqlImportBuilder {
     setTable(name: string): PostgresqlImportBuilder;
 
+    setSchema(name: string): PostgresqlImportBuilder;
+
     setDelimiter(delimiter: string): PostgresqlImportBuilder;
 
     setEnclosure(quote: string): PostgresqlImportBuilder;
@@ -2053,6 +2173,52 @@ export interface ApiServicesTab extends Tab {
     
 }
 
+export interface Audit {
+    auditTab(): AuditTab;
+}
+
+export interface AuditTab extends Tab {
+    pivot(viewName?: string): AuditPivot;
+}
+
+export interface AuditPivot extends Pivot {
+    eventTypeFilter(data: string | number | (string | number)[]): AuditPivot;
+
+    dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): AuditPivot;
+
+    statusFilter(status: number): AuditPivot;
+
+    authorFilter(name: string): AuditPivot;
+
+    detailsFilter(details4: string): AuditPivot;
+}
+
+export interface Users {
+    modelUsersTab(): ModelUsersTab;
+    workspaceUsersTab(): WorkspaceUsersTab;
+}
+
+export interface WorkspaceUsersTab extends Tab {
+
+}
+
+export interface ModelUsersTab extends Tab {
+
+}
+
+export interface Users {
+    modelUsersTab(): ModelUsersTab;
+    workspaceUsersTab(): WorkspaceUsersTab;
+}
+
+export interface WorkspaceUsersTab extends Tab {
+
+}
+
+export interface ModelUsersTab extends Tab {
+
+}
+
 export interface OM {
     readonly common: Common;
     readonly environment: Environment;
@@ -2066,6 +2232,9 @@ export interface OM {
     readonly notifications: Notifications.Manager;
     readonly variables: Variables;
     readonly apiServices: ApiServices;
+    readonly audit: Audit;
+    readonly crypto: Crypto;
+    readonly users: Users;
 }
 
 export var om: OM;

@@ -1,12 +1,13 @@
 # API Reference
 
-В этом разделе находится техническое описание предоставляемых платформой интерфейсов. Их можно разделить на 5 групп:
+В этом разделе находится техническое описание предоставляемых платформой интерфейсов. Их можно разделить на 6 групп:
 
 * выполнение скрипта: информация об окружении и управление выводом/действиями после завершения работы (см. `Common`, `Environment`, `Optimization`);
-* взаимодействие с моделью, как сущностью: создание бэкапа, пересчёт всей модели (см. `Common.ModelInfo`);
-* взаимодействие с данными и метаданными модели (см. `Multicubes`, `Times`, `Versions`, `Lists`, `Common.CopyData`;
+* взаимодействие с моделью, как сущностью: создание бэкапа, пересчёт всей модели (см. `Common.ModelInfo`, `Users`);
+* взаимодействие с данными и метаданными модели (см. `Multicubes`, `Times`, `Versions`, `Lists`, `Common.CopyData`);
 * взаимодействие с внешним миром (см. `Common.ApiService`, `Filesystems`, `Connectors`, `Notifications`);
-* администрирование воркспейса (см. `ApiServices`).
+* административное: настройка API-сервисов (`ApiServices`), работа с аудитом (`Audit`);
+* функции, напрямую не связанные с Оптимакросом, функции помощники — интерфейс `Crypto`.
 
 1. [Интерфейс скриптов 1.0 (на языке TypeScript)](scripts.om.d.ts)
 1. [Интерфейс Common](common.md)
@@ -29,6 +30,9 @@
 1. [Цепочки скриптов](scriptChains.md)
 1. [Web API сервисы](apiService.md)
 1. [Администрирование Web API сервисов](apiServicesAdministration.md)
+1. [Аудит](audit.md)
+1. [Криптография, хэширование и вспомогательные функции](crypto.md)
+1. [Пользователи](users.md)
 
 ## Интерфейс OM<a name="om"></a>
 ```ts
@@ -44,7 +48,10 @@ interface OM {
 	readonly connectors: Connectors;
 	readonly notifications: Notifications.Manager;
 	readonly variables: Variables;
-	readonly apiServices ApiServices;
+	readonly apiServices: ApiServices;
+	readonly audit: Audit;
+	readonly crypto: Crypto;
+	readonly users: Users;
 }
 
 var om: OM;
@@ -134,6 +141,27 @@ readonly variables: Variables;
 readonly apiServices: ApiServices;
 ```
 Ссылка на интерфейс [`ApiServices`](./apiServicesAdministration.md#api-services).
+
+&nbsp;
+
+```js
+readonly audit: Audit;
+```
+Ссылка на интерфейс [`Audit`](./audit.md).
+
+&nbsp;
+
+```js
+readonly crypto: Crypto;
+```
+Ссылка на интерфейс [`Crypto`](./crypto.md).
+
+&nbsp;
+
+```js
+readonly users: Users;
+```
+Ссылка на интерфейс [`Users`](./users.md).
 
 &nbsp;
 

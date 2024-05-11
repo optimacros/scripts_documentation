@@ -72,7 +72,7 @@ writeRows(rows: string[][]): CsvWriter
 ```js
 save(name: string, charset?: string): string
 ```
-Сохраняет файл в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) под именем `{name}.csv` в кодировке `charset` (допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`). Не сбрасывает кэш записанных строк, поэтому стоит создавать на каждый записываемый файл свой объект `CsvWriter`. Возвращает имя файла с расширением: `{name}.csv`.
+Сохраняет файл в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) под именем `'{name}.csv'` в кодировке `charset` (допустимые значения: `'UTF-8'`, `'WINDOWS-1251'`, значение по умолчанию: `'UTF-8'`). Не сбрасывает кэш записанных строк, поэтому стоит создавать на каждый записываемый файл свой объект `CsvWriter`. Возвращает имя файла с расширением: `'{name}.csv'`.
 
 &nbsp;
 
@@ -81,7 +81,7 @@ save(name: string, charset?: string): string
 interface CsvReader {
 	params(): CSVParams;
 	changeFileCharset(charset: string): CsvReader;
-	generator(): string[][];
+	generator(): IterableIterator<string[]>;
 }
 ```
 Интерфейс для чтения файла формата [`CSV`](https://ru.wikipedia.org/wiki/CSV).
@@ -98,12 +98,12 @@ params(): CSVParams
 ```js
 changeFileCharset(charset: string): CsvReader
 ```
-Устанавливает кодировку файла. Допустимые значения: `UTF-8`, `WINDOWS-1251`, значение по умолчанию: `UTF-8`. Возвращает `this`.
+Устанавливает кодировку файла. Допустимые значения: `'UTF-8'`, `'WINDOWS-1251'`, значение по умолчанию: `'UTF-8'`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-generator(): string[][]
+generator(): IterableIterator<string[]>
 ```
 Возвращает генератор, при каждом обращении читающий одну строку файла CSV и возвращающий её в виде `string[]`. Генератор вернёт `null`, если исходный файл был длиной 0 байт.
 

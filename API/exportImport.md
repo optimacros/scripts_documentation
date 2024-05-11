@@ -1,7 +1,8 @@
 # Экспорт и импорт
 
 1. [Экспорт из мультикубов и справочников](#export)
-1. [Импорт в мультикубы и справочники](#import)
+1. [Импорт в мультикубы, справочники и системные измерения](#import)
+1. [Быстрый импорт в мультикубы](#om-import)
 
 ## Экспорт из мультикубов и справочников<a name="export"></a>
 
@@ -85,27 +86,24 @@ setFileName(fileName: string): Exporter
 
 &nbsp;
 
-<a name="set-delimiter"></a>
 ```js
 setDelimiter(delimiter: string): Exporter
 ```
-Устанавливает разделитель полей. Допустимые значения: `,`, `;`, `\t`.  По умолчанию: `;`.
+Устанавливает разделитель полей. Допустимые значения: `,`, `;`, `\t`. Значение по умолчанию: `;`.
 
 &nbsp;
 
-<a name="set-enclosure"></a>
 ```js
 setEnclosure(enclosure: string): Exporter
 ```
-Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле. Обрамляться будут поля, которые содержат разделитель полей, перенос строк или символ экранирования, а для интерфейсов [`Exporter`](#exporter) и [`CsvWriter`](./csv.md#csv-writer) ещё и поля, содержащие пробел. Допустимые значения: `'` и `"`. По умолчанию: `"`.
+Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей, пробел, табуляция, сам обрамляющий символ или [`разделитель строк`](#set-line-delimiter) (только для интерфейса [`StorageExporter`](#storage-exporter)). Допустимые значения: `'`, `"`. Значение по умолчанию: `"`.
 
 &nbsp;
 
-<a name="set-escape"></a>
 ```js
 setEscape(escape: string): Exporter
 ```
-Устанавливает символ для экранирования обрамляющего символа, если встретится в строке ещё и он, и символа переноса строки. Допустимые значения: `\` и `"`. На данный момент при записи в файл метод не работает и экранирующий символ **всегда** равен обрамляющему символу. Важно, что для интерфейсов [`Exporter`](#exporter) и [`CsvWriter`](./csv.md#csv-writer) установка в коде экранирующего символа равным обрамляющему приводит к тому, что экранирование не будет работать.
+Устанавливает экранирующий символ: если в тексте встретится экранирующий символ и вслед за ним обрамляющий, эта последовательность останется неизменной; а если обрамляющий символ будет без экранирующего, он удвоится. Допустимые значения: `\`, `"`. Значение по умолчанию: `\`.
 
 &nbsp;
 
@@ -240,29 +238,32 @@ moveToLocal(path: string): ExportResult
 
 &nbsp;
 
-## Импорт в мультикубы и справочники<a name="import"></a>
+## Импорт в мультикубы, справочники и системные измерения<a name="import"></a>
 
 ### Интерфейс CSVParams<a name="csv-params"></a>
 ```ts
 interface CSVParams {
 	setDelimiter(delimiter: string): CSVParams;
 	getDelimiter(): string;
+	
 	setEnclosure(enclosure: string): CSVParams;
 	getEnclosure(): string;
+	
 	setEscape(escape: string): CSVParams;
 	getEscape(): string;
-	setLineDelimiter(escape: string): CSVParams;
+	
+	setLineDelimiter(lineDelimiter: string): CSVParams;
 	getLineDelimiter(): string;
 }
 ```
-Интерфейс настроек импорта из файла [`CSV`](https://ru.wikipedia.org/wiki/CSV).
+Интерфейс настроек различных манипуляций с файлом [`CSV`](https://ru.wikipedia.org/wiki/CSV).
 
 &nbsp;
 
 ```js
 setDelimiter(delimiter: string): CSVParams
 ```
-Устанавливает разделитель полей. Аналогично `Exporter`.[`setDelimiter()`](#set-delimiter). Возвращает `this`. При использовании для интерфейса `CsvWriter` разделитель может быть произвольной строкой. При использовании для интерфейса `CsvReader` должен быть однобайтным символом.
+Устанавливает разделитель полей. При использовании для интерфейса [`CsvReader`](./csv.md#csv-reader) должен быть однобайтным символом. При использовании для интерфейса [`CsvWriter`](./csv.md#csv-writer) разделитель может быть произвольной строкой, однако, если задана строка более чем из одного символа, механизм обрамления (enclosure) перестаёт работать, и рекомендуется всё же использовать одиночный символ. Значение по умолчанию: `;`. Возвращает `this`.
 
 &nbsp;
 
@@ -273,10 +274,13 @@ getDelimiter(): string
 
 &nbsp;
 
+<a name="CSVParams.setEnclosure"></a>
 ```js
 setEnclosure(enclosure: string): CSVParams
 ```
-Устанавливает обрамляющий символ. Аналогично `Exporter`.[`setEnclosure()`](#set-enclosure). Возвращает `this`.
+Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей, пробел, табуляция, сам обрамляющий символ или [`разделитель строк`](#CSVParams.setLineDelimiter). Допустим лишь один однобайтовый символ. Значение по умолчанию: `"`. См. также [`экранирующий символ`](#CSVParams.setEscape). Возвращает `this`.
+
+**Если для интерфейса [`CsvWriter`](./csv.md#csv-writer) задать в качестве обрамляющего символа строку более чем из одного символа, отключится механизм обрамления!**
 
 &nbsp;
 
@@ -287,24 +291,32 @@ getEnclosure(): string
 
 &nbsp;
 
+<a name="CSVParams.setEscape"></a>
 ```js
 setEscape(escape: string): CSVParams
 ```
-Устанавливает символ для экранирования обрамляющего символа. Аналогично `Exporter`.[`setEscape()`](#set-escape). Возвращает `this`.
+Устанавливает экранирующий символ: если в тексте встретится экранирующий символ и вслед за ним обрамляющий, эта последовательность останется неизменной; а если обрамляющий символ будет без экранирующего, он удвоится.
+
+Допустим лишь один однобайтовый символ. Значение по умолчанию: `\`. Возвращает `this`.
+
+**Если задать в качестве экранирующего символа пустую строку, отключится механизм [`обрамления`](#CSVParams.setEnclosure)!**
 
 &nbsp;
 
 ```js
 getEscape(): string
 ```
-Возвращает символ для экранирования обрамляющего символа.
+Возвращает экранирующий символ.
 
 &nbsp;
 
+<a name="CSVParams.setLineDelimiter"></a>
 ```js
-setLineDelimiter(escape: string): CSVParams
+setLineDelimiter(lineDelimiter: string): CSVParams
 ```
-Устанавливает разделитель строк. Аналогично `StorageExporter`.[`setLineDelimiter()`](#set-line-delimiter). Возвращает `this`.
+Устанавливает разделитель строк. По умолчанию: `\n`. Возвращает `this`.
+
+**Для интерфейса [`CsvReader`](./csv.md#csv-reader) невозможно установить значение, отличное от значения по умолчанию!**
 
 &nbsp;
 
@@ -325,7 +337,7 @@ interface Importer {
 	import(): Importer;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](./views.md#grid). Доступен в мультикубах и в справочниках. Результатом импорта является файл отчёта.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](./views.md#grid). Результатом импорта является файл отчёта.
 
 &nbsp;
 
@@ -364,6 +376,100 @@ import(): Importer
 
 &nbsp;
 
+### Интерфейс ListImporter<a name="list-importer"></a>
+```ts
+interface ListImporter extends Importer {
+	setFilePath(path: string): ListImporter;
+	setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter;
+	getObligatoryListCodes(): boolean;
+	setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
+	getImportToChildListOnly(): boolean;
+	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
+	getUpdatedPropertiesOnParentLevels(): boolean;
+}
+```
+Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
+```js
+setFilePath(path: string): ListImporter
+```
+Устанавливает имя импортируемого файла. Возвращает `this`.
+
+&nbsp;
+
+```js
+setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
+```
+Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществующие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getObligatoryListCodes(): boolean
+```
+Возвращает признак режима обязательных кодов.
+
+&nbsp;
+
+```js
+setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
+```
+Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getImportToChildListOnly(): boolean
+```
+Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
+
+&nbsp;
+
+```js
+setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
+```
+Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getUpdatedPropertiesOnParentLevels(): boolean
+```
+Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
+
+&nbsp;
+
+### Интерфейс MulticubeImporter<a name="multicube-importer"></a>
+```ts
+interface MulticubeImporter extends Importer {
+}
+```
+Интерфейс импорта в мультикуб. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
+### Интерфейс VersionsImporter<a name="versions-importer"></a>
+```ts
+interface VersionsImporter extends Importer {
+}
+```
+Интерфейс импорта в системный справочник версий. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
+### Интерфейс TimePeriodImporter<a name="time-period-importer"></a>
+```ts
+interface TimePeriodImporter extends Importer {
+}
+```
+Интерфейс импорта в системный справочник времени. Интерфейс наследуется от [`Importer`](#importer).
+
+&nbsp;
+
+## Быстрый импорт в мультикубы<a name="om-import"></a>
+
 ### Интерфейс StorageImporter<a name="storage-importer"></a>
 ```ts
 interface StorageImporter extends Importer {
@@ -374,7 +480,7 @@ interface StorageImporter extends Importer {
 	setMappings(mappings: object): StorageImporter;
 }
 ```
-Интерфейс быстрого импорта. Доступен только в мультикубах. Интерфейс наследуется от [`Importer`](#importer). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции возвращают `this`.
+Интерфейс быстрого импорта. Наследуется от [`Importer`](#importer). Доступен только в мультикубах. В отличие от базового импорта, формат файла фиксирован: сначала идут столбцы с измерениями, далее — столбцы кубов. Для идентификации элемента измерения используются имена элементов (`Item Name`). Все функции возвращают `this`.
 
 &nbsp;
 
@@ -458,98 +564,6 @@ setMappings(mappings: object): StorageImporter;
   ]
 }
 ```
-
-&nbsp;
-
-### Интерфейс ListImporter<a name="list-importer"></a>
-```ts
-interface ListImporter extends Importer {
-	setFilePath(path: string): ListImporter;
-	setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter;
-	getObligatoryListCodes(): boolean;
-	setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
-	getImportToChildListOnly(): boolean;
-	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
-	getUpdatedPropertiesOnParentLevels(): boolean;
-}
-```
-Интерфейс импорта в справочник. Интерфейс наследуется от [`Importer`](#importer).
-
-&nbsp;
-
-```js
-setFilePath(path: string): ListImporter
-```
-Устанавливает имя импортируемого файла. Возвращает `this`.
-
-&nbsp;
-
-```js
-setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
-```
-Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществующие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getObligatoryListCodes(): boolean
-```
-Возвращает признак режима обязательных кодов.
-
-&nbsp;
-
-```js
-setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
-```
-Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getImportToChildListOnly(): boolean
-```
-Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
-
-&nbsp;
-
-```js
-setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
-```
-Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
-
-&nbsp;
-
-```js
-getUpdatedPropertiesOnParentLevels(): boolean
-```
-Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
-
-&nbsp;
-
-### Интерфейс MulticubeImporter<a name="multicube-importer"></a>
-```ts
-interface MulticubeImporter extends Importer {
-}
-```
-Интерфейс импорта в мультикуб. Интерфейс наследуется от [`Importer`](#importer).
-
-&nbsp;
-
-### Интерфейс VersionsImporter<a name="versions-importer"></a>
-```ts
-interface VersionsImporter extends Importer {
-}
-```
-Интерфейс импорта в справочник версий. Интерфейс наследуется от [`Importer`](#importer).
-
-&nbsp;
-
-### Интерфейс TimePeriodImporter<a name="time-period-importer"></a>
-```ts
-interface TimePeriodImporter extends Importer {
-}
-```
-Интерфейс импорта в справочник времени. Интерфейс наследуется от [`Importer`](#importer).
 
 &nbsp;
 

@@ -12,9 +12,13 @@ interface Common {
 	copyData(): CopyData;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseLicenseManager(): EnterpriseLicenseManager;
+	metricsManager(): MetricsManager;
+
+	setCurrentMacrosStorageReadMode(type: string): boolean;
+	getCurrentMacrosStorageReadMode(): string;
 }
 ```
-Интерфейс, группирующий некоторые общие интерфейсы, не связанные друг с другом.
+Интерфейс, группирующий некоторые общие интерфейсы и методы, не связанные друг с другом.
 
 &nbsp;
 
@@ -82,6 +86,92 @@ enterpriseLicenseManager(): EnterpriseLicenseManager
 
 &nbsp;
 
+```js
+metricsManager(): MetricsManager
+```
+Возвращает ссылку на интерфейс [`MetricsManager`](#metrics-manager).
+
+&nbsp;
+
+```js
+setCurrentMacrosStorageReadMode(type: string): boolean
+```
+Устанавливает режим чтения данных модели для текущего скрипта. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). Возвращает `true`.
+
+&nbsp;
+
+```js
+getCurrentMacrosStorageReadMode(): string
+```
+Возвращает режим чтения данных модели для текущего скрипта. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). 
+
+&nbsp;
+
+### Интерфейс CellBuffer<a name="cell-buffer"></a>
+```ts
+interface CellBuffer {
+	set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer;
+	apply(): CellBuffer;
+	count(): number;
+	canLoadCellsValues(value: boolean): CellBuffer;
+}
+```
+Буфер, куда можно временно поместить значения набора ячеек, не обязательно смежных, чтобы изменить их перед отправкой на сервер.
+
+В один буфер можно помещать запросы на изменение ячеек, принадлежащих разным представлениям одного объекта (мультикуба или справочника) и даже разным объектам. Однако в последнем случае следует понимать, что если между объектами (например, мультикубами `мк1` и `мк2`) существует связь, которая может привести к пересчёту значений, то последовательность действий
+
+```
+* запись в `CellBuffer` ячеек `мк1`
+* запись в `CellBuffer` ячеек `мк2`
+* вызов `CellBuffer.apply()`
+```
+
+и последовательность
+
+```
+* запись в `CellBuffer` ячеек `мк1`
+* вызов `CellBuffer.apply()`
+* запись в `CellBuffer` ячеек `мк2`
+* вызов `CellBuffer.apply()`
+```
+
+может привести к различным результатам.
+
+При модификации большого количества клеток (от нескольких сотен тысяч), рекомендуется пользоваться [`импортом CSV`](./exportImport.md#importer).
+
+&nbsp;
+
+```js
+set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer
+```
+Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
+
+&nbsp;
+
+<a name="apply"></a>
+```js
+apply(): CellBuffer
+```
+Передаёт на сервер значения всех клеток для присваивания в модели и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение, например, после установки в ячейку формата даты строки `'2019-03-01'` впоследствии из неё будет считана строка `'1 Mar 19'`. Возвращает `this`.
+
+&nbsp;
+
+```js
+count(): number
+```
+Возвращает количество ячеек в буфере.
+
+&nbsp;
+
+```js
+canLoadCellsValues(value: boolean): CellBuffer
+```
+Устанавливает значение `value`, указывающее, нужно ли перезагружать значения клеток в буфере, если они изменятся. Возвращает `this`.
+
+По умолчанию: `true`. Использование значения по умолчанию сохранено для обратной совместимости и приводит к снижению производительности. Рекомендуется сразу после инициализации объекта вызвать функцию canLoadCellsValues и передать ей значение `false`.
+
+&nbsp;
+
 ### Интерфейс RequestManager<a name="request-manager"></a>
 ```ts
 interface RequestManager {
@@ -118,71 +208,6 @@ setStatusMessage(message: string): RequestManager
 Устанавливает статусное сообщение `message`. Может использоваться для уведомления пользователя во время длительной работы скрипта об этапах или процентах выполненных работ.
 
 ![Пример отображения статусного сообщения](./pic/statusMessage.png)
-
-&nbsp;
-
-### Интерфейс CellBuffer<a name="cell-buffer"></a>
-```ts
-interface CellBuffer {
-	set(cell: Cell | CubeCell, value: number | string | null): CellBuffer;
-	apply(): CellBuffer;
-	count(): number;
-	canLoadCellsValues(value: boolean): CellBuffer;
-}
-```
-Буфер, куда можно временно поместить значения набора ячеек, не обязательно смежных, чтобы изменить их перед отправкой на сервер.
-
-В один буфер можно помещать запросы на изменение ячеек, принадлежащих разным представлениям одного объекта (мультикуба или справочника) и даже разным объектам. Однако в последнем случае следует понимать, что если между объектами (например, мультикубами `мк1` и `мк2`) существует связь, которая может привести к пересчёту значений, то последовательность действий
-
-```
-* запись в `CellBuffer` ячеек `мк1`
-* запись в `CellBuffer` ячеек `мк2`
-* вызов `CellBuffer.apply()`
-```
-
-и последовательность
-
-```
-* запись в `CellBuffer` ячеек `мк1`
-* вызов `CellBuffer.apply()`
-* запись в `CellBuffer` ячеек `мк2`
-* вызов `CellBuffer.apply()`
-```
-
-может привести к различным результатам.
-
-При модификации большого количества клеток (от нескольких сотен тысяч), рекомендуется пользоваться [`импортом CSV`](./exportImport.md#importer).
-
-&nbsp;
-
-```js
-set(cell: Cell | CubeCell, value: number | string | null): CellBuffer
-```
-Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
-
-&nbsp;
-
-<a name="apply"></a>
-```js
-apply(): CellBuffer
-```
-Передаёт на сервер значения всех клеток для присваивания в модели и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение, например, после установки в ячейку формата даты строки `'2019-03-01'` впоследствии из неё будет считана строка `'1 Mar 19'`. Возвращает `this`.
-
-&nbsp;
-
-```js
-count(): number
-```
-Возвращает количество ячеек в буфере.
-
-&nbsp;
-
-```js
-canLoadCellsValues(value: boolean): CellBuffer
-```
-Устанавливает значение `value`, указывающее, нужно ли перезагружать значения клеток в буфере, если они изменятся. Возвращает `this`.
-
-По умолчанию: `true`. Использование значения по умолчанию сохранено для обратной совместимости и приводит к снижению производительности. Рекомендуется сразу после инициализации объекта вызвать функцию canLoadCellsValues и передать ей значение `false`.
 
 &nbsp;
 
@@ -227,6 +252,20 @@ export(): boolean
 
 &nbsp;
 
+### Тип UpdateInputCellsViaFormulaRequest<a name="update-input-cells-via-formula-request"></a>
+```js
+type UpdateInputCellsViaFormulaRequest = {
+	cubeLongId: number;
+	valueFormula: string;
+	conditionFormula?: string;
+}
+```
+Тип содержит информацию о сущности в свойстве `cubeLongId`, формулу для пересчёта в свойстве `valueFormula`, и условную формулу, которая будет применяться к каждой клетке куба в свойстве `conditionFormula`, которое не является обязательным и по умолчанию имеет значение `true`.
+
+Используется как параметр функции `Modelinfo`.[`batchUpdateInputCellsViaFormula()`](#model-info.batch-update-input-cells-via-formula).
+
+&nbsp;
+
 ### Интерфейс ModelInfo<a name="model-info"></a>
 ```ts
 interface ModelInfo {
@@ -239,7 +278,7 @@ interface ModelInfo {
 	
 	repair(): boolean;
 	recalculate(): boolean;
-	backup(path: string): EntityInfo | boolean;
+	backup(path?: string): EntityInfo | boolean;
 	
 	export(path: string): boolean;
 	exportObfuscationState(): ExportObfuscationState;
@@ -252,6 +291,8 @@ interface ModelInfo {
 	
 	recalculateIfManualCalculable(identifiers: number[]): boolean;
 
+	batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[], sortByDependenciesValueFormula?: boolean, sortByDependenciesConditionFormula?: boolean): boolean;
+
 	getStorageInstancePriority(): number;
 	setStorageInstancePriority(priority: number): number;
 
@@ -259,12 +300,21 @@ interface ModelInfo {
 	setModelStorageWriteMode(type: string): boolean;
 	getStorageReadMode(): string;
 	getStorageWriteMode(): string;
+
+	setMacrosStorageReadMode(type: string): boolean;
+	getMacrosStorageReadMode(): string;
+	
+	recalculateCubes(identifiers: number[]): boolean;
+	recalculateCubesWithTheirSources(identifiers: number[]): boolean;
+	recalculateCubesWithTheirDestinations(identifiers: number[]): boolean;
+	recalculateCubesWithLinkedCubes(identifiers: number[]): boolean;
 }
 ```
 Интерфейс получения информации о модели и произведения с ней некоторых манипуляций.
 
 &nbsp;
 
+<a name="model-id"></a>
 ```js
 id(): string
 ```
@@ -322,7 +372,7 @@ export(path: string): boolean
 &nbsp;
 
 ```js
-backup(path: string): EntityInfo | boolean
+backup(path?: string): EntityInfo | boolean
 ```
 Сохраняет резервную копию в логах модели ->`Центр безопастности`->`Логи`->`Резервные копии`. Если указан путь `path`, после создания копии вызовется функция `export()` и вернётся её результат типа `boolean`. Если `path` не указан, возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#entity-info).
 
@@ -371,22 +421,37 @@ unlock(): this
 
 &nbsp;
 
+<a name="model-info.recalculate-if-manual-calculable"></a>
 ```js
 recalculateIfManualCalculable(identifiers: number[]): boolean
 ```
-Производит перерасчёт сущностей, если на них не стоит флаг автокалькуляции. Автоматически перерасчитываемые сущности пропускаются. При успешном перерасчёте возвращает `true`.
+Производит пересчёт сущностей (кубов или свойств в справочниках) `identifiers`, если на них не стоит флаг автопересчёта. Если массив `identifiers` пустой, вместо него берётся массив всех сущностей модели. Автоматически пересчитываемые сущности пропускаются. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
+
+&nbsp;
+
+<a name="model-info.batch-update-input-cells-via-formula"></a>
+```js
+batchUpdateInputCellsViaFormula(requests: UpdateInputCellsViaFormulaRequest[], sortByDependenciesValueFormula?: boolean, sortByDependenciesConditionFormula?: boolean): boolean
+```
+Производит пересчёт (независимо от флага автопересчёта) сущностей (вводимых кубов или свойств справочников), заданных массивом `requests` типа [`UpdateInputCellsViaFormulaRequest`](#update-input-cells-via-formula-request). Передаваемая формула *не* переписывает текущую формулу данной сущности. При успешном пересчёте возвращает `true`, и это **поведение отличается** от поведения группы функций [`recalculateCubes...()`](#model-info.recalculate-cubes).
+
+Дополнительные булевые параметры влияют на порядок выполнения запросов.
+- `sortByDependenciesValueFormula` — учитывать формулы при определении порядка расчётов кубов. Значение по умолчанию: `true`.
+- `sortByDependenciesConditionFormula` — учитывать формулы, передаваемые в условии, при определении порядка расчёта кубов. Значение по умолчанию: `true`.
+
+Значение `true` указывает, что при построении порядка расчётов нужно учитывать зависимости между кубами в формулах, т. е. если `куб2` ссылается на `куб1`, то `куб1` должен считаться раньше. Значение `false` указывает, что порядок расчётов не важен и система сама решит, в каком порядке выполнить пересчёт в этот раз (порядок может отличаться при разных запусках).
 
 &nbsp;
 
 ```js
-getStorageInstancePriority(): number;
+getStorageInstancePriority(): number
 ```
 Возвращает текущий приоритет OLAP-процесса модели — значение [nice](https://ru.wikipedia.org/wiki/Nice), число от `-20` (наивысший приоритет) до `+19` (наименьший приоритет).
 
 &nbsp;
 
 ```js
-setStorageInstancePriority(priority: number): number;
+setStorageInstancePriority(priority: number): number
 ```
 Устанавливает приоритет OLAP-процесса модели (значение [nice](https://ru.wikipedia.org/wiki/Nice)). В параметре принимает число от `0` до `19`, отрицательные значения не разрешены. Возвращает предыдущее значение приоритета.
 
@@ -402,34 +467,75 @@ setStorageInstancePriority(priority: number): number;
 &nbsp;
 
 ```js
-setModelStorageReadMode(type: string): boolean;
+setModelStorageReadMode(type: string): boolean
 ```
-Устанавливает режим чтения в модели. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Расширенные` -> `Режим чтения`. В параметре принимает одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`. `CONSISTENT_READ` существовал и до этого и гарантирует, что при каждом запросе пользователю (или скрипту) будут возвращены данные со всеми модификациями, которые были сделаны до момента запроса, `FAST_READ` позволяет получить данные, не дожидаясь того, как порождённые предыдущими запросами пересчёты формул закончатся, `FAST_READ_METADATA` позволяет ещё и не ждать результатов изменений метаданных. Возвращает `true`.
-
-&nbsp;
-
-
-```js
-setModelStorageWriteMode(type: string): boolean;
-```
-Устанавливает режим записи в модели. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Расширенные` -> `Режим записи`. В параметре принимает одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`. `CONSISTENT_WRITE` существовал и до этого: при модификации ответ на запрос о модификации возвращался после того, как все порождённым им пересчёты были завершены. `FAST_WRITE` позволяет не ждать завершения пересчётов при модификации, а сразу продолжать работу. Возвращает `true`.
+Устанавливает режим чтения данных модели для пользователей. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим чтения для пользователей`. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode).  Возвращает `true`.
 
 &nbsp;
 
 ```js
-getStorageReadMode(): string;
+setModelStorageWriteMode(type: string): boolean
 ```
-Возвращает установленный режим чтения модели (одно из значений `CONSISTENT_READ`, `FAST_READ`, `FAST_READ_METADATA`).
+Устанавливает режим записи данных в модель. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим записи для пользователей и скриптов`. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#write-mode). Возвращает `true`.
 
 &nbsp;
 
 ```js
-getStorageWriteMode(): string;
+getStorageReadMode(): string
 ```
-Возвращает установленный режим записи модели (одно из значений `CONSISTENT_WRITE`, `FAST_WRITE`).
+Возвращает установленный режим чтения данных модели. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode).
 
 &nbsp;
 
+```js
+getStorageWriteMode(): string
+```
+Возвращает установленный режим записи данных в модель. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#write-mode).
+
+&nbsp;
+
+```js
+setMacrosStorageReadMode(type: string): boolean
+```
+Устанавливает режим чтения данных модели для скриптов. Аналог в интерфейсе `Optimacros`: `Меню пользователя` -> `Параметры` -> `Режимы чтения и записи` -> `Режим чтения для скриптов`. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode). Метод ожидает завершения всех запросов в модели и только после этого переключает режим. Возвращает `true`.
+
+&nbsp;
+
+```js
+getMacrosStorageReadMode(): string
+```
+Возвращает установленный режим чтения данных модели для скриптов. Описание режимов в разделе [`Режимы чтения и записи данных`](../advancedFeatues/readWriteModes.md#read-mode).
+
+&nbsp;
+
+<a name="model-info.recalculate-cubes"></a>
+```js
+recalculateCubes(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, без пересчёта связанных кубов. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` -> `Только этот куб`. Возвращает `true` в случае успешного выполнения и `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
+
+&nbsp;
+
+```js
+recalculateCubesWithTheirSources(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, а также кубов, на которые ссылаются эти кубы, – рекурсивно. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` -> `Источники для куба и сам куб`. Возвращает `true` в случае успешного выполнения и `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
+
+&nbsp;
+
+```js
+recalculateCubesWithTheirDestinations(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, а также кубов, которые ссылаются на эти кубы, – рекурсивно. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` -> `Этот куб и все приёмники куба`. Возвращает `true` в случае успешного выполнения и `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
+
+&nbsp;
+
+```js
+recalculateCubesWithLinkedCubes(identifiers: number[]): boolean
+```
+Выполняет пересчёт кубов, переданных в качестве аргумента, и всех связанных кубов – рекурсивно. Аналог в интерфейсе Optimacros: `Контекстное меню куба` -> `Пересчитать куб` - `Источники для куба и все приёмники`. Возвращает `true`, в случае успешного выполнения, либо `false`, если был передан пустой список кубов, и это **поведение отличается** от поведения похожей функции [`recalculateIfManualCalculable()`](#model-info.recalculate-if-manual-calculable). В случае ошибки выбрасывает исключение.
+
+&nbsp;
 
 ### Интерфейс UserInfo<a name="user-info"></a>
 ```ts
@@ -544,56 +650,62 @@ getCollection(longId: number[]): EntityInfo[]
 interface CopyData {
 	setSourceLongId(longId: number): CopyData;
 	setDestLongId(longId: number): CopyData;
-	enableCustomProperties(): CopyData;
+	
 	enableCopyAllCubes(): CopyData;
+	enableCustomProperties(): CopyData;
 	setMulticubeLongIds(longIds: number[]): CopyData;
 	setMulticubeByNames(names: string[]): CopyData;
+	
 	copy(): CopyData;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет скопировать срез куба в другой куб внутри одного мультикуба. Для указания кубов, которые необходимо копировать, необходимо вызвать одну из трёх функций: `enableCopyAllCubes()`, `setMulticubeLongIds()`, `setMulticubeByNames()`. Все методы возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет скопировать данные срезов кубов или свойств справочника по некоторому элементу *заданного измерения* в другой элемент того же измерения. Для использования нужно:
+- указать два элемента одного и того же измерения, которое здесь будем называть *заданным измерением*, вызовом функций `setSourceLongId()` и `setDestLongId()`;
+- указать кубы или свойства справочников, срезы которых нужно копировать, вызовом одной из четырёх функций: `enableCopyAllCubes()`, `enableCustomProperties()`, `setMulticubeLongIds()`, `setMulticubeByNames()`;
+- вызвать функцию `copy()`.
+Все функции возвращают `this`.
 
 &nbsp;
 
 ```js
 setSourceLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./views.md#long-id) измерения источника.
+Устанавливает [`longId`](./views.md#long-id) элемента-источника *заданного измерения*.
 
 &nbsp;
 
 ```js
 setDestLongId(longId: number): CopyData
 ```
-Устанавливает [`longId`](./views.md#long-id) измерения приёмника.
-
-&nbsp;
-
-```js
-enableCustomProperties(): CopyData
-```
-Предписывает пройти по всем справочникам, которые имеют связь с источником и приёмником, и произведёт копирование пользовательских свойств.
+Устанавливает [`longId`](./views.md#long-id) элемента-приёмника *заданного измерения*.
 
 &nbsp;
 
 ```js
 enableCopyAllCubes(): CopyData
 ```
-Предписывает произвести копирование во всех кубах.
+Предписывает произвести копирование во всех кубах модели, содержащих *заданное измерение*.
+
+&nbsp;
+
+```js
+enableCustomProperties(): CopyData
+```
+Предписывает произвести копирование данных из пользовательских свойств элемента-источника в свойства элемента-приёмника во всех справочниках, содержащих оба этих элемента.
 
 &nbsp;
 
 ```js
 setMulticubeLongIds(longIds: number[]): CopyData
 ```
-Устанавливает [`longId`](./views.md#long-id) мультикубов.
+Предписывает произвести копирование в указанных по [`longId`](./views.md#long-id) мультикубах, которые содержат *заданное измерение*.
 
 &nbsp;
 
 ```js
 setMulticubeByNames(names: string[]): CopyData
 ```
-Устанавливает имена мультикубов.
+Предписывает произвести копирование в указанных по именам мультикубах, которые содержат *заданное измерение*.
 
 &nbsp;
 
@@ -669,6 +781,57 @@ createLicense(password: string, key: string, jsonStr: string): string
 validateLicense(password: string, key: string, licenseData: string): object
 ```
 Проверяет ранее созданную лицензию `licenseData` на соответствие паролю `password` и ключу `key`. Возвращает объект с полями, указанными в исходной структуре лицензии, но у каждого названия свойства объекта появляется префикс `$`. В случае несоответствия лицензии ключу и паролю возвращается объект с текстом ошибки: `{"$errors": "Содержание лицензии не распознается"}`.
+
+&nbsp;
+
+### Интерфейс MetricsManager<a name="metrics-manager"></a>
+```ts
+type StringMap = {
+	[key: string]: string;
+};
+
+type MetricData = {
+	name(): string;
+	value(): number;
+	tags(): string;
+};
+
+interface MetricsManager {
+	getAllMetrics(): MetricData[];
+	setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+	getMetricValue(name: string, tags?: StringMap[]): number | null;
+}
+```
+Интерфейс для работы с [`метриками воркспейса`](https://github.com/optimacros/ws_metrics_api/tree/27378_metrics_service). Каждая метрика `MetricData` идентифицируется именем `name` и (возможно, пустым) набором тегов `tags`. То есть, могут существовать разные одноимённые метрики с разными наборами тегов.
+
+Тип `MetricData` описывает метрику в виде объекта, который предоставляет методы для доступа к имени метрики, её числовому значению и тегам. Пример использования:
+```js
+	const metrics = om.common.metricsManager().getAllMetrics();
+	for (let metric of metrics) {
+		console.log(metric.name() + ': ' + metric.value() + ' (' + metric.tags() + ')');
+	}
+```
+
+&nbsp;
+
+```js
+getAllMetrics(): MetricData[]
+```
+Возвращает массив всех доступных метрик.
+
+&nbsp;
+
+```js
+setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager
+```
+Сохраняет метрику с именем `name` и тегами `tags`, присваивая ей числовое значение `value`. Возвращает `this`.
+
+&nbsp;
+
+```js
+getMetricValue(name: string, tags?: StringMap[]): number | null
+```
+Возвращает числовое значение метрики с именем `name` и тегами `tags`, или `null`, если метрика не существует.
 
 &nbsp;
 
