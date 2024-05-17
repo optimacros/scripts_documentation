@@ -216,7 +216,7 @@ interface ListUserAccessTab extends Tab {
 
 &nbsp;
 
-### Интерфейс Versions<a name="versions"></a>
+## Интерфейс Versions<a name="versions"></a>
 ```ts
 interface Versions {
 	versionsTab(): VersionsTab;
@@ -253,7 +253,7 @@ interface VersionsTab extends Tab {
 	importer(): VersionsImporter;
 }
 ```
-Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+Вкладка `Версии`. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -300,7 +300,7 @@ interface VersionSubsetsTab extends Tab {
 	elementsReorder(): ElementsReorder;
 }
 ```
-Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+Вкладка `Выборки` версий. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
@@ -325,7 +325,7 @@ elementsReorder(): ElementsReorder;
 
 &nbsp;
 
-### Интерфейс Times<a name="times"></a>
+## Интерфейс Times<a name="times"></a>
 ```ts
 interface Times {
 	optionsTab(): TimeOptionsTab;
@@ -352,12 +352,12 @@ timePeriodTab(identifier: string | number): TimePeriodTab;
 
 ### Интерфейс TimeOptionsTab<a name="time-options-tab"></a>
 ```ts
-interface TimeOptionsTab {
+interface TimeOptionsTab extends Tab {
 	resetForm(): Object;
 	applyForm(): Object;
 }
 ```
-Вкладка `Время`. Для работы не требует открытия. Является [`плоской таблицей`](../appendix/constraints.md#flat-table). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
+Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#tab). Является [`плоской таблицей`](../appendix/constraints.md#flat-table). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
 
 &nbsp;
 
@@ -382,7 +382,7 @@ interface TimePeriodTab extends Tab {
 	importer(): TimePeriodImporter;
 }
 ```
-Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
+Вкладка выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
 
 &nbsp;
 
@@ -408,7 +408,7 @@ interface TimePeriodSubsetTab extends Tab {
 	elementsReorder(): ElementsReorder;
 }
 ```
-Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
+Интерфейс доступа к вкладке `Выборки` выбранного измерения времени. Интерфейс наследуется от [`Tab`](./views.md#tab). В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `{выбранное измерение времени}` -> `Выборки`.
 
 &nbsp;
 

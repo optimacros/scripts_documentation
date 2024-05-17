@@ -30,7 +30,7 @@ export interface Cell {
 
 export interface Cells {
 	all(): Cell[];
-	first(): Cell | undefined;
+	first(): Cell;
 	setValue(value: number | string | null);
 	count(): number;
 	chunkInstance(): GridRangeChunk;
@@ -39,10 +39,10 @@ export interface Cells {
 
 export interface Label {
 	longId(): number;
-	name(): string | null;
+	name(): string;
 	code(): string | null;
-	alias(): string | null;
-	label(): string | null;
+	alias(): string;
+	label(): string;
 	parentLongId(): number;
 	hierarchyLongId(): number;
 }
@@ -58,10 +58,10 @@ export interface LabelsGroup {
 export interface Labels {
 	start(): number;
 	count(): number;
-	all(): (LabelsGroup | undefined)[];
-	get(index: number): LabelsGroup | undefined;
+	all(): LabelsGroup[];
+	get(index: number): LabelsGroup | null;
 	chunkInstance(): GridRangeChunk;
-	findLabelByLongId(longId: number): Label | undefined;
+	findLabelByLongId(longId: number): Label | null;
 }
 
 export interface GridRangeChunk {
@@ -82,7 +82,7 @@ export interface GridRange {
 }
 
 export interface GridDimension {
-	getDimensionEntity(): EntityInfo | undefined;
+	getDimensionEntity(): EntityInfo;
 }
 
 export interface GridPageSelector extends GridDimension {
@@ -109,7 +109,7 @@ export interface Grid {
 
 export interface ExportResult {
 	mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): this;
-	getHash(): string;
+	getHash(): string | null;
 	copyToLocal(path: string): this;
 	moveToLocal(path: string): this;
 }
@@ -237,7 +237,6 @@ export interface CubeCellSelector {
 	getCubeInfo(): CubeInfo;
 	getCubeIdentifier(): number;
 	getCubeDimensions(): EntityInfo[];
-	// @ts-ignore
 	generator(): IterableIterator<CubeCell>;
 }
 
@@ -397,23 +396,14 @@ export interface TimePeriodTab extends Tab {
 	importer(): TimePeriodImporter;
 }
 
-export interface TypePeriod {
-	tableTab(): Tab;
-}
 
 export interface Times {
 	optionsTab(): TimeOptionsTab;
-
-	//v1.0 only
-	typePeriod(identifier: string | number): TypePeriod;
-	
-	//v2.0 only
 	timePeriodTab(identifier: string | number): TimePeriodTab;
 }
 
 export interface TimeOptionsTab extends Tab {
 	resetForm(): Object;
-
 	applyForm(): Object;
 }
 
@@ -456,7 +446,7 @@ export interface Importer {
 	csv(): CSVParams;
 	setFilePath(path: string): this;
 
-	getFilePath(): string | undefined;
+	getFilePath(): string;
 
 	getReportFilePath(): string | undefined;
 
@@ -506,13 +496,18 @@ export interface ListUserAccessTab extends Tab {
 
 }
 
-export interface ListTab extends Tab {
-	listSubsetTab(): ListSubsetsTab; //OBSOLETE in favor of subsetTab()
+export interface ListChildTab extends Tab {
+	listTab(): ListTab;
+	
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
+}
 
-	subsetTab(): ListSubsetsTab;
-	
-	propertiesTab(): ListPropertiesTab;
-	
+export type ListSubsetsTab = ListChildTab;
+
+export interface ListTab extends Tab {
+	listSubsetTab(): ListSubsetsTab;
 	customPropertiesTab(): CustomPropertiesTab;
 	
 	uamTab(): ListUserAccessTab;
@@ -523,17 +518,6 @@ export interface ListTab extends Tab {
 
 	importer(): ListImporter;
 }
-
-export interface ListChildTab extends Tab {
-	listTab(): ListTab;
-	
-	elementsCreator(): ElementsCreator;
-	elementsDeleter(): ElementsDeleter;
-	elementsReorder(): ElementsReorder;
-}
-
-export type ListSubsetsTab = ListChildTab;
-export type ListPropertiesTab = ListChildTab;
 
 export interface ListsTab extends Tab {
 	open(name: string): ListTab | undefined;

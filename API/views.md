@@ -366,7 +366,7 @@ getColumnDimensions(): GridDimension[];
 ### Интерфейс GridDimension<a name="grid-dimension"></a>
 ```ts
 interface GridDimension {
-	getDimensionEntity(): EntityInfo | undefined;
+	getDimensionEntity(): EntityInfo;
 }
 ```
 Интерфейс предоставляет данные об измерении мультикуба.
@@ -374,7 +374,7 @@ interface GridDimension {
 &nbsp;
 
 ```js
-getDimensionEntity(): EntityInfo | undefined;
+getDimensionEntity(): EntityInfo;
 ```
 Возвращает ссылку на сущность [`EntityInfo`](#entity-info) измерения мультикуба.
 
@@ -519,10 +519,10 @@ columns(): Labels;
 interface Labels {
 	start(): number;
 	count(): number;
-	all(): (LabelsGroup | undefined)[];
-	get(index: number): LabelsGroup | undefined;
+	all(): LabelsGroup[];
+	get(index: number): LabelsGroup | null;
 	chunkInstance(): GridRangeChunk;
-	findLabelByLongId(longId: number): Label | undefined;
+	findLabelByLongId(longId: number): Label | null;
 }
 ```
 Интерфейс, представляющий набор объектов [`LabelsGroup`](#labels-group), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#grid-range-chunk).
@@ -548,14 +548,14 @@ count(): number;
 &nbsp;
 
 ```js
-all(): (LabelsGroup | undefined)[];
+all(): LabelsGroup[];
 ```
-Возвращает набор объектов заголовков каждой строки/столбца [`LabelsGroup`](#labels-group) в виде массива.
+Возвращает массив объектов заголовков каждой строки/столбца [`LabelsGroup`](#labels-group).
 
 &nbsp;
 
 ```js
-get(index: number): LabelsGroup | undefined;
+get(index: number): LabelsGroup | null;
 ```
 Аналог `all()[index]`.
 
@@ -569,7 +569,7 @@ chunkInstance(): GridRangeChunk;
 &nbsp;
 
 ```js
-findLabelByLongId(longId: number): Label | undefined;
+findLabelByLongId(longId: number): Label | null;
 ```
 Возвращает объект [`Label`](#label) по его [`longId`](#long-id), если он присутствует в `this`, иначе — `null`.
 
@@ -614,10 +614,10 @@ cells(): Cells;
 ```ts
 interface Label {
 	longId(): number;
-	name(): string | null;
+	name(): string;
 	code(): string | null;
-	alias(): string | null;
-	label(): string | null;
+	alias(): string;
+	label(): string;
 	parentLongId(): number;
 	hierarchyLongId(): number;
 }
@@ -638,7 +638,7 @@ longId(): number;
 
 <a name="label.name"></a>
 ```js
-name(): string | null;
+name(): string;
 ```
 Возвращает имя сущности.
 
@@ -653,7 +653,7 @@ code(): string;
 
 <a name="alias"></a>
 ```js
-alias(): string | null;
+alias(): string;
 ```
 Возвращает отображаемое имя.
 
@@ -664,7 +664,7 @@ alias(): string | null;
 &nbsp;
 
 ```js
-label(): string | null;
+label(): string;
 ```
 То же, что и [`alias()`](#alias).
 
@@ -690,7 +690,7 @@ hierarchyLongId(): number;
 ```ts
 interface Cells {
 	all(): Cell[];
-	first(): Cell | undefined;
+	first(): Cell;
 	setValue(value: number | string | null);
 	count(): number;
 	chunkInstance(): GridRangeChunk;
@@ -709,7 +709,7 @@ all(): Cell[];
 &nbsp;
 
 ```js
-first(): Cell | undefined;
+first(): Cell;
 ```
 Аналог `all()[0]`.
 
@@ -821,14 +821,14 @@ definitions(): number[];
 ```js
 columns(): LabelsGroup | null;
 ```
-Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца.
+Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца, или `null`, если у клетки нет измерений на столбцах.
 
 &nbsp;
 
 ```js
 rows(): LabelsGroup | null;
 ```
-Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки.
+Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки, или `null`, если у клетки нет измерений на строках.
 
 &nbsp;
 
