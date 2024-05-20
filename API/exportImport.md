@@ -411,7 +411,7 @@ setObligatoryListCodes(obligatoryListCodes: boolean): this;
 &nbsp;
 
 ```js
-getObligatoryListCodes(): this;
+getObligatoryListCodes(): boolean;
 ```
 Возвращает признак режима обязательных кодов.
 
@@ -425,7 +425,7 @@ setImportToChildListOnly(importToChildListOnly: boolean): this;
 &nbsp;
 
 ```js
-getImportToChildListOnly(): this;
+getImportToChildListOnly(): boolean;
 ```
 Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
 
@@ -439,7 +439,7 @@ setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): th
 &nbsp;
 
 ```js
-getUpdatedPropertiesOnParentLevels(): this;
+getUpdatedPropertiesOnParentLevels(): boolean;
 ```
 Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
 

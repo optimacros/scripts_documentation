@@ -9,7 +9,7 @@ export type StringMap = {
 };
 
 export interface Cell {
-	setValue(value: number | string | boolean | null);
+	setValue(value: number | string | boolean | null): this;
 
 	/**
 	 * returns {number | string | null} boolean cube values are returned as strings 'true'/'false'
@@ -31,7 +31,7 @@ export interface Cell {
 export interface Cells {
 	all(): Cell[];
 	first(): Cell;
-	setValue(value: number | string | null);
+	setValue(value: number | string | boolean | null): this;
 	count(): number;
 	chunkInstance(): GridRangeChunk;
 	getByIndexes(indexes: number[]): Cells | null;
@@ -223,7 +223,7 @@ export interface Environment {
 	load(name: string): this;
 	loadFromMulticube(name: string, view?: string | null): this;
 	get(key: string, def?: any): any;
-	set(name: string, value: number | string | null): this;
+	set(name: string, value: number | string | boolean | null): this;
 }
 
 export interface CubeCell {
@@ -788,7 +788,7 @@ export interface ResultOpenAction extends ResultBaseAction {
 
 export interface ResultActionsInfo {
 	makeMacrosAction(identifier: string | number): ResultMacrosAction;
-	makeCodeExecutionAction(code: string): CodeExecutionAction;Zz
+	makeCodeExecutionAction(code: string): CodeExecutionAction;
 	makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
 	makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
 	makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;

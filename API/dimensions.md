@@ -339,7 +339,7 @@ interface Times {
 ```js
 optionsTab(): TimeOptionsTab;
 ```
-Возвращает ссылку на вкладку [`TimeOptionsTab`](#time-options-tab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время`.
+Возвращает ссылку на вкладку [`TimeOptionsTab`](#time-options-tab) настроек времени. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `Настройки (Календарь)`.
 
 &nbsp;
 

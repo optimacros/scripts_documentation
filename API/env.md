@@ -6,7 +6,7 @@ interface Environment {
 	load(name: string): this;
 	loadFromMulticube(name: string, view?: string | null): this;
 	get(key: string, def?: any): any;
-	set(name: string, value: number | string | null): this;
+	set(name: string, value: number | string | boolean | null): this;
 }
 ```
 Интерфейс для доступа к [переменным окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B).
@@ -84,7 +84,7 @@ get(key: string, def?: any): any;
 &nbsp;
 
 ```js
-set(name: string, value: number | string | null): this;
+set(name: string, value: number | string | boolean | null): this;
 ```
 Устанавливает значение переменной окружения `key` в значение `value`. Возвращает `this`.
 

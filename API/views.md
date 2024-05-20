@@ -209,7 +209,7 @@ create(): Grid;
 
 <a name="rows-filter"></a>
 ```js
-rowsFilter(data: string | string[] | number | number[]): Pivot;
+rowsFilter(data: string | string[] | number | number[]): this;
 ```
 Функция работает, если в представлении на строках присутствует только одно измерение. Позволяет задать для отображения множество строк и скрыть остальные. Множество можно задать следующими способами:
 
@@ -226,7 +226,7 @@ rowsFilter(data: string | string[] | number | number[]): Pivot;
 &nbsp;
 
 ```js
-columnsFilter(data: string | string[] | number | number[]): Pivot;
+columnsFilter(data: string | string[] | number | number[]): this;
 ```
 Аналог [`rowsFilter()`](#rows-filter) для столбцов.
 
@@ -691,7 +691,7 @@ hierarchyLongId(): number;
 interface Cells {
 	all(): Cell[];
 	first(): Cell;
-	setValue(value: number | string | null);
+	setValue(value: number | string | boolean | null): this;
 	count(): number;
 	chunkInstance(): GridRangeChunk;
 	getByIndexes(indexes: number[]): Cells | null;
@@ -717,9 +717,9 @@ first(): Cell;
 
 <a name="cells.set-value"></a>
 ```js
-setValue(value: number | string | null);
+setValue(value: number | string | boolean | null): this;
 ```
-Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
+Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах. Возвращает `this`.
 
 &nbsp;
 
@@ -748,7 +748,7 @@ getByIndexes(indexes: number[]): Cells | null;
 ### Интерфейс Cell<a name="cell"></a>
 ```ts
 interface Cell {
-	setValue(value: number | string | boolean | null);
+	setValue(value: number | string | boolean | null): this;
 	
 	getValue(): number | string | null;
 	getVisualValue(): string | null;
@@ -770,9 +770,9 @@ interface Cell {
 
 <a name="cell.set-value"></a>
 ```js
-setValue(value: number | string | boolean | null);
+setValue(value: number | string | boolean | null): this;
 ```
-Устанавливает значение клетки. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
+Устанавливает значение клетки. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах. Возвращает `this`.
 
 &nbsp;
 

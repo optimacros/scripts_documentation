@@ -142,7 +142,7 @@ interface CellBuffer {
 &nbsp;
 
 ```js
-set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer;
+set(cell: Cell | CubeCell, value: number | string | boolean | null): this;
 ```
 Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
 
@@ -150,7 +150,7 @@ set(cell: Cell | CubeCell, value: number | string | boolean | null): CellBuffer;
 
 <a name="apply"></a>
 ```js
-apply(): CellBuffer;
+apply(): this;
 ```
 Передаёт на сервер значения всех клеток для присваивания в модели и очищает буфер. Перед присваиванием сервер может их обработать и выставить другие значение, например, после установки в ячейку формата даты строки `'2019-03-01'` впоследствии из неё будет считана строка `'1 Mar 19'`. Возвращает `this`.
 
@@ -164,7 +164,7 @@ count(): number;
 &nbsp;
 
 ```js
-canLoadCellsValues(value: boolean): CellBuffer;
+canLoadCellsValues(value: boolean): this;
 ```
 Устанавливает значение `value`, указывающее, нужно ли перезагружать значения клеток в буфере, если они изменятся. Возвращает `this`.
 
@@ -600,7 +600,7 @@ interface ResultInfo {
 
 <a name="result-info.add-file-hash"></a>
 ```js
-addFileHash(hash: string): ResultInfo;
+addFileHash(hash: string): this;
 ```
 Добавляет к ответу на запрос скрипта хэш `hash` файла, ранее зарегистрированного в [`глобальном реестре`](../appendix/glossary.md#global-file-registry). Для пользователя это приведёт к тому, что файл будет скачан в браузере. Возвращает `this`.
 
@@ -614,7 +614,7 @@ actionsInfo(): ResultActionsInfo;
 &nbsp;
 
 ```js
-setProperty(name: string, value: any): ResultInfo;
+setProperty(name: string, value: any): this;
 ```
 Устанавливает свойству `name` значение `value` в HTTP-ответе на запрос о запуске скрипта приложением-клиентом (например, web-интерфейсом Optimacros). Возвращает `this`.
 
@@ -822,7 +822,7 @@ getAllMetrics(): MetricData[];
 &nbsp;
 
 ```js
-setMetricValue(name: string, value: number, tags?: StringMap[]): MetricsManager;
+setMetricValue(name: string, value: number, tags?: StringMap[]): this;
 ```
 Сохраняет метрику с именем `name` и тегами `tags`, присваивая ей числовое значение `value`. Возвращает `this`.
 
