@@ -542,12 +542,6 @@ export interface CSVParams {
     getLineDelimiter(): string;
 }
 
-export const enum ImporterEncoding {
-    AUTO = 'auto',
-    UTF = 'utf',
-    WINDOWS1251 = 'win'
-}
-
 export interface Importer {
     csv(): CSVParams;
 
@@ -556,8 +550,6 @@ export interface Importer {
     getFilePath(): string | undefined;
 
     getReportFilePath(): string | undefined;
-
-    setEncoding(encoding: ImporterEncoding): this;
 
     import(): this;
 }
