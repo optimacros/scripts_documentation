@@ -998,7 +998,7 @@ export interface Filesystems {
 }
 
 export interface OptimizationRequestTab extends Tab {
-	run(name: string): { success: boolean, error: undefined | string };
+	run(name: string): { success: boolean, error?: string };
 }
 
 export interface Optimization {
@@ -1816,7 +1816,7 @@ export interface AuditTab extends Tab {
 
 export interface AuditPivot extends Pivot {
 	eventTypeFilter(data: string | number | (string | number)[]): this;
-	dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): this;
+	dateFilter(beginAt?: string | number | null, endAt?:  string | number | null): this;
 	statusFilter(status: number): this;
 	authorFilter(name: string): this;
 	detailsFilter(details4: string): this;
