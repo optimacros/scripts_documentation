@@ -334,7 +334,7 @@ interface Importer {
 	setFilePath(path: string): Importer;
 	getFilePath(): string;
 	getReportFilePath(): string | null;
-    setEncoding(encoding: string): this;
+    	setEncoding(encoding: string): this;
 	import(): Importer;
 }
 ```
@@ -371,7 +371,7 @@ getReportFilePath(): string | null
 &nbsp;
 
 ```js
-setEncoding(encoding: string): Exporter
+setEncoding(encoding: string): Importer
 ```
 Устанавливает кодировку импортируемого файла. Допустимые значения:
 `'win', 'WINDOWS-1251', 'utf', 'UTF-8', 'auto', 'AUTO'`. По умолчанию: `'WINDOWS-1251'`.
