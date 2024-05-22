@@ -1615,6 +1615,9 @@ export namespace Http {
 	}
 }
 
+/**
+ * DEPRECATED
+ */
 export namespace WinAgent {
 
 	export interface BaseActionResult {
@@ -1734,12 +1737,18 @@ export interface Connectors {
 	mongodb(): Mongodb.ConnectorBuilder;
 	http(): Http.HttpManager;
 	/**
+	 * DEPRECATED
 	 * @param builtIn Use built-in configuration if exists. Default is 'false'
 	 */
 	winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 }
 
 export namespace Notifications {
+	export interface Manager {
+		smtp(channel: string): Smtp.Builder;
+		web(channel: string): Web.Builder;
+	}
+	
 	namespace Smtp {
 		export interface Result {
 		}
@@ -1754,8 +1763,30 @@ export namespace Notifications {
 		}
 	}
 
-	export interface Manager {
-		smtp(channel: string): Smtp.Builder;
+	namespace Web {
+		export const enum Preset {
+			CommonChannel = 'WEB notices',
+		}
+
+		export const enum GroupAlias {
+			AllUsers = '%ALL_USERS%',
+			AllGeneralUsers = '%ALL_GENERAL_USERS%',
+			AllServiceUsers = '%ALL_SERVICE_USERS%',
+			AllAdmins = '%ALL_ADMINS%',
+			AllModellers = '%ALL_MODELLERS%',
+		}
+
+		export interface Result {
+			messageId: string;
+		}
+
+		export interface Builder {
+			setTo(to: string | string[]): this;
+			setSubject(subject: string): this;
+			setBody(body: string): this;
+			markUrgent(): this;
+			send(): Result;
+		}
 	}
 }
 
