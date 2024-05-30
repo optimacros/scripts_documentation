@@ -374,7 +374,14 @@ getReportFilePath(): string | null
 setEncoding(encoding: string): Importer
 ```
 Устанавливает кодировку импортируемого файла. Допустимые значения:
-`'win', 'WINDOWS-1251', 'utf', 'UTF-8', 'auto', 'AUTO'`. По умолчанию: `'WINDOWS-1251'`.
+`'win', 'WINDOWS-1251', 'utf', 'UTF-8', 'auto', 'AUTO'`. По умолчанию: `'AUTO'`.
+
+&nbsp;
+
+```js
+getEncoding(): string
+```
+возвращает кодировку.
 
 &nbsp;
 

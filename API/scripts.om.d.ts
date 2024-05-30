@@ -559,6 +559,8 @@ export interface Importer {
 
     setEncoding(encoding: ImporterEncoding): this;
 
+    getEncoding(): string;
+
     import(): this;
 }
 
@@ -1121,6 +1123,8 @@ export interface Filesystem {
     makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 
     getPathObj(path: string): PathObj;
+
+    changeTextFileCharset(path: string, from: string, to: string): null | string;
 }
 
 export interface PathObj {
