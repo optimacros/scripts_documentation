@@ -192,7 +192,7 @@ getPathObj(path: string): PathObj
 ```js
 changeTextFileCharset(path: string, from: string, to: string): null | string 
 ```
-Меняет кодировку файла по пути `path` с `from` на `to`. Возращает полный путь к перекодированному файлу
+Меняет кодировку файла по пути `path` с `from` на `to`. Возвращает полный путь к перекодированному файлу.
 
 &nbsp;
 
