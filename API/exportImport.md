@@ -335,6 +335,7 @@ interface Importer {
 	getFilePath(): string;
 	getReportFilePath(): string | null;
     	setEncoding(encoding: string): this;
+	getEncoding(): string
 	import(): Importer;
 }
 ```
