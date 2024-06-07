@@ -408,7 +408,7 @@ interface GridRange {
 
 	cellCount(): number;
 
-	generator(size?: number): GridRangeChunk[];
+	generator(size?: number): IterableIterator<GridRangeChunk>;
 }
 ```
 Интерфейс, представляющий прямоугольный диапазон ячеек в таблице [`Grid`](#grid).
@@ -453,7 +453,7 @@ cellCount(): number;
 
 <a name="generator"></a>
 ```js
-generator(size?: number): GridRangeChunk[];
+generator(size?: number): IterableIterator<GridRangeChunk>;
 ```
 Возвращает генератор, при каждом обращении возвращающий интерфейс [`GridRangeChunk`](#grid-range-chunk) размером *не более* `size` ячеек, позволяющий обрабатывать `GridRange` покусочно.
 
@@ -557,7 +557,7 @@ all(): LabelsGroup[];
 ```js
 get(index: number): LabelsGroup | null;
 ```
-Аналог `all()[index]`.
+Аналог `all()[index]`. В случае некорретного индекса возвращает `null`.
 
 &nbsp;
 
@@ -690,11 +690,11 @@ hierarchyLongId(): number;
 ```ts
 interface Cells {
 	all(): Cell[];
-	first(): Cell;
+	first(): Cell | null;
 	setValue(value: number | string | boolean | null): this;
 	count(): number;
 	chunkInstance(): GridRangeChunk;
-	getByIndexes(indexes: number[]): Cells | null;
+	getByIndexes(indexes: number[]): Cells;
 }
 ```
 Интерфейс, представляющий (как правило, прямоугольный) набор клеток таблицы.
@@ -739,7 +739,7 @@ chunkInstance(): GridRangeChunk;
 &nbsp;
 
 ```js
-getByIndexes(indexes: number[]): Cells | null;
+getByIndexes(indexes: number[]): Cells;
 ```
 Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#cells).
 

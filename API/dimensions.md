@@ -135,21 +135,12 @@ importer(): ListImporter;
 ### Интерфейс ListSubsetsTab<a name="list-subsets-tab"></a>
 ```ts
 interface ListSubsetsTab extends Tab {
-	listTab(): ListTab;
-
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
 	elementsReorder(): ElementsReorder;
 }
 ```
 Вкладка `Выборки` справочника. Интерфейс наследуется от [`Tab`](./views.md#tab). В отличие от аналогичной вкладки в интерфейсе Optimacros, её [`Grid`](./views.md#grid) не имеет ни измерений на столбцах, ни ячеек; доступ можно получить только к заголовкам строк, являющихся названиями выборок справочника.
-
-&nbsp;
-
-```js
-listTab(): ListTab;
-```
-Возвращает интерфейс [`ListTab`](#list-tab) вкладки того справочника, чьи выборки представляет собой `this`.
 
 &nbsp;
 
@@ -346,7 +337,7 @@ optionsTab(): TimeOptionsTab;
 ```js
 timePeriodTab(identifier: string | number): TimePeriodTab;
 ```
-Возвращает ссылку на вкладку [`TimePeriodTab`](#time-period-tab) измерения времени `identifier`. Доступны измерения `Days`, `Weeks`, `Periods`, `Months`, `Quarters`, `Half Years`, `Years`. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
+Возвращает ссылку на вкладку [`TimePeriodTab`](#time-period-tab) измерения времени `identifier`. Доступны измерения `'Days'`, `'Weeks'`, `'Periods'`, `'Months'`, `'Quarters'`, `'Half Years'`, `'Years'`. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Время` -> `identifier`.
 
 &nbsp;
 

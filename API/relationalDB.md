@@ -9,7 +9,7 @@ interface SqlQueryResult {
 	generator(likeArray?: boolean): Object[] | string[][];
 	all(): Object[];
 	first(): Object | null;
-	column(columnName: string): string[];
+	column(columnName: string): (number | string | boolean | null)[];
 	cell(columnName: string, rowIndex?: number): number | string | boolean | null;
 	updated(): number;
 	lastId(): number;
@@ -48,7 +48,7 @@ first(): Object | null;
 &nbsp;
 
 ```js
-column(columnName: string): string[];
+column(columnName: string): (number | string | boolean | null)[];
 ```
 Выбирает и возвращает в виде массива значения столбца `columnName` у всех оставшихся строк ответа.
 

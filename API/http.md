@@ -6,9 +6,11 @@
 ```ts
 interface HttpManager {
 	requestBuilder(): RequestBuilder;
-	urlEncode(value: string): string;
-	urlDecode(value: string): string;
-	base64Encode(value: string): string;
+	
+	urlEncode(value: string): string | boolean;
+	urlDecode(value: string): string | boolean;
+	
+	base64Encode(value: string): string | boolean;
 	base64Decode(value: string): string | boolean;
 }
 ```
@@ -24,23 +26,23 @@ requestBuilder(): RequestBuilder;
 &nbsp;
 
 ```js
-urlEncode(value: string): string;
+urlEncode(value: string): string | boolean;
 ```
-Возвращает строку `value`, закодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
+Возвращает строку `value`, закодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL), или `false` если передана не строка.
 
 &nbsp;
 
 ```js
-urlDecode(value: string): string;
+urlDecode(value: string): string | boolean;
 ```
-Возвращает строку `value`, раскодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL).
+Возвращает строку `value`, раскодированную в соответствии с правилами [`кодировки URL`](https://ru.wikipedia.org/wiki/URL#%D0%9A%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5_URL), или `false` если передана не строка.
 
 &nbsp;
 
 ```js
 base64Encode(value: string): string;
 ```
-Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64).
+Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` если передана не строка.
 
 &nbsp;
 
@@ -263,7 +265,7 @@ interface Url {
 	getPort(): number | null;
 	
 	setUser(user: string): boolean;
-	getUser(): string;
+	getUser(): string | null;
 	
 	setPassword(password: string): boolean;
 	getPassword(): string | null;
@@ -295,7 +297,7 @@ getUrl(): string;
 ```js
 setUrlPath(path: string): boolean;
 ```
-Устанавливает путь на сервере. Возвращает `true`.
+Устанавливает путь на сервере. Значение по умолчанию: `'\'`. Возвращает `true`.
 
 &nbsp;
 
@@ -309,7 +311,7 @@ getUrlPath(): string;
 ```js
 setUrlScheme(scheme: string): boolean;
 ```
-Устанавливает схему URL (протокол). Возвращает `true`.
+Устанавливает схему URL (протокол). Значение по умолчанию: `'http'`. Возвращает `true`.
 
 &nbsp;
 
@@ -323,7 +325,7 @@ getUrlScheme(): string;
 ```js
 setHost(host: string): boolean;
 ```
-Устанавливает имя или адрес хоста. Возвращает `true`.
+Устанавливает имя или адрес хоста. Значение по умолчанию: `''`. Возвращает `true`.
 
 &nbsp;
 
@@ -344,7 +346,7 @@ setPort(port: number | string): boolean;
 ```js
 getPort(): number | null;
 ```
-Возвращает номер порта.
+Возвращает номер порта или `null`, если он не установлен.
 
 &nbsp;
 
@@ -356,9 +358,9 @@ setUser(user: string): boolean;
 &nbsp;
 
 ```js
-getUser(): string;
+getUser(): string | null;
 ```
-Возвращает имя пользователя.
+Возвращает имя пользователя или `null`, если оно не установлено.
 
 &nbsp;
 
@@ -372,7 +374,7 @@ setPassword(password: string): boolean;
 ```js
 getPassword(): string | null;
 ```
-Возвращает пароль.
+Возвращает пароль или `null`, если он не установлен.
 
 &nbsp;
 
@@ -386,7 +388,7 @@ setFragment(fragment: string): boolean;
 ```js
 getFragment(): string | null;
 ```
-Возвращает идентификатор якоря.
+Возвращает идентификатор якоря или `null`, если он не установлен.
 
 &nbsp;
 
@@ -613,7 +615,7 @@ interface Options {
 ```js
 setConnTimeout(seconds: number): boolean;
 ```
-Устанавливает тайм-аут соединения в секундах. Значение по умолчанию: `10`, максимальное значение: `60`. Возвращает `true`.
+Устанавливает тайм-аут соединения в секундах. Значение по умолчанию: `10`, максимальное значение: `30`. Возвращает `true`.
 
 &nbsp;
 
@@ -627,7 +629,7 @@ getConnTimeout(): number;
 ```js
 setReqTimeout(seconds: number): boolean;
 ```
-Устанавливает тайм-аут ожидания ответа в секундах. Значение по умолчанию: `30`, максимальное значение: `300`. Возвращает `true`.
+Устанавливает тайм-аут ожидания ответа в секундах. Значение по умолчанию: `30`, максимальное значение: `21600` (6 часов). Возвращает `true`.
 
 &nbsp;
 
@@ -825,7 +827,7 @@ interface Response {
 	getBinaryDataGenerator(length?: number): string[];
 	getStatusCode(): number;
 	isOk(): boolean;
-	getErrors(): ResponseErrors;
+	getErrors(): ResponseErrors | null;
 }
 ```
 Интерфейс ответа HTTP-сервера. Является [ленивым](https://ru.wikipedia.org/wiki/Ленивые_вычисления). Предоставленные функции чтения данных ответа: `getStringData()`, `getStringDataLikeJson()`, `getStringDataGenerator()`, `getBinaryDataGenerator()` — фактически берут данные из одного источника, и не рекомендуется их комбинировать.
@@ -882,9 +884,9 @@ isOk(): boolean;
 &nbsp;
 
 ```js
-getErrors(): ResponseErrors;
+getErrors(): ResponseErrors | null;
 ```
-Возвращает интерфейс [`ResponseErrors`](#response-errors) доступа к ошибкам HTTP.
+Возвращает интерфейс [`ResponseErrors`](#response-errors) доступа к ошибкам HTTP или `null`, если их нет.
 
 &nbsp;
 

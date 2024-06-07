@@ -6,8 +6,8 @@
 ```ts
 interface Crypto {
 	sha1(data: string): string;
-	hash(algo: string, data: string, binary: boolean): string | BinaryData;
-	hmac(algo: string, data: string, key: string | BinaryData, binary: boolean): string | BinaryData;
+	hash(algo: string, data: string, binary?: boolean): string | BinaryData;
+	hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData;
 	getHashAlgorithms(): string[];
 	getHmacHashAlgorithms(): string[];
 }
@@ -34,7 +34,7 @@ console.log(
 &nbsp;
 
 ```js
-hash(algo: string, data: string, binary: boolean): string | BinaryData;
+hash(algo: string, data: string, binary?: boolean): string | BinaryData;
 ```
 Метод для получения хэша строки `data` (переданной в кодировке `UTF-8`) по указанному алгоритму `algo`. Полный список доступных алгоритмов может быть получен с помощью метода `getHashAlgorithms()`.
 
@@ -54,7 +54,7 @@ console.log(
 &nbsp;
 
 ```js
-hmac(algo: string, data: string, key: string | BinaryData, binary: boolean): string | BinaryData;
+hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData;
 ```
 Метод для получения подписи [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием ключа `key` и алгоритма хэширования `algo`.
 
