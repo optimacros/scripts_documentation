@@ -52,7 +52,7 @@ interface Filesystem {
 	delete(path: string): boolean;
 	rename(from: string, to: string): boolean;
 	copy(from: string, to: string): boolean;
-	getTimestamp(path: string): string;
+	getTimestamp(path: string): number;
 	getSize(path: string): number | boolean;
 	createDir(path: string): boolean;
 	deleteDir(path: string): boolean;
@@ -118,7 +118,7 @@ copy(from: string, to: string): boolean;
 &nbsp;
 
 ```js
-getTimestamp(path: string): string;
+getTimestamp(path: string): number;
 ```
 Возвращает время последнего изменения в формате [`Unix`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F).
 
@@ -321,10 +321,10 @@ interface FTPAdapter extends BaseAdapter {
 	getPort(): number;
 
 	setUsername(username: string): this;
-	getUsername(): string;
+	getUsername(): string | null;
 
 	setPassword(password: string): this;
-	getPassword(): string;
+	getPassword(): string | null;
 
 	setRoot(root: string): this;
 	getRoot(): string;
@@ -353,7 +353,7 @@ interface FTPAdapter extends BaseAdapter {
 ```js
 setHost(host: string): this;
 ```
-Устанавливает адрес хоста. Возвращает `this`.
+Устанавливает адрес хоста. По умолчанию: `''`. Возвращает `this`.
 
 &nbsp;
 
@@ -367,7 +367,7 @@ getHost(): string;
 ```js
 setPort(port: number): this;
 ```
-Устанавливает номер порта. Возвращает `this`.
+Устанавливает номер порта. По умолчанию: `21`. Возвращает `this`.
 
 &nbsp;
 
@@ -386,7 +386,7 @@ setUsername(username: string): this;
 &nbsp;
 
 ```js
-getUsername(): string;
+getUsername(): string | null;
 ```
 Возвращает имя пользователя.
 
@@ -400,7 +400,7 @@ setPassword(password: string): this;
 &nbsp;
 
 ```js
-getPassword(): string;
+getPassword(): string | null;
 ```
 Возвращает пароль.
 
@@ -440,7 +440,6 @@ setIgnorePassiveAddress(ignore: boolean): this;
 Устанавливает режим игнорирования IP-адреса, полученного от FTP-сервера в пассивном режиме. По умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
-
 
 ```js
 getIgnorePassiveAddress(ignore: boolean): boolean;

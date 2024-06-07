@@ -11,9 +11,6 @@ export type StringMap = {
 export interface Cell {
 	setValue(value: number | string | boolean | null): this;
 
-	/**
-	 * returns {number | string | null} boolean cube values are returned as strings 'true'/'false'
-	 */
 	getValue(): number | string | null;
 	getVisualValue(): string | null;
 	getNativeValue(): number | string | null;
@@ -30,11 +27,11 @@ export interface Cell {
 
 export interface Cells {
 	all(): Cell[];
-	first(): Cell;
+	first(): Cell | null;
 	setValue(value: number | string | boolean | null): this;
 	count(): number;
 	chunkInstance(): GridRangeChunk;
-	getByIndexes(indexes: number[]): Cells | null;
+	getByIndexes(indexes: number[]): Cells;
 }
 
 export interface Label {
@@ -78,7 +75,7 @@ export interface GridRange {
 	columnCount(): number;
 
 	cellCount(): number;
-	generator(size?: number): GridRangeChunk[];
+	generator(size?: number): IterableIterator<GridRangeChunk>;
 }
 
 export interface GridDimension {
@@ -114,62 +111,20 @@ export interface ExportResult {
 	moveToLocal(path: string): this;
 }
 
-export const enum ExporterEncoding {
-	UTF = 'utf',
-	WINDOWS1251 = 'win'
-}
-
-export const enum ExporterFileExtension {
-	CSV = 'csv',
-	XLS = 'xls',
-	XLSX = 'xlsx',
-	TXT = 'txt',
-	ZIP = 'zip'
-}
-
-export const enum ExporterCsvDelimiter {
-	COMMA = ',',
-	SEMICOLON = ';',
-	TAB = '\t'
-}
-
-export const enum ExporterCsvEnclosure {
-	DOUBLE_QUOTE = '"',
-	SINGLE_QUOTE = "'"
-}
-
-export const enum ExporterCsvEscape {
-	BACKSLASH = '\\',
-	DOUBLE_QUOTE = '"'
-}
-
 export interface Exporter {
-	setEncoding(encoding: ExporterEncoding): this;
-
-	setFormat(extension: ExporterFileExtension): this;
-
+	setEncoding(encoding: string): this;
+	setFormat(extension: string): this;
 	setOmitSummaryRows(omitSummaryRows: boolean): this;
-
 	setOmitEmptyRows(omitEmptyRows: boolean): this;
-
 	setIncludeCodes(includeCodes: boolean): this;
-
 	setMappingForFlexibleImport(mappingForFlexibleImport: boolean): this;
-
 	setMappingForAdvancedImport(mappingForAdvancedImport: boolean): this;
-
 	setFileName(fileName: string): this;
-
-	setDelimiter(delimiter: ExporterCsvDelimiter): this;
-
-	setEnclosure(enclosure: ExporterCsvEnclosure): this;
-
-	setEscape(escape: ExporterCsvEscape): this;
-
+	setDelimiter(delimiter: string): this;
+	setEnclosure(enclosure: string): this;
+	setEscape(escape: string): this;
 	setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): this;
-
 	setUseCodeLikeLabels(useCodeLikeLabels: boolean): this;
-
 	export(): ExportResult;
 }
 
@@ -260,6 +215,7 @@ export interface CubeCellUpdaterBuilder {
 export interface CubeFormatInfo {
 	getFormatTypeEntity(): EntityInfo | undefined;
 	getDimensionEntity(): EntityInfo | undefined;
+	//убрать
 }
 
 export interface CubeInfo extends EntityInfo {
@@ -489,25 +445,20 @@ export interface TimePeriodImporter extends Importer {
 
 }
 
+export interface ListUserAccessTab extends Tab {
+
+}
+
+export interface ListSubsetsTab extends Tab {
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
+	elementsReorder(): ElementsReorder;
+}
 export interface CustomPropertiesTab extends Tab {
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
 	elementsReorder(): ElementsReorder;
 }
-
-export interface ListUserAccessTab extends Tab {
-
-}
-
-export interface ListChildTab extends Tab {
-	listTab(): ListTab;
-	
-	elementsCreator(): ElementsCreator;
-	elementsDeleter(): ElementsDeleter;
-	elementsReorder(): ElementsReorder;
-}
-
-export type ListSubsetsTab = ListChildTab;
 
 export interface ListTab extends Tab {
 	listSubsetTab(): ListSubsetsTab;
@@ -627,7 +578,7 @@ export interface EnterpriseLicenseManager {
 
 	validateLicenseJson(jsonStr: string): boolean;
 	createLicense(password: string, key: string, jsonStr: string): string;
-	validateLicense(password: string, key: string, licenseData: string, id?: string | null): Object;
+	validateLicense(password: string, key: string, licenseData: string): Object;
 }
 
 export type MetricData = {
@@ -884,7 +835,6 @@ export interface Filesystem {
 	delete(path: string): boolean;
 	rename(from: string, to: string): boolean;
 	copy(from: string, to: string): boolean;
-
 	getTimestamp(path: string): number;
 
 	getSize(path: string): number;
@@ -895,10 +845,6 @@ export interface Filesystem {
 	getMetadata(path: string): Object;
 	upload(from: string, to: string): boolean;
 	download(from: string, to: string): boolean;
-	
-	//2.0 only
-	makeLocalFile(hash: string, path?: string): string;
-
 	makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 	getPathObj(path: string): PathObj;
 }
@@ -914,28 +860,22 @@ export interface BaseAdapter {
 
 export interface FTPAdapter extends BaseAdapter {
 	setHost(host: string): this;
-
-	getHost(): string | undefined;
+	getHost(): string;
 
 	setPort(port: number): this;
-
-	getPort(): number | undefined;
+	getPort(): number;
 
 	setUsername(username: string): this;
-
-	getUsername(): string | undefined;
+	getUsername(): string | null;
 
 	setPassword(password: string): this;
-
-	getPassword(): string | undefined;
+	getPassword(): string | null;
 
 	setRoot(root: string): this;
-
 	getRoot(): string;
 
 	setPassive(passive: boolean): this;
-
-	getPassive(): boolean | undefined;
+	getPassive(): boolean;
 	
 	setIgnorePassiveAddress(ignore: boolean): this; 
 	getIgnorePassiveAddress(): boolean; 
@@ -1012,20 +952,15 @@ export interface SqlQueryResult {
 	count(): number;
 	generator(likeArray?: boolean): Object[] | string[][];
 	all(): Object[];
-	
-	first(): Object | undefined;
-	
-	column(columnName: string): unknown[];
-	
-	cell(columnName: string, rowIndex?: number): unknown;
-	
-	updated(): number | undefined;
-	
-	lastId(): number | string | undefined;
+	first(): Object | null;
+	column(columnName: string): (number | string | boolean | null)[];
+	cell(columnName: string, rowIndex?: number): number | string | boolean | null;
+	updated(): number;
+	lastId(): number;
 }
 
 export interface SqlQueryBuilder {
-	execute(sql: string, bindings?: Object): SqlQueryResult;
+	execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): SqlQueryResult;
 }
 
 export interface SqlConnection {
@@ -1295,16 +1230,9 @@ export namespace Mongodb {
 		 * https://docs.mongodb.com/manual/reference/method/db.createCollection
 		 * @param options
 		 */
-		setOptions(options: {
-			capped?: boolean,
-			autoIndexId?: boolean,
-			size?: number,
-			max?: number
-		}): this;
-
-		setName(name: string): this;
-
-		create(): { ok: number, errmsg?: string };
+	setOptions(options: Object): this;
+	setName(name: string): this;
+	create(): { ok: number, errmsg?: string };
 	}
 
 	export interface InsertOneResult {
@@ -1342,16 +1270,15 @@ export namespace Mongodb {
 		skip: number,
 		limit: number,
 		showRecordId: boolean,
-		min: number,
-		max: number
+		min: Object,
+		max: Object
 	}
 
 	export interface Collection {
 		count(filter: Object): number;
 		
 		find(filter: Object, options?: FilterOptions): Cursor;
-
-		findOne(filter: Object, options?: FilterOptions): Object | undefined;
+		findOne(filter: Object, options?: FilterOptions): Object;
 
 		insertOne(document: Object): InsertOneResult;
 		insertMany(documents: Object[]): InsertManyResult;
@@ -1370,8 +1297,7 @@ export namespace Mongodb {
 	}
 
 	export interface Types {
-		objectId(id?: string): Types.ObjectId;
-
+		ObjectId(id?: string): Types.ObjectId;
 		regex(pattern: string, flags?: string): Object;
 		date(milliseconds: number): Object;
 	}
@@ -1460,16 +1386,16 @@ export namespace Http {
 		getHost(): string;
 
 		setPort(port: number | string): boolean;
-		getPort(): number | undefined;
+		getPort(): number | null;
 
 		setUser(user: string): boolean;
-		getUser(): string;
+		getUser(): string | null;
 
 		setPassword(password: string): boolean;
-		getPassword(): string | undefined;
+		getPassword(): string | null;
 
 		setFragment(fragment: string): boolean;
-		getFragment(): string | undefined;
+		getFragment(): string | null;
 
 		params(): UrlParams;
 	}
@@ -1521,13 +1447,13 @@ export namespace Http {
 
 	export interface Options {
 		setConnTimeout(seconds: number): boolean;
-		getConnTimeout(): number | undefined;
+		getConnTimeout(): number;
 
 		setReqTimeout(seconds: number): boolean;
-		getReqTimeout(): number | undefined;
+		getReqTimeout(): number;
 
 		setCanDecodeContent(value: boolean): boolean;
-		getCanDecodeContent(): boolean | undefined;
+		getCanDecodeContent(): boolean;
 
 		allowRedirects(): AllowRedirects;
 		auth(): HttpAuth;
@@ -1573,7 +1499,7 @@ export namespace Http {
 		getBinaryDataGenerator(length?: number): string[];
 		getStatusCode(): number;
 		isOk(): boolean;
-		getErrors(): ResponseErrors | undefined;
+		getErrors(): ResponseErrors | null;
 	}
 
 	export interface Verify {
@@ -1609,11 +1535,9 @@ export namespace Http {
 		requestBuilder(): RequestBuilder;
 
 		urlEncode(value: string): string | boolean;
-
 		urlDecode(value: string): string | boolean;
 
 		base64Encode(value: string): string | boolean;
-
 		base64Decode(value: string): string | boolean;
 	}
 }
@@ -1645,17 +1569,8 @@ export namespace WinAgent {
 		setCommandUrl(url: string): this;
 		setDownloadUrl(url: string): this;
 		auth(): Http.HttpAuth;
-		/**
-		 * @param sec Default value is 10 sec
-		 */
 		setConnectTimeout(sec: number): this;
-		/**
-		 * @param sec Default value is 600 sec
-		 */
 		setRequestTimeout(sec: number): this;
-		/**
-		 * @param sec Default value is 150 sec
-		 */
 		setOperationTimeout(sec: number): this;
 		makeRunMacrosAction(): RunMacroAction;
 	}
@@ -1709,7 +1624,7 @@ export interface PostgresqlImportBuilder {
 }
 
 export interface MysqlConnectorBuilder extends SqlConnectorBuilder {
-	loadImportBuilder(): this;
+	loadImportBuilder(): MysqlImportBuilder;
 }
 
 export interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
@@ -1814,7 +1729,7 @@ export interface Audit {
 }
 
 export interface AuditTab extends Tab {
-	pivot(viewName?: string): AuditPivot;
+	pivot(): AuditPivot;
 }
 
 export interface AuditPivot extends Pivot {
