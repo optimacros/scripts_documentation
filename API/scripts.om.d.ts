@@ -551,8 +551,9 @@ export interface Importer {
 
     getReportFilePath(): string | undefined;
 
-	setEncoding(encoding: string): this;
-	getEncoding(): string;
+    setEncoding(encoding: string): this;
+	
+    getEncoding(): string;
 
     import(): this;
 }
