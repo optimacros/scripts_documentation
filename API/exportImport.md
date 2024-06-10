@@ -335,7 +335,9 @@ interface Importer {
 	setFilePath(path: string): this;
 	getFilePath(): string;
 	getReportFilePath(): string | null;
-	import(): this;
+  setEncoding(encoding: string): this;
+  getEncoding(): string;
+  import(): Importer;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](./views.md#grid). Результатом импорта является файл отчёта.
@@ -367,6 +369,21 @@ getFilePath(): string;
 getReportFilePath(): string | null;
 ```
 Возвращает путь к файлу отчёта.
+
+&nbsp;
+
+```js
+setEncoding(encoding: string): Importer;
+```
+Устанавливает кодировку импортируемого файла. Допустимые значения:
+`'win'`, `'WINDOWS-1251'`, `'utf'`, `'UTF-8'`, `'auto'`, `'AUTO'`. Значение по умолчанию: `'AUTO'`.
+
+&nbsp;
+
+```js
+getEncoding(): string;
+```
+Возвращает кодировку импортируемого файла.
 
 &nbsp;
 

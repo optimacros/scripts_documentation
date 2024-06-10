@@ -444,13 +444,16 @@ export interface CSVParams {
 
 export interface Importer {
 	csv(): CSVParams;
+  
 	setFilePath(path: string): this;
-
 	getFilePath(): string;
 
 	getReportFilePath(): string | undefined;
 
-	import(): this;
+  setEncoding(encoding: string): this;
+  getEncoding(): string;
+
+  import(): this;
 }
 
 export interface StorageImporter extends Importer {
