@@ -60,7 +60,7 @@ collectionCreator(): CollectionCreator;
 ```js
 dropCollection(name: string): Object;
 ```
-Передаёт в MongoDB запрос на [`удаление коллекции`](https://docs.mongodb.com/manual/reference/method/db.collection.drop/) `name`, дожидается завершения обработки и возвращает объект результата.
+Передаёт в MongoDB запрос на удаление коллекции `name`, дожидается завершения обработки и возвращает объект результата. Описание его полей – в официальной [`документации`](https://www.mongodb.com/docs/atlas/data-federation/admin/cli/collections/drop-collections-views/#output) MongoDB.
 
 &nbsp;
 

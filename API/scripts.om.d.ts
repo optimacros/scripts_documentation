@@ -1304,8 +1304,7 @@ export namespace Mongodb {
 
 	export interface Connection {
 		collectionCreator(): CollectionCreator;
-		dropCollection(name: string): { ok: number, errmsg?: string, nIndexesWas?: number, ns?: string };
-
+		dropCollection(name: string): Object;
 		selectCollection(name: string): Collection;
 		types(): Types;
 	}
