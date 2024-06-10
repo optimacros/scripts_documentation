@@ -334,6 +334,8 @@ interface Importer {
 	setFilePath(path: string): Importer;
 	getFilePath(): string;
 	getReportFilePath(): string | null;
+	setEncoding(encoding: string): this;
+	getEncoding(): string;
 	import(): Importer;
 }
 ```
@@ -366,6 +368,21 @@ getFilePath(): string
 getReportFilePath(): string | null
 ```
 Возвращает путь к файлу отчёта.
+
+&nbsp;
+
+```js
+setEncoding(encoding: string): Importer;
+```
+Устанавливает кодировку импортируемого файла. Допустимые значения:
+`'win'`, `'WINDOWS-1251'`, `'utf'`, `'UTF-8'`, `'auto'`, `'AUTO'`. Значение по умолчанию: `'AUTO'`.
+
+&nbsp;
+
+```js
+getEncoding(): string;
+```
+Возвращает кодировку импортируемого файла.
 
 &nbsp;
 
