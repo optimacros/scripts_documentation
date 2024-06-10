@@ -62,7 +62,7 @@ interface Filesystem {
 	download(from: string, to: string): boolean;
 	makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 	getPathObj(path: string): PathObj;
-    	changeTextFileCharset(path: string, from: string, to: string): null | string;
+	changeTextFileCharset(path: string, from: string, to: string): null | string;
 }
 ```
 Абстрактный интерфейс файловой системы.
@@ -190,9 +190,9 @@ getPathObj(path: string): PathObj
 &nbsp;
 
 ```js
-changeTextFileCharset(path: string, from: string, to: string): null | string 
+changeTextFileCharset(path: string, from: string, to: string): null | string;
 ```
-Меняет кодировку файла по пути `path` с `from` на `to`. Возвращает полный путь к перекодированному файлу.
+Меняет кодировку файла по адресу `path` с `from` на `to`. Возвращает полный путь к перекодированному файлу.
 
 &nbsp;
 
