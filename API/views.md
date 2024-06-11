@@ -28,7 +28,7 @@ syncMulticube(): SyncMulticubeBuilder;
 ### Интерфейс MulticubesTab<a name="multicubes-tab"></a>
 ```ts
 interface MulticubesTab extends Tab {
-	open(name: string): MulticubeTab | undefined;
+	open(name: string): MulticubeTab;
 
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
@@ -40,7 +40,7 @@ interface MulticubesTab extends Tab {
 &nbsp;
 
 ```js
-open(name: string): MulticubeTab | undefined;
+open(name: string): MulticubeTab;
 ```
 Возвращает ссылку на [`MulticubeTab`](#multicube-tab) мультикуба `name`. Если такой мультикуб отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
 

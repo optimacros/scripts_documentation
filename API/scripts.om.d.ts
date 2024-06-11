@@ -329,7 +329,7 @@ export interface MulticubeTab extends Tab {
 }
 
 export interface MulticubesTab extends Tab {
-	open(name: string): MulticubeTab | undefined;
+	open(name: string): MulticubeTab;
 	
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
@@ -351,7 +351,6 @@ export interface TimePeriodTab extends Tab {
 	subsetsTab(): TimePeriodSubsetTab;
 	importer(): TimePeriodImporter;
 }
-
 
 export interface Times {
 	optionsTab(): TimeOptionsTab;
@@ -404,7 +403,7 @@ export interface Importer {
 	setFilePath(path: string): this;
 	getFilePath(): string;
 
-	getReportFilePath(): string | undefined;
+	getReportFilePath(): string | null;
 
   setEncoding(encoding: string): this;
   getEncoding(): string;
