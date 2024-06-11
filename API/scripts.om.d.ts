@@ -213,9 +213,8 @@ export interface CubeCellUpdaterBuilder {
 }
 
 export interface CubeFormatInfo {
-	getFormatTypeEntity(): EntityInfo | undefined;
-	getDimensionEntity(): EntityInfo | undefined;
-	//убрать
+	getFormatTypeEntity(): EntityInfo;
+	getDimensionEntity(): EntityInfo | null;
 }
 
 export interface CubeInfo extends EntityInfo {
@@ -399,11 +398,11 @@ export interface CSVParams {
 
 export interface Importer {
 	csv(): CSVParams;
-	setFilePath(path: string): this;
 
+	setFilePath(path: string): this;
 	getFilePath(): string;
 
-	getReportFilePath(): string | null;
+	getReportFilePath(): string;
 
 	import(): this;
 }
@@ -470,7 +469,7 @@ export interface ListTab extends Tab {
 }
 
 export interface ListsTab extends Tab {
-	open(name: string): ListTab | undefined;
+	open(name: string): ListTab;
 	
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
@@ -516,9 +515,9 @@ export namespace ApiService {
 		append(name: string, value: string, ttl: number): this;
 	}
 
-	export interface ResponseHeaderInfos {
-		append(name: string, value: string): this;
-	}
+	// export interface ResponseHeaderInfos {
+		// append(name: string, value: string): this;
+	// }
 
 	export interface ResponseFileInfos {
 		append(fileId: string): this;

@@ -334,7 +334,7 @@ interface Importer {
 	csv(): CSVParams;
 	setFilePath(path: string): this;
 	getFilePath(): string;
-	getReportFilePath(): string | null;
+	getReportFilePath(): string;
 	import(): this;
 }
 ```
@@ -359,14 +359,14 @@ setFilePath(path: string): this;
 ```js
 getFilePath(): string;
 ```
-Возвращает имя импортируемого файла.
+Возвращает имя импортируемого файла. Если имени нет, бросает исключение.
 
 &nbsp;
 
 ```js
-getReportFilePath(): string | null;
+getReportFilePath(): string;
 ```
-Возвращает путь к файлу отчёта.
+Возвращает путь к файлу отчёта. Если импорта ещё не было, бросает исключение.
 
 &nbsp;
 
