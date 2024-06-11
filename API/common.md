@@ -641,7 +641,7 @@ get(longId: number): EntityInfo | null;
 ```js
 getCollection(longId: number[]): EntityInfo[];
 ```
-Возвращает массив сущностей [`EntityInfo`](./views.md#entity-info) по массиву их [`longId`](./views.md#long-id).
+Возвращает массив сущностей [`EntityInfo`](./views.md#entity-info) по массиву их [`longId`](./views.md#long-id). Корректно работает, только если все переданные `longId` корректные. Использовать с остророжностью.
 
 &nbsp;
 

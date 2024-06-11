@@ -332,12 +332,16 @@ getLineDelimiter(): string;
 ```ts
 interface Importer {
 	csv(): CSVParams;
+	
 	setFilePath(path: string): this;
 	getFilePath(): string;
-	getReportFilePath(): string | null;
-  setEncoding(encoding: string): this;
-  getEncoding(): string;
-  import(): Importer;
+	
+	getReportFilePath(): string;
+	
+	setEncoding(encoding: string): this;
+	getEncoding(): string;
+	
+	import(): Importer;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](./views.md#grid). Результатом импорта является файл отчёта.
@@ -361,14 +365,14 @@ setFilePath(path: string): this;
 ```js
 getFilePath(): string;
 ```
-Возвращает имя импортируемого файла.
+Возвращает имя импортируемого файла. Если имени нет, бросает исключение.
 
 &nbsp;
 
 ```js
-getReportFilePath(): string | null;
+getReportFilePath(): string;
 ```
-Возвращает путь к файлу отчёта.
+Возвращает путь к файлу отчёта. Если импорта ещё не было, бросает исключение.
 
 &nbsp;
 
