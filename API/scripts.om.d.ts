@@ -1731,7 +1731,7 @@ export interface AuditTab extends Tab {
 
 export interface AuditPivot extends Pivot {
 	eventTypeFilter(data: string | number | (string | number)[]): this;
-	dateFilter(beginAt?: string | number | null, endAt?:  string | number | null): this;
+	dateFilter(beginAt?: string | number | null, endAt?: string | number | null): this;
 	statusFilter(status: number): this;
 	authorFilter(name: string): this;
 	detailsFilter(details4: string): this;
