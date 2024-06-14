@@ -557,7 +557,7 @@ all(): LabelsGroup[];
 ```js
 get(index: number): LabelsGroup | null;
 ```
-Аналог `all()[index]`. В случае некорретного индекса возвращает `null`.
+Аналог `all()[index]`. В случае некорректного индекса возвращает `null`.
 
 &nbsp;
 
@@ -709,9 +709,9 @@ all(): Cell[];
 &nbsp;
 
 ```js
-first(): Cell;
+first(): Cell | null;
 ```
-Аналог `all()[0]`.
+Аналог `all()[0]`. Возвращает `null`, если массив клеток пустой.
 
 &nbsp;
 
@@ -741,7 +741,7 @@ chunkInstance(): GridRangeChunk;
 ```js
 getByIndexes(indexes: number[]): Cells;
 ```
-Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#cells).
+Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать непрямоугольный объект [`Cells`](#cells).
 
 &nbsp;
 

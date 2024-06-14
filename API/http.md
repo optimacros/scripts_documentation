@@ -40,7 +40,7 @@ urlDecode(value: string): string | boolean;
 &nbsp;
 
 ```js
-base64Encode(value: string): string;
+base64Encode(value: string): string | boolean;
 ```
 Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` если передана не строка.
 

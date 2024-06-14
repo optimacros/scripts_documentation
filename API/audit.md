@@ -94,7 +94,7 @@ eventTypeFilter(data: string | number | (string | number)[]): this;
 &nbsp;
 
 ```js
-	dateFilter(beginAt?: string | number | null, endAt?:  string | number | null): this;
+dateFilter(beginAt?: string | number | null, endAt?: string | number | null): this;
 ```
 Ограничивает получаемые представлением строки временн***ы***м диапазоном. Полный список допустимых форматов даты и времени можно посмотреть [здесь](https://www.php.net/manual/ru/datetime.formats.php). Кроме того даты можно передать в формате [`UNIX`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F). **Внимание**: воркспейс работает во временой зоне `Etc/UTC (UTC, +0000)`, и в веб-интерфейсе аудита время отображается так же. Например, число `1701317458` означает время `2023-11-30 04:10:58`. Любой параметр можно задать как `undefined` или `null` – тогда временн***о***й диапазон не будет ограничен с соответствующей стороны.
 
