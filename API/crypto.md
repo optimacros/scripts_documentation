@@ -6,8 +6,8 @@
 ```ts
 interface Crypto {
 	sha1(data: string): string;
-	hash(algo: string , data: string , binary: boolean): string | BinaryData;
-	hmac(algo: string, data: string, key: string | BinaryData, binary: boolean): string | BinaryData;
+	hash(algo: string, data: string, binary?: boolean): string | BinaryData;
+	hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData;
 	getHashAlgorithms(): string[];
 	getHmacHashAlgorithms(): string[];
 }
@@ -17,7 +17,7 @@ interface Crypto {
 &nbsp;
 
 ```js
-sha1(data: string): string
+sha1(data: string): string;
 ```
 Возвращает [`SHA1-хэш`](https://en.wikipedia.org/wiki/SHA-1) строки `data` (переданной в кодировке `UTF-8`), вычисленный по алгоритму `US Secure Hash Algorithm 1` в виде `40`-символьного шестнадцатеричного числа.
 
@@ -34,7 +34,7 @@ console.log(
 &nbsp;
 
 ```js
-hash(algo: string , data: string , binary: boolean): string | BinaryData
+hash(algo: string, data: string, binary?: boolean): string | BinaryData;
 ```
 Метод для получения хэша строки `data` (переданной в кодировке `UTF-8`) по указанному алгоритму `algo`. Полный список доступных алгоритмов может быть получен с помощью метода `getHashAlgorithms()`.
 
@@ -54,7 +54,7 @@ console.log(
 &nbsp;
 
 ```js
-hmac(algo: string, data: string, key: string | BinaryData, binary: boolean): string | BinaryData
+hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData;
 ```
 Метод для получения подписи [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием ключа `key` и алгоритма хэширования `algo`.
 
@@ -77,14 +77,14 @@ const signature = om.crypto.hmac('sha-256', 'stringToSign', signingKey);
 &nbsp;
 
 ```js
-getHashAlgorithms(): string[]
+getHashAlgorithms(): string[];
 ```
 Возвращает список алгоритмов хэширования, которые могут быть использованы в параметре `algo` метода `hash()`.
 
 &nbsp;
 
 ```js
-getHmacHashAlgorithms(): string[]
+getHmacHashAlgorithms(): string[];
 ```
 Возвращает список алгоритмов хэширования, которые могут быть использованы в параметре `algo` метода `hmac()`.
 
@@ -93,7 +93,7 @@ getHmacHashAlgorithms(): string[]
 ## Интерфейс BinaryData<a name="binarydata"></a>
 ```ts
 interface BinaryData {
-    getAsRawString(): string;
+	getAsRawString(): string;
 }
 ```
 Служебный интерфейс для работы с бинарными данными, которые могут быть получены в результате вычисления хэшей. Создан для передачи бинарных данных между `js` и `php` компонентами платформы.
@@ -101,7 +101,7 @@ interface BinaryData {
 &nbsp;
 
 ```js
-getAsRawString(): string
+getAsRawString(): string;
 ```
 Возвращает бинарные данные в виде `utf-8` строки.
 

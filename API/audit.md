@@ -41,7 +41,7 @@ interface Audit {
 &nbsp;
 
 ```js
-auditTab(): AuditTab
+auditTab(): AuditTab;
 ```
 Возвращает ссылку на интерфейс [`AuditTab`](#audit-tab). В интерфейсе Optimacros аналогично открытию вкладки `Центр безопасности` -> `Логи` -> `Аудит`.
 
@@ -58,7 +58,7 @@ interface AuditTab extends Tab {
 &nbsp;
 
 ```js
-pivot(): AuditPivot
+pivot(): AuditPivot;
 ```
 Возвращает ссылку на  интерфейс [`AuditPivot`](#audit-pivot) представления аудита.
 
@@ -67,11 +67,11 @@ pivot(): AuditPivot
 ### Интерфейс AuditPivot<a name="audit-pivot"></a>
 ```ts
 interface AuditPivot extends Pivot {
-    	eventTypeFilter(data: string | number | (string | number)[]): AuditPivot;
-    	dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): AuditPivot;
-    	statusFilter(status: number): AuditPivot;
-    	authorFilter(name: string): AuditPivot;
-    	detailsFilter(details4: string): AuditPivot;
+	eventTypeFilter(data: string | number | (string | number)[]): this;
+	dateFilter(beginAt?: string | number | null, endAt?: string | number | null): this;
+	statusFilter(status: number): this;
+	authorFilter(name: string): this;
+	detailsFilter(details4: string): this;
 }
 ```
 Интерфейс представления аудита. Интерфейс наследуется от [`Pivot`](./views.md#pivot).
@@ -79,7 +79,7 @@ interface AuditPivot extends Pivot {
 &nbsp;
 
 ```js
-eventTypeFilter(data: string | number | (string | number)[]): AuditPivot
+eventTypeFilter(data: string | number | (string | number)[]): this;
 ```
 Фильтрует получаемые представлением строки по [типу события](#events-table). Значения можно задать следующими способами:
 
@@ -94,7 +94,7 @@ eventTypeFilter(data: string | number | (string | number)[]): AuditPivot
 &nbsp;
 
 ```js
-dateFilter(beginAt?: string | number | undefined | null, endAt?:  string | number | undefined | null): AuditPivot
+dateFilter(beginAt?: string | number | null, endAt?: string | number | null): this;
 ```
 Ограничивает получаемые представлением строки временн***ы***м диапазоном. Полный список допустимых форматов даты и времени можно посмотреть [здесь](https://www.php.net/manual/ru/datetime.formats.php). Кроме того даты можно передать в формате [`UNIX`](https://ru.wikipedia.org/wiki/Unix-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F). **Внимание**: воркспейс работает во временой зоне `Etc/UTC (UTC, +0000)`, и в веб-интерфейсе аудита время отображается так же. Например, число `1701317458` означает время `2023-11-30 04:10:58`. Любой параметр можно задать как `undefined` или `null` – тогда временн***о***й диапазон не будет ограничен с соответствующей стороны.
 
@@ -112,7 +112,7 @@ dateFilter("2023-11-30");
 &nbsp;
 
 ```js
-statusFilter(status: number): AuditPivot
+statusFilter(status: number): this;
 ```
 Фильтрует получаемые представлением строки по статусу. Принимает 3 значения:
 
@@ -127,7 +127,7 @@ statusFilter(status: number): AuditPivot
 &nbsp;
 
 ```js
-authorFilter(name: string): AuditPivot
+authorFilter(name: string): this;
 ```
 Фильтрует получаемые представлением строки по имени автора или целевого пользователя.
 
@@ -136,7 +136,7 @@ authorFilter(name: string): AuditPivot
 &nbsp;
 
 ```js
-detailsFilter(details4: string): AuditPivot
+detailsFilter(details4: string): this;
 ```
 Фильтрует получаемые представлением строки по колонке `Details 4`. Функция будет работать, только если перед этим функцией `eventTypeFilter()` было произведена фильтрация по типу события, которое имеет значение в поле `Details 4`; при этом при использовании фильтрации по массиву событий достаточно, чтобы хотя бы одно упомянутое событие имело атрибут `Details 4`.
 

@@ -9,7 +9,7 @@ interface SqlQueryResult {
 	generator(likeArray?: boolean): Object[] | string[][];
 	all(): Object[];
 	first(): Object | null;
-	column(columnName: string): string[];
+	column(columnName: string): (number | string | boolean | null)[];
 	cell(columnName: string, rowIndex?: number): number | string | boolean | null;
 	updated(): number;
 	lastId(): number;
@@ -20,56 +20,56 @@ interface SqlQueryResult {
 &nbsp;
 
 ```js
-count(): number
+count(): number;
 ```
 Возвращает количество обработанных строк. Реализация зависит от СУБД и от драйвера.
 
 &nbsp;
 
 ```js
-generator(likeArray?: boolean): Object[] | string[][]
+generator(likeArray?: boolean): Object[] | string[][];
 ```
 Возвращает генератор для работы со строками запроса. Если `likeArray === true`, на каждой итерации генератор возвращает очередную строку запроса в виде массива полей `string[]`, иначе в виде `Object`, где ключами выступают названия столбцов, значениями – данные; по умолчанию `likeArray === false`.
 
 &nbsp;
 
 ```js
-all(): Object[]
+all(): Object[];
 ```
 Аналог вызову `generator(false)` с тем отличием, что возвращает все оставшиеся данные в виде массива.
 
 &nbsp;
 
 ```js
-first(): Object | null
+first(): Object | null;
 ```
 Возвращает ***следующую*** строку запроса, ***несмотря на название***.
 
 &nbsp;
 
 ```js
-column(columnName: string): string[]
+column(columnName: string): (number | string | boolean | null)[];
 ```
 Выбирает и возвращает в виде массива значения столбца `columnName` у всех оставшихся строк ответа.
 
 &nbsp;
 
 ```js
-cell(columnName: string, rowIndex?: number): number | string | boolean | null
+cell(columnName: string, rowIndex?: number): number | string | boolean | null;
 ```
 Пропускает в итераторе ответа `rowIndex` (по умолчанию: `0`) строк и возвращает значение столбца `columnName` из очередной строки. Внутренний итератор переходит на следующую строку.
 
 &nbsp;
 
 ```js
-updated(): number
+updated(): number;
 ```
 Возвращает количество изменённых строк. Если SQL-запрос был не на изменение, возвращаемое значение зависит от реализации.
 
 &nbsp;
 
 ```js
-lastId(): number
+lastId(): number;
 ```
 Функция работает только с запросом `INSERT`. Возвращает `id` последней вставленной строки.
 
@@ -86,7 +86,7 @@ interface SqlQueryBuilder {
 &nbsp;
 
 ```js
-execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): SqlQueryResult
+execute(sql: string, bindings?: (string | number | boolean | null)[] | Object): SqlQueryResult;
 ```
 Конструирует SQL-запрос из строки `sql`, используя параметры привязки `bindings`, передаёт его на исполнение в СУБД и возвращает интерфейс [`SqlQueryResult`](#sql-query-result) доступа к результатам запроса.
 
@@ -119,7 +119,7 @@ interface SqlConnection {
 &nbsp;
 
 ```js
-qb(): SqlQueryBuilder
+qb(): SqlQueryBuilder;
 ```
 Возвращает интерфейс [`SqlQueryBuilder`](#sql-query-builder) построения запроса к базе данных.
 
@@ -130,11 +130,11 @@ qb(): SqlQueryBuilder
 ### Интерфейс SqlConnectorBuilder<a name="sql-connector-builder"></a>
 ```ts
 interface SqlConnectorBuilder {
-	setHost(value: string): SqlConnectorBuilder;
-	setPort(value: number): SqlConnectorBuilder;
-	setUsername(value: string): SqlConnectorBuilder;
-	setPassword(value: string): SqlConnectorBuilder;
-	setDatabase(value: string): SqlConnectorBuilder;
+	setHost(value: string): this;
+	setPort(value: number): this;
+	setUsername(value: string): this;
+	setPassword(value: string): this;
+	setDatabase(value: string): this;
 	load(): SqlConnection;
 }
 ```
@@ -143,42 +143,42 @@ interface SqlConnectorBuilder {
 &nbsp;
 
 ```js
-setHost(value: string): SqlConnectorBuilder
+setHost(value: string): this;
 ```
 Устанавливает адрес подключения. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setPort(value: number): SqlConnectorBuilder
+setPort(value: number): this;
 ```
 Устанавливает номер порта для подключения. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setUsername(value: string): SqlConnectorBuilder
+setUsername(value: string): this;
 ```
 Устанавливает имя пользователя. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setPassword(value: string): SqlConnectorBuilder
+setPassword(value: string): this;
 ```
 Устанавливает пароль. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setDatabase(value: string): SqlConnectorBuilder
+setDatabase(value: string): this;
 ```
 Устанавливает имя базы данных. Возвращает `this`.
 
 &nbsp;
 
 ```js
-load(): SqlConnection
+load(): SqlConnection;
 ```
 Соединяется с БД и возвращает объект соединения [`SqlConnection`](#sql-connection).
 
@@ -195,7 +195,7 @@ interface MysqlConnectorBuilder extends SqlConnectorBuilder {
 &nbsp;
 
 ```js
-loadImportBuilder(): MysqlImportBuilder
+loadImportBuilder(): MysqlImportBuilder;
 ```
 Возвращает ссылку на интерфейс [`MysqlImportBuilder`](#mysql-import-builder) импорта из файла CSV.
 
@@ -203,8 +203,8 @@ loadImportBuilder(): MysqlImportBuilder
 
 ### Интерфейс PostgresqlConnectorBuilder<a name="postgresql-connector-builder"></a>
 ```ts
-export interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
-    loadImportBuilder(): PostgresqlImportBuilder;
+interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
+	loadImportBuilder(): PostgresqlImportBuilder;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Postgresql`](https://ru.wikipedia.org/wiki/PostgreSQL). Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
@@ -212,7 +212,7 @@ export interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
 &nbsp;
 
 ```js
-loadImportBuilder(): PostgresqlImportBuilder
+loadImportBuilder(): PostgresqlImportBuilder;
 ```
 Возвращает ссылку на интерфейс [`PostgresqlImportBuilder`](#postgresql-import-builder) импорта из файла CSV.
 
@@ -221,9 +221,9 @@ loadImportBuilder(): PostgresqlImportBuilder
 ### Интерфейс MicrosoftSqlConnectorBuilder<a name="microsoft-sql-connector-builder"></a>
 ```ts
 interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
-	setDriver(name: string | null): MicrosoftSqlConnectorBuilder;
-	setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder;
-	setRequestTimeout(timeout: number): MicrosoftSqlConnectorBuilder;
+	setDriver(name: string | null): this;
+	setScrollType(scrollType: string | null): this;
+	setRequestTimeout(timeout: number): this;
 	loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 }
 ```
@@ -232,7 +232,7 @@ interface MicrosoftSqlConnectorBuilder extends SqlConnectorBuilder {
 &nbsp;
 
 ```js
-setDriver(name: string | null): MicrosoftSqlConnectorBuilder
+setDriver(name: string | null): this;
 ```
 Устанавливает драйвер взаимодействия с MS SQL Server. Допустимые значения: `DBLIB`, `ODBC`, `SQLSRV`. Значение по умолчанию: `DBLIB`. Возвращает `this`.
 
@@ -245,7 +245,7 @@ setDriver(name: string | null): MicrosoftSqlConnectorBuilder
 &nbsp;
 
 ```js
-setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
+setScrollType(scrollType: string | null): this;
 ```
 **Для работы нужно использовать драйвер `SQLSRV`**
 
@@ -265,14 +265,14 @@ setScrollType(scrollType: string | null): MicrosoftSqlConnectorBuilder
 &nbsp;
 
 ```js
-setRequestTimeout(timeout: number): MicrosoftSqlConnectorBuilder
+setRequestTimeout(timeout: number): this;
 ```
 Устанавливает таймаут запроса в секундах. По умолчанию таймаут равен 30 секундам. Значение 0 задает бесконечный таймаут. Отрицательные и дробные значения не допускаются.
 
 &nbsp;
 
 ```js
-loadBulkCopyBuilder(): SqlBulkCopyBuilder
+loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 ```
 Возвращает ссылку на интерфейс [`SqlBulkCopyBuilder`](#sql-bulk-copy-builder) импорта/экспорта через файл CSV.
 
@@ -280,10 +280,10 @@ loadBulkCopyBuilder(): SqlBulkCopyBuilder
 
 ### Интерфейс OracleConnectorBuilder<a name="oracle-connector-builder"></a>
 ```ts
-export interface OracleConnectorBuilder extends SqlConnectorBuilder {
-	setServiceName(value: string): OracleConnectorBuilder;
-	setSchema(value: string): OracleConnectorBuilder;
-	setTNS(value: string): OracleConnectorBuilder;
+interface OracleConnectorBuilder extends SqlConnectorBuilder {
+	setServiceName(value: string): this;
+	setSchema(value: string): this;
+	setTNS(value: string): this;
 	loadImportBuilder(): OracleImportBuilder;
 }
 ```
@@ -292,28 +292,28 @@ export interface OracleConnectorBuilder extends SqlConnectorBuilder {
 &nbsp;
 
 ```js
-setServiceName(value: string): OracleConnectorBuilder
+setServiceName(value: string): this;
 ```
 Устанавливает имя службы (SERVICE_NAME). SERVICE_NAME определяет одно или ряд имен для подключения к одному экземпляру базы данных. Возможные значения SERVICE_NAME указываются в сетевых установках Oracle и регистрируются в качестве службы БД процессом listener.
 
 &nbsp;
 
 ```js
-setSchema(value: string): OracleConnectorBuilder
+setSchema(value: string): this;
 ```
 Устанавливает [`схему`](https://docs.oracle.com/cd/E11882_01/server.112/e10897/schema.htm).
 
 &nbsp;
 
 ```js
-setTNS(value: string): OracleConnectorBuilder
+setTNS(value: string): this;
 ```
 Устанавливает имя службы TNS. Протокол TNS (Transparent Network Substrate) — уровень связи, используемый базами данных Oracle. Имя службы TNS — это имя, с которым экземпляр базы данных Oracle представлен в сети. Имя службы TNS назначается при настройке подключений к базе данных Oracle. 
 
 &nbsp;
 
 ```js
-loadImportBuilder(): OracleImportBuilder
+loadImportBuilder(): OracleImportBuilder;
 ```
 Возвращает ссылку на интерфейс [`OracleImportBuilder`](#oracle-import-builder) импорта из файла CSV.
 
@@ -321,14 +321,14 @@ loadImportBuilder(): OracleImportBuilder
 
 ### Интерфейс SnowflakeConnectorBuilder<a name="snowflake-connector-builder"></a>
 ```ts
-export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
-    setAccount(account: string): this;
-    setRegion(region: string): this;
-    setInsecure(insecure: boolean): this;
-    setWarehouse(warehouse: string): this;
-    setSchema(schema: string): this;
-    setRole(role: string): this;
-    setProtocol(protocol: string): this;
+interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
+	setAccount(account: string): this;
+	setRegion(region: string): this;
+	setInsecure(insecure: boolean): this;
+	setWarehouse(warehouse: string): this;
+	setSchema(schema: string): this;
+	setRole(role: string): this;
+	setProtocol(protocol: string): this;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/) (для подключения используется [PHP PDO Driver](https://docs.snowflake.com/en/user-guide/php-pdo-driver.html)). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
@@ -364,7 +364,7 @@ setWarehouse(warehouse: string): this;
 &nbsp;
 
 ```js
-setSchema(value: string): OracleConnectorBuilder
+setSchema(value: string): this;
 ```
 Устанавливает [`схему`](https://docs.snowflake.com/en/sql-reference/info-schema.html). Опциональный, по умолчанию `public`.
 
@@ -380,7 +380,7 @@ setRole(role: string): this;
 ```js
 setProtocol(protocol: string): this;
 ```
-Устанавливает `название протокола`. Опциональный.
+Устанавливает название протокола. Опциональный.
 
 &nbsp;
 
@@ -389,22 +389,22 @@ setProtocol(protocol: string): this;
 ### Интерфейс MysqlImportBuilder<a name="mysql-import-builder"></a>
 ```js
 interface MysqlImportBuilder {
-	setTable(name: string): MysqlImportBuilder;
-	setDelimiter(delimiter: string): MysqlImportBuilder;
-	setLineDelimiter(delimiter: string): MysqlImportBuilder;
-	setEnclosure(enclosure: string): MysqlImportBuilder;
-	setEscape(escape: string): MysqlImportBuilder;
-	setThreads(threads: number): MysqlImportBuilder;
-	setVerbose(verbose: boolean): MysqlImportBuilder;
-	setFirstIgnoreLines(count: number): MysqlImportBuilder;
-	setLockTable(status: boolean): MysqlImportBuilder;
-	setForce(status: boolean): MysqlImportBuilder;
-	setDeleteAllRows(status: boolean): MysqlImportBuilder;
-	setCompress(status: boolean): MysqlImportBuilder;
-	setIgnoreDuplicates(status: boolean): MysqlImportBuilder;
-	setReplace(status: boolean): MysqlImportBuilder;
-	setColumns(names: string[]): MysqlImportBuilder;
-	setFilePath(path: string): MysqlImportBuilder;
+	setTable(name: string): this;
+	setDelimiter(delimiter: string): this;
+	setLineDelimiter(delimiter: string): this;
+	setEnclosure(enclosure: string): this;
+	setEscape(escape: string): this;
+	setThreads(threads: number): this;
+	setVerbose(verbose: boolean): this;
+	setFirstIgnoreLines(count: number): this;
+	setLockTable(status: boolean): this;
+	setForce(status: boolean): this;
+	setDeleteAllRows(status: boolean): this;
+	setCompress(status: boolean): this;
+	setIgnoreDuplicates(status: boolean): this;
+	setReplace(status: boolean): this;
+	setColumns(names: string[]): this;
+	setFilePath(path: string): this;
 	import(): MysqlImportResult;
 }
 ```
@@ -413,112 +413,112 @@ interface MysqlImportBuilder {
 &nbsp;
 
 ```js
-setTable(name: string): MysqlImportBuilder
+setTable(name: string): this;
 ```
 Устанавливает таблицу, из которой будет производиться импорт.
 
 &nbsp;
 
 ```js
-setDelimiter(delimiter: string): MysqlImportBuilder
+setDelimiter(delimiter: string): this;
 ```
 Устанавливает разделитель полей. По умолчанию: `;`.
 
 &nbsp;
 
 ```js
-setLineDelimiter(delimiter: string): MysqlImportBuilder
+setLineDelimiter(delimiter: string): this;
 ```
 Устанавливает разделитель строк. По умолчанию: `\n`.
 
 &nbsp;
 
 ```js
-setEnclosure(enclosure: string): MysqlImportBuilder
+setEnclosure(enclosure: string): this;
 ```
 Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей. По умолчанию: `"`.
 
 &nbsp;
 
 ```js
-setEscape(escape: string): MysqlImportBuilder
+setEscape(escape: string): this;
 ```
 Устанавливает символ для экранирования обрамляющего символа, если встретится в строке ещё и он, и символа переноса строки. По умолчанию равен обрамляющему символу.
 
 &nbsp;
 
 ```js
-setThreads(threads: number): MysqlImportBuilder
+setThreads(threads: number): this;
 ```
 Устанавливает количество [`потоков`](https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D1%82%D0%BE%D0%BA_%D0%B2%D1%8B%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F) импорта; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_use-threads) *mysqlimport*: *--use-threads*. Задать можно не более `8` потоков. По умолчанию: `1`. 
 
 &nbsp;
 
 ```js
-setVerbose(verbose: boolean): MysqlImportBuilder
+setVerbose(verbose: boolean): this;
 ```
 Устанавливает флаг расширенного вывода; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_verbose) *mysqlimport*: *--verbose*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setFirstIgnoreLines(count: number): MysqlImportBuilder
+setFirstIgnoreLines(count: number): this;
 ```
 Устанавливает количество первых строк, которые будут проигнорированы; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_ignore-lines) *mysqlimport*: *--ignore-lines*. По умолчанию: `0`.
 
 &nbsp;
 
 ```js
-setLockTable(status: boolean): MysqlImportBuilder
+setLockTable(status: boolean): this;
 ```
 Устанавливает флаг блокировки таблицы во время импорта; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_lock-tables) *mysqlimport*: *--lock-tables*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setForce(status: boolean): MysqlImportBuilder
+setForce(status: boolean): this;
 ```
 Устанавливает флаг игнорирования критических ошибок; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_force) *mysqlimport*: *--force*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setDeleteAllRows(status: boolean): MysqlImportBuilder
+setDeleteAllRows(status: boolean): this;
 ```
 Устанавливает флаг предварительного выполнения команды [`TRUNCATE`](https://ru.wikipedia.org/wiki/Truncate_(SQL)), что требует прав на эту команду; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_delete) *mysqlimport*: *--delete*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setCompress(status: boolean): MysqlImportBuilder
+setCompress(status: boolean): this;
 ```
 Устанавливает флаг компрессии; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_compress) *mysqlimport*: *--compress*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setIgnoreDuplicates(status: boolean): MysqlImportBuilder
+setIgnoreDuplicates(status: boolean): this;
 ```
 Устанавливает флаг игнорирования строк с одинаковым уникальным ключом; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_ignore) *mysqlimport*: *--ignore*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setReplace(status: boolean): MysqlImportBuilder
+setReplace(status: boolean): this;
 ```
 Устанавливает флаг замены строк с одинаковым уникальным ключом; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_replace) *mysqlimport*: *--replace*. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setColumns(names: string[]): MysqlImportBuilder
+setColumns(names: string[]): this;
 ```
 Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла CSV; [`опция`](https://dev.mysql.com/doc/refman/8.0/en/mysqlimport.html#option_mysqlimport_columns) *mysqlimport*: *--columns*. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
 
 &nbsp;
 
 ```js
-setFilePath(path: string): MysqlImportBuilder
+setFilePath(path: string): this;
 ```
 Устанавливает путь к файлу в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
@@ -526,7 +526,7 @@ setFilePath(path: string): MysqlImportBuilder
 
 <a name="mysql-import-builder.import"></a>
 ```js
-import(): MysqlImportResult
+import(): MysqlImportResult;
 ```
 Формирует из флагов команду на вызов *mysqlimport*, дожидается завершения импорта и возвращает ссылку на [`MysqlImportResult`](#mysql-import-result).
 
@@ -548,42 +548,42 @@ interface MysqlImportResult {
 &nbsp;
 
 ```js
-hasErrors(): boolean
+hasErrors(): boolean;
 ```
 Возвращает `getErrorOutput() != ''`.
 
 &nbsp;
 
 ```js
-getErrorOutput(): string
+getErrorOutput(): string;
 ```
 Возвращает вывод команды *mysqlimport* в `stderr`.
 
 &nbsp;
 
 ```js
-getOutput(): string
+getOutput(): string;
 ```
 Возвращает вывод команды *mysqlimport* в `stdout`.
 
 &nbsp;
 
 ```js
-getCommand(): string
+getCommand(): string;
 ```
 Возвращает сформированную команду на вызов *mysqlimport*, которая была выполнена в момент вызова [`MysqlImportBuilder.import()`](#mysql-import-builder.import). Параметры будут сохранены в конфигурационном файле, доступ к которому можно получить функцией `getConfig()`.
 
 &nbsp;
 
 ```js
-getConfig(): string
+getConfig(): string;
 ```
 Возвращает содержимое конфигурационного файла с параметрами импорта.
 
 &nbsp;
 
 ```js
-getStats(): Object
+getStats(): Object;
 ```
 Если импорт завершён без ошибок, возвращает объект вида `{"records": 3, "deleted": 0, "skipped": 0, "warnings": 0}`.
 
@@ -591,16 +591,16 @@ getStats(): Object
 
 ### Интерфейс PostgresqlImportBuilder<a name="postgresql-import-builder"></a>
 ```js
-export interface PostgresqlImportBuilder {
-    setTable(name: string): PostgresqlImportBuilder;
-    setSchema(name: string): PostgresqlImportBuilder;
-    setDelimiter(delimiter: string): PostgresqlImportBuilder;
-    setEnclosure(enclosure: string): PostgresqlImportBuilder;
-    setEscape(escape: string): PostgresqlImportBuilder;
-    setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder;
-    setColumns(names: string[]): PostgresqlImportBuilder;
-    setFilePath(path: string): PostgresqlImportBuilder;
-    import(): PostgresqlImportResult;
+interface PostgresqlImportBuilder {
+	setTable(name: string): this;
+	setSchema(name: string): this;
+	setDelimiter(delimiter: string): this;
+	setEnclosure(enclosure: string): this;
+	setEscape(escape: string): this;
+	setIgnoreHeader(ignoreHeader: boolean): this;
+	setColumns(names: string[]): this;
+	setFilePath(path: string): this;
+	import(): PostgresqlImportResult;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД Postgresql из файла CSV с помощью команды `\copy`. Все функции, кроме `import()`, возвращают `this`.
@@ -608,56 +608,56 @@ export interface PostgresqlImportBuilder {
 &nbsp;
 
 ```js
-setTable(name: string): PostgresqlImportBuilder
+setTable(name: string): this;
 ```
 Устанавливает таблицу, в которую будет производиться импорт.
 
 &nbsp;
 
 ```js
-setSchema(name: string): PostgresqlImportBuilder
+setSchema(name: string): this;
 ```
 Устанавливает [схему](https://www.postgresql.org/docs/current/ddl-schemas.html).
 
 &nbsp;
 
 ```js
-setDelimiter(delimiter: string): PostgresqlImportBuilder
+setDelimiter(delimiter: string): this;
 ```
 Устанавливает разделитель полей. По умолчанию: `;`.
 
 &nbsp;
 
 ```js
-setEnclosure(enclosure: string): PostgresqlImportBuilder;
+setEnclosure(enclosure: string): this;
 ```
 Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей или строк. По умолчанию: `"`
 
 &nbsp;
 
 ```js
-setEscape(escape: string): PostgresqlImportBuilder
+setEscape(escape: string): this;
 ```
 Устанавливает символ для экранирования обрамляющего символа, если он встретится в текстовом поле. По умолчанию равен обрамляющему символу.
 
 &nbsp;
 
 ```js
-setIgnoreHeader(ignoreHeader: boolean): PostgresqlImportBuilder
+setIgnoreHeader(ignoreHeader: boolean): this;
 ```
 Устанавливает флаг игнорирования заголовка. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setColumns(names: string[]): PostgresqlImportBuilder
+setColumns(names: string[]): this;
 ```
 Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла CSV. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
 
 &nbsp;
 
 ```js
-setFilePath(path: string): PostgresqlImportBuilder
+setFilePath(path: string): this;
 ```
 Устанавливает путь к файлу в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
@@ -665,7 +665,7 @@ setFilePath(path: string): PostgresqlImportBuilder
 
 <a name="postgresql-import-builder.import"></a>
 ```js
-import(): PostgresqlImportResult
+import(): PostgresqlImportResult;
 ```
 Формирует из флагов команду импорт, дожидается завершения импорта и возвращает ссылку на [`PostgresqlImportResult`](#postgresql-import-result).
 
@@ -674,9 +674,9 @@ import(): PostgresqlImportResult
 ### Интерфейс PostgresqlImportResult<a name="postgresql-import-result"></a>
 ```js
 interface PostgresqlImportResult {
-    hasErrors(): boolean;
-    getErrorOutput(): string;
-    getCommand(): string;
+	hasErrors(): boolean;
+	getErrorOutput(): string;
+	getCommand(): string;
 }
 ```
 Интерфейс просмотра результатов импорта, осуществлённого с помощью [`PostgresqlImportBuilder`](#postgresql-import-builder).
@@ -684,21 +684,21 @@ interface PostgresqlImportResult {
 &nbsp;
 
 ```js
-hasErrors(): boolean
+hasErrors(): boolean;
 ```
 Возвращает `getErrorOutput() != ''`.
 
 &nbsp;
 
 ```js
-getErrorOutput(): string
+getErrorOutput(): string;
 ```
-Возвращает вывод команды \copy в `stderr`.
+Возвращает вывод команды `\copy` в `stderr`.
 
 &nbsp;
 
 ```js
-getCommand(): string
+getCommand(): string;
 ```
 Возвращает сформированную команду на вызов `\copy`, которая была выполнена в момент вызова [`PostgresqlImportBuilder.import()`](#postgresql-import-builder.import).
 
@@ -707,36 +707,36 @@ getCommand(): string
 ### Интерфейс SqlBulkCopyBuilder<a name="sql-bulk-copy-builder"></a>
 ```ts
 interface SqlBulkCopyBuilder {
-	setServerName(value: string): SqlBulkCopyBuilder;
-	setPort(value: number): SqlBulkCopyBuilder;
-	setUsername(value: string): SqlBulkCopyBuilder;
-	setPassword(value: string): SqlBulkCopyBuilder;
-	setDatabase(value: string): SqlBulkCopyBuilder;
-	setQuery(value: string): SqlBulkCopyBuilder;
-	setPacketSize(size: number): SqlBulkCopyBuilder;
-	setBatchSize(size: number): SqlBulkCopyBuilder;
-	setCharacterTypesMode(status: boolean): SqlBulkCopyBuilder;
-	setCodePage(code: string): SqlBulkCopyBuilder;
-	setDsnMode(status: boolean): SqlBulkCopyBuilder;
-	setErrorFile(path: string): SqlBulkCopyBuilder;
-	setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder;
-	setFormatFile(path: string): SqlBulkCopyBuilder;
-	setFirstRow(index: number): SqlBulkCopyBuilder;
-	setHint(hint: string): SqlBulkCopyBuilder;
-	setStandardInputFile(path: string): SqlBulkCopyBuilder;
-	setKeepNullValuesMode(status: boolean): SqlBulkCopyBuilder;
-	setLoginTimeout(timeout: number): SqlBulkCopyBuilder;
-	setLastRow(index: number): SqlBulkCopyBuilder;
-	setMaxErrors(size: number): SqlBulkCopyBuilder;
-	setNativeTypesMode(status: boolean): SqlBulkCopyBuilder;
-	setKeepNonTextNativeValuesMode(status: boolean): SqlBulkCopyBuilder;
-	setOutputFile(path: string): SqlBulkCopyBuilder;
-	setQuotedIdentifiersMode(status: boolean): SqlBulkCopyBuilder;
-	setRowTerm(term: string): SqlBulkCopyBuilder;
-	setRegionalMode(status: boolean): SqlBulkCopyBuilder;
-	setFieldTerm(term: string): SqlBulkCopyBuilder;
-	setTrustedConnectionMode(status: boolean): SqlBulkCopyBuilder;
-	setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder;
+	setServerName(value: string): this;
+	setPort(value: number): this;
+	setUsername(value: string): this;
+	setPassword(value: string): this;
+	setDatabase(value: string): this;
+	setQuery(value: string): this;
+	setPacketSize(size: number): this;
+	setBatchSize(size: number): this;
+	setCharacterTypesMode(status: boolean): this;
+	setCodePage(code: string): this;
+	setDsnMode(status: boolean): this;
+	setErrorFile(path: string): this;
+	setKeepIdentityValuesMode(status: boolean): this;
+	setFormatFile(path: string): this;
+	setFirstRow(index: number): this;
+	setHint(hint: string): this;
+	setStandardInputFile(path: string): this;
+	setKeepNullValuesMode(status: boolean): this;
+	setLoginTimeout(timeout: number): this;
+	setLastRow(index: number): this;
+	setMaxErrors(size: number): this;
+	setNativeTypesMode(status: boolean): this;
+	setKeepNonTextNativeValuesMode(status: boolean): this;
+	setOutputFile(path: string): this;
+	setQuotedIdentifiersMode(status: boolean): this;
+	setRowTerm(term: string): this;
+	setRegionalMode(status: boolean): this;
+	setFieldTerm(term: string): this;
+	setTrustedConnectionMode(status: boolean): this;
+	setWideCharacterTypesMode(status: boolean): this;
 
 	import(path: string): SqlBulkCopyResult;
 	export(path: string): SqlBulkCopyResult;
@@ -751,90 +751,90 @@ interface SqlBulkCopyBuilder {
 
 <a name="set-server-name"></a>
 ```js
-setServerName(value: string): SqlBulkCopyBuilder
+setServerName(value: string): this;
 ```
 Устанавливает экземпляр SQL Server, к которому устанавливается подключение; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#S) *bcp*: *-S*.
 
 &nbsp;
 
 ```js
-setPort(value: number): SqlBulkCopyBuilder
+setPort(value: number): this;
 ```
 Устанавливает номер порта соединения. По умолчанию: `1433`.
 
 &nbsp;
 
 ```js
-setUsername(value: string): SqlBulkCopyBuilder
+setUsername(value: string): this;
 ```
 Устанавливает имя пользователя; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#U) *bcp*: *-U*.
 
 &nbsp;
 ```js
-setPassword(value: string): SqlBulkCopyBuilder
+setPassword(value: string): this;
 ```
 Устанавливает имя пользователя; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#P) *bcp*: *-P*.
 
 &nbsp;
 
 ```js
-setDatabase(value: string): SqlBulkCopyBuilder
+setDatabase(value: string): this;
 ```
 Устанавливает имя БД, к которой произойдёт подключение; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#d) *bcp*: *-d*.
 
 &nbsp;
 
 ```js
-setQuery(value: string): SqlBulkCopyBuilder
+setQuery(value: string): this;
 ```
 Устанавливает ***имя таблицы***, в которую будет произведён импорт, ***несмотря на название***.
 
 &nbsp;
 
 ```js
-setPacketSize(size: number): SqlBulkCopyBuilder
+setPacketSize(size: number): this;
 ```
 Устанавливает число байтов в каждом сетевом пакете; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#a) *bcp*: *-a*. Значение может находиться в пределах от `4096` до `65535` байт, значение по умолчанию: `4096`.
 
 &nbsp;
 
 ```js
-setBatchSize(size: number): SqlBulkCopyBuilder
+setBatchSize(size: number): this;
 ```
 Устанавливает количество строк в каждом пакете импортированных данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#b) *bcp*: *-b*. Каждый пакет импортируется и регистрируется как отдельная транзакция, которая фиксируется после выполнения импорта всего пакета. По умолчанию импорт всех строк в файле данных выполняется в одном пакете. 
 
 &nbsp;
 
 ```js
-setCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
+setCharacterTypesMode(status: boolean): this;
 ```
 Устанавливает символьный тип данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#c) *bcp*: *-c*. Подробное описание [`здесь`](https://docs.microsoft.com/ru-ru/sql/relational-databases/import-export/use-character-format-to-import-or-export-data-sql-server?view=sql-server-ver15).
 
 &nbsp;
 
 ```js
-setCodePage(code: string): SqlBulkCopyBuilder
+setCodePage(code: string): this;
 ```
 Устанавливает кодовую страницу данных в файле данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#C) *bcp*: *-C*. Значение по умолчанию: `OEM`.
 
 &nbsp;
 
 ```js
-setDsnMode(status: boolean): SqlBulkCopyBuilder
+setDsnMode(status: boolean): this;
 ```
 Устанавливает режим, в котором значение, передаваемое в функцию [`setServerName()`](#set-server-name) интерпретируется как имя источника данных (DSN); [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#D) *bcp*: *-D*.
 
 &nbsp;
 
 ```js
-setErrorFile(path: string): SqlBulkCopyBuilder
+setErrorFile(path: string): this;
 ```
 Устанавливает полный путь к файлу ошибок, используемому для хранения строк, которые `bcp` не может передать из файла в базу данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#e) *bcp*: *-e*.
 
 &nbsp;
 
 ```js
-setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder
+setKeepIdentityValuesMode(status: boolean): this;
 ```
 Указывает, что значение или значения идентификаторов в файле импортированных данных будут использоваться для столбца идентификаторов; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#E) *bcp*: *-E*.
 
@@ -842,119 +842,119 @@ setKeepIdentityValuesMode(status: boolean): SqlBulkCopyBuilder
 
 <a name="sql-bulk-copy-builder.set-format-file"></a>
 ```js
-setFormatFile(path: string): SqlBulkCopyBuilder
+setFormatFile(path: string): this;
 ```
 Устанавливает путь к файлу формата; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#f) *bcp*: *-f*. ***Этот функционал содержит баг в утилите bcp и не рекомендуется к использованию!***
 
 &nbsp;
 
 ```js
-setFirstRow(index: number): SqlBulkCopyBuilder
+setFirstRow(index: number): this;
 ```
 Устанавливает номер первой строки для импорта из файла данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#F) *bcp*: *-F*.
 
 &nbsp;
 
 ```js
-setHint(hint: string): SqlBulkCopyBuilder
+setHint(hint: string): this;
 ```
 Устанавливает одно или несколько указаний для использования во время массового импорта; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#h) *bcp*: *-h*.
 
 &nbsp;
 
 ```js
-setStandardInputFile(path: string): SqlBulkCopyBuilder
+setStandardInputFile(path: string): this;
 ```
 Устанавливает имя файла ответов, содержащего ответы на вопросы командной строки для каждого поля данных при выполнении массового копирования в интерактивном режиме; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#i) *bcp*: *-i*.
 
 &nbsp;
 
 ```js
-setKeepNullValuesMode(status: boolean): SqlBulkCopyBuilder
+setKeepNullValuesMode(status: boolean): this;
 ```
 Указывает, что пустые столбцы во время данной операции должны сохранить значение NULL вместо любых вставляемых значений столбцов по умолчанию; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#k) *bcp*: *-k*.
 
 &nbsp;
 
 ```js
-setLoginTimeout(timeout: number): SqlBulkCopyBuilder
+setLoginTimeout(timeout: number): this;
 ```
 Устанавливает время ожидания входа в секундах; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#l) *bcp*: *-l*. Значение по умолчанию: `15`.
 
 &nbsp;
 
 ```js
-setLastRow(index: number): SqlBulkCopyBuilder
+setLastRow(index: number): this;
 ```
 Устанавливает номер последней строки для импорта из файла данных; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#L) *bcp*: *-L*.
 
 &nbsp;
 
 ```js
-setMaxErrors(size: number): SqlBulkCopyBuilder
+setMaxErrors(size: number): this;
 ```
 Устанавливает максимальное количество ошибок, которые могут произойти до отмены импорта; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#m) *bcp*: *-m*. Значение по умолчанию: `10`.
 
 &nbsp;
 
 ```js
-setNativeTypesMode(status: boolean): SqlBulkCopyBuilder
+setNativeTypesMode(status: boolean): this;
 ```
 Устанавливает признак использования собственных типов данных (базы данных). Этот параметр не запрашивает тип данных для каждого поля, он использует собственные значения; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#n) *bcp*: *-n*.
 
 &nbsp;
 
 ```js
-setKeepNonTextNativeValuesMode(status: boolean): SqlBulkCopyBuilder
+setKeepNonTextNativeValuesMode(status: boolean): this;
 ```
 Устанавливает признак использования собственных типов данных (базы данных) для не символьных данных и символы Юникода для символьных данных. Этот параметр не запрашивает тип данных для каждого поля, он использует собственные значения; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#N) *bcp*: *-N*.
 
 &nbsp;
 
 ```js
-setOutputFile(path: string): SqlBulkCopyBuilder
+setOutputFile(path: string): this;
 ```
 Устанавливает имя файла, который принимает перенаправленные из командной строки выходные данные; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#o) *bcp*: *-o*.
 
 &nbsp;
 
 ```js
-setQuotedIdentifiersMode(status: boolean): SqlBulkCopyBuilder
+setQuotedIdentifiersMode(status: boolean): this;
 ```
 Выполняет инструкцию `SET QUOTED_IDENTIFIERS ON` в соединении между служебной программой `bcp` и экземпляром `SQL Server`; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#q) *bcp*: *-q*.
 
 &nbsp;
 
 ```js
-setRowTerm(term: string): SqlBulkCopyBuilder
+setRowTerm(term: string): this;
 ```
 Устанавливает признак конца строки; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#r) *bcp*: *-r*.
 
 &nbsp;
 
 ```js
-setRegionalMode(status: boolean): SqlBulkCopyBuilder
+setRegionalMode(status: boolean): this;
 ```
 Устанавливает признак импорта данных в денежном формате, в формате даты и времени с помощью регионального формата, определённого настройками локали клиентского компьютера; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#R) *bcp*: *-R*. Значение по умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setFieldTerm(term: string): SqlBulkCopyBuilder
+setFieldTerm(term: string): this;
 ```
 Устанавливает признак конца поля; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#t) *bcp*: *-t*. Значение по умолчанию: `\t`.
 
 &nbsp;
 
 ```js
-setTrustedConnectionMode(status: boolean): SqlBulkCopyBuilder
+setTrustedConnectionMode(status: boolean): this;
 ```
 Указывает, что программа `bcp` устанавливает доверительное соединение с `MS SQL Server` с использованием встроенной безопасности; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#T) *bcp*: *-T*. Не требуются учётные данные безопасности для сетевого пользователя.
 
 &nbsp;
 
 ```js
-setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
+setWideCharacterTypesMode(status: boolean): this;
 ```
 Устанавливает признак использования символов Юникода; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#w) *bcp*: *-w*. При использовании этого параметра не запрашивается тип данных каждого поля, для хранения данных используется тип `nchar`, отсутствуют префиксы, в качестве разделителя полей используется символ табуляции `\t`, а в качестве признака конца строки — символ новой строки `\n`.
 
@@ -962,7 +962,7 @@ setWideCharacterTypesMode(status: boolean): SqlBulkCopyBuilder
 
 <a name="sql-bulk-copy-builder.import"></a>
 ```js
-import(path: string): SqlBulkCopyResult
+import(path: string): SqlBulkCopyResult;
 ```
 Формирует из флагов команду на вызов *bcp*, дожидается завершения импорта из файла `path` и возвращает ссылку на [`SqlBulkCopyResult`](#sql-bulk-copy-result).
 
@@ -970,7 +970,7 @@ import(path: string): SqlBulkCopyResult
 
 <a name="sql-bulk-copy-builder.export"></a>
 ```js
-export(path: string): SqlBulkCopyResult
+export(path: string): SqlBulkCopyResult;
 ```
 Формирует из флагов команду на вызов *bcp*, дожидается завершения экспорта в файл `path` и возвращает ссылку на [`SqlBulkCopyResult`](#sql-bulk-copy-result).
 
@@ -978,7 +978,7 @@ export(path: string): SqlBulkCopyResult
 
 <a name="sql-bulk-copy-builder.format"></a>
 ```js
-format(path: string, xml: boolean): SqlBulkCopyResult
+format(path: string, xml: boolean): SqlBulkCopyResult;
 ```
 Формирует из флагов команду на вызов *bcp [`format`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#format)*, которая создаёт файл форматирования `path`, основанный на указанных параметрах, дожидается завершения и возвращает ссылку на [`SqlBulkCopyResult`](#sql-bulk-copy-result). Если указан флаг `xml` ([`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#x) *bcp*: *-x*), файл форматирования будет создан на основе [`XML`](https://ru.wikipedia.org/wiki/XML); по умолчанию: `true`.
 
@@ -1000,28 +1000,28 @@ interface SqlBulkCopyResult {
 &nbsp;
 
 ```js
-hasErrors(): boolean
+hasErrors(): boolean;
 ```
 Возвращает `getErrorOutput() != ''`.
 
 &nbsp;
 
 ```js
-getErrorOutput(): string
+getErrorOutput(): string;
 ```
 Возвращает вывод команды *bcp* в `stderr`.
 
 &nbsp;
 
 ```js
-getOutput(): string
+getOutput(): string;
 ```
 Возвращает вывод команды *bcp* в `stdout`.
 
 &nbsp;
 
 ```js
-getCommand(): string
+getCommand(): string;
 ```
 Возвращает сформированную команду на вызов *bcp*, которая была выполнена в момент вызова одной из функций [`SqlBulkCopyBuilder.import()`](#sql-bulk-copy-builder.import), [`SqlBulkCopyBuilder.export()`](#sql-bulk-copy-builder.export), [`SqlBulkCopyBuilder.format()`](#sql-bulk-copy-builder.format).
 
@@ -1030,13 +1030,14 @@ getCommand(): string
 ### Интерфейс OracleImportBuilder<a name="oracle-import-builder"></a>
 ```js
 interface OracleImportBuilder {
-	setTable(name: string): OracleImportBuilder;
-	setDelimiter(delimiter: string): OracleImportBuilder;
-	setColumns(names: string[]): OracleImportBuilder;
-	setFilePath(path: string): OracleImportBuilder;
-	setFirstIgnoreLines(count: number): OracleImportBuilder;
-	setDirect(value: boolean): OracleImportBuilder;
-	setUserBadFileFileLink(fileLink: string): OracleImportBuilder;
+	setTable(name: string): this;
+	setDelimiter(delimiter: string): this;
+	setColumns(names: string[]): this;
+	setFilePath(path: string): this;
+	setFirstIgnoreLines(count: number): this;
+	setDirect(value: boolean): this;
+	setUserBadFileFileLink(fileLink: string): this;
+	
 	import(): OracleImportResult;
 }
 ```
@@ -1045,49 +1046,49 @@ interface OracleImportBuilder {
 &nbsp;
 
 ```js
-setTable(name: string): OracleImportBuilder
+setTable(name: string): this;
 ```
 Устанавливает таблицу, в которую будет производиться импорт.
 
 &nbsp;
 
 ```js
-setDelimiter(delimiter: string): OracleImportBuilder
+setDelimiter(delimiter: string): this;
 ```
 Устанавливает разделитель полей. По умолчанию `;`.
 
 &nbsp;
 
 ```js
-setFirstIgnoreLines(count: number): OracleImportBuilder
+setFirstIgnoreLines(count: number): this;
 ```
 Устанавливает количество первых строк, которые будут пропущены; [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-2BB41EA6-C94D-41C1-94DE-966B291943E6) `sqlldr`: `skip=n`. По умолчанию `0`.
 
 &nbsp;
 
 ```js
-setColumns(names: string[]): OracleImportBuilder
+setColumns(names: string[]): this;
 ```
 Задаёт порядок столбцов таблицы, в которые будут записываться данные из файла `CSV`; [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-control-file-contents.html#GUID-413DEE17-FA16-4AD7-A5E6-0A6D8BFE0057) `sqlldr` `control file`. По умолчанию импорт будет производиться в столбцы таблицы последовательно.
 
 &nbsp;
 
 ```js
-setFilePath(path: string): OracleImportBuilder
+setFilePath(path: string): this;
 ```
 Устанавливает путь к файлу в формате `CSV`, содержащему строки для импорта, в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir).
 
 &nbsp;
 
 ```js
-setDirect(value: boolean): OracleImportBuilder
+setDirect(value: boolean): this;
 ```
 Параметр, определяющий, будет ли импорт осуществляться с помощью `INSERT`-запросов (значение `false`) или напрямую в файлы базы данных (значение `true`). Второй способ обычно намного быстрее. [Опция](https://docs.oracle.com/en/database/oracle/oracle-database/19/sutil/oracle-sql-loader-conventional-and-direct-loads.html#GUID-26686C49-D768-4F55-8AED-771B9A8C6552) `sqlldr`: `direct=true|false`. По умолчанию `false`.
 
 &nbsp;
 
 ```js
-setUserBadFileFileLink(fileLink: string): OracleImportBuilder
+setUserBadFileFileLink(fileLink: string): this;
 ```
 Метод, позволяющий установить путь к файлу, который будет содержать информацию о пропущенных строках при импорте.
 
@@ -1095,7 +1096,7 @@ setUserBadFileFileLink(fileLink: string): OracleImportBuilder
 
 <a name="oracle-import-builder.import"></a>
 ```js
-import(): OracleImportResult
+import(): OracleImportResult;
 ```
 Формирует из флагов команду на вызов `sqlldr`, дожидается завершения импорта и возвращает ссылку на [`OracleImportResult`](#oracle-import-result).
 
@@ -1115,28 +1116,28 @@ interface OracleImportResult {
 &nbsp;
 
 ```js
-hasErrors(): boolean
+hasErrors(): boolean;
 ```
 Возвращает `getErrorOutput() != ''`.
 
 &nbsp;
 
 ```js
-getErrorOutput(): string
+getErrorOutput(): string;
 ```
 Возвращает вывод команды *sqlldr* в `stderr`.
 
 &nbsp;
 
 ```js
-getStats(): OracleImportStats
+getStats(): OracleImportStats;
 ```
 Если импорт завершён без ошибок, возвращает ссылку на [`OracleImportStats`](#oracle-import-stats), содержащий информацию о пропущенных строках.
 
 &nbsp;
 
 ```js
-getBadFileLink(): string
+getBadFileLink(): string;
 ```
 Возвращает путь к файлу, содержащему все пропущенные при импорте строки.
 
@@ -1144,7 +1145,7 @@ getBadFileLink(): string
 
 ### Интерфейс OracleImportStats<a name="oracle-import-stats"></a>
 ```js
-export interface OracleImportStats {
+interface OracleImportStats {
 	getIgnored(): number;
 }
 ```
@@ -1153,7 +1154,7 @@ export interface OracleImportStats {
 &nbsp;
 
 ```js
-getIgnored(): number
+getIgnored(): number;
 ```
 Возвращает количество строк, которое не удалось импортировать.
 

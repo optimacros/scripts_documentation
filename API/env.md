@@ -3,10 +3,10 @@
 ## Интерфейс Environment<a name="environment"></a>
 ```ts
 interface Environment {
-	load(name: string): Environment;
-	loadFromMulticube(name: string, view?: string | null): Environment;
+	load(name: string): this;
+	loadFromMulticube(name: string, view?: string | null): this;
 	get(key: string, def?: any): any;
-	set(name: string, value: number | string | null): Environment;
+	set(name: string, value: number | string | boolean | null): this;
 }
 ```
 Интерфейс для доступа к [переменным окружения](https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D1%81%D1%80%D0%B5%D0%B4%D1%8B).
@@ -14,16 +14,16 @@ interface Environment {
 &nbsp;
 
 ```js
-load(name: string): Environment
+load(name: string): this;
 ```
 Загружает значения переменных окружения из нуль-мерного мультикуба `name`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-loadFromMulticube(name: string, view?: string | null): Environment
+loadFromMulticube(name: string, view?: string | null): this;
 ```
-Загружает данные в переменную окружения `view` (или `name`, если `view` не задано) из представления `view` мультикуба `name`. Если `view` не задано, используется представление по умолчанию.   Возвращает `this`.
+Загружает данные в переменную окружения `view` (или `name`, если `view` не задано) из представления `view` мультикуба `name`. Если `view` не задано, используется представление по умолчанию. Возвращает `this`.
 
 Построение объектов переменных происходит по следующему принципу: ключом первого уровня является первый заголовок строки, ключами второго и нескольких последующих – второй, третий и последующие заголовки строки (если они есть), ключами следующих уровней являются заголовки столбцов. Ключи естественно соответствуют расположению строк и столбцов в интерфейсе Optimacros и, кроме того, располагаются в порядке их перечисления функциями [`GridDefinitionInfo.getRowDimensions()`](./views.md#grid-definition-info.get-row-dimensions) и [`GridDefinitionInfo.getColumnDimensions()`](./views.md#grid-definition-info.get-column-dimensions). Значениями являются данные в ячейках.
 
@@ -77,14 +77,14 @@ loadFromMulticube(name: string, view?: string | null): Environment
 &nbsp;
 	
 ```js
-get(key: string, def?: any): any
+get(key: string, def?: any): any;
 ```
 Возвращает значение переменной окружения `key`. При отсутствии этой переменной и наличии аргумента `def` возвращает `def`.
 
 &nbsp;
 
 ```js
-set(name: string, value: number | string | null): Environment
+set(name: string, value: number | string | boolean | null): this;
 ```
 Устанавливает значение переменной окружения `key` в значение `value`. Возвращает `this`.
 

@@ -12,14 +12,14 @@ interface Multicubes {
 &nbsp;
 
 ```js
-multicubesTab(): MulticubesTab
+multicubesTab(): MulticubesTab;
 ```
 Возвращает ссылку на интерфейс [`MulticubesTab`](#multicubes-tab). В интерфейсе Optimacros аналогично открытию вкладки `Данные` -> `Мультикубы`.
 
 &nbsp;
 
 ```js
-syncMulticube(): SyncMulticubeBuilder
+syncMulticube(): SyncMulticubeBuilder;
 ```
 Возвращает интерфейс [`SyncMulticubeBuilder`](./sync.md#sync-multicube-builder) синхронизации мультикубов.
 
@@ -40,28 +40,28 @@ interface MulticubesTab extends Tab {
 &nbsp;
 
 ```js
-open(name: string): MulticubeTab
+open(name: string): MulticubeTab;
 ```
 Возвращает ссылку на [`MulticubeTab`](#multicube-tab) мультикуба `name`. Если такой мультикуб отсутствует, бросает исключение. В интерфейсе Optimacros аналогично открытию вкладки мультикуба `name`.
 
 &nbsp;
 
 ```js
-elementsCreator(): ElementsCreator
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления мультикубов.
 
 &nbsp;
 
 ```js
-elementsDeleter(): ElementsDeleter
+elementsDeleter(): ElementsDeleter;
 ```
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления мультикубов.
 
 &nbsp;
 
 ```js
-elementsReorder(): ElementsReorder
+elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования мультикубов.
 
@@ -79,7 +79,7 @@ interface Tab {
 
 <a name="tab.pivot"></a>
 ```js
-pivot(viewName?: string): Pivot
+pivot(viewName?: string): Pivot;
 ```
 Возвращает ссылку на объект [`Pivot`](#pivot) представления `viewName`. Если `viewName` не задано, используется представление по умолчанию. Эта функция — ***единственный*** способ получить доступ к представлению мультикуба или справочника в скриптах 1.0. Возможность программно задать строки, колонки и фильтры для создания представления мультикуба [*отсутствует*](../appendix/constraints.md#pivot), поэтому для работы с нужным представлением через скрипт необходимо заранее создать и сохранить его вручную.
 
@@ -88,7 +88,7 @@ pivot(viewName?: string): Pivot
 ### Интерфейс MulticubeTab<a name="multicube-tab"></a>
 ```ts
 interface MulticubeTab extends Tab {
-	cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab;
+	cleanCellsData(cubesIdentifiers?: number[]): this;
 	cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 	cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 
@@ -104,46 +104,50 @@ interface MulticubeTab extends Tab {
 &nbsp;
 
 ```js
-cleanCellsData(cubesIdentifiers?: number[]): MulticubeTab
+cleanCellsData(cubesIdentifiers?: number[]): this;
 ```
 Очищает всё содержимое кубов `cubesIdentifiers` или весь мультикуб при вызове без параметров. Возвращает `this`.
 
 &nbsp;
 
 ```js
-cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder
+cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 ```
 Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#cube-cell-selector-builder) выборки клеток для куба `identifier`. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
 ```js
-cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder
+cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 ```
+
 Возвращает интерфейс [`CubeCellUpdaterBuilder`](./cubeCell.md#cube-cell-updater-builder) обновления клеток куба с именем или идентификатором `identifier` по формуле. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
 ```js
-getCubeInfo(identifier: string | number): CubeInfo
+getCubeInfo(identifier: string | number): CubeInfo;
 ```
 Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
+
 ```js
-cubesTab(): CubesTab
+cubesTab(): CubesTab;
 ```
 Возвращает интерфейс [`CubesTab`](#cubes-tab) доступа к режиму редактирования мультикуба.
 
 &nbsp;
+
 ```js
-importer(): MulticubeImporter
+importer(): MulticubeImporter;
 ```
 Возвращает интерфейс [`MulticubeImporter`](./exportImport.md#multicube-importer) для импорта данных в мультикуб.
 
 &nbsp;
+
 ```js
-storageImporter(): StorageImporter
+storageImporter(): StorageImporter;
 ```
 Возвращает интерфейс [`storageImporter`](./exportImport.md#storage-importer) для быстрого импорта данных в мультикуб.
 
@@ -162,21 +166,21 @@ interface CubesTab extends Tab {
 &nbsp;
 
 ```js
-elementsCreator(): ElementsCreator
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления кубов.
 
 &nbsp;
 
 ```js
-elementsDeleter(): ElementsDeleter
+elementsDeleter(): ElementsDeleter;
 ```
 Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления кубов.
 
 &nbsp;
 
 ```js
-elementsReorder(): ElementsReorder
+elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования кубов.
 
@@ -186,10 +190,10 @@ elementsReorder(): ElementsReorder
 ```ts
 interface Pivot {
 	create(): Grid;
-	rowsFilter(data: string | string[] | number | number[]): Pivot;
-	columnsFilter(data: string | string[] | number | number[]): Pivot;
-	withoutValues(): Pivot;
-	addDependentContext(identifier: number): Pivot;
+	rowsFilter(data: string | string[] | number | number[]): this;
+	columnsFilter(data: string | string[] | number | number[]): this;
+	withoutValues(): this;
+	addDependentContext(identifier: number): this;
 }
 ```
 Интерфейс представления (сводной таблицы). Функции интерфейса настраивают будущее отображение таблицы и ***не*** запрашивают данные.
@@ -197,7 +201,7 @@ interface Pivot {
 &nbsp;
 
 ```js
-create(): Grid
+create(): Grid;
 ```
 Возвращает ссылку на [`Grid`](#grid) настроенного представления.
 
@@ -205,7 +209,7 @@ create(): Grid
 
 <a name="rows-filter"></a>
 ```js
-rowsFilter(data: string | string[] | number | number[]): Pivot
+rowsFilter(data: string | string[] | number | number[]): this;
 ```
 Функция работает, если в представлении на строках присутствует только одно измерение. Позволяет задать для отображения множество строк и скрыть остальные. Множество можно задать следующими способами:
 
@@ -222,14 +226,14 @@ rowsFilter(data: string | string[] | number | number[]): Pivot
 &nbsp;
 
 ```js
-columnsFilter(data: string | string[] | number | number[]): Pivot
+columnsFilter(data: string | string[] | number | number[]): this;
 ```
 Аналог [`rowsFilter()`](#rows-filter) для столбцов.
 
 &nbsp;
 
 ```js
-withoutValues(): Pivot
+withoutValues(): this;
 ```
 Устанавливает признак загрузки с сервера данных без значений ячеек. В этом случае функции интерфейса [`Cell`](#cell) [`getValue()`](#cell.get-value), [`getNativeValue()`](#cell.get-native-value) и [`getContextValue()`](#get-context-value) будут возвращать `null`, однако функции [`Cell`](#cell).[`setValue()`](#cell.set-value), [`Cells`](#cells).[`setValue()`](#cells.set-value) и [`CellBuffer`](./common.md#cell-buffer).[`apply()`](#apply) не теряют свою магическую силу. Возвращает `this`.
 
@@ -239,7 +243,7 @@ withoutValues(): Pivot
 
 <a name="add-dependent-context"></a>
 ```js
-addDependentContext(identifier: number): Pivot
+addDependentContext(identifier: number): this;
 ```
 Добавляет в фильтр по строкам весь зависимый контекст переданного [`longId`](#long-id) `identifier`: материнские и дочерние элементы всех уровней.
 
@@ -271,7 +275,7 @@ interface Grid {
 
 <a name="range"></a>
 ```js
-range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange
+range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: number): GridRange;
 ```
 Возвращает ссылку на объект с интерфейсом [`GridRange`](#grid-range), представляющий прямоугольный диапазон ячеек.
 
@@ -283,42 +287,42 @@ range(rowStart?: number, rowCount?: number, columnStart?: number, columnCount?: 
 &nbsp;
 
 ```js
-rowCount(): number
+rowCount(): number;
 ```
 Возвращает количество строк в таблице.
 
 &nbsp;
 
 ```js
-columnCount(): number
+columnCount(): number;
 ```
 Возвращает количество колонок в таблице.
 
 &nbsp;
 
 ```js
-cellCount(): number
+cellCount(): number;
 ```
 Возвращает количество ячеек в таблице. Эквивалентно `rowCount() * columnCount()`.
 
 &nbsp;
 
 ```js
-getDefinitionInfo(): GridDefinitionInfo
+getDefinitionInfo(): GridDefinitionInfo;
 ```
 Возвращает ссылку на интерфейс [`GridDefinitionInfo`](#grid-definition-info).
 
 &nbsp;
 
 ```js
-exporter(): Exporter
+exporter(): Exporter;
 ```
 Возвращает ссылку на интерфейс [`Exporter`](./exportImport.md#exporter) базового экспорта таблицы.
 
 &nbsp;
 
 ```js
-storageExporter(): StorageExporter
+storageExporter(): StorageExporter;
 ```
 Возвращает ссылку на интерфейс [`StorageExporter`](./exportImport.md#storage-exporter) быстрого экспорта таблицы.
 
@@ -337,7 +341,7 @@ interface GridDefinitionInfo {
 &nbsp;
 
 ```js
-getPageSelectors(): GridPageSelector[]
+getPageSelectors(): GridPageSelector[];
 ```
 Возвращает массив объектов с интерфейсом [`GridPageSelector`](#grid-page-selector), которые представляют метаданные о фильтрах таблицы.
 
@@ -345,7 +349,7 @@ getPageSelectors(): GridPageSelector[]
 
 <a name="grid-definition-info.get-row-dimensions"></a>
 ```js
-getRowDimensions(): GridDimension[]
+getRowDimensions(): GridDimension[];
 ```
 Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о строках таблицы.
 
@@ -353,7 +357,7 @@ getRowDimensions(): GridDimension[]
 
 <a name="grid-definition-info.get-column-dimensions"></a>
 ```js
-getColumnDimensions(): GridDimension[]
+getColumnDimensions(): GridDimension[];
 ```
 Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о столбцах таблицы.
 
@@ -370,7 +374,7 @@ interface GridDimension {
 &nbsp;
 
 ```js
-getDimensionEntity(): EntityInfo
+getDimensionEntity(): EntityInfo;
 ```
 Возвращает ссылку на сущность [`EntityInfo`](#entity-info) измерения мультикуба.
 
@@ -387,7 +391,7 @@ interface GridPageSelector extends GridDimension {
 &nbsp;
 
 ```js
-getSelectedEntity(): EntityInfo | null
+getSelectedEntity(): EntityInfo | null;
 ```
 Возвращает ссылку на [`EntityInfo`](#entity-info) выбранного элемента фильтра или `null`.
 
@@ -404,7 +408,7 @@ interface GridRange {
 
 	cellCount(): number;
 
-	generator(size?: number): GridRangeChunk[];
+	generator(size?: number): IterableIterator<GridRangeChunk>;
 }
 ```
 Интерфейс, представляющий прямоугольный диапазон ячеек в таблице [`Grid`](#grid).
@@ -412,21 +416,21 @@ interface GridRange {
 &nbsp;
 
 ```js
-rowStart(): number
+rowStart(): number;
 ```
 Возвращает номер первой строки.
 
 &nbsp;
 
 ```js
-rowCount(): number
+rowCount(): number;
 ```
 Возвращает количество строк.
 
 &nbsp;
 
 ```js
-columnStart(): number
+columnStart(): number;
 ```
 Возвращает номер первого столбца.
 
@@ -434,14 +438,14 @@ columnStart(): number
 
 <a name="grid-range.column-count"></a>
 ```js
-columnCount(): number
+columnCount(): number;
 ```
 Возвращает количество столбцов.
 
 &nbsp;
 
 ```js
-cellCount(): number
+cellCount(): number;
 ```
 Возвращает количество ячеек. Эквивалентно `rowCount() * columnCount()`.
 
@@ -449,7 +453,7 @@ cellCount(): number
 
 <a name="generator"></a>
 ```js
-generator(size?: number): GridRangeChunk[]
+generator(size?: number): IterableIterator<GridRangeChunk>;
 ```
 Возвращает генератор, при каждом обращении возвращающий интерфейс [`GridRangeChunk`](#grid-range-chunk) размером *не более* `size` ячеек, позволяющий обрабатывать `GridRange` покусочно.
 
@@ -490,21 +494,21 @@ interface GridRangeChunk {
 &nbsp;
 
 ```js
-cells(): Cells
+cells(): Cells;
 ```
 Возвращает ссылку на набор ячеек [`Cells`](#cells) текущего куска.
 
 &nbsp;
 
 ```js
-rows(): Labels
+rows(): Labels;
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки строк.
 
 &nbsp;
 
 ```js
-columns(): Labels
+columns(): Labels;
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки столбцов.
 
@@ -526,14 +530,14 @@ interface Labels {
 &nbsp;
 
 ```js
-start(): number
+start(): number;
 ```
 Возвращает номер первой строки/столбца текущего [`GridRangeChunk`](#grid-range-chunk) в таблице [`Grid`](#grid).
 
 &nbsp;
 
 ```js
-count(): number
+count(): number;
 ```
 Возвращает количество строк/столбцов в наборе.
 
@@ -544,28 +548,28 @@ count(): number
 &nbsp;
 
 ```js
-all(): LabelsGroup[]
+all(): LabelsGroup[];
 ```
-Возвращает набор объектов заголовков каждой строки/столбца [`LabelsGroup`](#labels-group) в виде массива.
+Возвращает массив объектов заголовков каждой строки/столбца [`LabelsGroup`](#labels-group).
 
 &nbsp;
 
 ```js
-get(index: number): LabelsGroup | null
+get(index: number): LabelsGroup | null;
 ```
-Аналог `all()[index]`.
+Аналог `all()[index]`. В случае некорректного индекса возвращает `null`.
 
 &nbsp;
 
 ```js
-chunkInstance(): GridRangeChunk
+chunkInstance(): GridRangeChunk;
 ```
 Возвращает обратную ссылку на [`GridRangeChunk`](#grid-range-chunk), из которого был получен `this`.
 
 &nbsp;
 
 ```js
-findLabelByLongId(longId: number): Label | null
+findLabelByLongId(longId: number): Label | null;
 ```
 Возвращает объект [`Label`](#label) по его [`longId`](#long-id), если он присутствует в `this`, иначе — `null`.
 
@@ -584,21 +588,21 @@ interface LabelsGroup {
 &nbsp;
 
 ```js
-all(): Label[]
+all(): Label[];
 ```
 Возвращает массив конкретных заголовков [`Label`](#label).
 
 &nbsp;
 
 ```js
-first(): Label
+first(): Label;
 ```
 Аналог `all()[0]`.
 
 &nbsp;
 
 ```js
-cells(): Cells
+cells(): Cells;
 ```
 Возвращает интерфейс [`Cells`](#cells), предоставляющий доступ к ячейкам данной строки или столбца.
 
@@ -612,8 +616,8 @@ interface Label {
 	longId(): number;
 	name(): string;
 	code(): string | null;
-	alias(): string | null;
-	label(): string | null;
+	alias(): string;
+	label(): string;
 	parentLongId(): number;
 	hierarchyLongId(): number;
 }
@@ -626,7 +630,7 @@ interface EntityInfo = Label;
 
 <a name="long-id"></a>
 ```js
-longId(): number
+longId(): number;
 ```
 Возвращает внутренний идентификатор сущности в системе, уникальный в пределах модели.
 
@@ -634,14 +638,14 @@ longId(): number
 
 <a name="label.name"></a>
 ```js
-name(): string
+name(): string;
 ```
 Возвращает имя сущности.
 
 &nbsp;
 
 ```js
-code(): string
+code(): string;
 ```
 Возвращает код сущности. В Optimacros всего две сущности могут иметь код: элементы справочников и кубы.
 
@@ -649,7 +653,7 @@ code(): string
 
 <a name="alias"></a>
 ```js
-alias(): string | null
+alias(): string;
 ```
 Возвращает отображаемое имя.
 
@@ -660,14 +664,14 @@ alias(): string | null
 &nbsp;
 
 ```js
-label(): string | null
+label(): string;
 ```
 То же, что и [`alias()`](#alias).
 
 &nbsp;
 
 ```js
-parentLongId(): number
+parentLongId(): number;
 ```
 Если сущность является элементом, у которого есть родительский элемент, то возвращает [`longId`](#long-id) сущности родителя.
 
@@ -676,7 +680,7 @@ parentLongId(): number
 &nbsp;
 
 ```js
-hierarchyLongId(): number
+hierarchyLongId(): number;
 ```
 Если сущность является элементом или сабсетом справочника (включая справочники времени и версий), возвращает  [`longId`](#long-id) самого справочника. Если родительского справочника нет, возвращает `-1`. На данный момент этот метод может некорректно работать в зависимости от способа получения `EntityInfo`, для корректной работы рекомендуется получать сущность с помощью интерфейса [`EntitiesInfo`](./common.md#entities-info).
 
@@ -686,11 +690,11 @@ hierarchyLongId(): number
 ```ts
 interface Cells {
 	all(): Cell[];
-	first(): Cell;
-	setValue(value: number | string | null);
+	first(): Cell | null;
+	setValue(value: number | string | boolean | null): this;
 	count(): number;
 	chunkInstance(): GridRangeChunk;
-	getByIndexes(indexes: number[]): Cells | null;
+	getByIndexes(indexes: number[]): Cells;
 }
 ```
 Интерфейс, представляющий (как правило, прямоугольный) набор клеток таблицы.
@@ -698,29 +702,29 @@ interface Cells {
 &nbsp;
 
 ```js
-all(): Cell[]
+all(): Cell[];
 ```
 Возвращает одномерный массив всех клеток [`Cell`](#cell).
 
 &nbsp;
 
 ```js
-first(): Cell
+first(): Cell | null;
 ```
-Аналог `all()[0]`.
+Аналог `all()[0]`. Возвращает `null`, если массив клеток пустой.
 
 &nbsp;
 
 <a name="cells.set-value"></a>
 ```js
-setValue(value: number | string | null)
+setValue(value: number | string | boolean | null): this;
 ```
-Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
+Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах. Возвращает `this`.
 
 &nbsp;
 
 ```js
-count(): number
+count(): number;
 ```
 Возвращает количество клеток в наборе.
 
@@ -728,29 +732,33 @@ count(): number
 
 <a name="chunkInstance"></a>
 ```js
-chunkInstance(): GridRangeChunk
+chunkInstance(): GridRangeChunk;
 ```
 Возвращает обратную ссылку на [`GridRangeChunk`](#grid-range-chunk), из которого был получен `this`.
 
 &nbsp;
 
 ```js
-getByIndexes(indexes: number[]): Cells | null
+getByIndexes(indexes: number[]): Cells;
 ```
-Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать объект непрямоугольный объект [`Cells`](#cells).
+Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать непрямоугольный объект [`Cells`](#cells).
 
 &nbsp;
 
 ### Интерфейс Cell<a name="cell"></a>
 ```ts
 interface Cell {
-	setValue(value: number | string | boolean | null);
+	setValue(value: number | string | boolean | null): this;
+	
 	getValue(): number | string | null;
+	getVisualValue(): string | null;
 	getNativeValue(): number | string | null;
 	getContextValue(): string | null;
+	
 	definitions(): number[];
-	columns(): LabelsGroup;
-	rows(): LabelsGroup;
+	columns(): LabelsGroup | null;
+	rows(): LabelsGroup | null;
+	
 	dropDown(): Labels;
 	getFormatType(): string;
 	isEditable(): boolean;
@@ -762,23 +770,30 @@ interface Cell {
 
 <a name="cell.set-value"></a>
 ```js
-setValue(value: number | string | boolean | null)
+setValue(value: number | string | boolean | null): this;
 ```
-Устанавливает значение клетки. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах.
+Устанавливает значение клетки. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах. Возвращает `this`.
 
 &nbsp;
 
 <a name="cell.get-value"></a>
 ```js
-getValue(): number | string | null
+getValue(): number | string | null;
 ```
 Возвращает значение клетки, которое видит пользователь. Если клетка имеет логический формат, то возвращается строковое значение `'true'` или `'false'`.
 
 &nbsp;
 
+```js
+getVisualValue(): string | null;
+```
+Возвращает отображаемое значение в ячейке, если куб в формате даты или справочника, для других форматов куба возвращает `null`.
+
+&nbsp;
+
 <a name="cell.get-native-value"></a>
 ```js
-getNativeValue(): number | string | null
+getNativeValue(): number | string | null;
 ```
 Возвращает самородное значение клетки, зависящее от формата. Если клетка имеет формат справочника, то возвращается [`longId`](#long-id). 
 
@@ -788,7 +803,7 @@ getNativeValue(): number | string | null
 
 <a name="cell.get-context-value"></a>
 ```js
-getContextValue(): string | null
+getContextValue(): string | null;
 ```
 Если ячейка имеет формат справочника, в настройках которого задано некоторое свойство `prop` в качестве отображаемого имени (опция `Отображение`), и для этой ячейки задано значение этого свойства, то возвращает строку, состоящую из имени, двойной вертикальной черты и значения свойства `prop`, например, `'#5||Берлин'`.
 
@@ -797,35 +812,35 @@ getContextValue(): string | null
 &nbsp;
 
 ```js
-definitions(): number[]
+definitions(): number[];
 ```
 То же, что и [`CubeCell.definitions()`](./cubeCell.md#cube-cell.definitions).
 
 &nbsp;
 
 ```js
-columns(): LabelsGroup
+columns(): LabelsGroup | null;
 ```
-Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца.
+Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца, или `null`, если у клетки нет измерений на столбцах.
 
 &nbsp;
 
 ```js
-rows(): LabelsGroup
+rows(): LabelsGroup | null;
 ```
-Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки.
+Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки, или `null`, если у клетки нет измерений на строках.
 
 &nbsp;
 
 ```js
-dropDown(): Labels
+dropDown(): Labels;
 ```
 Возвращает набор заголовков строк [`Labels`](#labels) выпадающего списка, который в интерфейсе пользователя Optimacros можно получить кликом по треугольнику внутри ячейки. Эта функция считается неэффективной, так как выгружает справочник целиком. Лучше зайти в нужный справочник и итерироваться по нему.
 
 &nbsp;
 
 ```js
-getFormatType(): string
+getFormatType(): string;
 ```
 Возвращает строку с форматом клетки. Возможные значения: `'NUMBER'`, `'BOOLEAN'`, 
 `'ENTITY'`, `'TIME_ENTITY'`, `'LINE_ITEM_SUBSET'`, `'VERSION'`, `'TEXT'`, `'DATE'`, `'NONE'`.
@@ -833,7 +848,7 @@ getFormatType(): string
 &nbsp;
 
 ```js
-isEditable(): boolean
+isEditable(): boolean;
 ```
 Возвращает признак возможности редактирования ячейки пользователем.
 

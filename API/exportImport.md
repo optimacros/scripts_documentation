@@ -9,19 +9,19 @@
 ### Интерфейс Exporter<a name="exporter"></a>
 ```ts
 interface Exporter {
-	setEncoding(encoding: string): Exporter;
-	setFormat(format: string): Exporter;
-	setOmitSummaryRows(omitSummaryRows: boolean): Exporter;
-	setOmitEmptyRows(omitEmptyRows: boolean): Exporter;
-	setIncludeCodes(includeCodes: boolean): Exporter;
-	setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter;
-	setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter;
-	setFileName(fileName: string): Exporter;
-	setDelimiter(delimiter: string): Exporter;
-	setEnclosure(enclosure: string): Exporter;
-	setEscape(escape: string): Exporter;
-	setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter;
-	setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter;
+	setEncoding(encoding: string): this;
+	setFormat(format: string): this;
+	setOmitSummaryRows(omitSummaryRows: boolean): this;
+	setOmitEmptyRows(omitEmptyRows: boolean): this;
+	setIncludeCodes(includeCodes: boolean): this;
+	setMappingForFlexibleImport(mappingForFlexibleImport: boolean): this;
+	setMappingForAdvancedImport(mappingForAdvancedImport: boolean): this;
+	setFileName(fileName: string): this;
+	setDelimiter(delimiter: string): this;
+	setEnclosure(enclosure: string): this;
+	setEscape(escape: string): this;
+	setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): this;
+	setUseCodeLikeLabels(useCodeLikeLabels: boolean): this;
 	export(): ExportResult;
 }
 ```
@@ -30,7 +30,7 @@ interface Exporter {
 &nbsp;
 
 ```js
-setEncoding(encoding: string): Exporter
+setEncoding(encoding: string): this;
 ```
 Устанавливает кодировку экспортируемого файла. Допустимые значения: 
 `'win' ,'WIN', 'windows-1251', 'WINDOWS-1251', 'utf', 'UTF', 'utf-8', 'UTF-8'`. По умолчанию: `'UTF-8'`.
@@ -38,84 +38,84 @@ setEncoding(encoding: string): Exporter
 &nbsp;
 
 ```js
-setFormat(format: string): Exporter
+setFormat(format: string): this;
 ```
 Устанавливает формат экспортируемого файла. Допустимые значения: `'csv', 'xls', 'xlsx', 'txt'`. По умолчанию: `'xlsx'`.
 
 &nbsp;
 
 ```js
-setOmitSummaryRows(omitSummaryRows: boolean): Exporter
+setOmitSummaryRows(omitSummaryRows: boolean): this;
 ```
 Устанавливает флаг пропуска итоговых строк. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setOmitEmptyRows(omitEmptyRows: boolean): Exporter
+setOmitEmptyRows(omitEmptyRows: boolean): this;
 ```
 Устанавливает флаг пропуска пустых строк. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setIncludeCodes(includeCodes: boolean): Exporter
+setIncludeCodes(includeCodes: boolean): this;
 ```
 Устанавливает флаг включения кодов для каждого измерения на строках. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setMappingForFlexibleImport(mappingForFlexibleImport: boolean): Exporter
+setMappingForFlexibleImport(mappingForFlexibleImport: boolean): this;
 ```
 Устанавливает мэппинг для настраиваемого импорта. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setMappingForAdvancedImport(mappingForAdvancedImport: boolean): Exporter
+setMappingForAdvancedImport(mappingForAdvancedImport: boolean): this;
 ```
 Устанавливает мэппинг для расширенного импорта. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setFileName(fileName: string): Exporter
+setFileName(fileName: string): this;
 ```
 Устанавливает начальную часть имени экспортируемого файла. По умолчанию: `'view'`. Итоговое имя файла будет иметь вид `'{fileName}--YYYY.MM.DD--HH.mm.{format}'`.
 
 &nbsp;
 
 ```js
-setDelimiter(delimiter: string): Exporter
+setDelimiter(delimiter: string): this;
 ```
 Устанавливает разделитель полей. Допустимые значения: `,`, `;`, `\t`. Значение по умолчанию: `;`.
 
 &nbsp;
 
 ```js
-setEnclosure(enclosure: string): Exporter
+setEnclosure(enclosure: string): this;
 ```
 Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей, пробел, табуляция, сам обрамляющий символ или [`разделитель строк`](#set-line-delimiter) (только для интерфейса [`StorageExporter`](#storage-exporter)). Допустимые значения: `'`, `"`. Значение по умолчанию: `"`.
 
 &nbsp;
 
 ```js
-setEscape(escape: string): Exporter
+setEscape(escape: string): this;
 ```
 Устанавливает экранирующий символ: если в тексте встретится экранирующий символ и вслед за ним обрамляющий, эта последовательность останется неизменной; а если обрамляющий символ будет без экранирующего, он удвоится. Допустимые значения: `\`, `"`. Значение по умолчанию: `\`.
 
 &nbsp;
 
 ```js
-setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): Exporter
+setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): this;
 ```
 Устанавливает флаг показа псевдонимов без имён. Применимо только для значений справочников. По умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
+setUseCodeLikeLabels(useCodeLikeLabels: boolean): this;
 ```
 Устанавливает флаг показа кода вместо имён для тех элементов, у которых есть код. По умолчанию: `false`.
 
@@ -123,7 +123,7 @@ setUseCodeLikeLabels(useCodeLikeLabels: boolean): Exporter
 
 <a name="exporter.export"></a>
 ```js
-export(): ExportResult
+export(): ExportResult;
 ```
 Производит экспорт представления в соответствии с настройками, регистрирует файл в [`глобальном реестре`](../appendix/glossary.md#global-file-registry) и возвращает ссылку на [`ExportResult`](#export-result).
 
@@ -132,13 +132,14 @@ export(): ExportResult
 ### Интерфейс StorageExporter<a name="storage-exporter"></a>
 ```ts
 interface StorageExporter extends Exporter {
-	setFormat(format: string): StorageExporter;
-	setDelimiter(delimiter: string): StorageExporter;
-	setLineDelimiter(lineDelimiter: string): StorageExporter;
-	setFilterFormula(filterFormula: string): StorageExporter;
-	setDecimalSeparator(decimalSeparator: string): StorageExporter;
-	setDateFormat(dateFormat: string): StorageExporter;
-	setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter;
+	setFormat(format: string): this;
+	setDelimiter(delimiter: string): this;
+	
+	setLineDelimiter(lineDelimiter: string): this;
+	setFilterFormula(filterFormula: string): this;
+	setDecimalSeparator(decimalSeparator: string): this;
+	setDateFormat(dateFormat: string): this;
+	setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
 }
 ```
 Интерфейс быстрого экспорта. Доступен только в мультикубах. Интерфейс наследуется от [`Exporter`](#exporter). В отличие от базового, формат выгрузки фиксирован и отличается от представления таблицы: в столбцах находятся измерения и кубы. Кроме того, вместо псевдонимов экспортируются только их имена. Все функции, кроме [`export()`](#exporter.export), возвращают `this`.
@@ -146,14 +147,14 @@ interface StorageExporter extends Exporter {
 &nbsp;
 
 ```js
-setFormat(format: string): StorageExporter
+setFormat(format: string): this;
 ```
 Устанавливает формат экспортируемого файла. Допустимые значения: `'csv', 'txt', 'gz', 'zip'`. По умолчанию: `'csv'`.
 
 &nbsp;
 
 ```js
-setDelimiter(delimiter: string): StorageExporter
+setDelimiter(delimiter: string): this;
 ```
 Устанавливает разделитель полей. В отличие от аналагичного метода интерфейса `Exporter` можно установить любое значение.  По умолчанию: `;`.
 
@@ -161,21 +162,21 @@ setDelimiter(delimiter: string): StorageExporter
 
 <a name="set-line-delimiter"></a>
 ```js
-setLineDelimiter(lineDelimiter: string): StorageExporter
+setLineDelimiter(lineDelimiter: string): this;
 ```
 Устанавливает разделитель строк. По умолчанию: `\n`.
 
 &nbsp;
 
 ```js
-setFilterFormula(filterFormula: string): StorageExporter
+setFilterFormula(filterFormula: string): this;
 ```
 Устанавливает булеву формулу, которая будет применяться в качестве аналога [`setBooleanCubeIdentifier()`](#set-boolean-cube-identifier), но без создания булева куба.
 
 &nbsp;
 
 ```js
-setDecimalSeparator(decimalSeparator: string): StorageExporter
+setDecimalSeparator(decimalSeparator: string): this;
 ```
 Устанавливает десятичный разделитель. Допустимые значения: `,`, `.`.  По умолчанию: `.`.
 
@@ -183,7 +184,7 @@ setDecimalSeparator(decimalSeparator: string): StorageExporter
 
 <a name="storage-exporter.set-date-format"></a>
 ```js
-setDateFormat(dateFormat: string): StorageExporter
+setDateFormat(dateFormat: string): this;
 ```
 Устанавливает формат даты. Синтаксис формата такой же, как и в функции C++ [`std::put_time()`](https://en.cppreference.com/w/cpp/io/manip/put_time). Значение по умолчанию: `'%d.%m.%Y'`.
 
@@ -191,7 +192,7 @@ setDateFormat(dateFormat: string): StorageExporter
 
 <a name="set-boolean-cube-identifier"></a>
 ```js
-setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter
+setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
 ```
 Устанавливает идентификатор булева куба, который будет использоваться в качестве логического фильтра.
 
@@ -200,10 +201,10 @@ setBooleanCubeIdentifier(booleanCubeIdentifier: number): StorageExporter
 ### Интерфейс ExportResult<a name="export-result"></a>
 ```ts
 interface ExportResult {
-	mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult;
+	mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): this;
 	getHash(): string | null;
-	copyToLocal(path: string): ExportResult;
-	moveToLocal(path: string): ExportResult;
+	copyToLocal(path: string): this;
+	moveToLocal(path: string): this;
 }
 ```
 Интерфейс для работы с результатом экспорта.
@@ -211,28 +212,28 @@ interface ExportResult {
 &nbsp;
 
 ```js
-mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): ExportResult
+mergeToExternalExcelSheet(toFile: string, toSheet: string, fromSheet?: string): this;
 ```
 Если экспорт был в формате `'xls'` или `'xlsx'`, заменяет в файле Excel (формата `.xlsx` или `.xlsm`) `toFile` **существующий** лист `toSheet` и помещает в него результат экспорта.  Данные берутся с листа `fromSheet`, по умолчанию – с первого листа. Возращает `this`.
 
 &nbsp;
 
 ```js
-getHash(): string | null
+getHash(): string | null;
 ```
 Возвращает идентификатор файла в [`глобальном реестре`](../appendix/glossary.md#global-file-registry), или `null`, если файл там отсутствует. Как правило, используется для передачи в функцию [`ResultInfo.addFileHash()`](./common.md#result-info.add-file-hash).
 
 &nbsp;
 
 ```js
-copyToLocal(path: string): ExportResult
+copyToLocal(path: string): this;
 ```
 Копирует экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir). Возвращает `this`.
 
 &nbsp;
 
 ```js
-moveToLocal(path: string): ExportResult
+moveToLocal(path: string): this;
 ```
 Перемещает экспортированный файл в путь `path` в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) и убирает его из [`глобального реестра`](../appendix/glossary.md#global-file-registry). Возвращает `this`.
 
@@ -243,16 +244,16 @@ moveToLocal(path: string): ExportResult
 ### Интерфейс CSVParams<a name="csv-params"></a>
 ```ts
 interface CSVParams {
-	setDelimiter(delimiter: string): CSVParams;
+	setDelimiter(delimiter: string): this;
 	getDelimiter(): string;
 	
-	setEnclosure(enclosure: string): CSVParams;
+	setEnclosure(enclosure: string): this;
 	getEnclosure(): string;
 	
-	setEscape(escape: string): CSVParams;
+	setEscape(escape: string): this;
 	getEscape(): string;
 	
-	setLineDelimiter(lineDelimiter: string): CSVParams;
+	setLineDelimiter(lineDelimiter: string): this;
 	getLineDelimiter(): string;
 }
 ```
@@ -261,14 +262,14 @@ interface CSVParams {
 &nbsp;
 
 ```js
-setDelimiter(delimiter: string): CSVParams
+setDelimiter(delimiter: string): this;
 ```
 Устанавливает разделитель полей. При использовании для интерфейса [`CsvReader`](./csv.md#csv-reader) должен быть однобайтным символом. При использовании для интерфейса [`CsvWriter`](./csv.md#csv-writer) разделитель может быть произвольной строкой, однако, если задана строка более чем из одного символа, механизм обрамления (enclosure) перестаёт работать, и рекомендуется всё же использовать одиночный символ. Значение по умолчанию: `;`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getDelimiter(): string
+getDelimiter(): string;
 ```
 Возвращает разделитель полей.
 
@@ -276,7 +277,7 @@ getDelimiter(): string
 
 <a name="CSVParams.setEnclosure"></a>
 ```js
-setEnclosure(enclosure: string): CSVParams
+setEnclosure(enclosure: string): this;
 ```
 Устанавливает обрамляющий символ, которым будет обрамляться текстовое поле, если в нём содержится разделитель полей, пробел, табуляция, сам обрамляющий символ или [`разделитель строк`](#CSVParams.setLineDelimiter). Допустим лишь один однобайтовый символ. Значение по умолчанию: `"`. См. также [`экранирующий символ`](#CSVParams.setEscape). Возвращает `this`.
 
@@ -285,7 +286,7 @@ setEnclosure(enclosure: string): CSVParams
 &nbsp;
 
 ```js
-getEnclosure(): string
+getEnclosure(): string;
 ```
 Возвращает обрамляющий символ.
 
@@ -293,7 +294,7 @@ getEnclosure(): string
 
 <a name="CSVParams.setEscape"></a>
 ```js
-setEscape(escape: string): CSVParams
+setEscape(escape: string): this;
 ```
 Устанавливает экранирующий символ: если в тексте встретится экранирующий символ и вслед за ним обрамляющий, эта последовательность останется неизменной; а если обрамляющий символ будет без экранирующего, он удвоится.
 
@@ -304,7 +305,7 @@ setEscape(escape: string): CSVParams
 &nbsp;
 
 ```js
-getEscape(): string
+getEscape(): string;
 ```
 Возвращает экранирующий символ.
 
@@ -312,7 +313,7 @@ getEscape(): string
 
 <a name="CSVParams.setLineDelimiter"></a>
 ```js
-setLineDelimiter(lineDelimiter: string): CSVParams
+setLineDelimiter(lineDelimiter: string): this;
 ```
 Устанавливает разделитель строк. По умолчанию: `\n`. Возвращает `this`.
 
@@ -321,7 +322,7 @@ setLineDelimiter(lineDelimiter: string): CSVParams
 &nbsp;
 
 ```js
-getLineDelimiter(): string
+getLineDelimiter(): string;
 ```
 Возвращает разделитель строк.
 
@@ -331,12 +332,16 @@ getLineDelimiter(): string
 ```ts
 interface Importer {
 	csv(): CSVParams;
-	setFilePath(path: string): Importer;
+	
+	setFilePath(path: string): this;
 	getFilePath(): string;
-	getReportFilePath(): string | null;
+	
+	getReportFilePath(): string;
+	
 	setEncoding(encoding: string): this;
 	getEncoding(): string;
-	import(): Importer;
+	
+	import(): this;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), позволяет сформировать и вызвать запрос на базовый импорт таблицы [`Grid`](./views.md#grid). Результатом импорта является файл отчёта.
@@ -344,30 +349,30 @@ interface Importer {
 &nbsp;
 
 ```js
-csv(): CSVParams
+csv(): CSVParams;
 ```
 Возвращает ссылку на интерфейс [`CSVParams`](#csv-params), предоставляющий доступ к настройкам CSV. В случае импорта из Excel не имеет смысла.
 
 &nbsp;
 
 ```js
-setFilePath(path: string): Importer
+setFilePath(path: string): this;
 ```
 Устанавливает имя импортируемого файла. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getFilePath(): string
+getFilePath(): string;
 ```
-Возвращает имя импортируемого файла.
+Возвращает имя импортируемого файла. Если имени нет, бросает исключение.
 
 &nbsp;
 
 ```js
-getReportFilePath(): string | null
+getReportFilePath(): string;
 ```
-Возвращает путь к файлу отчёта.
+Возвращает путь к файлу отчёта. Если импорта ещё не было, бросает исключение.
 
 &nbsp;
 
@@ -387,7 +392,7 @@ getEncoding(): string;
 &nbsp;
 
 ```js
-import(): Importer
+import(): this;
 ```
 Производит импорт в [`Grid`](./views.md#grid) в соответствии с настройками. Возвращает `this`.
 
@@ -396,12 +401,15 @@ import(): Importer
 ### Интерфейс ListImporter<a name="list-importer"></a>
 ```ts
 interface ListImporter extends Importer {
-	setFilePath(path: string): ListImporter;
-	setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter;
+	setFilePath(path: string): this;
+	
+	setObligatoryListCodes(obligatoryListCodes: boolean): this;
 	getObligatoryListCodes(): boolean;
-	setImportToChildListOnly(importToChildListOnly: boolean): ListImporter;
+	
+	setImportToChildListOnly(importToChildListOnly: boolean): this;
 	getImportToChildListOnly(): boolean;
-	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter;
+	
+	setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): this;
 	getUpdatedPropertiesOnParentLevels(): boolean;
 }
 ```
@@ -410,49 +418,49 @@ interface ListImporter extends Importer {
 &nbsp;
 
 ```js
-setFilePath(path: string): ListImporter
+setFilePath(path: string): this;
 ```
 Устанавливает имя импортируемого файла. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setObligatoryListCodes(obligatoryListCodes: boolean): ListImporter
+setObligatoryListCodes(obligatoryListCodes: boolean): this;
 ```
 Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществующие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getObligatoryListCodes(): boolean
+getObligatoryListCodes(): boolean;
 ```
 Возвращает признак режима обязательных кодов.
 
 &nbsp;
 
 ```js
-setImportToChildListOnly(importToChildListOnly: boolean): ListImporter
+setImportToChildListOnly(importToChildListOnly: boolean): this;
 ```
 Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getImportToChildListOnly(): boolean
+getImportToChildListOnly(): boolean;
 ```
 Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
 
 &nbsp;
 
 ```js
-setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): ListImporter
+setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): this;
 ```
 Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getUpdatedPropertiesOnParentLevels(): boolean
+getUpdatedPropertiesOnParentLevels(): boolean;
 ```
 Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
 
@@ -490,11 +498,10 @@ interface TimePeriodImporter extends Importer {
 ### Интерфейс StorageImporter<a name="storage-importer"></a>
 ```ts
 interface StorageImporter extends Importer {
-	setMaxFailures(maxFailures: number): StorageImporter;
-	setIsCompressed(isCompressed: boolean): StorageImporter;
-	setEncoding(encoding: string): StorageImporter;
-	setDateFormat(dateFormat: string): StorageImporter;
-	setMappings(mappings: object): StorageImporter;
+	setMaxFailures(maxFailures: number): this;
+	setIsCompressed(isCompressed: boolean): this;
+	setDateFormat(dateFormat: string): this;
+	setMappings(mappings: Object): this;
 }
 ```
 Интерфейс быстрого импорта. Наследуется от [`Importer`](#importer). Доступен только в мультикубах. В отличие от базового импорта, формат файла фиксирован: сначала идут столбцы с измерениями, далее — столбцы кубов. Для идентификации элемента измерения используются имена элементов (`Item Name`). Все функции возвращают `this`.
@@ -502,35 +509,28 @@ interface StorageImporter extends Importer {
 &nbsp;
 
 ```js
-setMaxFailures(maxFailures: number): StorageImporter
+setMaxFailures(maxFailures: number): this;
 ```
 Устанавливает количество ошибок, после которых попытка импорта прекращается. Уже импортированные значения при этом сохранятся. Значение по умолчанию: `0` (т. е. бесконечность).
 
 &nbsp;
 
 ```js
-setIsCompressed(isCompressed: boolean): StorageImporter
+setIsCompressed(isCompressed: boolean): this;
 ```
 Устанавливает флаг `isCompressed`. Если он равен `true`, во время импорта будет происходить поточная деархивация упакованного в ZIP файла. Значение по умолчанию: `false`.
 
 &nbsp;
 
 ```js
-setEncoding(encoding: string): StorageImporter
-```
-Устанавливает кодировку. По умолчанию: `'UTF-8'`.
-
-&nbsp;
-
-```js
-setDateFormat(dateFormat: string): StorageImporter
+setDateFormat(dateFormat: string): this;
 ```
 Устанавливает формат дат. Аналогично функции [`StorageExporter.setDateFormat()`](#storage-exporter.set-date-format).
 
 &nbsp;
 
 ```js
-setMappings(mappings: object): StorageImporter;
+setMappings(mappings: Object): this;
 ```
 Позволяет установить соответствие полей импортируемого `CSV` и мультикуба-приёмника. Передаётся в виде объекта. 
 Пример:

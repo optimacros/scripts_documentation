@@ -61,70 +61,70 @@ var om: OM;
 &nbsp;
 
 ```js
-readonly common: Common
+readonly common: Common;
 ```
 Ссылка на интерфейс [`Common`](./common.md#common).
 
 &nbsp;
 
 ```js
-readonly environment: Environment
+readonly environment: Environment;
 ```
 Ссылка на интерфейс [`Environment`](./env.md#environment).
 
 &nbsp;
 
 ```js
-readonly multicubes: Multicubes
+readonly multicubes: Multicubes;
 ```
 Ссылка на интерфейс [`Multicubes`](./views.md#multicubes).
 
 &nbsp;
 
 ```js
-readonly times: Times
+readonly times: Times;
 ```
 Ссылка на интерфейс [`Times`](./dimensions.md#times).
 
 &nbsp;
 
 ```js
-readonly versions: Versions
+readonly versions: Versions;
 ```
 Ссылка на интерфейс [`Versions`](./dimensions.md#versions).
 
 &nbsp;
 
 ```js
-readonly lists: Lists
+readonly lists: Lists;
 ```
 Ссылка на интерфейс [`Lists`](./dimensions.md#lists).
 
 &nbsp;
 
 ```js
-readonly filesystems: Filesystems
+readonly filesystems: Filesystems;
 ```
 Ссылка на интерфейс [`Filesystems`](./fs.md#filesystems).
 
 &nbsp;
 
 ```js
-readonly optimization: Optimization
+readonly optimization: Optimization;
 ```
 Ссылка на интерфейс [`Optimization`](./optimization.md#optimization).
 
 &nbsp;
 
 ```js
-readonly connectors: Connectors
+readonly connectors: Connectors;
 ```
 Ссылка на интерфейс [`Connectors`](./connectors.md#connectors).
 
 &nbsp;
 
 ```js
-readonly notifications: Notifications.Manager
+readonly notifications: Notifications.Manager;
 ```
 Ссылка на интерфейс [`Notifications.Manager`](./notifications.md#manager).
 

@@ -11,7 +11,7 @@ interface Optimization {
 &nbsp;
 
 ```js
-optimizationRequestsTab(): OptimizationRequestTab
+optimizationRequestsTab(): OptimizationRequestTab;
 ```
 Возвращает ссылку на интерфейс [`OptimizationRequestTab`](#optimization-request-tab). В интерфейсе Optimacros аналогично открытию вкладки `Оптимизация` -> `Оптимизационные запросы`.
 
@@ -20,8 +20,15 @@ optimizationRequestsTab(): OptimizationRequestTab
 ### Интерфейс OptimizationRequestTab<a name="optimization-request-tab"></a>
 ```ts
 interface OptimizationRequestTab extends Tab {
-	run(name: string): { success: boolean, error: undefined | string };
+	run(name: string): { success: boolean, error?: string };
 }
+```
+Интерфейс вкладки оптимизационных запросов.
+
+&nbsp;
+
+```js
+run(name: string): { success: boolean, error?: string };
 ```
 Запускает оптимизационный запрос `name`. Возвращает объект с данными об исполнении. Интерфейс наследуется от [`Tab`](./views.md#tab).
 

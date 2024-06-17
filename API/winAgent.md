@@ -27,42 +27,42 @@ interface WinAgentBuilder {
 &nbsp;
 
 ```js
-setCommandUrl(url: string): this
+setCommandUrl(url: string): this;
 ```
 Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL) агента, на который будут подаваться команды из скрипта. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setDownloadUrl(url: string): this
+setDownloadUrl(url: string): this;
 ```
 Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL), по которому можно будет скачивать результирующие документы. Возвращает `this`.
 
 &nbsp;
 
 ```js
-auth(): Http.HttpAuth
+auth(): Http.HttpAuth;
 ```
 Возвращает интерфейс [`Http.HttpAuth`](./http.md#http-auth) доступа к настройкам аутентификации WinAgent.
 
 &nbsp;
 
 ```js
-setConnectTimeout(sec: number): this
+setConnectTimeout(sec: number): this;
 ```
 Устанавливает таймаут ожидания соединения по HTTP в секундах. Значение по умолчанию: `10`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setRequestTimeout(sec: number): this
+setRequestTimeout(sec: number): this;
 ```
 Устанавливает таймаут ожидания ответа от внешнего ресурса в секундах. Значение по умолчанию: `600`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setOperationTimeout(sec: number): this
+setOperationTimeout(sec: number): this;
 ```
 Устанавливает таймаут ожидания WinAgent'ом исполнения макроса VBA в секундах. Значение по умолчанию: `150`. Возвращает `this`.
 
@@ -70,7 +70,7 @@ setOperationTimeout(sec: number): this
 &nbsp;
 
 ```js
-makeRunMacrosAction(): RunMacroAction
+makeRunMacrosAction(): RunMacroAction;
 ```
 Возвращает интерфейс [`RunMacroAction`](#run-macro-action) настройки и запуска макроса.
 
@@ -87,7 +87,7 @@ interface BaseAction {
 &nbsp;
 
 ```js
-run(): BaseActionResult
+run(): BaseActionResult;
 ```
 Выполняет действие и возвращает базовый интерфейс [`BaseActionResult`](#base-action-result) доступа к данным его результата.
 
@@ -107,28 +107,28 @@ interface RunMacroAction extends BaseAction {
 &nbsp;
 
 ```js
-setMacroName(macroName: string): this
+setMacroName(macroName: string): this;
 ```
 Устанавливает имя макроса. Значение по умолчанию: `'process'`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setMacroFilePath(macroFilePath: string): this
+setMacroFilePath(macroFilePath: string): this;
 ```
 Устанавливает имя файла с макросом. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setDataFilePaths(dataFilePaths: string[]): this
+setDataFilePaths(dataFilePaths: string[]): this;
 ```
 Задаёт массив входных файлов с данными для макроса. Возвращает `this`.
 
 &nbsp;
 
 ```js
-run(): RunMacroActionResult
+run(): RunMacroActionResult;
 ```
 Запускает макрос и возвращает интерфейс [`RunMacroActionResult`](#run-macro-action-result) доступа к данным его результата.
 
@@ -137,7 +137,6 @@ run(): RunMacroActionResult
 ### Интерфейс BaseActionResult<a name="base-action-result"></a>
 ```ts
 interface BaseActionResult {
-
 }
 ```
 Базовый интерфейс результата действия. Он пустой.
@@ -155,7 +154,7 @@ interface RunMacroActionResult extends BaseActionResult {
 &nbsp;
 
 ```js
-getFilePaths(): string[]
+getFilePaths(): string[];
 ```
 Возвращает список имён результирующих файлов.
 

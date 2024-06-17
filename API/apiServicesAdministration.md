@@ -3,7 +3,7 @@
 ### Интерфейс ApiServices<a name="api-services"></a>
 ```ts
 interface ApiServices {
-    apiServicesTab(): ApiServicesTab;
+	apiServicesTab(): ApiServicesTab;
 }
 
 ```
@@ -12,9 +12,9 @@ interface ApiServices {
 &nbsp;
 
 ```js
-apiServicesTab(): ApiServicesTab
+apiServicesTab(): ApiServicesTab;
 ```
-Возвращает ссылку на вкладку управления (создания, сортировки, удаления) элементами списка `Api Services` — списка веб-сервисов воркспейса, достпупного в панели администратора воркспейса.
+Возвращает ссылку на вкладку управления (создания, сортировки, удаления) элементами списка `Api Services` — списка веб-сервисов воркспейса, доступного в панели администратора воркспейса.
 
 Работать с [`apiServicesTab()`](#api-services-tab) необходимо **вне** контекста модели, т.е. перед вызовом нужно выполнить [`om.common.modelInfo().unlock()`](./common.md#model-info.unlock).
 

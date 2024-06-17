@@ -14,14 +14,14 @@
 
 ```js
 for (const chunk of generator) {
-	const rowsCells = chunk.rows().all()[0].cells()   // null
+	const rowsCells = chunk.rows().all()[0].cells();   // null
 }
 ```
 
 В этом случае система скриптов создаёт виртуальное измерение, к которому можно получить доступ стандартным способом, и вызов
 
 ```js
-definitionInfo.getColumnDimensions()[0]getDimensionEntity().name()
+definitionInfo.getColumnDimensions()[0]getDimensionEntity().name();
 ```
 
 вернёт специальное значение `'Empty 1 0'`.
@@ -32,21 +32,21 @@ definitionInfo.getColumnDimensions()[0]getDimensionEntity().name()
 
 ```js
 for (const chunk of generator) {
-	let currentMonthIndex = null
+	let currentMonthIndex = null;
 
 	chunk.rows().all().forEach((rowLabels, index) => {
-		const name = rowLabels.first().name()
+		const name = rowLabels.first().name();
 		if (name === 'Current Month') {
-			currentMonthIndex = index
+			currentMonthIndex = index;
 		}
 	});
 
 	if (currentMonthIndex === null) {
-		throw new Error(`Option 'Current Month' not found`)
+		throw new Error(`Option 'Current Month' not found`);
 	}
 
-	const cells = chunk.cells().all()
-	cells[currentMonthIndex].setValue(newCurrentMonthValue)
+	const cells = chunk.cells().all();
+	cells[currentMonthIndex].setValue(newCurrentMonthValue);
 }
 ```
 
@@ -81,13 +81,13 @@ for (const chunk of generator) {
 Для получения удобочитаемого вывода рекомендуется добавлять этот символ самостоятельно:
 
 ```js
-console.log(message + '\n')
+console.log(message + '\n');
 ```
 
 или
 
 ```js
-console.log(`${message} \n`)
+console.log(`${message} \n`);
 ```
 
 Это неудобство [`отсутствует`](https://github.com/optimacros/applications_documentation/blob/master/diff.md#line-break) в Application Manager.
