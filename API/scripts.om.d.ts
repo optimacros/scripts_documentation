@@ -11,8 +11,10 @@ export type StringMap = {
 export interface Cell {
 	setValue(value: number | string | boolean | null): this;
 
+	/** @remarks Boolean cube values are returned as strings 'true'/'false' */
 	getValue(): number | string | null;
 	getVisualValue(): string | null;
+	/** @remarks Boolean cube values are returned as strings 'true'/'false' */
 	getNativeValue(): number | string | null;
 	getContextValue(): string | null;
 
