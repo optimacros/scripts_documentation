@@ -517,6 +517,7 @@ export namespace ApiService {
 		append(name: string, value: string, ttl: number): this;
 	}
 
+	// Awaiting for implementation
 	// export interface ResponseHeaderInfos {
 		// append(name: string, value: string): this;
 	// }
