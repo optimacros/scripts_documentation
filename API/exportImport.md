@@ -500,7 +500,6 @@ interface TimePeriodImporter extends Importer {
 interface StorageImporter extends Importer {
 	setMaxFailures(maxFailures: number): this;
 	setIsCompressed(isCompressed: boolean): this;
-	setEncoding(encoding: string): this;
 	setDateFormat(dateFormat: string): this;
 	setMappings(mappings: Object): this;
 }
@@ -520,13 +519,6 @@ setMaxFailures(maxFailures: number): this;
 setIsCompressed(isCompressed: boolean): this;
 ```
 Устанавливает флаг `isCompressed`. Если он равен `true`, во время импорта будет происходить поточная деархивация упакованного в ZIP файла. Значение по умолчанию: `false`.
-
-&nbsp;
-
-```js
-setEncoding(encoding: string): this;
-```
-Устанавливает кодировку. По умолчанию: `'UTF-8'`.
 
 &nbsp;
 

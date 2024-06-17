@@ -413,7 +413,6 @@ export interface Importer {
 export interface StorageImporter extends Importer {
 	setMaxFailures(maxFailures: number): this;
 	setIsCompressed(isCompressed: boolean): this;
-	setEncoding(encoding: string): this;
 	setDateFormat(dateFormat: string): this;
 	setMappings(mappings: Object): this;
 }
