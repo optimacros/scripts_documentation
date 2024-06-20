@@ -10,25 +10,33 @@
 
 ## Таблица событий<a name="events-table"></a>
 
-| Наименование  | longId | Details 4 |
-|-------|--------|--------|
-| Client Auth | 119000000001 | |
-| User Model Change Role | 119000000002 | |
-| Cube Cell Value Change | 119000000003 | ✓ |
-| Create Model Backup Point | 119000000004 | |
-| Delete Model Backup Point | 119000000005 | |
-| Erase Model Backup Point | 119000000006 | |
-| Revert Model Backup Point | 119000000007 | |
-| Report Export | 119000000008 | |
-| Export Model Backup Point | 119000000009 | |
-| File Download | 119000000010 | |
-| Formula Change | 119000000011 | ✓ |
-| User Ban Status Change | 119000000012 | |
-| Script Change | 119000000013 | |
-| Script Add | 119000000014 | |
-| Script Delete | 119000000015 | |
-| Script Rename | 119000000016 | |
-| Audit Records Cleaned | 119000000017 | |
+| Наименование                         | longId       | Details 4 |
+| ------------------------------------ | ------------ | --------- |
+| Client Auth                          | 119000000001 |           |
+| User Model Change Role               | 119000000002 |           |
+| Cube Cell Value Change               | 119000000003 | ✓         |
+| Create Model Backup Point            | 119000000004 |           |
+| Delete Model Backup Point            | 119000000005 |           |
+| Erase Model Backup Point             | 119000000006 |           |
+| Revert Model Backup Point            | 119000000007 |           |
+| Report Export                        | 119000000008 |           |
+| Export Model Backup Point            | 119000000009 |           |
+| File Download                        | 119000000010 |           |
+| Formula Change                       | 119000000011 | ✓         |
+| User Ban Status Change               | 119000000012 |           |
+| Script Change                        | 119000000013 |           |
+| Script Add                           | 119000000014 |           |
+| Script Delete                        | 119000000015 |           |
+| Script Rename                        | 119000000016 |           |
+| Audit Records Cleaned                | 119000000017 |           |
+| Set inactive model to offline status | 119000000018 |           |
+| List Item Change                     | 119000000019 |           |
+| List Creation                        | 119000000020 | ✓         |
+| Scripts Tasks Cleaned                | 119000000021 |           |
+| Model switched to Offline/Online     | 119000000022 | ✓         |
+| Model Restore                        | 119000000023 | ✓         |
+| Restart model                        | 119000000024 | ✓         |
+| Recalculate model                    | 119000000025 | ✓         |
 
 ## Интерфейс Audit<a name="audit"></a>
 ```ts
