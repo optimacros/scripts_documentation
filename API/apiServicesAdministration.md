@@ -23,7 +23,7 @@ apiServicesTab(): ApiServicesTab;
 ### Интерфейс ApiServicesTab<a name="api-services-tab"></a>
 ```ts
 interface ApiServicesTab extends Tab {
-	elementsCreator(): NamedElementsCreator;
+	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
 }
 ```
@@ -32,7 +32,7 @@ interface ApiServicesTab extends Tab {
 &nbsp;
 
 ```js
-elementsCreator(): NamedElementsCreator;
+elementsCreator(): ElementsCreator;
 ```
 Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления API сервисов.
 
