@@ -14,9 +14,9 @@ interface ApiServices {
 ```js
 apiServicesTab(): ApiServicesTab;
 ```
-Возвращает ссылку на вкладку управления (создания, сортировки, удаления) элементами списка `Api Services` — списка веб-сервисов воркспейса, доступного в панели администратора воркспейса.
+Возвращает ссылку на интерфейс [`ApiServicesTab`](#api-services-tab) вкладки управления `Api Services` — списком веб-сервисов воркспейса, доступным в панели администратора воркспейса.
 
-Работать с [`apiServicesTab()`](#api-services-tab) необходимо **вне** контекста модели, т.е. перед вызовом нужно выполнить [`om.common.modelInfo().unlock()`](./common.md#model-info.unlock).
+Работать с ним необходимо **вне** контекста модели, т. е. перед вызовом нужно выполнить [`om.common.modelInfo().unlock()`](./common.md#model-info.unlock).
 
 &nbsp;
 
@@ -34,14 +34,14 @@ interface ApiServicesTab extends Tab {
 ```js
 elementsCreator(): NamedElementsCreator;
 ```
-Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления апи сервисов.
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления API сервисов.
 
 &nbsp;
 
 ```js
 elementsDeleter(): ElementsDeleter;
 ```
-Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления апи сервисов.
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления API сервисов.
 
 &nbsp;
 
