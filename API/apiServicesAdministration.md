@@ -23,9 +23,25 @@ apiServicesTab(): ApiServicesTab;
 ### Интерфейс ApiServicesTab<a name="api-services-tab"></a>
 ```ts
 interface ApiServicesTab extends Tab {
+	elementsCreator(): NamedElementsCreator;
+	elementsDeleter(): ElementsDeleter;
 }
 ```
 Вкладка `Api Services`. Интерфейс наследуется от [`Tab`](./views.md#tab). Для работы не требует открытия.
+
+&nbsp;
+
+```js
+elementsCreator(): NamedElementsCreator;
+```
+Возвращает ссылку на [`ElementsCreator`](./elementsManipulator.md#elements-creator) для добавления апи сервисов.
+
+&nbsp;
+
+```js
+elementsDeleter(): ElementsDeleter;
+```
+Возвращает ссылку на [`ElementsDeleter`](./elementsManipulator.md#elements-deleter) для удаления апи сервисов.
 
 &nbsp;
 
