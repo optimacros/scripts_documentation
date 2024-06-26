@@ -1721,6 +1721,8 @@ export interface ApiServices {
 }
 
 export interface ApiServicesTab extends Tab {
+	elementsCreator(): ElementsCreator;
+	elementsDeleter(): ElementsDeleter;
 }
 
 export interface Audit {
