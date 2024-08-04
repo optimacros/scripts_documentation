@@ -903,8 +903,8 @@ export interface CsvReader {
 
 export interface CsvWriter {
 	params(): CSVParams;
-	writeRow(row: string[]): this;
-	writeRows(rows: string[][]): this;
+	writeRow(row: (number | string | boolean | null)[]): this;
+	writeRows(rows: (number | string | boolean | null)[][]): this;
 
 	/**
 	 *
