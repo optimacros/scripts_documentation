@@ -96,7 +96,7 @@ interface CubeFormatInfo {
 ```js
 getFormatTypeEntity(): EntityInfo;
 ```
-Возвращает сущность [`EntityInfo`](./views.md#entity-info) формата куба.
+Возвращает сущность [`EntityInfo`](./views.md#entity-info) формата куба. Возможные форматы: `'Number'`, `'Text'`, `'Boolean'`, `'Date'`, `'Entity'`, `'Time Entity'`, `'Version'`, `'Line Item Subset'`, `'None'`.
 
 &nbsp;
 
