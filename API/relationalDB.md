@@ -384,6 +384,22 @@ setProtocol(protocol: string): this;
 
 &nbsp;
 
+### Интерфейс VerticaConnectorBuilder<a name="vertica-connector-builder"></a>
+```ts
+interface VerticaConnectorBuilder extends PostgresqlConnectorBuilder {
+}
+```
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Vertica`](https://en.wikipedia.org/wiki/Vertica). Интерфейс наследуется от [`PostgresqlConnectorBuilder`](#postgresql-connector-builder).
+
+&nbsp;
+
+```js
+loadImportBuilder(): PostgresqlImportBuilder;
+```
+Возвращает ссылку на интерфейс [`PostgresqlImportBuilder`](#postgresql-import-builder) импорта из файла CSV.
+
+&nbsp;
+
 ## Импорт<a name="db-import"></a>
 
 ### Интерфейс MysqlImportBuilder<a name="mysql-import-builder"></a>
