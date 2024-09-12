@@ -393,13 +393,6 @@ interface VerticaConnectorBuilder extends PostgresqlConnectorBuilder {
 
 &nbsp;
 
-```js
-loadImportBuilder(): PostgresqlImportBuilder;
-```
-Возвращает ссылку на интерфейс [`PostgresqlImportBuilder`](#postgresql-import-builder) импорта из файла CSV.
-
-&nbsp;
-
 ## Импорт<a name="db-import"></a>
 
 ### Интерфейс MysqlImportBuilder<a name="mysql-import-builder"></a>
