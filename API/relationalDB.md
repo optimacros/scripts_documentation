@@ -384,9 +384,9 @@ setProtocol(protocol: string): this;
 
 &nbsp;
 
-### Интерфейс VerticaConnectorBuilder<a name="vertica-connector-builder"></a>
+### Интерфейс PgsqlDrivenVerticaConnectorBuilder<a name="vertica-connector-builder"></a>
 ```ts
-interface VerticaConnectorBuilder extends PostgresqlConnectorBuilder {
+interface PgsqlDrivenVerticaConnectorBuilder extends PostgresqlConnectorBuilder {
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Vertica`](https://en.wikipedia.org/wiki/Vertica). Интерфейс наследуется от [`PostgresqlConnectorBuilder`](#postgresql-connector-builder).

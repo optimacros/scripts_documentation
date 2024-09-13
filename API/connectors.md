@@ -11,7 +11,7 @@ interface Connectors {
 	mongodb(): Mongodb.ConnectorBuilder;
 	http(): Http.HttpManager;
 	winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
-	vertica(): VerticaConnectorBuilder;
+	verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
 }
 ```
 Интерфейс, группирующий [`коннекторы`](../appendix/glossary.md#connector) к различным внешним системам.
@@ -78,9 +78,9 @@ winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 &nbsp;
 
 ```js
-vertica(): VerticaConnectorBuilder;
+verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
 ```
-Возвращает коннектор [`VerticaConnectorBuilder`](./relationalDB.md#vertica-connector-builder) для подключения к базе данных [`Vertica`](https://docs.vertica.com/).
+Возвращает коннектор [`PgsqlDrivenVerticaConnectorBuilder`](./relationalDB.md#vertica-connector-builder) для подключения к базе данных [`Vertica`](https://docs.vertica.com/).
 
 &nbsp;
 
