@@ -1368,7 +1368,7 @@ export namespace Http {
 		 */
 		formBody(): FormRequestBody;
 
-        fileBody(): FileRequestBody;
+        	fileBody(): FileRequestBody;
 	}
 
 	export interface Cert {
