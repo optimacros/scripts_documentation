@@ -1351,9 +1351,9 @@ export namespace Http {
 		appendFile(fieldName: string, fileName: string, filePath: string): this;
 	}
 
-    export interface FileRequestBody {
-        appendFile(filePath: string): this;
-    }
+    	export interface FileRequestBody {
+        	appendFile(filePath: string): this;
+    	}
 
 	export interface RequestBody {
 		/**
