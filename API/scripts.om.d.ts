@@ -1351,9 +1351,9 @@ export namespace Http {
 		appendFile(fieldName: string, fileName: string, filePath: string): this;
 	}
 
-    	export interface FileRequestBody {
-        	appendFile(filePath: string): this;
-    	}
+	export interface FileRequestBody {
+		appendFile(filePath: string): this;
+	}
 
 	export interface RequestBody {
 		/**
@@ -1368,7 +1368,7 @@ export namespace Http {
 		 */
 		formBody(): FormRequestBody;
 
-        	fileBody(): FileRequestBody;
+		fileBody(): FileRequestBody;
 	}
 
 	export interface Cert {

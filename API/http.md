@@ -236,7 +236,7 @@ interface RequestBody {
 	jsonBody(): JsonRequestBody;
 	stringBody(): StringRequestBody;
 	formBody(): FormRequestBody;
-    	fileBody(): FileRequestBody
+	fileBody(): FileRequestBody;
 }
 ```
 Интерфейс генерации тела запроса [`POST`](https://ru.wikipedia.org/wiki/POST_(HTTP)). Все функции перезаписывают тело запроса до отправки, поэтому следует выбрать одну из них.
@@ -267,7 +267,7 @@ formBody(): FormRequestBody;
 ```js
 fileBody(): FileRequestBody;
 ```
-*Не* устанавливает [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type`, возвращает интерфейс [`FileRequestBody`](#file-request-body) для отправки файла в теле запроса.
+*Не* устанавливает [`заголовок HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type`, возвращает интерфейс [`FileRequestBody`](#file-request-body) для отправки файла в теле запроса.
 
 &nbsp;
 
