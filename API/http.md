@@ -213,12 +213,30 @@ interface FormRequestBody {
 
 &nbsp;
 
+### Интерфейс FileRequestBody<a name="file-request-body"></a>
+```ts
+interface FileRequestBody {
+	appendFile(filePath: string): this;
+}
+```
+Интерфейс генерации тела запроса для отправки в нём файла.
+
+&nbsp;
+
+```js
+	appendFile(filePath: string): this;
+```
+Прикрепляет к запросу файл, расположенный по пути `filePath` локальной файловой системы скрипта. Возвращает `this`.
+
+&nbsp;
+
 ### Интерфейс RequestBody<a name="request-body"></a>
 ```ts
 interface RequestBody {
 	jsonBody(): JsonRequestBody;
 	stringBody(): StringRequestBody;
 	formBody(): FormRequestBody;
+    	fileBody(): FileRequestBody
 }
 ```
 Интерфейс генерации тела запроса [`POST`](https://ru.wikipedia.org/wiki/POST_(HTTP)). Все функции перезаписывают тело запроса до отправки, поэтому следует выбрать одну из них.
@@ -243,6 +261,13 @@ stringBody(): StringRequestBody;
 formBody(): FormRequestBody;
 ```
 Устанавливает значение [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type: application/x-www-form-urlencoded`, возвращает интерфейс [`FormRequestBody`](#form-request-body) для отправки формы в теле запроса.
+
+&nbsp;
+
+```js
+fileBody(): FileRequestBody;
+```
+*Не* устанавливает [`заголовка HTTP`](https://ru.wikipedia.org/wiki/Список_заголовков_HTTP) `Content-Type`, возвращает интерфейс [`FileRequestBody`](#file-request-body) для отправки файла в теле запроса.
 
 &nbsp;
 

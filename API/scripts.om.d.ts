@@ -1351,6 +1351,10 @@ export namespace Http {
 		appendFile(fieldName: string, fileName: string, filePath: string): this;
 	}
 
+    export interface FileRequestBody {
+        appendFile(filePath: string): this;
+    }
+
 	export interface RequestBody {
 		/**
 		 * Content-Type: application/json
@@ -1363,6 +1367,8 @@ export namespace Http {
 		 * Content-Type: application/x-www-form-urlencoded
 		 */
 		formBody(): FormRequestBody;
+
+        fileBody(): FileRequestBody;
 	}
 
 	export interface Cert {
