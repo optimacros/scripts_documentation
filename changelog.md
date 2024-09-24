@@ -18,5 +18,6 @@
 
 &nbsp;
 
-[API Reference](./API.md)
-[Оглавление](../README.md)
+[API Reference](./API/API.md)
+
+[Оглавление](./README.md)
