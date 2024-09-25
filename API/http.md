@@ -42,14 +42,14 @@ urlDecode(value: string): string | boolean;
 ```js
 base64Encode(value: string): string | boolean;
 ```
-Возвращает строку `value`, закодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` если передана не строка.
+Возвращает строку `value`, закодированную по схеме [`base64`](https://ru.wikipedia.org/wiki/Base64), или `false` если передана не строка.
 
 &nbsp;
 
 ```js
 base64Decode(value: string): string | boolean;
 ```
-Возвращает строку `value`, раскодированную по схеме [`base64 `](https://ru.wikipedia.org/wiki/Base64), или `false` в случае ошибки.
+Возвращает строку `value`, раскодированную по схеме [`base64`](https://ru.wikipedia.org/wiki/Base64), или `false` в случае ошибки.
 
 &nbsp;
 
