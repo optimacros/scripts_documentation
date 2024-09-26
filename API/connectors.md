@@ -49,7 +49,7 @@ oracle(): OracleConnectorBuilder;
 ```js
 snowflake(): SnowflakeConnectorBuilder;
 ```
-Возвращает коннектор [`SnowflakeConnectorBuilder`](./relationalDB.md#snowflake-connector-builder) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/).
+Возвращает коннектор [`SnowflakeConnectorBuilder`](./relationalDB.md#snowflake-connector-builder) для подключения к базе данных [`Snowflake`](https://en.wikipedia.org/wiki/Snowflake_Inc%2E).
 
 &nbsp;
 
@@ -80,7 +80,7 @@ winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 ```js
 verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
 ```
-Возвращает коннектор [`PgsqlDrivenVerticaConnectorBuilder`](./relationalDB.md#vertica-connector-builder) для подключения к базе данных [`Vertica`](https://docs.vertica.com/).
+Возвращает коннектор [`PgsqlDrivenVerticaConnectorBuilder`](./relationalDB.md#vertica-connector-builder) для подключения к базе данных [`Vertica`](https://en.wikipedia.org/wiki/Vertica).
 
 &nbsp;
 
