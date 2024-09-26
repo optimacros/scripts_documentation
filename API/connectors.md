@@ -11,6 +11,7 @@ interface Connectors {
 	mongodb(): Mongodb.ConnectorBuilder;
 	http(): Http.HttpManager;
 	winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
+	verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
 }
 ```
 Интерфейс, группирующий [`коннекторы`](../appendix/glossary.md#connector) к различным внешним системам.
@@ -48,7 +49,7 @@ oracle(): OracleConnectorBuilder;
 ```js
 snowflake(): SnowflakeConnectorBuilder;
 ```
-Возвращает коннектор [`SnowflakeConnectorBuilder`](./relationalDB.md#snowflake-connector-builder) для подключения к базе данных [`Snowflake`](https://habr.com/ru/company/lifestreet/blog/270167/).
+Возвращает коннектор [`SnowflakeConnectorBuilder`](./relationalDB.md#snowflake-connector-builder) для подключения к базе данных [`Snowflake`](https://en.wikipedia.org/wiki/Snowflake_Inc%2E).
 
 &nbsp;
 
@@ -73,6 +74,13 @@ winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 **Deprecation warning! Данный интерфейс более не развивается и будет удален в будущих версиях приложения. Если вы его используете, вам необходимо реализовать взаимодействие через коннектор `http`**
 
 Возвращает коннектор [`WinAgent.WinAgentBuilder`](./winAgent.md#win-agent-builder) для взаимодействия с [`WinAgent`](./winAgent.md). Параметр `builtIn` указывает использовать встроенную конфигурацию воркспейса. Значение по умолчанию: `false`.
+
+&nbsp;
+
+```js
+verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
+```
+Возвращает коннектор [`PgsqlDrivenVerticaConnectorBuilder`](./relationalDB.md#vertica-connector-builder) для подключения к базе данных [`Vertica`](https://en.wikipedia.org/wiki/Vertica).
 
 &nbsp;
 

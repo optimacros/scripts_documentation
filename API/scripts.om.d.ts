@@ -1636,6 +1636,9 @@ export interface PostgresqlConnectorBuilder extends SqlConnectorBuilder {
 	loadImportBuilder(): PostgresqlImportBuilder;
 }
 
+export interface PgsqlDrivenVerticaConnectorBuilder extends PostgresqlConnectorBuilder {
+}
+
 export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
 	setAccount(account: string): this;
 	setRegion(region: string): this;
@@ -1664,6 +1667,7 @@ export interface Connectors {
 	 * @param builtIn Use built-in configuration if exists. Default is 'false'
 	 */
 	winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
+	verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
 }
 
 export namespace Notifications {

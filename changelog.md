@@ -2,6 +2,7 @@
 
 | Дата релиза | Тег релиза | Версия ScriptAPI | Версии MiddleWork | Версия приложения | Изменения |
 | --- | --- | --- | --- | --- | --- |
+| 26.09.2024 | [v9.0.50.6](https://github.com/optimacros/scripts_documentation/tree/v9.0.50.6) | — | <ul><li>9.0.50.6</li></ul> | — | <ul><li>В интерфейс [Connectors](./API/connectors.md#connectors) добавлен коннектор для подключения к базе данных `Vertica`</li></ul> |
 | 19.09.2024 | [v9.0.49.1](https://github.com/optimacros/scripts_documentation/tree/v9.0.49.1) | — | <ul><li>9.0.49.1</li></ul> | — | <ul><li>В HTTP интерфейс [RequestBody](./API/http.md#request-body) добавлена функция `fileBody()`</li></ul> |
 | 17.06.2024 | [api-actualization](https://github.com/optimacros/scripts_documentation/tree/api-actualization) | — | — | — | <ul><li>Актуализация декларации API скриптов</li></ul> |
 | 10.06.2024 | [v7.2.70.2--v8.0.37.2--v9.0.43.3](https://github.com/optimacros/scripts_documentation/tree/v7.2.70.2--v8.0.37.2--v9.0.43.3) | — | <ul><li>7.2.70.2</li><li>8.0.37.2</li><li>9.0.43.3</li></ul> | <ul><li>7.49.5</li><li>8.40.6</li><li>9.44.3</li></ul> | <ul><li>В интерфейс [Importer](./API/exportImport.md#importer) добавлены функции `setEncoding()`, `getEncoding()`</li></ul> |
