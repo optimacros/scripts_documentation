@@ -62,7 +62,7 @@ interface Filesystem {
 	download(from: string, to: string): boolean;
 	makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 	getPathObj(path: string): PathObj;
-    changeTextFileCharset(path: string, fromCharset: string, toCharset: string): boolean;
+    	changeTextFileCharset(path: string, fromCharset: string, toCharset: string): boolean;
 }
 ```
 Абстрактный интерфейс файловой системы.
