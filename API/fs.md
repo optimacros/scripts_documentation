@@ -62,6 +62,7 @@ interface Filesystem {
 	download(from: string, to: string): boolean;
 	makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): string;
 	getPathObj(path: string): PathObj;
+	changeTextFileCharset(path: string, fromCharset: string, toCharset: string): boolean;
 }
 ```
 Абстрактный интерфейс файловой системы.
@@ -185,6 +186,13 @@ makeGlobalFile(name: string, extension: string, path: string, copy?: boolean): s
 getPathObj(path: string): PathObj;
 ```
 Возвращает интерфейс [`PathObj`](#path-obj).
+
+&nbsp;
+
+```js
+changeTextFileCharset(path: string, fromCharset: string, toCharset: string): boolean;
+```
+Меняет кодировку файла `path` (удаляет и создаёт новый) из кодировки `fromCharset` в кодировку `toCharset`. Список поддерживаемых кодировок[`здесь`](https://www.php.net/manual/ru/mbstring.supported-encodings.php). В случае неправильно указанной кодировки выбрасывает исключение. Возвращает `true` в случае успеха.
 
 &nbsp;
 
