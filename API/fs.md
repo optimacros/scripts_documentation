@@ -192,7 +192,7 @@ getPathObj(path: string): PathObj;
 ```js
 changeTextFileCharset(path: string, fromCharset: string, toCharset: string): boolean;
 ```
-Меняет кодировку файла `path` (удаляет и создаёт новый) из кодировки `fromCharset` в кодировку `toCharset`. Список поддерживаемых кодировок[`здесь`](https://www.php.net/manual/ru/mbstring.supported-encodings.php). В случае неправильно указанной кодировки выбрасывает исключение. Возвращает `true` в случае успеха.
+Меняет кодировку файла `path` (удаляет и создаёт новый) из кодировки `fromCharset` в кодировку `toCharset`. Список поддерживаемых кодировок [`здесь`](https://www.php.net/manual/ru/mbstring.supported-encodings.php). В случае неправильно указанной кодировки выбрасывает исключение. Возвращает `true` в случае успеха.
 
 &nbsp;
 

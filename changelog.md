@@ -2,7 +2,7 @@
 
 | Дата релиза | Тег релиза | Версия ScriptAPI | Версии MiddleWork | Версия приложения | Изменения |
 | --- | --- | --- | --- | --- | --- |
-| 15.11.2024 | [v9.200.x.13](https://github.com/optimacros/scripts_documentation/tree/v9.200.x.13) | — | <ul><li>9.200.x.13</li></ul> | <ul><li> - </li></ul> | <ul><li>В интерфейс [Filesystem](./API/fs.md#filesystem) добавлен метод для изменения кодировки файла `changeTextFileCharset()`</li></ul> |
+| 15.11.2024 | [v9.200.x.13](https://github.com/optimacros/scripts_documentation/tree/v9.200.x.13) | — | <ul><li>9.200.x.13</li></ul> | <ul><li> — </li></ul> | <ul><li>В интерфейс [Filesystem](./API/fs.md#filesystem) добавлен метод для изменения кодировки файла `changeTextFileCharset()`</li></ul> |
 | 26.09.2024 | [v9.0.50.6](https://github.com/optimacros/scripts_documentation/tree/v9.0.50.6) | — | <ul><li>9.0.50.6</li></ul> | <ul><li>9.54.10</li></ul> | <ul><li>В интерфейс [Connectors](./API/connectors.md#connectors) добавлен коннектор для подключения к базе данных `Vertica`</li></ul> |
 | 19.09.2024 | [v9.0.49.1](https://github.com/optimacros/scripts_documentation/tree/v9.0.49.1) | — | <ul><li>9.0.49.1</li></ul> | <ul><li>9.52.1</li></ul> | <ul><li>В HTTP интерфейс [RequestBody](./API/http.md#request-body) добавлена функция `fileBody()`</li></ul> |
 | 17.06.2024 | [api-actualization](https://github.com/optimacros/scripts_documentation/tree/api-actualization) | — | — | — | <ul><li>Актуализация декларации API скриптов</li></ul> |
