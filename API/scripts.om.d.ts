@@ -569,16 +569,15 @@ export interface UserInfo {
 	getRole(): EntityInfo;
 }
 
-export interface EnterpriseLicenseManager {
-	getWorkspaceLicenseStatus(): boolean;
-	getWorkspaceLicenseInfo(): Object;
+export interface EnterpriseContractManager {
+    getWorkspaceContractStatus(): boolean;
+    getWorkspaceContractInfo(): object;
 
-	createKey(password: string): string;
-	validateKey(password: string, key: string): boolean;
+    createSalt(): string;
 
-	validateLicenseJson(jsonStr: string): boolean;
-	createLicense(password: string, key: string, jsonStr: string): string;
-	validateLicense(password: string, key: string, licenseData: string): Object;
+    validateContractJson(jsonStr: string): boolean;
+    createContractHash(contractData: string, salt: string): string;
+    validateContract(contractData: string, hash: string, salt: string): object;
 }
 
 export type MetricData = {
@@ -805,7 +804,7 @@ export interface Common {
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
-	enterpriseLicenseManager(): EnterpriseLicenseManager;
+	enterpriseContractManager(): EnterpriseContractManager;
 	metricsManager(): MetricsManager;
 
 	/**

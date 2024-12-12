@@ -11,7 +11,7 @@ interface Common {
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
-	enterpriseLicenseManager(): EnterpriseLicenseManager;
+	enterpriseContractManager(): EnterpriseContractManager;
 	metricsManager(): MetricsManager;
 
 	setCurrentMacrosStorageReadMode(type: string): boolean;
@@ -80,9 +80,9 @@ apiServiceRequestInfo(): ApiService.RequestInfo | null;
 &nbsp;
 
 ```js
-enterpriseLicenseManager(): EnterpriseLicenseManager;
+enterpriseContractManager(): EnterpriseContractManager;
 ```
-Возвращает ссылку на интерфейс [`EnterpriseLicenseManager`](#enterprise-license-manager).
+Возвращает ссылку на интерфейс [`EnterpriseContractManager`](#enterprise-contract-manager).
 
 &nbsp;
 
@@ -716,18 +716,17 @@ copy(): this;
 
 &nbsp;
 
-### Интерфейс EnterpriseLicenseManager<a name="enterprise-license-manager"></a>
+### Интерфейс EnterpriseContractManager<a name="enterprise-contract-manager"></a>
 ```ts
-interface EnterpriseLicenseManager {
-	getWorkspaceLicenseStatus(): boolean;
-	getWorkspaceLicenseInfo(): Object;
+interface EnterpriseContractManager {
+	getWorkspaceContractStatus(): boolean;
+	getWorkspaceContractInfo(): Object;
 	
-	createKey(password: string): string;
-	validateKey(password: string, key: string): boolean;
+	createSalt(): string;
 	
-	validateLicenseJson(jsonStr: string): boolean;
-	createLicense(password: string, key: string, jsonStr: string): string;
-	validateLicense(password: string, key: string, licenseData: string): Object;
+	validateContractJson(jsonStr: string): boolean;
+	createContractHash(contractData: string, salt: string): string;
+	validateContract(contractData: string, hash: string, salt: string): Object;
 }
 ```
 Интерфейс для работы с лицензиями воркспейса: получения информации об установленной на воркспейсе лицензии, создании шифрованной лицензионной строки и её валидации. Текст лицензии — `JSON`-строка, содержащая произвольную информацию. Документации на поля этого `JSON` на данный момент нет, но основное, что там должно содержаться, — информация об объекте лицензирования (домене, на котором будет развёрнут воркспейс) и допустимых параметрах воркспейса (число моделеров, число обычных пользователей и т. п.).
@@ -737,50 +736,56 @@ interface EnterpriseLicenseManager {
 &nbsp;
 
 ```js
-getWorkspaceLicenseStatus(): boolean;
+getWorkspaceContractStatus(): boolean;
 ```
-Если на воркспейсе в панели администратора установлена лицензия, соответствующая зашитым в дистрибутив паролю и ключу, возвращает `true`. В противном случае возвращает `false`.
+Возвращает `true`, если воркспейс установлен из дистрибутива, собранного с вшитыми данными для сверки параметров договора. В противном случае возвращает `false`.
 
 &nbsp;
 
 ```js
-getWorkspaceLicenseInfo(): Object;
+getWorkspaceContractInfo(): Object;
 ```
-Если на воркспейсе установлена валидная лицензия, возвращает стандартный JS-объект с полями, указанными в исходной структуре лицензии. В случае отсутствия лицензии выбрасывается исключение `License not valid`.
+Возвращает стандартный JS-объект объект, содержащий параметры договора.
+
+Если проверка параметров договора не успешна, возвращаемый объект содержит также непустое свойство `errors` с перечислением ошибок валидации.
+
+Если воркспейс не имеет вшитых данных для проверки параметров договора, метод выбрасывает исключение `Contract is not valid`.
+
+Если параметры договора не указаны для воркспейса в интерфейсе администратора, возвращаемый объект будет содержать ошибку `Contract not found`.
+
+Если указанный в интерфейсе администратора JSON-объект с параметрами договора имеет некорректную структуру, возвращаемый объект будет содержать ошибку `Contract json content not valid`.
+
 
 &nbsp;
 
 ```js
-createKey(password: string): string;
+createSalt(): string;
 ```
-Создаёт ключ на основе пароля `password`, которым можно в дальнейшем подписать лицензию. Повторный вызов приводит к генерации нового ключа.
+Генерирует и возвращает случайное значение `salt` для последующего использования при генерации хэша.
+
+&nbsp;
+
+
+```js
+validateContractJson(jsonStr: string): boolean;
+```
+Проверяет текстовое представление структуры лицензии `jsonStr` на соответствие формату `JSON`, никак не проверяет содержимое. Возвращает `true` или выбрасывает исключение об ошибке синтаксиса.
 
 &nbsp;
 
 ```js
-validateKey(password: string, key: string): boolean;
+createContractHash(contractData: string, salt: string): string;
 ```
-Проверяет ранее созданный ключ `key` на соответствие паролю `password`. Возвращает `true`, если проверка пройдена, иначе выбрасывает исключение.
+Генерирует и возвращает значение хэша для указанного JSON-объекта с параметрами договора `contractData` и значением `salt`.
 
 &nbsp;
 
 ```js
-validateLicenseJson(jsonStr: string): boolean;
+validateContract(contractData: string, hash: string, salt: string): Object;
 ```
-Проверяет текстовое представление структуры лицензии `jsonStr` на соответствие формату `JSON`, никак не проверяет содержимое лицензии. Возвращает `true` или выкидывает исключение об ошибке синтаксиса. 
+Генерирует хэш для указанного JSON-объекта с параметрами договора `contractData` и значением `salt` и сравнивает полученное значение с `hash`. Возвращает стандартный JS-объект, содержащий параметры договора, если проверка прошла успешно. В противном случае выбрасывает исключение `Contract data does not match hash`.
 
-&nbsp;
-
-```js
-createLicense(password: string, key: string, jsonStr: string): string;
-```
-Создаёт лицензию — зашифрованные данные на основе пароля `password`, ключа `key` и JSON-данных лицензии `jsonStr`. Возвращает строку с лицензией.
-&nbsp;
-
-```js
-validateLicense(password: string, key: string, licenseData: string): Object;
-```
-Проверяет ранее созданную лицензию `licenseData` на соответствие паролю `password` и ключу `key`. Возвращает объект с полями, указанными в исходной структуре лицензии, но у каждого названия свойства объекта появляется префикс `$`. В случае несоответствия лицензии ключу и паролю возвращается объект с текстом ошибки: `{"$errors": "Содержание лицензии не распознается"}`.
+Если переданная JSON-строка `contractData` имеет некорректную структуру, выбрасывается исключение `Contract json content not valid`.
 
 &nbsp;
 
