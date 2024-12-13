@@ -720,13 +720,13 @@ copy(): this;
 ```ts
 interface EnterpriseContractManager {
 	doesWorkspaceRequireContract(): boolean;
-	getWorkspaceContractInfo(): Object;
+	getWorkspaceContractInfo(): string;
 	
 	generateSalt(): string;
 	
 	validateContractJson(jsonStr: string): boolean;
 	calculateContractHash(contractData: string, salt: string): string;
-	validateContract(contractData: string, hash: string, salt: string): Object;
+	validateContract(contractData: string, hash: string, salt: string): string;
 }
 ```
 Интерфейс для работы с параметрами договора воркспейса: получения информации об установленных на воркспейсе параметрах договора, создании хэш-строки, валидации параметров договора согласно хэш-строке. Параметры договора — это `JSON`-объект, содержащий произвольную информацию. Документации на поля этого `JSON` на данный момент нет, но основное, что там должно содержаться, — информация об объекте договора (домене, на котором будет развёрнут воркспейс) и допустимых параметрах воркспейса (число моделеров, число обычных пользователей и т.п.).
@@ -745,7 +745,7 @@ doesWorkspaceRequireContract(): boolean;
 ```js
 getWorkspaceContractInfo(): Object;
 ```
-Сравнивает параметры договора, указанные в настройках воркспейса, с параметрами текущего воркспейса. Возвращает стандартный JS-объект объект, содержащий параметры договора.
+Сравнивает параметры договора, указанные в настройках воркспейса, с параметрами текущего воркспейса. Возвращает строку - JSON-encoded объект, содержащий параметры договора.
 
 Если проверка параметров договора не успешна, возвращаемый объект содержит также непустое свойство `errors` с перечислением ошибок валидации.
 
@@ -782,9 +782,9 @@ calculateContractHash(contractData: string, salt: string): string;
 &nbsp;
 
 ```js
-validateContract(contractData: string, hash: string, salt: string): Object;
+validateContract(contractData: string, hash: string, salt: string): string;
 ```
-Генерирует хэш для указанного JSON-объекта с параметрами договора `contractData` и значением `salt` и сравнивает полученное значение с `hash`. Возвращает стандартный JS-объект, содержащий параметры договора, если проверка прошла успешно. В противном случае выбрасывает исключение `Contract data does not match hash`.
+Генерирует хэш для указанного JSON-объекта с параметрами договора `contractData` и значением `salt` и сравнивает полученное значение с `hash`. Если проверка прошла успешно, возвращает строку - JSON-encoded объект, содержащий параметры договора. В противном случае выбрасывает исключение `Contract data does not match hash`.
 
 Параметр `contractData` должен быть валидной JSON-строкой, а `hash` и `salt` - не пустой строкой.
 
