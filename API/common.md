@@ -743,7 +743,7 @@ doesWorkspaceRequireContract(): boolean;
 &nbsp;
 
 ```js
-getWorkspaceContractInfo(): Object;
+getWorkspaceContractInfo(): string;
 ```
 Сравнивает параметры договора, указанные в настройках воркспейса, с параметрами текущего воркспейса. Возвращает строку - JSON-encoded объект, содержащий параметры договора.
 
