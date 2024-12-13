@@ -719,13 +719,13 @@ copy(): this;
 ### Интерфейс EnterpriseContractManager<a name="enterprise-contract-manager"></a>
 ```ts
 interface EnterpriseContractManager {
-	getWorkspaceContractStatus(): boolean;
+	doesWorkspaceRequireContract(): boolean;
 	getWorkspaceContractInfo(): Object;
 	
-	createSalt(): string;
+	generateSalt(): string;
 	
 	validateContractJson(jsonStr: string): boolean;
-	createContractHash(contractData: string, salt: string): string;
+	calculateContractHash(contractData: string, salt: string): string;
 	validateContract(contractData: string, hash: string, salt: string): Object;
 }
 ```
@@ -736,7 +736,7 @@ interface EnterpriseContractManager {
 &nbsp;
 
 ```js
-getWorkspaceContractStatus(): boolean;
+doesWorkspaceRequireContract(): boolean;
 ```
 Возвращает `true`, если воркспейс установлен из дистрибутива, собранного с вшитыми данными для сверки параметров договора. В противном случае возвращает `false`.
 
@@ -745,21 +745,20 @@ getWorkspaceContractStatus(): boolean;
 ```js
 getWorkspaceContractInfo(): Object;
 ```
-Возвращает стандартный JS-объект объект, содержащий параметры договора.
+Сравнивает параметры договора, указанные в настройках воркспейса, с параметрами текущего воркспейса. Возвращает стандартный JS-объект объект, содержащий параметры договора.
 
 Если проверка параметров договора не успешна, возвращаемый объект содержит также непустое свойство `errors` с перечислением ошибок валидации.
-
-Если воркспейс не имеет вшитых данных для проверки параметров договора, метод выбрасывает исключение `Contract is not valid`.
 
 Если параметры договора не указаны для воркспейса в интерфейсе администратора, возвращаемый объект будет содержать ошибку `Contract not found`.
 
 Если указанный в интерфейсе администратора JSON-объект с параметрами договора имеет некорректную структуру, возвращаемый объект будет содержать ошибку `Contract json content not valid`.
 
+Если воркспейс не имеет вшитых данных для проверки параметров договора, метод выбрасывает исключение `Contract is not required for this workspace`.
 
 &nbsp;
 
 ```js
-createSalt(): string;
+generateSalt(): string;
 ```
 Генерирует и возвращает случайное значение `salt` для последующего использования при генерации хэша.
 
@@ -769,12 +768,12 @@ createSalt(): string;
 ```js
 validateContractJson(jsonStr: string): boolean;
 ```
-Проверяет `jsonStr` на соответствие формату `JSON`, никак не проверяет содержимое. Возвращает `true` или выбрасывает исключение об ошибке синтаксиса.
+Проверяет `jsonStr` на соответствие формату `JSON` и схеме валидации параметров контракта. Возвращает `true` или выбрасывает исключение об ошибке синтаксиса.
 
 &nbsp;
 
 ```js
-createContractHash(contractData: string, salt: string): string;
+calculateContractHash(contractData: string, salt: string): string;
 ```
 Генерирует и возвращает значение хэша для указанного JSON-объекта с параметрами договора `contractData` и значением `salt`.
 
