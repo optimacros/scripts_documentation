@@ -777,12 +777,16 @@ calculateContractHash(contractData: string, salt: string): string;
 ```
 Генерирует и возвращает значение хэша для указанного JSON-объекта с параметрами договора `contractData` и значением `salt`.
 
+Параметр `contractData` должен быть валидной JSON-строкой, а `salt` - не пустой строкой.
+
 &nbsp;
 
 ```js
 validateContract(contractData: string, hash: string, salt: string): Object;
 ```
 Генерирует хэш для указанного JSON-объекта с параметрами договора `contractData` и значением `salt` и сравнивает полученное значение с `hash`. Возвращает стандартный JS-объект, содержащий параметры договора, если проверка прошла успешно. В противном случае выбрасывает исключение `Contract data does not match hash`.
+
+Параметр `contractData` должен быть валидной JSON-строкой, а `hash` и `salt` - не пустой строкой.
 
 Если переданная JSON-строка `contractData` имеет некорректную структуру, выбрасывается исключение `Contract json content not valid`.
 
