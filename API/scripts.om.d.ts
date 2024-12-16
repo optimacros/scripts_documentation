@@ -570,14 +570,14 @@ export interface UserInfo {
 }
 
 export interface EnterpriseContractManager {
-    getWorkspaceContractStatus(): boolean;
-    getWorkspaceContractInfo(): object;
-
-    createSalt(): string;
-
-    validateContractJson(jsonStr: string): boolean;
-    createContractHash(contractData: string, salt: string): string;
-    validateContract(contractData: string, hash: string, salt: string): object;
+    doesWorkspaceRequireContract(): boolean;
+    getWorkspaceContractInfo(): string;
+	
+	generateSalt(): string;
+	
+	validateContractJson(jsonStr: string): boolean;
+	calculateContractHash(contractData: string, salt: string): string;
+	validateContract(contractData: string, hash: string, salt: string): string;
 }
 
 export type MetricData = {
