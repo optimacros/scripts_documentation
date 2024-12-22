@@ -569,12 +569,17 @@ export interface UserInfo {
 	getRole(): EntityInfo;
 }
 
+export type ContractInfo = {
+	contractJson(): string;
+	errors(): string[];
+}
+
 export interface EnterpriseContractManager {
-    doesWorkspaceRequireContract(): boolean;
-    getWorkspaceContractInfo(): string;
-	
+	doesWorkspaceRequireContract(): boolean;
+	getWorkspaceContractInfo(): ContractInfo;
+
 	generateSalt(): string;
-	
+
 	validateContractJson(jsonStr: string): boolean;
 	calculateContractHash(contractData: string, salt: string): string;
 	validateContract(contractData: string, hash: string, salt: string): string;
