@@ -11,7 +11,7 @@ interface Common {
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
-	enterpriseLicenseManager(): EnterpriseLicenseManager;
+	enterpriseContractManager(): EnterpriseContractManager;
 	metricsManager(): MetricsManager;
 
 	setCurrentMacrosStorageReadMode(type: string): boolean;
@@ -80,9 +80,9 @@ apiServiceRequestInfo(): ApiService.RequestInfo | null;
 &nbsp;
 
 ```js
-enterpriseLicenseManager(): EnterpriseLicenseManager;
+enterpriseContractManager(): EnterpriseContractManager;
 ```
-Возвращает ссылку на интерфейс [`EnterpriseLicenseManager`](#enterprise-license-manager).
+Возвращает ссылку на интерфейс [`EnterpriseContractManager`](#enterprise-contract-manager).
 
 &nbsp;
 
@@ -716,71 +716,127 @@ copy(): this;
 
 &nbsp;
 
-### Интерфейс EnterpriseLicenseManager<a name="enterprise-license-manager"></a>
+### Интерфейс EnterpriseContractManager<a name="enterprise-contract-manager"></a>
 ```ts
-interface EnterpriseLicenseManager {
-	getWorkspaceLicenseStatus(): boolean;
-	getWorkspaceLicenseInfo(): Object;
+interface EnterpriseContractManager {
+	doesWorkspaceRequireContract(): boolean;
+	getWorkspaceContractInfo(): ContractInfo;
 	
-	createKey(password: string): string;
-	validateKey(password: string, key: string): boolean;
+	generateSalt(): string;
 	
-	validateLicenseJson(jsonStr: string): boolean;
-	createLicense(password: string, key: string, jsonStr: string): string;
-	validateLicense(password: string, key: string, licenseData: string): Object;
+	validateContractJson(jsonStr: string): boolean;
+	calculateContractHash(contractData: string, salt: string): string;
+	validateContract(contractData: string, hash: string, salt: string): string;
 }
 ```
-Интерфейс для работы с лицензиями воркспейса: получения информации об установленной на воркспейсе лицензии, создании шифрованной лицензионной строки и её валидации. Текст лицензии — `JSON`-строка, содержащая произвольную информацию. Документации на поля этого `JSON` на данный момент нет, но основное, что там должно содержаться, — информация об объекте лицензирования (домене, на котором будет развёрнут воркспейс) и допустимых параметрах воркспейса (число моделеров, число обычных пользователей и т. п.).
+On-premise (на сервере клиента) установка предполагает ограничения на различные параметры воркспейса: домен, число моделеров, число обычных пользователей и т. д. Для контроля соответствия фактического состояния вещей договору с клиентом используется следующий подход:
 
-Для создания лицензии требуется пароль (произвольная строка) и ключ, сгенерированный на основе этого пароля. Далее текст лицензии шифруется с помощью пароля и ключа. После этого пароль, ключ и идентификатор лицензии (который будет отображаться в панели администратора) помещаются в дистрибутив, который будет установлен на сервере клиента, а зашифрованная лицензия передаётся клиенту и должна быть введена в панели администратора воркспейса в специальное поле в настройках воркспейса.
+1. при сборке дистрибутива для клиента в него записывается секретная строка — [соль](https://ru.wikipedia.org/wiki/Соль_(криптография)),
+1. параметры договора записываются в виде JSON-строки фиксированного формата (который на данный момент не задокументирован),
+1. JSON-строка и значение хэш-функции (тоже текст), которое было рассчитано из JSON-строки и соли, передаются клиенту,
+1. клиент указывает оба этих значения в настройках воркспейса в панели администратора воркспейса,
+1. воркспейс проверяет
+   - соответствие строки формату JSON,
+   - соответствие JSON-строки схеме данных,
+   - соответствие JSON-строки указанному значению хэш-функции,
+   - соответствие текущих параметров воркспейса параметрам, указанным в JSON-строке,
+1. в случае наличия ошибок или нарушения параметров договора всем пользователям выводится системное сообщение с информацией о проблеме.
 
-&nbsp;
-
-```js
-getWorkspaceLicenseStatus(): boolean;
-```
-Если на воркспейсе в панели администратора установлена лицензия, соответствующая зашитым в дистрибутив паролю и ключу, возвращает `true`. В противном случае возвращает `false`.
-
-&nbsp;
-
-```js
-getWorkspaceLicenseInfo(): Object;
-```
-Если на воркспейсе установлена валидная лицензия, возвращает стандартный JS-объект с полями, указанными в исходной структуре лицензии. В случае отсутствия лицензии выбрасывается исключение `License not valid`.
+Данный интерфейс предоставляет возможность работать с текущими параметрами договора воркспейса, а также генерировать новые пары "`соль — значение хэш-функции`" на основе произвольных параметров договора.
 
 &nbsp;
 
 ```js
-createKey(password: string): string;
+doesWorkspaceRequireContract(): boolean;
 ```
-Создаёт ключ на основе пароля `password`, которым можно в дальнейшем подписать лицензию. Повторный вызов приводит к генерации нового ключа.
+Возвращает `true`, если воркспейс установлен из дистрибутива, собранного с данными для сверки параметров договора. В противном случае возвращает `false`.
 
 &nbsp;
 
 ```js
-validateKey(password: string, key: string): boolean;
+getWorkspaceContractInfo(): ContractInfo;
 ```
-Проверяет ранее созданный ключ `key` на соответствие паролю `password`. Возвращает `true`, если проверка пройдена, иначе выбрасывает исключение.
+Сначала функция проверяет JSON-объект с параметрами договора аналогично `validateContractJson()`. Если указанный в интерфейсе администратора JSON-объект содержит синтаксическую ошибку или не соответствует схеме данных, будет выброшено соответствующее исключение.
+
+Затем сравнивает параметры договора, указанные в настройках воркспейса (`Settings` -> `Editor` -> `Workspace` -> `Contract`), с текущими параметрами воркспейса. Возвращает объект [`ContractInfo`](#contract-info) с результатом проверок.
+
+Если воркспейс не имеет данных для проверки параметров договора, выбрасывает исключение `Contract is not required for this workspace`.
 
 &nbsp;
 
 ```js
-validateLicenseJson(jsonStr: string): boolean;
+generateSalt(): string;
 ```
-Проверяет текстовое представление структуры лицензии `jsonStr` на соответствие формату `JSON`, никак не проверяет содержимое лицензии. Возвращает `true` или выкидывает исключение об ошибке синтаксиса. 
+Генерирует и возвращает случайное значение соли для последующего использования при генерации хэша.
 
 &nbsp;
 
 ```js
-createLicense(password: string, key: string, jsonStr: string): string;
+validateContractJson(jsonStr: string): boolean;
 ```
-Создаёт лицензию — зашифрованные данные на основе пароля `password`, ключа `key` и JSON-данных лицензии `jsonStr`. Возвращает строку с лицензией.
+Проверяет `jsonStr` на соответствие формату `JSON` и схеме валидации параметров договора. Возвращает `true` или выбрасывает исключение об ошибке синтаксиса.
+
 &nbsp;
 
 ```js
-validateLicense(password: string, key: string, licenseData: string): Object;
+calculateContractHash(contractData: string, salt: string): string;
 ```
-Проверяет ранее созданную лицензию `licenseData` на соответствие паролю `password` и ключу `key`. Возвращает объект с полями, указанными в исходной структуре лицензии, но у каждого названия свойства объекта появляется префикс `$`. В случае несоответствия лицензии ключу и паролю возвращается объект с текстом ошибки: `{"$errors": "Содержание лицензии не распознается"}`.
+Проверяет JSON-строку `contractData` с параметрами договора аналогично методу `validateContractJson()`, затем рассчитывает и возвращает значение хэш-функции, используя значение соли, которое должно быть произвольной непустой строкой.
+
+&nbsp;
+
+```js
+validateContract(contractData: string, hash: string, salt: string): string;
+```
+Проверяет JSON-строку `contractData` с параметрами договора аналогично методу `validateContractJson()`, затем проверяет соответствие параметров договора `contractData` и второго аргумента хэш-функции `salt` значению этой хэш-функции `hash`. Если проверка прошла успешно, возвращает JSON-объект с параметарми договора в виде строки. В противном случае выбрасывает исключение `Contract data does not match hash`. `hash` и `salt` должны быть непустыми строками.
+
+&nbsp;
+
+### Тип ContractInfo<a name="contract-info"></a>
+```ts
+type ContractInfo = {
+	contractJson(): string;
+	errors(): string[];
+}
+```
+Объект содержит информацию о параметрах договора и обнаруженных проблемах. Если параметры договора не указаны в интерфейсе администратора, объект будет содержать только ошибку `Contract not found`.
+
+Если параметры, указанные в JSON-строке не соответствуют текущим параметрам воркспейса, объект `ContractInfo` будет содержать информацию об этих несоответствиях, которую можно получить, вызвав метод `errors()`.
+
+Пример использования:
+
+```js
+try {
+	const contractInfo = om.common.enterpriseContractManager().getWorkspaceContractInfo();
+
+	const errors = contractInfo.errors();
+	if (errors.length > 0) {
+		console.log("Errors:\n" + errors + "\n\n");
+	}
+
+	console.log(contractInfo.contractJson());
+} catch (e) {
+	console.log("Exception: " + e.message);
+}
+```
+
+&nbsp;
+
+```js
+contractJson(): string;
+```
+Возвращает нормализованную JSON-строку, которая соответствует JSON-объекту, указанному в панели администратора воркспейса. Например, если в панели администратора введена строка `{   "id"  :   "some_id"   }`, функция `contractJson()` вернёт `{"id":"some_id"}`.
+
+Если JSON-строка и значение хэш-функции не соответствуют записанному в воркспейс значению соли, вернёт пустой JSON-объект.
+
+&nbsp;
+
+```js
+errors(): string[];
+```
+Возвращает список строк с обнаруженными проблемами.
+
+Если JSON-строка и значение хэш-функции не соответствуют записанному в воркспейс значению соли, список будет содержать ошибку `Contract data does not match hash`.
 
 &nbsp;
 
