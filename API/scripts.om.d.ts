@@ -817,6 +817,8 @@ export interface Common {
 	 */
 	setCurrentMacrosStorageReadMode(type: string): boolean;
 	getCurrentMacrosStorageReadMode(): string;
+
+	sleep(sec: number): void;
 }
 
 export interface FileMeta {
