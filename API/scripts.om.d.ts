@@ -490,6 +490,12 @@ export interface CellBuffer {
 	apply(): this;
 	count(): number;
 	canLoadCellsValues(value: boolean): this;
+	lastApplyErrors(): CellApplyError[];
+}
+
+export interface CellApplyError {
+	definitions(): number[];
+	error(): string;
 }
 
 export namespace ApiService {
