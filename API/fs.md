@@ -48,7 +48,7 @@ interface Filesystem {
 	has(path: string): boolean;
 	read(path: string): string;
 	readAndDelete(path: string): string;
-	write(path: string, contents: string): boolean;
+	write(path: string, contents: string): null;
 	delete(path: string): boolean;
 	rename(from: string, to: string): boolean;
 	copy(from: string, to: string): boolean;
@@ -91,9 +91,9 @@ readAndDelete(path: string): string;
 &nbsp;
 
 ```js
-write(path: string, contents: string): boolean;
+write(path: string, contents: string): null;
 ```
-Если файла `path` не существует, создаёт его; при необходимости создаёт промежуточные папки. Затем записывает текст `contents` в файл `path` и возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Если файла `path` не существует, создаёт его; при необходимости создаёт промежуточные папки. Затем записывает текст `contents` в файл `path`. Возвращает `null` в случае успешного выполнения.
 
 &nbsp;
 

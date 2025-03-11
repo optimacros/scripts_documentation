@@ -837,7 +837,7 @@ export interface Filesystem {
 	has(path: string): boolean;
 	read(path: string): string;
 	readAndDelete(path: string): string;
-	write(path: string, contents: string): void;
+	write(path: string, contents: string): null;
 	delete(path: string): void;
 	rename(from: string, to: string): void;
 	copy(from: string, to: string): void;
