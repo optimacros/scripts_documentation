@@ -837,16 +837,16 @@ export interface Filesystem {
 	has(path: string): boolean;
 	read(path: string): string;
 	readAndDelete(path: string): string;
-	write(path: string, contents: string): boolean;
-	delete(path: string): boolean;
-	rename(from: string, to: string): boolean;
-	copy(from: string, to: string): boolean;
+	write(path: string, contents: string): void;
+	delete(path: string): void;
+	rename(from: string, to: string): void;
+	copy(from: string, to: string): void;
 	getTimestamp(path: string): number;
 
-	getSize(path: string): number;
+	getSize(path: string): number|false;
 
-	createDir(path: string): boolean;
-	deleteDir(path: string): boolean;
+	createDir(path: string): void;
+	deleteDir(path: string): void;
 	listContents(path: string, recursive: boolean): FileMeta[];
 	getMetadata(path: string): Object;
 	upload(from: string, to: string): boolean;
