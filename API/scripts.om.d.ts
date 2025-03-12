@@ -846,7 +846,7 @@ export interface Filesystem {
 	getSize(path: string): number|false;
 
 	createDir(path: string): null;
-	deleteDir(path: string): void;
+	deleteDir(path: string): null;
 	listContents(path: string, recursive: boolean): FileMeta[];
 	getMetadata(path: string): Object;
 	upload(from: string, to: string): boolean;

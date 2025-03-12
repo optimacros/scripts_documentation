@@ -55,7 +55,7 @@ interface Filesystem {
 	getTimestamp(path: string): number;
 	getSize(path: string): number | boolean;
 	createDir(path: string): null;
-	deleteDir(path: string): boolean;
+	deleteDir(path: string): null;
 	listContents(path: string, recursive: boolean): FileMeta[];
 	getMetadata(path: string): Object;
 	upload(from: string, to: string): boolean;
@@ -140,9 +140,9 @@ createDir(path: string): null;
 &nbsp;
 
 ```js
-deleteDir(path: string): boolean;
+deleteDir(path: string): null;
 ```
-Удаляет папку `path`. Возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Удаляет папку `path`. Возвращает `null` в случае успешного выполнения или если папки не существует.
 
 &nbsp;
 
