@@ -53,7 +53,7 @@ interface Filesystem {
 	rename(from: string, to: string): null;
 	copy(from: string, to: string): null;
 	getTimestamp(path: string): number;
-	getSize(path: string): number | boolean;
+	getSize(path: string): number | false;
 	createDir(path: string): null;
 	deleteDir(path: string): null;
 	listContents(path: string, recursive: boolean): FileMeta[];
@@ -126,9 +126,9 @@ getTimestamp(path: string): number;
 &nbsp;
 
 ```js
-getSize(path: string): number | boolean;
+getSize(path: string): number | false;
 ```
-Возвращает размер файла в байтах. Если `path` является папкой, возвращает `false`. В связи с багом сейчас бросает исключение, если передана папка, а не файл.
+Возвращает размер файла в байтах. Если `path` является папкой, возвращает `false`. Если файла не существует, бросает исключение.
 
 &nbsp;
 
