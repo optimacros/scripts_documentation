@@ -54,7 +54,7 @@ interface Filesystem {
 	copy(from: string, to: string): null;
 	getTimestamp(path: string): number;
 	getSize(path: string): number | boolean;
-	createDir(path: string): boolean;
+	createDir(path: string): null;
 	deleteDir(path: string): boolean;
 	listContents(path: string, recursive: boolean): FileMeta[];
 	getMetadata(path: string): Object;
@@ -133,9 +133,9 @@ getSize(path: string): number | boolean;
 &nbsp;
 
 ```js
-createDir(path: string): boolean;
+createDir(path: string): null;
 ```
-Создаёт папку `path`; при необходимости создаёт промежуточные папки. Возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Создаёт папку `path`; при необходимости создаёт промежуточные папки. Если папка уже существует, ничего не делает. Возвращает `null` в случае успешного выполнения.
 
 &nbsp;
 
