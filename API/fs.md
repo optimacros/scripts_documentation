@@ -49,7 +49,7 @@ interface Filesystem {
 	read(path: string): string;
 	readAndDelete(path: string): string;
 	write(path: string, contents: string): null;
-	delete(path: string): boolean;
+	delete(path: string): null;
 	rename(from: string, to: string): boolean;
 	copy(from: string, to: string): boolean;
 	getTimestamp(path: string): number;
@@ -98,9 +98,9 @@ write(path: string, contents: string): null;
 &nbsp;
 
 ```js
-delete(path: string): boolean;
+delete(path: string): null;
 ```
-Удаляет файл `path`. Возвращает признак успешного выполнения. Если файл не существует, выбрасывает исключение. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Удаляет файл `path`. Возвращает `null` в случае успешного выполнения или если файла не существует.
 
 &nbsp;
 
