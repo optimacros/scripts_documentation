@@ -50,7 +50,7 @@ interface Filesystem {
 	readAndDelete(path: string): string;
 	write(path: string, contents: string): null;
 	delete(path: string): null;
-	rename(from: string, to: string): boolean;
+	rename(from: string, to: string): null;
 	copy(from: string, to: string): boolean;
 	getTimestamp(path: string): number;
 	getSize(path: string): number | boolean;
@@ -105,9 +105,9 @@ delete(path: string): null;
 &nbsp;
 
 ```js
-rename(from: string, to: string): boolean;
+rename(from: string, to: string): null;
 ```
-Переименовывает объект `from` в `to`. Возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Переименовывает файл/папку `from` в `to`. Возвращает `null` в случае успешного выполнения. Если объекта `from` не существует, бросает исключение.
 
 &nbsp;
 

@@ -839,7 +839,7 @@ export interface Filesystem {
 	readAndDelete(path: string): string;
 	write(path: string, contents: string): null;
 	delete(path: string): null;
-	rename(from: string, to: string): void;
+	rename(from: string, to: string): null;
 	copy(from: string, to: string): void;
 	getTimestamp(path: string): number;
 
