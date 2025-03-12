@@ -48,14 +48,14 @@ interface Filesystem {
 	has(path: string): boolean;
 	read(path: string): string;
 	readAndDelete(path: string): string;
-	write(path: string, contents: string): boolean;
-	delete(path: string): boolean;
-	rename(from: string, to: string): boolean;
-	copy(from: string, to: string): boolean;
+	write(path: string, contents: string): null;
+	delete(path: string): null;
+	rename(from: string, to: string): null;
+	copy(from: string, to: string): null;
 	getTimestamp(path: string): number;
-	getSize(path: string): number | boolean;
-	createDir(path: string): boolean;
-	deleteDir(path: string): boolean;
+	getSize(path: string): number | false;
+	createDir(path: string): null;
+	deleteDir(path: string): null;
 	listContents(path: string, recursive: boolean): FileMeta[];
 	getMetadata(path: string): Object;
 	upload(from: string, to: string): boolean;
@@ -91,30 +91,30 @@ readAndDelete(path: string): string;
 &nbsp;
 
 ```js
-write(path: string, contents: string): boolean;
+write(path: string, contents: string): null;
 ```
-Если файла `path` не существует, создаёт его; при необходимости создаёт промежуточные папки. Затем записывает текст `contents` в файл `path` и возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Если файла `path` не существует, создаёт его; при необходимости создаёт промежуточные папки. Затем записывает текст `contents` в файл `path`. Возвращает `null` в случае успешного выполнения.
 
 &nbsp;
 
 ```js
-delete(path: string): boolean;
+delete(path: string): null;
 ```
-Удаляет файл `path`. Возвращает признак успешного выполнения. Если файл не существует, выбрасывает исключение. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Удаляет файл `path`. Возвращает `null` в случае успешного выполнения или если файла не существует.
 
 &nbsp;
 
 ```js
-rename(from: string, to: string): boolean;
+rename(from: string, to: string): null;
 ```
-Переименовывает объект `from` в `to`. Возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Переименовывает файл/папку `from` в `to`. Возвращает `null` в случае успешного выполнения. Если объекта `from` не существует, бросает исключение.
 
 &nbsp;
 
 ```js
-copy(from: string, to: string): boolean;
+copy(from: string, to: string): null;
 ```
-Копирует файл `from` в путь `to`. Возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Копирует файл `from` в путь `to`. Возвращает `null` в случае успешного выполнения. Если файла `from` не существует, бросает исключение.
 
 &nbsp;
 
@@ -126,23 +126,23 @@ getTimestamp(path: string): number;
 &nbsp;
 
 ```js
-getSize(path: string): number | boolean;
+getSize(path: string): number | false;
 ```
-Возвращает размер файла в байтах. Если `path` является папкой, возвращает `false`. В связи с багом сейчас бросает исключение, если передана папка, а не файл.
+Возвращает размер файла в байтах. Если `path` является папкой, возвращает `false`. Если файла не существует, бросает исключение.
 
 &nbsp;
 
 ```js
-createDir(path: string): boolean;
+createDir(path: string): null;
 ```
-Создаёт папку `path`; при необходимости создаёт промежуточные папки. Возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Создаёт папку `path`; при необходимости создаёт промежуточные папки. Если папка уже существует, ничего не делает. Возвращает `null` в случае успешного выполнения.
 
 &nbsp;
 
 ```js
-deleteDir(path: string): boolean;
+deleteDir(path: string): null;
 ```
-Удаляет папку `path`. Возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Удаляет папку `path`. Возвращает `null` в случае успешного выполнения или если папки не существует.
 
 &nbsp;
 
