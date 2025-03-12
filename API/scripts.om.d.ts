@@ -843,7 +843,7 @@ export interface Filesystem {
 	copy(from: string, to: string): null;
 	getTimestamp(path: string): number;
 
-	getSize(path: string): number|false;
+	getSize(path: string): number | false;
 
 	createDir(path: string): null;
 	deleteDir(path: string): null;
