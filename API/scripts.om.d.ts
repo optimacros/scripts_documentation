@@ -840,7 +840,7 @@ export interface Filesystem {
 	write(path: string, contents: string): null;
 	delete(path: string): null;
 	rename(from: string, to: string): null;
-	copy(from: string, to: string): void;
+	copy(from: string, to: string): null;
 	getTimestamp(path: string): number;
 
 	getSize(path: string): number|false;

@@ -51,7 +51,7 @@ interface Filesystem {
 	write(path: string, contents: string): null;
 	delete(path: string): null;
 	rename(from: string, to: string): null;
-	copy(from: string, to: string): boolean;
+	copy(from: string, to: string): null;
 	getTimestamp(path: string): number;
 	getSize(path: string): number | boolean;
 	createDir(path: string): boolean;
@@ -112,9 +112,9 @@ rename(from: string, to: string): null;
 &nbsp;
 
 ```js
-copy(from: string, to: string): boolean;
+copy(from: string, to: string): null;
 ```
-Копирует файл `from` в путь `to`. Возвращает признак успешного выполнения. В связи с багом сейчас возвращает `null` в случае успешного выполнения.
+Копирует файл `from` в путь `to`. Возвращает `null` в случае успешного выполнения. Если файла `from` не существует, бросает исключение.
 
 &nbsp;
 
