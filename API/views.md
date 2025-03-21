@@ -235,7 +235,7 @@ columnsFilter(data: string | string[] | number | number[]): this;
 ```js
 withoutValues(): this;
 ```
-Устанавливает признак загрузки с сервера данных без значений ячеек. В этом случае функции интерфейса [`Cell`](#cell) [`getValue()`](#cell.get-value), [`getNativeValue()`](#cell.get-native-value) и [`getContextValue()`](#get-context-value) будут возвращать `null`, однако функции [`Cell`](#cell).[`setValue()`](#cell.set-value), [`Cells`](#cells).[`setValue()`](#cells.set-value) и [`CellBuffer`](./common.md#cell-buffer).[`apply()`](#apply) не теряют свою магическую силу. Возвращает `this`.
+Устанавливает признак загрузки с сервера данных без значений ячеек. В этом случае функции интерфейса [`Cell`](#cell) [`getValue()`](#cell.get-value), [`getNativeValue()`](#cell.get-native-value) и [`getContextValue()`](#get-context-value) будут возвращать `null`, однако функции [`Cell`](#cell).[`setValue()`](#cell.set-value), [`Cells`](#cells).[`setValue()`](#cells.set-value) и [`CellBuffer`](./common.md#cell-buffer).[`apply()`](./common.md#cell-buffer.apply) не теряют свою магическую силу. Возвращает `this`.
 
 Эта функция существенно ускоряет работу в тех случаях, когда нужно записать данные, но не читать их.
 
