@@ -114,6 +114,7 @@ interface CellBuffer {
 	apply(): this;
 	count(): number;
 	canLoadCellsValues(value: boolean): this;
+	lastApplyErrors(): CellApplyError[];
 }
 ```
 Буфер, куда можно временно поместить значения набора ячеек, не обязательно смежных, чтобы изменить их перед отправкой на сервер.
@@ -148,7 +149,7 @@ set(cell: Cell | CubeCell, value: number | string | boolean | null): this;
 
 &nbsp;
 
-<a name="apply"></a>
+<a name="cell-buffer.apply"></a>
 ```js
 apply(): this;
 ```
@@ -168,7 +169,39 @@ canLoadCellsValues(value: boolean): this;
 ```
 Устанавливает значение `value`, указывающее, нужно ли перезагружать значения клеток в буфере, если они изменятся. Возвращает `this`.
 
-По умолчанию: `true`. Использование значения по умолчанию сохранено для обратной совместимости и приводит к снижению производительности. Рекомендуется сразу после инициализации объекта вызвать функцию canLoadCellsValues и передать ей значение `false`.
+По умолчанию: `true`. Использование значения по умолчанию сохранено для обратной совместимости и приводит к снижению производительности. Рекомендуется сразу после инициализации объекта вызвать функцию `canLoadCellsValues()` и передать ей значение `false`.
+
+&nbsp;
+
+```js
+lastApplyErrors(): CellApplyError[];
+```
+Если после последнего выполнения функции [`apply()`](#cell-buffer.apply) в некоторые ячейки по каким-то причинам фактически не произошла запись, информация о каждой такой ячейке и причине неуспеха помещается в интефейс [`CellApplyError`](#cell-apply-error). Функция возвращает массив таких интерфейсов.
+	
+&nbsp;
+
+### Интерфейс CellApplyError<a name="cell-apply-error"></a>
+```ts
+interface CellApplyError {
+	definitions(): number[];
+	error(): string;
+}
+```
+Интерфейс содержит информацию об адресе ячейки и причинах невозможности произвести в неё запись с помощью функции [`CellBuffer.apply()`](#cell-buffer.apply).
+
+&nbsp;
+
+```js
+definitions(): number[];
+```
+Возвращает адрес ячейки, то же что и [`CubeCell.definitions()`](./cubeCell.md#cube-cell.definitions).
+
+&nbsp;
+
+```js
+error(): string;
+```
+Возвращает текст ошибки.
 
 &nbsp;
 
