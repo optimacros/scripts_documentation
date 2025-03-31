@@ -1667,6 +1667,90 @@ export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
 	setProtocol(protocol: string): this;
 }
 
+export interface ClickhouseConnectorBuilder {
+	setHost(value: string): this;
+	setPort(value: number): this;
+	setUsername(value: string): this;
+	setPassword(value: string): this;
+	setDatabase(value: string): this;
+	setHttps(value: boolean): this;
+	load(): ClickhouseConnection;
+}
+
+export interface ClickhouseConnection {
+	qb(): ClickhouseQueryBuilder;
+}
+
+export interface ClickhouseQueryBuilder {
+	/**
+	 * @param columns Default is ['*']
+	 */
+	select(columns: string[]): this;
+	addSelect(column: string): this;
+	addSelectRaw(expression: string): this;
+	/**
+	 * @param columns Default is ['*']
+	 */
+	distinct(columns: string[]): this;
+	/**
+	 * @param table
+	 * @param alias Default is null
+	 */
+	setFrom(table: string, alias: string | null): this;
+	/**
+	 * @param table
+	 * @param alias Default is null
+	 */
+	setTable(table: string, alias: string | null): this;
+	/**
+	 * @param column
+	 * @param value Default is null
+	 * @param operator Default is null
+	 * @param concatOperator 'AND'|'OR'; Default is 'AND'
+	 */
+	where(column: string, operator: string | null, value: any[] | any, concatOperator: string): this;
+	orWhere(column: string, operator: string | null, value: any[] | any): this;
+	/**
+	 * @param column
+	 * @param values
+	 * @param concatOperator 'AND'|'OR'; Default is 'AND'
+	 * @param not Default is false
+	 */
+	whereIn(column: string, values: any[], concatOperator: string, not: boolean): this;
+	/**
+	 * @param column
+	 * @param minValue
+	 * @param maxValue
+	 * @param concatOperator 'AND'|'OR'; Default is 'AND'
+	 * @param not Default is false
+	 */
+	whereBetween(column: string, minValue: string|number, maxValue: string|number, concatOperator: string, not: boolean): this;
+	orWhereBetween(column: string, minValue: string|number, maxValue: string|number): this;
+	groupBy(column: string): this;
+	/**
+	 *
+	 * @param column
+	 * @param direction 'asc'|'desc'; Default is 'asc'
+	 */
+	orderBy(column: string, direction: string): this;
+	orderByDesc(column: string): this;
+	offset(value: number): this;
+	limit(value: number): this;
+	exists(): boolean;
+	count(): number;
+	sum(column: string): number;
+	insert(values: Object[] | Object): boolean;
+	get(): ClickhouseQueryResult;
+}
+
+export interface ClickhouseQueryResult {
+	count(): number;
+	generator(): Object[];
+	all(): Object[];
+	first(): Object | null;
+	column(columnName: string): any[];
+}
+
 export interface Connectors {
 	mysql(): MysqlConnectorBuilder;
 	postgresql(): PostgresqlConnectorBuilder;
@@ -1681,6 +1765,7 @@ export interface Connectors {
 	 */
 	winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
 	verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
+	clickhouse(): ClickhouseConnectorBuilder;
 }
 
 export namespace Notifications {
