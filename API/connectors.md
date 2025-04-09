@@ -3,16 +3,16 @@
 ## Интерфейс Connectors<a name="connectors"></a>
 ```ts
 interface Connectors {
-  mysql(): MysqlConnectorBuilder;
-  postgresql(): PostgresqlConnectorBuilder;
-  sqlServer(): MicrosoftSqlConnectorBuilder;
-  oracle(): OracleConnectorBuilder;
-  snowflake(): SnowflakeConnectorBuilder;
-  mongodb(): Mongodb.ConnectorBuilder;
-  http(): Http.HttpManager;
-  winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
-  verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
-  clickhouse(): ClickhouseConnectorBuilder
+	mysql(): MysqlConnectorBuilder;
+	postgresql(): PostgresqlConnectorBuilder;
+	sqlServer(): MicrosoftSqlConnectorBuilder;
+	oracle(): OracleConnectorBuilder;
+	snowflake(): SnowflakeConnectorBuilder;
+	mongodb(): Mongodb.ConnectorBuilder;
+	http(): Http.HttpManager;
+	winAgent(builtIn?: boolean): WinAgent.WinAgentBuilder;
+	verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
+	clickhouse(): ClickhouseConnectorBuilder;
 }
 ```
 Интерфейс, группирующий [`коннекторы`](../appendix/glossary.md#connector) к различным внешним системам.
@@ -86,9 +86,9 @@ verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
 &nbsp;
 
 ```js
-clickhouse(): ClickhouseConnectorBuilder
+clickhouse(): ClickhouseConnectorBuilder;
 ```
-Возвращает коннектор [`ClickhouseConnectorBuilder`](./clickhouse.md#clickhouse-connector-builder) для подключения в базе данных [`Clickhouse`](https://ru.wikipedia.org/wiki/ClickHouse).
+Возвращает коннектор [`ClickhouseConnectorBuilder`](./clickhouse.md#clickhouse-connector-builder) для подключения к базе данных [`Clickhouse`](https://ru.wikipedia.org/wiki/ClickHouse).
 
 &nbsp;
 

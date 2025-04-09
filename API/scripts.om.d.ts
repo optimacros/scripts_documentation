@@ -1685,38 +1685,38 @@ export interface ClickhouseQueryBuilder {
 	/**
 	 * @param columns Default is ['*']
 	 */
-	select(columns: string[]): this;
+	select(columns?: string[]): this;
 	addSelect(column: string): this;
 	addSelectRaw(expression: string): this;
 	/**
 	 * @param columns Default is ['*']
 	 */
-	distinct(columns: string[]): this;
+	distinct(columns?: string[]): this;
 	/**
 	 * @param table
 	 * @param alias Default is null
 	 */
-	setFrom(table: string, alias: string | null): this;
+	setFrom(table: string, alias?: string | null): this;
 	/**
 	 * @param table
 	 * @param alias Default is null
 	 */
-	setTable(table: string, alias: string | null): this;
+	setTable(table: string, alias?: string | null): this;
 	/**
 	 * @param column
-	 * @param value Default is null
-	 * @param operator Default is null
+	 * @param operator
+	 * @param value
 	 * @param concatOperator 'AND'|'OR'; Default is 'AND'
 	 */
-	where(column: string, operator: string | null, value: any[] | any, concatOperator: string): this;
-	orWhere(column: string, operator: string | null, value: any[] | any): this;
+	where(column: string, operator: string, value: any[] | any, concatOperator?: string): this;
+	orWhere(column: string, operator: string, value: any[] | any): this;
 	/**
 	 * @param column
 	 * @param values
 	 * @param concatOperator 'AND'|'OR'; Default is 'AND'
 	 * @param not Default is false
 	 */
-	whereIn(column: string, values: any[], concatOperator: string, not: boolean): this;
+	whereIn(column: string, values: any[], concatOperator?: string, not?: boolean): this;
 	/**
 	 * @param column
 	 * @param minValue
@@ -1724,15 +1724,14 @@ export interface ClickhouseQueryBuilder {
 	 * @param concatOperator 'AND'|'OR'; Default is 'AND'
 	 * @param not Default is false
 	 */
-	whereBetween(column: string, minValue: string|number, maxValue: string|number, concatOperator: string, not: boolean): this;
-	orWhereBetween(column: string, minValue: string|number, maxValue: string|number): this;
+	whereBetween(column: string, minValue: string | number, maxValue: string | number, concatOperator?: string, not?: boolean): this;
+	orWhereBetween(column: string, minValue: string | number, maxValue: string | number): this;
 	groupBy(column: string): this;
 	/**
-	 *
 	 * @param column
-	 * @param direction 'asc'|'desc'; Default is 'asc'
+	 * @param direction 'ASC'|'DESC'; Default is 'ASC'
 	 */
-	orderBy(column: string, direction: string): this;
+	orderBy(column: string, direction?: string): this;
 	orderByDesc(column: string): this;
 	offset(value: number): this;
 	limit(value: number): this;
@@ -1745,7 +1744,7 @@ export interface ClickhouseQueryBuilder {
 
 export interface ClickhouseQueryResult {
 	count(): number;
-	generator(): Object[];
+	generator(): IterableIterator<Object>;
 	all(): Object[];
 	first(): Object | null;
 	column(columnName: string): any[];
