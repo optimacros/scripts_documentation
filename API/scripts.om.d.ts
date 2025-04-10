@@ -25,6 +25,21 @@ export interface Cell {
 	dropDown(): Labels;
 	getFormatType(): string;
 	isEditable(): boolean;
+	dropDownSelector(): DropDownSelector;
+}
+
+export interface DropDownSelector {
+	totalCount(): number;
+	/**
+	 * @param chunkSize Default: 1000
+	 */
+	generator(chunkSize: number | null): IterableIterator<DropDownSelectorChunk>;
+}
+
+export interface DropDownSelectorChunk {
+	start(): number;
+	count(): number;
+	all(): Label[];
 }
 
 export interface Cells {
