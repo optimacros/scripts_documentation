@@ -145,7 +145,7 @@ interface CellBuffer {
 ```js
 set(cell: Cell | CubeCell, value: number | string | boolean | null): this;
 ```
-Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
+Устанавливает значение `value` в клетку `cell` в буфере. В качестве значения `value` можно передать то же, что и для метода [`Cell.setValue()`](./readingGrid.md#cell.set-value). Возвращает `this`.
 
 &nbsp;
 
@@ -615,7 +615,7 @@ getLastName(): string;
 ```js
 getRole(): EntityInfo;
 ```
-Возвращает сущность роли пользователя в виде [`EntityInfo`](./common.md#entity-info).
+Возвращает сущность роли пользователя в виде [`EntityInfo`](#entity-info).
 
 &nbsp;
 
@@ -678,7 +678,7 @@ longId(): number;
 
 &nbsp;
 
-<a name="label.name"></a>
+<a name="name"></a>
 ```js
 name(): string;
 ```
@@ -686,6 +686,7 @@ name(): string;
 
 &nbsp;
 
+<a name="code"></a>
 ```js
 code(): string;
 ```
@@ -701,7 +702,7 @@ alias(): string;
 
 Если `this` является сущностью элемента справочника, в настройках которого задано некоторое свойство в качестве отображаемого имени (опция `Отображение`), и для этой сущности задано значение этого свойства, то возвращает значение этого свойства.
 
-Иначе возвращает [`name()`](#label.name).
+Иначе возвращает [`name()`](#name).
 
 &nbsp;
 
