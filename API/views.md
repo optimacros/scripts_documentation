@@ -113,7 +113,7 @@ cleanCellsData(cubesIdentifiers?: number[]): this;
 ```js
 cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 ```
-Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#cube-cell-selector-builder) выборки клеток для куба `identifier`. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
+Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#cube-cell-selector-builder) выборки клеток для куба `identifier`. `identifier` должен быть именем или [`longId`](./readingGrid.md#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
@@ -121,14 +121,14 @@ cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 ```
 
-Возвращает интерфейс [`CubeCellUpdaterBuilder`](./cubeCell.md#cube-cell-updater-builder) обновления клеток куба с именем или идентификатором `identifier` по формуле. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
+Возвращает интерфейс [`CubeCellUpdaterBuilder`](./cubeCell.md#cube-cell-updater-builder) обновления клеток куба с именем или идентификатором `identifier` по формуле. `identifier` должен быть именем или [`longId`](./readingGrid.md#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
 ```js
 getCubeInfo(identifier: string | number): CubeInfo;
 ```
-Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`. `identifier` должен быть именем или [`longId`](#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
+Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`. `identifier` должен быть именем или [`longId`](./readingGrid.md#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
@@ -217,9 +217,9 @@ rowsFilter(data: string | string[] | number | number[]): this;
 
 `string[]` — массив названий строк;
 
-`number` — [`longId`](#long-id) строки;
+`number` — [`longId`](./readingGrid.md#long-id) строки;
 
-`number[]` — массив [`longId`](#long-id) строк.
+`number[]` — массив [`longId`](./readingGrid.md#long-id) строк.
 
 Возвращает `this`.
 
@@ -235,7 +235,7 @@ columnsFilter(data: string | string[] | number | number[]): this;
 ```js
 withoutValues(): this;
 ```
-Устанавливает признак загрузки с сервера данных без значений ячеек. В этом случае функции интерфейса [`Cell`](#cell) [`getValue()`](#cell.get-value), [`getNativeValue()`](#cell.get-native-value) и [`getContextValue()`](#get-context-value) будут возвращать `null`, однако функции [`Cell`](#cell).[`setValue()`](#cell.set-value), [`Cells`](#cells).[`setValue()`](#cells.set-value) и [`CellBuffer`](./common.md#cell-buffer).[`apply()`](./common.md#cell-buffer.apply) не теряют свою магическую силу. Возвращает `this`.
+Устанавливает признак загрузки с сервера данных без значений ячеек. В этом случае функции интерфейса [`Cell`](./readingGrid.md#cell) [`getValue()`](./readingGrid.md#cell.get-value), [`getNativeValue()`](./readingGrid.md#cell.get-native-value) и [`getContextValue()`](./readingGrid.md#get-context-value) будут возвращать `null`, однако функции [`Cell`](./readingGrid.md#cell).[`setValue()`](./readingGrid.md#cell.set-value), [`Cells`](./readingGrid.md#cells).[`setValue()`](./readingGrid.md#cells.set-value) и [`CellBuffer`](./common.md#cell-buffer).[`apply()`](./common.md#cell-buffer.apply) не теряют свою магическую силу. Возвращает `this`.
 
 Эта функция существенно ускоряет работу в тех случаях, когда нужно записать данные, но не читать их.
 
@@ -245,11 +245,11 @@ withoutValues(): this;
 ```js
 addDependentContext(identifier: number): this;
 ```
-Добавляет в фильтр по строкам весь зависимый контекст переданного [`longId`](#long-id) `identifier`: материнские и дочерние элементы всех уровней.
+Добавляет в фильтр по строкам весь зависимый контекст переданного [`longId`](./readingGrid.md#long-id) `identifier`: материнские и дочерние элементы всех уровней.
 
 Если эта функция многократно вызывается с аргументами, один из которых является потомком остальных (порядок вызовов не имеет значения), то это считается уточнением запроса, и результат будет равносилен однократному вызову с этим аргументом.
 
-Если для полученного [`Grid`](#grid) установлен фильтр [`GridPageSelector`](#grid-page-selector) (или несколько), а `identifier` — это [`longId`](#long-id) элемента измерения одного из этих фильтров, то в соответствующем фильтре будет программно установлен этот элемент.
+Если для полученного [`Grid`](#grid) установлен фильтр [`GridPageSelector`](#grid-page-selector) (или несколько), а `identifier` — это [`longId`](./readingGrid.md#long-id) элемента измерения одного из этих фильтров, то в соответствующем фильтре будет программно установлен этот элемент.
 
 Возвращает `this`.
 
@@ -478,379 +478,6 @@ for (const chunk of range.generator(1000)) {
     });
 }
 ```
-
-&nbsp;
-
-### Интерфейс GridRangeChunk<a name="grid-range-chunk"></a>
-```ts
-interface GridRangeChunk {
-	cells(): Cells;
-	rows(): Labels;
-	columns(): Labels;
-}
-```
-Интерфейс для обработки куска [`GridRange`](#grid-range).
-
-&nbsp;
-
-```js
-cells(): Cells;
-```
-Возвращает ссылку на набор ячеек [`Cells`](#cells) текущего куска.
-
-&nbsp;
-
-```js
-rows(): Labels;
-```
-Возвращает интерфейс [`Labels`](#labels), представляющий заголовки строк.
-
-&nbsp;
-
-```js
-columns(): Labels;
-```
-Возвращает интерфейс [`Labels`](#labels), представляющий заголовки столбцов.
-
-&nbsp;
-
-### Интерфейс Labels<a name="labels"></a>
-```ts
-interface Labels {
-	start(): number;
-	count(): number;
-	all(): LabelsGroup[];
-	get(index: number): LabelsGroup | null;
-	chunkInstance(): GridRangeChunk;
-	findLabelByLongId(longId: number): Label | null;
-}
-```
-Интерфейс, представляющий набор объектов [`LabelsGroup`](#labels-group), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#grid-range-chunk).
-
-&nbsp;
-
-```js
-start(): number;
-```
-Возвращает номер первой строки/столбца текущего [`GridRangeChunk`](#grid-range-chunk) в таблице [`Grid`](#grid).
-
-&nbsp;
-
-```js
-count(): number;
-```
-Возвращает количество строк/столбцов в наборе.
-
-Если `this` относится к строкам, то это значение, которое было посчитано в функции [`GridRange`](#grid-range).[`generator(size)`](#generator) на основе аргумента `size`.
-
-Если `this` относится к столбцам, то это в точности значение аргумента `columnCount` функции [`Grid`](#grid).[`range(rowStart, rowCount, columnStart, columnCount)`](#range).
-
-&nbsp;
-
-```js
-all(): LabelsGroup[];
-```
-Возвращает массив объектов заголовков каждой строки/столбца [`LabelsGroup`](#labels-group).
-
-&nbsp;
-
-```js
-get(index: number): LabelsGroup | null;
-```
-Аналог `all()[index]`. В случае некорректного индекса возвращает `null`.
-
-&nbsp;
-
-```js
-chunkInstance(): GridRangeChunk;
-```
-Возвращает обратную ссылку на [`GridRangeChunk`](#grid-range-chunk), из которого был получен `this`.
-
-&nbsp;
-
-```js
-findLabelByLongId(longId: number): Label | null;
-```
-Возвращает объект [`Label`](#label) по его [`longId`](#long-id), если он присутствует в `this`, иначе — `null`.
-
-&nbsp;
-
-## Интерфейс LabelsGroup<a name="labels-group"></a>
-```ts
-interface LabelsGroup {
-	all(): Label[];
-	first(): Label;
-	cells(): Cells;
-}
-```
-Интерфейс, представляющий многоуровневый набор заголовков конкретной строки или столбца.
-
-&nbsp;
-
-```js
-all(): Label[];
-```
-Возвращает массив конкретных заголовков [`Label`](#label).
-
-&nbsp;
-
-```js
-first(): Label;
-```
-Аналог `all()[0]`.
-
-&nbsp;
-
-```js
-cells(): Cells;
-```
-Возвращает интерфейс [`Cells`](#cells), предоставляющий доступ к ячейкам данной строки или столбца.
-
-В случае плоской таблицы [`возвращает`](../appendix/constraints.md#flat-table) `null`.
-
-&nbsp;
-
-### Интерфейс EntityInfo (Label)<a name="entity-info"></a> <a name="label"></a>
-```ts
-interface Label {
-	longId(): number;
-	name(): string;
-	code(): string | null;
-	alias(): string;
-	label(): string;
-	parentLongId(): number;
-	hierarchyLongId(): number;
-}
-
-interface EntityInfo = Label;
-```
-Интерфейс сущности. Как правило, представляет собой один из заголовков строки или столбца.
-
-&nbsp;
-
-<a name="long-id"></a>
-```js
-longId(): number;
-```
-Возвращает внутренний идентификатор сущности в системе, уникальный в пределах модели.
-
-&nbsp;
-
-<a name="label.name"></a>
-```js
-name(): string;
-```
-Возвращает имя сущности.
-
-&nbsp;
-
-```js
-code(): string;
-```
-Возвращает код сущности. В Optimacros всего две сущности могут иметь код: элементы справочников и кубы.
-
-&nbsp;
-
-<a name="alias"></a>
-```js
-alias(): string;
-```
-Возвращает отображаемое имя.
-
-Если `this` является сущностью элемента справочника, в настройках которого задано некоторое свойство в качестве отображаемого имени (опция `Отображение`), и для этой сущности задано значение этого свойства, то возвращает значение этого свойства.
-
-Иначе возвращает [`name()`](#label.name).
-
-&nbsp;
-
-```js
-label(): string;
-```
-То же, что и [`alias()`](#alias).
-
-&nbsp;
-
-```js
-parentLongId(): number;
-```
-Если сущность является элементом, у которого есть родительский элемент, то возвращает [`longId`](#long-id) сущности родителя.
-
-Если родительской сущности нет, возвращает `-1`.
-
-&nbsp;
-
-```js
-hierarchyLongId(): number;
-```
-Если сущность является элементом или сабсетом справочника (включая справочники времени и версий), возвращает  [`longId`](#long-id) самого справочника. Если родительского справочника нет, возвращает `-1`. На данный момент этот метод может некорректно работать в зависимости от способа получения `EntityInfo`, для корректной работы рекомендуется получать сущность с помощью интерфейса [`EntitiesInfo`](./common.md#entities-info).
-
-&nbsp;
-
-### Интерфейс Cells<a name="cells"></a>
-```ts
-interface Cells {
-	all(): Cell[];
-	first(): Cell | null;
-	setValue(value: number | string | boolean | null): this;
-	count(): number;
-	chunkInstance(): GridRangeChunk;
-	getByIndexes(indexes: number[]): Cells;
-}
-```
-Интерфейс, представляющий (как правило, прямоугольный) набор клеток таблицы.
-
-&nbsp;
-
-```js
-all(): Cell[];
-```
-Возвращает одномерный массив всех клеток [`Cell`](#cell).
-
-&nbsp;
-
-```js
-first(): Cell | null;
-```
-Аналог `all()[0]`. Возвращает `null`, если массив клеток пустой.
-
-&nbsp;
-
-<a name="cells.set-value"></a>
-```js
-setValue(value: number | string | boolean | null): this;
-```
-Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах. Возвращает `this`.
-
-&nbsp;
-
-```js
-count(): number;
-```
-Возвращает количество клеток в наборе.
-
-&nbsp;
-
-<a name="chunkInstance"></a>
-```js
-chunkInstance(): GridRangeChunk;
-```
-Возвращает обратную ссылку на [`GridRangeChunk`](#grid-range-chunk), из которого был получен `this`.
-
-&nbsp;
-
-```js
-getByIndexes(indexes: number[]): Cells;
-```
-Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать непрямоугольный объект [`Cells`](#cells).
-
-&nbsp;
-
-### Интерфейс Cell<a name="cell"></a>
-```ts
-interface Cell {
-	setValue(value: number | string | boolean | null): this;
-	
-	getValue(): number | string | null;
-	getVisualValue(): string | null;
-	getNativeValue(): number | string | null;
-	getContextValue(): string | null;
-	
-	definitions(): number[];
-	columns(): LabelsGroup | null;
-	rows(): LabelsGroup | null;
-	
-	dropDown(): Labels;
-	getFormatType(): string;
-	isEditable(): boolean;
-}
-```
-Интерфейс, представляющий клетку таблицы.
-
-&nbsp;
-
-<a name="cell.set-value"></a>
-```js
-setValue(value: number | string | boolean | null): this;
-```
-Устанавливает значение клетки. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах. Возвращает `this`.
-
-&nbsp;
-
-<a name="cell.get-value"></a>
-```js
-getValue(): number | string | null;
-```
-Возвращает значение клетки, которое видит пользователь. Если клетка имеет логический формат, то возвращается строковое значение `'true'` или `'false'`.
-
-&nbsp;
-
-```js
-getVisualValue(): string | null;
-```
-Возвращает отображаемое значение в ячейке, если куб в формате даты или справочника, для других форматов куба возвращает `null`.
-
-&nbsp;
-
-<a name="cell.get-native-value"></a>
-```js
-getNativeValue(): number | string | null;
-```
-Возвращает самородное значение клетки, зависящее от формата. Если клетка имеет формат справочника, то возвращается [`longId`](#long-id). 
-
-В противном случае возвращает то же, что и [`getValue()`](#cell.get-value).
-
-&nbsp;
-
-<a name="cell.get-context-value"></a>
-```js
-getContextValue(): string | null;
-```
-Если ячейка имеет формат справочника, в настройках которого задано некоторое свойство `prop` в качестве отображаемого имени (опция `Отображение`), и для этой ячейки задано значение этого свойства, то возвращает строку, состоящую из имени, двойной вертикальной черты и значения свойства `prop`, например, `'#5||Берлин'`.
-
-В противном случае возвращает `null`.
-
-&nbsp;
-
-```js
-definitions(): number[];
-```
-То же, что и [`CubeCell.definitions()`](./cubeCell.md#cube-cell.definitions).
-
-&nbsp;
-
-```js
-columns(): LabelsGroup | null;
-```
-Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца, или `null`, если у клетки нет измерений на столбцах.
-
-&nbsp;
-
-```js
-rows(): LabelsGroup | null;
-```
-Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки, или `null`, если у клетки нет измерений на строках.
-
-&nbsp;
-
-```js
-dropDown(): Labels;
-```
-Возвращает набор заголовков строк [`Labels`](#labels) выпадающего списка, который в интерфейсе пользователя Optimacros можно получить кликом по треугольнику внутри ячейки. Эта функция считается неэффективной, так как выгружает справочник целиком. Лучше зайти в нужный справочник и итерироваться по нему.
-
-&nbsp;
-
-```js
-getFormatType(): string;
-```
-Возвращает строку с форматом клетки. Возможные значения: `'NUMBER'`, `'BOOLEAN'`, 
-`'ENTITY'`, `'TIME_ENTITY'`, `'LINE_ITEM_SUBSET'`, `'VERSION'`, `'TEXT'`, `'DATE'`, `'NONE'`.
-
-&nbsp;
-
-```js
-isEditable(): boolean;
-```
-Возвращает признак возможности редактирования ячейки пользователем.
 
 &nbsp;
 
