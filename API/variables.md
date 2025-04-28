@@ -31,7 +31,7 @@ interface Variable {
 ```js
 isEntity(): boolean;
 ```
-Возвращает `true`, если значение переменной - объект [`EntityInfo`](./views.md#entity-info), и `false` в противном случае.
+Возвращает `true`, если значение переменной - объект [`EntityInfo`](./common.md#entity-info), и `false` в противном случае.
 
 &nbsp;
 

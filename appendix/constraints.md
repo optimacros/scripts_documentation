@@ -7,18 +7,10 @@
 
 &nbsp;
 
-<a name="flat-table"></a>
-## Плоские таблицы
+<a name="labelless-table"></a>
+## Таблицы без строк и/или столбцов
 
-Если в сводной таблице на столбцах нет измерений (в этом случае в интерфейсе отображается один столбец), то к ячейкам невозможно получить доступ через функцию [`LabelsGroup`](../API/views.md#labels-group).`cells()`. В этой ситуации она возвращает `null`:
-
-```js
-for (const chunk of generator) {
-	const rowsCells = chunk.rows().all()[0].cells();   // null
-}
-```
-
-В этом случае система скриптов создаёт виртуальное измерение, к которому можно получить доступ стандартным способом, и вызов
+Если в сводной таблице в строках или столбцах нет измерений, система скриптов создаёт виртуальное измерение, к которому можно получить доступ стандартным способом, и вызов
 
 ```js
 definitionInfo.getColumnDimensions()[0]getDimensionEntity().name();
@@ -26,31 +18,11 @@ definitionInfo.getColumnDimensions()[0]getDimensionEntity().name();
 
 вернёт специальное значение `'Empty 1 0'`.
 
-Характерный пример плоской таблицы – [`вкладка`](../API/dimensions.md#time-options-tab) настроек времени.
+Характерный пример такой таблицы – [`вкладка`](../API/dimensions.md#time-options-tab) настроек времени.
 
-Для решения этой проблемы следует использовать функцию [`GridRangeChunk`](../API/views.md#grid-range-chunk).`cells()`, которая возвращает линейный массив, параллельный массиву [`GridRangeChunk`](../API/views.md#grid-range-chunk).`rows()`. Пример кода, который в настройках времени устанавливает нужное значение в ячейку `Current Month`, используя такой подход:
+Такое измерение не содержит заголовков и вызов [`LabelsGroup`](../API/readingGrid.md#labels-group).`all()` вернёт пустой массив.
 
-```js
-for (const chunk of generator) {
-	let currentMonthIndex = null;
-
-	chunk.rows().all().forEach((rowLabels, index) => {
-		const name = rowLabels.first().name();
-		if (name === 'Current Month') {
-			currentMonthIndex = index;
-		}
-	});
-
-	if (currentMonthIndex === null) {
-		throw new Error(`Option 'Current Month' not found`);
-	}
-
-	const cells = chunk.cells().all();
-	cells[currentMonthIndex].setValue(newCurrentMonthValue);
-}
-```
-
-Если в сводной таблице нет измерений на *строках*, ситуация полностью аналогична описанной.
+Если таблица не собержит ни строк, ни колонок, то доступ к единственной ячейке возможет только с помощью метода [`GridRangeChunk`](../API/readingGrid.md#grid-range-chunk).`cells()`.
 
 &nbsp;
 

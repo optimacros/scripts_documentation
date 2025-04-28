@@ -113,7 +113,7 @@ cleanCellsData(cubesIdentifiers?: number[]): this;
 ```js
 cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 ```
-Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#cube-cell-selector-builder) выборки клеток для куба `identifier`. `identifier` должен быть именем или [`longId`](./readingGrid.md#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
+Возвращает интерфейс [`CubeCellSelectorBuilder`](./cubeCell.md#cube-cell-selector-builder) выборки клеток для куба `identifier`. `identifier` должен быть именем или [`longId`](./common.md#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
@@ -121,14 +121,14 @@ cubeCellSelector(identifier: string | number): CubeCellSelectorBuilder;
 cubeCellUpdater(identifier: string | number): CubeCellUpdaterBuilder;
 ```
 
-Возвращает интерфейс [`CubeCellUpdaterBuilder`](./cubeCell.md#cube-cell-updater-builder) обновления клеток куба с именем или идентификатором `identifier` по формуле. `identifier` должен быть именем или [`longId`](./readingGrid.md#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
+Возвращает интерфейс [`CubeCellUpdaterBuilder`](./cubeCell.md#cube-cell-updater-builder) обновления клеток куба с именем или идентификатором `identifier` по формуле. `identifier` должен быть именем или [`longId`](./common.md#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
 ```js
 getCubeInfo(identifier: string | number): CubeInfo;
 ```
-Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`. `identifier` должен быть именем или [`longId`](./readingGrid.md#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
+Возвращает интерфейс [`CubeInfo`](./cubeCell.md#cube-info) для получения информации о кубе `identifier`. `identifier` должен быть именем или [`longId`](./common.md#long-id) куба. При указании некорректного `identifier` выбрасывается исключение.
 
 &nbsp;
 
@@ -217,9 +217,9 @@ rowsFilter(data: string | string[] | number | number[]): this;
 
 `string[]` — массив названий строк;
 
-`number` — [`longId`](./readingGrid.md#long-id) строки;
+`number` — [`longId`](./common.md#long-id) строки;
 
-`number[]` — массив [`longId`](./readingGrid.md#long-id) строк.
+`number[]` — массив [`longId`](./common.md#long-id) строк.
 
 Возвращает `this`.
 
@@ -245,11 +245,11 @@ withoutValues(): this;
 ```js
 addDependentContext(identifier: number): this;
 ```
-Добавляет в фильтр по строкам весь зависимый контекст переданного [`longId`](./readingGrid.md#long-id) `identifier`: материнские и дочерние элементы всех уровней.
+Добавляет в фильтр по строкам весь зависимый контекст переданного [`longId`](./common.md#long-id) `identifier`: материнские и дочерние элементы всех уровней.
 
 Если эта функция многократно вызывается с аргументами, один из которых является потомком остальных (порядок вызовов не имеет значения), то это считается уточнением запроса, и результат будет равносилен однократному вызову с этим аргументом.
 
-Если для полученного [`Grid`](#grid) установлен фильтр [`GridPageSelector`](#grid-page-selector) (или несколько), а `identifier` — это [`longId`](./readingGrid.md#long-id) элемента измерения одного из этих фильтров, то в соответствующем фильтре будет программно установлен этот элемент.
+Если для полученного [`Grid`](#grid) установлен фильтр [`GridPageSelector`](#grid-page-selector) (или несколько), а `identifier` — это [`longId`](./common.md#long-id) элемента измерения одного из этих фильтров, то в соответствующем фильтре будет программно установлен этот элемент.
 
 Возвращает `this`.
 
@@ -455,9 +455,9 @@ cellCount(): number;
 ```js
 generator(size?: number): IterableIterator<GridRangeChunk>;
 ```
-Возвращает генератор, при каждом обращении возвращающий интерфейс [`GridRangeChunk`](#grid-range-chunk) размером *не более* `size` ячеек, позволяющий обрабатывать `GridRange` покусочно.
+Возвращает генератор, при каждом обращении возвращающий интерфейс [`GridRangeChunk`](./readingGrid.md#grid-range-chunk) размером *не более* `size` ячеек, позволяющий обрабатывать `GridRange` покусочно.
 
-Каждый возвращаемый [`GridRangeChunk`](#grid-range-chunk) содержит целое количество строк, т. е. все колонки `GridRange`, а количество строк в нём определяется по формуле `size / columnCount()`. Здесь используется целочисленное деление с округлением в большую сторону. Например, если в таблице `14` столбцов, а параметр `size` равен `1500`, то генератор вернёт [`GridRangeChunk`](#grid-range-chunk) из `1500 / 14 = 107.14 ≈ 108` строк, в котором будет `14 * 108 = 1512` ячеек.
+Каждый возвращаемый [`GridRangeChunk`](./readingGrid.md#grid-range-chunk) содержит целое количество строк, т. е. все колонки `GridRange`, а количество строк в нём определяется по формуле `size / columnCount()`. Здесь используется целочисленное деление с округлением в большую сторону. Например, если в таблице `14` столбцов, а параметр `size` равен `1500`, то генератор вернёт [`GridRangeChunk`](./readingGrid.md#grid-range-chunk) из `1500 / 14 = 107.14 ≈ 108` строк, в котором будет `14 * 108 = 1512` ячеек.
 
 Значение аргумента `size` ограничено снизу значением `500` и сверху значением `5000`, поэтому в скриптах 1.0 [`невозможно`](../appendix/constraints.md#generator) работать с `GridRange` с б*О*льшим количеством столбцов. Значение по умолчанию: `1500`.
 
