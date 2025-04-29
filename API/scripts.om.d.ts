@@ -22,10 +22,11 @@ export interface Cell {
 	columns(): LabelsGroup | null;
 	rows(): LabelsGroup | null;
 
+	/** DEPRECATED */
 	dropDown(): Labels;
+	dropDownSelector(): DropDownSelector;
 	getFormatType(): string;
 	isEditable(): boolean;
-	dropDownSelector(): DropDownSelector;
 }
 
 export interface DropDownSelector {
