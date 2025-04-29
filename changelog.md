@@ -2,6 +2,7 @@
 
 | Дата релиза | Тег релиза | Версия ScriptAPI | Версии MiddleWork | Версия приложения | Изменения |
 | --- | --- | --- | --- | --- | --- |
+| xx.xx.xxxx | [v9.300.x.x](https://github.com/optimacros/scripts_documentation/tree/v9.300.x.x) | — | <ul><li>9.300.x.x</li></ul> | <ul><li> — </li></ul> | <ul><li>В интерфейс информации о запросе [`RequestManager`](./API/common.md#request-manager) добавлены методы для получения информации о текущем исполняемом скрипте: `getRequestId()`, `getScriptName()`, `getScriptLongId()`</li></ul> |
 | 16.12.2024 | [v9.?00.x.x](https://github.com/optimacros/scripts_documentation/tree/v9.?00.x.x) | — | <ul><li>9.?00.x.x</li></ul> | <ul><li> — </li></ul> | <ul><li>Интерфейс работы с лицензиями воркспейса `EnterpriseLicenseManager` заменён на новый интерфейс работы с данными договора о параметрах воркспейса [EnterpriseContractManager](./API/common.md#enterprise-contract-manager)</li></ul> |
 | 15.11.2024 | [9.200.x.13](https://github.com/optimacros/scripts_documentation/tree/v9.200.x.13) | — | <ul><li>9.200.dev.13</li></ul> | <ul><li> 9.200.x.x </li></ul> | <ul><li>В интерфейс [Filesystem](./API/fs.md#filesystem) добавлен метод для изменения кодировки файла `changeTextFileCharset()`</li></ul> |
 | 26.09.2024 | [v9.0.50.6](https://github.com/optimacros/scripts_documentation/tree/v9.0.50.6) | — | <ul><li>9.0.50.6</li></ul> | <ul><li>9.54.10</li></ul> | <ul><li>В интерфейс [Connectors](./API/connectors.md#connectors) добавлен коннектор для подключения к базе данных `Vertica`</li></ul> |
