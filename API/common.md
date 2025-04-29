@@ -747,10 +747,11 @@ get(longId: number): EntityInfo | null;
 
 &nbsp;
 
+<a name="entities-info.get-collection"></a>
 ```js
-getCollection(longId: number[]): EntityInfo[];
+getCollection(longId: number[]): (EntityInfo | null)[];
 ```
-Возвращает массив сущностей [`EntityInfo`](#entity-info) по массиву их [`longId`](#long-id). Корректно работает, только если все переданные `longId` корректные (существуют в модели). Иначе возвращает массив меньшей размерности. Использовать с осторожностью. Порядок возвращаемых сущностей `EntityInfo` может отличаться от порядка переданных `longId`.
+Возвращает массив сущностей [`EntityInfo`](#entity-info) параллельный массиву их [`longId`](#long-id). Если сущность не найдена, на её месте будет возвращён `null`.
 
 &nbsp;
 

@@ -783,7 +783,7 @@ export interface ResultInfo {
 
 export interface EntitiesInfo {
 	get(longId: number): EntityInfo | null;
-	getCollection(longId: number[]): EntityInfo[];
+	getCollection(longId: number[]): (EntityInfo | null)[];
 }
 
 export interface CopyData {
