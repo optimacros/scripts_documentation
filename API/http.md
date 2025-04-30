@@ -274,39 +274,39 @@ fileBody(): FileRequestBody;
 ### Интерфейс Url<a name="url"></a>
 ```ts
 interface Url {
-	setUrl(url: string): boolean;
+	setUrl(url: string | SecretValue): boolean;
 	getUrl(): string;
 	
-	setUrlPath(path: string): boolean;
+	setUrlPath(path: string | SecretValue): boolean;
 	getUrlPath(): string;
 	
-	setUrlScheme(scheme: string): boolean;
+	setUrlScheme(scheme: string | SecretValue): boolean;
 	getUrlScheme(): string;
 	
-	setHost(host: string): boolean;
+	setHost(host: string | SecretValue): boolean;
 	getHost(): string;
 	
-	setPort(port: number | string): boolean;
+	setPort(port: number | string | SecretValue): boolean;
 	getPort(): number | null;
 	
-	setUser(user: string): boolean;
+	setUser(user: string | SecretValue): boolean;
 	getUser(): string | null;
 	
-	setPassword(password: string): boolean;
+	setPassword(password: string | SecretValue): boolean;
 	getPassword(): string | null;
 	
-	setFragment(fragment: string): boolean;
+	setFragment(fragment: string | SecretValue): boolean;
 	getFragment(): string | null;
 	
 	params(): UrlParams;
 }
 ```
-Интерфейс построения [`URL`](https://ru.wikipedia.org/wiki/URL).
+Интерфейс построения [`URL`](https://ru.wikipedia.org/wiki/URL). Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setUrl(url: string): boolean;
+setUrl(url: string | SecretValue): boolean;
 ```
 Устанавливает URL целиком. Возвращает `true`.
 
@@ -320,7 +320,7 @@ getUrl(): string;
 &nbsp;
 
 ```js
-setUrlPath(path: string): boolean;
+setUrlPath(path: string | SecretValue): boolean;
 ```
 Устанавливает путь на сервере. Значение по умолчанию: `'\'`. Возвращает `true`.
 
@@ -334,7 +334,7 @@ getUrlPath(): string;
 &nbsp;
 
 ```js
-setUrlScheme(scheme: string): boolean;
+setUrlScheme(scheme: string | SecretValue): boolean;
 ```
 Устанавливает схему URL (протокол). Значение по умолчанию: `'http'`. Возвращает `true`.
 
@@ -348,7 +348,7 @@ getUrlScheme(): string;
 &nbsp;
 
 ```js
-setHost(host: string): boolean;
+setHost(host: string | SecretValue): boolean;
 ```
 Устанавливает имя или адрес хоста. Значение по умолчанию: `''`. Возвращает `true`.
 
@@ -362,7 +362,7 @@ getHost(): string;
 &nbsp;
 
 ```js
-setPort(port: number | string): boolean;
+setPort(port: number | string | SecretValue): boolean;
 ```
 Устанавливает номер порта. Возвращает `true`.
 
@@ -376,7 +376,7 @@ getPort(): number | null;
 &nbsp;
 
 ```js
-setUser(user: string): boolean;
+setUser(user: string | SecretValue): boolean;
 ```
 Устанавливает имя пользователя. Возвращает `true`.
 
@@ -390,7 +390,7 @@ getUser(): string | null;
 &nbsp;
 
 ```js
-setPassword(password: string): boolean;
+setPassword(password: string | SecretValue): boolean;
 ```
 Устанавливает пароль. Возвращает `true`.
 
@@ -404,7 +404,7 @@ getPassword(): string | null;
 &nbsp;
 
 ```js
-setFragment(fragment: string): boolean;
+setFragment(fragment: string | SecretValue): boolean;
 ```
 Устанавливает идентификатор якоря.  Возвращает `true`.
 
@@ -520,25 +520,25 @@ getProtocols(): string[];
 ### Интерфейс HttpAuth<a name="http-auth"></a>
 ```ts
 interface HttpAuth {
-	setUser(user: string): this;
-	setPassword(password: string): this;
+	setUser(user: string | SecretValue): this;
+	setPassword(password: string | SecretValue): this;
 	setType(type: string): this;
 	setStatus(status: boolean): this;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настроек аутентификации HTTP. Все функции возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настроек аутентификации HTTP. Все функции возвращают `this`. Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setUser(user: string): this;
+setUser(user: string | SecretValue): this;
 ```
 Устанавливает имя пользователя.
 
 &nbsp;
 
 ```js
-setPassword(password: string): this;
+setPassword(password: string | SecretValue): this;
 ```
 Устанавливает пароль.
 

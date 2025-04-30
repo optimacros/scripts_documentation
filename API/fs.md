@@ -322,16 +322,16 @@ load(): Filesystem;
 ### Интерфейс FTPAdapter<a name="ftp-adapter"></a>
 ```ts
 interface FTPAdapter extends BaseAdapter {
-	setHost(host: string): this;
+	setHost(host: string | SecretValue): this;
 	getHost(): string;
 
-	setPort(port: number): this;
+	setPort(port: number | SecretValue): this;
 	getPort(): number;
 
-	setUsername(username: string): this;
+	setUsername(username: string | SecretValue): this;
 	getUsername(): string | null;
 
-	setPassword(password: string): this;
+	setPassword(password: string | SecretValue): this;
 	getPassword(): string | null;
 
 	setRoot(root: string): this;
@@ -354,12 +354,12 @@ interface FTPAdapter extends BaseAdapter {
 }
 ```
 
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для соединения с сервером [`FTP`](https://ru.wikipedia.org/wiki/FTP). Наследуется от интерфейса [`BaseAdapter`](#base-adapter).
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для соединения с сервером [`FTP`](https://ru.wikipedia.org/wiki/FTP). Наследуется от интерфейса [`BaseAdapter`](#base-adapter). Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setHost(host: string): this;
+setHost(host: string | SecretValue): this;
 ```
 Устанавливает адрес хоста. По умолчанию: `''`. Возвращает `this`.
 
@@ -373,7 +373,7 @@ getHost(): string;
 &nbsp;
 
 ```js
-setPort(port: number): this;
+setPort(port: number | SecretValue): this;
 ```
 Устанавливает номер порта. По умолчанию: `21`. Возвращает `this`.
 
@@ -387,7 +387,7 @@ getPort(): number;
 &nbsp;
 
 ```js
-setUsername(username: string): this;
+setUsername(username: string | SecretValue): this;
 ```
 Устанавливает имя пользователя. Возвращает `this`.
 
@@ -401,7 +401,7 @@ getUsername(): string | null;
 &nbsp;
 
 ```js
-setPassword(password: string): this;
+setPassword(password: string | SecretValue): this;
 ```
 Устанавливает пароль. Возвращает `this`.
 
