@@ -93,6 +93,8 @@ const ftp = om.filesystems.ftp();
 ftp.setHost(secret);
 ```
 
+&nbsp;
+
 Самостоятельное создание JSON-объекта секрета и передача его в метод API скриптов
 ```ts
 const secret = {
@@ -108,6 +110,8 @@ const ftp = om.filesystems.ftp();
 
 ftp.setHost(secret);
 ```
+
+&nbsp;
 
 Передача секрета в дочерний скрипт в составе JSON-oбъекта
 ```ts
