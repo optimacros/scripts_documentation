@@ -794,7 +794,7 @@ export interface Crypto {
 	 * @param algo available values can be retrieved by getHashAlgorithms()
 	 * @param binary defaults to false
 	 */
-	hash(algo: string , data: string | SecretValue , binary?: boolean): string | BinaryData
+	hash(algo: string, data: string | SecretValue , binary?: boolean): string | BinaryData;
 	/**
 	 * 
 	 * @param algo available values can be retrieved by getHmacHashAlgorithms()
@@ -878,7 +878,7 @@ export interface FTPAdapter extends BaseAdapter {
 	setPort(port: number | SecretValue): this;
 	getPort(): number;
 
-	setUsername(username: string | SecretValue): this
+	setUsername(username: string | SecretValue): this;
 	getUsername(): string | null;
 
 	setPassword(password: string | SecretValue): this;
@@ -1213,7 +1213,7 @@ export interface OracleImportBuilder {
 export interface OracleConnectorBuilder extends SqlConnectorBuilder {
 	setServiceName(value: string | SecretValue): this;
 	setSchema(value: string | SecretValue): this;
-	setTNS(value: string | SecretValue): this
+	setTNS(value: string | SecretValue): this;
 	loadImportBuilder(): OracleImportBuilder;
 }
 
@@ -1409,7 +1409,7 @@ export namespace Http {
 		setUser(user: string | SecretValue): boolean;
 		getUser(): string | null;
 
-		setPassword(password: string | SecretValue): boolean
+		setPassword(password: string | SecretValue): boolean;
 		getPassword(): string | null;
 
 		setFragment(fragment: string | SecretValue): boolean;
@@ -1653,7 +1653,6 @@ export interface PgsqlDrivenVerticaConnectorBuilder extends PostgresqlConnectorB
 }
 
 export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
-	setAccount(account: string): this;
 	setAccount(account: string | SecretValue): this;
 	setRegion(region: string | SecretValue): this;
 	/**
