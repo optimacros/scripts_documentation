@@ -84,13 +84,6 @@ verticaViaPgsqlDriver(): PgsqlDrivenVerticaConnectorBuilder;
 
 &nbsp;
 
-```js
-secrets(): SecretStorage;
-```
-Возвращает объект для взаимодействия с [защищенным хранилищем секретов](./apiSecrets.md)
-
-&nbsp;
-
 [API Reference](API.md)
 
 [Оглавление](../README.md)

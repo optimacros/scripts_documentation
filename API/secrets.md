@@ -1,148 +1,132 @@
-# Поддержка работы с секретами
+# Секреты
 
-Для хранения чувствительных данных (логины, пароли, хеши) пользователи могут воспользоваться сервисом [OpenBao](https://openbao.org/), который поставляется с дистрибутивом. У сервиса есть UI (/openbao/ui). Через него клиенты записывают в защищенное хранилище  важные данные, чтобы затем использовать в скриптах.
+Для хранения чувствительных данных (логины, пароли, хеши) пользователи могут воспользоваться сервисом [OpenBao](https://openbao.org/), который поставляется с дистрибутивом. У сервиса есть UI `workspace_url/openbao/ui`. Через него клиенты записывают в защищенное хранилище важные данные, чтобы затем использовать в скриптах.
 
 Такие данные называются **секретами**. Они бывают разных видов. Поддерживаемые типы: 
-- OpenBaoKeyValueSecret (ключ-значение).
+- `OpenBaoKeyValueSecret` - ключ-значение
 
-## Quick start
-
-Посмотрим на пример получения секрета из хранилища и разберем, что здесь происходит:
-
-```typescript
-let secret = om.secrets.getStorage('openbao-vault').getSecret('it-gets-secret-path', 'it-gets-secret-key')
+## Интерфейс Secrets<a name="secrets"></a>
+```ts
+interface Secrets {
+	getStorage(vaultId: string): SecretStorage;
+}
 ```
+Интерфейс для доступа к секретам.
 
-Интерфейс **secrets** представляет метод `getStorage()`. В него передается идентификатор хранилища. Доступ к нему настраивается в манифесте workspace'а администраторами. 
+&nbsp;
 
-К одному workspace'у могут быть подключены сразу несколько хранилищ. В скрипте можно обращаться к любому из них или сразу к нескольким.
-
-```typescript
-let baoSecret = om.secrets.getStorage('openbao-vault').getSecret(
-    'several-vaults-single-script-openbao-path',
-    'several-vaults-single-script-openbao-key'
-)
-
-let hashiSecret = om.secrets.getStorage('hashicorp-vault').getSecret(
-    'several-vaults-single-script-hashicorp-path',
-    'several-vaults-single-script-hashicorp-key'
-)
+```js
+getStorage(vaultId: string): SecretStorage;
 ```
+Возвращает хранилище [`SecretStorage`](#secret-storage) с идентификатором `vaultId`.
 
-Поддерживаются решения [OpenBao](https://openbao.org/) и [Hashicorp Vault](https://www.vaultproject.io/). Список подключенных хранилищ можно посмотреть в админке в разделе `/secrets`.
+К воркспейсу могут быть подключены сразу несколько хранилищ. Доступ настраивается в манифесте воркспейса администратором. Поддерживаются решения [OpenBao](https://openbao.org/) и [Hashicorp Vault](https://www.vaultproject.io/). Список подключенных хранилищ и их идентификаторы `id` можно посмотреть в панели администратора воркспейса в разделе `Secrets`. В одном скрипте можно обращаться к любому из них или сразу к нескольким.
 
-### Структура секретов
+&nbsp;
+
+## Интерфейс SecretStorage<a name="secret-storage"></a>
+```ts
+interface SecretStorage {
+	getSecret(path: string, key: string): SecretValue;
+}
+```
+Интерфейс для работы с защищенным хранилищем секретов.
+
+&nbsp;
+
+```js
+getSecret(path: string, key: string): SecretValue;
+```
+Возвращает секрет [`SecretValue`](#secret-value).
 
 Секреты в хранилищах хранятся в иерархиях.
-
 ```
-/secret/path/to/secrets
+/secret/path-to-secrets
 |--- secret-key-1
 |--- secret-key-2
 ```
 
-Найти секрет можно, зная "папку", в которой он лежит (путь) и название самого секрета (ключ). Поэтому методу `getSecret()` нужны в качестве аргументов оба параметра.
+Получить секрет можно, зная "папку" `path`, в которой он лежит и название ключа секрета `key`.
 
-Обратившись к хранилищу за секретом, вы получите объект SecretValue. Его можно преобразовать в JSON-объект и работать с ним обычным способом.
+&nbsp;
 
-```typescript
+## Интерфейс SecretValue<a name="secret-value"></a>
+```ts
+interface SecretValue {
+	getStorageIdentifier(): string;
+	getIdentifier(): string;
+	toJson(): Object;
+}
+```
+Объект секрета. **Обратите внимание, что значения секрета в объекте нет.** Он только содержит информацию о секрете. Так сделано для безопасности. Значения считываются из хранилища только внутри приложения Optimacros. Этот объект нужно передавать в методы API скриптов, которые поддерживают секреты, вместо простых типов данных. Приложение само сделает запрос в хранилище и подставит значение секрета.
 
-console.log(secret.toJson().type);
-console.log(secret.toJson().params.key);
-console.log(secret.toJson().params.value);
+Опознать методы с поддержкой секретов можно по сигнатуре `setPassword(password: string | SecretValue): this;`. Появляется выбор - использовать простой тип данных или секрет. Проверка типа значения также работает на секретах. Если тип значения не совпадет с тем, который ожидается методом, вылетит ошибка.
 
+
+&nbsp;
+
+```js
+toJson(): Object;
+```
+Возвращает JSON-объект секрета вида
+```ts
 {
     "type":"OpenBaoKeyValueSecret",
     "params": {
-        "key":"it-gets-secret-key",
-        "path":"it-gets-secret-path"
-    }
+        "key":"secret-key",
+        "path":"secret-path",
+    },
 }
 ```
+Такой JSON-объект можно создать самостоятельно и передавать в методы API скриптов с поддержкой секретов.
 
-Обратите внимание, что значения секрета в объекте нет. Так сделано для безопасности. Значения раскрываются только на backend'е. Передавайте в доступные методы API объекты секретов. Backend сам сделает запрос в хранилище и подставит значение секрета, где это нужно.
+&nbsp;
 
-```typescript
-let secret = om.secrets.getStorage('openbao-vault').getSecret('ftp-adapter-path', 'ftp-adapter-port')
+##Примеры
 
-let fs = om.filesystems.ftp();
+Получение секрета из хранилища и передача его в метод API скриптов
+```ts
+const secret = om.secrets.getStorage('openbao-vault').getSecret('ftp-connection', 'host');
 
-fs.setPort(secret);
+const ftp = om.filesystems.ftp();
+
+ftp.setHost(secret);
 ```
 
-Не обязательно явно забирать секрет из хранилища, чтобы передать его на backend. Можно самостоятельно собрать неклассифицированный объект V8 и воспользоваться им.
-
-```typescript
-const NCSecret = {
+Самостоятельное создание JSON-объекта секрета и передача его в метод API скриптов
+```ts
+const secret = {
     "type": "OpenBaoKeyValueSecret",
     "params": {
         "storageIdentifier": "openbao-vault",
-        "path": "nc-secret-port-path",
-        "key": "nc-secret-port-key"
-    }
-}
+        "path": "ftp-connection",
+        "key": "host",
+    },
+};
 
-let fs = om.filesystems.ftp();
-fs.setPort(NCSecret);
+const ftp = om.filesystems.ftp();
+
+ftp.setHost(secret);
 ```
 
-Валидация по-прежнему работает в методах API, даже на значениях секретов. Если тип значения не совпадет с тем, который ожидается методом API, вылетит ошибка. 
+Передача секрета в дочерний скрипт в составе JSON-oбъекта
+```ts
+const secret = om.secrets.getStorage('openbao-vault').getSecret('secret-path', 'secret-key');
 
-```typescript
-let secret = om.secrets.getStorage('openbao-vault').getSecret('ftp-bad-secret-path', 'ftp-bad-secret-port')
+const ENV = {
+    SECRET: secret.toJson(),
+};
 
-let fs = om.filesystems.ftp();
-
-fs.setPort(secret);
-console.log(fs.getPort());
-```
-
-### Use-кейсы
-
-Объекты секретов можно передавать в качестве env-параметров из одних скриптов в другие. 
-
-```typescript
-const targetScript = om.common.resultInfo()
+om.common.resultInfo()
     .actionsInfo()
-    .makeMacrosAction('testChainEnvironment_2');
-
-const envSecret = om.secrets.getStorage('openbao-vault').getSecret('env-chainset-path', 'env-chainset-key')
-
-targetScript.environmentInfo().set('ENV_SECRET', envSecret);
-targetScript.appendAfter();
+    .makeMacrosAction('next script')
+    .appendAfter()
+    .environmentInfo()
+    .set('ENV', ENV);
 ```
 
-### Интерфейсы и изменения в API
+&nbsp;
 
-Интерфейсы функционала описаны в декларации
+[API Reference](./API.md)
 
-```typescript
-export interface Secrets {
-    getStorage(vaultId: string): SecretStorage;
-}
-
-export interface SecretStorage {
-    getSecret(path: string, key: string): SecretValue
-}
-
-export interface SecretValue {
-    getStorageIdentifier(): string;
-    getIdentifier(): string;
-    toJson(): object;
-}
-```
-
-В некоторые методы, добавлена поддержка секретов. Прежний код, передающий в них скалярные аргументы, должен работать без изменений. 
-
-У вас появляется выбор - можно использовать и скалярные типы, и секреты. Опознать методы с новыми возможностями можно по изменениям в сигнатурах.
-
-```typescript
-
-export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
-    setAccount(account: string|SecretValue): SnowflakeConnectorBuilder;
-
-    setRegion(region: string|SecretValue): SnowflakeConnectorBuilder;
-
-    // ...
-}
-```
+[Оглавление](../README.md)

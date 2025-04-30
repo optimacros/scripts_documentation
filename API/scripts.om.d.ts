@@ -787,20 +787,20 @@ export interface BinaryData {
 }
 
 export interface Crypto {
-	sha1(data: string|SecretValue): string;
+	sha1(data: string | SecretValue): string;
 
 	/**
 	 * 
 	 * @param algo available values can be retrieved by getHashAlgorithms()
 	 * @param binary defaults to false
 	 */
-	hash(algo: string , data: string|SecretValue , binary?: boolean): string | BinaryData
+	hash(algo: string , data: string | SecretValue , binary?: boolean): string | BinaryData
 	/**
 	 * 
 	 * @param algo available values can be retrieved by getHmacHashAlgorithms()
 	 * @param binary defaults to false
 	 */
-	hmac(algo: string, data: string|SecretValue, key: string | BinaryData, binary?: boolean): string | BinaryData;
+	hmac(algo: string, data: string | SecretValue, key: string | BinaryData, binary?: boolean): string | BinaryData;
 
 	getHashAlgorithms(): string[];
 	getHmacAlgorithms(): string[];
@@ -872,16 +872,16 @@ export interface BaseAdapter {
 }
 
 export interface FTPAdapter extends BaseAdapter {
-	setHost(host: string|SecretValue): this;
+	setHost(host: string | SecretValue): this;
 	getHost(): string;
 
-	setPort(port: number|SecretValue): this;
+	setPort(port: number | SecretValue): this;
 	getPort(): number;
 
-	setUsername(username: string|SecretValue): this
+	setUsername(username: string | SecretValue): this
 	getUsername(): string | null;
 
-	setPassword(password: string|SecretValue): this;
+	setPassword(password: string | SecretValue): this;
 	getPassword(): string | null;
 
 	setRoot(root: string): this;
@@ -981,11 +981,11 @@ export interface SqlConnection {
 }
 
 export interface SqlConnectorBuilder {
-	setHost(value: string|SecretValue): this;
-	setPort(value: number|SecretValue): this;
-	setUsername(value: string|SecretValue): this;
-	setPassword(value: string|SecretValue): this;
-	setDatabase(value: string|SecretValue): this;
+	setHost(value: string | SecretValue): this;
+	setPort(value: number | SecretValue): this;
+	setUsername(value: string | SecretValue): this;
+	setPassword(value: string | SecretValue): this;
+	setDatabase(value: string | SecretValue): this;
 	load(): SqlConnection;
 }
 
@@ -1001,31 +1001,31 @@ export interface SqlBulkCopyBuilder {
 	 * -S
 	 * @param value
 	 */
-	setServerName(value: string|SecretValue): this;
+	setServerName(value: string | SecretValue): this;
 
 	/**
 	 * Port is part of server name
 	 * @param value
 	 */
-	setPort(value: number|SecretValue): this;
+	setPort(value: number | SecretValue): this;
 
 	/**
 	 * -U
 	 * @param value
 	 */
-	setUsername(value: string|SecretValue): this;
+	setUsername(value: string | SecretValue): this;
 
 	/**
 	 * -P
 	 * @param value
 	 */
-	setPassword(value: string|SecretValue): this;
+	setPassword(value: string | SecretValue): this;
 
 	/**
 	 * -d
 	 * @param value
 	 */
-	setDatabase(value: string|SecretValue): this;
+	setDatabase(value: string | SecretValue): this;
 
 	/**
 	 * Query for export or table query string for import
@@ -1211,9 +1211,9 @@ export interface OracleImportBuilder {
 }
 
 export interface OracleConnectorBuilder extends SqlConnectorBuilder {
-	setServiceName(value: string|SecretValue): this;
-	setSchema(value: string|SecretValue): this;
-	setTNS(value: string|SecretValue): this
+	setServiceName(value: string | SecretValue): this;
+	setSchema(value: string | SecretValue): this;
+	setTNS(value: string | SecretValue): this
 	loadImportBuilder(): OracleImportBuilder;
 }
 
@@ -1323,8 +1323,8 @@ export namespace Mongodb {
 	}
 
 	export interface ConnectorBuilder {
-		setDSN(value: string|SecretValue): this;
-		setDatabase(value: string|SecretValue): this;
+		setDSN(value: string | SecretValue): this;
+		setDatabase(value: string | SecretValue): this;
 		load(): Connection;
 	}
 }
@@ -1391,28 +1391,28 @@ export namespace Http {
 	}
 
 	export interface Url {
-		setUrl(url: string|SecretValue): boolean;
+		setUrl(url: string | SecretValue): boolean;
 		getUrl(): string;
 
-		setUrlPath(path: string|SecretValue): boolean;
+		setUrlPath(path: string | SecretValue): boolean;
 		getUrlPath(): string;
 
-		setUrlScheme(scheme: string|SecretValue): boolean;
+		setUrlScheme(scheme: string | SecretValue): boolean;
 		getUrlScheme(): string;
 
-		setHost(host: string|SecretValue): boolean;
+		setHost(host: string | SecretValue): boolean;
 		getHost(): string;
 
 		setPort(port: number | string | SecretValue): boolean;
 		getPort(): number | null;
 
-		setUser(user: string|SecretValue): boolean;
+		setUser(user: string | SecretValue): boolean;
 		getUser(): string | null;
 
-		setPassword(password: string|SecretValue): boolean
+		setPassword(password: string | SecretValue): boolean
 		getPassword(): string | null;
 
-		setFragment(fragment: string|SecretValue): boolean;
+		setFragment(fragment: string | SecretValue): boolean;
 		getFragment(): string | null;
 
 		params(): UrlParams;
@@ -1454,8 +1454,8 @@ export namespace Http {
 	}
 
 	export interface HttpAuth {
-		setUser(user: string|SecretValue): this;
-		setPassword(password: string|SecretValue): this;
+		setUser(user: string | SecretValue): this;
+		setPassword(password: string | SecretValue): this;
 		/**
 		 * @param type basic|digest|ntlm
 		 */
@@ -1584,8 +1584,8 @@ export namespace WinAgent {
 	}
 
 	export interface WinAgentBuilder {
-		setCommandUrl(url: string|SecretValue): this;
-		setDownloadUrl(url: string|SecretValue): this;
+		setCommandUrl(url: string | SecretValue): this;
+		setDownloadUrl(url: string | SecretValue): this;
 		auth(): Http.HttpAuth;
 		setConnectTimeout(sec: number): this;
 		setRequestTimeout(sec: number): this;
@@ -1631,8 +1631,7 @@ export interface MysqlImportBuilder {
 
 export interface PostgresqlImportBuilder {
 	setTable(name: string): this;
-	setSchema(name: string): this;
-	setSchema(name: string|SecretValue): this;
+	setSchema(name: string | SecretValue): this;
 	setDelimiter(delimiter: string): this;
 	setEnclosure(enclosure: string): this;
 	setEscape(escape: string): this;
@@ -1655,17 +1654,17 @@ export interface PgsqlDrivenVerticaConnectorBuilder extends PostgresqlConnectorB
 
 export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
 	setAccount(account: string): this;
-	setAccount(account: string|SecretValue): this;
-	setRegion(region: string|SecretValue): this;
+	setAccount(account: string | SecretValue): this;
+	setRegion(region: string | SecretValue): this;
 	/**
 	 * Configuring OCSP Checking
 	 * Default is false
 	 * @param insecure
 	 */
 	setInsecure(insecure: boolean): this;
-	setWarehouse(warehouse: string|SecretValue): this;
-	setSchema(schema: string|SecretValue): this;
-	setRole(role: string|SecretValue): this;
+	setWarehouse(warehouse: string | SecretValue): this;
+	setSchema(schema: string | SecretValue): this;
+	setRole(role: string | SecretValue): this;
 	setProtocol(protocol: string): this;
 }
 
@@ -1778,17 +1777,17 @@ export interface ModelUsersTab extends Tab {
 }
 
 export interface Secrets {
-    getStorage(vaultId: string): SecretStorage;
+	getStorage(vaultId: string): SecretStorage;
 }
 
 export interface SecretStorage {
-    getSecret(path: string, key: string): SecretValue
+	getSecret(path: string, key: string): SecretValue;
 }
 
 export interface SecretValue {
-    getStorageIdentifier(): string;
-    getIdentifier(): string;
-    toJson(): object;
+	getStorageIdentifier(): string;
+	getIdentifier(): string;
+	toJson(): Object;
 }
 
 export interface OM {
