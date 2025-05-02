@@ -565,6 +565,9 @@ export interface RequestManager {
 	log(message: string, print?: boolean): this;
 	logStatusMessage(message: string, print?: boolean): this;
 	setStatusMessage(message: string): this;
+	getRequestId(): string | null;
+	getScriptName(): string | null;
+	getScriptLongId(): string | null;
 }
 
 export interface UserInfo {
