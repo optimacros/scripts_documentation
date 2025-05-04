@@ -727,7 +727,10 @@ export interface BaseCodeExecutionAction extends ResultBaseAction {
 }
 
 export interface ResultMacrosAction extends BaseCodeExecutionAction {
-
+	/**
+	 * @param value Default is false
+	 */
+	setCollectResults(value: boolean): this;
 }
 
 export interface TaskPromise {
