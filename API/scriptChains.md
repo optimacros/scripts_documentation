@@ -18,7 +18,7 @@ interface ResultActionsInfo {
 ```js
 makeMacrosAction(identifier: string | number): ResultMacrosAction;
 ```
-Создаёт и возвращает действие [`ResultMacrosAction`](#result-macros-action) запуска существующего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) скрипта.
+Создаёт и возвращает действие [`ResultMacrosAction`](#result-macros-action) запуска существующего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) скрипта.
 
 &nbsp;
 
@@ -32,28 +32,28 @@ makeCodeExecutionAction(code: string): CodeExecutionAction;
 ```js
 makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) дашборда.
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) дашборда.
 
 &nbsp;
 
 ```js
 makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) контекстной таблицы.
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) контекстной таблицы.
 
 &nbsp;
 
 ```js
 makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) мультикуба, `view` означает имя или [`longId`](./views.md#long-id) представления.
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) мультикуба, `view` означает имя или [`longId`](./common.md#long-id) представления.
 
 &nbsp;
 
 ```js
 makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) справочника, `view` означает имя или [`longId`](./views.md#long-id) представления.
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) справочника, `view` означает имя или [`longId`](./common.md#long-id) представления.
 
 &nbsp;
 

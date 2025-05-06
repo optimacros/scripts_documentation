@@ -93,9 +93,9 @@ eventTypeFilter(data: string | number | (string | number)[]): this;
 
 - `string` — название типа события,
 
-- `number` — [`longId`](./views.md#long-id) типа события,
+- `number` — [`longId`](./common.md#long-id) типа события,
 
-- `(string | number)[]` — массив (возможно, смешанный) названий и [`longId`](./views.md#long-id) типов событий.
+- `(string | number)[]` — массив (возможно, смешанный) названий и [`longId`](./common.md#long-id) типов событий.
 
 Возвращает `this`.
 
