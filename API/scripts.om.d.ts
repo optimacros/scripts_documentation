@@ -873,16 +873,16 @@ export interface BaseAdapter {
 
 export interface FTPAdapter extends BaseAdapter {
 	setHost(host: string | SecretValue): this;
-	getHost(): string;
+	getHost(): string | SecretValue;
 
 	setPort(port: number | SecretValue): this;
-	getPort(): number;
+	getPort(): number | SecretValue;
 
 	setUsername(username: string | SecretValue): this;
-	getUsername(): string | null;
+	getUsername(): string | SecretValue | null;
 
 	setPassword(password: string | SecretValue): this;
-	getPassword(): string | null;
+	getPassword(): string | SecretValue | null;
 
 	setRoot(root: string): this;
 	getRoot(): string;
@@ -1395,25 +1395,25 @@ export namespace Http {
 		getUrl(): string;
 
 		setUrlPath(path: string | SecretValue): boolean;
-		getUrlPath(): string;
+		getUrlPath(): string | SecretValue;
 
 		setUrlScheme(scheme: string | SecretValue): boolean;
-		getUrlScheme(): string;
+		getUrlScheme(): string | SecretValue;
 
 		setHost(host: string | SecretValue): boolean;
-		getHost(): string;
+		getHost(): string | SecretValue;
 
 		setPort(port: number | string | SecretValue): boolean;
-		getPort(): number | null;
+		getPort(): number | SecretValue | null;
 
 		setUser(user: string | SecretValue): boolean;
-		getUser(): string | null;
+		getUser(): string | SecretValue | null;
 
 		setPassword(password: string | SecretValue): boolean;
-		getPassword(): string | null;
+		getPassword(): string | SecretValue | null;
 
 		setFragment(fragment: string | SecretValue): boolean;
-		getFragment(): string | null;
+		getFragment(): string | SecretValue | null;
 
 		params(): UrlParams;
 	}

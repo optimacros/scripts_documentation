@@ -331,7 +331,7 @@ interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
 	setProtocol(protocol: string): this;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Snowflake`](https://en.wikipedia.org/wiki/Snowflake_Inc%2E) (для подключения используется [PHP PDO Driver](https://docs.snowflake.com/en/user-guide/php-pdo-driver.html)). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder). Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Snowflake`](https://en.wikipedia.org/wiki/Snowflake_Inc%2E) (для подключения используется [PHP PDO Driver](https://docs.snowflake.com/en/user-guide/php-pdo-driver.html)). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder). Функции поддерживают [секреты](./secrets.md).
 
 &nbsp;
 

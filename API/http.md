@@ -278,30 +278,30 @@ interface Url {
 	getUrl(): string;
 	
 	setUrlPath(path: string | SecretValue): boolean;
-	getUrlPath(): string;
+	getUrlPath(): string | SecretValue;
 	
 	setUrlScheme(scheme: string | SecretValue): boolean;
-	getUrlScheme(): string;
+	getUrlScheme(): string | SecretValue;
 	
 	setHost(host: string | SecretValue): boolean;
-	getHost(): string;
+	getHost(): string | SecretValue;
 	
 	setPort(port: number | string | SecretValue): boolean;
-	getPort(): number | null;
+	getPort(): number | SecretValue | null;
 	
 	setUser(user: string | SecretValue): boolean;
-	getUser(): string | null;
+	getUser(): string | SecretValue | null;
 	
 	setPassword(password: string | SecretValue): boolean;
-	getPassword(): string | null;
+	getPassword(): string | SecretValue | null;
 	
 	setFragment(fragment: string | SecretValue): boolean;
-	getFragment(): string | null;
+	getFragment(): string | SecretValue | null;
 	
 	params(): UrlParams;
 }
 ```
-Интерфейс построения [`URL`](https://ru.wikipedia.org/wiki/URL). Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
+Интерфейс построения [`URL`](https://ru.wikipedia.org/wiki/URL). Функции поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
@@ -315,7 +315,7 @@ setUrl(url: string | SecretValue): boolean;
 ```js
 getUrl(): string;
 ```
-Возвращает URL.
+Возвращает URL или выбрасывает исключение `This interface call was denied for JS context`, если хотя бы одна из частей URL является секретом.
 
 &nbsp;
 
@@ -327,7 +327,7 @@ setUrlPath(path: string | SecretValue): boolean;
 &nbsp;
 
 ```js
-getUrlPath(): string;
+getUrlPath(): string | SecretValue;
 ```
 Возвращает путь на сервере.
 
@@ -341,7 +341,7 @@ setUrlScheme(scheme: string | SecretValue): boolean;
 &nbsp;
 
 ```js
-getUrlScheme(): string;
+getUrlScheme(): string | SecretValue;
 ```
 Возвращает схему URL (протокол).
 
@@ -355,7 +355,7 @@ setHost(host: string | SecretValue): boolean;
 &nbsp;
 
 ```js
-getHost(): string;
+getHost(): string | SecretValue;
 ```
 Возвращает имя или адрес хоста, установленное в URL.
 
@@ -369,7 +369,7 @@ setPort(port: number | string | SecretValue): boolean;
 &nbsp;
 
 ```js
-getPort(): number | null;
+getPort(): number | SecretValue | null;
 ```
 Возвращает номер порта или `null`, если он не установлен.
 
@@ -383,7 +383,7 @@ setUser(user: string | SecretValue): boolean;
 &nbsp;
 
 ```js
-getUser(): string | null;
+getUser(): string | SecretValue | null;
 ```
 Возвращает имя пользователя или `null`, если оно не установлено.
 
@@ -397,7 +397,7 @@ setPassword(password: string | SecretValue): boolean;
 &nbsp;
 
 ```js
-getPassword(): string | null;
+getPassword(): string | SecretValue | null;
 ```
 Возвращает пароль или `null`, если он не установлен.
 
@@ -411,7 +411,7 @@ setFragment(fragment: string | SecretValue): boolean;
 &nbsp;
 
 ```js
-getFragment(): string | null;
+getFragment(): string | SecretValue | null;
 ```
 Возвращает идентификатор якоря или `null`, если он не установлен.
 
@@ -526,7 +526,7 @@ interface HttpAuth {
 	setStatus(status: boolean): this;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настроек аутентификации HTTP. Все функции возвращают `this`. Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настроек аутентификации HTTP. Все функции возвращают `this`. Функции поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
