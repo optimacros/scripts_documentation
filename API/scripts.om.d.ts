@@ -1785,7 +1785,8 @@ export interface SecretStorage {
 
 export interface SecretValue {
 	getStorageIdentifier(): string;
-	getIdentifier(): string;
+	getPath(): string;
+	getKey(): string;
 	toJson(): Object;
 }
 

@@ -5,6 +5,10 @@
 Такие данные называются **секретами**. Они бывают разных видов. Поддерживаемые типы: 
 - `OpenBaoKeyValueSecret` - ключ-значение
 
+**Важно!** Запись в хранилище данных в формате, отличном от строкового (например порт подключения является числом), необходимо выполнять в режиме JSON, иначе они будут трактоваться как строка.
+
+![Режим JSON в хранилище секретов](./pic/secret_json_mode.png)
+
 ## Интерфейс Secrets<a name="secrets"></a>
 ```ts
 interface Secrets {
@@ -54,7 +58,8 @@ getSecret(path: string, key: string): SecretValue;
 ```ts
 interface SecretValue {
 	getStorageIdentifier(): string;
-	getIdentifier(): string;
+	getPath(): string;
+	getKey(): string;
 	toJson(): Object;
 }
 ```
@@ -62,6 +67,26 @@ interface SecretValue {
 
 Опознать методы с поддержкой секретов можно по сигнатуре `setPassword(password: string | SecretValue): this;`. Появляется выбор - использовать простой тип данных или секрет. Проверка типа значения также работает на секретах. Если тип не совпадет с тем, который ожидается методом, вылетит ошибка.
 
+&nbsp;
+
+```js
+getStorageIdentifier(): string;
+```
+Возвращает идентификатор хранилища.
+
+&nbsp;
+
+```js
+getPath(): string;
+```
+Возвращает название папки, в которой находится секрет.
+
+&nbsp;
+
+```js
+getKey(): string;
+```
+Возвращает название ключа секрета.
 
 &nbsp;
 
@@ -71,14 +96,15 @@ toJson(): Object;
 Возвращает JSON-объект секрета вида
 ```ts
 {
-    "type":"OpenBaoKeyValueSecret",
+    "secret": true,
     "params": {
-        "key":"secret-key",
-        "path":"secret-path",
+        "key": "secret-key",
+        "path": "secret-path",
+        "storageIdentifier": "vault-id",
     },
 }
 ```
-Такой JSON-объект можно создать самостоятельно и передавать в методы с поддержкой секретов.
+Такой JSON-объект также можно передавать в методы с поддержкой секретов. Наличие ключа `secret` определяет объект как секрет вне зависимости от его значения. В текущей реализации для этого ключа необходимо всегда указывать значение `true`, иначе будет выбрасываться ошибка валидации объекта как секрета при передаче его в метод.
 
 &nbsp;
 
@@ -98,11 +124,11 @@ ftp.setHost(secret);
 Самостоятельное создание JSON-объекта секрета и передача его в метод API скриптов
 ```ts
 const secret = {
-    "type": "OpenBaoKeyValueSecret",
+    "secret": true,
     "params": {
-        "storageIdentifier": "openbao-vault",
-        "path": "ftp-connection",
         "key": "host",
+        "path": "ftp-connection",
+        "storageIdentifier": "openbao-vault",
     },
 };
 
