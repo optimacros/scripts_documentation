@@ -130,48 +130,48 @@ qb(): SqlQueryBuilder;
 ### Интерфейс SqlConnectorBuilder<a name="sql-connector-builder"></a>
 ```ts
 interface SqlConnectorBuilder {
-	setHost(value: string): this;
-	setPort(value: number): this;
-	setUsername(value: string): this;
-	setPassword(value: string): this;
-	setDatabase(value: string): this;
+	setHost(value: string | SecretValue): this;
+	setPort(value: number | SecretValue): this;
+	setUsername(value: string | SecretValue): this;
+	setPassword(value: string | SecretValue): this;
+	setDatabase(value: string | SecretValue): this;
 	load(): SqlConnection;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), базовый интерфейс [`коннекторов`](../appendix/glossary.md#connector) для подключения к реляционной базе данных.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), базовый интерфейс [`коннекторов`](../appendix/glossary.md#connector) для подключения к реляционной базе данных. Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setHost(value: string): this;
+setHost(value: string | SecretValue): this;
 ```
 Устанавливает адрес подключения. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setPort(value: number): this;
+setPort(value: number | SecretValue): this;
 ```
 Устанавливает номер порта для подключения. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setUsername(value: string): this;
+setUsername(value: string | SecretValue): this;
 ```
 Устанавливает имя пользователя. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setPassword(value: string): this;
+setPassword(value: string | SecretValue): this;
 ```
 Устанавливает пароль. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setDatabase(value: string): this;
+setDatabase(value: string | SecretValue): this;
 ```
 Устанавливает имя базы данных. Возвращает `this`.
 
@@ -281,32 +281,32 @@ loadBulkCopyBuilder(): SqlBulkCopyBuilder;
 ### Интерфейс OracleConnectorBuilder<a name="oracle-connector-builder"></a>
 ```ts
 interface OracleConnectorBuilder extends SqlConnectorBuilder {
-	setServiceName(value: string): this;
-	setSchema(value: string): this;
-	setTNS(value: string): this;
+	setServiceName(value: string | SecretValue): this;
+	setSchema(value: string | SecretValue): this;
+	setTNS(value: string | SecretValue): this;
 	loadImportBuilder(): OracleImportBuilder;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Oracle`](https://ru.wikipedia.org/wiki/Oracle_Database). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder). Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setServiceName(value: string): this;
+setServiceName(value: string | SecretValue): this;
 ```
 Устанавливает имя службы (SERVICE_NAME). SERVICE_NAME определяет одно или ряд имен для подключения к одному экземпляру базы данных. Возможные значения SERVICE_NAME указываются в сетевых установках Oracle и регистрируются в качестве службы БД процессом listener.
 
 &nbsp;
 
 ```js
-setSchema(value: string): this;
+setSchema(value: string | SecretValue): this;
 ```
 Устанавливает [`схему`](https://docs.oracle.com/cd/E11882_01/server.112/e10897/schema.htm).
 
 &nbsp;
 
 ```js
-setTNS(value: string): this;
+setTNS(value: string | SecretValue): this;
 ```
 Устанавливает имя службы TNS. Протокол TNS (Transparent Network Substrate) — уровень связи, используемый базами данных Oracle. Имя службы TNS — это имя, с которым экземпляр базы данных Oracle представлен в сети. Имя службы TNS назначается при настройке подключений к базе данных Oracle. 
 
@@ -322,28 +322,28 @@ loadImportBuilder(): OracleImportBuilder;
 ### Интерфейс SnowflakeConnectorBuilder<a name="snowflake-connector-builder"></a>
 ```ts
 interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
-	setAccount(account: string): this;
-	setRegion(region: string): this;
+	setAccount(account: string | SecretValue): this;
+	setRegion(region: string | SecretValue): this;
 	setInsecure(insecure: boolean): this;
-	setWarehouse(warehouse: string): this;
-	setSchema(schema: string): this;
-	setRole(role: string): this;
+	setWarehouse(warehouse: string | SecretValue): this;
+	setSchema(schema: string | SecretValue): this;
+	setRole(role: string | SecretValue): this;
 	setProtocol(protocol: string): this;
 }
 ```
-[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Snowflake`](https://en.wikipedia.org/wiki/Snowflake_Inc%2E) (для подключения используется [PHP PDO Driver](https://docs.snowflake.com/en/user-guide/php-pdo-driver.html)). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
+[`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`Snowflake`](https://en.wikipedia.org/wiki/Snowflake_Inc%2E) (для подключения используется [PHP PDO Driver](https://docs.snowflake.com/en/user-guide/php-pdo-driver.html)). Все функции возвращают `this`. Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder). Функции поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setAccount(account: string): this;
+setAccount(account: string | SecretValue): this;
 ```
 Устанавливает [`имя аккаунта`](https://docs.snowflake.com/en/sql-reference/account-usage.html).
 
 &nbsp;
 
 ```js
-setRegion(region: string): this;
+setRegion(region: string | SecretValue): this;
 ```
 Устанавливает [`имя региона`](https://docs.snowflake.com/en/user-guide/admin-account-identifier.html). Опциональный.
 
@@ -357,21 +357,21 @@ setInsecure(insecure: boolean): this;
 &nbsp;
 
 ```js
-setWarehouse(warehouse: string): this;
+setWarehouse(warehouse: string | SecretValue): this;
 ```
 Устанавливает [`название хранилища`](https://docs.snowflake.com/en/user-guide/warehouses-overview.html). Опциональный.
 
 &nbsp;
 
 ```js
-setSchema(value: string): this;
+setSchema(value: string | SecretValue): this;
 ```
 Устанавливает [`схему`](https://docs.snowflake.com/en/sql-reference/info-schema.html). Опциональный, по умолчанию `public`.
 
 &nbsp;
 
 ```js
-setRole(role: string): this;
+setRole(role: string | SecretValue): this;
 ```
 Устанавливает [`имя роли`](https://docs.snowflake.com/en/user-guide/security-access-control-overview.html#roles). Опциональный.
 
@@ -602,7 +602,7 @@ getStats(): Object;
 ```js
 interface PostgresqlImportBuilder {
 	setTable(name: string): this;
-	setSchema(name: string): this;
+	setSchema(name: string | SecretValue): this;
 	setDelimiter(delimiter: string): this;
 	setEnclosure(enclosure: string): this;
 	setEscape(escape: string): this;
@@ -624,9 +624,9 @@ setTable(name: string): this;
 &nbsp;
 
 ```js
-setSchema(name: string): this;
+setSchema(name: string | SecretValue): this;
 ```
-Устанавливает [схему](https://www.postgresql.org/docs/current/ddl-schemas.html).
+Устанавливает [схему](https://www.postgresql.org/docs/current/ddl-schemas.html). Поддерживает [секреты](./secrets.md).
 
 &nbsp;
 
@@ -716,11 +716,11 @@ getCommand(): string;
 ### Интерфейс SqlBulkCopyBuilder<a name="sql-bulk-copy-builder"></a>
 ```ts
 interface SqlBulkCopyBuilder {
-	setServerName(value: string): this;
-	setPort(value: number): this;
-	setUsername(value: string): this;
-	setPassword(value: string): this;
-	setDatabase(value: string): this;
+	setServerName(value: string | SecretValue): this;
+	setPort(value: number | SecretValue): this;
+	setUsername(value: string | SecretValue): this;
+	setPassword(value: string | SecretValue): this;
+	setDatabase(value: string | SecretValue): this;
 	setQuery(value: string): this;
 	setPacketSize(size: number): this;
 	setBatchSize(size: number): this;
@@ -752,7 +752,7 @@ interface SqlBulkCopyBuilder {
 	format(path: string, xml: boolean): SqlBulkCopyResult;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MS SQL из файла CSV с помощью утилиты [*bcp*](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility). Все функции, начинающиеся с `set...()`, возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для импорта в СУБД MS SQL из файла CSV с помощью утилиты [*bcp*](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility). Все функции, начинающиеся с `set...()`, возвращают `this`. Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
 
 Порядок полей в файле CSV и таблице должен строго совпадать, даже при импорте в таблицу с полем [`IDENTITY`](https://docs.microsoft.com/ru-ru/sql/t-sql/statements/create-table-transact-sql-identity-property), так как в утилите *bcp* имеется баг, из-за которого работоспособность функций [`setFormatFile()`](#sql-bulk-copy-builder.set-format-file) и [`format()`](#sql-bulk-copy-builder.format) не гарантирована.
 
@@ -760,34 +760,34 @@ interface SqlBulkCopyBuilder {
 
 <a name="set-server-name"></a>
 ```js
-setServerName(value: string): this;
+setServerName(value: string | SecretValue): this;
 ```
 Устанавливает экземпляр SQL Server, к которому устанавливается подключение; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#S) *bcp*: *-S*.
 
 &nbsp;
 
 ```js
-setPort(value: number): this;
+setPort(value: number | SecretValue): this;
 ```
 Устанавливает номер порта соединения. По умолчанию: `1433`.
 
 &nbsp;
 
 ```js
-setUsername(value: string): this;
+setUsername(value: string | SecretValue): this;
 ```
 Устанавливает имя пользователя; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#U) *bcp*: *-U*.
 
 &nbsp;
 ```js
-setPassword(value: string): this;
+setPassword(value: string | SecretValue): this;
 ```
-Устанавливает имя пользователя; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#P) *bcp*: *-P*.
+Устанавливает пароль пользователя; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#P) *bcp*: *-P*.
 
 &nbsp;
 
 ```js
-setDatabase(value: string): this;
+setDatabase(value: string | SecretValue): this;
 ```
 Устанавливает имя БД, к которой произойдёт подключение; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#d) *bcp*: *-d*.
 

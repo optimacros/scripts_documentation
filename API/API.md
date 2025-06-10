@@ -5,7 +5,7 @@
 * выполнение скрипта: информация об окружении и управление выводом/действиями после завершения работы (см. `Common`, `Environment`, `Optimization`);
 * взаимодействие с моделью, как сущностью: создание бэкапа, пересчёт всей модели (см. `Common.ModelInfo`, `Users`);
 * взаимодействие с данными и метаданными модели (см. `Multicubes`, `Times`, `Versions`, `Lists`, `Common.CopyData`);
-* взаимодействие с внешним миром (см. `Common.ApiService`, `Filesystems`, `Connectors`, `Notifications`);
+* взаимодействие с внешним миром (см. `Common.ApiService`, `Filesystems`, `Connectors`, `Notifications`, `Secrets`);
 * административное: настройка API-сервисов (`ApiServices`), работа с аудитом (`Audit`);
 * функции, напрямую не связанные с Оптимакросом, функции помощники — интерфейс `Crypto`.
 
@@ -33,6 +33,7 @@
 1. [Аудит](audit.md)
 1. [Криптография, хэширование и вспомогательные функции](crypto.md)
 1. [Пользователи](users.md)
+1. [Секреты](secrets.md)
 
 ## Интерфейс OM<a name="om"></a>
 ```ts
@@ -52,6 +53,7 @@ interface OM {
 	readonly audit: Audit;
 	readonly crypto: Crypto;
 	readonly users: Users;
+	readonly secrets: Secrets;
 }
 
 var om: OM;
@@ -162,6 +164,13 @@ readonly crypto: Crypto;
 readonly users: Users;
 ```
 Ссылка на интерфейс [`Users`](./users.md).
+
+&nbsp;
+
+```js
+readonly secrets: Secrets;
+```
+Ссылка на интерфейс [`Secrets`](./secrets.md).
 
 &nbsp;
 
