@@ -3,9 +3,9 @@
 ## Интерфейс GridRangeChunk<a name="grid-range-chunk"></a>
 ```ts
 interface GridRangeChunk {
-    cells(): Cells;
-    rows(): Labels;
-    columns(): Labels;
+	cells(): Cells;
+	rows(): Labels;
+	columns(): Labels;
 }
 ```
 Интерфейс для обработки части строк [`GridRange`](./views.md#grid-range) — чанка. Содержит информацию о заголовках (возможно многоуровневых) и ячейках двумерной таблицы.
@@ -36,12 +36,12 @@ columns(): Labels;
 ### Интерфейс Labels<a name="labels"></a>
 ```ts
 interface Labels {
-    start(): number;
-    count(): number;
-    all(): LabelsGroup[];
-    get(index: number): LabelsGroup | null;
-    chunkInstance(): GridRangeChunk;
-    findLabelByLongId(longId: number): Label | null;
+	start(): number;
+	count(): number;
+	all(): LabelsGroup[];
+	get(index: number): LabelsGroup | null;
+	chunkInstance(): GridRangeChunk;
+	findLabelByLongId(longId: number): Label | null;
 }
 ```
 Интерфейс, представляющий набор объектов [`LabelsGroup`](#labels-group), то есть набор заголовков строк/столбцов с их возможно многоуровневой структурой. Как правило, его можно получить функциями интерфейса [`GridRangeChunk`](#grid-range-chunk).
@@ -97,9 +97,9 @@ findLabelByLongId(longId: number): Label | null;
 ## Интерфейс LabelsGroup<a name="labels-group"></a>
 ```ts
 interface LabelsGroup {
-    all(): Label[];
-    first(): Label;
-    cells(): Cells;
+	all(): Label[];
+	first(): Label;
+	cells(): Cells;
 }
 ```
 Интерфейс, представляющий многоуровневый набор заголовков конкретной строки или столбца.
@@ -138,12 +138,12 @@ interface Label = EntityInfo;
 ### Интерфейс Cells<a name="cells"></a>
 ```ts
 interface Cells {
-    all(): Cell[];
-    first(): Cell | null;
-    setValue(value: number | string | boolean | null): this;
-    count(): number;
-    chunkInstance(): GridRangeChunk;
-    getByIndexes(indexes: number[]): Cells;
+	all(): Cell[];
+	first(): Cell | null;
+	setValue(value: number | string | boolean | null): this;
+	count(): number;
+	chunkInstance(): GridRangeChunk;
+	getByIndexes(indexes: number[]): Cells;
 }
 ```
 Интерфейс, представляющий (как правило, прямоугольный) набор клеток таблицы.
@@ -197,21 +197,21 @@ getByIndexes(indexes: number[]): Cells;
 ### Интерфейс Cell<a name="cell"></a>
 ```ts
 interface Cell {
-    setValue(value: number | string | boolean | null): this;
-    
-    getValue(): number | string | null;
-    getVisualValue(): string | null;
-    getNativeValue(): number | string | null;
-    getContextValue(): string | null;
-    
-    definitions(): number[];
-    columns(): LabelsGroup | null;
-    rows(): LabelsGroup | null;
-    
-    dropDown(): Labels;
-    dropDownSelector(): DropDownSelector;
-    getFormatType(): string;
-    isEditable(): boolean;
+	setValue(value: number | string | boolean | null): this;
+
+	getValue(): number | string | null;
+	getVisualValue(): string | null;
+	getNativeValue(): number | string | null;
+	getContextValue(): string | null;
+
+	definitions(): number[];
+	columns(): LabelsGroup | null;
+	rows(): LabelsGroup | null;
+
+	dropDown(): Labels;
+	dropDownSelector(): DropDownSelector;
+	getFormatType(): string;
+	isEditable(): boolean;
 }
 ```
 Интерфейс, представляющий клетку таблицы.
@@ -318,33 +318,33 @@ isEditable(): boolean;
 
 ### Интерфейс DropDownSelector<a name="dropdown-selector"></a>
 
-```js
+```ts
 interface DropDownSelector {
-    totalCount(): number;
-    generator(chunkSize: number | null): IterableIterator<DropDownSelectorChunk>;
+	totalCount(): number;
+	generator(chunkSize: number | null): IterableIterator<DropDownSelectorChunk>;
 }
 ```
 
-Интерфейс постраничного получения опций выпадающего списка для клеток формата сущности — `'ENTITY'`, `'TIME_ENTITY'`, `'VERSION'`. Который должен во всех случаях совпадать со списком, доступным пользователю через `web`-интерфейс (со всеми применимыми фильтрациями).
+Интерфейс постраничного получения опций выпадающего списка для клеток формата сущности — `'ENTITY'`, `'TIME_ENTITY'`, `'VERSION'`, который должен во всех случаях совпадать со списком, доступным пользователю через `web`-интерфейс (со всеми применимыми фильтрациями).
 
-Для клеток, доступных только для чтения, список опций всё равно доступен, хотя изменение значения клетки невозможно, поэтому чтобы понять, можно ли изменять клетку, стоит обратиться к методу [`Cell.isEditable()`](#cell.is-editable). Если недоступно даже чтение значения клетки, попытка получения данного интерфейса приведёт к ошибке.
+Для клеток, доступных только для чтения, список опций всё равно доступен, хотя изменение значения клетки невозможно. Чтобы понять, можно ли изменять клетку, стоит обратиться к методу [`Cell.isEditable()`](#cell.is-editable). Если недоступно даже чтение значения клетки, попытка получения данного интерфейса приведёт к ошибке.
 
-По неизвестной науке причине с помощью этого интерфейса также **возможно** чтение списка доспупных пользовательских измерений мультикуба `User Lists`. По той же причине, если в справочнике типа `Cube Link` не установлено значение мультикуба `Multicube Link`, то у клетки пропадает выпадающий список полностью и она становится нередактируемой, а значит, попытка чтения опций кубов `Cube Link` приведёт к ошибке. Эта же причниа влияет и на то, что если в справочнике создать свойство с форматом этого же или родительского справочника и применить зависимый контекст по измерению, то в `web`-интерфейсе фильтрация **не** будет работать, но интерфейс `DropDownSelector` **будет** работать с фильтрацией.
+По неизвестной науке причине с помощью этого интерфейса также **возможно** чтение списка доступных пользовательских измерений мультикуба в колонке `User Lists` на вкладке `Multicubes`. По той же причине, если в справочнике типа `Cube Link` не установлено значение мультикуба в колонке `Multicube Link`, то у клетки пропадает выпадающий список полностью и она становится нередактируемой, а значит, попытка чтения опций кубов в колонке `Cube Link` приведёт к ошибке. Эта же причина влияет и на то, что если в справочнике создать свойство с форматом этого же или родительского справочника и применить зависимый контекст по измерению, то в `web`-интерфейсе фильтрация **не будет** работать, но интерфейс `DropDownSelector` **будет** работать с фильтрацией.
 
-Для получения новыйх страниц требуется блокировка того же уровня, что и для получения ссылки на сам интерфейс с помощью [`Cell.dropDownSelector`](#cell.dropdown-selector).
+Для получения новых страниц требуется блокировка того же уровня, что и для получения ссылки на сам интерфейс с помощью [`Cell.dropDownSelector`](#cell.dropdown-selector).
 
-Также стоит отметить, что наличе опции в выпадающем списке не гарантирует, что данное значение может быть установлено.
+Так же стоит отметить, что наличие опции в выпадающем списке не гарантирует, что данное значение может быть установлено.
 
 &nbsp;
 
-```js
+```ts
 totalCount(): number;
 ```
 Возвращает общее количество опций выпадающего списка.
 
 &nbsp;
 
-```js
+```ts
 generator(chunkSize: number | null): IterableIterator<DropDownSelectorChunk>;
 ```
 Метод получения итератора для постраничного чтения опций выпадающего списка. Аргумент `chunkSize` — максимальное количество опций на одной странице итератора в интервале от 500 до 5000 (по умолчанию 1000). Влияние параметра `chunkSize` на скорость работы итератора достаточно не изучено и это предстоит устанавливать в каждом конкретном случае. Возвращает итерируемый объект для чтения страниц опций выдающего списка [`DropDownSelectorChunk`](#dropdown-selector-chunk). 
@@ -352,33 +352,32 @@ generator(chunkSize: number | null): IterableIterator<DropDownSelectorChunk>;
 &nbsp;
 
 ### Интерфейс DropDownSelectorChunk<a name="dropdown-selector-chunk"></a>
-
-```js
+```ts
 interface DropDownSelectorChunk {
-    start(): number;
-    count(): number;
-    all(): Label[];
+	start(): number;
+	count(): number;
+	all(): Label[];
 }
 ```
-Интерфейс содержащий одну страницу опций выпадающего списка возможных значений клетки.
+Интерфейс, содержащий одну страницу опций выпадающего списка возможных значений клетки.
 
 &nbsp;
 
-```js
+```ts
 start(): number;
 ```
 Возвращает номер первой опции текущей страницы выдающего списка, начиная отсчёт с 0.
 
 &nbsp;
 
-```js
+```ts
 count(): number;
 ```
-Возвращает общее число опций на данной странице.
+Возвращает общее число опций на текущей странице.
 
 &nbsp;
 
-```js
+```ts
 all(): Label[];
 ```
 Возвращает список сущностей [Label](#label) опций выпадающего списка.
