@@ -12,21 +12,21 @@ interface GridRangeChunk {
 
 &nbsp;
 
-```js
+```ts
 cells(): Cells;
 ```
 Возвращает ссылку на набор ячеек [`Cells`](#cells) текущего чанка.
 
 &nbsp;
 
-```js
+```ts
 rows(): Labels;
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки строк.
 
 &nbsp;
 
-```js
+```ts
 columns(): Labels;
 ```
 Возвращает интерфейс [`Labels`](#labels), представляющий заголовки столбцов.
@@ -48,14 +48,14 @@ interface Labels {
 
 &nbsp;
 
-```js
+```ts
 start(): number;
 ```
 Возвращает номер первой строки/столбца текущего [`GridRangeChunk`](#grid-range-chunk) в таблице [`Grid`](./views.md#grid).
 
 &nbsp;
 
-```js
+```ts
 count(): number;
 ```
 Возвращает количество строк/столбцов в наборе.
@@ -66,28 +66,28 @@ count(): number;
 
 &nbsp;
 
-```js
+```ts
 all(): LabelsGroup[];
 ```
 Возвращает массив объектов заголовков каждой строки/столбца [`LabelsGroup`](#labels-group).
 
 &nbsp;
 
-```js
+```ts
 get(index: number): LabelsGroup | null;
 ```
 Аналог `all()[index]`. В случае некорректного индекса возвращает `null`.
 
 &nbsp;
 
-```js
+```ts
 chunkInstance(): GridRangeChunk;
 ```
 Возвращает обратную ссылку на [`GridRangeChunk`](#grid-range-chunk), из которого был получен `this`.
 
 &nbsp;
 
-```js
+```ts
 findLabelByLongId(longId: number): Label | null;
 ```
 Возвращает объект [`Label`](#label) по его [`longId`](./common.md#long-id), если он присутствует в `this`, иначе — `null`.
@@ -106,21 +106,21 @@ interface LabelsGroup {
 
 &nbsp;
 
-```js
+```ts
 all(): Label[];
 ```
 Возвращает массив конкретных заголовков [`Label`](#label).
 
 &nbsp;
 
-```js
+```ts
 first(): Label;
 ```
 Аналог `all()[0]`.
 
 &nbsp;
 
-```js
+```ts
 cells(): Cells;
 ```
 Возвращает интерфейс [`Cells`](#cells), предоставляющий доступ к ячейкам данной строки или столбца.
@@ -150,14 +150,14 @@ interface Cells {
 
 &nbsp;
 
-```js
+```ts
 all(): Cell[];
 ```
 Возвращает одномерный массив всех клеток [`Cell`](#cell).
 
 &nbsp;
 
-```js
+```ts
 first(): Cell | null;
 ```
 Аналог `all()[0]`. Возвращает `null`, если массив клеток пустой.
@@ -165,14 +165,14 @@ first(): Cell | null;
 &nbsp;
 
 <a name="cells.set-value"></a>
-```js
+```ts
 setValue(value: number | string | boolean | null): this;
 ```
 Устанавливает одно и то же значение для всех клеток. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых от них клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах. Возвращает `this`.
 
 &nbsp;
 
-```js
+```ts
 count(): number;
 ```
 Возвращает количество клеток в наборе.
@@ -180,14 +180,14 @@ count(): number;
 &nbsp;
 
 <a name="chunkInstance"></a>
-```js
+```ts
 chunkInstance(): GridRangeChunk;
 ```
 Возвращает обратную ссылку на [`GridRangeChunk`](#grid-range-chunk), из которого был получен `this`.
 
 &nbsp;
 
-```js
+```ts
 getByIndexes(indexes: number[]): Cells;
 ```
 Производит выборку из одномерного представления клеток объекта `this` по индексам `indexes` и возвращает новый объект [`Cells`](#cells). В этом случае функция [`chunkInstance()`](#chunk-instance) для нового объекта будет возвращать ссылку на тот же самый объект [`GridRangeChunk`](#grid-range-chunk), что и для `this`. Это *единственный* способ создать непрямоугольный объект [`Cells`](#cells).
@@ -219,7 +219,7 @@ interface Cell {
 &nbsp;
 
 <a name="cell.set-value"></a>
-```js
+```ts
 setValue(value: number | string | boolean | null): this;
 ```
 Устанавливает значение клетки. Отрабатывает в момент вызова и мгновенно приводит к пересчёту зависимых клеток. Поэтому ***не*** рекомендуется к использованию в больших мультикубах. В случае клетки формата справочника в качестве значения можно использовать [имя элемента](./common.md#name), его [код](./common.md#code), [`longId`](./common.md#long-id) или [пару `отображаемое-имя||имя`](cell.get-context-value). Возвращает `this`.
@@ -227,14 +227,14 @@ setValue(value: number | string | boolean | null): this;
 &nbsp;
 
 <a name="cell.get-value"></a>
-```js
+```ts
 getValue(): number | string | null;
 ```
 Возвращает значение клетки, которое видит пользователь. Если клетка имеет логический формат, то возвращается строковое значение `'true'` или `'false'`.
 
 &nbsp;
 
-```js
+```ts
 getVisualValue(): string | null;
 ```
 Возвращает отображаемое значение в ячейке, если куб в формате даты или справочника, для других форматов куба возвращает `null`.
@@ -242,7 +242,7 @@ getVisualValue(): string | null;
 &nbsp;
 
 <a name="cell.get-native-value"></a>
-```js
+```ts
 getNativeValue(): number | string | null;
 ```
 Возвращает самородное значение клетки, зависящее от формата. Если клетка имеет формат справочника, то возвращается [`longId`](./common.md#long-id). 
@@ -252,7 +252,7 @@ getNativeValue(): number | string | null;
 &nbsp;
 
 <a name="cell.get-context-value"></a>
-```js
+```ts
 getContextValue(): string | null;
 ```
 Если ячейка имеет формат справочника, в настройках которого задано некоторое свойство `prop` в качестве отображаемого имени (опция `Отображение`), и для этой ячейки задано значение этого свойства, то возвращает строку, состоящую из имени, двойной вертикальной черты и значения свойства `prop`. Например, для отображамого имени `Берлин` и имени элемента `#5` — `'Берлин||#5'`.
@@ -261,21 +261,21 @@ getContextValue(): string | null;
 
 &nbsp;
 
-```js
+```ts
 definitions(): number[];
 ```
 То же, что и [`CubeCell.definitions()`](./cubeCell.md#cube-cell.definitions).
 
 &nbsp;
 
-```js
+```ts
 columns(): LabelsGroup | null;
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретного столбца, или `null`, если у клетки нет измерений на столбцах.
 
 &nbsp;
 
-```js
+```ts
 rows(): LabelsGroup | null;
 ```
 Возвращает многоуровневый набор заголовков [`LabelsGroup`](#labels-group) конкретной строки, или `null`, если у клетки нет измерений на строках.
@@ -283,7 +283,7 @@ rows(): LabelsGroup | null;
 &nbsp;
 
 <a name="cell.dropdown"></a>
-```js
+```ts
 dropDown(): Labels;
 ```
 Этот метод признан устаревшим. Вместо него стоит использовать метод [`dropDownSelector()`](#cell.dropdown-selector).
@@ -293,14 +293,14 @@ dropDown(): Labels;
 &nbsp;
 
 <a name="cell.dropdown-selector"></a>
-```js
+```ts
 dropDownSelector(): DropDownSelector;
 ```
 Позволяет постранично читать набор опций выпадающего списка значений клетки. Требует наличия `SHARED` блокировки для всех случаев, кроме колонки `Api Service Model` [таблицы веб-сервисов воркспейса](./apiServicesAdministration.md), которая требует отсутствия блокировок — `UNLOCK` (чтение опций клеток колонки `Api Service Script` требует `SHARED` блокировки, так как список скриптов без чтения модели получить не выйдет). Вызов на клетке, не содержащей выпадающего списка, приведёт к ошибке. Возвращает ссылку на интерфейс [`DropDownSelector`](#dropdown-selector) выпадающего списка, который в интерфейсе пользователя `Optimacros` можно получить кликом по треугольнику внутри ячейки.
 
 &nbsp;
 
-```js
+```ts
 getFormatType(): string;
 ```
 Возвращает строку с форматом клетки. Возможные значения: `'NUMBER'`, `'BOOLEAN'`, 
@@ -309,7 +309,7 @@ getFormatType(): string;
 &nbsp;
 
 <a name="cell.is-editable"></a>
-```js
+```ts
 isEditable(): boolean;
 ```
 Возвращает признак возможности редактирования ячейки пользователем.
@@ -333,7 +333,7 @@ interface DropDownSelector {
 
 Для получения новых страниц требуется блокировка того же уровня, что и для получения ссылки на сам интерфейс с помощью [`Cell.dropDownSelector`](#cell.dropdown-selector).
 
-Так же стоит отметить, что наличие опции в выпадающем списке не гарантирует, что данное значение может быть установлено.
+Также стоит отметить, что наличие опции в выпадающем списке не гарантирует, что данное значение может быть установлено.
 
 &nbsp;
 
