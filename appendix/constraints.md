@@ -13,7 +13,7 @@
 Если в сводной таблице в строках или столбцах нет измерений, система скриптов создаёт виртуальное измерение, к которому можно получить доступ стандартным способом, и вызов
 
 ```js
-definitionInfo.getColumnDimensions()[0]getDimensionEntity().name();
+definitionInfo.getColumnDimensions()[0].getDimensionEntity().name();
 ```
 
 вернёт специальное значение `'Empty 1 0'`.
@@ -22,7 +22,7 @@ definitionInfo.getColumnDimensions()[0]getDimensionEntity().name();
 
 Такое измерение не содержит заголовков и вызов [`LabelsGroup`](../API/readingGrid.md#labels-group).`all()` вернёт пустой массив.
 
-Если таблица не собержит ни строк, ни колонок, то доступ к единственной ячейке возможет только с помощью метода [`GridRangeChunk`](../API/readingGrid.md#grid-range-chunk).`cells()`.
+Если таблица не содержит ни строк, ни колонок, то доступ к единственной ячейке возможет только с помощью метода [`GridRangeChunk`](../API/readingGrid.md#grid-range-chunk).`cells()`.
 
 &nbsp;
 
