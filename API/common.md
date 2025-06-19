@@ -751,7 +751,7 @@ get(longId: number): EntityInfo | null;
 ```js
 getCollection(longId: number[]): (EntityInfo | null)[];
 ```
-Возвращает массив сущностей [`EntityInfo`](#entity-info) параллельный массиву их [`longId`](#long-id). Если сущность не найдена, на её месте будет возвращён `null`.
+Возвращает массив сущностей [`EntityInfo`](#entity-info), параллельный массиву их [`longId`](#long-id). Если сущность не найдена, на её месте будет возвращёно значение `null`.
 
 &nbsp;
 
