@@ -113,6 +113,9 @@ interface ClickhouseQueryBuilder {
 	insert(values: Object[] | Object): boolean;
 
 	get(): ClickhouseQueryResult;
+
+	exportToCsv(fileName: string, withNames: boolean): string;
+	loadImportBuilder(): ClickhouseImportBuilder;
 }
 ```
 Интерфейс построения запроса к базе данных.
@@ -298,6 +301,20 @@ get(): ClickhouseQueryResult;
 
 &nbsp;
 
+```js
+exportToCsv(fileName: string, withNames: boolean): string;
+```
+Конструирует SQL-запрос, передаёт его на исполнение в СУБД и сохраняет результат в CSV формате в локальной директории скрипта в файл `filename`, со строкой заголовков - при `wwithNames = true` или без неё. Возвращает сообщение вида "10 rows were received" в случае успеха.  
+
+&nbsp;
+
+```js
+loadImportBuilder(): ClickhouseImportBuilder;
+```
+Возвращает интерфейс [`ClickhouseImportBuilder`](#clickhouse-import-builder) для импорта результатов запроса в модель
+
+&nbsp;
+
 ## Интерфейс ClickhouseQueryResult<a name="clickhouse-query-result"></a>
 ```ts
 interface ClickhouseQueryResult {
@@ -344,6 +361,135 @@ first(): Object | null;
 column(columnName: string): any[];
 ```
 Выбирает и возвращает в виде массива значения столбца `columnName`.
+
+&nbsp;
+
+## Интерфейс ClickhouseImportBuilder<a name="clickhouse-import-builder"></a>
+```ts
+interface ClickhouseImportBuilder {
+   loadMulticubeImportBuilder(): ClickhouseMulticubeImportBuilder;
+   loadListImportBuilder(): ClickhouseListImportBuilder;
+}
+```
+
+&nbsp;
+
+```js
+loadMulticubeImportBuilder(): ClickhouseMulticubeImportBuilder;
+```
+Возвращает интерфейс [`ClickhouseMulticubeImportBuilder`](#clickhouse-multicube-import-builder) для импорта результатов запроса в мультикуб.
+
+&nbsp;
+
+```js
+loadListImportBuilder(): ClickhouseListImportBuilder; 
+```
+Возвращает интерфейс [`ClickhouseListImportBuilder`](#clickhouse-list-import-builder) для импорта результатов запроса в справочник.
+
+&nbsp;
+
+## Интерфейс ClickhouseMulticubeImportBuilder<a name="clickhouse-multicube-import-builder"></a>
+```js
+interface ClickhouseMulticubeImportBuilder {
+  setMulticube(multicube: MulticubeTab): this;
+  getFileName(): string;
+  import(): string;
+}
+```
+
+&nbsp;
+
+```js
+setMulticube(multicube: MulticubeTab): this
+```
+Устанавливает представление мультикуба для импорта, возвращает `this`.
+
+&nbsp;
+
+```js
+getFileName(): string;
+```
+Возвращает имя промежуточного CSV файла, куда будет выполнена выгрузка результата запроса из Clickhouse
+
+&nbsp;
+
+```js
+import(): string;
+```
+Выполняет импорт строк, полученных в результате выполнения запроса в заданное представление мультикуба. Возвращает сообщение вида "10 rows were received" в случае успеха.
+
+&nbsp;
+
+## Интерфейс ClickhouseListImportBuilder<a name="clickhouse-list-import-builder"></a>
+```js
+interface ClickhouseListImportBuilder {
+  setList(list: ListTab): this;
+  setRequiredListCodes(requiredListCodes: boolean): this;
+  getRequiredListCodes(): boolean;
+  setImportToChildListOnly(importToChildListOnly: boolean): this;
+  getImportToChildListOnly(): boolean;
+  setUpdatedPropertiesOnParentLevel(updatedPropertiesOnParentLevels: boolean): this;
+  getUpdatedPropertiesOnParentLevels(): boolean;
+  getFileName(): string;
+  import(): string;
+}
+```
+
+&nbsp;
+
+```js
+setList(list: ListTab): this;
+```
+Задаёт справочник для импорта
+
+&nbsp;
+
+```js
+setRequiredListCodes(requiredListCodes: boolean): this;
+```
+см. [`setObligatoryListCodes`](exportImport.md#set-obligatory-list-codes)
+
+&nbsp;
+
+```js
+getRequiredListCodes(): boolean;
+```
+см. [`getObligatoryListCodes`](exportImport.md#get-obligatory-list-codes)
+
+&nbsp;
+
+```js
+setImportToChildListOnly(importToChildListOnly: boolean): this;
+```
+см. [`setImportToChildListOnly`](exportImport.md#set-import-to-child-list-only)
+
+&nbsp;
+
+```js
+setUpdatedPropertiesOnParentLevel(updatedPropertiesOnParentLevels: boolean): this;
+```
+см. [`setUpdatedPropertiesOnParentLevel`](exportImport.md#set-updated-properties-on-parent-level)
+
+&nbsp;
+
+```js
+getUpdatedPropertiesOnParentLevels(): boolean;
+```
+см. [`getUpdatedPropertiesOnParentLevels`](exportImport.md#get-updated-properties-on-parent-level)
+
+&nbsp;
+
+```js
+getFileName(): string;
+```
+Возвращает имя промежуточного CSV файла, куда будет выполнена выгрузка результата запроса из Clickhouse
+
+&nbsp;
+
+```js
+import(): string;
+```
+Выполняет импорт строк, полученных в результате выполнения запроса в заданный справочник. Возвращает сообщение вида "10 rows were received" в случае успеха.
 
 &nbsp;
 

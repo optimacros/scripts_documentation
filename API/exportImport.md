@@ -427,6 +427,7 @@ setFilePath(path: string): this;
 ```js
 setObligatoryListCodes(obligatoryListCodes: boolean): this;
 ```
+<a name="set-obligatory-list-codes"></a>
 Устанавливает режим обязательных кодов: если столбец `Code` у элемента пустой, то несуществующие элементы не будут создаваться, но уже существующие тем не менее будут обновлены. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
@@ -434,6 +435,7 @@ setObligatoryListCodes(obligatoryListCodes: boolean): this;
 ```js
 getObligatoryListCodes(): boolean;
 ```
+<a name="get-obligatory-list-codes"></a>
 Возвращает признак режима обязательных кодов.
 
 &nbsp;
@@ -441,6 +443,7 @@ getObligatoryListCodes(): boolean;
 ```js
 setImportToChildListOnly(importToChildListOnly: boolean): this;
 ```
+<a name="set-import-to-child-list-only"></a>
 Устанавливает режим обновления свойств `Parent` и `Code` для элементов только текущего справочника. Если аргумент `importToChildListOnly === false`, эти свойства будут обновляться также и у родительских справочников любого уровня. Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
@@ -448,6 +451,7 @@ setImportToChildListOnly(importToChildListOnly: boolean): this;
 ```js
 getImportToChildListOnly(): boolean;
 ```
+<a name="get-import-to-child-list-only"></a>
 Возвращает признак режима обновления свойств `Parent` и `Code` для элементов только текущего справочника.
 
 &nbsp;
@@ -455,6 +459,7 @@ getImportToChildListOnly(): boolean;
 ```js
 setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): this;
 ```
+<a name="set-updated-properties-on-parent-level"></a>
 Устанавливает режим обновления собственных свойств для элементов родительских справочников. Значение по умолчанию: `true`. Возвращает `this`.
 
 &nbsp;
@@ -462,6 +467,7 @@ setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): th
 ```js
 getUpdatedPropertiesOnParentLevels(): boolean;
 ```
+<a name="get-updated-properties-on-parent-level"></a>
 Возвращает признак режима обновления собственных свойств для элементов родительских справочников.
 
 &nbsp;

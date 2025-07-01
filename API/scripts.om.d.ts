@@ -1667,6 +1667,39 @@ export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
 	setProtocol(protocol: string): this;
 }
 
+export interface ClickhouseMulticubeImportBuilder {
+  setMulticube(multicube: MulticubeTab): this;
+
+  getFileName(): string;
+
+  import(): string;
+}
+
+export interface ClickhouseListImportBuilder {
+  setList(list: ListTab): this;
+
+  setRequiredListCodes(requiredListCodes: boolean): this;
+  
+  getRequiredListCodes(): boolean;
+
+  setImportToChildListOnly(importToChildListOnly: boolean): this;
+  
+  getImportToChildListOnly(): boolean;
+
+  setUpdatedPropertiesOnParentLevels(updatedPropertiesOnParentLevels: boolean): this;
+  
+  getUpdatedPropertiesOnParentLevels(): boolean;
+
+  getFileName(): string;
+
+  import(): string;
+}
+
+export interface ClickhouseImportBuilder {
+   loadMulticubeImportBuilder(): ClickhouseMulticubeImportBuilder;
+   loadListImportBuilder(): ClickhouseListImportBuilder;
+}
+
 export interface ClickhouseConnectorBuilder {
 	setHost(value: string): this;
 	setPort(value: number): this;
@@ -1740,6 +1773,8 @@ export interface ClickhouseQueryBuilder {
 	sum(column: string): number;
 	insert(values: Object[] | Object): boolean;
 	get(): ClickhouseQueryResult;
+	exportToCsv(fileName: string, withNames: boolean): string;
+	loadImportBuilder(): ClickhouseImportBuilder;
 }
 
 export interface ClickhouseQueryResult {
