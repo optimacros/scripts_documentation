@@ -75,7 +75,7 @@ copyData(): CopyData;
 ```js
 apiServiceRequestInfo(): ApiService.RequestInfo | null;
 ```
-Возвращает ссылку на интерфейс [`ApiService.RequestInfo`](./apiService.md#request-info), если скрипт вызван через API Service, или `null` иначе. 
+Возвращает ссылку на интерфейс [`ApiService.RequestInfo`](./apiService.md#request-info), если скрипт вызван через API Service, или `null` иначе.
 
 &nbsp;
 
@@ -250,21 +250,21 @@ setStatusMessage(message: string): this;
 ```js
 getRequestId(): string | null;
 ```
-Каждый запуск скрипта должен существовать в рамках пользовательского или системного [запроса](../appendix/glossary.md#request). Метод предполагает возможность вернуть `null`, но такое поведение можно смело считать багом системы запуска скриптов. Возвращает идентификатор [запроса](../appendix/glossary.md#request), по которому можно найти запись о запуске скрипта в истории запуска скриптов в `web`-интерфейсе (`Macros` -> `Scripts` -> `Launch History`) и в панели администратора `Requests` -> `History`, если запрос на запуск скрипта был сделан пользователем. Скрипты, запущенные по расписанию или через систему API сервисов считаются системными.
+Каждый запуск скрипта должен существовать в рамках пользовательского или системного [запроса](../appendix/glossary.md#request). Метод возвращает идентификатор текущего запроса. Предполагает возможность вернуть `null`, но такое поведение можно смело считать багом системы запуска скриптов. По идентификатору можно найти запись о запуске скрипта в истории запуска скриптов в web-интерфейсе на вкладке `Macros` -> `Scripts` -> `Launch History` и в панели администратора на вкладке `Requests` -> `History`, если запрос на запуск скрипта был сделан пользователем. Скрипты, запущенные по расписанию или через систему API сервисов считаются системными.
 
 &nbsp;
 
 ```js
 getScriptName(): string | null;
 ```
-Возвращает имя сущности текущего исполняемого скрипта кроме случая запуска сниппета кода с помощью метода [`ResultActionsInfo.makeCodeExecutionAction()`](./scriptChains.md#make-code-execution-action) — тогда вернёт `null`.
+Возвращает имя сущности текущего исполняемого скрипта. В случае запуска сниппета кода с помощью метода [`ResultActionsInfo.makeCodeExecutionAction()`](./scriptChains.md#make-code-execution-action) возвращает `null`.
 
 &nbsp;
 
 ```js
 getScriptLongId(): string | null;
 ```
-Возвращает [long id](#long-id) сущности текущего исполняемого скрипта кроме случая запуска сниппета кода с помощью метода [`ResultActionsInfo.makeCodeExecutionAction()`](./scriptChains.md#make-code-execution-action) — тогда вернёт `null`.
+Возвращает [`longId`](./views.md#long-id) сущности текущего исполняемого скрипта. В случае запуска сниппета кода с помощью метода [`ResultActionsInfo.makeCodeExecutionAction()`](./scriptChains.md#make-code-execution-action) возвращает `null`.
 
 &nbsp;
 
