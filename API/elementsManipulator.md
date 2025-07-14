@@ -76,6 +76,7 @@ setPositionChildOf(parentLongId: number): this;
 
 &nbsp;
 
+<a name="base-elements-creator.create"></a>
 ```js
 create(): number[];
 ```
@@ -96,7 +97,7 @@ interface NumericElementsCreator extends BaseElementsCreator {
 ```js
 setCount(count: number): this;
 ```
-Устанавливает количество добавляемых элементов. Возвращает `this`.
+Устанавливает количество добавляемых элементов. Один вызов метода [`create()`](#base-elements-creator.create) позволяет создать максимум `100000` элементов. Возвращает `this`.
 
 &nbsp;
 
