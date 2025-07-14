@@ -22,9 +22,25 @@ export interface Cell {
 	columns(): LabelsGroup | null;
 	rows(): LabelsGroup | null;
 
+	/** DEPRECATED */
 	dropDown(): Labels;
+	dropDownSelector(): DropDownSelector;
 	getFormatType(): string;
 	isEditable(): boolean;
+}
+
+export interface DropDownSelector {
+	totalCount(): number;
+	/**
+	 * @param chunkSize Default: 1000
+	 */
+	generator(chunkSize: number | null): IterableIterator<DropDownSelectorChunk>;
+}
+
+export interface DropDownSelectorChunk {
+	start(): number;
+	count(): number;
+	all(): Label[];
 }
 
 export interface Cells {
@@ -173,7 +189,7 @@ export interface ElementsReorder {
 }
 
 export interface Tab {
-	pivot(viewName?: string): Pivot;
+	pivot(viewName?: string | null): Pivot;
 }
 
 export interface Environment {
@@ -770,7 +786,7 @@ export interface ResultInfo {
 
 export interface EntitiesInfo {
 	get(longId: number): EntityInfo | null;
-	getCollection(longId: number[]): EntityInfo[];
+	getCollection(longId: number[]): (EntityInfo | null)[];
 }
 
 export interface CopyData {
