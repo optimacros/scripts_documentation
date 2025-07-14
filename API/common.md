@@ -211,6 +211,9 @@ interface RequestManager {
 	log(message: string, print?: boolean): this;
 	logStatusMessage(message: string, print?: boolean): this;
 	setStatusMessage(message: string): this;
+	getRequestId(): string | null;
+	getScriptName(): string | null;
+	getScriptLongId(): string | null;
 }
 ```
 Интерфейс для записи в лог (устаревший функционал) и работы со статусными сообщениями. Все функции возвращают `this`.
@@ -241,6 +244,27 @@ setStatusMessage(message: string): this;
 Устанавливает статусное сообщение `message`. Может использоваться для уведомления пользователя во время длительной работы скрипта об этапах или процентах выполненных работ.
 
 ![Пример отображения статусного сообщения](./pic/statusMessage.png)
+
+&nbsp;
+
+```js
+getRequestId(): string | null;
+```
+Каждый запуск скрипта должен существовать в рамках пользовательского или системного [запроса](../appendix/glossary.md#request). Метод возвращает идентификатор текущего запроса. Предполагает возможность вернуть `null`, но такое поведение можно смело считать багом системы запуска скриптов. По идентификатору можно найти запись о запуске скрипта в истории запуска скриптов в web-интерфейсе на вкладке `Macros` -> `Scripts` -> `Launch History` и в панели администратора на вкладке `Requests` -> `History`, если запрос на запуск скрипта был сделан пользователем. Скрипты, запущенные по расписанию или через систему API сервисов считаются системными.
+
+&nbsp;
+
+```js
+getScriptName(): string | null;
+```
+Возвращает имя сущности текущего исполняемого скрипта. В случае запуска сниппета кода с помощью метода [`ResultActionsInfo.makeCodeExecutionAction()`](./scriptChains.md#make-code-execution-action) возвращает `null`.
+
+&nbsp;
+
+```js
+getScriptLongId(): string | null;
+```
+Возвращает [`longId`](#long-id) сущности текущего исполняемого скрипта. В случае запуска сниппета кода с помощью метода [`ResultActionsInfo.makeCodeExecutionAction()`](./scriptChains.md#make-code-execution-action) возвращает `null`.
 
 &nbsp;
 
