@@ -67,7 +67,7 @@ interface Params {
 	clear(): boolean;
 }
 ```
-Интерфейс, представляющий набор параметров и их значений.
+Интерфейс, представляющий набор параметров и их значений. Позволяет устанавливать значение [`SecretValue`](./secrets.md#secret-value). Секрет передаётся по сети в виде JSON строки, **не раскрывая** секретное значение.
 
 &nbsp;
 
@@ -274,39 +274,39 @@ fileBody(): FileRequestBody;
 ### Интерфейс Url<a name="url"></a>
 ```ts
 interface Url {
-	setUrl(url: string): boolean;
+	setUrl(url: string | SecretValue): boolean;
 	getUrl(): string;
 	
-	setUrlPath(path: string): boolean;
-	getUrlPath(): string;
+	setUrlPath(path: string | SecretValue): boolean;
+	getUrlPath(): string | SecretValue;
 	
-	setUrlScheme(scheme: string): boolean;
-	getUrlScheme(): string;
+	setUrlScheme(scheme: string | SecretValue): boolean;
+	getUrlScheme(): string | SecretValue;
 	
-	setHost(host: string): boolean;
-	getHost(): string;
+	setHost(host: string | SecretValue): boolean;
+	getHost(): string | SecretValue;
 	
-	setPort(port: number | string): boolean;
-	getPort(): number | null;
+	setPort(port: number | string | SecretValue): boolean;
+	getPort(): number | SecretValue | null;
 	
-	setUser(user: string): boolean;
-	getUser(): string | null;
+	setUser(user: string | SecretValue): boolean;
+	getUser(): string | SecretValue | null;
 	
-	setPassword(password: string): boolean;
-	getPassword(): string | null;
+	setPassword(password: string | SecretValue): boolean;
+	getPassword(): string | SecretValue | null;
 	
-	setFragment(fragment: string): boolean;
-	getFragment(): string | null;
+	setFragment(fragment: string | SecretValue): boolean;
+	getFragment(): string | SecretValue | null;
 	
 	params(): UrlParams;
 }
 ```
-Интерфейс построения [`URL`](https://ru.wikipedia.org/wiki/URL).
+Интерфейс построения [`URL`](https://ru.wikipedia.org/wiki/URL). Функции поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setUrl(url: string): boolean;
+setUrl(url: string | SecretValue): boolean;
 ```
 Устанавливает URL целиком. Возвращает `true`.
 
@@ -315,103 +315,103 @@ setUrl(url: string): boolean;
 ```js
 getUrl(): string;
 ```
-Возвращает URL.
+Возвращает URL или выбрасывает исключение `This interface call was denied for JS context`, если хотя бы одна из частей URL является секретом.
 
 &nbsp;
 
 ```js
-setUrlPath(path: string): boolean;
+setUrlPath(path: string | SecretValue): boolean;
 ```
 Устанавливает путь на сервере. Значение по умолчанию: `'\'`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getUrlPath(): string;
+getUrlPath(): string | SecretValue;
 ```
 Возвращает путь на сервере.
 
 &nbsp;
 
 ```js
-setUrlScheme(scheme: string): boolean;
+setUrlScheme(scheme: string | SecretValue): boolean;
 ```
 Устанавливает схему URL (протокол). Значение по умолчанию: `'http'`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getUrlScheme(): string;
+getUrlScheme(): string | SecretValue;
 ```
 Возвращает схему URL (протокол).
 
 &nbsp;
 
 ```js
-setHost(host: string): boolean;
+setHost(host: string | SecretValue): boolean;
 ```
 Устанавливает имя или адрес хоста. Значение по умолчанию: `''`. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getHost(): string;
+getHost(): string | SecretValue;
 ```
 Возвращает имя или адрес хоста, установленное в URL.
 
 &nbsp;
 
 ```js
-setPort(port: number | string): boolean;
+setPort(port: number | string | SecretValue): boolean;
 ```
 Устанавливает номер порта. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getPort(): number | null;
+getPort(): number | SecretValue | null;
 ```
 Возвращает номер порта или `null`, если он не установлен.
 
 &nbsp;
 
 ```js
-setUser(user: string): boolean;
+setUser(user: string | SecretValue): boolean;
 ```
 Устанавливает имя пользователя. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getUser(): string | null;
+getUser(): string | SecretValue | null;
 ```
 Возвращает имя пользователя или `null`, если оно не установлено.
 
 &nbsp;
 
 ```js
-setPassword(password: string): boolean;
+setPassword(password: string | SecretValue): boolean;
 ```
 Устанавливает пароль. Возвращает `true`.
 
 &nbsp;
 
 ```js
-getPassword(): string | null;
+getPassword(): string | SecretValue | null;
 ```
 Возвращает пароль или `null`, если он не установлен.
 
 &nbsp;
 
 ```js
-setFragment(fragment: string): boolean;
+setFragment(fragment: string | SecretValue): boolean;
 ```
 Устанавливает идентификатор якоря.  Возвращает `true`.
 
 &nbsp;
 
 ```js
-getFragment(): string | null;
+getFragment(): string | SecretValue | null;
 ```
 Возвращает идентификатор якоря или `null`, если он не установлен.
 
@@ -520,25 +520,25 @@ getProtocols(): string[];
 ### Интерфейс HttpAuth<a name="http-auth"></a>
 ```ts
 interface HttpAuth {
-	setUser(user: string): this;
-	setPassword(password: string): this;
+	setUser(user: string | SecretValue): this;
+	setPassword(password: string | SecretValue): this;
 	setType(type: string): this;
 	setStatus(status: boolean): this;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настроек аутентификации HTTP. Все функции возвращают `this`.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настроек аутентификации HTTP. Все функции возвращают `this`. Функции поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setUser(user: string): this;
+setUser(user: string | SecretValue): this;
 ```
 Устанавливает имя пользователя.
 
 &nbsp;
 
 ```js
-setPassword(password: string): this;
+setPassword(password: string | SecretValue): this;
 ```
 Устанавливает пароль.
 
