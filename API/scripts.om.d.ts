@@ -1740,6 +1740,7 @@ export interface ClickhouseQueryBuilder {
 	sum(column: string): number;
 	insert(values: Object[] | Object): boolean;
 	get(): ClickhouseQueryResult;
+	exportToCsv(path: string, ignoreHeader?: boolean): number;
 }
 
 export interface ClickhouseQueryResult {

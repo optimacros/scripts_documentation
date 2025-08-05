@@ -113,6 +113,7 @@ interface ClickhouseQueryBuilder {
 	insert(values: Object[] | Object): boolean;
 
 	get(): ClickhouseQueryResult;
+	exportToCsv(path: string, ignoreHeader?: boolean): number;
 }
 ```
 Интерфейс построения запроса к базе данных.
@@ -295,6 +296,13 @@ insert([
 get(): ClickhouseQueryResult;
 ```
 Конструирует SQL-запрос, передаёт его на исполнение в СУБД и возвращает интерфейс [`ClickhouseQueryResult`](#clickhouse-query-result) доступа к результатам запроса.
+
+&nbsp;
+
+```js
+exportToCsv(path: string, ignoreHeader?: boolean): number;
+```
+Конструирует SQL-запрос, передаёт его на исполнение в СУБД и сохраняет результат в CSV формате в [`рабочей директории скрипта`](../appendix/glossary.md#script-dir) в файл `path`. Аргумент `ignoreHeader` устанавливает флаг игнорирования заголовка (`false` по умолчанию). Возвращает количество полученных строк.
 
 &nbsp;
 
