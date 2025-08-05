@@ -145,7 +145,7 @@ interface CellBuffer {
 ```js
 set(cell: Cell | CubeCell, value: number | string | boolean | null): this;
 ```
-Устанавливает значение `value` в клетку `cell` в буфере. Возвращает `this`.
+Устанавливает значение `value` в клетку `cell` в буфере. В качестве значения `value` можно передать то же, что и для метода [`Cell.setValue()`](./readingGrid.md#cell.set-value). Возвращает `this`.
 
 &nbsp;
 
@@ -211,6 +211,9 @@ interface RequestManager {
 	log(message: string, print?: boolean): this;
 	logStatusMessage(message: string, print?: boolean): this;
 	setStatusMessage(message: string): this;
+	getRequestId(): string | null;
+	getScriptName(): string | null;
+	getScriptLongId(): string | null;
 }
 ```
 Интерфейс для записи в лог (устаревший функционал) и работы со статусными сообщениями. Все функции возвращают `this`.
@@ -241,6 +244,27 @@ setStatusMessage(message: string): this;
 Устанавливает статусное сообщение `message`. Может использоваться для уведомления пользователя во время длительной работы скрипта об этапах или процентах выполненных работ.
 
 ![Пример отображения статусного сообщения](./pic/statusMessage.png)
+
+&nbsp;
+
+```js
+getRequestId(): string | null;
+```
+Каждый запуск скрипта должен существовать в рамках пользовательского или системного [запроса](../appendix/glossary.md#request). Метод возвращает идентификатор текущего запроса. Предполагает возможность вернуть `null`, но такое поведение можно смело считать багом системы запуска скриптов. По идентификатору можно найти запись о запуске скрипта в истории запуска скриптов в web-интерфейсе на вкладке `Macros` -> `Scripts` -> `Launch History` и в панели администратора на вкладке `Requests` -> `History`, если запрос на запуск скрипта был сделан пользователем. Скрипты, запущенные по расписанию или через систему API сервисов считаются системными.
+
+&nbsp;
+
+```js
+getScriptName(): string | null;
+```
+Возвращает имя сущности текущего исполняемого скрипта. В случае запуска сниппета кода с помощью метода [`ResultActionsInfo.makeCodeExecutionAction()`](./scriptChains.md#make-code-execution-action) возвращает `null`.
+
+&nbsp;
+
+```js
+getScriptLongId(): string | null;
+```
+Возвращает [`longId`](#long-id) сущности текущего исполняемого скрипта. В случае запуска сниппета кода с помощью метода [`ResultActionsInfo.makeCodeExecutionAction()`](./scriptChains.md#make-code-execution-action) возвращает `null`.
 
 &nbsp;
 
@@ -400,7 +424,7 @@ recalculate(): boolean;
 ```js
 backup(path?: string): EntityInfo | boolean;
 ```
-Сохраняет резервную копию в логах модели: в интерфейсе Optimacros на вкладке `Центр безопастности`->`Логи`->`Резервные копии`. Если указан путь `path`, после создания копии вызовется функция `export()` и вернётся её результат типа `boolean`. Если `path` не указан, возвращает сущность резервной копии в виде [`EntityInfo`](./views.md#entity-info).
+Сохраняет резервную копию в логах модели: в интерфейсе Optimacros на вкладке `Центр безопастности`->`Логи`->`Резервные копии`. Если указан путь `path`, после создания копии вызовется функция `export()` и вернётся её результат типа `boolean`. Если `path` не указан, возвращает сущность резервной копии в виде [`EntityInfo`](#entity-info).
 
 &nbsp;
 
@@ -587,7 +611,7 @@ interface UserInfo {
 ```js
 getEntity(): EntityInfo;
 ```
-Возвращает сущность пользователя в виде [`EntityInfo`](./views.md#entity-info).
+Возвращает сущность пользователя в виде [`EntityInfo`](#entity-info).
 
 &nbsp;
 
@@ -615,7 +639,7 @@ getLastName(): string;
 ```js
 getRole(): EntityInfo;
 ```
-Возвращает сущность роли пользователя в виде [`EntityInfo`](./views.md#entity-info).
+Возвращает сущность роли пользователя в виде [`EntityInfo`](#entity-info).
 
 &nbsp;
 
@@ -653,6 +677,82 @@ setProperty(name: string, value: any): this;
 
 &nbsp;
 
+### Интерфейс EntityInfo (Label)<a name="entity-info"></a>
+```ts
+interface Label {
+	longId(): number;
+	name(): string;
+	code(): string | null;
+	alias(): string;
+	label(): string;
+	parentLongId(): number;
+	hierarchyLongId(): number;
+}
+
+```
+Интерфейс сущности. Как правило, представляет собой один из заголовков строки или столбца.
+
+&nbsp;
+
+<a name="long-id"></a>
+```js
+longId(): number;
+```
+Возвращает внутренний идентификатор сущности в системе, уникальный в пределах модели.
+
+&nbsp;
+
+<a name="name"></a>
+```js
+name(): string;
+```
+Возвращает имя сущности.
+
+&nbsp;
+
+<a name="code"></a>
+```js
+code(): string;
+```
+Возвращает код сущности.
+
+&nbsp;
+
+<a name="alias"></a>
+```js
+alias(): string;
+```
+Возвращает отображаемое имя.
+
+Если `this` является сущностью элемента справочника, в настройках которого задано некоторое свойство в качестве отображаемого имени (колонка `Отображаемое имя` на вкладке `Справочники`), и для этой сущности задано значение этого свойства, то возвращает значение этого свойства.
+
+Иначе возвращает [`name()`](#name).
+
+&nbsp;
+
+```js
+label(): string;
+```
+То же, что и [`alias()`](#alias).
+
+&nbsp;
+
+```js
+parentLongId(): number;
+```
+Если сущность является элементом, у которого есть родительский элемент, то возвращает [`longId`](#long-id) сущности родителя.
+
+Если родительской сущности нет, возвращает `-1`.
+
+&nbsp;
+
+```js
+hierarchyLongId(): number;
+```
+Если сущность является элементом или сабсетом справочника (включая справочники времени и версий), возвращает  [`longId`](#long-id) самого справочника. Если родительского справочника нет, возвращает `-1`. На данный момент этот метод может некорректно работать в зависимости от способа получения `EntityInfo`, для корректной работы рекомендуется получать сущность с помощью интерфейса [`EntitiesInfo`](#entities-info).
+
+&nbsp;
+
 ### Интерфейс EntitiesInfo<a name="entities-info"></a>
 ```ts
 interface EntitiesInfo {
@@ -660,21 +760,22 @@ interface EntitiesInfo {
 	getCollection(longId: number[]): EntityInfo[];
 }
 ```
-Интерфейс для получения сущности по [`longId`](./views.md#long-id).
+Интерфейс для получения сущности по [`longId`](#long-id).
 
 &nbsp;
 
 ```js
 get(longId: number): EntityInfo | null;
 ```
-Возвращает сущность [`EntityInfo`](./views.md#entity-info) по её [`longId`](./views.md#long-id).
+Возвращает сущность [`EntityInfo`](#entity-info) по её [`longId`](#long-id).
 
 &nbsp;
 
+<a name="entities-info.get-collection"></a>
 ```js
-getCollection(longId: number[]): EntityInfo[];
+getCollection(longId: number[]): (EntityInfo | null)[];
 ```
-Возвращает массив сущностей [`EntityInfo`](./views.md#entity-info) по массиву их [`longId`](./views.md#long-id). Корректно работает, только если все переданные `longId` корректные (существуют в модели). Иначе возвращает массив меньшей размерности. Использовать с осторожностью. Порядок возвращаемых сущностей `EntityInfo` может отличаться от порядка переданных `longId`.
+Возвращает массив сущностей [`EntityInfo`](#entity-info), параллельный массиву их [`longId`](#long-id). Если сущность не найдена, на её месте будет возвращёно значение `null`.
 
 &nbsp;
 
@@ -703,14 +804,14 @@ interface CopyData {
 ```js
 setSourceLongId(longId: number): this;
 ```
-Устанавливает [`longId`](./views.md#long-id) элемента-источника *заданного измерения*.
+Устанавливает [`longId`](#long-id) элемента-источника *заданного измерения*.
 
 &nbsp;
 
 ```js
 setDestLongId(longId: number): this;
 ```
-Устанавливает [`longId`](./views.md#long-id) элемента-приёмника *заданного измерения*.
+Устанавливает [`longId`](#long-id) элемента-приёмника *заданного измерения*.
 
 &nbsp;
 
@@ -731,7 +832,7 @@ enableCustomProperties(): this;
 ```js
 setMulticubeLongIds(longIds: number[]): this;
 ```
-Предписывает произвести копирование в указанных по [`longId`](./views.md#long-id) мультикубах, которые содержат *заданное измерение*.
+Предписывает произвести копирование в указанных по [`longId`](#long-id) мультикубах, которые содержат *заданное измерение*.
 
 &nbsp;
 
