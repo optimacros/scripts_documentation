@@ -173,7 +173,7 @@ export interface ElementsReorder {
 }
 
 export interface Tab {
-	pivot(viewName?: string): Pivot;
+	pivot(viewName?: string | null): Pivot;
 }
 
 export interface Environment {
