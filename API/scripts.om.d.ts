@@ -1687,11 +1687,11 @@ export interface SnowflakeConnectorBuilder extends SqlConnectorBuilder {
 }
 
 export interface ClickhouseConnectorBuilder {
-	setHost(value: string): this;
-	setPort(value: number): this;
-	setUsername(value: string): this;
-	setPassword(value: string): this;
-	setDatabase(value: string): this;
+	setHost(value: string | SecretValue): this;
+	setPort(value: number | SecretValue): this;
+	setUsername(value: string | SecretValue): this;
+	setPassword(value: string | SecretValue): this;
+	setDatabase(value: string | SecretValue): this;
 	setHttps(value: boolean): this;
 	load(): ClickhouseConnection;
 }

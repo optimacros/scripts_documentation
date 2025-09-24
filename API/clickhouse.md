@@ -3,49 +3,49 @@
 ## Интерфейс ClickhouseConnectorBuilder<a name="clickhouse-connector-builder"></a>
 ```ts
 interface ClickhouseConnectorBuilder {
-	setHost(value: string): this;
-	setPort(value: number): this;
-	setUsername(value: string): this;
-	setPassword(value: string): this;
-	setDatabase(value: string): this;
+	setHost(value: string | SecretValue): this;
+	setPort(value: number | SecretValue): this;
+	setUsername(value: string | SecretValue): this;
+	setPassword(value: string | SecretValue): this;
+	setDatabase(value: string | SecretValue): this;
 	setHttps(value: boolean): this;
 	load(): ClickhouseConnection;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), базовый интерфейс [`коннекторов`](../appendix/glossary.md#connector) для настройки подключения к базе данных [`Clickhouse`](https://ru.wikipedia.org/wiki/ClickHouse).
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), базовый интерфейс [`коннекторов`](../appendix/glossary.md#connector) для настройки подключения к базе данных [`Clickhouse`](https://ru.wikipedia.org/wiki/ClickHouse). Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setHost(value: string): this;
+setHost(value: string | SecretValue): this;
 ```
 Устанавливает адрес подключения. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setPort(value: number): this;
+setPort(value: number | SecretValue): this;
 ```
 Устанавливает номер порта для подключения. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setUsername(value: string): this;
+setUsername(value: string | SecretValue): this;
 ```
 Устанавливает имя пользователя. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setPassword(value: string): this;
+setPassword(value: string | SecretValue): this;
 ```
 Устанавливает пароль. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setDatabase(value: string): this;
+setDatabase(value: string | SecretValue): this;
 ```
 Устанавливает имя базы данных. Возвращает `this`.
 
