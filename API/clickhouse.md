@@ -99,17 +99,16 @@ interface ClickhouseQueryBuilder {
 	whereBetween(column: string, minValue: string | number, maxValue: string | number, concatOperator?: string, not?: boolean): this;
 	orWhereBetween(column: string, minValue: string | number, maxValue: string | number): this;
 
-	groupBy(column: string): this;
 	orderBy(column: string, direction?: string): this;
 	orderByDesc(column: string): this;
-
-	offset(value: number): this;
-	limit(value: number): this;
+	groupBy(column: string): this;
+	limit(count: number, offset?: number): this;
 
 	exists(): boolean;
 	count(): number;
 	sum(column: string): number;
 
+	truncate(): boolean;
 	insert(values: Object[] | Object): boolean;
 
 	get(): ClickhouseQueryResult;
@@ -213,13 +212,6 @@ orWhereBetween(column: string, minValue: string | number, maxValue: string | num
 &nbsp;
 
 ```js
-groupBy(column: string): this;
-```
-Устанавливает группировку по колонке `column`. Возвращает `this`.
-
-&nbsp;
-
-```js
 orderBy(column: string, direction?: string): this;
 ```
 Устанавливает сортировку по колонке `column`. Возвращает `this`.
@@ -236,16 +228,16 @@ orderByDesc(column: string): this;
 &nbsp;
 
 ```js
-offset(value: number): this;
+groupBy(column: string): this;
 ```
-Устанавливает количество строк, которое надо пропустить, прежде чем начать выборку. Возвращает `this`.
+Устанавливает группировку по колонке `column`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-limit(value: number): this;
+limit(count: number, offset?: number): this;
 ```
-Устанавливает максимальное количество строк в выборке. Возвращает `this`.
+Устанавливает максимальное количество строк в выборке и количество строк, которое надо пропустить, прежде чем начать выборку. По умолчанию выборка начинается с первой строки (аргумент `offset` равен `0`). Возвращает `this`.
 
 &nbsp;
 
@@ -267,6 +259,13 @@ count(): number;
 sum(column: string): number;
 ```
 Суммирует значения в колонке `column` и возвращает полученную сумму.
+
+&nbsp;
+
+```js
+truncate(): boolean;
+```
+Очищает таблицу запросом `TRUNCATE`. В случае успешного выполнения операции возвращает `true`, иначе `false`.
 
 &nbsp;
 

@@ -1745,18 +1745,18 @@ export interface ClickhouseQueryBuilder {
 	 */
 	whereBetween(column: string, minValue: string | number, maxValue: string | number, concatOperator?: string, not?: boolean): this;
 	orWhereBetween(column: string, minValue: string | number, maxValue: string | number): this;
-	groupBy(column: string): this;
 	/**
 	 * @param column
 	 * @param direction 'ASC'|'DESC'; Default is 'ASC'
 	 */
 	orderBy(column: string, direction?: string): this;
 	orderByDesc(column: string): this;
-	offset(value: number): this;
-	limit(value: number): this;
+	groupBy(column: string): this;
+	limit(count: number, offset?: number): this;
 	exists(): boolean;
 	count(): number;
 	sum(column: string): number;
+	truncate(): boolean;
 	insert(values: Object[] | Object): boolean;
 	get(): ClickhouseQueryResult;
 	exportToCsv(path: string, ignoreHeader?: boolean): number;
