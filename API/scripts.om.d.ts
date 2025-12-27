@@ -141,8 +141,10 @@ export interface Exporter {
 	setDelimiter(delimiter: string): this;
 	setEnclosure(enclosure: string): this;
 	setEscape(escape: string): this;
+	setDecimalSeparator(decimalSeparator: string): this;
 	setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): this;
 	setUseCodeLikeLabels(useCodeLikeLabels: boolean): this;
+	setSaveVisualSettings(saveVisualSettings: boolean): this;
 	export(): ExportResult;
 }
 
@@ -244,7 +246,6 @@ export interface CubeInfo extends EntityInfo {
 export interface StorageExporter extends Exporter {
 	setLineDelimiter(lineDelimiter: string): this;
 	setFilterFormula(filterFormula: string): this;
-	setDecimalSeparator(decimalSeparator: string): this;
 	setDateFormat(dateFormat: string): this;
 	setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
 }

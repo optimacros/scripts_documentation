@@ -20,8 +20,10 @@ interface Exporter {
 	setDelimiter(delimiter: string): this;
 	setEnclosure(enclosure: string): this;
 	setEscape(escape: string): this;
+	setDecimalSeparator(decimalSeparator: string): this;
 	setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): this;
 	setUseCodeLikeLabels(useCodeLikeLabels: boolean): this;
+	setSaveVisualSettings(saveVisualSettings: boolean): this;
 	export(): ExportResult;
 }
 ```
@@ -108,6 +110,13 @@ setEscape(escape: string): this;
 &nbsp;
 
 ```js
+setDecimalSeparator(decimalSeparator: string): this;
+```
+Устанавливает десятичный разделитель. Допустимые значения: `,`, `.`.  По умолчанию: `.`.
+
+&nbsp;
+
+```js
 setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): this;
 ```
 Устанавливает флаг показа псевдонимов без имён. Применимо только для значений справочников. По умолчанию: `false`.
@@ -118,6 +127,19 @@ setShowAliasesWithoutNames(showAliasesWithoutNames: boolean): this;
 setUseCodeLikeLabels(useCodeLikeLabels: boolean): this;
 ```
 Устанавливает флаг показа кода вместо имён для тех элементов, у которых есть код. По умолчанию: `false`.
+
+&nbsp;
+
+```js
+setSaveVisualSettings(saveVisualSettings: boolean): this;
+```
+Устанавливает флаг сохранения визуальных настроек для формата `XLSX`, без учета `CV`.
+
+- Ширина заголовка колонок в XLSX файле - соответствует установленной в веб-интерфейсе.
+- Уровни иерархии справочников выделены жирным шрифтом по аналогии с веб-интерфейсом.
+- Уровни иерархии справочников визуально выделяются "лесенкой" по аналогии с веб-интерфейсом.
+- Процентные показатели в XLSX файле – отображены в виде процентов.
+- Выгружается выбранное количество значащих десятичных разрядов.
 
 &nbsp;
 
@@ -134,10 +156,8 @@ export(): ExportResult;
 interface StorageExporter extends Exporter {
 	setFormat(format: string): this;
 	setDelimiter(delimiter: string): this;
-	
 	setLineDelimiter(lineDelimiter: string): this;
 	setFilterFormula(filterFormula: string): this;
-	setDecimalSeparator(decimalSeparator: string): this;
 	setDateFormat(dateFormat: string): this;
 	setBooleanCubeIdentifier(booleanCubeIdentifier: number): this;
 }
@@ -172,13 +192,6 @@ setLineDelimiter(lineDelimiter: string): this;
 setFilterFormula(filterFormula: string): this;
 ```
 Устанавливает булеву формулу, которая будет применяться в качестве аналога [`setBooleanCubeIdentifier()`](#set-boolean-cube-identifier), но без создания булева куба.
-
-&nbsp;
-
-```js
-setDecimalSeparator(decimalSeparator: string): this;
-```
-Устанавливает десятичный разделитель. Допустимые значения: `,`, `.`.  По умолчанию: `.`.
 
 &nbsp;
 
