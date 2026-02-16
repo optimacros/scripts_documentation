@@ -187,10 +187,18 @@ load(): SqlConnection;
 ### Интерфейс MysqlConnectorBuilder<a name="mysql-connector-builder"></a>
 ```ts
 interface MysqlConnectorBuilder extends SqlConnectorBuilder {
+	setSkipSsl(value: boolean): this;
 	loadImportBuilder(): MysqlImportBuilder;
 }
 ```
 [`Коннектор`](../appendix/glossary.md#connector) для подключения к базе данных [`MySQL`](https://ru.wikipedia.org/wiki/MySQL). Интерфейс наследуется от [`SqlConnectorBuilder`](#sql-connector-builder).
+
+&nbsp;
+
+```js
+setSkipSsl(value: boolean): this;
+```
+Управляет проверкой SSL-сертификата. Если задано `true`, соединение будет установлено без проверки безопасности SSL (полезно для локальных сред разработки или самоподписанных сертификатов). Значение по умолчанию: `false`. Возвращает `this`.
 
 &nbsp;
 
@@ -267,7 +275,7 @@ setScrollType(scrollType: string | null): this;
 ```js
 setRequestTimeout(timeout: number): this;
 ```
-Устанавливает таймаут запроса в секундах. По умолчанию таймаут равен 30 секундам. Значение 0 задает бесконечный таймаут. Отрицательные и дробные значения не допускаются.
+Устанавливает таймаут запроса в секундах. По умолчанию таймаут равен 30 секундам. Значение `0` задает бесконечный таймаут. Отрицательные и дробные значения не допускаются.
 
 &nbsp;
 
@@ -881,7 +889,7 @@ setStandardInputFile(path: string): this;
 ```js
 setKeepNullValuesMode(status: boolean): this;
 ```
-Указывает, что пустые столбцы во время данной операции должны сохранить значение NULL вместо любых вставляемых значений столбцов по умолчанию; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#k) *bcp*: *-k*.
+Указывает, что пустые столбцы во время данной операции должны сохранить значение `NULL` вместо любых вставляемых значений столбцов по умолчанию; [`опция`](https://docs.microsoft.com/ru-ru/sql/tools/bcp-utility#k) *bcp*: *-k*.
 
 &nbsp;
 
