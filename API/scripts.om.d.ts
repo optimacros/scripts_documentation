@@ -1662,6 +1662,7 @@ export interface PostgresqlImportBuilder {
 }
 
 export interface MysqlConnectorBuilder extends SqlConnectorBuilder {
+	setSkipSsl(value: boolean): this;
 	loadImportBuilder(): MysqlImportBuilder;
 }
 
