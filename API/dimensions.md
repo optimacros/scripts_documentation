@@ -212,6 +212,7 @@ interface ListUserAccessTab extends Tab {
 interface Versions {
 	versionsTab(): VersionsTab;
 	versionSubsetsTab(): VersionSubsetsTab;
+	versionAccessTab(): VersionAccessTab;
 }
 ```
 Интерфейс работы с версиями.
@@ -229,6 +230,13 @@ versionsTab(): VersionsTab;
 versionSubsetsTab(): VersionSubsetsTab;
 ```
 Возвращает ссылку на вкладку [`VersionSubsetsTab`](#version-subsets-tab) выборок версий. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии` -> `Выборки`.
+
+&nbsp;
+
+```js
+versionAccessTab(): VersionAccessTab;
+```
+Возвращает ссылку на вкладку [`VersionAccessTab`](#version-access-tab) настроек ролевого доступа к версиям. В интерфейсе Optimacros аналогично открытию вкладки `Измерения` -> `Версии` -> `Доступ`.
 
 &nbsp;
 
@@ -313,6 +321,15 @@ elementsDeleter(): ElementsDeleter;
 elementsReorder(): ElementsReorder;
 ```
 Возвращает ссылку на [`ElementsReorder`](./elementsManipulator.md#elements-reorder) для тасования выборок.
+
+&nbsp;
+
+### Интерфейс VersionAccessTab<a name="version-access-tab"></a>
+```ts
+interface VersionAccessTab extends Tab {
+}
+```
+Вкладка `Доступ` настроек ролевого доступа к версиям. Интерфейс наследуется от [`Tab`](./views.md#tab).
 
 &nbsp;
 
