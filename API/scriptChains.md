@@ -297,9 +297,19 @@ run(): TaskPromise | null;
 ## Интерфейс ResultMacrosAction<a name="result-macros-action"></a>
 ```ts
 interface ResultMacrosAction extends BaseCodeExecutionAction {
+  setCollectResults(value: boolean): this;
 }
 ```
 Интерфейс действия запуска скрипта, сохраненного в модели в списке скриптов модели. Наследуется от [`BaseCodeExecutionAction`](#base-code-execution-action).
+
+&nbsp;
+
+```js
+setCollectResults(value: boolean): this;
+```
+Устанавливает флаг `collectResults`, что позволяет собрать вывод и файлы от скриптов, запущенных через [`appendAfter()`](#result-base-action).
+Если `setCollectResults(true)` не применен ни к одному скрипту, то вывод и файлы будут возвращены только от последнего скрипта в цепочке.
+Иначе вывод и файлы будут собраны от всех скриптов, в котором применено `setCollectResults(true)` и от исходного скрипта, из которого был вызов `appendAfter()`. 
 
 &nbsp;
 
