@@ -379,9 +379,13 @@ export interface VersionSubsetsTab extends Tab {
 	elementsReorder(): ElementsReorder;
 }
 
+export interface VersionAccessTab extends Tab {
+}
+
 export interface Versions {
 	versionsTab(): VersionsTab;
 	versionSubsetsTab(): VersionSubsetsTab;
+	versionAccessTab(): VersionAccessTab;
 }
 
 export interface CSVParams {
