@@ -469,6 +469,10 @@ export interface ListUserAccessTab extends Tab {
 
 }
 
+export interface ListRoleAccessTab extends Tab {
+
+}
+
 export interface ListSubsetsTab extends Tab {
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
@@ -485,6 +489,7 @@ export interface ListTab extends Tab {
 	customPropertiesTab(): CustomPropertiesTab;
 	
 	uamTab(): ListUserAccessTab;
+	ramTab(): ListRoleAccessTab;
 
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
