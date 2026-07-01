@@ -18,10 +18,11 @@ interface ResultActionsInfo {
 ```js
 makeMacrosAction(identifier: string | number): ResultMacrosAction;
 ```
-Создаёт и возвращает действие [`ResultMacrosAction`](#result-macros-action) запуска существующего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) скрипта.
+Создаёт и возвращает действие [`ResultMacrosAction`](#result-macros-action) запуска существующего в модели скрипта. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) скрипта.
 
 &nbsp;
 
+<a name="make-code-execution-action"></a>
 ```js
 makeCodeExecutionAction(code: string): CodeExecutionAction;
 ```
@@ -32,28 +33,28 @@ makeCodeExecutionAction(code: string): CodeExecutionAction;
 ```js
 makeDashboardOpenAction(identifier: string | number): ResultOpenAction;
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) дашборда.
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели дашборда. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) дашборда.
 
 &nbsp;
 
 ```js
 makeContextTableOpenAction(identifier: string | number): ResultOpenAction;
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) контекстной таблицы.
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующей в модели контекстной таблицы. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) контекстной таблицы.
 
 &nbsp;
 
 ```js
 makeMulticubeViewOpenAction(multicube: string | number, view?: string | number | null): ResultOpenAction;
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) мультикуба, `view` означает имя или [`longId`](./views.md#long-id) представления.
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели мультикуба. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) мультикуба, `view` означает имя или [`longId`](./common.md#long-id) представления.
 
 &nbsp;
 
 ```js
 makeListViewOpenAction(list: string | number, view?: string | number | null): ResultOpenAction;
 ```
-Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./views.md#long-id) справочника, `view` означает имя или [`longId`](./views.md#long-id) представления.
+Создаёт и возвращает действие [`ResultOpenAction`](#result-open-action) открытия существующего в модели справочника. Аргумент `identifier` означает имя или [`longId`](./common.md#long-id) справочника, `view` означает имя или [`longId`](./common.md#long-id) представления.
 
 &nbsp;
 
@@ -153,6 +154,8 @@ appendAfter(): this;
 ![Дерево вызовов](./pic/DFS.png)
 
 В такой ситуации скрипты исполнятся в следующем порядке: `3 -> 4 -> 5 -> 1 -> 2`.
+
+Запущенный таким образом скрипт унаследует идентификатор [запроса](../appendix/glossary.md#request) от своего родителя.
 
 &nbsp;
 
@@ -290,7 +293,15 @@ setTaskDescription(description: string): this;
 ```js
 run(): TaskPromise | null;
 ```
-Запускает скрипт с помощью асинхронного механизма выполнения. Вызов метода породит задачу, которая не будет дожидаться завершения текущей задачи, а будет выполняться сразу. Так как родительская задача не завершается и может работать параллельно с дочерней, то важно следить за совместимостью режимов блокировок родительской и дочерней задач (иначе можно попасть в `dead lock`). На данный момент существует защита от погружения в бесконечную рекурсию и задача, запущенная через `run()`, не может сама использовать этот метод. Если до запуска скрипта был вызван метод `withPromise(true)`, возвращает [`TaskPromise`](#task-promise), иначе — `null`.
+Запускает скрипт с помощью асинхронного механизма выполнения. Вызов метода породит задачу, которая не будет дожидаться завершения текущей задачи, а будет выполняться сразу.
+
+Так как родительская задача не завершается и может работать параллельно с дочерней, то важно следить за совместимостью режимов блокировок родительской и дочерней задач (иначе можно попасть в `dead lock`).
+
+На данный момент существует защита от погружения в бесконечную рекурсию и задача, запущенная через `run()`, не может сама использовать этот метод.
+
+Запущенный таким образом скрипт будет считаться порождённым системой и получит системный идентификатор [запроса](../appendix/glossary.md#request), даже если родительский скрипт был запущен пользователем.
+
+Если до запуска скрипта был вызван метод `withPromise(true)`, возвращает [`TaskPromise`](#task-promise), иначе — `null`.
 
 &nbsp;
 
@@ -310,7 +321,7 @@ interface CodeExecutionAction extends BaseCodeExecutionAction {
 	setTimeLimit(value: number): this;
 }
 ```
-Интерфейс действия запуска динамического кода. Наследуется от [`BaseCodeExecutionAction`](#base-code-execution-action).
+Интерфейс действия запуска динамического кода. Наследуется от [`BaseCodeExecutionAction`](#base-code-execution-action). Скрипты, порождённые этим интерфейсом, не имеют имени и [`longId`](./common.md#long-id).
 
 &nbsp;
 

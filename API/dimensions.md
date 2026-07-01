@@ -73,6 +73,7 @@ interface ListTab extends Tab {
 	listSubsetTab(): ListSubsetsTab;
 	customPropertiesTab(): CustomPropertiesTab;
 	uamTab(): ListUserAccessTab;
+	ramTab(): ListRoleAccessTab;
 
 	elementsCreator(): ElementsCreator;
 	elementsDeleter(): ElementsDeleter;
@@ -101,6 +102,12 @@ customPropertiesTab(): CustomPropertiesTab;
 uamTab(): ListUserAccessTab;
 ```
 Возвращает интерфейс [`ListUserAccessTab`](#list-user-access-tab) доступа к управлению UAM (МДП) элементов справочника.
+
+&nbsp;
+```js
+ramTab(): ListRoleAccessTab;
+```
+Возвращает интерфейс [`ListRoleAccessTab`](#list-role-access-tab) доступа к управлению RAM (МДР) элементов справочника.
 
 &nbsp;
 
@@ -204,6 +211,15 @@ interface ListUserAccessTab extends Tab {
 }
 ```
 Интерфейс доступа к UAM (МДП) элементов справочника. В интерфейсе Optimacros аналогично открытию вкладки `UAM`/`МДП` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab). Реализован только метод [`pivot()`](./views.md#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек.
+
+&nbsp;
+
+### Интерфейс ListRoleAccessTab<a name="list-role-access-tab"></a>
+```ts
+interface ListRoleAccessTab extends Tab {
+}
+```
+Интерфейс доступа к RAM (МДР) элементов справочника. В интерфейсе Optimacros аналогично открытию вкладки `RAM`/`МДР` справочника. Наследуется от интерфейса [`Tab`](./views.md#tab). Реализован только метод [`pivot()`](./views.md#tab.pivot), с помощью которого можно получить доступ на чтение и запись ячеек.
 
 &nbsp;
 
@@ -365,7 +381,7 @@ interface TimeOptionsTab extends Tab {
 	applyForm(): Object;
 }
 ```
-Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#tab). Является [`плоской таблицей`](../appendix/constraints.md#flat-table). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
+Вкладка `Время`. Интерфейс наследуется от [`Tab`](./views.md#tab). Является [`плоской таблицей`](../appendix/constraints.md#labelless-table). Кроме того, является формой, аналогичной форме HTML: после изменения значений ячейки/ячеек требуется ещё вызвать функцию `applyForm()` для применения новых данных к модели.
 
 &nbsp;
 

@@ -37,7 +37,7 @@ getDimensionIds(): number[];
 ```js
 getDimensionItems(): EntityInfo[];
 ```
-Возвращает массив [`EntityInfo`](./views.md#entity-info) элементов измерений куба, которыми определена клетка. Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#cube-info.get-dimensions).
+Возвращает массив [`EntityInfo`](./common.md#entity-info) элементов измерений куба, которыми определена клетка. Порядок измерений фиксирован и соответствует порядку, в котором их же возвращает функция [`CubeInfo.getDimensions()`](#cube-info.get-dimensions).
 
 &nbsp;
 
@@ -56,7 +56,7 @@ interface CubeInfo extends EntityInfo {
 	getDimensions(): EntityInfo[];
 }
 ```
-Интерфейс информации о кубе. Интерфейс наследуется от [`EntityInfo`](./views.md#entity-info).
+Интерфейс информации о кубе. Интерфейс наследуется от [`EntityInfo`](./common.md#entity-info).
 
 &nbsp;
 
@@ -78,7 +78,7 @@ getFormatInfo(): CubeFormatInfo;
 ```js
 getDimensions(): EntityInfo[];
 ```
-Возвращает массив [`EntityInfo`](./views.md#entity-info) измерений куба.
+Возвращает массив [`EntityInfo`](./common.md#entity-info) измерений куба.
 
 &nbsp;
 
@@ -96,7 +96,7 @@ interface CubeFormatInfo {
 ```js
 getFormatTypeEntity(): EntityInfo;
 ```
-Возвращает сущность [`EntityInfo`](./views.md#entity-info) формата куба. Возможные форматы: `'Number'`, `'Text'`, `'Boolean'`, `'Date'`, `'Entity'`, `'Time Entity'`, `'Version'`, `'Line Item Subset'`, `'None'`.
+Возвращает сущность [`EntityInfo`](./common.md#entity-info) формата куба. Возможные форматы: `'Number'`, `'Text'`, `'Boolean'`, `'Date'`, `'Entity'`, `'Time Entity'`, `'Version'`, `'Line Item Subset'`, `'None'`.
 
 &nbsp;
 
