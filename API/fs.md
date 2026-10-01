@@ -322,17 +322,17 @@ load(): Filesystem;
 ### Интерфейс FTPAdapter<a name="ftp-adapter"></a>
 ```ts
 interface FTPAdapter extends BaseAdapter {
-	setHost(host: string): this;
-	getHost(): string;
+	setHost(host: string | SecretValue): this;
+	getHost(): string | SecretValue;
 
-	setPort(port: number): this;
-	getPort(): number;
+	setPort(port: number | SecretValue): this;
+	getPort(): number | SecretValue;
 
-	setUsername(username: string): this;
-	getUsername(): string | null;
+	setUsername(username: string | SecretValue): this;
+	getUsername(): string | SecretValue | null;
 
-	setPassword(password: string): this;
-	getPassword(): string | null;
+	setPassword(password: string | SecretValue): this;
+	getPassword(): string | SecretValue | null;
 
 	setRoot(root: string): this;
 	getRoot(): string;
@@ -354,61 +354,61 @@ interface FTPAdapter extends BaseAdapter {
 }
 ```
 
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для соединения с сервером [`FTP`](https://ru.wikipedia.org/wiki/FTP). Наследуется от интерфейса [`BaseAdapter`](#base-adapter).
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для соединения с сервером [`FTP`](https://ru.wikipedia.org/wiki/FTP). Наследуется от интерфейса [`BaseAdapter`](#base-adapter). Функции поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setHost(host: string): this;
+setHost(host: string | SecretValue): this;
 ```
 Устанавливает адрес хоста. По умолчанию: `''`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getHost(): string;
+getHost(): string | SecretValue;
 ```
 Возвращает адрес хоста.
 
 &nbsp;
 
 ```js
-setPort(port: number): this;
+setPort(port: number | SecretValue): this;
 ```
 Устанавливает номер порта. По умолчанию: `21`. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getPort(): number;
+getPort(): number | SecretValue;
 ```
 Возвращает номер порта.
 
 &nbsp;
 
 ```js
-setUsername(username: string): this;
+setUsername(username: string | SecretValue): this;
 ```
 Устанавливает имя пользователя. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getUsername(): string | null;
+getUsername(): string | SecretValue | null;
 ```
 Возвращает имя пользователя.
 
 &nbsp;
 
 ```js
-setPassword(password: string): this;
+setPassword(password: string | SecretValue): this;
 ```
 Устанавливает пароль. Возвращает `this`.
 
 &nbsp;
 
 ```js
-getPassword(): string | null;
+getPassword(): string | SecretValue | null;
 ```
 Возвращает пароль.
 

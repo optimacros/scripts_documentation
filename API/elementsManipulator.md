@@ -43,14 +43,14 @@ interface BaseElementsCreator {
 ```js
 setPositionAfter(relativeLongId: number): this;
 ```
-Устанавливает позицию добавления после [`relativeLongId`](./views.md#long-id). Возвращает `this`.
+Устанавливает позицию добавления после [`relativeLongId`](./common.md#long-id). Возвращает `this`.
 
 &nbsp; 
 
 ```js
 setPositionBefore(relativeLongId: number): this;
 ```
-Устанавливает позицию добавления до [`relativeLongId`](./views.md#long-id). Возвращает `this`.
+Устанавливает позицию добавления до [`relativeLongId`](./common.md#long-id). Возвращает `this`.
 
 &nbsp;
 
@@ -72,7 +72,7 @@ setPositionEnd(): this;
 ```js
 setPositionChildOf(parentLongId: number): this;
 ```
-Устанавливает позицию добавления элемента как дочернего для [`parentLongId`](./views.md#long-id). Возвращает `this`.
+Устанавливает позицию добавления элемента как дочернего для [`parentLongId`](./common.md#long-id). Возвращает `this`.
 
 &nbsp;
 
@@ -80,7 +80,7 @@ setPositionChildOf(parentLongId: number): this;
 ```js
 create(): number[];
 ```
-Добавляет элементы и возвращает массив их [`longId`](./views.md#long-id).
+Добавляет элементы и возвращает массив их [`longId`](./common.md#long-id).
 
 &nbsp;
 
@@ -132,7 +132,7 @@ interface ElementsDeleter {
 ```js
 appendIdentifier(identifier: number): this;
 ```
-Добавляет в буфер элемент, чей [`longId`](./views.md#long-id) равен `identifier`. Повторное добавление элемента в очередь **не** приводит к ошибкам. Возращает `this`.
+Добавляет в буфер элемент, чей [`longId`](./common.md#long-id) равен `identifier`. Повторное добавление элемента в очередь **не** приводит к ошибкам. Возращает `this`.
 
 &nbsp;
 
@@ -161,7 +161,7 @@ interface ElementsReorder {
 ```js
 append(longId: number, relativeLongId?: number, position?: string): this;
 ```
-Добавляет в очередь данные о [`longId`](./views.md#long-id) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId` (значение по умолчанию: `-1`). Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
+Добавляет в очередь данные о [`longId`](./common.md#long-id) элемента, который впоследствии будет позиционирован относительно элемента `relativeLongId` (значение по умолчанию: `-1`). Возвращает `this`. Способ позиционирования задаёт аргумент `position` (регистр имеет значение):
 
 `'Before'` — непосредственно перед `relativeLongId`;
 

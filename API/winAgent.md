@@ -13,8 +13,8 @@ WinAgent – сервис создания отчётов MS Word и Excel, ра
 ## Интерфейс WinAgentBuilder<a name="win-agent-builder"></a>
 ```js
 interface WinAgentBuilder {
-	setCommandUrl(url: string): this;
-	setDownloadUrl(url: string): this;
+	setCommandUrl(url: string | SecretValue): this;
+	setDownloadUrl(url: string | SecretValue): this;
 	auth(): Http.HttpAuth;
 	setConnectTimeout(sec: number): this;
 	setRequestTimeout(sec: number): this;
@@ -22,19 +22,19 @@ interface WinAgentBuilder {
 	makeRunMacrosAction(): RunMacroAction;
 }
 ```
-Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки доступа к WinAgent.
+Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для настройки доступа к WinAgent. Функции для установки параметров подключения поддерживают [секреты](./secrets.md).
 
 &nbsp;
 
 ```js
-setCommandUrl(url: string): this;
+setCommandUrl(url: string | SecretValue): this;
 ```
 Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL) агента, на который будут подаваться команды из скрипта. Возвращает `this`.
 
 &nbsp;
 
 ```js
-setDownloadUrl(url: string): this;
+setDownloadUrl(url: string | SecretValue): this;
 ```
 Устанавливает [`URL`](https://ru.wikipedia.org/wiki/URL), по которому можно будет скачивать результирующие документы. Возвращает `this`.
 

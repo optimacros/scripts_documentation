@@ -5,9 +5,9 @@
 ## Интерфейс Crypto<a name="crypto"></a>
 ```ts
 interface Crypto {
-	sha1(data: string): string;
-	hash(algo: string, data: string, binary?: boolean): string | BinaryData;
-	hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData;
+	sha1(data: string | SecretValue): string;
+	hash(algo: string, data: string | SecretValue, binary?: boolean): string | BinaryData;
+	hmac(algo: string, data: string | SecretValue, key: string | BinaryData, binary?: boolean): string | BinaryData;
 	getHashAlgorithms(): string[];
 	getHmacHashAlgorithms(): string[];
 }
@@ -17,9 +17,9 @@ interface Crypto {
 &nbsp;
 
 ```js
-sha1(data: string): string;
+sha1(data: string | SecretValue): string;
 ```
-Возвращает [`SHA1-хэш`](https://en.wikipedia.org/wiki/SHA-1) строки `data` (переданной в кодировке `UTF-8`), вычисленный по алгоритму `US Secure Hash Algorithm 1` в виде `40`-символьного шестнадцатеричного числа.
+Возвращает [`SHA1-хэш`](https://en.wikipedia.org/wiki/SHA-1) строки `data` (переданной в кодировке `UTF-8`), вычисленный по алгоритму `US Secure Hash Algorithm 1` в виде `40`-символьного шестнадцатеричного числа. Поддерживает [секреты](./secrets.md).
 
 Пример использования:
 
@@ -34,9 +34,9 @@ console.log(
 &nbsp;
 
 ```js
-hash(algo: string, data: string, binary?: boolean): string | BinaryData;
+hash(algo: string, data: string | SecretValue, binary?: boolean): string | BinaryData;
 ```
-Метод для получения хэша строки `data` (переданной в кодировке `UTF-8`) по указанному алгоритму `algo`. Полный список доступных алгоритмов может быть получен с помощью метода `getHashAlgorithms()`.
+Метод для получения хэша строки `data` (переданной в кодировке `UTF-8`) по указанному алгоритму `algo`. Поддерживает [секреты](./secrets.md). Полный список доступных алгоритмов может быть получен с помощью метода `getHashAlgorithms()`.
 
 Если `binary = false` (по умолчанию), то хэш возвращается в виде строки, использующей шестнадцатеричное кодирование в нижнем регистре ([`hexits`](https://en.wiktionary.org/wiki/hexit)).
 
@@ -54,9 +54,9 @@ console.log(
 &nbsp;
 
 ```js
-hmac(algo: string, data: string, key: string | BinaryData, binary?: boolean): string | BinaryData;
+hmac(algo: string, data: string | SecretValue, key: string | BinaryData, binary?: boolean): string | BinaryData;
 ```
-Метод для получения подписи [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием ключа `key` и алгоритма хэширования `algo`.
+Метод для получения подписи [`HMAC (Hash-based Message Authentication Code)`](https://ru.wikipedia.org/wiki/HMAC) для строки `data` (переданной в кодировке `UTF-8`) с использованием ключа `key` и алгоритма хэширования `algo`. Поддерживает [секреты](./secrets.md).
 
 Ключ `key` может быть передан в виде строки в кодировке `UTF-8` или в бинарном виде — инкапсулированным в объект [`BinaryData`](#binarydata). Аналогично методу `hash()`, полный список доступных алгоритмов хэширования `algo` может быть получен с помощью метода `getHmacHashAlgorithms()`.
 
