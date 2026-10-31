@@ -510,14 +510,14 @@ interface TimePeriodImporter extends Importer {
 
 ### Интерфейс StorageImporter<a name="storage-importer"></a>
 ```ts
-interface StorageImporter extends Importer {
+interface StorageImporter extends Importer, StorageBatchItem {
 	setMaxFailures(maxFailures: number): this;
 	setIsCompressed(isCompressed: boolean): this;
 	setDateFormat(dateFormat: string): this;
 	setMappings(mappings: Object): this;
 }
 ```
-Интерфейс быстрого импорта. Наследуется от [`Importer`](#importer). Доступен только в мультикубах. В отличие от базового импорта, формат файла фиксирован: сначала идут столбцы с измерениями, далее — столбцы кубов. Для идентификации элемента измерения используются имена элементов (`Item Name`). Все функции возвращают `this`.
+Интерфейс быстрого импорта. Наследуется от [`Importer`](#importer) и [`StorageBatchItem`](./common.md#storage-batch-item): вместо вызова `import()` его можно добавить в пакет [`StorageBatch`](./common.md#storage-batch), чтобы выполнить несколько импортов одним запросом к хранилищу. Доступен только в мультикубах. В отличие от базового импорта, формат файла фиксирован: сначала идут столбцы с измерениями, далее — столбцы кубов. Для идентификации элемента измерения используются имена элементов (`Item Name`). Все функции возвращают `this`.
 
 &nbsp;
 

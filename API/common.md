@@ -10,6 +10,7 @@ interface Common {
 	resultInfo(): ResultInfo;
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
+	storageBatch(): StorageBatch;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseContractManager(): EnterpriseContractManager;
 	metricsManager(): MetricsManager;
@@ -69,6 +70,13 @@ entitiesInfo(): EntitiesInfo;
 copyData(): CopyData;
 ```
 Возвращает ссылку на интерфейс [`CopyData`](#copy-data).
+
+&nbsp;
+
+```js
+storageBatch(): StorageBatch;
+```
+Возвращает ссылку на новый интерфейс [`StorageBatch`](#storage-batch).
 
 &nbsp;
 
@@ -849,6 +857,74 @@ setMulticubeByNames(names: string[]): this;
 copy(): this;
 ```
 Выполняет копирование.
+
+&nbsp;
+
+### Интерфейс StorageBatch<a name="storage-batch"></a>
+```ts
+interface StorageBatch {
+	add(item: StorageBatchItem): this;
+	count(): number;
+	flush(): StorageBatchItem[];
+}
+```
+Интерфейс пакетной отправки запросов в хранилище модели. Позволяет накопить несколько операций и выполнить их одним запросом к хранилищу. Операции выполняются в порядке добавления.
+
+Пример:
+```js
+const multicubeTab = om.multicubes.multicubesTab().open('Продажи');
+
+const importer = multicubeTab.storageImporter().setFilePath('sales.csv');
+
+const updater = multicubeTab
+	.cubeCellUpdater('Скидка')
+	.setFormula('0')
+	.setConditionFormula('Скидка < 0')
+	.load(false);
+
+const batch = om.common.storageBatch();
+
+batch.add(importer).add(updater);
+
+batch.flush();
+
+console.log(importer.getReportFilePath());
+console.log(updater.getCount());
+```
+
+&nbsp;
+
+```js
+add(item: StorageBatchItem): this;
+```
+Добавляет в пакет операцию [`StorageBatchItem`](#storage-batch-item). Если `item` не поддерживается пакетной отправкой, бросает исключение. Возвращает `this`.
+
+&nbsp;
+
+```js
+count(): number;
+```
+Возвращает количество операций в пакете.
+
+&nbsp;
+
+```js
+flush(): StorageBatchItem[];
+```
+Выполняет все накопленные операции одним запросом к хранилищу, очищает пакет и возвращает массив выполненных операций в порядке добавления. После выполнения результаты доступны в самих операциях (например, [`Importer.getReportFilePath()`](./exportImport.md#importer), [`CubeCellUpdater.getCount()`](./cubeCell.md#cube-cell-updater)). Для пустого пакета запрос не отправляется и возвращается пустой массив.
+
+Если хотя бы одна операция завершилась ошибкой, бросает исключение с номерами и текстами ошибок операций. Результаты успешно выполненных операций при этом всё равно применяются.
+
+&nbsp;
+
+### Интерфейс StorageBatchItem<a name="storage-batch-item"></a>
+```ts
+interface StorageBatchItem {
+}
+```
+Интерфейс операции, которую можно добавить в пакет [`StorageBatch`](#storage-batch). Его реализуют:
+- [`StorageImporter`](./exportImport.md#storage-importer);
+- [`CubeCellUpdater`](./cubeCell.md#cube-cell-updater).
 
 &nbsp;
 

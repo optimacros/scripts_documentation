@@ -222,14 +222,15 @@ export interface CubeCellSelectorBuilder {
 	load(): CubeCellSelector;
 }
 
-export interface CubeCellUpdater {
+export interface CubeCellUpdater extends StorageBatchItem {
+	update(): this;
 	getCount(): number;
 }
 
 export interface CubeCellUpdaterBuilder {
 	setConditionFormula(formula: string): this;
 	setFormula(formula: string): this;
-	load(): CubeCellUpdater;
+	load(update?: boolean): CubeCellUpdater;
 }
 
 export interface CubeFormatInfo {
@@ -433,7 +434,16 @@ export interface Importer {
 	import(): this;
 }
 
-export interface StorageImporter extends Importer {
+export interface StorageBatchItem {
+}
+
+export interface StorageBatch {
+	add(item: StorageBatchItem): this;
+	count(): number;
+	flush(): StorageBatchItem[];
+}
+
+export interface StorageImporter extends Importer, StorageBatchItem {
 	setMaxFailures(maxFailures: number): this;
 	setIsCompressed(isCompressed: boolean): this;
 	setDateFormat(dateFormat: string): this;
@@ -843,6 +853,7 @@ export interface Common {
 	resultInfo(): ResultInfo;
 	entitiesInfo(): EntitiesInfo;
 	copyData(): CopyData;
+	storageBatch(): StorageBatch;
 	apiServiceRequestInfo(): ApiService.RequestInfo | null;
 	enterpriseContractManager(): EnterpriseContractManager;
 	metricsManager(): MetricsManager;

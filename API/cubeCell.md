@@ -199,7 +199,7 @@ generator(): IterableIterator<CubeCell>;
 interface CubeCellUpdaterBuilder {
 	setConditionFormula(formula: string): this;
 	setFormula(formula: string): this;
-	load(): CubeCellUpdater;
+	load(update?: boolean): CubeCellUpdater;
 }
 ```
 Интерфейс, реализующий шаблон проектирования [`строитель`](https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)), для обновления клеток куба по формуле Optimacros.
@@ -221,26 +221,34 @@ setFormula(formula: string): this;
 &nbsp;
 
 ```js
-load(): CubeCellUpdater;
+load(update?: boolean): CubeCellUpdater;
 ```
-Устанавливает значения в клетках куба в соответствии с формулой и условной формулой, возвращает интерфейс [`CubeCellUpdater`](#cube-cell-updater).
+Возвращает интерфейс [`CubeCellUpdater`](#cube-cell-updater). Если `update` равен `true`, сразу устанавливает значения в клетках куба в соответствии с формулой и условной формулой. Если `update` равен `false`, обновление не выполняется: его можно выполнить позже вызовом [`CubeCellUpdater.update()`](#cube-cell-updater) или добавить в пакет [`StorageBatch`](./common.md#storage-batch). Значение по умолчанию: `true`.
 
 &nbsp;
 
 ### Интерфейс CubeCellUpdater<a name="cube-cell-updater"></a>
 ```ts
-interface CubeCellUpdater {
+interface CubeCellUpdater extends StorageBatchItem {
+	update(): this;
 	getCount(): number;
 }
 ```
-Интерфейс получения результатов об обновлении клеток куба по формуле.
+Интерфейс обновления клеток куба по формуле и получения его результатов. Наследуется от [`StorageBatchItem`](./common.md#storage-batch-item), поэтому может быть добавлен в пакет [`StorageBatch`](./common.md#storage-batch).
+
+&nbsp;
+
+```js
+update(): this;
+```
+Устанавливает значения в клетках куба в соответствии с формулой и условной формулой. Возвращает `this`.
 
 &nbsp;
 
 ```js
 getCount(): number;
 ```
-Должна возвращать количество ячеек, модифицированных применением формулы. ***Не реализовано; возвращает `-1`.***
+Должна возвращать количество ячеек, модифицированных применением формулы. ***Не реализовано; возвращает `-1`.*** Если обновление ещё не выполнено, бросает исключение.
 
 &nbsp;
 
