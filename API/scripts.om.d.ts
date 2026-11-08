@@ -60,6 +60,8 @@ export interface Label {
 	label(): string;
 	parentLongId(): number;
 	hierarchyLongId(): number;
+	entityInfo(): EntityInfo;
+	attributeGroupEntity(): EntityInfo | null;
 }
 
 export type EntityInfo = Label;
@@ -98,6 +100,7 @@ export interface GridRange {
 
 export interface GridDimension {
 	getDimensionEntity(): EntityInfo;
+	getAttributeGroupEntity(): EntityInfo | null;
 }
 
 export interface GridPageSelector extends GridDimension {
@@ -106,8 +109,8 @@ export interface GridPageSelector extends GridDimension {
 
 export interface GridDefinitionInfo {
 	getPageSelectors(): GridPageSelector[];
-	getRowDimensions(): GridDimension[];
-	getColumnDimensions(): GridDimension[];
+	getRowDimensions(withAttributeGroups?: boolean): GridDimension[];
+	getColumnDimensions(withAttributeGroups?: boolean): GridDimension[];
 }
 
 export interface Grid {

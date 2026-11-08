@@ -334,8 +334,8 @@ storageExporter(): StorageExporter;
 ```ts
 interface GridDefinitionInfo {
 	getPageSelectors(): GridPageSelector[];
-	getRowDimensions(): GridDimension[];
-	getColumnDimensions(): GridDimension[];
+	getRowDimensions(withAttributeGroups?: boolean): GridDimension[];
+	getColumnDimensions(withAttributeGroups?: boolean): GridDimension[];
 }
 ```
 Интерфейс, предоставляющий метаданные о таблице [`Grid`](#grid).
@@ -353,7 +353,7 @@ getPageSelectors(): GridPageSelector[];
 ```js
 getRowDimensions(): GridDimension[];
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о строках таблицы.
+Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о строках таблицы. Параметр `withAttributeGroups` задает режим работы метода: если `true`, то возвращается полный список измерений, включая группы атрибутов. Если `false`, то результат не включает измерения групп атрибутов. По умолчанию параметр имеет значение `false`.
 
 &nbsp;
 
@@ -361,7 +361,7 @@ getRowDimensions(): GridDimension[];
 ```js
 getColumnDimensions(): GridDimension[];
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о столбцах таблицы.
+Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о столбцах таблицы. Описание параметра `withAttributeGroups` аналогично описанию для `getRowDimensions`.
 
 &nbsp;
 
@@ -379,6 +379,13 @@ interface GridDimension {
 getDimensionEntity(): EntityInfo;
 ```
 Возвращает ссылку на сущность [`EntityInfo`](#entity-info) измерения мультикуба.
+
+&nbsp;
+
+```js
+getAttributeGroupEntity(): EntityInfo | null;
+```
+Возвращает ссылку на сущность [`EntityInfo`](#entity-info) группы атрибутов (если измерение относится к группе атрибутов), либо null.
 
 &nbsp;
 
