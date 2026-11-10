@@ -679,9 +679,9 @@ setProperty(name: string, value: any): this;
 
 &nbsp;
 
-### Интерфейс EntityInfo (Label)<a name="entity-info"></a>
+### Интерфейс EntityInfo<a name="entity-info"></a>
 ```ts
-interface Label {
+interface EntityInfo {
 	longId(): number;
 	name(): string;
 	code(): string | null;
@@ -689,12 +689,9 @@ interface Label {
 	label(): string;
 	parentLongId(): number;
 	hierarchyLongId(): number;
-	entityInfo(): EntityInfo;
-	attributeGroupEntity(): EntityInfo | null;
 }
-
 ```
-Интерфейс сущности. Как правило, представляет собой один из заголовков строки или столбца.
+Интерфейс сущности, существующей в системе.
 
 &nbsp;
 
@@ -754,20 +751,6 @@ parentLongId(): number;
 hierarchyLongId(): number;
 ```
 Если сущность является элементом или сабсетом справочника (включая справочники времени и версий), возвращает  [`longId`](#long-id) самого справочника. Если родительского справочника нет, возвращает `-1`. На данный момент этот метод может некорректно работать в зависимости от способа получения `EntityInfo`, для корректной работы рекомендуется получать сущность с помощью интерфейса [`EntitiesInfo`](#entities-info).
-
-&nbsp;
-
-```js
-entityInfo(): EntityInfo;
-```
-Возвращает сущность, к которой относится заголовок строки или столбца.
-
-&nbsp;
-
-```js
-attributeGroupEntity(): EntityInfo | null;
-```
-Если сущность (заголовок строки или столбца) относится к измерению, принадлежащему в описании viewDefinition грида группе атрибутов, то данный метод возвращает сущность группы атрибутов. В противном случае возвращается `null`.
 
 &nbsp;
 

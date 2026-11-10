@@ -64,8 +64,6 @@ export interface Label {
 	attributeGroupEntity(): EntityInfo | null;
 }
 
-export type EntityInfo = Label;
-
 export interface LabelsGroup {
 	all(): Label[];
 	first(): Label;
@@ -795,6 +793,16 @@ export interface ResultInfo {
 	addFileHash(hash: string): this;
 	actionsInfo(): ResultActionsInfo;
 	setProperty(name: string, value: any): this;
+}
+
+export interface EntityInfo {
+	longId(): number;
+	name(): string;
+	code(): string | null;
+	alias(): string;
+	label(): string;
+	parentLongId(): number;
+	hierarchyLongId(): number;
 }
 
 export interface EntitiesInfo {

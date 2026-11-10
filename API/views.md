@@ -351,17 +351,20 @@ getPageSelectors(): GridPageSelector[];
 
 <a name="grid-definition-info.get-row-dimensions"></a>
 ```js
-getRowDimensions(): GridDimension[];
+getRowDimensions(withAttributeGroups?: boolean): GridDimension[];
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о строках таблицы. Параметр `withAttributeGroups` задает режим работы метода: если `true`, то возвращается полный список измерений, включая группы атрибутов. Если `false`, то результат не включает измерения групп атрибутов. По умолчанию параметр имеет значение `false`.
+Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о строках таблицы. Параметр `withAttributeGroups` задает режим работы метода: если `true`, то возвращает полный список измерений, включая группы атрибутов; если `false` (по умолчанию), то результат не включает измерения групп атрибутов.
+
+<a name="attribute-group-dimension"></a>
+***Измерение группы атрибутов*** - это системное измерение `Property`, которое содержит набор атрибутов справочника. Сущность измерения `Property` уникальна в системе, но может иметь группу атрибутов разных справочников. Такое измерение добавляется в грид мультикуба при включении отображения атрибутов основного измерения. Если атрибуты отображаются для измерения в колонках, то измерение группы атрибутов находится в строках. И наоборот, если атрибуты отображаются для измерения в строках, то измерение группы атрибутов находится в колонках.
 
 &nbsp;
 
 <a name="grid-definition-info.get-column-dimensions"></a>
 ```js
-getColumnDimensions(): GridDimension[];
+getColumnDimensions(withAttributeGroups?: boolean): GridDimension[];
 ```
-Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о столбцах таблицы. Описание параметра `withAttributeGroups` аналогично описанию для `getRowDimensions`.
+Возвращает массив объектов с интерфейсом [`GridDimension`](#grid-dimension), которые представляют метаданные о столбцах таблицы. Описание параметра `withAttributeGroups` аналогично описанию для метода `getRowDimensions()`.
 
 &nbsp;
 
@@ -369,6 +372,7 @@ getColumnDimensions(): GridDimension[];
 ```ts
 interface GridDimension {
 	getDimensionEntity(): EntityInfo;
+	getAttributeGroupEntity(): EntityInfo | null;
 }
 ```
 Интерфейс предоставляет данные об измерении мультикуба.
@@ -378,14 +382,17 @@ interface GridDimension {
 ```js
 getDimensionEntity(): EntityInfo;
 ```
-Возвращает ссылку на сущность [`EntityInfo`](#entity-info) измерения мультикуба.
+Возвращает ссылку на сущность [`EntityInfo`](./common.md#entity-info) измерения мультикуба.
 
 &nbsp;
 
 ```js
 getAttributeGroupEntity(): EntityInfo | null;
 ```
-Возвращает ссылку на сущность [`EntityInfo`](#entity-info) группы атрибутов (если измерение относится к группе атрибутов), либо null.
+Если это [измерение группы атрибутов](#attribute-group-dimension), возвращает ссылку на сущность [`EntityInfo`](#entity-info) группы атрибутов, иначе возвращает `null`.
+
+<a name="attribute-group"></a>
+***Сущность группы атрибутов*** представляет собой набор атрибутов справочника и имеет имя в формате `attr.<имя справочника>`.
 
 &nbsp;
 
