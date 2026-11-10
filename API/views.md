@@ -389,7 +389,7 @@ getDimensionEntity(): EntityInfo;
 ```js
 getAttributeGroupEntity(): EntityInfo | null;
 ```
-Если это [измерение группы атрибутов](#attribute-group-dimension), возвращает ссылку на сущность [`EntityInfo`](#entity-info) группы атрибутов, иначе возвращает `null`.
+Если это [измерение группы атрибутов](#attribute-group-dimension), возвращает ссылку на сущность [`EntityInfo`](./common.md#entity-info) группы атрибутов, иначе возвращает `null`.
 
 <a name="attribute-group"></a>
 ***Сущность группы атрибутов*** представляет собой набор атрибутов справочника и имеет имя в формате `attr.<имя справочника>`.

@@ -691,7 +691,7 @@ interface EntityInfo {
 	hierarchyLongId(): number;
 }
 ```
-Интерфейс сущности, существующей в системе.
+Интерфейс сущности в системе.
 
 &nbsp;
 
