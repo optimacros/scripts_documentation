@@ -713,9 +713,9 @@ name(): string;
 
 <a name="code"></a>
 ```js
-code(): string;
+code(): string | null;
 ```
-Возвращает код сущности.
+Возвращает код сущности или `null`, если код не задан.
 
 &nbsp;
 

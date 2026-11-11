@@ -162,9 +162,9 @@ name(): string;
 
 <a name="code"></a>
 ```js
-code(): string;
+code(): string | null;
 ```
-Возвращает код заголовка.
+Возвращает код заголовка или `null`, если код не задан.
 
 &nbsp;
 
