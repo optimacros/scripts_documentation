@@ -679,9 +679,9 @@ setProperty(name: string, value: any): this;
 
 &nbsp;
 
-### Интерфейс EntityInfo (Label)<a name="entity-info"></a>
+### Интерфейс EntityInfo<a name="entity-info"></a>
 ```ts
-interface Label {
+interface EntityInfo {
 	longId(): number;
 	name(): string;
 	code(): string | null;
@@ -690,9 +690,8 @@ interface Label {
 	parentLongId(): number;
 	hierarchyLongId(): number;
 }
-
 ```
-Интерфейс сущности. Как правило, представляет собой один из заголовков строки или столбца.
+Интерфейс сущности в системе.
 
 &nbsp;
 
@@ -714,9 +713,9 @@ name(): string;
 
 <a name="code"></a>
 ```js
-code(): string;
+code(): string | null;
 ```
-Возвращает код сущности.
+Возвращает код сущности или `null`, если код не задан.
 
 &nbsp;
 
